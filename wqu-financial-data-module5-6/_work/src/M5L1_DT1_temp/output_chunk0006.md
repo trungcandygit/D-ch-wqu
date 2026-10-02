@@ -37,8 +37,8 @@ algorithm. J. Royal Stat. Soc. 39, 1–38 (1977).
 23. Saul, L. & Pereira, F. Proceedings of the Second Conference on Empirical Methods n Natural Language
 Processing (eds Cardie, C. & Weischedel, R.) 81–89 (Morgan Kaufmann, San Francisco, 1997).
 
-## Lời cảm ơn
+Lời cảm ơn
 
-Chúng tôi cảm ơn sự hỗ trợ của Bell Laboratories và MIT. C. Papageorgiou và T. Poggio cung cấp cơ sở dữ liệu khuôn mặt, và R. Sproat cung cấp kho ngữ liệu bách khoa toàn thư Grolier. Chúng tôi cảm ơn L. Saul đã thuyết phục chúng tôi về ưu điểm của các thuật toán dạng EM. Chúng tôi được hưởng lợi từ các trao đổi với B. Anderson, K. Clarkson, R. Freund, L. Kaufman, E. Rietman, S. Roweis, N. Rubin, J. Tenenbaum, N. Tishby, M. Tsodyks, T. Tyson và M. Wright.
+Chúng tôi ghi nhận sự hỗ trợ của Bell Laboratories và MIT. C. Papageorgiou và T. Poggio đã cung cấp cho chúng tôi cơ sở dữ liệu khuôn mặt, còn R. Sproat cung cấp kho ngữ liệu bách khoa toàn thư Grolier. Chúng tôi cảm ơn L. Saul đã thuyết phục chúng tôi về những ưu điểm của các thuật toán kiểu EM. Chúng tôi đã được hưởng lợi từ các cuộc thảo luận với B. Anderson, K. Clarkson, R. Freund, L. Kaufman, E. Rietman, S. Roweis, N. Rubin, J. Tenenbaum, N. Tishby, M. Tsodyks, T. Tyson và M. Wright.
 
 Thư từ và yêu cầu về tài liệu xin gửi tới H.S.S.
