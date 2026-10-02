@@ -1,0 +1,82 @@
+%****************************************************************************************************
+% main — WQU Financial Data — Module 1
+% Bản dịch tiếng Việt (tài liệu học tập cá nhân)
+%****************************************************************************************************
+\RequirePackage{fix-cm}
+\documentclass[
+  oneside, titlepage, numbers=noenddot, headinclude,
+  footinclude=true, cleardoublepage=empty, abstractoff,
+  BCOR=5mm, paper=a4, fontsize=11pt
+]{scrreprt}
+
+\input{classicthesis-config}
+\usepackage{framed}
+\usepackage{tikz}
+\usetikzlibrary{arrows.meta, positioning, calc}
+\usepackage{pdfpages}
+\usepackage{xcolor}
+
+% ---- Style riêng cho khối code/output (lstlisting), chỉ áp dụng ở main.tex,
+% ---- không chỉnh sửa classicthesis-config.tex. Mục tiêu: chống tràn lề
+% ---- (breaklines) và trình bày chuẩn học thuật cho các đoạn code Python.
+\lstset{
+  basicstyle=\ttfamily\footnotesize,
+  breaklines=true,
+  breakatwhitespace=false,
+  columns=fullflexible,
+  keepspaces=true,
+  showstringspaces=false,
+  tabsize=4,
+  frame=single,
+  framerule=0.4pt,
+  rulecolor=\color{black!30},
+  backgroundcolor=\color{black!4},
+  captionpos=b,
+  aboveskip=1em,
+  belowskip=1em,
+  keywordstyle=\color{blue!55!black}\bfseries,
+  commentstyle=\color{green!40!black}\itshape,
+  stringstyle=\color{orange!65!black},
+  numberstyle=\tiny\color{black!50}
+}
+
+\begin{document}
+\frenchspacing
+\raggedbottom
+\selectlanguage{vietnamese}
+\pagenumbering{roman}
+\pagestyle{plain}
+
+\includepdf[pages=-]{gfx/cover.pdf}
+\input{disclaimer}
+
+\pagestyle{scrheadings}
+\tableofcontents
+\cleardoublepage
+\pagenumbering{arabic}
+
+% ============ MODULE 1: FIXED INCOME DATA ============
+
+% ---- Lesson 1: Financial Data Best Practices ----
+% Thứ tự đọc: Lesson Notes -> Đọc thêm 1 -> Đọc thêm 2 -> Đọc thêm 3
+\include{Chapters/M1_L1_ThucHanhTotDuLieuTaiChinh}
+\include{Chapters/M1_L1_DocThem1_GentleWalkIn}
+\include{Chapters/M1_L1_DocThem2_VeridicalDataScience}
+\include{Chapters/M1_L1_DocThem3_MacroNowcasting}
+
+% ---- Lesson 2: Government Data ----
+% Thứ tự đọc: Lesson Notes (trong VM, xem ghi chú trong chương) -> Đọc thêm
+\include{Chapters/M1_L2_DuLieuChinhPhu}
+\include{Chapters/M1_L2_DocThem_ThanhKhoanChuong3}
+
+% ---- Lesson 3: Government Bond Yield Curve Analysis ----
+% Thứ tự đọc: Lesson Notes (trong VM, xem ghi chú trong chương) -> Đọc thêm
+\include{Chapters/M1_L3_PhanTichDuongCongLoiSuatTraiPhieuChinhPhu}
+\include{Chapters/M1_L3_DocThem_NoiSuySpline}
+
+% ---- Lesson 4: Government Bond Yield Bivariate Analysis and Yield Curve Analysis ----
+% Thứ tự đọc: Lesson Notes (trong VM, xem ghi chú trong chương) -> Đọc thêm
+\include{Chapters/M1_L4_PhanTichSongBienVaDuongCongLoiSuat}
+\include{Chapters/M1_L4_DocThem_EigenvaluesEigenvectors}
+
+\end{document}

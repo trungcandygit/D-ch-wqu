@@ -1,0 +1,123 @@
+%% bia-module2.tex -- bìa WQU Financial Data, Module 2 (dùng lớp bookcover.cls)
+%% Biên dịch (XeLaTeX hoặc LuaLaTeX), chạy trong thư mục này:
+%%   for i in 1 2; do TEXINPUTS=..: lualatex bia-module2.tex; done   (chạy 2 lượt; XeLaTeX không tìm thấy font TeX Gyre theo tên)
+%% Kết quả: bia-module2.pdf (tờ in đủ bìa sau + gáy + bìa trước, có dấu cắt).
+%% Mặt bìa trước A4 để chèn vào sách: xem ../tach-bia-truoc.py
+
+\documentclass[
+  width       = 210,   % khổ A4 khớp với sách (scrreprt, paper=a4)
+  height      = 297,
+  margin      = 14,
+  bleed       = 10,
+  paperwidth  = 480,   % tờ in đủ chỗ cho 2 mặt A4 + gáy + tràn lề
+  paperheight = 330,
+  pages       = 297,   % số trang sách -> quyết định độ dày gáy
+  grammage    = 75,
+  colorFront  = B01018,
+  colorBack   = B01018,
+  colorSpine  = F3F3F3
+]{bookcover}
+
+\usepackage{graphicx}
+\usepackage{ragged2e}
+\usepackage{fontspec}
+    \setmainfont{TeX Gyre Adventor}
+    \newfontfamily\TitleFont{TeX Gyre Adventor}[LetterSpace=6.0]
+\usepackage{xcolor}
+    \definecolor{teal} {HTML}{B01018}  % màu chữ nhấn (trùng colorFront/colorBack)
+    \definecolor{gold} {HTML}{F3F3F3}  % màu sáng (trùng colorSpine)
+    \definecolor{white}{rgb}{1,1,1}
+
+\def\hugefont  {\fontsize{54}{62}}
+\def\largefont {\fontsize{26}{30}}
+\def\mediumfont{\fontsize{20}{24}}
+\def\normalfont{\fontsize{14}{18}}
+\def\smallfont {\fontsize{11}{13}}
+
+%% ---- Bìa trước ----
+\def\booktitle{Financial\\Data}
+\def\booksubtitle{Module 3 \& 4: Portfolios,\\Tick Data and Alternative Data}
+\def\bookedition{Bản dịch tiếng Việt}
+\def\bookauthors{Nguyễn Văn Trung}
+\def\bookpublisher{WorldQuant University \quad\textbullet\quad MSc in Financial Engineering}
+
+%% ---- Bìa sau ----
+\def\bookdescription{%
+  Bản dịch tiếng Việt cá nhân, phục vụ học tập và nghiên cứu của học viên
+  chương trình Master of Science in Financial Engineering tại WorldQuant
+  University. Đây không phải ấn phẩm chính thức của WQU.
+
+  Module 3 -- Working with Portfolios and Tick Data: Lợi suất và Phương sai
+  Danh mục; Đường Biên Hiệu quả, Tỷ số Sharpe; Dữ liệu Tick; Phân rã Giá trị
+  Kỳ dị của Ma trận.
+
+  Module 4 -- Alternative Data: các thước đo khoảng cách và embedding trong
+  NLP; dữ liệu Google Trends; phân tích cảm xúc trên Stocktwits và Twitter,
+  cùng các bài đọc thêm tương ứng.
+
+  Lesson Notes thuộc bản quyền WorldQuant University, chỉ dùng cho mục đích cá
+  nhân. Mỗi bài đọc thêm theo giấy phép riêng của tác giả, ghi ở trang
+  Disclaimer. Không sao chép hay phân phối lại.%
+}
+\def\bookisbn{Bản dịch cá nhân \textbullet\ 2026}
+
+%% ---- Gáy ----
+\def\spinetitle{Financial Data \textbullet\ Module 3-4}
+\def\spineauthors{Nguyễn Văn Trung}
+\def\spineedition{2026}
+\def\spinevolume{M3-4}
+
+\begin{front}
+  \colorblock{gold}{0.28\textheight}{%
+    \centering
+    \color{teal}
+    {\hugefont\TitleFont\bfseries\selectfont
+      \MakeUppercase{\booktitle}\par}
+    \vspace{2mm}
+    {\rule{0.85\textwidth}{2pt}\par}
+    \vspace{2mm}
+    {\mediumfont\bfseries\selectfont
+      \MakeUppercase{\booksubtitle}\par}
+  }
+  \centering
+  \color{gold}
+  \vspace{5mm}
+  \hfill{\mediumfont\itshape\selectfont\bookedition}
+  \vfill
+  {\normalfont\bfseries\selectfont\MakeUppercase{\bookauthors}}\par
+  \vspace{16mm}
+  \colorblock{gold}{12mm}{%
+    \centering
+    \color{teal}
+    {\smallfont\bfseries\selectfont\bookpublisher}
+  }
+\end{front}
+
+\begin{back}
+  \vspace{10mm}
+  \color{white}
+  \setlength{\parindent}{0pt}
+  \setlength{\parskip}{14pt}
+  {\normalfont\selectfont\justifying\bookdescription}
+  \vfill
+  \hfill{\color{gold}\smallfont\bfseries\selectfont\bookisbn}
+  \vspace{1cm}
+\end{back}
+
+\begin{spine}
+  \centering
+  \vspace{2mm}
+  \color{teal}
+  \spinerotated{{\smallfont\bfseries\selectfont\spineauthors}}\par
+  \vfill
+  \spinerotated{{\normalfont\bfseries\selectfont\spinetitle}}\par
+  \vfill
+  \spinerotated{{\smallfont\bfseries\selectfont\spineedition}}\par
+  \vfill
+  {\centering\smallfont\bfseries\selectfont\spinevolume\par}
+  \vspace{2mm}
+\end{spine}
+
+\begin{document}
+\makecover
+\end{document}

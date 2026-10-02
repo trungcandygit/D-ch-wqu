@@ -1,0 +1,158 @@
+\chapter{Đọc thêm 1: Các Thước đo Khoảng cách (Leskovec, Rajaraman \& Ullman)}
+\label{ch:M4L1DT1}
+
+% Nguồn: Leskovec, J., Rajaraman, A. & Ullman, J. D. ``Mining of Massive Datasets.'' Cambridge University Press, 2020, Section 3.5.
+% Phần cần đọc: Toàn bộ Section 3.5 Distance Measures
+% Nội dung bắt buộc đọc: được kiểm tra trong mọi bài đánh giá (kể cả Quiz).
+
+\section{Thông tin nguồn}
+
+\begin{itemize}
+  \item \textbf{Nguồn:} Leskovec, Jure, Anand Rajaraman, and Jeffrey D. Ullman. \emph{Mining of Massive Datasets}. Cambridge University Press, 2020. \url{http://infolab.stanford.edu/~ullman/mmds/ch3n.pdf}
+  \item \textbf{Phần cần đọc:} Toàn bộ nội dung Section 3.5: Distance Measures
+\end{itemize}
+
+\section{3.5 Các Thước đo Khoảng cách}
+
+Chúng ta tạm rẽ sang tìm hiểu khái niệm tổng quát về thước đo khoảng cách. Độ tương tự Jaccard là một thước đo mức độ gần nhau của các tập hợp, mặc dù nó không thực sự là một thước đo khoảng cách. Nghĩa là, các tập hợp càng gần nhau thì độ tương tự Jaccard càng cao. Ngược lại, 1 trừ đi độ tương tự Jaccard mới là một thước đo khoảng cách, như ta sẽ thấy; đại lượng này được gọi là \emph{khoảng cách Jaccard}.
+
+Tuy nhiên, khoảng cách Jaccard không phải là thước đo hợp lý duy nhất về mức độ gần nhau. Trong mục này, ta sẽ xem xét một số thước đo khoảng cách khác có ứng dụng. Sau đó, ở Section 3.6, ta sẽ thấy một số thước đo khoảng cách này cũng có kỹ thuật LSH tương ứng, cho phép ta tập trung vào các điểm gần nhau mà không cần so sánh tất cả các cặp điểm. Các ứng dụng khác của thước đo khoảng cách sẽ xuất hiện khi ta nghiên cứu về phân cụm (clustering) ở Chương 7.
+
+\subsection*{3.5.1 Định nghĩa Thước đo Khoảng cách}
+
+Giả sử ta có một tập hợp các điểm, gọi là một \emph{không gian} (space). Một \emph{thước đo khoảng cách} (distance measure) trên không gian này là một hàm số $d(x,y)$ nhận hai điểm trong không gian làm đối số và cho ra một số thực, đồng thời thỏa mãn các tiên đề sau:
+
+\begin{enumerate}
+  \item $d(x,y) \geq 0$ (không có khoảng cách âm).
+  \item $d(x,y) = 0$ khi và chỉ khi $x = y$ (khoảng cách luôn dương, trừ khoảng cách từ một điểm đến chính nó).
+  \item $d(x,y) = d(y,x)$ (khoảng cách có tính đối xứng).
+  \item $d(x,y) \leq d(x,z) + d(z,y)$ (bất đẳng thức tam giác).
+\end{enumerate}
+
+Bất đẳng thức tam giác là điều kiện phức tạp nhất. Nói theo trực giác, điều kiện này cho biết khi đi từ $x$ đến $y$, ta không thể có lợi gì nếu bị buộc phải đi qua một điểm thứ ba $z$ nào đó. Chính tiên đề bất đẳng thức tam giác khiến mọi thước đo khoảng cách hoạt động như thể khoảng cách mô tả độ dài của đường đi ngắn nhất từ điểm này đến điểm khác.
+
+\subsection*{3.5.2 Khoảng cách Euclid}
+
+Thước đo khoảng cách quen thuộc nhất chính là thước đo mà ta thường vẫn nghĩ đến khi nói về ``khoảng cách''. Một \emph{không gian Euclid $n$ chiều} ($n$-dimensional Euclidean space) là không gian mà các điểm là các vector gồm $n$ số thực. Thước đo khoảng cách thông thường trong không gian này, mà ta sẽ gọi là \emph{chuẩn $L_2$} ($L_2$-norm), được định nghĩa như sau:
+
+$$d([x_1,x_2,\ldots,x_n],\ [y_1,y_2,\ldots,y_n]) = \sqrt{\sum_{i=1}^{n}(x_i-y_i)^2}$$
+
+Nghĩa là, ta bình phương hiệu số theo từng chiều, cộng các bình phương lại, rồi lấy căn bậc hai dương.
+
+Có thể dễ dàng kiểm chứng ba yêu cầu đầu tiên của một thước đo khoảng cách đều được thỏa mãn. Khoảng cách Euclid giữa hai điểm không thể âm, vì ta luôn lấy căn bậc hai dương. Vì bình phương của mọi số thực đều không âm, bất kỳ chỉ số $i$ nào mà $x_i \neq y_i$ đều khiến khoảng cách trở nên dương thực sự. Ngược lại, nếu $x_i = y_i$ với mọi $i$, thì khoảng cách rõ ràng bằng 0. Tính đối xứng suy ra từ việc $(x_i-y_i)^2 = (y_i-x_i)^2$. Bất đẳng thức tam giác đòi hỏi khá nhiều phép biến đổi đại số để kiểm chứng. Tuy nhiên, người ta đã hiểu rõ đây là một tính chất của không gian Euclid: tổng độ dài của hai cạnh bất kỳ trong một tam giác không nhỏ hơn độ dài cạnh còn lại.
+
+Còn có những thước đo khoảng cách khác từng được sử dụng cho các không gian Euclid. Với bất kỳ hằng số $r$ nào, ta có thể định nghĩa \emph{chuẩn $L_r$} ($L_r$-norm) là thước đo khoảng cách $d$ được định nghĩa bởi:
+
+$$d([x_1,x_2,\ldots,x_n],\ [y_1,y_2,\ldots,y_n]) = \left(\sum_{i=1}^{n}|x_i-y_i|^r\right)^{1/r}$$
+
+Trường hợp $r=2$ chính là chuẩn $L_2$ thông thường vừa nêu ở trên. Một thước đo khoảng cách phổ biến khác là \emph{chuẩn $L_1$} ($L_1$-norm), hay còn gọi là \emph{khoảng cách Manhattan} (Manhattan distance). Ở chuẩn này, khoảng cách giữa hai điểm là tổng độ lớn của hiệu số theo từng chiều. Nó được gọi là ``khoảng cách Manhattan'' vì đây chính là khoảng cách ta phải di chuyển giữa các điểm nếu bị giới hạn phải đi theo các đường lưới, giống như trên các con phố của một thành phố như Manhattan.
+
+Một thước đo khoảng cách thú vị khác là \emph{chuẩn $L_\infty$} ($L_\infty$-norm), là giới hạn của chuẩn $L_r$ khi $r$ tiến tới vô cùng. Khi $r$ càng lớn, chỉ chiều có hiệu số lớn nhất mới còn ý nghĩa, do đó, về mặt hình thức, chuẩn $L_\infty$ được định nghĩa là giá trị lớn nhất của $|x_i-y_i|$ trên tất cả các chiều $i$.
+
+\textbf{Ví dụ 3.13:} Xét không gian Euclid hai chiều (mặt phẳng quen thuộc) và hai điểm $(2,7)$ và $(6,4)$. Chuẩn $L_2$ cho khoảng cách $\sqrt{(2-6)^2+(7-4)^2} = \sqrt{4^2+3^2} = 5$. Chuẩn $L_1$ cho khoảng cách $|2-6|+|7-4| = 4+3 = 7$. Chuẩn $L_\infty$ cho khoảng cách
+
+$$\max(|2-6|,|7-4|) = \max(4,3) = 4$$
+
+\subsection*{3.5.3 Khoảng cách Jaccard}
+
+Như đã đề cập ở đầu mục này, ta định nghĩa \emph{khoảng cách Jaccard} của các tập hợp bằng $d(x,y) = 1 - \text{SIM}(x,y)$. Nghĩa là, khoảng cách Jaccard bằng 1 trừ đi tỉ số giữa kích thước phần giao và kích thước phần hợp của hai tập hợp $x$ và $y$. Ta cần kiểm chứng rằng hàm số này là một thước đo khoảng cách.
+
+\begin{enumerate}
+  \item $d(x,y)$ không âm vì kích thước phần giao không thể vượt quá kích thước phần hợp.
+  \item $d(x,y) = 0$ nếu $x = y$, vì $x \cup x = x \cap x = x$. Tuy nhiên, nếu $x \neq y$, thì kích thước của $x \cap y$ nhỏ hơn thực sự so với kích thước của $x \cup y$, do đó $d(x,y)$ dương thực sự.
+  \item $d(x,y) = d(y,x)$ vì cả phép hợp và phép giao đều có tính đối xứng; nghĩa là $x \cup y = y \cup x$ và $x \cap y = y \cap x$.
+  \item Đối với bất đẳng thức tam giác, hãy nhớ lại từ Section 3.3.3 rằng $\text{SIM}(x,y)$ là xác suất mà một hàm minhash ngẫu nhiên ánh xạ $x$ và $y$ về cùng một giá trị. Do đó, khoảng cách Jaccard $d(x,y)$ chính là xác suất mà một hàm minhash ngẫu nhiên \emph{không} ánh xạ $x$ và $y$ về cùng một giá trị. Vì vậy, ta có thể diễn dịch điều kiện $d(x,y) \leq d(x,z)+d(z,y)$ thành phát biểu: nếu $h$ là một hàm minhash ngẫu nhiên, thì xác suất $h(x) \neq h(y)$ không lớn hơn tổng của xác suất $h(x) \neq h(z)$ và xác suất $h(z) \neq h(y)$. Phát biểu này đúng vì bất cứ khi nào $h(x) \neq h(y)$, thì ít nhất một trong hai giá trị $h(x)$ và $h(y)$ phải khác $h(z)$. Chúng không thể cùng bằng $h(z)$, vì nếu vậy thì $h(x)$ và $h(y)$ sẽ bằng nhau.
+\end{enumerate}
+
+\subsection*{3.5.4 Khoảng cách Cosine}
+
+\emph{Khoảng cách cosine} (cosine distance) có ý nghĩa trong các không gian có chiều (dimensions), bao gồm các không gian Euclid và các phiên bản rời rạc của không gian Euclid, chẳng hạn không gian mà các điểm là các vector với thành phần nguyên hoặc thành phần Boolean (0 hoặc 1). Trong một không gian như vậy, các điểm có thể được xem như các hướng (directions). Ta không phân biệt giữa một vector và một bội số của vector đó. Khi đó, khoảng cách cosine giữa hai điểm chính là góc tạo bởi các vector đến hai điểm đó. Góc này sẽ nằm trong khoảng từ 0 đến 180 độ, bất kể không gian có bao nhiêu chiều.
+
+Ta có thể tính khoảng cách cosine bằng cách trước tiên tính cosine của góc, sau đó áp dụng hàm arccosine để chuyển về góc trong khoảng 0-180 độ. Cho hai vector $x$ và $y$, cosine của góc giữa chúng là tích vô hướng $x.y$ chia cho chuẩn $L_2$ của $x$ và của $y$ (tức là khoảng cách Euclid của chúng đến gốc tọa độ). Nhắc lại rằng tích vô hướng của các vector $[x_1,x_2,\ldots,x_n].[y_1,y_2,\ldots,y_n]$ là $\sum_{i=1}^{n} x_i y_i$.
+
+\textbf{Ví dụ 3.14:} Cho hai vector của ta là $x = [1,2,-1]$ và $y = [2,1,1]$. Tích vô hướng $x.y$ là $1 \times 2 + 2 \times 1 + (-1) \times 1 = 3$. Chuẩn $L_2$ của cả hai vector đều là $\sqrt{6}$. Chẳng hạn, $x$ có chuẩn $L_2$ là $\sqrt{1^2+2^2+(-1)^2} = \sqrt{6}$. Do đó, cosine của góc giữa $x$ và $y$ là $3/(\sqrt{6}\sqrt{6})$, tức $1/2$. Góc có cosine bằng $1/2$ là 60 độ, vậy đó chính là khoảng cách cosine giữa $x$ và $y$.
+
+Ta cần chứng minh rằng khoảng cách cosine thực sự là một thước đo khoảng cách. Ta đã định nghĩa nó sao cho các giá trị nằm trong khoảng 0 đến 180, nên không thể có khoảng cách âm. Hai vector có góc bằng 0 khi và chỉ khi chúng cùng hướng.\footnote{Lưu ý rằng để thỏa mãn tiên đề thứ hai, ta phải coi các vector là bội số của nhau (ví dụ $[1,2]$ và $[3,6]$) là cùng một hướng, và thực tế đúng như vậy. Nếu ta coi chúng là các vector khác nhau, ta sẽ gán cho chúng khoảng cách bằng 0, và như vậy vi phạm điều kiện chỉ có $d(x,x)$ mới bằng 0.} Tính đối xứng là hiển nhiên: góc giữa $x$ và $y$ cũng chính là góc giữa $y$ và $x$. Cách tốt nhất để lập luận bất đẳng thức tam giác là dùng suy luận vật lý. Một cách để xoay từ $x$ sang $y$ là xoay đến $z$ rồi từ đó xoay đến $y$. Tổng của hai phép xoay đó không thể nhỏ hơn phép xoay trực tiếp từ $x$ sang $y$.
+
+\subsection*{3.5.5 Khoảng cách Chỉnh sửa (Edit Distance)}
+
+Thước đo khoảng cách này có ý nghĩa khi các điểm là các chuỗi ký tự (strings). Khoảng cách giữa hai chuỗi $x = x_1x_2\cdots x_n$ và $y = y_1y_2\cdots y_m$ là số lượng nhỏ nhất các phép chèn (insertion) và xóa (deletion) từng ký tự đơn lẻ cần thiết để biến đổi $x$ thành $y$.
+
+\textbf{Ví dụ 3.15:} Khoảng cách chỉnh sửa giữa hai chuỗi $x = $ \texttt{abcde} và $y = $ \texttt{acfdeg} là 3. Để biến đổi $x$ thành $y$:
+
+\begin{enumerate}
+  \item Xóa \texttt{b}.
+  \item Chèn \texttt{f} sau \texttt{c}.
+  \item Chèn \texttt{g} sau \texttt{e}.
+\end{enumerate}
+
+Không có chuỗi thao tác nào ít hơn ba phép chèn và/hoặc xóa có thể biến đổi $x$ thành $y$. Vậy, $d(x,y) = 3$.
+
+Một cách khác để định nghĩa và tính khoảng cách chỉnh sửa $d(x,y)$ là tính \emph{dãy con chung dài nhất} (longest common subsequence, LCS) của $x$ và $y$. Một LCS của $x$ và $y$ là một chuỗi được xây dựng bằng cách xóa bớt các vị trí khỏi $x$ và $y$, và có độ dài bằng độ dài lớn nhất có thể đạt được theo cách đó. Khoảng cách chỉnh sửa $d(x,y)$ có thể được tính bằng độ dài của $x$ cộng độ dài của $y$ trừ đi hai lần độ dài của LCS chung của chúng.
+
+\textbf{Ví dụ 3.16:} Các chuỗi $x = $ \texttt{abcde} và $y = $ \texttt{acfdeg} trong Ví dụ 3.15 có một LCS duy nhất, đó là \texttt{acde}. Ta có thể chắc chắn đây là LCS dài nhất có thể, vì nó chứa mọi ký hiệu xuất hiện trong cả hai chuỗi. May mắn là các ký hiệu chung này xuất hiện theo cùng một thứ tự trong cả hai chuỗi, nên ta có thể dùng tất cả chúng trong một LCS. Lưu ý rằng độ dài của $x$ là 5, độ dài của $y$ là 6, và độ dài LCS của chúng là 4. Khoảng cách chỉnh sửa do đó là $5+6-2\times4=3$, khớp với kết quả tính trực tiếp trong Ví dụ 3.15.
+
+Xét một ví dụ khác, cho $x = $ \texttt{aba} và $y = $ \texttt{bab}. Khoảng cách chỉnh sửa của chúng là 2. Chẳng hạn, ta có thể biến đổi $x$ thành $y$ bằng cách xóa \texttt{a} đầu tiên rồi chèn \texttt{b} vào cuối. Có hai LCS: \texttt{ab} và \texttt{ba}. Mỗi LCS này đều có thể thu được bằng cách xóa một ký hiệu khỏi mỗi chuỗi. Như bắt buộc phải đúng khi một cặp chuỗi có nhiều LCS, cả hai LCS đều có cùng độ dài. Do đó, ta có thể tính khoảng cách chỉnh sửa là $3+3-2\times2=2$.
+
+Khoảng cách chỉnh sửa là một thước đo khoảng cách. Rõ ràng không khoảng cách chỉnh sửa nào có thể âm, và chỉ hai chuỗi giống hệt nhau mới có khoảng cách chỉnh sửa bằng 0. Để thấy rằng khoảng cách chỉnh sửa có tính đối xứng, lưu ý rằng một dãy các phép chèn và xóa có thể được đảo ngược, với mỗi phép chèn trở thành một phép xóa, và ngược lại. Bất đẳng thức tam giác cũng dễ chứng minh. Một cách để biến chuỗi $s$ thành chuỗi $t$ là biến $s$ thành một chuỗi trung gian $u$ nào đó rồi biến $u$ thành $t$. Do đó, số phép chỉnh sửa để đi từ $s$ đến $u$, cộng với số phép chỉnh sửa để đi từ $u$ đến $t$, không thể nhỏ hơn số phép chỉnh sửa nhỏ nhất cần thiết để biến $s$ thành $t$.
+
+\begin{framed}
+\textbf{KHÔNG GIAN PHI EUCLID (NON-EUCLIDEAN SPACES)}
+
+Lưu ý rằng nhiều thước đo khoảng cách được giới thiệu trong mục này không phải là không gian Euclid. Một tính chất của không gian Euclid mà ta sẽ thấy quan trọng khi bàn đến phân cụm ở Chương 7 là trung bình của các điểm trong một không gian Euclid luôn tồn tại và là một điểm trong không gian đó. Tuy nhiên, hãy xét không gian các tập hợp mà ta đã dùng để định nghĩa khoảng cách Jaccard. Khái niệm ``trung bình'' của hai tập hợp không có ý nghĩa gì cả. Tương tự, không gian các chuỗi ký tự (strings), nơi ta có thể dùng khoảng cách chỉnh sửa (edit distance), cũng không cho phép ta lấy ``trung bình'' của các chuỗi.
+
+Các không gian vector, mà ta đã đề xuất dùng khoảng cách cosine, có thể là hoặc không phải là không gian Euclid. Nếu các thành phần của vector có thể là bất kỳ số thực nào, thì không gian đó là Euclid. Tuy nhiên, nếu ta giới hạn các thành phần phải là số nguyên, thì không gian đó không phải là Euclid. Chẳng hạn, lưu ý rằng ta không thể tìm được trung bình của hai vector $[1,2]$ và $[3,1]$ trong không gian các vector có hai thành phần nguyên, mặc dù nếu ta coi chúng là thành viên của không gian Euclid hai chiều, thì ta có thể nói trung bình của chúng là $[2.0, 1.5]$.
+\end{framed}
+
+\subsection*{3.5.6 Khoảng cách Hamming}
+
+Cho một không gian các vector, ta định nghĩa \emph{khoảng cách Hamming} (Hamming distance) giữa hai vector là số lượng thành phần mà chúng khác nhau. Hiển nhiên khoảng cách Hamming là một thước đo khoảng cách. Thật vậy, khoảng cách Hamming không thể âm, và nếu bằng 0 thì hai vector giống hệt nhau. Khoảng cách này không phụ thuộc vào việc ta xét vector nào trước trong hai vector. Bất đẳng thức tam giác cũng dễ thấy. Nếu $x$ và $z$ khác nhau ở $m$ thành phần, và $z$ và $y$ khác nhau ở $n$ thành phần, thì $x$ và $y$ không thể khác nhau ở nhiều hơn $m+n$ thành phần. Phổ biến nhất, khoảng cách Hamming được dùng khi các vector là Boolean, tức chỉ gồm các giá trị 0 và 1. Tuy nhiên, về nguyên tắc, các vector có thể có thành phần thuộc bất kỳ tập hợp nào.
+
+\textbf{Ví dụ 3.17:} Khoảng cách Hamming giữa hai vector \texttt{10101} và \texttt{11110} là 3. Nghĩa là, hai vector này khác nhau ở thành phần thứ hai, thứ tư và thứ năm, trong khi giống nhau ở thành phần thứ nhất và thứ ba.
+
+\subsection*{3.5.7 Bài tập cho Section 3.5}
+
+\textbf{Bài tập 3.5.1:} Trên không gian các số nguyên không âm, hàm nào trong số các hàm sau đây là thước đo khoảng cách? Nếu đúng, hãy chứng minh; nếu không, hãy chứng minh rằng nó không thỏa mãn một hoặc nhiều tiên đề.
+\begin{itemize}
+  \item[(a)] $\max(x,y)$ = giá trị lớn hơn trong $x$ và $y$.
+  \item[(b)] $\text{diff}(x,y) = |x-y|$ (độ lớn tuyệt đối của hiệu giữa $x$ và $y$).
+  \item[(c)] $\text{sum}(x,y) = x+y$.
+\end{itemize}
+
+\textbf{Bài tập 3.5.2:} Tìm khoảng cách $L_1$ và $L_2$ giữa hai điểm $(5,6,7)$ và $(8,2,4)$.
+
+\textbf{Bài tập 3.5.3 (mức độ khó cao):} Chứng minh rằng nếu $i$ và $j$ là hai số nguyên dương bất kỳ, với $i<j$, thì chuẩn $L_i$ giữa hai điểm bất kỳ luôn lớn hơn chuẩn $L_j$ giữa chính hai điểm đó.
+
+\textbf{Bài tập 3.5.4:} Tìm khoảng cách Jaccard giữa các cặp tập hợp sau:
+\begin{itemize}
+  \item[(a)] $\{1,2,3,4\}$ và $\{2,3,4,5\}$.
+  \item[(b)] $\{1,2,3\}$ và $\{4,5,6\}$.
+\end{itemize}
+
+\textbf{Bài tập 3.5.5:} Tính cosine của góc giữa mỗi cặp vector sau đây.\footnote{Lưu ý rằng điều bài tập yêu cầu không hẳn chính xác là khoảng cách cosine, nhưng từ cosine của một góc, bạn có thể tính được chính góc đó, có thể với sự trợ giúp của bảng tra hoặc một hàm thư viện.}
+\begin{itemize}
+  \item[(a)] $(3,-1,2)$ và $(-2,3,1)$.
+  \item[(b)] $(1,2,3)$ và $(2,4,6)$.
+  \item[(c)] $(5,0,-4)$ và $(-1,-6,2)$.
+  \item[(d)] $(0,1,1,0,1,1)$ và $(0,0,1,0,0,0)$.
+\end{itemize}
+
+\textbf{Bài tập 3.5.6:} Chứng minh rằng khoảng cách cosine giữa hai vector bất kỳ gồm toàn số 0 và 1, có cùng độ dài, luôn nhỏ hơn hoặc bằng 90 độ.
+
+\textbf{Bài tập 3.5.7:} Tìm khoảng cách chỉnh sửa (chỉ dùng phép chèn và phép xóa) giữa các cặp chuỗi sau.
+\begin{itemize}
+  \item[(a)] \texttt{abcdef} và \texttt{bdaefc}.
+  \item[(b)] \texttt{abccdabc} và \texttt{acbdcab}.
+  \item[(c)] \texttt{abcdef} và \texttt{baedfc}.
+\end{itemize}
+
+\textbf{Bài tập 3.5.8:} Có một số khái niệm khác về khoảng cách chỉnh sửa. Chẳng hạn, ngoài phép chèn và phép xóa, ta có thể cho phép thêm các phép toán sau:
+\begin{itemize}
+  \item[i.] \textbf{Đột biến (mutation)}: một ký hiệu được thay thế bằng một ký hiệu khác. Lưu ý rằng một phép đột biến luôn có thể được thực hiện bằng một phép chèn theo sau bởi một phép xóa, nhưng nếu ta cho phép đột biến, thì thao tác này chỉ tính là 1, không phải 2, khi tính khoảng cách chỉnh sửa.
+  \item[ii.] \textbf{Hoán vị (transposition)}: hai ký hiệu liền kề đổi vị trí cho nhau. Tương tự như đột biến, ta có thể mô phỏng một phép hoán vị bằng một phép chèn theo sau bởi một phép xóa, nhưng ở đây ta chỉ tính là 1 cho cả hai bước này.
+\end{itemize}
+Hãy làm lại Bài tập 3.5.7 nếu khoảng cách chỉnh sửa được định nghĩa là số phép chèn, xóa, đột biến và hoán vị cần thiết để biến đổi một chuỗi thành chuỗi kia.
+
+\textbf{Bài tập 3.5.9:} Chứng minh rằng khoảng cách chỉnh sửa được thảo luận trong Bài tập 3.5.8 thực sự là một thước đo khoảng cách.
+
+\textbf{Bài tập 3.5.10:} Tìm khoảng cách Hamming giữa mỗi cặp trong số các vector sau: \texttt{000000}, \texttt{110011}, \texttt{010101}, và \texttt{011100}.

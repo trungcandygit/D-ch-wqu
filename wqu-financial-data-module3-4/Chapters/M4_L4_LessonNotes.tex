@@ -1,0 +1,515 @@
+\chapter{Mạng Xã hội}
+\label{ch:M4L4}
+
+% Lesson: Social Media
+
+\section*{Lesson Notes}
+
+MODULE 4 | BÀI 4
+
+{\small
+\begin{longtable}{>{\raggedright\arraybackslash}p{0.213\linewidth}>{\raggedright\arraybackslash}p{0.727\linewidth}}
+\toprule
+\textbf{Thời gian đọc} & 6 giờ \\
+\addlinespace[2pt]
+\textbf{Kiến thức nền tảng} & API, chức năng của mạng xã hội nói chung \\
+\addlinespace[2pt]
+\textbf{Từ khóa} & API, youtube, reddit, subreddit, phân tích cảm xúc, nltk, từ khóa \\
+\addlinespace[2pt]
+\bottomrule
+\end{longtable}
+}
+
+\emph{Mạng xã hội đã trở thành một phần không thể tách rời của đời sống hiện đại, làm thay đổi cách chúng ta giao tiếp, chia sẻ thông tin và tương tác với thế giới xung quanh. Để hiểu tầm quan trọng của dữ liệu mạng xã hội và các ứng dụng của nó ngày nay, cần thiết phải xem xét quá trình phát triển lịch sử của các nền tảng này.}
+
+\emph{Nguồn gốc của mạng xã hội có thể truy ngược về những ngày đầu của internet. Năm 1997, SixDegrees.com ra mắt như trang mạng xã hội đầu tiên có thể nhận diện được, cho phép người dùng tạo hồ sơ và liệt kê bạn bè. Điều này mở đường cho các nền tảng về sau như Friendster, MySpace, và cuối cùng là Facebook, nền tảng đã làm cách mạng hóa bức tranh mạng xã hội. Khi các nền tảng này ngày càng phổ biến và giàu chức năng, chúng bắt đầu tạo ra lượng dữ liệu người dùng khổng lồ. Dữ liệu này, bao gồm mọi thứ từ hồ sơ và kết nối của người dùng đến các tương tác với nội dung và các khuôn mẫu hành vi, nhanh chóng trở thành nguồn tài nguyên quý giá cho các nhà nghiên cứu, nhà tiếp thị và doanh nghiệp.}
+
+\emph{Sự trỗi dậy của dữ liệu mạng xã hội như một lĩnh vực nghiên cứu và ứng dụng diễn ra đồng thời với mức độ tinh vi ngày càng tăng của các nền tảng này. Chẳng hạn, việc Facebook giới thiệu News Feed vào năm 2006 không chỉ thay đổi cách người dùng tương tác với nền tảng mà còn cung cấp một nguồn dữ liệu phong phú về sở thích và hành vi của người dùng. Ngày nay, dữ liệu mạng xã hội được sử dụng trong nhiều lĩnh vực, bao gồm tiếp thị, y tế công cộng, khoa học chính trị và nghiên cứu xã hội. Các nền tảng như YouTube và Reddit mang lại những hiểu biết độc đáo về hành vi người dùng, việc tiêu thụ nội dung và diễn ngôn công chúng. Thông qua các API (giao diện lập trình ứng dụng, application programming interface) do các nền tảng này cung cấp, các nhà nghiên cứu và nhà phát triển có thể truy cập và phân tích dữ liệu này theo những cách chưa từng có.}
+
+\emph{Trong bài học này, chúng ta sẽ tập trung vào các khía cạnh thực hành của việc truy xuất và làm việc với dữ liệu mạng xã hội. Chúng ta sẽ khám phá cách sử dụng API để thu thập dữ liệu từ YouTube và Reddit, qua đó minh họa các ứng dụng thực tế của việc phân tích dữ liệu mạng xã hội. Bằng cách hiểu cả bối cảnh lịch sử lẫn các phương pháp hiện hành, chúng ta có thể đánh giá đúng hơn sức mạnh và tiềm năng của dữ liệu mạng xã hội trong bối cảnh số ngày nay.}
+
+\section{Mạng Xã hội là gì?}
+
+Chúng ta sẽ đưa ra một số định nghĩa về mạng xã hội là gì, dù có lẽ mỗi người trong chúng ta đều đã tiếp xúc đủ nhiều với các nền tảng như vậy.
+
+Boyd và Ellison định nghĩa các trang mạng xã hội là những dịch vụ dựa trên web cho phép cá nhân
+\begin{itemize}
+  \item xây dựng một hồ sơ công khai hoặc bán công khai trong một hệ thống có giới hạn,
+  \item lập danh sách những người dùng khác mà họ có kết nối, và
+  \item xem và duyệt qua danh sách kết nối của mình cũng như của những người khác trong hệ thống.
+\end{itemize}
+Thông tin này làm nổi bật các khía cạnh cấu trúc của mạng xã hội, chẳng hạn hồ sơ người dùng, các kết nối và khả năng hiển thị của mạng lưới.
+
+Định nghĩa trong Từ điển Merriam-Webster nhấn mạnh các khía cạnh giao tiếp và xây dựng cộng đồng của mạng xã hội: các mạng xã hội là những hình thức giao tiếp điện tử (chẳng hạn các trang web dành cho mạng xã hội và tiểu blog, microblogging) thông qua đó người dùng tạo ra các cộng đồng trực tuyến để chia sẻ thông tin, ý tưởng, tin nhắn cá nhân và các nội dung khác (chẳng hạn video) (``Social media'' [\emph{Merriam-Webster.com Dictionary}]).
+
+Mặt khác, Từ điển Cambridge mô tả mạng xã hội như các nền tảng công nghệ: các trang web và chương trình máy tính cho phép mọi người giao tiếp và chia sẻ thông tin trên internet bằng máy tính hoặc điện thoại di động (``Social media'' [\emph{Cambridge Dictionary}]).
+
+Tóm lại, chúng ta có thể tổng hợp các khía cạnh của mạng xã hội như sau:
+\begin{itemize}
+  \item Hồ sơ và kết nối của người dùng
+  \item Cộng đồng trực tuyến
+  \item Chia sẻ thông tin và nội dung
+  \item Nền tảng công nghệ
+  \item Nội dung do người dùng tạo ra
+  \item Tính tương tác và cộng tác
+  \item Mạng lưới ảo
+  \item Biểu đạt và giao tiếp
+\end{itemize}
+
+Mỗi đặc điểm trên đều là một quá trình tạo ra dữ liệu. Chẳng hạn, phần ``Hồ sơ và kết nối của người dùng'' của mạng xã hội tạo ra dữ liệu nhân khẩu học, bản thân mạng xã hội (bạn bè, người theo dõi và các kết nối), cùng sở thích và ưu tiên cá nhân. Phần ``Cộng đồng trực tuyến'' tạo ra dữ liệu về tư cách thành viên nhóm, các khuôn mẫu tương tác trong cộng đồng, và các mối quan tâm/xu hướng trong những cộng đồng khác nhau.
+
+Đến đây có thể thấy rõ rằng lượng dữ liệu khổng lồ được tạo ra có thể được dùng cho nhiều mục đích tùy thuộc vào mục tiêu của nhà nghiên cứu. Cụ thể, trong bối cảnh tài chính, chúng ta đặc biệt quan tâm đến ``Nội dung do người dùng tạo ra'', từ đó có thể trích xuất:
+\begin{itemize}
+  \item dữ liệu văn bản: bài đăng, bình luận
+  \item dữ liệu cảm xúc và quan điểm
+  \item nội dung đa phương tiện liên quan đến các chủ đề tài chính
+\end{itemize}
+
+Dữ liệu này có giá trị đối với một số ứng dụng đặc thù của tài chính:
+
+\begin{itemize}
+  \item Phân tích cảm xúc thị trường: Bằng cách phân tích cảm xúc của các bài đăng trên mạng xã hội về các cổ phiếu, hàng hóa, điều kiện thị trường cụ thể, v.v., các nhà nghiên cứu có thể lượng hóa ý kiến công chúng.
+  \item Dự đoán giá cổ phiếu: Một số nghiên cứu đã cho thấy mối tương quan giữa cảm xúc trên mạng xã hội và các thay đổi giá cổ phiếu ngắn hạn, khiến dữ liệu này có khả năng hữu ích cho các chiến lược giao dịch.
+  \item Phổ biến tin tức tài chính: Mạng xã hội thường lan truyền tin tức tài chính nhanh hơn các phương tiện truyền thông truyền thống!
+  \item Đánh giá rủi ro: Bằng cách theo dõi các cuộc thảo luận trên mạng xã hội, các tổ chức tài chính có thể sớm nhận diện các rủi ro tiềm tàng hoặc các vấn đề về danh tiếng.
+  \item Xu hướng tiền mã hóa: Do vai trò đáng kể của các cộng đồng trực tuyến trong thị trường tiền mã hóa, dữ liệu mạng xã hội đặc biệt có giá trị trong lĩnh vực này.
+\end{itemize}
+
+\section{Truy xuất Dữ liệu}
+
+Trong phần này, chúng ta sẽ đưa ra một số ví dụ về cách sử dụng API để kết nối với một nền tảng mạng xã hội, cách truy xuất dữ liệu, và dữ liệu trông như thế nào trước khi được cấu trúc hóa thành các dataframe để vẽ biểu đồ và phân tích.
+
+\subsection{Một Ví dụ về Lượng hóa Cảm xúc bằng Dữ liệu YouTube}
+
+Trong tiểu mục này, chúng ta sẽ khám phá cách tận dụng YouTube API để thu thập và phân tích cảm xúc công chúng xoay quanh các sự kiện tài chính quan trọng. Chúng ta sẽ dùng đợt sụp đổ thị trường năm 2020 làm nghiên cứu tình huống để hiểu cách cảm xúc có thể được lượng hóa và tương quan với dữ liệu tài chính như chỉ số S\&P 500.
+
+Điều kiện tiên quyết:
+
+\begin{itemize}
+  \item Tài khoản Google: Hãy bảo đảm bạn có một tài khoản Google đang hoạt động. Điều này cần thiết để truy cập các dịch vụ API của Google.
+
+  \item Dự án Google Cloud: Bạn cần tạo một dự án trong Google Cloud Console. Dự án này sẽ lưu trữ khóa API của bạn, vốn thiết yếu để truy cập dữ liệu của YouTube.
+\end{itemize}
+
+Thiết lập YouTube API: Thực hiện các bước sau để bắt đầu:
+
+\begin{enumerate}
+  \item Truy cập Google Cloud Console.
+
+  \item Tạo một dự án mới.
+
+  \item Điều hướng đến API Library và bật YouTube Data API v3.
+
+  \item Tạo thông tin xác thực (khóa API) để truy cập API.
+\end{enumerate}
+
+\begin{lstlisting}[language=Python,escapeinside={(*@}{@*)}]
+import requests
+import praw
+from datetime import datetime, timedelta
+import matplotlib.pyplot as plt
+import pandas as pd
+from collections import defaultdict
+from googleapiclient.discovery import build
+from googleapiclient.errors import HttpError
+import yfinance as yf
+import seaborn as sns
+sns.set()
+\end{lstlisting}
+
+Những Lưu ý Chính
+
+\begin{enumerate}
+  \item Quản lý Hạn ngạch: Hãy lưu ý các giới hạn hạn ngạch của API. Google cung cấp miễn phí một số lượng yêu cầu hạn chế mỗi ngày. Hãy lập kế hoạch truy xuất dữ liệu cẩn thận để nằm trong các giới hạn này, nếu không bạn sẽ buộc phải dừng quy trình làm việc trong một ngày.
+
+  \item Lựa chọn Từ khóa: Việc chọn từ khóa là then chốt. Hãy nghĩ về những thuật ngữ có liên quan vào thời điểm diễn ra sự kiện tài chính. Trong nghiên cứu tình huống về cuộc sụp đổ năm 2020, chúng tôi đã dùng các thuật ngữ như ``recession'', ``economic crisis'', ``inflation'', v.v.
+
+  \item Lựa chọn Kênh: Hãy chọn các kênh uy tín và phù hợp, cung cấp nội dung nhất quán và chất lượng cao.
+
+  \item Phân tích Dữ liệu: Sau khi truy xuất dữ liệu, bạn sẽ phân tích tần suất của các từ khóa và đối chiếu nó với các chỉ số tài chính như chỉ số S\&P 500.
+\end{enumerate}
+
+\begin{lstlisting}[language=Python,escapeinside={(*@}{@*)}]
+API_KEY = "YOUR_API_KEY"
+CHANNEL_NAMES = ['cnbc'] # (*@Bạn@*) (*@có@*) (*@thể@*) (*@đưa@*) (*@vào@*) (*@các@*) (*@kênh@*) (*@tài@*) (*@chính@*) (*@YouTube@*) (*@do@*) (*@bạn@*) (*@chọn@*)
+CHANNEL_IDs = {} # (*@Từ@*) (*@điển@*) (*@lưu@*) (*@tên@*) (*@kênh@*) (*@và@*) (*@ID@*) (*@của@*) (*@chúng@*)
+
+# (*@Hàm@*) (*@lấy@*) (*@ID@*) (*@kênh@*) (*@theo@*) (*@tên@*) (*@kênh@*)
+def get_channel_id_by_name(channel_name, api_key):
+    url = f"https://www.googleapis.com/youtube/v3/search?part=snippet&type=channel&q={channel_name}&key={api_key}"
+    response = requests.get(url)
+    data = response.json()
+    return data['items'][0]['snippet']['channelId']
+
+# (*@Lấy@*) (*@ID@*) (*@kênh@*) (*@cho@*) (*@tất@*) (*@cả@*) (*@tên@*) (*@kênh@*)
+for channel_name in CHANNEL_NAMES:
+    channel_id = get_channel_id_by_name(channel_name, API_KEY)
+    CHANNEL_IDs[channel_name] = channel_id
+
+# (*@In@*) (*@tên@*) (*@các@*) (*@kênh@*) (*@và@*) (*@ID@*) (*@của@*) (*@chúng@*)
+for channel_name, channel_id in CHANNEL_IDs.items():
+    print(f"{channel_name}: {channel_id}")
+\end{lstlisting}
+
+\begin{lstlisting}[language=Python,escapeinside={(*@}{@*)}]
+# (*@Định@*) (*@nghĩa@*) (*@các@*) (*@tham@*) (*@số@*)
+KEYWORDS = ['recession', 'unemployment', 'crash', 'stimulus', 'crisis', 'inflation'] # (*@Danh@*) (*@sách@*) (*@các@*) (*@từ@*) (*@khóa@*) (*@cần@*) (*@tìm@*). (*@Bạn@*) (*@có@*) (*@thể@*) (*@đưa@*) (*@vào@*) (*@các@*) (*@từ@*) (*@khóa@*) (*@liên@*) (*@quan@*) (*@do@*) (*@bạn@*) (*@chọn@*)
+START_DATE = '2020-01-01T00:00:00Z'
+END_DATE = '2020-05-30T23:59:59Z'
+\end{lstlisting}
+
+\begin{lstlisting}[language=Python,escapeinside={(*@}{@*)}]
+# (*@Khởi@*) (*@tạo@*) (*@YouTube@*) (*@API@*)
+def initialize_youtube(api_key):
+    youtube = build('youtube', 'v3', developerKey=api_key)
+    return youtube
+
+# (*@Lấy@*) (*@các@*) (*@video@*) (*@từ@*) (*@một@*) (*@kênh@*)
+def get_videos(youtube, channel_id, start_date, end_date):
+    request = youtube.search().list(
+        part='snippet',
+        channelId=channel_id,
+        publishedAfter=start_date,
+        publishedBefore=end_date,
+        maxResults=50,
+        type='video'
+    )
+    videos = []
+    while request:
+        response = request.execute()
+        videos.extend(response['items'])
+        request = youtube.search().list_next(request, response)
+    return videos
+
+# (*@Lấy@*) (*@các@*) (*@bình@*) (*@luận@*) (*@từ@*) (*@một@*) (*@video@*)
+def get_comments(youtube, video_id):
+    comments = []
+    request = youtube.commentThreads().list(
+        part='snippet',
+        videoId=video_id,
+        maxResults=100
+    )
+    while request:
+        try:
+            response = request.execute()
+            comments.extend(response['items'])
+            request = youtube.commentThreads().list_next(request, response)
+        except HttpError as e:
+            if e.resp.status == 403 and 'commentsDisabled' in str(e):
+                print(f"Comments are disabled for video ID: {video_id}")
+                break
+            else:
+                raise e
+    return comments
+
+# (*@Lọc@*) (*@dữ@*) (*@liệu@*) (*@và@*) (*@đếm@*) (*@số@*) (*@lần@*) (*@nhắc@*) (*@đến@*) (*@từ@*) (*@khóa@*)
+def filter_and_count_comments(comments, keywords, start_date, end_date):
+    keyword_counts = defaultdict(int)
+    start = datetime.strptime(start_date, '%Y-%m-%dT%H:%M:%SZ')
+    end = datetime.strptime(end_date, '%Y-%m-%dT%H:%M:%SZ')
+    current_date = start
+
+    while current_date <= end:
+        keyword_counts[current_date.strftime('%Y-%m-%d')] = 0
+        current_date += timedelta(days=1)
+
+    for comment_thread in comments:
+        comment = comment_thread['snippet']['topLevelComment']['snippet']
+        comment_date = datetime.strptime(comment['publishedAt'], '%Y-%m-%dT%H:%M:%SZ').strftime('%Y-%m-%d')
+        comment_text = comment['textDisplay'].lower()
+        if any(keyword in comment_text for keyword in keywords):
+            keyword_counts[comment_date] += 1
+
+    return keyword_counts
+
+def plot_keyword_counts(keyword_counts, channel_name):
+    dates = list(keyword_counts.keys())
+    counts = list(keyword_counts.values())
+    df = pd.DataFrame({'Date': dates, 'Count': counts})
+    df['Date'] = pd.to_datetime(df['Date'])
+    df = df.set_index('Date')
+    df.sort_index(inplace=True)
+
+    plt.figure(figsize=(14, 7))  # (*@Điều@*) (*@chỉnh@*) (*@kích@*) (*@thước@*) (*@hình@*) (*@để@*) (*@dễ@*) (*@đọc@*) (*@hơn@*)
+    ax = df.plot(kind='bar', legend=False, width = 0.8)
+    ax.set_title(f'Keyword Mentions per Day in {channel_name}')
+    ax.set_xlabel('Date')
+    ax.set_ylabel('Count of Keywords')
+
+    # (*@Đặt@*) (*@các@*) (*@vạch@*) (*@chia@*) (*@trục@*) (*@x@*) (*@theo@*) (*@khoảng@*) (*@đều@*) (*@và@*) (*@xoay@*) (*@nhãn@*) (*@để@*) (*@dễ@*) (*@đọc@*) (*@hơn@*)
+    ax.set_xticks(range(0, len(df.index), 14))
+    ax.set_xticklabels(df.index.strftime('%Y-%m-%d')[::14], rotation=45, ha='right')
+
+    #plt.tight_layout()
+    plt.show()
+\end{lstlisting}
+
+\begin{lstlisting}[language=Python,escapeinside={(*@}{@*)}]
+# (*@Kịch@*) (*@bản@*) (*@chính@*)
+# (*@Ô@*) (*@NÀY@*) (*@CÓ@*) (*@THỂ@*) (*@MẤT@*) (*@NHIỀU@*) (*@THỜI@*) (*@GIAN@*) (*@ĐỂ@*) (*@HOÀN@*) (*@THÀNH@*), (*@THẬM@*) (*@CHÍ@*) (*@GẦN@*) (*@20@*) (*@PHÚT@*).
+# (*@XIN@*) (*@HÃY@*) (*@KIÊN@*) (*@NHẪN@*).
+
+# (*@Khởi@*) (*@tạo@*) (*@client@*) (*@YouTube@*) (*@API@*)
+youtube = initialize_youtube(API_KEY)
+
+# (*@Lấy@*) (*@các@*) (*@video@*) (*@từ@*) (*@kênh@*) (*@được@*) (*@chỉ@*) (*@định@*) (*@trong@*) (*@khoảng@*) (*@ngày@*) (*@đã@*) (*@cho@*)
+videos = get_videos(youtube, channel_id, START_DATE, END_DATE)
+
+# (*@Khởi@*) (*@tạo@*) (*@một@*) (*@danh@*) (*@sách@*) (*@để@*) (*@lưu@*) (*@tất@*) (*@cả@*) (*@bình@*) (*@luận@*)
+all_comments = []
+
+# (*@Lấy@*) (*@bình@*) (*@luận@*) (*@cho@*) (*@từng@*) (*@video@*)
+for video in videos:
+    video_id = video['id']['videoId']
+    try:
+        comments = get_comments(youtube, video_id)
+        all_comments.extend(comments)
+    except HttpError as e:
+        print(f"An error occurred: {e}")
+
+# (*@Lọc@*) (*@và@*) (*@đếm@*) (*@từ@*) (*@khóa@*) (*@trong@*) (*@các@*) (*@bình@*) (*@luận@*)
+keyword_counts = filter_and_count_comments(all_comments, KEYWORDS, START_DATE, END_DATE)
+\end{lstlisting}
+
+Ở ô bên dưới, bạn có thể thấy một phản hồi trông như thế nào. Bạn có thể dùng trí tưởng tượng để nghĩ xem dữ liệu có thể được sử dụng ra sao. Chẳng hạn, khóa \texttt{likeCount} có thể được dùng để đánh giá liệu một bình luận cụ thể có nên được gán trọng số cao hơn các bình luận còn lại hay không. Các giá trị \texttt{totalReplyCount} có thể được dùng để nhận diện các chủ đề gây tranh cãi, được yêu thích hoặc thú vị.
+
+\begin{lstlisting}[language=Python,escapeinside={(*@}{@*)}]
+comments[0]
+\end{lstlisting}
+
+\begin{lstlisting}[language=Python,escapeinside={(*@}{@*)}]
+# (*@Chuẩn@*) (*@bị@*) (*@tập@*) (*@dữ@*) (*@liệu@*) (*@để@*) (*@trực@*) (*@quan@*) (*@hóa@*)
+df_keywords = pd.DataFrame(keyword_counts.items()).set_index(0)
+df_keywords.index = pd.to_datetime(df_keywords.index)
+df_keywords.sort_index(inplace=True)
+df_keywords.columns = ['count']
+df_keywords['count'] = df_keywords['count'].astype(int)
+df_keywords = df_keywords.resample('D').sum()
+
+rolling_sum = df_keywords.loc[:"2020-05-30"].rolling('7D').sum()
+
+# (*@Tải@*) (*@S\&P500@*) (*@làm@*) (*@chuẩn@*) (*@so@*) (*@sánh@*)
+gspc = yf.download('^GSPC', start='2020-01-01', end='2020-05-30')['Adj Close']
+
+# (*@Vẽ@*) (*@biểu@*) (*@đồ@*)
+fig, ax1 = plt.subplots(figsize=(16, 7))
+
+# (*@Vẽ@*) (*@dữ@*) (*@liệu@*) (*@từ@*) (*@khóa@*)
+#ax1.plot(df_keywords.loc[:"2020-05-30"].rolling('7D').sum(), color='green', alpha=0.6, label='Rolling weekly sum of keywords')
+ax1.bar(rolling_sum.index, rolling_sum.values.flatten(), color='green', alpha=0.6, label='Rolling weekly sum of keywords')
+#ax1.set_ylim(-1, 40)
+ax1.set_ylabel('Sum of Keywords')
+
+# (*@Tạo@*) (*@trục@*) (*@kép@*) (*@để@*) (*@vẽ@*) (*@dữ@*) (*@liệu@*) (*@S\&P500@*)
+ax2 = ax1.twinx()
+ax2.plot(gspc, color='blue', alpha=0.5, label='S&P500 Price')
+ax2.set_ylim(1500, 3400)
+ax2.set_ylabel('S&P500 Price')
+
+# (*@Thêm@*) (*@chú@*) (*@giải@*)
+ax1.legend(loc='upper left')
+ax2.legend(loc='upper right')
+
+plt.title('Rolling weekly sum of keywords and S&P500 Price')
+plt.show()
+\end{lstlisting}
+
+Đồ thị trên là một ví dụ về cách lượng hóa cảm xúc. Cách dễ nhất là đếm số lượng từ do ta chọn, và vì một số từ không dễ xuất hiện trừ khi có lý do, ta có thể tin rằng việc nhắc đến những từ đó vượt mức thông thường cho thấy cảm xúc tại thời điểm đó. Các thanh màu xanh lá biểu diễn tổng số từ khóa như ``recession'', ``economic crisis'' và ``inflation'' tìm thấy trong các bình luận YouTube, cho thấy mối quan ngại của công chúng gia tăng. Đường màu xanh dương theo dõi giá chỉ số S\&P 500, làm nổi bật phản ứng của thị trường trong cùng giai đoạn. Khi số lần nhắc đến từ khóa tiếp tục tăng sau tháng 3 năm 2020, trùng với đợt giảm mạnh của S\&P 500, ta quan sát thấy mối quan ngại ngày càng tăng của người dân và tác động của đợt sụp đổ lên cảm xúc chung.
+
+\textbf{Bài tập 1}
+
+Hãy chọn một tài sản và một giai đoạn mà các sự kiện quan trọng đối với tài sản đó đã xảy ra. Xác định các từ khóa bạn muốn đếm và (các) kênh phù hợp cho phân tích của bạn. Sử dụng đoạn mã đã cung cấp và thực hiện cùng quy trình như trên. Vẽ biểu đồ kết quả (bạn có thể phải chỉnh sửa mã đáng kể) và đăng lên diễn đàn cùng với phần phân tích ``chúng ta thấy gì''.
+
+\subsection{Reddit}
+
+Reddit là một trang web tin tức xã hội và thảo luận phổ biến, nơi người dùng có thể chia sẻ nội dung và tham gia các cuộc trò chuyện về nhiều chủ đề khác nhau, bao gồm tiền mã hóa. Đối với sinh viên ngành kỹ thuật tài chính, dữ liệu Reddit có thể cung cấp những ví dụ giá trị về cách thu được hiểu biết sâu sắc về cảm xúc và xu hướng thị trường.
+
+Trong phần này, chúng ta sẽ khám phá cách sử dụng Reddit API để thu thập và phân tích dữ liệu liên quan đến các cuộc thảo luận về tiền mã hóa. Reddit API cho phép các nhà phát triển truy cập cơ sở dữ liệu của Reddit gồm các bài đăng, bình luận và nội dung khác một cách có lập trình. Để sử dụng API, bạn cần tạo một tài khoản Reddit và đăng ký một ứng dụng để nhận các thông tin xác thực cần thiết (client ID, client secret và user agent). Ở bước này, bạn được khuyến nghị sử dụng các hướng dẫn từ AI để hoàn thành.
+
+Ví dụ của chúng ta tập trung vào việc phân tích cảm xúc trong các subreddit liên quan đến tiền mã hóa trong tháng vừa qua. Điều này là do các hạn chế của API Reddit và do nó không được tạo ra để phân tích dữ liệu mà chỉ là một công cụ dành cho những người điều hành subreddit. Đoạn mã chỉ xét tháng gần nhất (tháng gần nhất tính từ thời điểm bạn chạy các ô mã), và vì lý do này, kết quả được kỳ vọng sẽ khác nhau mỗi lần bạn chạy mã.
+
+Bạn được KHUYẾN CÁO MẠNH không được chạy liên tục ô tải bình luận, vì ứng dụng của bạn sẽ bị hạn chế truy cập các subreddit này, dù điều đó có thể được khắc phục bằng cách tạo một ứng dụng mới. Đây là lời nhắc nhở cho sinh viên rằng dữ liệu phân tích cảm xúc không miễn phí. Chúng ta bị ràng buộc bởi các hạn chế của API và sự thiếu vắng dữ liệu lịch sử miễn phí.
+
+Cũng cần lưu ý rằng dù ta thường kỳ vọng phân tích cảm xúc sẽ khớp sát với biến động giá, mối tương quan này không phải lúc nào cũng hoàn hảo. Các yếu tố như thao túng thị trường, tin tức bên ngoài hoặc thay đổi về quy định có thể gây ra sự phân kỳ giữa cảm xúc và giá. Tuy nhiên, phân tích cảm xúc vẫn là một công cụ có giá trị để hiểu tâm lý thị trường và các hướng đi tiềm năng của giá.
+
+\begin{lstlisting}[language=Python,escapeinside={(*@}{@*)}]
+# (*@Khởi@*) (*@tạo@*) (*@thể@*) (*@hiện@*) (*@Reddit@*)
+
+reddit = praw.Reddit(
+    client_id='CLIENT_ID',
+    client_secret="CLIENT_SECRET",
+    user_agent='USER_AGENT',
+    check_for_async=False
+)
+
+# (*@Ví@*) (*@dụ@*) (*@về@*) (*@việc@*) (*@lấy@*) (*@các@*) (*@bài@*) (*@đăng@*) (*@hàng@*) (*@đầu@*) (*@từ@*) (*@một@*) (*@subreddit@*)
+submissions = reddit.subreddit('finance').top(limit=5)
+for submission in submissions:
+    print(f"Title: {submission.title}")
+    print(f"Score: {submission.score}")
+    print(f"URL: {submission.url}")
+    print("="*40)
+\end{lstlisting}
+
+\begin{lstlisting}[language=Python,escapeinside={(*@}{@*)}]
+# (*@Định@*) (*@nghĩa@*) (*@các@*) (*@subreddit@*)
+subreddits = ['cryptocurrency']
+
+# (*@Định@*) (*@nghĩa@*) (*@các@*) (*@từ@*) (*@khóa@*) (*@cảm@*) (*@xúc@*) (*@bull@*) (*@và@*) (*@bear@*)
+bull_keywords = ['bull', 'bullish', 'moon', 'lambo', 'hodl', 'buy', 'long', 'uptrend', 'breakout', 'rally']
+bear_keywords = ['bear', 'bearish', 'crash', 'dip', 'sell', 'short', 'downtrend', 'correction', 'dump', 'fud']
+
+# (*@Hàm@*) (*@lấy@*) (*@bình@*) (*@luận@*) (*@từ@*) (*@một@*) (*@subreddit@*)
+def get_comments(subreddit_name, start_date):
+    subreddit = reddit.subreddit(subreddit_name)
+    comments = []
+    for submission in subreddit.new(limit=None):
+        if submission.created_utc < start_date:
+            break
+        submission.comments.replace_more(limit=0)
+        for comment in submission.comments.list():
+            comments.append({
+                'text': comment.body,
+                'created_utc': datetime.fromtimestamp(comment.created_utc),
+                'subreddit': subreddit_name
+            })
+    return comments
+
+# (*@Lấy@*) (*@bình@*) (*@luận@*) (*@của@*) (*@tháng@*) (*@vừa@*) (*@qua@*)
+end_date = datetime.now()
+start_date = end_date - timedelta(days=30)
+all_comments = []
+
+for subreddit in subreddits:
+    all_comments.extend(get_comments(subreddit, start_date.timestamp()))
+\end{lstlisting}
+
+NLTK (Natural Language Toolkit) là một nền tảng hàng đầu để xây dựng các chương trình Python làm việc với dữ liệu ngôn ngữ tự nhiên của con người. Trong phân tích của chúng ta, chúng ta sử dụng một số thành phần của NLTK:
+
+\begin{itemize}
+  \item Từ điển \texttt{VADER} (Valence Aware Dictionary and sEntiment Reasoner): Một công cụ phân tích cảm xúc dựa trên quy tắc, được điều chỉnh đặc biệt cho các cảm xúc được thể hiện trên mạng xã hội.
+  \item \texttt{SentimentIntensityAnalyzer}: Một công cụ dựa trên VADER cung cấp điểm cảm xúc cho văn bản.
+  \item \texttt{word\_tokenize}: Một hàm tách văn bản thành các từ hoặc token riêng lẻ.
+\end{itemize}
+
+Các công cụ này cho phép chúng ta xử lý và phân tích cảm xúc của các bình luận Reddit một cách hiệu quả, mang lại hiểu biết sâu sắc về tâm trạng chung của các cuộc thảo luận về tiền mã hóa.
+
+\begin{lstlisting}[language=Python,escapeinside={(*@}{@*)}]
+import nltk
+from nltk.sentiment import SentimentIntensityAnalyzer
+from nltk.tokenize import word_tokenize
+
+# (*@Tải@*) (*@từ@*) (*@điển@*) (*@VADER@*)
+nltk.download('vader_lexicon')
+nltk.download('punkt')
+nltk.download('punkt_tab')
+
+# (*@Khởi@*) (*@tạo@*) (*@bộ@*) (*@phân@*) (*@tích@*) (*@cảm@*) (*@xúc@*)
+sia = SentimentIntensityAnalyzer()
+\end{lstlisting}
+
+\textbf{Bài tập 2}
+
+Hãy giải thích sự khác biệt giữa hàm \texttt{.split(" ")} và \texttt{word\_tokenize} bằng cách sử dụng tài liệu hướng dẫn. Hãy trình bày những khác biệt đó bằng một đoạn văn. Hãy giải thích bằng những từ ngữ đơn giản tokenization (tách token) là gì trong bối cảnh NLP.
+
+\begin{lstlisting}[language=Python,escapeinside={(*@}{@*)}]
+# (*@Chuẩn@*) (*@bị@*) (*@tập@*) (*@dữ@*) (*@liệu@*) (*@để@*) (*@trực@*) (*@quan@*) (*@hóa@*)
+
+text_df = pd.DataFrame(all_comments) # (*@Tạo@*) (*@DataFrame@*) (*@từ@*) (*@các@*) (*@bình@*) (*@luận@*)
+
+text_df['tokenized'] = text_df['text'].apply(word_tokenize) # (*@Tách@*) (*@token@*) (*@các@*) (*@bình@*) (*@luận@*)
+text_df['tokenized'] = text_df['tokenized'].apply(lambda x: [word.lower() for word in x]) # (*@Chuyển@*) (*@các@*) (*@từ@*) (*@về@*) (*@chữ@*) (*@thường@*)
+3669
+text_df['bull_count'] = text_df['tokenized'].apply(lambda x: sum(1 for word in x if word in bull_keywords)) # (*@Đếm@*) (*@các@*) (*@từ@*) (*@khóa@*) (*@bull@*)
+text_df['bear_count'] = text_df['tokenized'].apply(lambda x: sum(1 for word in x if word in bear_keywords)) # (*@Đếm@*) (*@các@*) (*@từ@*) (*@khóa@*) (*@bear@*)
+
+text_df['sia'] = text_df['text'].apply(lambda x: sia.polarity_scores(x)['compound']) # (*@Tính@*) (*@cảm@*) (*@xúc@*) (*@bằng@*) (*@NLTK@*)
+
+text_df.set_index('created_utc', inplace=True) # (*@Đặt@*) (*@chỉ@*) (*@mục@*) (*@là@*) (*@cột@*) (*@created\_utc@*)
+text_df.sort_index(inplace=True) # (*@Sắp@*) (*@xếp@*) (*@DataFrame@*) (*@theo@*) (*@chỉ@*) (*@mục@*)
+\end{lstlisting}
+
+\begin{lstlisting}[language=Python,escapeinside={(*@}{@*)}]
+# (*@Tải@*) (*@giá@*) (*@BTCUSD@*) (*@làm@*) (*@đại@*) (*@diện@*) (*@cho@*) (*@thị@*) (*@trường@*) (*@tiền@*) (*@mã@*) (*@hóa@*).
+btcusd = yf.download('BTC-USD', start=start_date, end=end_date)['Adj Close'] # (*@Tải@*) (*@dữ@*) (*@liệu@*) (*@giá@*) (*@Bitcoin@*)
+\end{lstlisting}
+
+\begin{lstlisting}[language=Python,escapeinside={(*@}{@*)}]
+# (*@Chồng@*) (*@giá@*) (*@lên@*) (*@điểm@*) (*@cảm@*) (*@xúc@*) (*@đã@*) (*@được@*) (*@làm@*) (*@mượt@*)
+
+fig, ax1 = plt.subplots(figsize=(14, 5)) # (*@Tạo@*) (*@một@*) (*@hình@*) (*@và@*) (*@một@*) (*@trục@*)
+ax2 = ax1.twinx() # (*@Tạo@*) (*@trục@*) (*@thứ@*) (*@hai@*) (*@dùng@*) (*@chung@*) (*@trục@*) (*@x@*)
+
+smoothened_sia = text_df[['sia']].resample('D').mean().rolling('7D').mean() # (*@Tính@*) (*@trung@*) (*@bình@*) (*@trượt@*) (*@của@*) (*@SIA@*)
+ax1.plot(smoothened_sia, color='green', label='Sentiment Analysis Score') # (*@Vẽ@*) (*@trung@*) (*@bình@*) (*@SIA@*)
+ax2.plot(btcusd, color='blue', label='BTC-USD') # (*@Vẽ@*) (*@giá@*) (*@Bitcoin@*)
+
+ax1.set_ylabel('SIA Sentiment') # (*@Đặt@*) (*@nhãn@*) (*@cho@*) (*@trục@*) (*@thứ@*) (*@nhất@*)
+ax2.set_ylabel('BTC-USD Price') # (*@Đặt@*) (*@nhãn@*) (*@cho@*) (*@trục@*) (*@thứ@*) (*@hai@*)
+ax1.set_xlabel('Date') # (*@Đặt@*) (*@nhãn@*) (*@cho@*) (*@trục@*) (*@x@*)
+
+# (*@Lấy@*) (*@các@*) (*@handle@*) (*@và@*) (*@nhãn@*) (*@từ@*) (*@cả@*) (*@hai@*) (*@trục@*)
+lines_1, labels_1 = ax1.get_legend_handles_labels()
+lines_2, labels_2 = ax2.get_legend_handles_labels()
+
+# (*@Kết@*) (*@hợp@*) (*@các@*) (*@handle@*) (*@và@*) (*@nhãn@*), (*@rồi@*) (*@tạo@*) (*@chú@*) (*@giải@*)
+ax1.legend(lines_1 + lines_2, labels_1 + labels_2, loc='upper left')
+
+plt.title('SIA Sentiment vs. BTC-USD Price') # (*@Đặt@*) (*@tiêu@*) (*@đề@*) (*@cho@*) (*@biểu@*) (*@đồ@*)
+plt.show() # (*@Hiển@*) (*@thị@*) (*@biểu@*) (*@đồ@*)
+\end{lstlisting}
+
+Hãy làm tương tự như trên, nhưng lần này chúng ta tự chọn từ khóa để ước lượng cảm xúc. Chúng ta sẽ tổng hợp số lần xuất hiện của mỗi từ tăng giá (bullish) và mỗi từ giảm giá (bearish). Để có một ước lượng cảm xúc, chúng ta sẽ dùng hiệu số bull - bear. Hiệu số này sẽ được làm mượt bằng cửa sổ 7 ngày (như trong trường hợp SIA) trước khi chồng giá BTCUSD lên.
+
+\begin{lstlisting}[language=Python,escapeinside={(*@}{@*)}]
+keywords_bull_bear = text_df[['bull_count', 'bear_count']].resample('D').sum()
+bull_minus_bear = keywords_bull_bear['bull_count'] - keywords_bull_bear['bear_count']
+bull_minus_bear = bull_minus_bear.rolling('7D').mean()
+\end{lstlisting}
+
+\begin{lstlisting}[language=Python,escapeinside={(*@}{@*)}]
+fig, ax1 = plt.subplots(figsize=(14, 5)) # (*@Tạo@*) (*@một@*) (*@hình@*) (*@và@*) (*@một@*) (*@trục@*)
+ax2 = ax1.twinx() # (*@Tạo@*) (*@trục@*) (*@thứ@*) (*@hai@*) (*@dùng@*) (*@chung@*) (*@trục@*) (*@x@*)
+
+
+ax1.plot(bull_minus_bear, color='green', label='Bull - Bear') # (*@Vẽ@*) (*@hiệu@*) (*@số@*)
+ax2.plot(btcusd, color='blue', label='BTC-USD') # (*@Vẽ@*) (*@giá@*) (*@Bitcoin@*)
+
+ax1.set_ylabel('Bull - Bear counts') # (*@Đặt@*) (*@nhãn@*) (*@cho@*) (*@trục@*) (*@thứ@*) (*@nhất@*)
+ax2.set_ylabel('BTC-USD Price') # (*@Đặt@*) (*@nhãn@*) (*@cho@*) (*@trục@*) (*@thứ@*) (*@hai@*)
+ax1.set_xlabel('Date') # (*@Đặt@*) (*@nhãn@*) (*@cho@*) (*@trục@*) (*@x@*)
+
+# (*@Lấy@*) (*@các@*) (*@handle@*) (*@và@*) (*@nhãn@*) (*@từ@*) (*@cả@*) (*@hai@*) (*@trục@*)
+lines_1, labels_1 = ax1.get_legend_handles_labels()
+lines_2, labels_2 = ax2.get_legend_handles_labels()
+
+# (*@Kết@*) (*@hợp@*) (*@các@*) (*@handle@*) (*@và@*) (*@nhãn@*), (*@rồi@*) (*@tạo@*) (*@chú@*) (*@giải@*)
+ax1.legend(lines_1 + lines_2, labels_1 + labels_2, loc='upper left')
+
+plt.title('Bull - Bear counts vs. BTC-USD Price') # (*@Đặt@*) (*@tiêu@*) (*@đề@*) (*@cho@*) (*@biểu@*) (*@đồ@*)
+plt.show() # (*@Hiển@*) (*@thị@*) (*@biểu@*) (*@đồ@*)
+\end{lstlisting}
+
+\textbf{Bài tập 3}
+
+Trong phần Reddit, chúng ta đã tải xuống toàn bộ bình luận trong một giai đoạn cụ thể cho một subreddit. Bằng cách sử dụng đoạn mã đã cung cấp, bạn có thể chọn các từ khóa (với subreddit mà chúng ta đã chọn) giúp bạn tìm thêm các xu hướng (các altcoin cụ thể, các meme coin cụ thể, v.v.). Hãy sử dụng cả \texttt{nltk} lẫn cách ước lượng cảm xúc thủ công. Hãy đăng kết quả của bạn lên các diễn đàn.
+
+\section{Kết luận}
+
+Tóm lại, bài học này đã cho thấy vai trò mạnh mẽ mà dữ liệu mạng xã hội có thể đảm nhiệm trong phân tích tài chính. Chúng ta đã khám phá cách truy xuất và phân tích dữ liệu từ các nền tảng lớn như YouTube và Reddit, sử dụng các tương tác API và áp dụng các kỹ thuật phân tích cảm xúc đơn giản. Những phương pháp này mang lại hiểu biết giá trị về cảm xúc thị trường, ý kiến công chúng và các xu hướng có thể tác động đến thị trường tài chính.
+
+Các ví dụ đã đưa ra có ý nghĩa ở chỗ cho thấy những gì người ta có thể đạt được với một API \textbf{miễn phí}. Hãy nhớ rằng dữ liệu cho phân tích cảm xúc rất khó tìm và hầu như chắc chắn là đắt đỏ. Nhưng bằng cách lựa chọn cẩn thận giai đoạn và các kênh, subreddit, tweet, v.v., bạn sẽ có thể trích xuất, lượng hóa và trực quan hóa cảm xúc.
+
+\textbf{Tài liệu tham khảo}
+
+\begin{itemize}
+  \item Boyd, Danah M., and Nicole B. Ellison. ``Social Network Sites: Definition, History, and Scholarship.'' Journal of Computer-Mediated Communication, vol. 13, no. 1, 2007, pp. 210-230.
+
+  \item ``Social media.'' \emph{Cambridge Dictionary}, Cambridge University Press. \url{https://dictionary.cambridge.org}. Accessed 18 Nov. 2024.
+
+  \item ``Social media.'' \emph{Merriam-Webster.com Dictionary}, Merriam-Webster, \url{https://www.merriam-webster.com}. Accessed 18 Nov. 2024.
+\end{itemize}
+
+\begin{center}\small
+Copyright 2024 WorldQuant University. This content is licensed solely for personal use. Redistribution or publication of this material is strictly prohibited.
+\end{center}

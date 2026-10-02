@@ -1,0 +1,196 @@
+\babel@toc {vietnamese}{}\relax 
+\vspace {-\cftbeforepartskip }
+\babel@toc {vietnamese}{}\relax 
+\contentsline {chapter}{\numberline {1}{Lợi suất và Phương sai Danh mục Đầu tư}}{1}{chapter.1}%
+\contentsline {section}{\numberline {1.1}{Lợi suất Danh mục Đầu tư}}{1}{section.1.1}%
+\contentsline {section}{\numberline {1.2}{Các Loại Lợi suất}}{3}{section.1.2}%
+\contentsline {subsection}{\numberline {1.2.1}{Lợi suất Phần trăm}}{3}{subsection.1.2.1}%
+\contentsline {subsection}{\numberline {1.2.2}{Lợi suất Logarit}}{4}{subsection.1.2.2}%
+\contentsline {section}{\numberline {1.3}{So sánh Lợi suất Hình học và Số học}}{7}{section.1.3}%
+\contentsline {subsection}{\numberline {1.3.1}{Ví dụ về Trung bình Hình học}}{7}{subsection.1.3.1}%
+\contentsline {subsection}{\numberline {1.3.2}{Trung bình Số học}}{8}{subsection.1.3.2}%
+\contentsline {subsection}{\numberline {1.3.3}{Chọn Đúng Loại Trung bình cho Lợi suất Phần trăm}}{9}{subsection.1.3.3}%
+\contentsline {section}{\numberline {1.4}{Chuẩn hóa Lợi suất Phần trăm theo Năm}}{9}{section.1.4}%
+\contentsline {section}{\numberline {1.5}{Chuẩn hóa Lợi suất Logarit theo Năm}}{10}{section.1.5}%
+\contentsline {section}{\numberline {1.6}{Phương sai Danh mục Đầu tư}}{10}{section.1.6}%
+\contentsline {subsection}{\numberline {1.6.1}{Tổng quan về Phương sai Danh mục Đầu tư}}{10}{subsection.1.6.1}%
+\contentsline {subsection}{\numberline {1.6.2}{Ảnh hưởng của Tương quan lên Phương sai Danh mục Đầu tư}}{12}{subsection.1.6.2}%
+\contentsline {section}{\numberline {1.7}{Trọng số Danh mục Đầu tư}}{16}{section.1.7}%
+\contentsline {section}{\numberline {1.8}{Kết luận}}{20}{section.1.8}%
+\contentsline {chapter}{\numberline {2}{Đọc thêm: Rủi ro và Lợi suất (Dahlquist \& Knight)}}{21}{chapter.2}%
+\contentsline {section}{\numberline {2.1}{Thông tin nguồn}}{21}{section.2.1}%
+\contentsline {section}{\numberline {2.2}{15.1 Rủi ro và Lợi suất của Một Tài sản Riêng lẻ}}{21}{section.2.2}%
+\contentsline {section}{\numberline {2.3}{15.2 Rủi ro và Lợi suất của Nhiều Tài sản}}{31}{section.2.3}%
+\contentsline {chapter}{\numberline {3}{Đường Biên Hiệu quả, Tỷ số Sharpe và Các Thước đo Rủi ro Sụt giảm}}{35}{chapter.3}%
+\contentsline {section}{\numberline {3.1}{Tổng Lợi suất và Lợi suất Điều chỉnh Cổ tức}}{36}{section.3.1}%
+\contentsline {subsection}{\numberline {3.1.1}{Tổng Lợi suất và Lợi suất Điều chỉnh Cổ tức}}{36}{subsection.3.1.1}%
+\contentsline {subsection}{\numberline {3.1.2}{Giá Đóng cửa Điều chỉnh}}{37}{subsection.3.1.2}%
+\contentsline {subsection}{\numberline {3.1.3}{Lợi suất theo Trọng số Thời gian (Time-Weighted Returns)}}{38}{subsection.3.1.3}%
+\contentsline {section}{\numberline {3.2}{Lợi suất Vượt trội}}{43}{section.3.2}%
+\contentsline {subsection}{\numberline {3.2.1}{Định nghĩa Lợi suất Vượt trội}}{43}{subsection.3.2.1}%
+\contentsline {subsection}{\numberline {3.2.2}{Lợi suất Vượt trội so với Lợi suất Kỳ vọng}}{44}{subsection.3.2.2}%
+\contentsline {section}{\numberline {3.3}{Tỷ số Sharpe Danh mục và Đường Biên Hiệu quả}}{45}{section.3.3}%
+\contentsline {section}{\numberline {3.4}{Danh mục Tiếp tuyến và Đường Tiếp tuyến}}{47}{section.3.4}%
+\contentsline {section}{\numberline {3.5}{Value at Risk (VaR)}}{49}{section.3.5}%
+\contentsline {section}{\numberline {3.6}{VaR bằng Phương pháp Lịch sử}}{50}{section.3.6}%
+\contentsline {subsection}{\numberline {3.6.1}{Triển khai Value at Risk (VaR) - Phương pháp Lịch sử}}{51}{subsection.3.6.1}%
+\contentsline {subsection}{\numberline {3.6.2}{Conditional Value at Risk (CVaR) dùng Dữ liệu Lịch sử}}{52}{subsection.3.6.2}%
+\contentsline {section}{\numberline {3.7}{VaR bằng Phương pháp Tham số}}{53}{section.3.7}%
+\contentsline {subsection}{\numberline {3.7.1}{VaR Tham số với Phân phối Chuẩn}}{53}{subsection.3.7.1}%
+\contentsline {subsection}{\numberline {3.7.2}{Triển khai VaR Tham số với Phân phối Chuẩn}}{53}{subsection.3.7.2}%
+\contentsline {subsection}{\numberline {3.7.3}{Triển khai VaR Tham số với phân phối $t$}}{54}{subsection.3.7.3}%
+\contentsline {section}{\numberline {3.8}{VaR bằng Mô phỏng Monte Carlo}}{55}{section.3.8}%
+\contentsline {section}{\numberline {3.9}{Kết luận}}{55}{section.3.9}%
+\contentsline {chapter}{\numberline {4}{Đọc thêm: Mô hình CAPM và Đo lường Hiệu suất (Dahlquist \& Knight)}}{56}{chapter.4}%
+\contentsline {section}{\numberline {4.1}{Thông tin nguồn}}{56}{section.4.1}%
+\contentsline {section}{\numberline {4.2}{15.3 Mô hình Định giá Tài sản Vốn (CAPM)}}{56}{section.4.2}%
+\contentsline {section}{\numberline {4.3}{15.4 Ứng dụng trong Đo lường Hiệu suất}}{59}{section.4.3}%
+\contentsline {chapter}{\numberline {5}{Đọc thêm: Các Thước đo Rủi ro dựa trên Phân vị (Dowd \& Blake)}}{62}{chapter.5}%
+\contentsline {section}{\numberline {5.1}{Thông tin nguồn}}{62}{section.5.1}%
+\contentsline {section}{\numberline {5.2}{Các Thước đo Rủi ro dựa trên Phân vị (Quantile-Based Measures of Risk)}}{62}{section.5.2}%
+\contentsline {subsection}{\numberline {5.2.1}{Value at Risk}}{62}{subsection.5.2.1}%
+\contentsline {subsection}{\numberline {5.2.2}{Lý thuyết về Các Thước đo Rủi ro Chặt chẽ (Coherent Risk Measures)}}{64}{subsection.5.2.2}%
+\contentsline {subsection}{\numberline {5.2.3}{Expected Shortfall}}{65}{subsection.5.2.3}%
+\contentsline {subsection}{\numberline {5.2.4}{Kịch bản và Kịch bản Tổng quát hóa}}{66}{subsection.5.2.4}%
+\contentsline {section}{\numberline {5.3}{Phương pháp Ước lượng (Estimation Methods)}}{66}{section.5.3}%
+\contentsline {subsection}{\numberline {5.3.1}{Phương pháp Tham số}}{67}{subsection.5.3.1}%
+\contentsline {subsection}{\numberline {5.3.2}{Phương pháp Phi tham số}}{68}{subsection.5.3.2}%
+\contentsline {subsection}{\numberline {5.3.3}{Phương pháp Mô phỏng Ngẫu nhiên}}{69}{subsection.5.3.3}%
+\contentsline {chapter}{\numberline {6}{Dữ liệu Tick}}{70}{chapter.6}%
+\contentsline {section}{\numberline {6.1}{Dữ liệu Tick là gì?}}{70}{section.6.1}%
+\contentsline {section}{\numberline {6.2}{Các Ví dụ về Dữ liệu Tick}}{72}{section.6.2}%
+\contentsline {section}{\numberline {6.3}{Trực quan hóa Dữ liệu Giao dịch Tick}}{74}{section.6.3}%
+\contentsline {section}{\numberline {6.4}{Bao gồm Hướng Giao dịch}}{78}{section.6.4}%
+\contentsline {section}{\numberline {6.5}{Xử lý Dữ liệu Tick}}{80}{section.6.5}%
+\contentsline {section}{\numberline {6.6}{Dữ liệu Cấp 1 (Level 1, L1)}}{82}{section.6.6}%
+\contentsline {section}{\numberline {6.7}{Mất cân bằng Dòng lệnh (Order Flow Imbalance, OFI)}}{86}{section.6.7}%
+\contentsline {section}{\numberline {6.8}{Lấy mẫu lại (Resampling)}}{89}{section.6.8}%
+\contentsline {section}{\numberline {6.9}{Kết luận}}{91}{section.6.9}%
+\contentsline {chapter}{\numberline {7}{Đọc thêm 1: Quy trình Làm sạch Dữ liệu Tần suất Cao (Barndorff-Nielsen et al.)}}{92}{chapter.7}%
+\contentsline {section}{\numberline {7.1}{Thông tin nguồn}}{92}{section.7.1}%
+\contentsline {section}{\numberline {7.2}{3. Quy trình làm sạch dữ liệu tần suất cao}}{92}{section.7.2}%
+\contentsline {chapter}{\numberline {8}{Đọc thêm 2: Xử lý Dữ liệu Tần suất Siêu cao (Brownlees \& Gallo)}}{95}{chapter.8}%
+\contentsline {section}{\numberline {8.1}{Thông tin nguồn}}{95}{section.8.1}%
+\contentsline {section}{\numberline {8.2}{3.1 Làm sạch Dữ liệu}}{95}{section.8.2}%
+\contentsline {section}{\numberline {8.3}{3.2 Quản lý Dữ liệu}}{97}{section.8.3}%
+\contentsline {chapter}{\numberline {9}{Phân rã Giá trị Kỳ dị của Ma trận}}{103}{chapter.9}%
+\contentsline {section}{\numberline {9.1}{Giới thiệu Phân rã Giá trị Kỳ dị (SVD)}}{103}{section.9.1}%
+\contentsline {section}{\numberline {9.2}{Định nghĩa Phân rã Giá trị Kỳ dị}}{104}{section.9.2}%
+\contentsline {subsection}{\numberline {9.2.1}{Biểu diễn Ma trận của SVD}}{104}{subsection.9.2.1}%
+\contentsline {subsection}{\numberline {9.2.2}{Diễn giải Hình học của Phân rã Giá trị Kỳ dị (SVD)}}{104}{subsection.9.2.2}%
+\contentsline {section}{\numberline {9.3}{Các Tính chất của Phân rã Giá trị Kỳ dị (SVD)}}{105}{section.9.3}%
+\contentsline {section}{\numberline {9.4}{Xấp xỉ Ma trận bằng SVD}}{105}{section.9.4}%
+\contentsline {section}{\numberline {9.5}{Ứng dụng của Phân rã Giá trị Kỳ dị (SVD)}}{106}{section.9.5}%
+\contentsline {subsection}{\numberline {9.5.1}{Nhập Dữ liệu}}{107}{subsection.9.5.1}%
+\contentsline {subsection}{\numberline {9.5.2}{Tính Lợi suất}}{107}{subsection.9.5.2}%
+\contentsline {subsection}{\numberline {9.5.3}{Tính SVD}}{107}{subsection.9.5.3}%
+\contentsline {section}{\numberline {9.6}{So sánh PCA và SVD}}{108}{section.9.6}%
+\contentsline {section}{\numberline {9.7}{Kết luận}}{110}{section.9.7}%
+\contentsline {chapter}{\numberline {10}{Đọc thêm 1: Phân rã Giá trị Kỳ dị (SVD) (Murphy)}}{112}{chapter.10}%
+\contentsline {section}{\numberline {10.1}{Thông tin nguồn}}{112}{section.10.1}%
+\contentsline {section}{\numberline {10.2}{7.5 Phân rã Giá trị Kỳ dị (SVD)}}{112}{section.10.2}%
+\contentsline {subsection}{\numberline {10.2.1}{7.5.1 Cơ bản}}{112}{subsection.10.2.1}%
+\contentsline {subsection}{\numberline {10.2.2}{7.5.2 Mối liên hệ giữa SVD và EVD}}{113}{subsection.10.2.2}%
+\contentsline {chapter}{\numberline {11}{Các Thước đo Độ tương đồng}}{114}{chapter.11}%
+\contentsline {section}{\numberline {11.1}{1 Các Thước đo Độ tương đồng}}{114}{section.11.1}%
+\contentsline {subsection}{\numberline {11.1.1}{1.1 Các Thước đo Khoảng cách}}{115}{subsection.11.1.1}%
+\contentsline {subsection}{\numberline {11.1.2}{1.2 Các Hệ số Tương đồng}}{117}{subsection.11.1.2}%
+\contentsline {subsection}{\numberline {11.1.3}{1.3 Các Ứng dụng của Thước đo Độ tương đồng}}{118}{subsection.11.1.3}%
+\contentsline {subsection}{\numberline {11.1.4}{1.4 Các Ví dụ Đơn giản hóa}}{119}{subsection.11.1.4}%
+\contentsline {subsection}{\numberline {11.1.5}{1.5 Lựa chọn Thước đo Độ tương đồng}}{123}{subsection.11.1.5}%
+\contentsline {section}{\numberline {11.2}{2 Dữ liệu Văn bản}}{124}{section.11.2}%
+\contentsline {subsection}{\numberline {11.2.1}{2.1 Các Kỹ thuật Phân tích Văn bản}}{125}{subsection.11.2.1}%
+\contentsline {subsection}{\numberline {11.2.2}{2.2 Định nghĩa Term Frequency-Inverse Document Frequency}}{126}{subsection.11.2.2}%
+\contentsline {subsection}{\numberline {11.2.3}{2.3 Các Ứng dụng của TF-IDF}}{127}{subsection.11.2.3}%
+\contentsline {subsection}{\numberline {11.2.4}{2.4 Lợi ích của TF-IDF}}{129}{subsection.11.2.4}%
+\contentsline {subsection}{\numberline {11.2.5}{2.5 Ví dụ Đơn giản hóa về Áp dụng TF-IDF}}{130}{subsection.11.2.5}%
+\contentsline {section}{\numberline {11.3}{Kết luận}}{135}{section.11.3}%
+\contentsline {chapter}{\numberline {12}{Đọc thêm 1: Các Thước đo Khoảng cách (Leskovec, Rajaraman \& Ullman)}}{136}{chapter.12}%
+\contentsline {section}{\numberline {12.1}{Thông tin nguồn}}{136}{section.12.1}%
+\contentsline {section}{\numberline {12.2}{3.5 Các Thước đo Khoảng cách}}{136}{section.12.2}%
+\contentsline {chapter}{\numberline {13}{Đọc thêm 2: Embeddings (Jurafsky \& Martin)}}{142}{chapter.13}%
+\contentsline {section}{\numberline {13.1}{Thông tin nguồn}}{142}{section.13.1}%
+\contentsline {section}{\numberline {13.2}{5.1 Ngữ nghĩa Từ vựng}}{143}{section.13.2}%
+\contentsline {section}{\numberline {13.3}{5.2 Ngữ nghĩa Vector: Trực giác}}{146}{section.13.3}%
+\contentsline {section}{\numberline {13.4}{5.3 Embedding dựa trên đếm đơn giản}}{147}{section.13.4}%
+\contentsline {section}{\numberline {13.5}{5.4 Cosine để Đo Độ tương đồng}}{149}{section.13.5}%
+\contentsline {section}{\numberline {13.6}{5.5 Word2vec}}{151}{section.13.6}%
+\contentsline {section}{\numberline {13.7}{5.6 Trực quan hóa Embedding}}{157}{section.13.7}%
+\contentsline {section}{\numberline {13.8}{5.7 Các thuộc tính ngữ nghĩa của embedding}}{157}{section.13.8}%
+\contentsline {section}{\numberline {13.9}{5.8 Thiên kiến và Embedding}}{159}{section.13.9}%
+\contentsline {section}{\numberline {13.10}{5.9 Đánh giá các Mô hình Vector}}{160}{section.13.10}%
+\contentsline {section}{\numberline {13.11}{5.10 Tóm tắt}}{161}{section.13.11}%
+\contentsline {chapter}{\numberline {14}{Dữ liệu Công cụ Tìm kiếm}}{165}{chapter.14}%
+\contentsline {chapter}{\numberline {15}{Đọc thêm 1: Định lượng Hành vi Giao dịch qua Google Trends (Preis, Moat \& Stanley)}}{191}{chapter.15}%
+\contentsline {section}{\numberline {15.1}{Thông tin nguồn}}{191}{section.15.1}%
+\contentsline {section}{\numberline {15.2}{Trích yếu}}{191}{section.15.2}%
+\contentsline {section}{\numberline {15.3}{Giới thiệu}}{192}{section.15.3}%
+\contentsline {section}{\numberline {15.4}{Kết quả}}{193}{section.15.4}%
+\contentsline {section}{\numberline {15.5}{Thảo luận}}{199}{section.15.5}%
+\contentsline {section}{\numberline {15.6}{Phương pháp}}{199}{section.15.6}%
+\contentsline {section}{\numberline {15.7}{Lời cảm ơn và thông tin bổ sung}}{200}{section.15.7}%
+\contentsline {chapter}{\numberline {16}{Đọc thêm 2: Dự đoán Thị trường Tài chính bằng Google Trends (Challet \& Bel)}}{201}{chapter.16}%
+\contentsline {section}{\numberline {16.1}{Thông tin nguồn}}{201}{section.16.1}%
+\contentsline {section}{\numberline {16.2}{Tóm tắt}}{201}{section.16.2}%
+\contentsline {section}{\numberline {16.3}{I. Giới thiệu}}{201}{section.16.3}%
+\contentsline {section}{\numberline {16.4}{II. Dữ liệu và Chiến lược}}{202}{section.16.4}%
+\contentsline {section}{\numberline {16.5}{III. Các Sai lệch Phương pháp luận}}{202}{section.16.5}%
+\contentsline {section}{\numberline {16.6}{IV. Sức Mạnh Dự đoán của Google Trends}}{207}{section.16.6}%
+\contentsline {section}{\numberline {16.7}{V. Thảo luận}}{209}{section.16.7}%
+\contentsline {chapter}{\numberline {17}{Đọc thêm 3: Mối liên hệ giữa Tiền mã hóa và Sự chú ý trên Google Trends (Aslanidis, Bariviera \& López)}}{212}{chapter.17}%
+\contentsline {section}{\numberline {17.1}{Thông tin nguồn}}{212}{section.17.1}%
+\contentsline {section}{\numberline {17.2}{Tóm tắt}}{212}{section.17.2}%
+\contentsline {section}{\numberline {17.3}{1. Giới thiệu}}{212}{section.17.3}%
+\contentsline {section}{\numberline {17.4}{2. Xây dựng Chỉ số Google Trends Cryptocurrency (GTC)}}{214}{section.17.4}%
+\contentsline {section}{\numberline {17.5}{3. Phương pháp}}{215}{section.17.5}%
+\contentsline {section}{\numberline {17.6}{4. Phân tích thực nghiệm}}{216}{section.17.6}%
+\contentsline {section}{\numberline {17.7}{5. Kết luận}}{219}{section.17.7}%
+\contentsline {section}{\numberline {17.8}{Tuyên bố đóng góp tác giả (CRediT)}}{220}{section.17.8}%
+\contentsline {section}{\numberline {17.9}{Lời cảm ơn}}{220}{section.17.9}%
+\contentsline {section}{\numberline {17.10}{Phụ lục A. Bộ từ khóa xây dựng Chỉ số Chú ý Google Trends Cryptocurrency (GTC)}}{220}{section.17.10}%
+\contentsline {section}{\numberline {17.11}{Phụ lục B. Dữ liệu bổ sung}}{221}{section.17.11}%
+\contentsline {chapter}{\numberline {18}{Ứng dụng của Dữ liệu Thay thế}}{222}{chapter.18}%
+\contentsline {section}{\numberline {18.1}{Dữ liệu Twitter là gì}}{222}{section.18.1}%
+\contentsline {subsection}{\numberline {18.1.1}{Lấy dữ liệu Twitter}}{224}{subsection.18.1.1}%
+\contentsline {subsection}{\numberline {18.1.2}{Điều chỉnh múi giờ trong dữ liệu Twitter}}{225}{subsection.18.1.2}%
+\contentsline {subsection}{\numberline {18.1.3}{Phát hiện retweet trong dữ liệu Twitter}}{225}{subsection.18.1.3}%
+\contentsline {subsection}{\numberline {18.1.4}{Tìm hiểu phân phối của các tweet}}{226}{subsection.18.1.4}%
+\contentsline {subsection}{\numberline {18.1.5}{Trực quan hóa dữ liệu Twitter}}{227}{subsection.18.1.5}%
+\contentsline {subsection}{\numberline {18.1.6}{Phát hiện cashtag và hashtag trong dữ liệu Twitter}}{228}{subsection.18.1.6}%
+\contentsline {subsection}{\numberline {18.1.7}{Lọc dữ liệu Twitter}}{229}{subsection.18.1.7}%
+\contentsline {section}{\numberline {18.2}{Dữ liệu StockTwits là gì}}{231}{section.18.2}%
+\contentsline {subsection}{\numberline {18.2.1}{Lấy dữ liệu StockTwits}}{232}{subsection.18.2.1}%
+\contentsline {subsection}{\numberline {18.2.2}{Điều chỉnh múi giờ trong dữ liệu StockTwits}}{233}{subsection.18.2.2}%
+\contentsline {subsection}{\numberline {18.2.3}{Trực quan hóa dữ liệu StockTwits}}{236}{subsection.18.2.3}%
+\contentsline {subsection}{\numberline {18.2.4}{Phát hiện mã cổ phiếu trong dữ liệu StockTwits}}{237}{subsection.18.2.4}%
+\contentsline {subsection}{\numberline {18.2.5}{So sánh dữ liệu Twitter và StockTwits}}{238}{subsection.18.2.5}%
+\contentsline {section}{\numberline {18.3}{Kết luận}}{240}{section.18.3}%
+\contentsline {chapter}{\numberline {19}{Đọc thêm 1: SA-MAIS, Bộ Phân tích Cảm xúc Lai cho Thị trường Chứng khoán (Taborda et al.)}}{241}{chapter.19}%
+\contentsline {section}{\numberline {19.1}{Thông tin nguồn}}{241}{section.19.1}%
+\contentsline {section}{\numberline {19.2}{Tóm tắt}}{241}{section.19.2}%
+\contentsline {section}{\numberline {19.3}{1. Giới thiệu}}{242}{section.19.3}%
+\contentsline {section}{\numberline {19.4}{2. Tổng quan tài liệu}}{243}{section.19.4}%
+\contentsline {section}{\numberline {19.5}{3. Mục tiêu nghiên cứu}}{245}{section.19.5}%
+\contentsline {section}{\numberline {19.6}{4. Phương pháp luận}}{245}{section.19.6}%
+\contentsline {section}{\numberline {19.7}{5. Cải tiến từ điển cảm xúc}}{248}{section.19.7}%
+\contentsline {section}{\numberline {19.8}{6. SA-MAIS: phương pháp lai để phân tích tweet thị trường chứng khoán}}{251}{section.19.8}%
+\contentsline {section}{\numberline {19.9}{7. Đóng góp và hàm ý thực tiễn}}{255}{section.19.9}%
+\contentsline {section}{\numberline {19.10}{8. Kết luận}}{255}{section.19.10}%
+\contentsline {chapter}{\numberline {20}{Đọc thêm 2: Dự đoán Biến động Giá Cổ phiếu từ Cảm xúc Nhà đầu tư trên Stocktwits (Liu, Leu \& Holst)}}{257}{chapter.20}%
+\contentsline {section}{\numberline {20.1}{Thông tin nguồn}}{257}{section.20.1}%
+\contentsline {section}{\numberline {20.2}{Tóm tắt}}{257}{section.20.2}%
+\contentsline {section}{\numberline {20.3}{Giới thiệu}}{258}{section.20.3}%
+\contentsline {section}{\numberline {20.4}{Công trình liên quan}}{260}{section.20.4}%
+\contentsline {section}{\numberline {20.5}{Phương pháp luận}}{264}{section.20.5}%
+\contentsline {section}{\numberline {20.6}{Thiết lập thực nghiệm}}{270}{section.20.6}%
+\contentsline {section}{\numberline {20.7}{Kết quả}}{274}{section.20.7}%
+\contentsline {section}{\numberline {20.8}{Thảo luận}}{276}{section.20.8}%
+\contentsline {section}{\numberline {20.9}{Kết luận}}{278}{section.20.9}%
+\contentsline {section}{\numberline {20.10}{Thông tin bổ sung và các công bố}}{278}{section.20.10}%
+\contentsline {chapter}{\numberline {21}{Mạng Xã hội}}{280}{chapter.21}%
+\contentsline {section}{\numberline {21.1}{Mạng Xã hội là gì?}}{281}{section.21.1}%
+\contentsline {section}{\numberline {21.2}{Truy xuất Dữ liệu}}{282}{section.21.2}%
+\contentsline {subsection}{\numberline {21.2.1}{Một Ví dụ về Lượng hóa Cảm xúc bằng Dữ liệu YouTube}}{282}{subsection.21.2.1}%
+\contentsline {subsection}{\numberline {21.2.2}{Reddit}}{287}{subsection.21.2.2}%
+\contentsline {section}{\numberline {21.3}{Kết luận}}{290}{section.21.3}%
+\providecommand \tocbasic@end@toc@file {}\tocbasic@end@toc@file 

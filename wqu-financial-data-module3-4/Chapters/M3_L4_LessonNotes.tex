@@ -1,0 +1,464 @@
+\chapter{Phân rã Giá trị Kỳ dị của Ma trận}
+\label{ch:M3L4}
+
+% Lesson: Singular Value Decomposition of Matrices
+
+\section*{Lesson Notes}
+
+MODULE 3 | BÀI 4
+
+{\small
+\begin{longtable}{>{\raggedright\arraybackslash}p{0.213\linewidth}>{\raggedright\arraybackslash}p{0.727\linewidth}}
+\toprule
+\textbf{Thời gian đọc} & 60 phút \\
+\addlinespace[2pt]
+\textbf{Kiến thức nền tảng} & Các phép toán ma trận cơ bản, đại số tuyến tính, Python cơ bản \\
+\addlinespace[2pt]
+\textbf{Từ khóa} & Phân rã giá trị kỳ dị (SVD), SVD đầy đủ và SVD cỡ kinh tế, xấp xỉ ma trận \\
+\addlinespace[2pt]
+\bottomrule
+\end{longtable}
+}
+
+\emph{Trong bài học trước, chúng ta đã giới thiệu các phương pháp phân rã một ma trận đối xứng. Tuy nhiên, nhiều khi tập dữ liệu hay ma trận mà ta có lại không phải là ma trận đối xứng. Trong bài học này, chúng ta sẽ giới thiệu một phương pháp tổng quát để phân rã một ma trận. Phương pháp này được gọi là Phân rã Giá trị Kỳ dị, hay SVD. Chúng ta sẽ đi qua định nghĩa và các tính chất của SVD, sau đó trình bày một ứng dụng.}
+
+\section{Giới thiệu Phân rã Giá trị Kỳ dị (SVD)}
+
+\textbf{Phân rã giá trị kỳ dị (SVD)} là một phương pháp rất phổ biến trong đại số tuyến tính số. Phương pháp này thường được dùng để giải bài toán hồi quy tuyến tính khi ma trận không vuông. Nó cũng có thể được dùng như một phương pháp giảm chiều dữ liệu. Một ví dụ là dùng SVD làm cơ sở cho phân tích thành phần chính. SVD cũng là một phương pháp số nền tảng cho các thuật toán học máy.
+
+Trong module trước, chúng ta đã thảo luận cách chéo hóa một ma trận đối xứng. Nếu $A$ là một ma trận đối xứng cỡ 3 nhân 3, ta có thể chéo hóa hay phân tích $A$ thành nhân tử như sau:
+
+\[
+A=\begin{bmatrix}
+| & | &  |\\
+v_{1} & v_{2} & v_{3} \\
+| & | & |
+\end{bmatrix}\begin{bmatrix}
+\lambda_{1} & 0 & 0 \\
+0 & \lambda_{2} & 0 \\
+0 & 0 & \lambda_{3}
+\end{bmatrix}\begin{bmatrix}
+| & | &  |\\
+v_{1} & v_{2} & v_{3} \\
+| & | & |
+\end{bmatrix}^{T}
+\]
+
+trong đó
+
+$v_{1} , v_{2} , v_{3}$ là các vector riêng của $A$
+
+$\lambda_{1} , \lambda_{2} , \lambda_{3}$ là các giá trị riêng của $A$
+
+Tuy nhiên, phần lớn thời gian, các tập dữ liệu hay ma trận mà ta có sẽ không có tính đối xứng. Do đó, ta cần một phương pháp để chéo hóa một ma trận tổng quát. Phương pháp này chính là phân rã giá trị kỳ dị.
+
+\section{Định nghĩa Phân rã Giá trị Kỳ dị}
+
+\subsection{Biểu diễn Ma trận của SVD}
+
+\textbf{Phân rã giá trị kỳ dị} là một phương pháp phân rã một ma trận thành ba ma trận. Với mọi ma trận $A$ cỡ $m\times n$ có các phần tử thực, tồn tại một phân tích thành nhân tử có dạng:
+
+\[
+A=U\Sigma V^{T}
+\]
+
+Trong đó:
+
+$U$ là một ma trận unita và trực giao cỡ $m\times m$, do đó là ma trận trực chuẩn
+
+$\Sigma$ là một ma trận đường chéo hình chữ nhật cỡ $m\times n$ với các số thực khác không trên đường chéo
+
+$V^{T}$ là chuyển vị của $V$; $V$ là một ma trận unita và trực giao (trực chuẩn) cỡ $n\times n$
+
+Ta cũng có thể viết lại công thức trên dưới dạng ma trận sau, với giả định $m\ge n$.
+
+\[
+\begin{bmatrix}
+ &  &  &  \\
+| & | &  & |\\
+a_{1} & a_{2} & ... & a_{n} \\
+| & | &  & |\\
+ &  &  &
+\end{bmatrix}=\begin{bmatrix}
+ &  &  &  \\
+| & | &  & |\\
+u_{1} & u_{2} & ... & u_{m} \\
+| & | &  & |\\
+ &  &  &
+\end{bmatrix}\begin{bmatrix}
+\sigma_{1} & 0 & ... & 0 \\
+0 & \sigma_{2} & ... & 0 \\
+0 & 0 & ... & 0 \\
+0 & 0 & ... & \sigma_{n} \\
+0 & 0 & ... & 0
+\end{bmatrix}\begin{bmatrix}
+ &  &  &  \\
+| & | & | & | \\
+v_{1} & v_{2} & ... & v_{n} \\
+| & | & | & | \\
+ &  &  &
+\end{bmatrix}^{T}
+\]
+
+trong đó $a$ là $n$ vector cột trong ma trận $A$, $u$ là $m$ vector cột trong ma trận $U$, và $v$ là $n$ vector cột trong ma trận $V$.
+
+Các cỡ ma trận ở trên như sau:
+\[
+\left[ m\times n \right]=\left[ m\times m \right]\left[ m\times n \right]\left[ n\times n \right]
+\]
+
+Các phần tử đường chéo $\sigma_{i}$ của $\Sigma$ được gọi là các \textbf{giá trị kỳ dị} của $A$. Chúng thường được sắp xếp theo thứ tự giảm dần ($\sigma_{1} \geq \sigma_{2} \geq ... \geq \sigma_{\min(m,n)} \geq 0$). Vì ma trận $\Sigma$ ở trên giả định $m \ge n$, nên có tối đa $n$ giá trị kỳ dị dương. Giá trị của các hàng còn lại trong $\Sigma$ bằng 0.
+
+Các vector trong ma trận $U$ được gọi là các \textbf{vector kỳ dị trái} của $A$.
+
+Các vector trong ma trận $V$ được gọi là các \textbf{vector kỳ dị phải} của $A$.
+
+\subsection{Diễn giải Hình học của Phân rã Giá trị Kỳ dị (SVD)}
+
+SVD có thể được diễn giải về mặt hình học như một hợp của ba phép biến đổi:
+\begin{enumerate}
+  \item Một phép quay hoặc phản xạ $U$
+  \item Một phép co giãn hoặc mở rộng dọc theo các trục tọa độ $\Sigma$
+  \item Một phép quay hoặc phản xạ khác $V^{T}$
+\end{enumerate}
+
+Cách diễn giải này giúp hiểu SVD nắm bắt cấu trúc cốt lõi của các phép biến đổi tuyến tính như thế nào. Đồ thị sau minh họa phép phân rã.
+
+\textbf{Hình 1: Minh họa Phân rã Giá trị Kỳ dị}
+
+% [Hình chưa có trong gfx: images/FD_M3_L4_decomposition.jpg]
+\begin{figure}[H]
+\centering
+\fbox{\parbox{0.9\linewidth}{\small \emph{[Hình minh họa: Sơ đồ mô tả quá trình Phân rã Giá trị Kỳ dị (SVD), cho thấy các phép biến đổi: một phép biến đổi tuyến tính (A), các phép quay (U và V$^{T}$), và phép co giãn ($\Sigma$), được biểu diễn trên mặt phẳng 2D cùng các vector.]}}}
+\end{figure}
+
+\section{Các Tính chất của Phân rã Giá trị Kỳ dị (SVD)}
+
+Trong mục này, chúng ta sẽ thảo luận một số tính chất then chốt của SVD.
+
+\subsubsection*{Tính chất 1.}
+
+Vì các vector trong $U$ và $V$ là unita và trực giao,
+
+$U^{T}U=UU^{T}=I_{m\times m}$ \quad (ma trận đơn vị)
+
+$V^{T}V=VV^{T}=I_{n\times n}$ \quad (ma trận đơn vị)
+
+\subsubsection*{Tính chất 2.}
+
+Số giá trị kỳ dị khác không trong ma trận $\Sigma$ chính là hạng của ma trận $A$.
+
+\subsubsection*{Tính chất 3.}
+
+Vì các giá trị kỳ dị $\sigma$ được sắp xếp theo thứ tự giảm dần trong ma trận $\Sigma$, cột thứ nhất của $U$ (là $u_{1}$) và cột thứ nhất của $V$ (là $v_{1}$) tương ứng với $\sigma_{1}$ quan trọng hơn cột thứ hai của các ma trận $U$ và $V$ trong việc mô tả thông tin của ma trận $A$. Các cột thứ nhất của $U$ và $V$ cũng quan trọng hơn cột thứ ba trong việc mô tả ma trận $A$, và cứ tiếp tục như vậy. Do tính chất này, khi một số giá trị $\sigma$ rất nhỏ, điều đó có nghĩa là chúng chỉ chứa một lượng thông tin rất nhỏ của ma trận $A$. Ta có thể bỏ các $\sigma$ này cùng các cột tương ứng của chúng trong các ma trận $U$ và $V$.
+
+\subsubsection*{Tính chất 4.}
+
+Trong phần trước, chúng ta đã đề cập rằng số giá trị kỳ dị khác không trong ma trận $\Sigma$ là giá trị nhỏ nhất của $m$ và $n$. Do đó, có thể có các hàng toàn số $0$ ở phần dưới của ma trận $\Sigma$. Kết quả là, khi ta thực hiện tích vô hướng của ma trận $U$ với ma trận $\Sigma$, các vector tương ứng của $U$ sẽ nhân với tất cả các hàng số $0$ trong ma trận $\Sigma$ và cho kết quả bằng $0$. Từ kết quả này, ta có thể đơn giản hóa SVD về dạng rút gọn bằng cách bỏ các hàng toàn số $0$ trong ma trận $\Sigma$ và các vector tương ứng trong ma trận $U$. Hình 2 dưới đây minh họa tính chất này.
+
+\textbf{Hình 2: SVD Đầy đủ so với SVD Cỡ kinh tế/Rút gọn}
+
+Sơ đồ so sánh Phân rã Giá trị Kỳ dị (SVD) đầy đủ và cỡ kinh tế, cho thấy các ma trận $A$, $U$, $\Sigma$, và $V^T$ cùng các thành phần và số chiều tương ứng:
+
+% [Hình chưa có trong gfx: images/FD_M3_L4_reduced_SVD.jpg]
+\begin{figure}[H]
+\centering
+\fbox{\parbox{0.9\linewidth}{\small \emph{[Hình minh họa: Sơ đồ so sánh Phân rã Giá trị Kỳ dị (SVD) đầy đủ và rút gọn, cho thấy các ma trận A, U, $\Sigma$, và V$^{T}$ cùng các thành phần và số chiều tương ứng.]}}}
+\end{figure}
+
+Trong phương trình đầu tiên ở Hình 2, ta thấy khi thực hiện tích vô hướng của $U$ và $\Sigma$, phần $\hat{U}^{\bot }$ của $U$ sẽ nhân với các số $0$ của $\Sigma$. Kết quả sẽ bằng $0$. Do đó, ta có thể bỏ chúng đi mà không mất thông tin nào trong ma trận A. Phương trình thứ hai là dạng rút gọn của SVD. Dạng này được gọi là \textbf{SVD rút gọn} hay \textbf{SVD cỡ kinh tế}.
+
+\section{Xấp xỉ Ma trận bằng SVD}
+
+Trong mục này, chúng ta sẽ minh họa cách dùng SVD để xấp xỉ một ma trận. Đây là lý do phổ biến nhất để dùng SVD.
+
+Giả sử với ma trận A cỡ $m \times n$, hạng là $r$, và $r<min(m,n)$. Ta có thể viết SVD của ma trận $A$ như sau.
+
+\[
+A=\begin{bmatrix}
+ &  &  &  \\
+| & | &  & |\\
+a_{1} & a_{2} & ... & a_{n} \\
+| & | &  & |\\
+ &  &  & \\
+ &  &  &
+\end{bmatrix}=\begin{bmatrix}
+ &  &  &  \\
+| & | &  & |\\
+u_{1} & u_{2} & ... & u_{m} \\
+| & | &  & |\\
+ &  &  & \\
+ &  &  &
+\end{bmatrix}\begin{bmatrix}
+\sigma_{1} & 0 & ... & 0 &0 \\
+0 & \sigma_{2} & ... & 0 &0\\
+0 & 0 & ... & 0 &0\\
+0 & 0 & ... & \sigma_{r} &0\\
+0 & 0 & ... & 0 &0\\
+0 & 0 & ... & 0 &0
+\end{bmatrix}\begin{bmatrix}
+ &  &  &  \\
+| & | & | & | \\
+v_{1} & v_{2} & ... & v_{n} \\
+| & | & | & | \\
+ &  &  & \\
+ &  &  &
+\end{bmatrix}^{T}
+\]
+
+Từ các giá trị kỳ dị trong $\Sigma$, ta biết $\sigma_{1}\ge \sigma_{2}\ge ...\ge \sigma_{r}>\sigma_{r+1}=...\sigma_{min(m,n)}=0$. Ta có thể khai triển ma trận A như sau.
+
+\[
+A=\sum_{k=1}^{r}\sigma_{k}u_{k}v_{k}^{T}=\sigma_{1}u_{1}v_{1}^{T}+\sigma_{2}u_{2}v_{2}^{T}+...+\sigma_{r-1}u_{r-1}v_{r-1}^{T}+\sigma_{r}u_{r}v_{r}^{T}
+\]
+
+Đây được gọi là định lý Eckart-Young. Theo định lý này, ta có thể biểu diễn ma trận $A$ chỉ bằng $r$ vector đầu tiên trong ma trận $U$ và $r$ vector đầu tiên trong ma trận $V$, vì trong ma trận $\Sigma$ chỉ có $r$ giá trị $\sigma$ khác không.
+
+Ta cũng biết rằng các $\sigma$ trong $\Sigma$ được sắp xếp theo thứ tự giảm dần. Nếu các $\sigma$ ở vế phải của phương trình quá nhỏ, ta có thể bỏ chúng khỏi phương trình. Khi đó, ta có thể xấp xỉ ma trận $A$ chỉ bằng các $\sigma$ có giá trị lớn. Giả sử ta chỉ muốn giữ lại $\hat{r}$ giá trị $\sigma$ đầu tiên trong phương trình, trong đó $r \ge \hat{r}$. Ma trận $A$ xấp xỉ có thể được biểu diễn như sau.
+
+\[
+\tilde{A}=\sum_{k=1}^{\hat{r}}\sigma_{k}u_{k}v_{k}^{T}=\sigma_{1}u_{1}v_{1}^{T}+\sigma_{2}u_{2}v_{2}^{T}+...+\sigma_{\hat{r}-1}u_{\hat{r}-1}v_{\hat{r}-1}^{T}+\sigma_{\hat{r}}u_{\hat{r}}v_{\hat{r}}^{T}
+\]
+
+$\tilde{A}$ là xấp xỉ của A. Dựa trên phương trình và phần giải thích ở trên, $\tilde{A}$ chứa ít điểm dữ liệu hơn $A$ nhưng vẫn giữ phần lớn thông tin từ ma trận gốc $A$. Ta giảm chiều dữ liệu bằng cách dùng SVD để xấp xỉ một ma trận. Điều này nhờ vào tính chất của SVD cho phép ta giải các bài toán bình phương tối thiểu hoặc chạy các thuật toán học máy hiệu quả hơn.
+
+\section{Ứng dụng của Phân rã Giá trị Kỳ dị (SVD)}
+
+Trong mục này, chúng ta sẽ dùng một số dữ liệu tài chính để minh họa cách sử dụng SVD. Chúng ta sẽ dùng dữ liệu giá cổ phiếu của Apple, Ford Motor, Pfizer và Walmart để cho thấy cách áp dụng SVD. Trước hết, hãy tải một số thư viện Python cho ứng dụng này.
+
+\begin{lstlisting}[language=Python,escapeinside={(*@}{@*)}]
+import datetime
+import math
+import matplotlib.pyplot as plt
+import numpy as np
+import pandas as pd
+import seaborn as sns
+import yfinance as yfin
+
+from numpy import linalg as LA
+\end{lstlisting}
+
+\subsection{Nhập Dữ liệu}
+
+Tiếp theo, chúng ta sẽ tải dữ liệu giá cổ phiếu từ Yahoo Finance.
+
+\begin{lstlisting}[language=Python,escapeinside={(*@}{@*)}]
+# (*@Tải@*) (*@giá@*) (*@cổ@*) (*@phiếu@*) (*@từ@*) Yahoo Finance (*@và@*) (*@đặt@*) (*@khoảng@*) (*@thời@*) gian (*@tải@*) (*@về@*)
+start = datetime.date(2018, 1, 2)
+end = datetime.date(2023, 12, 31)
+
+# (*@Lấy@*) (*@dữ@*) (*@liệu@*)
+# (*@Để@*) (*@chuyển@*) (*@đổi@*) (*@giữa@*) (*@tải@*) (*@dữ@*) (*@liệu@*) (*@trực@*) (*@tiếp@*) (*@và@*) (*@nạp@*) (*@dữ@*) (*@liệu@*) (*@cục@*) (*@bộ,@*) 
+# (*@bỏ@*) (*@dấu@*) (*@chú@*) (*@thích@*) (*@ở@*) (*@dòng@*) mong (*@muốn@*) (*@và@*) (*@chú@*) (*@thích@*) (*@dòng@*) (*@còn@*) (*@lại.@*)
+# (*@Lấy@*) (*@dữ@*) (*@liệu@*) Amazon, Ford (*@và@*) Bitcoin
+#stocks = yfin.download(["AAPL", "F", "WMT","PFE"], start, end, auto_adjust = False)["Adj Close"]
+stocks = pd.read_csv('FD_M3_L4_stocks.csv', index_col='Date', parse_dates=True)\
+                    .loc[start:end].reindex(columns=["AAPL", "F", "WMT","PFE"])
+
+stocks.head()
+\end{lstlisting}
+
+\begin{lstlisting}[escapeinside={(*@}{@*)}]
+                 AAPL         F        WMT        PFE
+Date                                                 
+2018-01-02  40.341885  8.263117  28.914423  24.229599
+2018-01-03  40.334858  8.328384  29.166639  24.409126
+2018-01-04  40.522213  8.471978  29.193027  24.462317
+2018-01-05  40.983566  8.615572  29.366074  24.508865
+2018-01-08  40.831348  8.582937  29.800114  24.236256
+\end{lstlisting}
+
+\begin{lstlisting}[language=Python,escapeinside={(*@}{@*)}]
+stocks.index = pd.to_datetime(stocks.index).strftime("%Y-%m-%d")
+\end{lstlisting}
+
+\subsection{Tính Lợi suất}
+
+Bây giờ, hãy tính lợi suất của các giá cổ phiếu này.
+
+\begin{lstlisting}[language=Python,escapeinside={(*@}{@*)}]
+# (*@Để@*) (*@tính@*) (*@lợi@*) (*@suất@*) (*@của@*) (*@các@*) (*@cổ@*) (*@phiếu,@*) ta (*@cần@*) (*@loại@*) (*@bỏ@*) (*@các@*) (*@hàng@*) NA.
+stocks_returns = stocks[["AAPL", "F", "WMT","PFE"]].dropna().pct_change()
+stocks_returns = stocks_returns.dropna()
+stocks_returns.head()
+\end{lstlisting}
+
+\begin{lstlisting}[escapeinside={(*@}{@*)}]
+                AAPL         F       WMT       PFE
+Date                                              
+2018-01-03 -0.000174  0.007899  0.008723  0.007409
+2018-01-04  0.004645  0.017241  0.000905  0.002179
+2018-01-05  0.011385  0.016949  0.005928  0.001903
+2018-01-08 -0.003714 -0.003788  0.014780 -0.011123
+2018-01-09 -0.000115 -0.005323 -0.012007 -0.001098
+\end{lstlisting}
+
+\subsection{Tính SVD}
+
+Bây giờ chúng ta đã có tập dữ liệu lợi suất giá cổ phiếu của bốn cổ phiếu. Ta có thể tính SVD một cách đơn giản bằng hàm Python sau.
+
+\begin{lstlisting}[language=Python,escapeinside={(*@}{@*)}]
+# (*@Thực@*) (*@hiện@*) SVD cho (*@lợi@*) (*@suất@*) (*@cổ@*) (*@phiếu@*)
+U, s, VT = np.linalg.svd(stocks_returns)
+\end{lstlisting}
+
+\begin{lstlisting}[language=Python,escapeinside={(*@}{@*)}]
+# (*@Trình@*) (*@bày@*) (*@kết@*) (*@quả@*)
+print("Stock Returns Matrix Dimension:")
+print(stocks_returns.shape)
+print("\nDimension of Matrix U:")
+print(U.shape)
+print("\nSingular values:")
+print(s)
+print("\nDimension of Matrix V^T:")
+print(VT.shape)
+\end{lstlisting}
+
+\begin{lstlisting}[escapeinside={(*@}{@*)}]
+Stock Returns Matrix Dimension:
+(1508, 4)
+
+Dimension of Matrix U:
+(1508, 1508)
+
+Singular values:
+[1.11696739 0.72489554 0.55820564 0.47159228]
+
+Dimension of Matrix V^T:
+(4, 4)
+
+\end{lstlisting}
+
+\section{So sánh PCA và SVD}
+
+Cho đến nay, việc tính SVD của một ma trận bằng Python rất đơn giản. Hãy làm cho mọi thứ thú vị hơn một chút. Chúng ta sẽ cho thấy mối liên hệ giữa SVD và phân tích thành phần chính (PCA) (Brunton et al.).
+
+Trong Module 1, chúng ta đã thảo luận ngắn gọn cách thu được các thành phần chính bằng vector riêng và giá trị riêng. Trong mục này, chúng ta sẽ chỉ cho bạn cách dùng SVD của một ma trận để thu được giá trị riêng và vector riêng.
+
+Hãy nhớ rằng trong Module 2, trước khi đi đến các thành phần chính, ta cần chuẩn hóa dữ liệu. Hãy làm điều đó trước.
+
+\begin{lstlisting}[language=Python,escapeinside={(*@}{@*)}]
+# (*@Chuẩn@*) (*@hóa@*) (*@tập@*) (*@dữ@*) (*@liệu@*) (*@lợi@*) (*@suất@*) (*@cổ@*) (*@phiếu@*)
+stocks_returns_means = stocks_returns.mean()
+stocks_returns_stds = stocks_returns.std()
+standardized_returns = (stocks_returns - stocks_returns_means) / stocks_returns_stds
+standardized_returns.head()
+\end{lstlisting}
+
+\begin{lstlisting}[escapeinside={(*@}{@*)}]
+                AAPL         F       WMT       PFE
+Date                                              
+2018-01-03 -0.070358  0.286261  0.584133  0.446787
+2018-01-04  0.171148  0.647641  0.029986  0.124438
+2018-01-05  0.508925  0.636338  0.386009  0.107413
+2018-01-08 -0.247757 -0.165773  1.013486 -0.695380
+2018-01-09 -0.067374 -0.225159 -0.885164 -0.077534
+\end{lstlisting}
+
+Tiếp theo, ta muốn tính hiệp phương sai của ma trận lợi suất đã chuẩn hóa. Dạng ma trận của phương trình hiệp phương sai như sau.
+
+\[
+\left( \frac{\text{ma trận lợi suất chuẩn hóa}}{\sqrt{n-1}} \right)^{T}\bullet \left( \frac{\text{ma trận lợi suất chuẩn hóa}}{\sqrt{n-1}} \right)
+\]
+
+\begin{lstlisting}[language=Python,escapeinside={(*@}{@*)}]
+# (*@Tính@*) (*@hiệp@*) (*@phương@*) sai cho ma (*@trận@*) (*@lợi@*) (*@suất@*) (*@chuẩn@*) (*@hóa@*)
+standardized_returns_dvd_sqrt_n=(standardized_returns/math.sqrt(len(standardized_returns)-1))
+standardized_returns_cov = standardized_returns_dvd_sqrt_n.T@standardized_returns_dvd_sqrt_n
+standardized_returns_cov
+\end{lstlisting}
+
+\begin{lstlisting}[escapeinside={(*@}{@*)}]
+          AAPL         F       WMT       PFE
+AAPL  1.000000  0.376460  0.365246  0.324438
+F     0.376460  1.000000  0.185248  0.224384
+WMT   0.365246  0.185248  1.000000  0.296375
+PFE   0.324438  0.224384  0.296375  1.000000
+\end{lstlisting}
+
+Bây giờ, hãy thực hiện một số phép biến đổi ma trận đơn giản trên hiệp phương sai của lợi suất chuẩn hóa. Giả sử ma trận $B$ là $\left( \frac{\text{ma trận lợi suất chuẩn hóa}}{\sqrt{n-1}} \right)$. Do đó, ta có thể viết lại hiệp phương sai của lợi suất chuẩn hóa như sau.
+
+\[
+\text{Hiệp phương sai} = B^{T}B
+\]
+
+Với SVD, ta có thể viết ma trận $B$ là $B=U\Sigma V^{T}$. Khi đó, chuyển vị của nó là $B^{T}=V\Sigma U^{T}$. Sau đó, ta có thể tính hiệp phương sai của lợi suất chuẩn hóa như sau.
+
+\[
+\text{Hiệp phương sai} =B^{T}B=V\Sigma U^{T}U\Sigma V^{T}=V\Sigma\Sigma V^{T}=V\Sigma^{2} V^{T}
+\]
+
+Vì tính chất $U^{T}U=I$ là ma trận đơn vị, ta có thể bỏ $U^{T}U$. Tiếp theo, hãy thực hiện phép tính sau.
+
+\[
+B^{T}BV=V\Sigma^{2} V^{T}V=V\Sigma^{2}
+\]
+
+Ta có thể bỏ $V^{T}V$ vì $V^{T}V=I$ là ma trận đơn vị. Phương trình trên có gợi cho bạn điều gì không? Đúng vậy, phương trình cho thấy các vector cột trong ma trận $V$ là các vector riêng của $B^{T}B$. Các giá trị kỳ dị bình phương trong ma trận $\Sigma$ là các giá trị riêng của $B^{T}B$. Do đó, $Bv_{1}$ là thành phần chính thứ nhất và $\sigma_{1}^{2}$ tương ứng là phương sai của tập dữ liệu $B$ được giải thích bởi thành phần chính thứ nhất.
+
+Bây giờ, bạn thực ra có hai cách để tính các thành phần chính. Phương pháp thứ nhất, như đã mô tả ở Module 1, Bài 4, là tính các giá trị riêng và vector riêng của ma trận hiệp phương sai của dữ liệu. Phương pháp thứ hai là tính SVD của dữ liệu. Khi đó, ma trận $V$ sẽ chứa các vector riêng, và các giá trị kỳ dị bình phương sẽ là các giá trị riêng.
+
+Bây giờ hãy thử cả hai phương pháp để thu được giá trị riêng và vector riêng.
+
+\begin{lstlisting}[language=Python,escapeinside={(*@}{@*)}]
+# (*@Dùng@*) SVD (*@để@*) (*@tính@*) vector (*@riêng@*) (*@và@*) (*@giá@*) (*@trị@*) (*@riêng@*) (*@của@*) ma (*@trận@*) (*@hiệp@*) (*@phương@*) sai (*@của@*) (*@lợi@*) (*@suất@*) (*@chuẩn@*) (*@hóa@*)
+U_st_return, s_st_return, VT_st_return = np.linalg.svd(standardized_returns_dvd_sqrt_n)
+print("\nSquared Singular values (eigenvalues):")
+print(s_st_return**2)
+print("\nMatrix V (eigenvectors)")
+print(VT_st_return.T)
+\end{lstlisting}
+
+\begin{lstlisting}[escapeinside={(*@}{@*)}]
+
+Squared Singular values (eigenvalues):
+[1.8947492  0.83555338 0.71064931 0.55904811]
+
+Matrix V (eigenvectors)
+[[ 0.56634769  0.14011624 -0.21637439 -0.78281534]
+ [ 0.45964766  0.75759291  0.0183351   0.46307756]
+ [ 0.48586769 -0.53226779 -0.55857187  0.41063494]
+ [ 0.48156713 -0.35087237  0.80052696  0.06432933]]
+
+\end{lstlisting}
+
+\begin{lstlisting}[language=Python,escapeinside={(*@}{@*)}]
+# (*@Dùng@*) (*@phương@*) (*@pháp@*) (*@từ@*) Module 1 (*@Bài@*) 4 (*@để@*) (*@tính@*) vector (*@riêng@*) (*@và@*) 
+# (*@giá@*) (*@trị@*) (*@riêng@*) (*@của@*) ma (*@trận@*) (*@hiệp@*) (*@phương@*) sai (*@của@*) (*@lợi@*) (*@suất@*) (*@chuẩn@*) (*@hóa@*)
+eigenvalues, eigenvectors = LA.eig(standardized_returns_cov)
+idx = np.argsort(eigenvalues)[::-1]
+eigenvalues = eigenvalues[idx]
+eigenvectors = eigenvectors[:, idx]
+eigenvalues
+\end{lstlisting}
+
+\begin{lstlisting}[escapeinside={(*@}{@*)}]
+array([1.8947492 , 0.83555338, 0.71064931, 0.55904811])
+\end{lstlisting}
+
+\begin{lstlisting}[language=Python,escapeinside={(*@}{@*)}]
+eigenvectors
+\end{lstlisting}
+
+\begin{lstlisting}[escapeinside={(*@}{@*)}]
+array([[-0.56634769,  0.14011624, -0.21637439, -0.78281534],
+       [-0.45964766,  0.75759291,  0.0183351 ,  0.46307756],
+       [-0.48586769, -0.53226779, -0.55857187,  0.41063494],
+       [-0.48156713, -0.35087237,  0.80052696,  0.06432933]])
+\end{lstlisting}
+
+Từ kết quả trên, ta thấy cả hai phương pháp đều cho cùng các giá trị riêng. Cả hai phương pháp cũng cho cùng các vector riêng, ngoại trừ vector đầu tiên. Nhìn kỹ, ta thấy chúng chỉ khác nhau về dấu âm. Với vector riêng, chúng thực chất là như nhau vì dấu âm không làm thay đổi hướng hay độ lớn của cả hai vector riêng.
+
+Bạn có thể dùng một trong hai phương pháp để thu được các vector riêng và giá trị riêng của một ma trận hiệp phương sai. Không có sự đồng thuận về việc phương pháp nào tốt hơn. Chúng ta thường dùng SVD để triển khai PCA, nén ảnh và các hệ thống gợi ý. Chúng ta sẽ dùng phương pháp trong Module 1, Bài 4 để giải các bài toán bình phương tối thiểu.
+
+Một khác biệt then chốt giữa PCA và SVD là cách chúng xử lý điểm xuất phát. Nói chung, PCA làm việc trên ma trận hiệp phương sai hoặc ma trận tương quan. PCA cũng chuẩn hóa ma trận dữ liệu. Tuy nhiên, SVD có thể làm việc trực tiếp trên ma trận dữ liệu. Nếu SVD không chuẩn hóa ma trận dữ liệu, các giá trị riêng thu được có thể khác với các giá trị riêng tính từ PCA.
+
+\section{Kết luận}
+
+Trong bài học này, trước hết chúng ta đã giới thiệu SVD. Chúng ta đã nêu định nghĩa của nó, minh họa cách diễn giải hình học, và thảo luận các tính chất của nó. Sau đó, chúng ta đã trình bày ứng dụng của nó bằng Python. Chúng ta đã cho thấy cách dùng SVD để tính các giá trị riêng và vector riêng của một ma trận hiệp phương sai. Chúng ta cũng đã chỉ ra mối liên hệ giữa SVD và PCA.
+
+\textbf{Tài liệu tham khảo}
+
+\begin{itemize}
+  \item Brunton, Steven L., et al. ``Chapter 1: Singular Value Decomposition (SVD) and Principal Components Analysis (PCA).'' University of Washington, 2015, \url{https://faculty.washington.edu/sbrunton/me565/pdf/CHAPTER1.pdf}.
+\end{itemize}

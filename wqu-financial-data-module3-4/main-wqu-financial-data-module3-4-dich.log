@@ -1,0 +1,4416 @@
+This is pdfTeX, Version 3.141592653-2.6-1.40.27 (TeX Live 2025) (preloaded format=pdflatex 2025.3.8)  25 SEP 2026 16:59
+entering extended mode
+ restricted \write18 enabled.
+ %&-line parsing enabled.
+**main-wqu-financial-data-module3-4-dich.tex
+(./main-wqu-financial-data-module3-4-dich.tex
+LaTeX2e <2024-11-01> patch level 2
+L3 programming layer <2025-01-18>
+(/usr/local/texlive/2025/texmf-dist/tex/latex/base/fix-cm.sty
+Package: fix-cm 2020/11/24 v1.1t fixes to LaTeX
+
+(/usr/local/texlive/2025/texmf-dist/tex/latex/base/ts1enc.def
+File: ts1enc.def 2001/06/05 v3.0e (jk/car/fm) Standard LaTeX file
+LaTeX Font Info:    Redeclaring font encoding TS1 on input line 47.
+))
+(/usr/local/texlive/2025/texmf-dist/tex/latex/koma-script/scrreprt.cls
+Document Class: scrreprt 2024/10/24 v3.43 KOMA-Script document class (report)
+(/usr/local/texlive/2025/texmf-dist/tex/latex/koma-script/scrkbase.sty
+Package: scrkbase 2024/10/24 v3.43 KOMA-Script package (KOMA-Script-dependent b
+asics and keyval usage)
+
+(/usr/local/texlive/2025/texmf-dist/tex/latex/koma-script/scrbase.sty
+Package: scrbase 2024/10/24 v3.43 KOMA-Script package (KOMA-Script-independent 
+basics and keyval usage)
+
+(/usr/local/texlive/2025/texmf-dist/tex/latex/koma-script/scrlfile.sty
+Package: scrlfile 2024/10/24 v3.43 KOMA-Script package (file load hooks)
+
+(/usr/local/texlive/2025/texmf-dist/tex/latex/koma-script/scrlfile-hook.sty
+Package: scrlfile-hook 2024/10/24 v3.43 KOMA-Script package (using LaTeX hooks)
+
+
+(/usr/local/texlive/2025/texmf-dist/tex/latex/koma-script/scrlogo.sty
+Package: scrlogo 2024/10/24 v3.43 KOMA-Script package (logo)
+)))
+(/usr/local/texlive/2025/texmf-dist/tex/latex/graphics/keyval.sty
+Package: keyval 2022/05/29 v1.15 key=value parser (DPC)
+\KV@toks@=\toks17
+)
+Applying: [2021/05/01] Usage of raw or classic option list on input line 254.
+Already applied: [0000/00/00] Usage of raw or classic option list on input line
+ 370.
+))
+(/usr/local/texlive/2025/texmf-dist/tex/latex/koma-script/tocbasic.sty
+Package: tocbasic 2024/10/24 v3.43 KOMA-Script package (handling toc-files)
+\scr@dte@tocline@numberwidth=\skip49
+\scr@dte@tocline@numbox=\box52
+)
+Package tocbasic Info: omitting babel extension for `toc'
+(tocbasic)             because of feature `nobabel' available
+(tocbasic)             for `toc' on input line 137.
+Class scrreprt Info: You've used standard option `oneside'.
+(scrreprt)           This is correct!
+(scrreprt)           Internally I'm using `twoside=false'.
+(scrreprt)           If you'd like to set the option with \KOMAoptions,
+(scrreprt)           you'd have to use `twoside=false' there
+(scrreprt)           instead of `oneside', too.
+
+
+Class scrreprt Warning: You've used deprecated option `abstractoff'.
+(scrreprt)              Usage of this option indicates an old document
+(scrreprt)              and changes compatibility level using
+(scrreprt)              `abstract=false,version=first,
+(scrreprt)              enabledeprecatedfontcommands' that may result
+(scrreprt)              in further warnings.
+(scrreprt)              If you don't want this, you should simply
+(scrreprt)              replace option `abstractoff' by `abstract=false'.
+
+Class scrreprt Info: Switching compatibility level to `first'.
+
+Class scrreprt Warning: Switching back to an old KOMA-Script release does
+(scrreprt)              not mean, that KOMA-Script is fully compatible with
+(scrreprt)              the old release. If you need full compatibility
+(scrreprt)              to an old KOMA-Script release, you should use that
+(scrreprt)              old KOMA-Script release. However, in that case you
+(scrreprt)              could also need old releases of other packages and
+(scrreprt)              even of the LaTeX kernel.
+(scrreprt)              Please also note, that the KOMA-Script developers
+(scrreprt)              refuse support for documents using `version=first'.
+(scrreprt)              We recommend to eliminate all deprecated options
+(scrreprt)              and commands. We also recommend to not use option
+(scrreprt)              `version', i.e., with other values than `last'.
+
+
+Class scrreprt Warning: deprecated option `enabledeprecatedfontcommands'.
+(scrreprt)              Note, that this option was already depreacted when
+(scrreprt)              it has been defined. Support for old font commands
+(scrreprt)              has been removed from KOMA-Script more than one
+(scrreprt)              decade ago. It is not recommended to use them any
+(scrreprt)              longer. Therefore usage of this class option also
+(scrreprt)              is not recommended.
+
+Class scrreprt Info: File `scrsize11pt.clo' used to setup font sizes on input l
+ine 2713.
+(/usr/local/texlive/2025/texmf-dist/tex/latex/koma-script/scrsize11pt.clo
+File: scrsize11pt.clo 2024/10/24 v3.43 KOMA-Script font size class option (11pt
+)
+)
+(/usr/local/texlive/2025/texmf-dist/tex/latex/koma-script/typearea.sty
+Package: typearea 2024/10/24 v3.43 KOMA-Script package (type area)
+\ta@bcor=\skip50
+\ta@div=\count196
+Package typearea Info: You've used standard option `oneside'.
+(typearea)             This is correct!
+(typearea)             Internally I'm using `twoside=false'.
+(typearea)             If you'd like to set the option with \KOMAoptions,
+(typearea)             you'd have to use `twoside=false' there
+(typearea)             instead of `oneside', too.
+\ta@hblk=\skip51
+\ta@vblk=\skip52
+\ta@temp=\skip53
+\footheight=\skip54
+Package typearea Info: These are the values describing the layout:
+(typearea)             DIV  = 10
+(typearea)             BCOR = 14.22636pt
+(typearea)             \paperwidth      = 597.50793pt
+(typearea)              \textwidth      = 408.2971pt
+(typearea)              DIV departure   = -3%
+(typearea)              \evensidemargin = 29.44861pt
+(typearea)              \oddsidemargin  = 29.44861pt
+(typearea)             \paperheight     = 845.04694pt
+(typearea)              \textheight     = 514.20023pt
+(typearea)              \topmargin      = 12.2347pt
+(typearea)              \headheight     = 17.0pt
+(typearea)              \headsep        = 20.40001pt
+(typearea)              \topskip        = 11.0pt
+(typearea)              \footskip       = 47.6pt
+(typearea)              \baselineskip   = 13.6pt
+(typearea)              on input line 1802.
+)
+\c@part=\count197
+\c@chapter=\count198
+\c@section=\count199
+\c@subsection=\count266
+\c@subsubsection=\count267
+\c@paragraph=\count268
+\c@subparagraph=\count269
+\scr@dte@chapter@maxnumwidth=\skip55
+Class scrreprt Info: using compatibility default `afterindent=bysign'
+(scrreprt)           for `\chapter on input line 6020.
+\scr@dte@section@maxnumwidth=\skip56
+Class scrreprt Info: using compatibility default `runin=bysign'
+(scrreprt)           for `\section on input line 6031.
+Class scrreprt Info: using compatibility default `afterindent=bysign'
+(scrreprt)           for `\section on input line 6031.
+\scr@dte@part@maxnumwidth=\skip57
+Class scrreprt Info: using compatibility default `afterindent=true'
+(scrreprt)           for `\part on input line 6040.
+\scr@dte@subsection@maxnumwidth=\skip58
+Class scrreprt Info: using compatibility default `runin=bysign'
+(scrreprt)           for `\subsection on input line 6050.
+Class scrreprt Info: using compatibility default `afterindent=bysign'
+(scrreprt)           for `\subsection on input line 6050.
+\scr@dte@subsubsection@maxnumwidth=\skip59
+Class scrreprt Info: using compatibility default `runin=bysign'
+(scrreprt)           for `\subsubsection on input line 6060.
+Class scrreprt Info: using compatibility default `afterindent=bysign'
+(scrreprt)           for `\subsubsection on input line 6060.
+\scr@dte@paragraph@maxnumwidth=\skip60
+Class scrreprt Info: using compatibility default `runin=bysign'
+(scrreprt)           for `\paragraph on input line 6071.
+Class scrreprt Info: using compatibility default `afterindent=bysign'
+(scrreprt)           for `\paragraph on input line 6071.
+\scr@dte@subparagraph@maxnumwidth=\skip61
+Class scrreprt Info: using compatibility default `runin=bysign'
+(scrreprt)           for `\subparagraph on input line 6081.
+Class scrreprt Info: using compatibility default `afterindent=bysign'
+(scrreprt)           for `\subparagraph on input line 6081.
+\abovecaptionskip=\skip62
+\belowcaptionskip=\skip63
+\c@pti@nb@sid@b@x=\box53
+Package tocbasic Info: omitting babel extension for `lof'
+(tocbasic)             because of feature `nobabel' available
+(tocbasic)             for `lof' on input line 7269.
+\scr@dte@figure@maxnumwidth=\skip64
+\c@figure=\count270
+Package tocbasic Info: omitting babel extension for `lot'
+(tocbasic)             because of feature `nobabel' available
+(tocbasic)             for `lot' on input line 7286.
+\scr@dte@table@maxnumwidth=\skip65
+\c@table=\count271
+Class scrreprt Info: Using old \@makefntext due to compatibility level
+(scrreprt)           less than 3.22 on input line 7444.
+Class scrreprt Info: Redefining `\numberline' on input line 7457.
+\bibindent=\dimen141
+)
+(./classicthesis-config.tex
+(/usr/local/texlive/2025/texmf-dist/tex/latex/base/inputenc.sty
+Package: inputenc 2024/02/08 v1.3d Input encoding file
+\inpenc@prehook=\toks18
+\inpenc@posthook=\toks19
+)
+(/usr/local/texlive/2025/texmf-dist/tex/latex/base/fontenc.sty
+Package: fontenc 2021/04/29 v2.0v Standard LaTeX package
+
+(/usr/local/texlive/2025/texmf-dist/tex/latex/vntex/t5enc.def
+File: t5enc.def 2006/11/21 v1.4 Vietnamese T5 encoding
+Now handling font encoding T5 ...
+... processing UTF-8 mapping file for font encoding T5
+
+(/usr/local/texlive/2025/texmf-dist/tex/latex/vntex/t5enc.dfu
+File: t5enc.dfu 2006/08/19 v1.1 UTF8 support for Vietnamese
+   defining Unicode char U+00AB (decimal 171)
+   defining Unicode char U+00BB (decimal 187)
+   defining Unicode char U+00C0 (decimal 192)
+   defining Unicode char U+00C1 (decimal 193)
+   defining Unicode char U+00C2 (decimal 194)
+   defining Unicode char U+00C3 (decimal 195)
+   defining Unicode char U+00C8 (decimal 200)
+   defining Unicode char U+00C9 (decimal 201)
+   defining Unicode char U+00CA (decimal 202)
+   defining Unicode char U+00CC (decimal 204)
+   defining Unicode char U+00CD (decimal 205)
+   defining Unicode char U+00D2 (decimal 210)
+   defining Unicode char U+00D3 (decimal 211)
+   defining Unicode char U+00D4 (decimal 212)
+   defining Unicode char U+00D5 (decimal 213)
+   defining Unicode char U+00D9 (decimal 217)
+   defining Unicode char U+00DA (decimal 218)
+   defining Unicode char U+00DD (decimal 221)
+   defining Unicode char U+00E0 (decimal 224)
+   defining Unicode char U+00E1 (decimal 225)
+   defining Unicode char U+00E2 (decimal 226)
+   defining Unicode char U+00E3 (decimal 227)
+   defining Unicode char U+00E8 (decimal 232)
+   defining Unicode char U+00E9 (decimal 233)
+   defining Unicode char U+00EA (decimal 234)
+   defining Unicode char U+00EC (decimal 236)
+   defining Unicode char U+00ED (decimal 237)
+   defining Unicode char U+00F2 (decimal 242)
+   defining Unicode char U+00F3 (decimal 243)
+   defining Unicode char U+00F4 (decimal 244)
+   defining Unicode char U+00F5 (decimal 245)
+   defining Unicode char U+00F9 (decimal 249)
+   defining Unicode char U+00FA (decimal 250)
+   defining Unicode char U+00FD (decimal 253)
+   defining Unicode char U+0102 (decimal 258)
+   defining Unicode char U+0103 (decimal 259)
+   defining Unicode char U+0110 (decimal 272)
+   defining Unicode char U+0111 (decimal 273)
+   defining Unicode char U+0128 (decimal 296)
+   defining Unicode char U+0129 (decimal 297)
+   defining Unicode char U+0131 (decimal 305)
+   defining Unicode char U+0168 (decimal 360)
+   defining Unicode char U+0169 (decimal 361)
+   defining Unicode char U+01A0 (decimal 416)
+   defining Unicode char U+01A1 (decimal 417)
+   defining Unicode char U+01AF (decimal 431)
+   defining Unicode char U+01B0 (decimal 432)
+   defining Unicode char U+1EA0 (decimal 7840)
+   defining Unicode char U+1EA1 (decimal 7841)
+   defining Unicode char U+1EA2 (decimal 7842)
+   defining Unicode char U+1EA3 (decimal 7843)
+   defining Unicode char U+1EA4 (decimal 7844)
+   defining Unicode char U+1EA5 (decimal 7845)
+   defining Unicode char U+1EA6 (decimal 7846)
+   defining Unicode char U+1EA7 (decimal 7847)
+   defining Unicode char U+1EA8 (decimal 7848)
+   defining Unicode char U+1EA9 (decimal 7849)
+   defining Unicode char U+1EAA (decimal 7850)
+   defining Unicode char U+1EAB (decimal 7851)
+   defining Unicode char U+1EAC (decimal 7852)
+   defining Unicode char U+1EAD (decimal 7853)
+   defining Unicode char U+1EAE (decimal 7854)
+   defining Unicode char U+1EAF (decimal 7855)
+   defining Unicode char U+1EB0 (decimal 7856)
+   defining Unicode char U+1EB1 (decimal 7857)
+   defining Unicode char U+1EB2 (decimal 7858)
+   defining Unicode char U+1EB3 (decimal 7859)
+   defining Unicode char U+1EB4 (decimal 7860)
+   defining Unicode char U+1EB5 (decimal 7861)
+   defining Unicode char U+1EB6 (decimal 7862)
+   defining Unicode char U+1EB7 (decimal 7863)
+   defining Unicode char U+1EB8 (decimal 7864)
+   defining Unicode char U+1EB9 (decimal 7865)
+   defining Unicode char U+1EBA (decimal 7866)
+   defining Unicode char U+1EBB (decimal 7867)
+   defining Unicode char U+1EBC (decimal 7868)
+   defining Unicode char U+1EBD (decimal 7869)
+   defining Unicode char U+1EBE (decimal 7870)
+   defining Unicode char U+1EBF (decimal 7871)
+   defining Unicode char U+1EC0 (decimal 7872)
+   defining Unicode char U+1EC1 (decimal 7873)
+   defining Unicode char U+1EC2 (decimal 7874)
+   defining Unicode char U+1EC3 (decimal 7875)
+   defining Unicode char U+1EC4 (decimal 7876)
+   defining Unicode char U+1EC5 (decimal 7877)
+   defining Unicode char U+1EC6 (decimal 7878)
+   defining Unicode char U+1EC7 (decimal 7879)
+   defining Unicode char U+1EC8 (decimal 7880)
+   defining Unicode char U+1EC9 (decimal 7881)
+   defining Unicode char U+1ECA (decimal 7882)
+   defining Unicode char U+1ECB (decimal 7883)
+   defining Unicode char U+1ECC (decimal 7884)
+   defining Unicode char U+1ECD (decimal 7885)
+   defining Unicode char U+1ECE (decimal 7886)
+   defining Unicode char U+1ECF (decimal 7887)
+   defining Unicode char U+1ED0 (decimal 7888)
+   defining Unicode char U+1ED1 (decimal 7889)
+   defining Unicode char U+1ED2 (decimal 7890)
+   defining Unicode char U+1ED3 (decimal 7891)
+   defining Unicode char U+1ED4 (decimal 7892)
+   defining Unicode char U+1ED5 (decimal 7893)
+   defining Unicode char U+1ED6 (decimal 7894)
+   defining Unicode char U+1ED7 (decimal 7895)
+   defining Unicode char U+1ED8 (decimal 7896)
+   defining Unicode char U+1ED9 (decimal 7897)
+   defining Unicode char U+1EDA (decimal 7898)
+   defining Unicode char U+1EDB (decimal 7899)
+   defining Unicode char U+1EDC (decimal 7900)
+   defining Unicode char U+1EDD (decimal 7901)
+   defining Unicode char U+1EDE (decimal 7902)
+   defining Unicode char U+1EDF (decimal 7903)
+   defining Unicode char U+1EE0 (decimal 7904)
+   defining Unicode char U+1EE1 (decimal 7905)
+   defining Unicode char U+1EE2 (decimal 7906)
+   defining Unicode char U+1EE3 (decimal 7907)
+   defining Unicode char U+1EE4 (decimal 7908)
+   defining Unicode char U+1EE5 (decimal 7909)
+   defining Unicode char U+1EE6 (decimal 7910)
+   defining Unicode char U+1EE7 (decimal 7911)
+   defining Unicode char U+1EE8 (decimal 7912)
+   defining Unicode char U+1EE9 (decimal 7913)
+   defining Unicode char U+1EEA (decimal 7914)
+   defining Unicode char U+1EEB (decimal 7915)
+   defining Unicode char U+1EEC (decimal 7916)
+   defining Unicode char U+1EED (decimal 7917)
+   defining Unicode char U+1EEE (decimal 7918)
+   defining Unicode char U+1EEF (decimal 7919)
+   defining Unicode char U+1EF0 (decimal 7920)
+   defining Unicode char U+1EF1 (decimal 7921)
+   defining Unicode char U+1EF2 (decimal 7922)
+   defining Unicode char U+1EF3 (decimal 7923)
+   defining Unicode char U+1EF4 (decimal 7924)
+   defining Unicode char U+1EF5 (decimal 7925)
+   defining Unicode char U+1EF6 (decimal 7926)
+   defining Unicode char U+1EF7 (decimal 7927)
+   defining Unicode char U+1EF8 (decimal 7928)
+   defining Unicode char U+1EF9 (decimal 7929)
+   defining Unicode char U+200C (decimal 8204)
+   defining Unicode char U+2013 (decimal 8211)
+   defining Unicode char U+2014 (decimal 8212)
+   defining Unicode char U+2018 (decimal 8216)
+   defining Unicode char U+2019 (decimal 8217)
+   defining Unicode char U+201A (decimal 8218)
+   defining Unicode char U+201C (decimal 8220)
+   defining Unicode char U+201D (decimal 8221)
+   defining Unicode char U+201E (decimal 8222)
+   defining Unicode char U+2030 (decimal 8240)
+   defining Unicode char U+2031 (decimal 8241)
+   defining Unicode char U+2039 (decimal 8249)
+   defining Unicode char U+203A (decimal 8250)
+   defining Unicode char U+2423 (decimal 9251)
+)))
+(/usr/local/texlive/2025/texmf-dist/tex/latex/psnfss/mathpazo.sty
+Package: mathpazo 2020/03/25 PSNFSS-v9.3 Palatino w/ Pazo Math (D.Puga, WaS) 
+\symupright=\mathgroup4
+)
+(/usr/local/texlive/2025/texmf-dist/tex/latex/listings/listings.sty
+\lst@mode=\count272
+\lst@gtempboxa=\box54
+\lst@token=\toks20
+\lst@length=\count273
+\lst@currlwidth=\dimen142
+\lst@column=\count274
+\lst@pos=\count275
+\lst@lostspace=\dimen143
+\lst@width=\dimen144
+\lst@newlines=\count276
+\lst@lineno=\count277
+\lst@maxwidth=\dimen145
+
+(/usr/local/texlive/2025/texmf-dist/tex/latex/listings/lstpatch.sty
+File: lstpatch.sty 2024/09/23 1.10c (Carsten Heinz)
+)
+(/usr/local/texlive/2025/texmf-dist/tex/latex/listings/lstmisc.sty
+File: lstmisc.sty 2024/09/23 1.10c (Carsten Heinz)
+\c@lstnumber=\count278
+\lst@skipnumbers=\count279
+\lst@framebox=\box55
+)
+(/usr/local/texlive/2025/texmf-dist/tex/latex/listings/listings.cfg
+File: listings.cfg 2024/09/23 1.10c listings configuration
+))
+Package: listings 2024/09/23 1.10c (Carsten Heinz)
+
+(/usr/local/texlive/2025/texmf-dist/tex/generic/babel/babel.sty
+Package: babel 2025/02/14 v25.4 The multilingual framework for pdfLaTeX, LuaLaT
+eX and XeLaTeX
+\babel@savecnt=\count280
+\U@D=\dimen146
+\l@unhyphenated=\language90
+
+(/usr/local/texlive/2025/texmf-dist/tex/generic/babel/txtbabel.def)
+\bbl@readstream=\read2
+\bbl@dirlevel=\count281
+
+(/usr/local/texlive/2025/texmf-dist/tex/generic/babel-vietnamese/vietnamese.ldf
+Language: vietnamese 
+Loading definitions for the Vietnamese font encoding
+(/usr/local/texlive/2025/texmf-dist/tex/latex/vntex/t5enc.def
+File: t5enc.def 2006/11/21 v1.4 Vietnamese T5 encoding
+LaTeX Font Info:    Redeclaring font encoding T5 on input line 75.
+)
+Package babel Info: Making " an active character on input line 147.
+))
+(/usr/local/texlive/2025/texmf-dist/tex/generic/babel/locale/vi/babel-vietnames
+e.tex
+Package babel Info: Importing font and identification data for vietnamese
+(babel)             from babel-vi.ini. Reported on input line 11.
+) (/usr/local/texlive/2025/texmf-dist/tex/latex/csquotes/csquotes.sty
+Package: csquotes 2024-04-04 v5.2o context-sensitive quotations (JAW)
+
+(/usr/local/texlive/2025/texmf-dist/tex/latex/etoolbox/etoolbox.sty
+Package: etoolbox 2025/02/11 v2.5l e-TeX tools for LaTeX (JAW)
+\etb@tempcnta=\count282
+)
+\csq@reset=\count283
+\csq@gtype=\count284
+\csq@glevel=\count285
+\csq@qlevel=\count286
+\csq@maxlvl=\count287
+\csq@tshold=\count288
+\csq@ltx@everypar=\toks21
+
+(/usr/local/texlive/2025/texmf-dist/tex/latex/csquotes/csquotes.def
+File: csquotes.def 2024-04-04 v5.2o csquotes generic definitions (JAW)
+)
+Package csquotes Info: Trying to load configuration file 'csquotes.cfg'...
+Package csquotes Info: ... configuration file loaded successfully.
+
+(/usr/local/texlive/2025/texmf-dist/tex/latex/csquotes/csquotes.cfg
+File: csquotes.cfg 
+))
+(/usr/local/texlive/2025/texmf-dist/tex/latex/amsmath/amsmath.sty
+Package: amsmath 2024/11/05 v2.17t AMS math features
+\@mathmargin=\skip66
+
+For additional information on amsmath, use the `?' option.
+(/usr/local/texlive/2025/texmf-dist/tex/latex/amsmath/amstext.sty
+Package: amstext 2021/08/26 v2.01 AMS text
+
+(/usr/local/texlive/2025/texmf-dist/tex/latex/amsmath/amsgen.sty
+File: amsgen.sty 1999/11/30 v2.0 generic functions
+\@emptytoks=\toks22
+\ex@=\dimen147
+))
+(/usr/local/texlive/2025/texmf-dist/tex/latex/amsmath/amsbsy.sty
+Package: amsbsy 1999/11/29 v1.2d Bold Symbols
+\pmbraise@=\dimen148
+)
+(/usr/local/texlive/2025/texmf-dist/tex/latex/amsmath/amsopn.sty
+Package: amsopn 2022/04/08 v2.04 operator names
+)
+\inf@bad=\count289
+LaTeX Info: Redefining \frac on input line 233.
+\uproot@=\count290
+\leftroot@=\count291
+LaTeX Info: Redefining \overline on input line 398.
+LaTeX Info: Redefining \colon on input line 409.
+\classnum@=\count292
+\DOTSCASE@=\count293
+LaTeX Info: Redefining \ldots on input line 495.
+LaTeX Info: Redefining \dots on input line 498.
+LaTeX Info: Redefining \cdots on input line 619.
+\Mathstrutbox@=\box56
+\strutbox@=\box57
+LaTeX Info: Redefining \big on input line 721.
+LaTeX Info: Redefining \Big on input line 722.
+LaTeX Info: Redefining \bigg on input line 723.
+LaTeX Info: Redefining \Bigg on input line 724.
+\big@size=\dimen149
+LaTeX Font Info:    Redeclaring font encoding OML on input line 742.
+LaTeX Font Info:    Redeclaring font encoding OMS on input line 743.
+\macc@depth=\count294
+LaTeX Info: Redefining \bmod on input line 904.
+LaTeX Info: Redefining \pmod on input line 909.
+LaTeX Info: Redefining \smash on input line 939.
+LaTeX Info: Redefining \relbar on input line 969.
+LaTeX Info: Redefining \Relbar on input line 970.
+\c@MaxMatrixCols=\count295
+\dotsspace@=\muskip17
+\c@parentequation=\count296
+\dspbrk@lvl=\count297
+\tag@help=\toks23
+\row@=\count298
+\column@=\count299
+\maxfields@=\count300
+\andhelp@=\toks24
+\eqnshift@=\dimen150
+\alignsep@=\dimen151
+\tagshift@=\dimen152
+\tagwidth@=\dimen153
+\totwidth@=\dimen154
+\lineht@=\dimen155
+\@envbody=\toks25
+\multlinegap=\skip67
+\multlinetaggap=\skip68
+\mathdisplay@stack=\toks26
+LaTeX Info: Redefining \[ on input line 2953.
+LaTeX Info: Redefining \] on input line 2954.
+)
+(/usr/local/texlive/2025/texmf-dist/tex/latex/amsfonts/amssymb.sty
+Package: amssymb 2013/01/14 v3.01 AMS font symbols
+
+(/usr/local/texlive/2025/texmf-dist/tex/latex/amsfonts/amsfonts.sty
+Package: amsfonts 2013/01/14 v3.01 Basic AMSFonts support
+\symAMSa=\mathgroup5
+\symAMSb=\mathgroup6
+LaTeX Font Info:    Redeclaring math symbol \hbar on input line 98.
+LaTeX Font Info:    Overwriting math alphabet `\mathfrak' in version `bold'
+(Font)                  U/euf/m/n --> U/euf/b/n on input line 106.
+))
+(/usr/local/texlive/2025/texmf-dist/tex/latex/graphics/graphicx.sty
+Package: graphicx 2021/09/16 v1.2d Enhanced LaTeX Graphics (DPC,SPQR)
+
+(/usr/local/texlive/2025/texmf-dist/tex/latex/graphics/graphics.sty
+Package: graphics 2024/08/06 v1.4g Standard LaTeX Graphics (DPC,SPQR)
+
+(/usr/local/texlive/2025/texmf-dist/tex/latex/graphics/trig.sty
+Package: trig 2023/12/02 v1.11 sin cos tan (DPC)
+)
+(/usr/local/texlive/2025/texmf-dist/tex/latex/graphics-cfg/graphics.cfg
+File: graphics.cfg 2016/06/04 v1.11 sample graphics configuration
+)
+Package graphics Info: Driver file: pdftex.def on input line 106.
+
+(/usr/local/texlive/2025/texmf-dist/tex/latex/graphics-def/pdftex.def
+File: pdftex.def 2024/04/13 v1.2c Graphics/color driver for pdftex
+))
+\Gin@req@height=\dimen156
+\Gin@req@width=\dimen157
+)
+(/usr/local/texlive/2025/texmf-dist/tex/latex/scrhack/scrhack.sty
+Package: scrhack 2024-09-04 v3.42 scrhack emulation package
+)
+(/usr/local/texlive/2025/texmf-dist/tex/latex/tools/xspace.sty
+Package: xspace 2014/10/28 v1.13 Space after command names (DPC,MH)
+)
+(/usr/local/texlive/2025/texmf-dist/tex/latex/tools/tabularx.sty
+Package: tabularx 2023/12/11 v2.12a `tabularx' package (DPC)
+
+(/usr/local/texlive/2025/texmf-dist/tex/latex/tools/array.sty
+Package: array 2024/10/17 v2.6g Tabular extension package (FMi)
+\col@sep=\dimen158
+\ar@mcellbox=\box58
+\extrarowheight=\dimen159
+\NC@list=\toks27
+\extratabsurround=\skip69
+\backup@length=\skip70
+\ar@cellbox=\box59
+)
+\TX@col@width=\dimen160
+\TX@old@table=\dimen161
+\TX@old@col=\dimen162
+\TX@target=\dimen163
+\TX@delta=\dimen164
+\TX@cols=\count301
+\TX@ftn=\toks28
+)
+(/usr/local/texlive/2025/texmf-dist/tex/latex/subfig/subfig.sty
+Package: subfig 2005/06/28 ver: 1.3 subfig package
+
+(/usr/local/texlive/2025/texmf-dist/tex/latex/caption/caption.sty
+Package: caption 2023/08/05 v3.6o Customizing captions (AR)
+
+(/usr/local/texlive/2025/texmf-dist/tex/latex/caption/caption3.sty
+Package: caption3 2023/07/31 v2.4d caption3 kernel (AR)
+\caption@tempdima=\dimen165
+\captionmargin=\dimen166
+\caption@leftmargin=\dimen167
+\caption@rightmargin=\dimen168
+\caption@width=\dimen169
+\caption@indent=\dimen170
+\caption@parindent=\dimen171
+\caption@hangindent=\dimen172
+Package caption Info: KOMA-Script document class detected.
+
+(/usr/local/texlive/2025/texmf-dist/tex/latex/caption/caption-koma.sto
+File: caption-koma.sto 2023/09/08 v2.0e Adaption of the caption package to the 
+KOMA-Script document classes (AR)
+))
+\c@caption@flags=\count302
+\c@continuedfloat=\count303
+Package caption Info: listings package is loaded.
+Package caption Info: KOMA-Script scrextend package detected.
+\caption@addmargin@hsize=\dimen173
+\caption@addmargin@linewidth=\dimen174
+)
+\c@KVtest=\count304
+\sf@farskip=\skip71
+\sf@captopadj=\dimen175
+\sf@capskip=\skip72
+\sf@nearskip=\skip73
+\c@subfigure=\count305
+\c@subfigure@save=\count306
+\c@lofdepth=\count307
+\c@subtable=\count308
+\c@subtable@save=\count309
+\c@lotdepth=\count310
+\sf@top=\skip74
+\sf@bottom=\skip75
+)
+(/usr/local/texlive/2025/texmf-dist/tex/latex/pgf/frontendlayer/tikz.sty
+(/usr/local/texlive/2025/texmf-dist/tex/latex/pgf/basiclayer/pgf.sty
+(/usr/local/texlive/2025/texmf-dist/tex/latex/pgf/utilities/pgfrcs.sty
+(/usr/local/texlive/2025/texmf-dist/tex/generic/pgf/utilities/pgfutil-common.te
+x
+\pgfutil@everybye=\toks29
+\pgfutil@tempdima=\dimen176
+\pgfutil@tempdimb=\dimen177
+)
+(/usr/local/texlive/2025/texmf-dist/tex/generic/pgf/utilities/pgfutil-latex.def
+\pgfutil@abb=\box60
+) (/usr/local/texlive/2025/texmf-dist/tex/generic/pgf/utilities/pgfrcs.code.tex
+(/usr/local/texlive/2025/texmf-dist/tex/generic/pgf/pgf.revision.tex)
+Package: pgfrcs 2023-01-15 v3.1.10 (3.1.10)
+))
+Package: pgf 2023-01-15 v3.1.10 (3.1.10)
+
+(/usr/local/texlive/2025/texmf-dist/tex/latex/pgf/basiclayer/pgfcore.sty
+(/usr/local/texlive/2025/texmf-dist/tex/latex/pgf/systemlayer/pgfsys.sty
+(/usr/local/texlive/2025/texmf-dist/tex/generic/pgf/systemlayer/pgfsys.code.tex
+Package: pgfsys 2023-01-15 v3.1.10 (3.1.10)
+(/usr/local/texlive/2025/texmf-dist/tex/generic/pgf/utilities/pgfkeys.code.tex
+\pgfkeys@pathtoks=\toks30
+\pgfkeys@temptoks=\toks31
+
+(/usr/local/texlive/2025/texmf-dist/tex/generic/pgf/utilities/pgfkeyslibraryfil
+tered.code.tex
+\pgfkeys@tmptoks=\toks32
+))
+\pgf@x=\dimen178
+\pgf@y=\dimen179
+\pgf@xa=\dimen180
+\pgf@ya=\dimen181
+\pgf@xb=\dimen182
+\pgf@yb=\dimen183
+\pgf@xc=\dimen184
+\pgf@yc=\dimen185
+\pgf@xd=\dimen186
+\pgf@yd=\dimen187
+\w@pgf@writea=\write3
+\r@pgf@reada=\read3
+\c@pgf@counta=\count311
+\c@pgf@countb=\count312
+\c@pgf@countc=\count313
+\c@pgf@countd=\count314
+\t@pgf@toka=\toks33
+\t@pgf@tokb=\toks34
+\t@pgf@tokc=\toks35
+\pgf@sys@id@count=\count315
+
+(/usr/local/texlive/2025/texmf-dist/tex/generic/pgf/systemlayer/pgf.cfg
+File: pgf.cfg 2023-01-15 v3.1.10 (3.1.10)
+)
+Driver file for pgf: pgfsys-pdftex.def
+
+(/usr/local/texlive/2025/texmf-dist/tex/generic/pgf/systemlayer/pgfsys-pdftex.d
+ef
+File: pgfsys-pdftex.def 2023-01-15 v3.1.10 (3.1.10)
+
+(/usr/local/texlive/2025/texmf-dist/tex/generic/pgf/systemlayer/pgfsys-common-p
+df.def
+File: pgfsys-common-pdf.def 2023-01-15 v3.1.10 (3.1.10)
+)))
+(/usr/local/texlive/2025/texmf-dist/tex/generic/pgf/systemlayer/pgfsyssoftpath.
+code.tex
+File: pgfsyssoftpath.code.tex 2023-01-15 v3.1.10 (3.1.10)
+\pgfsyssoftpath@smallbuffer@items=\count316
+\pgfsyssoftpath@bigbuffer@items=\count317
+)
+(/usr/local/texlive/2025/texmf-dist/tex/generic/pgf/systemlayer/pgfsysprotocol.
+code.tex
+File: pgfsysprotocol.code.tex 2023-01-15 v3.1.10 (3.1.10)
+)) (/usr/local/texlive/2025/texmf-dist/tex/latex/xcolor/xcolor.sty
+Package: xcolor 2024/09/29 v3.02 LaTeX color extensions (UK)
+
+(/usr/local/texlive/2025/texmf-dist/tex/latex/graphics-cfg/color.cfg
+File: color.cfg 2016/01/02 v1.6 sample color configuration
+)
+Package xcolor Info: Driver file: pdftex.def on input line 274.
+
+(/usr/local/texlive/2025/texmf-dist/tex/latex/graphics/mathcolor.ltx)
+Package xcolor Info: Model `cmy' substituted by `cmy0' on input line 1349.
+Package xcolor Info: Model `hsb' substituted by `rgb' on input line 1353.
+Package xcolor Info: Model `RGB' extended on input line 1365.
+Package xcolor Info: Model `HTML' substituted by `rgb' on input line 1367.
+Package xcolor Info: Model `Hsb' substituted by `hsb' on input line 1368.
+Package xcolor Info: Model `tHsb' substituted by `hsb' on input line 1369.
+Package xcolor Info: Model `HSB' substituted by `hsb' on input line 1370.
+Package xcolor Info: Model `Gray' substituted by `gray' on input line 1371.
+Package xcolor Info: Model `wave' substituted by `hsb' on input line 1372.
+)
+(/usr/local/texlive/2025/texmf-dist/tex/latex/graphics/dvipsnam.def
+File: dvipsnam.def 2016/06/17 v3.0m Driver-dependent file (DPC,SPQR)
+)
+(/usr/local/texlive/2025/texmf-dist/tex/generic/pgf/basiclayer/pgfcore.code.tex
+Package: pgfcore 2023-01-15 v3.1.10 (3.1.10)
+(/usr/local/texlive/2025/texmf-dist/tex/generic/pgf/math/pgfmath.code.tex
+(/usr/local/texlive/2025/texmf-dist/tex/generic/pgf/math/pgfmathutil.code.tex)
+(/usr/local/texlive/2025/texmf-dist/tex/generic/pgf/math/pgfmathparser.code.tex
+\pgfmath@dimen=\dimen188
+\pgfmath@count=\count318
+\pgfmath@box=\box61
+\pgfmath@toks=\toks36
+\pgfmath@stack@operand=\toks37
+\pgfmath@stack@operation=\toks38
+)
+(/usr/local/texlive/2025/texmf-dist/tex/generic/pgf/math/pgfmathfunctions.code.
+tex)
+(/usr/local/texlive/2025/texmf-dist/tex/generic/pgf/math/pgfmathfunctions.basic
+.code.tex)
+(/usr/local/texlive/2025/texmf-dist/tex/generic/pgf/math/pgfmathfunctions.trigo
+nometric.code.tex)
+(/usr/local/texlive/2025/texmf-dist/tex/generic/pgf/math/pgfmathfunctions.rando
+m.code.tex)
+(/usr/local/texlive/2025/texmf-dist/tex/generic/pgf/math/pgfmathfunctions.compa
+rison.code.tex)
+(/usr/local/texlive/2025/texmf-dist/tex/generic/pgf/math/pgfmathfunctions.base.
+code.tex)
+(/usr/local/texlive/2025/texmf-dist/tex/generic/pgf/math/pgfmathfunctions.round
+.code.tex)
+(/usr/local/texlive/2025/texmf-dist/tex/generic/pgf/math/pgfmathfunctions.misc.
+code.tex)
+(/usr/local/texlive/2025/texmf-dist/tex/generic/pgf/math/pgfmathfunctions.integ
+erarithmetics.code.tex)
+(/usr/local/texlive/2025/texmf-dist/tex/generic/pgf/math/pgfmathcalc.code.tex)
+(/usr/local/texlive/2025/texmf-dist/tex/generic/pgf/math/pgfmathfloat.code.tex
+\c@pgfmathroundto@lastzeros=\count319
+)) (/usr/local/texlive/2025/texmf-dist/tex/generic/pgf/math/pgfint.code.tex)
+(/usr/local/texlive/2025/texmf-dist/tex/generic/pgf/basiclayer/pgfcorepoints.co
+de.tex
+File: pgfcorepoints.code.tex 2023-01-15 v3.1.10 (3.1.10)
+\pgf@picminx=\dimen189
+\pgf@picmaxx=\dimen190
+\pgf@picminy=\dimen191
+\pgf@picmaxy=\dimen192
+\pgf@pathminx=\dimen193
+\pgf@pathmaxx=\dimen194
+\pgf@pathminy=\dimen195
+\pgf@pathmaxy=\dimen196
+\pgf@xx=\dimen197
+\pgf@xy=\dimen198
+\pgf@yx=\dimen199
+\pgf@yy=\dimen256
+\pgf@zx=\dimen257
+\pgf@zy=\dimen258
+)
+(/usr/local/texlive/2025/texmf-dist/tex/generic/pgf/basiclayer/pgfcorepathconst
+ruct.code.tex
+File: pgfcorepathconstruct.code.tex 2023-01-15 v3.1.10 (3.1.10)
+\pgf@path@lastx=\dimen259
+\pgf@path@lasty=\dimen260
+)
+(/usr/local/texlive/2025/texmf-dist/tex/generic/pgf/basiclayer/pgfcorepathusage
+.code.tex
+File: pgfcorepathusage.code.tex 2023-01-15 v3.1.10 (3.1.10)
+\pgf@shorten@end@additional=\dimen261
+\pgf@shorten@start@additional=\dimen262
+)
+(/usr/local/texlive/2025/texmf-dist/tex/generic/pgf/basiclayer/pgfcorescopes.co
+de.tex
+File: pgfcorescopes.code.tex 2023-01-15 v3.1.10 (3.1.10)
+\pgfpic=\box62
+\pgf@hbox=\box63
+\pgf@layerbox@main=\box64
+\pgf@picture@serial@count=\count320
+)
+(/usr/local/texlive/2025/texmf-dist/tex/generic/pgf/basiclayer/pgfcoregraphicst
+ate.code.tex
+File: pgfcoregraphicstate.code.tex 2023-01-15 v3.1.10 (3.1.10)
+\pgflinewidth=\dimen263
+)
+(/usr/local/texlive/2025/texmf-dist/tex/generic/pgf/basiclayer/pgfcoretransform
+ations.code.tex
+File: pgfcoretransformations.code.tex 2023-01-15 v3.1.10 (3.1.10)
+\pgf@pt@x=\dimen264
+\pgf@pt@y=\dimen265
+\pgf@pt@temp=\dimen266
+)
+(/usr/local/texlive/2025/texmf-dist/tex/generic/pgf/basiclayer/pgfcorequick.cod
+e.tex
+File: pgfcorequick.code.tex 2023-01-15 v3.1.10 (3.1.10)
+)
+(/usr/local/texlive/2025/texmf-dist/tex/generic/pgf/basiclayer/pgfcoreobjects.c
+ode.tex
+File: pgfcoreobjects.code.tex 2023-01-15 v3.1.10 (3.1.10)
+)
+(/usr/local/texlive/2025/texmf-dist/tex/generic/pgf/basiclayer/pgfcorepathproce
+ssing.code.tex
+File: pgfcorepathprocessing.code.tex 2023-01-15 v3.1.10 (3.1.10)
+)
+(/usr/local/texlive/2025/texmf-dist/tex/generic/pgf/basiclayer/pgfcorearrows.co
+de.tex
+File: pgfcorearrows.code.tex 2023-01-15 v3.1.10 (3.1.10)
+\pgfarrowsep=\dimen267
+)
+(/usr/local/texlive/2025/texmf-dist/tex/generic/pgf/basiclayer/pgfcoreshade.cod
+e.tex
+File: pgfcoreshade.code.tex 2023-01-15 v3.1.10 (3.1.10)
+\pgf@max=\dimen268
+\pgf@sys@shading@range@num=\count321
+\pgf@shadingcount=\count322
+)
+(/usr/local/texlive/2025/texmf-dist/tex/generic/pgf/basiclayer/pgfcoreimage.cod
+e.tex
+File: pgfcoreimage.code.tex 2023-01-15 v3.1.10 (3.1.10)
+)
+(/usr/local/texlive/2025/texmf-dist/tex/generic/pgf/basiclayer/pgfcoreexternal.
+code.tex
+File: pgfcoreexternal.code.tex 2023-01-15 v3.1.10 (3.1.10)
+\pgfexternal@startupbox=\box65
+)
+(/usr/local/texlive/2025/texmf-dist/tex/generic/pgf/basiclayer/pgfcorelayers.co
+de.tex
+File: pgfcorelayers.code.tex 2023-01-15 v3.1.10 (3.1.10)
+)
+(/usr/local/texlive/2025/texmf-dist/tex/generic/pgf/basiclayer/pgfcoretranspare
+ncy.code.tex
+File: pgfcoretransparency.code.tex 2023-01-15 v3.1.10 (3.1.10)
+)
+(/usr/local/texlive/2025/texmf-dist/tex/generic/pgf/basiclayer/pgfcorepatterns.
+code.tex
+File: pgfcorepatterns.code.tex 2023-01-15 v3.1.10 (3.1.10)
+)
+(/usr/local/texlive/2025/texmf-dist/tex/generic/pgf/basiclayer/pgfcorerdf.code.
+tex
+File: pgfcorerdf.code.tex 2023-01-15 v3.1.10 (3.1.10)
+)))
+(/usr/local/texlive/2025/texmf-dist/tex/generic/pgf/modules/pgfmoduleshapes.cod
+e.tex
+File: pgfmoduleshapes.code.tex 2023-01-15 v3.1.10 (3.1.10)
+\pgfnodeparttextbox=\box66
+)
+(/usr/local/texlive/2025/texmf-dist/tex/generic/pgf/modules/pgfmoduleplot.code.
+tex
+File: pgfmoduleplot.code.tex 2023-01-15 v3.1.10 (3.1.10)
+)
+(/usr/local/texlive/2025/texmf-dist/tex/latex/pgf/compatibility/pgfcomp-version
+-0-65.sty
+Package: pgfcomp-version-0-65 2023-01-15 v3.1.10 (3.1.10)
+\pgf@nodesepstart=\dimen269
+\pgf@nodesepend=\dimen270
+)
+(/usr/local/texlive/2025/texmf-dist/tex/latex/pgf/compatibility/pgfcomp-version
+-1-18.sty
+Package: pgfcomp-version-1-18 2023-01-15 v3.1.10 (3.1.10)
+))
+(/usr/local/texlive/2025/texmf-dist/tex/latex/pgf/utilities/pgffor.sty
+(/usr/local/texlive/2025/texmf-dist/tex/latex/pgf/utilities/pgfkeys.sty
+(/usr/local/texlive/2025/texmf-dist/tex/generic/pgf/utilities/pgfkeys.code.tex)
+) (/usr/local/texlive/2025/texmf-dist/tex/latex/pgf/math/pgfmath.sty
+(/usr/local/texlive/2025/texmf-dist/tex/generic/pgf/math/pgfmath.code.tex))
+(/usr/local/texlive/2025/texmf-dist/tex/generic/pgf/utilities/pgffor.code.tex
+Package: pgffor 2023-01-15 v3.1.10 (3.1.10)
+\pgffor@iter=\dimen271
+\pgffor@skip=\dimen272
+\pgffor@stack=\toks39
+\pgffor@toks=\toks40
+))
+(/usr/local/texlive/2025/texmf-dist/tex/generic/pgf/frontendlayer/tikz/tikz.cod
+e.tex
+Package: tikz 2023-01-15 v3.1.10 (3.1.10)
+
+(/usr/local/texlive/2025/texmf-dist/tex/generic/pgf/libraries/pgflibraryplothan
+dlers.code.tex
+File: pgflibraryplothandlers.code.tex 2023-01-15 v3.1.10 (3.1.10)
+\pgf@plot@mark@count=\count323
+\pgfplotmarksize=\dimen273
+)
+\tikz@lastx=\dimen274
+\tikz@lasty=\dimen275
+\tikz@lastxsaved=\dimen276
+\tikz@lastysaved=\dimen277
+\tikz@lastmovetox=\dimen278
+\tikz@lastmovetoy=\dimen279
+\tikzleveldistance=\dimen280
+\tikzsiblingdistance=\dimen281
+\tikz@figbox=\box67
+\tikz@figbox@bg=\box68
+\tikz@tempbox=\box69
+\tikz@tempbox@bg=\box70
+\tikztreelevel=\count324
+\tikznumberofchildren=\count325
+\tikznumberofcurrentchild=\count326
+\tikz@fig@count=\count327
+
+(/usr/local/texlive/2025/texmf-dist/tex/generic/pgf/modules/pgfmodulematrix.cod
+e.tex
+File: pgfmodulematrix.code.tex 2023-01-15 v3.1.10 (3.1.10)
+\pgfmatrixcurrentrow=\count328
+\pgfmatrixcurrentcolumn=\count329
+\pgf@matrix@numberofcolumns=\count330
+)
+\tikz@expandcount=\count331
+
+(/usr/local/texlive/2025/texmf-dist/tex/generic/pgf/frontendlayer/tikz/librarie
+s/tikzlibrarytopaths.code.tex
+File: tikzlibrarytopaths.code.tex 2023-01-15 v3.1.10 (3.1.10)
+)))
+(/usr/local/texlive/2025/texmf-dist/tex/generic/pgf/frontendlayer/tikz/librarie
+s/tikzlibrarypositioning.code.tex
+File: tikzlibrarypositioning.code.tex 2023-01-15 v3.1.10 (3.1.10)
+)
+(/usr/local/texlive/2025/texmf-dist/tex/generic/pgf/frontendlayer/tikz/librarie
+s/tikzlibraryfit.code.tex
+File: tikzlibraryfit.code.tex 2023-01-15 v3.1.10 (3.1.10)
+)
+(/usr/local/texlive/2025/texmf-dist/tex/generic/pgf/frontendlayer/tikz/librarie
+s/tikzlibrarybackgrounds.code.tex
+File: tikzlibrarybackgrounds.code.tex 2023-01-15 v3.1.10 (3.1.10)
+\pgf@layerbox@background=\box71
+\pgf@layerboxsaved@background=\box72
+)
+(/usr/local/texlive/2025/texmf-dist/tex/generic/pgf/frontendlayer/tikz/librarie
+s/tikzlibraryshapes.geometric.code.tex
+File: tikzlibraryshapes.geometric.code.tex 2023-01-15 v3.1.10 (3.1.10)
+
+(/usr/local/texlive/2025/texmf-dist/tex/generic/pgf/libraries/shapes/pgflibrary
+shapes.geometric.code.tex
+File: pgflibraryshapes.geometric.code.tex 2023-01-15 v3.1.10 (3.1.10)
+))
+(/usr/local/texlive/2025/texmf-dist/tex/latex/classicthesis/classicthesis.sty
+Package: classicthesis 2025/02/02 v4.8 Typographic style for a classic-looking 
+thesis
+
+(/usr/local/texlive/2025/texmf-dist/tex/latex/base/ifthen.sty
+Package: ifthen 2024/03/16 v1.1e Standard LaTeX ifthen package (DPC)
+)
+(/usr/local/texlive/2025/texmf-dist/tex/latex/kvoptions/kvoptions.sty
+Package: kvoptions 2022-06-15 v3.15 Key value format for package options (HO)
+
+(/usr/local/texlive/2025/texmf-dist/tex/generic/ltxcmds/ltxcmds.sty
+Package: ltxcmds 2023-12-04 v1.26 LaTeX kernel commands for general use (HO)
+)
+(/usr/local/texlive/2025/texmf-dist/tex/latex/kvsetkeys/kvsetkeys.sty
+Package: kvsetkeys 2022-10-05 v1.19 Key value parser (HO)
+))
+(/usr/local/texlive/2025/texmf-dist/tex/generic/iftex/ifpdf.sty
+Package: ifpdf 2019/10/25 v3.4 ifpdf legacy package. Use iftex instead.
+
+(/usr/local/texlive/2025/texmf-dist/tex/generic/iftex/iftex.sty
+Package: iftex 2024/12/12 v1.0g TeX engine tests
+))
+(/usr/local/texlive/2025/texmf-dist/tex/generic/iftex/ifxetex.sty
+Package: ifxetex 2019/10/25 v0.7 ifxetex legacy package. Use iftex instead.
+)
+(/usr/local/texlive/2025/texmf-dist/tex/generic/iftex/ifluatex.sty
+Package: ifluatex 2019/10/25 v1.5 ifluatex legacy package. Use iftex instead.
+)
+(/usr/local/texlive/2025/texmf-dist/tex/latex/bera/beramono.sty
+Package: beramono 2004/01/31 (WaS)
+)
+LaTeX Font Info:    Trying to load font information for T1+pplj on input line 2
+36.
+
+(/usr/local/texlive/2025/texmf-dist/tex/latex/psnfss/t1pplj.fd
+File: t1pplj.fd 2004/09/06 font definitions for T1/pplj.
+)
+(/usr/local/texlive/2025/texmf-dist/tex/latex/microtype/microtype.sty
+Package: microtype 2025/02/11 v3.2a Micro-typographical refinements (RS)
+\MT@toks=\toks41
+\MT@tempbox=\box73
+\MT@count=\count332
+LaTeX Info: Redefining \noprotrusionifhmode on input line 1087.
+LaTeX Info: Redefining \leftprotrusion on input line 1088.
+\MT@prot@toks=\toks42
+LaTeX Info: Redefining \rightprotrusion on input line 1107.
+LaTeX Info: Redefining \textls on input line 1449.
+\MT@outer@kern=\dimen282
+LaTeX Info: Redefining \microtypecontext on input line 2053.
+LaTeX Info: Redefining \textmicrotypecontext on input line 2070.
+\MT@listname@count=\count333
+
+(/usr/local/texlive/2025/texmf-dist/tex/latex/microtype/microtype-pdftex.def
+File: microtype-pdftex.def 2025/02/11 v3.2a Definitions specific to pdftex (RS)
+
+LaTeX Info: Redefining \lsstyle on input line 944.
+LaTeX Info: Redefining \lslig on input line 944.
+\MT@outer@space=\skip76
+)
+Package microtype Info: Loading configuration file microtype.cfg.
+
+(/usr/local/texlive/2025/texmf-dist/tex/latex/microtype/microtype.cfg
+File: microtype.cfg 2025/02/11 v3.2a microtype main configuration file (RS)
+)
+LaTeX Info: Redefining \microtypesetup on input line 3065.
+)
+Package classicthesis Info: A4 paper, Palatino or other on input line 280.
+Package typearea Info: These are the values describing the layout:
+(typearea)             DIV  = areaset
+(typearea)             BCOR = 14.22636pt
+(typearea)             \paperwidth      = 597.50793pt
+(typearea)              \textwidth      = 336.0pt
+(typearea)              \evensidemargin = 65.59715pt
+(typearea)              \oddsidemargin  = 65.59715pt
+(typearea)             \paperheight     = 845.04694pt
+(typearea)              \textheight     = 666.04997pt
+(typearea)              \topmargin      = -40.58768pt
+(typearea)              \headheight     = 15.95pt
+(typearea)              \headsep        = 20.40001pt
+(typearea)              \topskip        = 11.0pt
+(typearea)              \footskip       = 47.60002pt
+(typearea)              \baselineskip   = 13.6pt
+(typearea)              on input line 280.
+
+(/usr/local/texlive/2025/texmf-dist/tex/latex/mparhack/mparhack.sty
+Package: mparhack 2021-05-02 v1.5 (T. Sgouros and S. Ulrich)
+)
+(/usr/local/texlive/2025/texmf-dist/tex/latex/booktabs/booktabs.sty
+Package: booktabs 2020/01/12 v1.61803398 Publication quality tables
+\heavyrulewidth=\dimen283
+\lightrulewidth=\dimen284
+\cmidrulewidth=\dimen285
+\belowrulesep=\dimen286
+\belowbottomsep=\dimen287
+\aboverulesep=\dimen288
+\abovetopsep=\dimen289
+\cmidrulesep=\dimen290
+\cmidrulekern=\dimen291
+\defaultaddspace=\dimen292
+\@cmidla=\count334
+\@cmidlb=\count335
+\@aboverulesep=\dimen293
+\@belowrulesep=\dimen294
+\@thisruleclass=\count336
+\@lastruleclass=\count337
+\@thisrulewidth=\dimen295
+)
+(/usr/local/texlive/2025/texmf-dist/tex/latex/textcase/textcase.sty
+Package: textcase 2025/02/16 v1.05 Text only upper/lower case changing (DPC)
+Package textcase Info: Defining Legacy names on input line 20.
+)
+Package classicthesis Info: Using microtype for character spacing.Make sure you
+r pdflatex is version 1.40 or higher. on input line 351.
+
+(/usr/local/texlive/2025/texmf-dist/tex/latex/koma-script/scrlayer-scrpage.sty
+Package: scrlayer-scrpage 2024/10/24 v3.43 KOMA-Script package (end user interf
+ace for scrlayer)
+
+(/usr/local/texlive/2025/texmf-dist/tex/latex/koma-script/scrlayer.sty
+Package: scrlayer 2024/10/24 v3.43 KOMA-Script package (defining layers and pag
+e styles)
+Package scrlayer Info: patching LaTeX kernel macro \pagestyle on input line 218
+2.
+)
+Package scrlayer-scrpage Info: Makeing stand-alone element `pagehead' from
+(scrlayer-scrpage)             alias to `pageheadfoot' on input line 1106.
+)
+
+Class scrreprt Warning: Usage of package `titlesec' together
+(scrreprt)              with a KOMA-Script class is not recommended.
+(scrreprt)              I'd suggest to use KOMA-Script features
+(scrreprt)              like \setkomafont, \RedeclareSectionCommand, \sectionli
+nesformat
+(scrreprt)              and several others to re-configure section
+(scrreprt)              headings.
+(scrreprt)              Nevertheless, using requested
+(scrreprt)              package `titlesec' on input line 401.
+
+(/usr/local/texlive/2025/texmf-dist/tex/latex/titlesec/titlesec.sty
+Package: titlesec 2025/01/04 v2.17 Sectioning titles
+\ttl@box=\box74
+\beforetitleunit=\skip77
+\aftertitleunit=\skip78
+\ttl@plus=\dimen296
+\ttl@minus=\dimen297
+\ttl@toksa=\toks43
+\titlewidth=\dimen298
+\titlewidthlast=\dimen299
+\titlewidthfirst=\dimen300
+
+
+Package titlesec Warning: Non standard sectioning command \section
+(titlesec)                detected. Using default spacing and no format.
+
+
+Package titlesec Warning: Non standard sectioning command \subsection
+(titlesec)                detected. Using default spacing and no format.
+
+
+Package titlesec Warning: Non standard sectioning command \subsubsection
+(titlesec)                detected. Using default spacing and no format.
+
+
+Package titlesec Warning: Non standard sectioning command \paragraph
+(titlesec)                detected. Using default spacing and no format.
+
+
+Package titlesec Warning: Non standard sectioning command \subparagraph
+(titlesec)                detected. Using default spacing and no format.
+
+)
+
+Class scrreprt Warning: Usage of package `tocloft' together
+(scrreprt)              with a KOMA-Script class is not recommended.
+(scrreprt)              I'd suggest to use options like `listof=entryprefix',
+(scrreprt)              commands like `\listoflofentryname' or
+(scrreprt)              `\listoflotentryname', and `\DeclareTOCStyleEntry' or
+(scrreprt)              `\RedeclareSectionCommand' instead of this package,
+(scrreprt)              because it breaks several KOMA-Script features of
+(scrreprt)              the list of figures, list of tables and table of
+(scrreprt)              contents, i.e., options like `listof=numbered',
+(scrreprt)              `listof=flat or `toc=flat', commands like
+(scrreprt)              `\BeforeTOCHead{...}' and `\AfterTOCHead{...}',
+(scrreprt)              `\BeforeStartingTOC{...}' and \AfterStartingTOC{...}',
+(scrreprt)              all features of `\DeclareTOCStyleEntry',
+(scrreprt)              and the ToC entry features of `\DeclareSecionCommand'
+(scrreprt)              and `\RedeclareSectionCommand' of levels
+(scrreprt)              `part', `section', `subsection',
+(scrreprt)              `subsubsection', `paragraph' and `subparagraph'.
+(scrreprt)              Nevertheless, using requested
+(scrreprt)              package `tocloft' on input line 450.
+
+(/usr/local/texlive/2025/texmf-dist/tex/latex/tocloft/tocloft.sty
+Package: tocloft 2017/08/31 v2.3i parameterised ToC, etc., typesetting
+Package tocloft Info: The document has chapter divisions on input line 51.
+\cftparskip=\skip79
+\cftbeforetoctitleskip=\skip80
+\cftaftertoctitleskip=\skip81
+\cftbeforepartskip=\skip82
+\cftpartnumwidth=\skip83
+\cftpartindent=\skip84
+\cftbeforechapskip=\skip85
+\cftchapindent=\skip86
+\cftchapnumwidth=\skip87
+\cftbeforesecskip=\skip88
+\cftsecindent=\skip89
+\cftsecnumwidth=\skip90
+\cftbeforesubsecskip=\skip91
+\cftsubsecindent=\skip92
+\cftsubsecnumwidth=\skip93
+\cftbeforesubsubsecskip=\skip94
+\cftsubsubsecindent=\skip95
+\cftsubsubsecnumwidth=\skip96
+\cftbeforeparaskip=\skip97
+\cftparaindent=\skip98
+\cftparanumwidth=\skip99
+\cftbeforesubparaskip=\skip100
+\cftsubparaindent=\skip101
+\cftsubparanumwidth=\skip102
+\cftbeforeloftitleskip=\skip103
+\cftafterloftitleskip=\skip104
+\cftbeforefigskip=\skip105
+\cftfigindent=\skip106
+\cftfignumwidth=\skip107
+\cftbeforelottitleskip=\skip108
+\cftafterlottitleskip=\skip109
+\cftbeforetabskip=\skip110
+\cfttabindent=\skip111
+\cfttabnumwidth=\skip112
+\cftbeforesubfigskip=\skip113
+\cftsubfigindent=\skip114
+\cftsubfignumwidth=\skip115
+\cftbeforesubtabskip=\skip116
+\cftsubtabindent=\skip117
+\cftsubtabnumwidth=\skip118
+)
+\newnumberwidth=\skip119
+\beforebibskip=\skip120
+\newchnumberwidth=\skip121
+\figurelabelwidth=\skip122
+\tablelabelwidth=\skip123
+Class scrreprt Info: Using old \@makefntext due to compatibility level
+(scrreprt)           less than 3.22 on input line 635.
+
+Using KOMA-command "deffootnote" for footnote setup
+(/usr/local/texlive/2025/texmf-dist/tex/latex/koma-script/scrtime.sty
+Package: scrtime 2024/10/24 v3.43 KOMA-Script package (time of LaTeX run)
+)
+(/usr/local/texlive/2025/texmf-dist/tex/latex/hyperref/hyperref.sty
+Package: hyperref 2024-11-05 v7.01l Hypertext links for LaTeX
+
+(/usr/local/texlive/2025/texmf-dist/tex/generic/kvdefinekeys/kvdefinekeys.sty
+Package: kvdefinekeys 2019-12-19 v1.6 Define keys (HO)
+)
+(/usr/local/texlive/2025/texmf-dist/tex/generic/pdfescape/pdfescape.sty
+Package: pdfescape 2019/12/09 v1.15 Implements pdfTeX's escape features (HO)
+
+(/usr/local/texlive/2025/texmf-dist/tex/generic/pdftexcmds/pdftexcmds.sty
+Package: pdftexcmds 2020-06-27 v0.33 Utility functions of pdfTeX for LuaTeX (HO
+)
+
+(/usr/local/texlive/2025/texmf-dist/tex/generic/infwarerr/infwarerr.sty
+Package: infwarerr 2019/12/03 v1.5 Providing info/warning/error messages (HO)
+)
+Package pdftexcmds Info: \pdf@primitive is available.
+Package pdftexcmds Info: \pdf@ifprimitive is available.
+Package pdftexcmds Info: \pdfdraftmode found.
+))
+(/usr/local/texlive/2025/texmf-dist/tex/latex/hycolor/hycolor.sty
+Package: hycolor 2020-01-27 v1.10 Color options for hyperref/bookmark (HO)
+)
+(/usr/local/texlive/2025/texmf-dist/tex/latex/hyperref/nameref.sty
+Package: nameref 2023-11-26 v2.56 Cross-referencing by name of section
+
+(/usr/local/texlive/2025/texmf-dist/tex/latex/refcount/refcount.sty
+Package: refcount 2019/12/15 v3.6 Data extraction from label references (HO)
+)
+(/usr/local/texlive/2025/texmf-dist/tex/generic/gettitlestring/gettitlestring.s
+ty
+Package: gettitlestring 2019/12/15 v1.6 Cleanup title references (HO)
+)
+\c@section@level=\count338
+) (/usr/local/texlive/2025/texmf-dist/tex/generic/stringenc/stringenc.sty
+Package: stringenc 2019/11/29 v1.12 Convert strings between diff. encodings (HO
+)
+)
+\@linkdim=\dimen301
+\Hy@linkcounter=\count339
+\Hy@pagecounter=\count340
+
+(/usr/local/texlive/2025/texmf-dist/tex/latex/hyperref/pd1enc.def
+File: pd1enc.def 2024-11-05 v7.01l Hyperref: PDFDocEncoding definition (HO)
+Now handling font encoding PD1 ...
+... no UTF-8 mapping file for font encoding PD1
+)
+(/usr/local/texlive/2025/texmf-dist/tex/generic/intcalc/intcalc.sty
+Package: intcalc 2019/12/15 v1.3 Expandable calculations with integers (HO)
+)
+\Hy@SavedSpaceFactor=\count341
+
+(/usr/local/texlive/2025/texmf-dist/tex/latex/hyperref/puenc.def
+File: puenc.def 2024-11-05 v7.01l Hyperref: PDF Unicode definition (HO)
+Now handling font encoding PU ...
+... no UTF-8 mapping file for font encoding PU
+)
+Package hyperref Info: Option `hyperfootnotes' set `false' on input line 4040.
+Package hyperref Info: Hyper figures OFF on input line 4157.
+Package hyperref Info: Link nesting OFF on input line 4162.
+Package hyperref Info: Hyper index ON on input line 4165.
+Package hyperref Info: Plain pages OFF on input line 4172.
+Package hyperref Info: Backreferencing OFF on input line 4177.
+Package hyperref Info: Implicit mode ON; LaTeX internals redefined.
+Package hyperref Info: Bookmarks ON on input line 4424.
+\c@Hy@tempcnt=\count342
+
+(/usr/local/texlive/2025/texmf-dist/tex/latex/url/url.sty
+\Urlmuskip=\muskip18
+Package: url 2013/09/16  ver 3.4  Verb mode for urls, etc.
+)
+LaTeX Info: Redefining \url on input line 4763.
+\XeTeXLinkMargin=\dimen302
+
+(/usr/local/texlive/2025/texmf-dist/tex/generic/bitset/bitset.sty
+Package: bitset 2019/12/09 v1.3 Handle bit-vector datatype (HO)
+
+(/usr/local/texlive/2025/texmf-dist/tex/generic/bigintcalc/bigintcalc.sty
+Package: bigintcalc 2019/12/15 v1.5 Expandable calculations on big integers (HO
+)
+))
+\Fld@menulength=\count343
+\Field@Width=\dimen303
+\Fld@charsize=\dimen304
+Package hyperref Info: Hyper figures OFF on input line 6042.
+Package hyperref Info: Link nesting OFF on input line 6047.
+Package hyperref Info: Hyper index ON on input line 6050.
+Package hyperref Info: backreferencing OFF on input line 6057.
+Package hyperref Info: Link coloring OFF on input line 6062.
+Package hyperref Info: Link coloring with OCG OFF on input line 6067.
+Package hyperref Info: PDF/A mode OFF on input line 6072.
+
+(/usr/local/texlive/2025/texmf-dist/tex/latex/base/atbegshi-ltx.sty
+Package: atbegshi-ltx 2021/01/10 v1.0c Emulation of the original atbegshi
+package with kernel methods
+)
+\Hy@abspage=\count344
+\c@Item=\count345
+)
+Package hyperref Info: Driver (autodetected): hpdftex.
+
+(/usr/local/texlive/2025/texmf-dist/tex/latex/hyperref/hpdftex.def
+File: hpdftex.def 2024-11-05 v7.01l Hyperref driver for pdfTeX
+
+(/usr/local/texlive/2025/texmf-dist/tex/latex/base/atveryend-ltx.sty
+Package: atveryend-ltx 2020/08/19 v1.0a Emulation of the original atveryend pac
+kage
+with kernel methods
+)
+\Fld@listcount=\count346
+\c@bookmark@seq@number=\count347
+
+(/usr/local/texlive/2025/texmf-dist/tex/latex/rerunfilecheck/rerunfilecheck.sty
+Package: rerunfilecheck 2022-07-10 v1.10 Rerun checks for auxiliary files (HO)
+
+(/usr/local/texlive/2025/texmf-dist/tex/generic/uniquecounter/uniquecounter.sty
+Package: uniquecounter 2019/12/15 v1.4 Provide unlimited unique counter (HO)
+)
+Package uniquecounter Info: New unique counter `rerunfilecheck' on input line 2
+85.
+)
+\Hy@SectionHShift=\skip124
+)
+Package hyperref Info: Option `colorlinks' set `true' on input line 732.
+Package hyperref Info: Option `linktocpage' set `true' on input line 732.
+Package hyperref Info: Option `breaklinks' set `true' on input line 732.
+)
+Package hyperref Info: Option `colorlinks' set `true' on input line 124.
+Package hyperref Info: Option `linktocpage' set `true' on input line 124.
+Package hyperref Info: Option `breaklinks' set `true' on input line 124.
+Package hyperref Info: Option `pageanchor' set `true' on input line 124.
+Package hyperref Info: Option `plainpages' set `false' on input line 124.
+Package hyperref Info: Option `bookmarksnumbered' set `true' on input line 124.
+
+Package hyperref Info: Option `bookmarksopen' set `true' on input line 124.
+Package hyperref Info: Option `hypertexnames' set `true' on input line 124.
+ (/usr/local/texlive/2025/texmf-dist/tex/latex/mdframed/mdframed.sty
+Package: mdframed 2013/07/01 1.9b: mdframed
+
+(/usr/local/texlive/2025/texmf-dist/tex/latex/l3packages/xparse/xparse.sty
+(/usr/local/texlive/2025/texmf-dist/tex/latex/l3kernel/expl3.sty
+Package: expl3 2025-01-18 L3 programming layer (loader) 
+
+(/usr/local/texlive/2025/texmf-dist/tex/latex/l3backend/l3backend-pdftex.def
+File: l3backend-pdftex.def 2024-05-08 L3 backend support: PDF output (pdfTeX)
+\l__color_backend_stack_int=\count348
+\l__pdf_internal_box=\box75
+))
+Package: xparse 2024-08-16 L3 Experimental document command parser
+) (/usr/local/texlive/2025/texmf-dist/tex/latex/zref/zref-abspage.sty
+Package: zref-abspage 2023-09-14 v2.35 Module abspage for zref (HO)
+
+(/usr/local/texlive/2025/texmf-dist/tex/latex/zref/zref-base.sty
+Package: zref-base 2023-09-14 v2.35 Module base for zref (HO)
+
+(/usr/local/texlive/2025/texmf-dist/tex/generic/etexcmds/etexcmds.sty
+Package: etexcmds 2019/12/15 v1.7 Avoid name clashes with e-TeX commands (HO)
+)
+(/usr/local/texlive/2025/texmf-dist/tex/latex/auxhook/auxhook.sty
+Package: auxhook 2019-12-17 v1.6 Hooks for auxiliary files (HO)
+)
+Package zref Info: New property list: main on input line 767.
+Package zref Info: New property: default on input line 768.
+Package zref Info: New property: page on input line 769.
+)
+\c@abspage=\count349
+Package zref Info: New property: abspage on input line 67.
+)
+(/usr/local/texlive/2025/texmf-dist/tex/latex/needspace/needspace.sty
+Package: needspace 2010/09/12 v1.3d reserve vertical space
+)
+\mdf@templength=\skip125
+\c@mdf@globalstyle@cnt=\count350
+\mdf@skipabove@length=\skip126
+\mdf@skipbelow@length=\skip127
+\mdf@leftmargin@length=\skip128
+\mdf@rightmargin@length=\skip129
+\mdf@innerleftmargin@length=\skip130
+\mdf@innerrightmargin@length=\skip131
+\mdf@innertopmargin@length=\skip132
+\mdf@innerbottommargin@length=\skip133
+\mdf@splittopskip@length=\skip134
+\mdf@splitbottomskip@length=\skip135
+\mdf@outermargin@length=\skip136
+\mdf@innermargin@length=\skip137
+\mdf@linewidth@length=\skip138
+\mdf@innerlinewidth@length=\skip139
+\mdf@middlelinewidth@length=\skip140
+\mdf@outerlinewidth@length=\skip141
+\mdf@roundcorner@length=\skip142
+\mdf@footenotedistance@length=\skip143
+\mdf@userdefinedwidth@length=\skip144
+\mdf@needspace@length=\skip145
+\mdf@frametitleaboveskip@length=\skip146
+\mdf@frametitlebelowskip@length=\skip147
+\mdf@frametitlerulewidth@length=\skip148
+\mdf@frametitleleftmargin@length=\skip149
+\mdf@frametitlerightmargin@length=\skip150
+\mdf@shadowsize@length=\skip151
+\mdf@extratopheight@length=\skip152
+\mdf@subtitleabovelinewidth@length=\skip153
+\mdf@subtitlebelowlinewidth@length=\skip154
+\mdf@subtitleaboveskip@length=\skip155
+\mdf@subtitlebelowskip@length=\skip156
+\mdf@subtitleinneraboveskip@length=\skip157
+\mdf@subtitleinnerbelowskip@length=\skip158
+\mdf@subsubtitleabovelinewidth@length=\skip159
+\mdf@subsubtitlebelowlinewidth@length=\skip160
+\mdf@subsubtitleaboveskip@length=\skip161
+\mdf@subsubtitlebelowskip@length=\skip162
+\mdf@subsubtitleinneraboveskip@length=\skip163
+\mdf@subsubtitleinnerbelowskip@length=\skip164
+
+(/usr/local/texlive/2025/texmf-dist/tex/latex/mdframed/md-frame-0.mdf
+File: md-frame-0.mdf 2013/07/01\ 1.9b: md-frame-0
+)
+\mdf@frametitlebox=\box76
+\mdf@footnotebox=\box77
+\mdf@splitbox@one=\box78
+\mdf@splitbox@two=\box79
+\mdf@splitbox@save=\box80
+\mdfsplitboxwidth=\skip165
+\mdfsplitboxtotalwidth=\skip166
+\mdfsplitboxheight=\skip167
+\mdfsplitboxdepth=\skip168
+\mdfsplitboxtotalheight=\skip169
+\mdfframetitleboxwidth=\skip170
+\mdfframetitleboxtotalwidth=\skip171
+\mdfframetitleboxheight=\skip172
+\mdfframetitleboxdepth=\skip173
+\mdfframetitleboxtotalheight=\skip174
+\mdffootnoteboxwidth=\skip175
+\mdffootnoteboxtotalwidth=\skip176
+\mdffootnoteboxheight=\skip177
+\mdffootnoteboxdepth=\skip178
+\mdffootnoteboxtotalheight=\skip179
+\mdftotallinewidth=\skip180
+\mdfboundingboxwidth=\skip181
+\mdfboundingboxtotalwidth=\skip182
+\mdfboundingboxheight=\skip183
+\mdfboundingboxdepth=\skip184
+\mdfboundingboxtotalheight=\skip185
+\mdf@freevspace@length=\skip186
+\mdf@horizontalwidthofbox@length=\skip187
+\mdf@verticalmarginwhole@length=\skip188
+\mdf@horizontalspaceofbox=\skip189
+\mdfsubtitleheight=\skip190
+\mdfsubsubtitleheight=\skip191
+\c@mdfcountframes=\count351
+
+****** mdframed patching \endmdf@trivlist
+
+****** -- success******
+
+\mdf@envdepth=\count352
+\c@mdf@env@i=\count353
+\c@mdf@env@ii=\count354
+\c@mdf@zref@counter=\count355
+Package zref Info: New property: mdf@pagevalue on input line 895.
+)
+(/usr/local/texlive/2025/texmf-dist/tex/latex/tcolorbox/tcolorbox.sty
+Package: tcolorbox 2024/10/22 version 6.4.1 text color boxes
+
+(/usr/local/texlive/2025/texmf-dist/tex/latex/tools/verbatim.sty
+Package: verbatim 2024-01-22 v1.5x LaTeX2e package for verbatim enhancements
+\every@verbatim=\toks44
+\verbatim@line=\toks45
+\verbatim@in@stream=\read4
+)
+(/usr/local/texlive/2025/texmf-dist/tex/latex/environ/environ.sty
+Package: environ 2014/05/04 v0.3 A new way to define environments
+
+(/usr/local/texlive/2025/texmf-dist/tex/latex/trimspaces/trimspaces.sty
+Package: trimspaces 2009/09/17 v1.1 Trim spaces around a token list
+))
+\tcb@titlebox=\box81
+\tcb@upperbox=\box82
+\tcb@lowerbox=\box83
+\tcb@phantombox=\box84
+\c@tcbbreakpart=\count356
+\c@tcblayer=\count357
+\c@tcolorbox@number=\count358
+\l__tcobox_tmpa_box=\box85
+\l__tcobox_tmpa_dim=\dimen305
+\tcb@temp=\box86
+\tcb@temp=\box87
+\tcb@temp=\box88
+\tcb@temp=\box89
+)
+(/usr/local/texlive/2025/texmf-dist/tex/latex/multirow/multirow.sty
+Package: multirow 2024/11/12 v2.9 Span multiple rows of a table
+\multirow@colwidth=\skip192
+\multirow@cntb=\count359
+\multirow@dima=\skip193
+\bigstrutjot=\dimen306
+)
+(/usr/local/texlive/2025/texmf-dist/tex/latex/adjustbox/adjustbox.sty
+Package: adjustbox 2025/02/26 v1.3c Adjusting TeX boxes (trim, clip, ...)
+
+(/usr/local/texlive/2025/texmf-dist/tex/latex/xkeyval/xkeyval.sty
+Package: xkeyval 2022/06/16 v2.9 package option processing (HA)
+
+(/usr/local/texlive/2025/texmf-dist/tex/generic/xkeyval/xkeyval.tex
+(/usr/local/texlive/2025/texmf-dist/tex/generic/xkeyval/xkvutils.tex
+\XKV@toks=\toks46
+\XKV@tempa@toks=\toks47
+)
+\XKV@depth=\count360
+File: xkeyval.tex 2014/12/03 v2.7a key=value parser (HA)
+))
+(/usr/local/texlive/2025/texmf-dist/tex/latex/adjustbox/adjcalc.sty
+Package: adjcalc 2012/05/16 v1.1 Provides advanced setlength with multiple back
+-ends (calc, etex, pgfmath)
+)
+(/usr/local/texlive/2025/texmf-dist/tex/latex/adjustbox/trimclip.sty
+Package: trimclip 2025/02/21 v1.2a Trim and clip general TeX material
+
+(/usr/local/texlive/2025/texmf-dist/tex/latex/collectbox/collectbox.sty
+Package: collectbox 2022/10/17 v0.4c Collect macro arguments as boxes
+\collectedbox=\box90
+)
+\tc@llx=\dimen307
+\tc@lly=\dimen308
+\tc@urx=\dimen309
+\tc@ury=\dimen310
+Package trimclip Info: Using driver 'tc-pdftex.def'.
+
+(/usr/local/texlive/2025/texmf-dist/tex/latex/adjustbox/tc-pdftex.def
+File: tc-pdftex.def 2025/02/26 v2.3 Clipping driver for pdftex
+))
+\adjbox@Width=\dimen311
+\adjbox@Height=\dimen312
+\adjbox@Depth=\dimen313
+\adjbox@Totalheight=\dimen314
+\adjbox@pwidth=\dimen315
+\adjbox@pheight=\dimen316
+\adjbox@pdepth=\dimen317
+\adjbox@ptotalheight=\dimen318
+
+(/usr/local/texlive/2025/texmf-dist/tex/latex/ifoddpage/ifoddpage.sty
+Package: ifoddpage 2022/10/18 v1.2 Conditionals for odd/even page detection
+\c@checkoddpage=\count361
+)
+(/usr/local/texlive/2025/texmf-dist/tex/latex/varwidth/varwidth.sty
+Package: varwidth 2009/03/30 ver 0.92;  Variable-width minipages
+\@vwid@box=\box91
+\sift@deathcycles=\count362
+\@vwid@loff=\dimen319
+\@vwid@roff=\dimen320
+))
+(/usr/local/texlive/2025/texmf-dist/tex/latex/float/float.sty
+Package: float 2001/11/08 v1.3d Float enhancements (AL)
+\c@float@type=\count363
+\float@exts=\toks48
+\float@box=\box92
+\@float@everytoks=\toks49
+\@floatcapt=\box93
+)
+(/usr/local/texlive/2025/texmf-dist/tex/latex/floatbytocbasic/floatbytocbasic.s
+ty
+Package: floatbytocbasic 2023-08-16 v1.0 improved float package using tocbasic
+ (/usr/local/texlive/2025/texmf-dist/tex/latex/xpatch/xpatch.sty
+Package: xpatch 2020/03/25 v0.3a Extending etoolbox patching commands
+))
+(/usr/local/texlive/2025/texmf-dist/tex/latex/geometry/geometry.sty
+Package: geometry 2020/01/02 v5.9 Page Geometry
+
+(/usr/local/texlive/2025/texmf-dist/tex/generic/iftex/ifvtex.sty
+Package: ifvtex 2019/10/25 v1.7 ifvtex legacy package. Use iftex instead.
+)
+\Gm@cnth=\count364
+\Gm@cntv=\count365
+\c@Gm@tempcnt=\count366
+\Gm@bindingoffset=\dimen321
+\Gm@wd@mp=\dimen322
+\Gm@odd@mp=\dimen323
+\Gm@even@mp=\dimen324
+\Gm@layoutwidth=\dimen325
+\Gm@layoutheight=\dimen326
+\Gm@layouthoffset=\dimen327
+\Gm@layoutvoffset=\dimen328
+\Gm@dimlist=\toks50
+)
+(/usr/local/texlive/2025/texmf-dist/tex/latex/xurl/xurl.sty
+Package: xurl 2022/01/09 v 0.10 modify URL breaks
+)
+\nquotes=\count367
+\qseed=\count368
+\qresult=\count369
+\qidxA=\count370
+\qidxB=\count371
+\qidxC=\count372
+\c@blankquotecall=\count373
+)
+(/usr/local/texlive/2025/texmf-dist/tex/latex/framed/framed.sty
+Package: framed 2011/10/22 v 0.96: framed or shaded text with page breaks
+\OuterFrameSep=\skip194
+\fb@frw=\dimen329
+\fb@frh=\dimen330
+\FrameRule=\dimen331
+\FrameSep=\dimen332
+)
+(/usr/local/texlive/2025/texmf-dist/tex/generic/pgf/libraries/pgflibraryarrows.
+meta.code.tex
+File: pgflibraryarrows.meta.code.tex 2023-01-15 v3.1.10 (3.1.10)
+\pgfarrowinset=\dimen333
+\pgfarrowlength=\dimen334
+\pgfarrowwidth=\dimen335
+\pgfarrowlinewidth=\dimen336
+)
+(/usr/local/texlive/2025/texmf-dist/tex/generic/pgf/frontendlayer/tikz/librarie
+s/tikzlibrarycalc.code.tex
+File: tikzlibrarycalc.code.tex 2023-01-15 v3.1.10 (3.1.10)
+)
+(/usr/local/texlive/2025/texmf-dist/tex/latex/pdfpages/pdfpages.sty
+Package: pdfpages 2025/01/30 v0.6e Insert pages of external PDF documents (AM)
+
+(/usr/local/texlive/2025/texmf-dist/tex/latex/tools/calc.sty
+Package: calc 2023/07/08 v4.3 Infix arithmetic (KKT,FJ)
+\calc@Acount=\count374
+\calc@Bcount=\count375
+\calc@Adimen=\dimen337
+\calc@Bdimen=\dimen338
+\calc@Askip=\skip195
+\calc@Bskip=\skip196
+LaTeX Info: Redefining \setlength on input line 80.
+LaTeX Info: Redefining \addtolength on input line 81.
+\calc@Ccount=\count376
+\calc@Cskip=\skip197
+)
+(/usr/local/texlive/2025/texmf-dist/tex/latex/eso-pic/eso-pic.sty
+Package: eso-pic 2023/05/03 v3.0c eso-pic (RN)
+\ESO@tempdima=\dimen339
+\ESO@tempdimb=\dimen340
+)
+\AM@pagewidth=\dimen341
+\AM@pageheight=\dimen342
+\AM@fboxrule=\dimen343
+
+(/usr/local/texlive/2025/texmf-dist/tex/latex/pdfpages/pppdftex.def
+File: pppdftex.def 2025/01/30 v0.6e Pdfpages driver for pdfTeX (AM)
+)
+\pdfpages@includegraphics@status=\count377
+\AM@pagebox=\box94
+\AM@global@opts=\toks51
+\AM@pagecnt=\count378
+\AM@toc@title=\toks52
+\AM@lof@heading=\toks53
+\c@AM@survey=\count379
+\AM@templatesizebox=\box95
+)
+(/usr/local/texlive/2025/texmf-dist/tex/latex/tools/longtable.sty
+Package: longtable 2024-10-27 v4.22 Multi-page Table package (DPC)
+\LTleft=\skip198
+\LTright=\skip199
+\LTpre=\skip256
+\LTpost=\skip257
+\LTchunksize=\count380
+\LTcapwidth=\dimen344
+\LT@head=\box96
+\LT@firsthead=\box97
+\LT@foot=\box98
+\LT@lastfoot=\box99
+\LT@gbox=\box100
+\LT@cols=\count381
+\LT@rows=\count382
+\c@LT@tables=\count383
+\c@LT@chunks=\count384
+\LT@p@ftn=\toks54
+)
+Class scrreprt Info: longtable captions redefined on input line 19.
+
+(/usr/local/texlive/2025/texmf-dist/tex/latex/pdflscape/pdflscape.sty
+Package: pdflscape 2022-10-27 v0.13 Display of landscape pages in PDF
+
+(/usr/local/texlive/2025/texmf-dist/tex/latex/pdflscape/pdflscape-nometadata.st
+y
+Package: pdflscape-nometadata 2022-10-28 v0.13 Display of landscape pages in PD
+F (HO)
+ (/usr/local/texlive/2025/texmf-dist/tex/latex/graphics/lscape.sty
+Package: lscape 2020/05/28 v3.02 Landscape Pages (DPC)
+)
+(/usr/local/texlive/2025/texmf-dist/tex/latex/lscapeenhanced/lscapeenhanced.sty
+Package: lscapeenhanced 2024-04-16 v1.0 improved lscape package
+Package lscapeenhanced Info: \landscape patched to make \textheight change opti
+onal on input line 72.
+\@lscapeenhanced@textheight=\skip258
+)
+Package pdflscape Info: Auto-detected driver: pdftex on input line 81.
+))
+Package csquotes Info: Checking for multilingual support...
+Package csquotes Info: ... found 'babel' package.
+Package csquotes Info: Adjusting default style.
+
+
+Package csquotes Warning: No style for language 'vietnamese'.
+(csquotes)                Using fallback style on input line 45.
+
+Package csquotes Info: Redefining alias 'default' -> 'fallback'.
+LaTeX Font Info:    Trying to load font information for T1+ppl on input line 45
+.
+(/usr/local/texlive/2025/texmf-dist/tex/latex/psnfss/t1ppl.fd
+File: t1ppl.fd 2001/06/04 font definitions for T1/ppl.
+)
+(./main-wqu-financial-data-module3-4-dich.aux
+LaTeX Font Info:    Trying to load font information for T5+ppl on input line 12
+.
+
+(/usr/local/texlive/2025/texmf-dist/tex/latex/vntex/t5ppl.fd
+File: t5upl.fd 2005/08/24 Fontinst v1.929 font definitions for T5/ppl.
+)
+(./Chapters/M3_L1_LessonNotes.aux) (./Chapters/M3_L1_DocThem1.aux)
+(./Chapters/M3_L2_LessonNotes.aux) (./Chapters/M3_L2_DocThem1.aux)
+(./Chapters/M3_L2_DocThem2.aux) (./Chapters/M3_L3_LessonNotes.aux)
+(./Chapters/M3_L3_DocThem1.aux) (./Chapters/M3_L3_DocThem2.aux)
+(./Chapters/M3_L4_LessonNotes.aux) (./Chapters/M3_L4_DocThem1.aux)
+(./Chapters/M4_L1_LessonNotes.aux) (./Chapters/M4_L1_DocThem1.aux)
+(./Chapters/M4_L1_DocThem2.aux) (./Chapters/M4_L2_LessonNotes.aux)
+(./Chapters/M4_L2_DocThem1.aux) (./Chapters/M4_L2_DocThem2.aux)
+(./Chapters/M4_L2_DocThem3.aux) (./Chapters/M4_L3_LessonNotes.aux)
+(./Chapters/M4_L3_DocThem1.aux) (./Chapters/M4_L3_DocThem2.aux)
+(./Chapters/M4_L4_LessonNotes.aux))
+\openout1 = `main-wqu-financial-data-module3-4-dich.aux'.
+
+LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 45.
+LaTeX Font Info:    ... okay on input line 45.
+LaTeX Font Info:    Checking defaults for OMS/cmsy/m/n on input line 45.
+LaTeX Font Info:    ... okay on input line 45.
+LaTeX Font Info:    Checking defaults for OT1/cmr/m/n on input line 45.
+LaTeX Font Info:    ... okay on input line 45.
+LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 45.
+LaTeX Font Info:    ... okay on input line 45.
+LaTeX Font Info:    Checking defaults for TS1/cmr/m/n on input line 45.
+LaTeX Font Info:    ... okay on input line 45.
+LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 45.
+LaTeX Font Info:    ... okay on input line 45.
+LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 45.
+LaTeX Font Info:    ... okay on input line 45.
+LaTeX Font Info:    Checking defaults for T5/cmr/m/n on input line 45.
+LaTeX Font Info:    Trying to load font information for T5+cmr on input line 45
+.
+
+(/usr/local/texlive/2025/texmf-dist/tex/latex/vntex/t5cmr.fd
+File: t5cmr.fd 1999/05/25 v2.5h Standard LaTeX font definitions
+)
+LaTeX Font Info:    ... okay on input line 45.
+LaTeX Font Info:    Checking defaults for PD1/pdf/m/n on input line 45.
+LaTeX Font Info:    ... okay on input line 45.
+LaTeX Font Info:    Checking defaults for PU/pdf/m/n on input line 45.
+LaTeX Font Info:    ... okay on input line 45.
+\c@lstlisting=\count385
+Package tocbasic Info: setting babel extension for `lol' on input line 45.
+\scr@dte@lstlisting@maxnumwidth=\skip259
+
+(/usr/local/texlive/2025/texmf-dist/tex/context/base/mkii/supp-pdf.mkii
+[Loading MPS to PDF converter (version 2006.09.02).]
+\scratchcounter=\count386
+\scratchdimen=\dimen345
+\scratchbox=\box101
+\nofMPsegments=\count387
+\nofMParguments=\count388
+\everyMPshowfont=\toks55
+\MPscratchCnt=\count389
+\MPscratchDim=\dimen346
+\MPnumerator=\count390
+\makeMPintoPDFobject=\count391
+\everyMPtoPDFconversion=\toks56
+) (/usr/local/texlive/2025/texmf-dist/tex/latex/epstopdf-pkg/epstopdf-base.sty
+Package: epstopdf-base 2020-01-24 v2.11 Base part for package epstopdf
+Package epstopdf-base Info: Redefining graphics rule for `.eps' on input line 4
+85.
+
+(/usr/local/texlive/2025/texmf-dist/tex/latex/latexconfig/epstopdf-sys.cfg
+File: epstopdf-sys.cfg 2010/07/13 v1.3 Configuration of (r)epstopdf for TeX Liv
+e
+))
+Package caption Info: Begin \AtBeginDocument code.
+Package caption Info: subfig package v1.3 is loaded.
+Package caption Info: float package is loaded.
+Package caption Info: hyperref package is loaded.
+Package caption Info: longtable package is loaded.
+
+(/usr/local/texlive/2025/texmf-dist/tex/latex/caption/ltcaption.sty
+Package: ltcaption 2021/01/08 v1.4c longtable captions (AR)
+)
+Package caption Info: End \AtBeginDocument code.
+Package microtype Info: Patching varwidth to enable character protrusion.
+\MT@vwid@leftmargin=\dimen347
+\MT@vwid@rightmargin=\dimen348
+LaTeX Info: Redefining \microtypecontext on input line 45.
+Package microtype Info: Applying patch `item' on input line 45.
+Package microtype Info: Applying patch `toc' on input line 45.
+Package microtype Info: Applying patch `eqnum' on input line 45.
+Package microtype Info: Applying patch `footnote' on input line 45.
+Package microtype Info: Applying patch `verbatim' on input line 45.
+LaTeX Info: Redefining \microtypesetup on input line 45.
+Package microtype Info: Generating PDF output.
+Package microtype Info: Character protrusion enabled (level 2).
+Package microtype Info: Using default protrusion set `alltext'.
+Package microtype Info: Automatic font expansion enabled (level 2),
+(microtype)             stretch: 20, shrink: 20, step: 1, non-selected.
+Package microtype Info: Using default expansion set `alltext-nott'.
+LaTeX Info: Redefining \showhyphens on input line 45.
+Package microtype Info: No adjustment of tracking.
+Package microtype Info: No adjustment of interword spacing.
+Package microtype Info: No adjustment of character kerning.
+
+(/usr/local/texlive/2025/texmf-dist/tex/latex/microtype/mt-ppl.cfg
+File: mt-ppl.cfg 2005/11/16 v1.6 microtype config. file: Palatino (RS)
+)
+
+Package microtype Warning: I cannot find a protrusion list for font
+(microtype)                `T5/ppl/m/n/10.95'. Switching off
+(microtype)                protrusion for this font on input line 45.
+
+\c@listings=\count392
+\cftbeforelistingsskip=\skip260
+\cftlistingsindent=\skip261
+\cftlistingsnumwidth=\skip262
+\c@loldepth=\count393
+\cftbeforeloltitleskip=\skip263
+\cftafterloltitleskip=\skip264
+\listingslabelwidth=\skip265
+Package hyperref Info: Link coloring ON on input line 45.
+(./main-wqu-financial-data-module3-4-dich.out)
+(./main-wqu-financial-data-module3-4-dich.out)
+\@outlinefile=\write4
+\openout4 = `main-wqu-financial-data-module3-4-dich.out'.
+
+Class scrreprt Info: loading recommended package `bookmark'.
+(scrreprt)           Using `bookmark' together with `hyperref' is recommended,
+(scrreprt)           because of handling of possible bookmark level gaps.
+(scrreprt)           You can avoid loading `bookmark' with KOMA-Script option
+(scrreprt)           `bookmarkpackage=false' before \begin{document} and
+(scrreprt)           you can avoid this message adding:
+(scrreprt)             \usepackage{bookmark}
+(scrreprt)           before \begin{document} on input line 45.
+
+(/usr/local/texlive/2025/texmf-dist/tex/latex/bookmark/bookmark.sty
+Package: bookmark 2023-12-10 v1.31 PDF bookmarks (HO)
+
+(/usr/local/texlive/2025/texmf-dist/tex/latex/bookmark/bkm-pdftex.def
+File: bkm-pdftex.def 2023-12-10 v1.31 bookmark driver for pdfTeX and luaTeX (HO
+)
+\BKM@id=\count394
+))
+*geometry* driver: auto-detecting
+*geometry* detected driver: pdftex
+*geometry* verbose mode - [ preamble ] result:
+* driver: pdftex
+* paper: a4paper
+* layout: <same size as paper>
+* layoutoffset:(h,v)=(0.0pt,0.0pt)
+* modes: twoside 
+* h-part:(L,W,R)=(99.58464pt, 441.01773pt, 56.9055pt)
+* v-part:(T,H,B)=(71.13188pt, 688.5567pt, 85.35826pt)
+* \paperwidth=597.50787pt
+* \paperheight=845.04684pt
+* \textwidth=441.01773pt
+* \textheight=688.5567pt
+* \oddsidemargin=27.31465pt
+* \evensidemargin=-15.36449pt
+* \topmargin=-45.54085pt
+* \headheight=15.95pt
+* \headsep=28.45274pt
+* \topskip=11.0pt
+* \footskip=47.60002pt
+* \marginparwidth=76.63118pt
+* \marginparsep=21.89462pt
+* \columnsep=10.0pt
+* \skip\footins=10.0pt plus 4.0pt minus 2.0pt
+* \hoffset=0.0pt
+* \voffset=0.0pt
+* \mag=1000
+* \@twocolumnfalse
+* \@twosidetrue
+* \@mparswitchtrue
+* \@reversemarginfalse
+* (1in=72.27pt=25.4mm, 1cm=28.453pt)
+
+<gfx/cover.pdf, id=7, 597.50786pt x 845.04686pt>
+File: gfx/cover.pdf Graphic file (type pdf)
+<use gfx/cover.pdf>
+Package pdftex.def Info: gfx/cover.pdf  used on input line 52.
+(pdftex.def)             Requested size: 597.5064pt x 845.0448pt.
+<gfx/cover.pdf, id=9, page=1, 597.50786pt x 845.04686pt>
+File: gfx/cover.pdf Graphic file (type pdf)
+<use gfx/cover.pdf, page 1>
+Package pdftex.def Info: gfx/cover.pdf , page1 used on input line 52.
+(pdftex.def)             Requested size: 597.5064pt x 845.0448pt.
+File: gfx/cover.pdf Graphic file (type pdf)
+<use gfx/cover.pdf, page 1>
+Package pdftex.def Info: gfx/cover.pdf , page1 used on input line 52.
+(pdftex.def)             Requested size: 597.53374pt x 845.08348pt.
+File: gfx/cover.pdf Graphic file (type pdf)
+<use gfx/cover.pdf, page 1>
+Package pdftex.def Info: gfx/cover.pdf , page1 used on input line 52.
+(pdftex.def)             Requested size: 597.53374pt x 845.08348pt.
+File: gfx/cover.pdf Graphic file (type pdf)
+<use gfx/cover.pdf, page 1>
+Package pdftex.def Info: gfx/cover.pdf , page1 used on input line 52.
+(pdftex.def)             Requested size: 597.53374pt x 845.08348pt.
+
+
+File: gfx/cover.pdf Graphic file (type pdf)
+<use gfx/cover.pdf, page 1>
+Package pdftex.def Info: gfx/cover.pdf , page1 used on input line 52.
+(pdftex.def)             Requested size: 597.53374pt x 845.08348pt.
+[1
+
+
+ <./gfx/cover.pdf>] (./disclaimer.tex
+
+Package hyperref Warning: Token not allowed in a PDF string (Unicode):
+(hyperref)                removing `\textls' on input line 6.
+
+
+Package hyperref Warning: Token not allowed in a PDF string (Unicode):
+(hyperref)                removing `\MakeTextUppercase   ' on input line 6.
+
+
+Package microtype Warning: I cannot find a protrusion list for font
+(microtype)                `T5/ppl/m/n/10.95/80ls'. Switching off
+(microtype)                protrusion for this font on input line 10.
+
+
+Package microtype Warning: I cannot find a protrusion list for font
+(microtype)                `T5/ppl/m/sc/10.95/80ls'. Switching off
+(microtype)                protrusion for this font on input line 10.
+
+LaTeX Font Info:    Trying to load font information for OT1+ppl on input line 1
+0.
+(/usr/local/texlive/2025/texmf-dist/tex/latex/psnfss/ot1ppl.fd
+File: ot1ppl.fd 2001/06/04 font definitions for OT1/ppl.
+)
+LaTeX Font Info:    Trying to load font information for OML+zplm on input line 
+10.
+
+(/usr/local/texlive/2025/texmf-dist/tex/latex/psnfss/omlzplm.fd
+File: omlzplm.fd 2002/09/08 Fontinst v1.914 font definitions for OML/zplm.
+)
+LaTeX Font Info:    Trying to load font information for OMS+zplm on input line 
+10.
+
+(/usr/local/texlive/2025/texmf-dist/tex/latex/psnfss/omszplm.fd
+File: omszplm.fd 2002/09/08 Fontinst v1.914 font definitions for OMS/zplm.
+)
+LaTeX Font Info:    Trying to load font information for OMX+zplm on input line 
+10.
+
+(/usr/local/texlive/2025/texmf-dist/tex/latex/psnfss/omxzplm.fd
+File: omxzplm.fd 2002/09/08 Fontinst v1.914 font definitions for OMX/zplm.
+)
+LaTeX Font Info:    Trying to load font information for OT1+zplm on input line 
+10.
+
+(/usr/local/texlive/2025/texmf-dist/tex/latex/psnfss/ot1zplm.fd
+File: ot1zplm.fd 2002/09/08 Fontinst v1.914 font definitions for OT1/zplm.
+)
+Package microtype Info: Loading generic protrusion settings for font family
+(microtype)             `zplm' (encoding: OT1).
+(microtype)             For optimal results, create family-specific settings.
+(microtype)             See the microtype manual for details.
+LaTeX Font Info:    Font shape `U/msa/m/n' will be
+(Font)              scaled to size 11.40997pt on input line 10.
+
+(/usr/local/texlive/2025/texmf-dist/tex/latex/microtype/mt-msa.cfg
+File: mt-msa.cfg 2006/02/04 v1.1 microtype config. file: AMS symbols (a) (RS)
+)
+LaTeX Font Info:    Font shape `U/msa/m/n' will be
+(Font)              scaled to size 8.33606pt on input line 10.
+LaTeX Font Info:    Font shape `U/msa/m/n' will be
+(Font)              scaled to size 6.25204pt on input line 10.
+LaTeX Font Info:    Font shape `U/msb/m/n' will be
+(Font)              scaled to size 11.40997pt on input line 10.
+
+(/usr/local/texlive/2025/texmf-dist/tex/latex/microtype/mt-msb.cfg
+File: mt-msb.cfg 2005/06/01 v1.0 microtype config. file: AMS symbols (b) (RS)
+)
+LaTeX Font Info:    Font shape `U/msb/m/n' will be
+(Font)              scaled to size 8.33606pt on input line 10.
+LaTeX Font Info:    Font shape `U/msb/m/n' will be
+(Font)              scaled to size 6.25204pt on input line 10.
+
+
+Package microtype Warning: I cannot find a protrusion list for font
+(microtype)                `T5/ppl/b/n/10.95'. Switching off
+(microtype)                protrusion for this font on input line 12.
+
+LaTeX Font Info:    Trying to load font information for TS1+ppl on input line 1
+6.
+(/usr/local/texlive/2025/texmf-dist/tex/latex/psnfss/ts1ppl.fd
+File: ts1ppl.fd 2001/06/04 font definitions for TS1/ppl.
+)
+
+Package microtype Warning: I cannot find a protrusion list for font
+(microtype)                `T5/ppl/m/n/10'. Switching off
+(microtype)                protrusion for this font on input line 24.
+
+
+Package microtype Warning: I cannot find a protrusion list for font
+(microtype)                `T5/ppl/b/n/10'. Switching off
+(microtype)                protrusion for this font on input line 28.
+
+)
+
+[2{/usr/local/texlive/2025/texmf-var/fonts/map/pdftex/updmap/pdftex.map}{/usr/l
+ocal/texlive/2025/texmf-dist/fonts/enc/dvips/vntex/t5.enc}{/usr/local/texlive/2
+025/texmf-dist/fonts/enc/dvips/base/8r.enc}]
+
+Package microtype Warning: I cannot find a protrusion list for font
+(microtype)                `T5/ppl/m/n/10.95/160ls'. Switching off
+(microtype)                protrusion for this font on input line 56.
+
+
+Package microtype Warning: I cannot find a protrusion list for font
+(microtype)                `T5/ppl/m/sc/10.95/160ls'. Switching off
+(microtype)                protrusion for this font on input line 56.
+
+Package tocbasic Info: character protrusion at toc deactivated on input line 56
+.
+(./main-wqu-financial-data-module3-4-dich.toc
+
+Package microtype Warning: I cannot find a protrusion list for font
+(microtype)                `T5/ppl/m/sc/10.95'. Switching off
+(microtype)                protrusion for this font on input line 5.
+
+
+
+LaTeX Font Info:    Font shape `U/msa/m/n' will be
+(Font)              scaled to size 10.42007pt on input line 46.
+LaTeX Font Info:    Font shape `U/msa/m/n' will be
+(Font)              scaled to size 7.91925pt on input line 46.
+LaTeX Font Info:    Font shape `U/msb/m/n' will be
+(Font)              scaled to size 10.42007pt on input line 46.
+LaTeX Font Info:    Font shape `U/msb/m/n' will be
+(Font)              scaled to size 7.91925pt on input line 46.
+[3
+
+]
+Underfull \hbox (badness 1033) in paragraph at lines 50--50
+ [][] []\T5/ppl/m/n/10.95 (+20) C¡c Th÷îc ^^_o Rõi ro düa tr¶n Ph¥n và (Quantil
+e-Based Measures of 
+ []
+
+
+Underfull \hbox (badness 1968) in paragraph at lines 52--52
+ [][] []\T5/ppl/m/n/10.95 (+20) Lþ thuy¸t v· C¡c Th÷îc ^^_o Rõi ro Ch°t ch³ (Co
+herent Risk 
+ []
+
+
+Underfull \hbox (badness 1565) in paragraph at lines 69--69
+ [][] []\T5/ppl/m/sc/10.95/80ls (+20) ^^_åc th¶m 1: quy tr¼nh l m s¤ch dú li»u 
+t¦n su§t cao 
+ []
+
+
+
+
+Package microtype Warning: I cannot find a protrusion list for font
+(microtype)                `T5/ppl/m/n/10/80ls'. Switching off
+(microtype)                protrusion for this font on input line 89.
+
+
+Package microtype Warning: I cannot find a protrusion list for font
+(microtype)                `T5/ppl/m/sc/10/80ls'. Switching off
+(microtype)                protrusion for this font on input line 89.
+
+[4]
+
+[5]
+Underfull \hbox (badness 1609) in paragraph at lines 176--176
+ [][] []\T5/ppl/m/n/10.95 (+20) 6. SA-MAIS: ph÷ìng ph¡p lai ^^_º ph¥n t½ch twee
+t thà tr÷íng chùng 
+ []
+
+
+
+[6])
+\tf@toc=\write5
+\openout5 = `main-wqu-financial-data-module3-4-dich.toc'.
+
+
+
+[7]
+
+Package microtype Warning: I cannot find a protrusion list for font
+(microtype)                `T5/ppl/m/it/10.95'. Switching off
+(microtype)                protrusion for this font on input line 57.
+
+
+Package microtype Warning: I cannot find a protrusion list for font
+(microtype)                `T5/ppl/m/it/12'. Switching off
+(microtype)                protrusion for this font on input line 57.
+
+
+Package microtype Warning: I cannot find a protrusion list for font
+(microtype)                `T5/ppl/m/n/12'. Switching off
+(microtype)                protrusion for this font on input line 57.
+
+
+
+[8
+
+]
+\openout2 = `Chapters/M3_L1_LessonNotes.aux'.
+
+ (./Chapters/M3_L1_LessonNotes.tex
+Ch\uhorn \ohorn ng 1.
+
+Package microtype Warning: I cannot find a protrusion list for font
+(microtype)                `T5/ppl/m/n/100'. Switching off
+(microtype)                protrusion for this font on input line 1.
+
+
+Package microtype Warning: I cannot find a protrusion list for font
+(microtype)                `T5/ppl/m/n/8'. Switching off
+(microtype)                protrusion for this font on input line 29.
+
+
+Package microtype Warning: I cannot find a protrusion list for font
+(microtype)                `T5/ppl/m/n/6'. Switching off
+(microtype)                protrusion for this font on input line 29.
+
+
+
+[1
+
+
+] (/usr/local/texlive/2025/texmf-dist/tex/latex/listings/lstlang1.sty
+File: lstlang1.sty 2024/09/23 1.10c listings language file
+)
+LaTeX Font Info:    Trying to load font information for T5+fvm on input line 76
+.
+LaTeX Font Info:    No file T5fvm.fd. on input line 76.
+
+
+LaTeX Font Warning: Font shape `T5/fvm/m/n' undefined
+(Font)              using `T5/cmr/m/n' instead on input line 76.
+
+(/usr/local/texlive/2025/texmf-dist/tex/latex/microtype/mt-cmr.cfg
+File: mt-cmr.cfg 2013/05/19 v2.2 microtype config. file: Computer Modern Roman 
+(RS)
+)
+
+Package microtype Warning: I cannot find a protrusion list for font
+(microtype)                `T5/fvm/m/n/9'. Switching off
+(microtype)                protrusion for this font on input line 76.
+
+
+LaTeX Font Warning: Font shape `T5/fvm/b/n' undefined
+(Font)              using `T5/fvm/m/n' instead on input line 77.
+
+
+Package microtype Warning: I cannot find a protrusion list for font
+(microtype)                `T5/fvm/b/n/9'. Switching off
+(microtype)                protrusion for this font on input line 77.
+
+
+Package microtype Warning: I cannot find a protrusion list for font
+(microtype)                `T5/fvm/m/n/10.95'. Switching off
+(microtype)                protrusion for this font on input line 84.
+
+
+LaTeX Font Warning: Font shape `T5/fvm/m/it' undefined
+(Font)              using `T5/fvm/m/n' instead on input line 85.
+
+
+Package microtype Warning: I cannot find a protrusion list for font
+(microtype)                `T5/fvm/m/it/9'. Switching off
+(microtype)                protrusion for this font on input line 85.
+
+
+
+
+Package microtype Warning: I cannot find a protrusion list for font
+(microtype)                `T5/ppl/m/n/9'. Switching off
+(microtype)                protrusion for this font on input line 88.
+
+[2]
+
+
+Package microtype Warning: I cannot find a protrusion list for font
+(microtype)                `T5/ppl/m/sc/10'. Switching off
+(microtype)                protrusion for this font on input line 137.
+
+[3]
+
+[4]
+LaTeX Font Info:    Trying to load font information for U+fplmbb on input line 
+205.
+ (/usr/local/texlive/2025/texmf-dist/tex/latex/psnfss/ufplmbb.fd
+File: ufplmbb.fd 2003/10/30 Fontinst v1.914 font definitions for U/fplmbb.
+)
+
+[5]
+<gfx/m3l1_notes_fig1_pct_vs_log_returns_msft.png, id=529, 798.5835pt x 290.5254
+pt>
+File: gfx/m3l1_notes_fig1_pct_vs_log_returns_msft.png Graphic file (type png)
+<use gfx/m3l1_notes_fig1_pct_vs_log_returns_msft.png>
+Package pdftex.def Info: gfx/m3l1_notes_fig1_pct_vs_log_returns_msft.png  used 
+on input line 240.
+(pdftex.def)             Requested size: 441.02573pt x 160.44556pt.
+
+
+[6 <./gfx/m3l1_notes_fig1_pct_vs_log_returns_msft.png>]
+
+[7]
+
+[8]
+
+[9]
+
+[10]
+
+[11]
+
+[12]
+<gfx/m3l1_notes_fig2_assets_vs_portfolio_volatility_returns.png, id=620, 856.39
+95pt x 273.1806pt>
+File: gfx/m3l1_notes_fig2_assets_vs_portfolio_volatility_returns.png Graphic fi
+le (type png)
+<use gfx/m3l1_notes_fig2_assets_vs_portfolio_volatility_returns.png>
+Package pdftex.def Info: gfx/m3l1_notes_fig2_assets_vs_portfolio_volatility_ret
+urns.png  used on input line 607.
+(pdftex.def)             Requested size: 441.018pt x 140.67914pt.
+
+
+[13 <./gfx/m3l1_notes_fig2_assets_vs_portfolio_volatility_returns.png>]
+<gfx/m3l1_notes_fig3_portfolio_variance_vs_asset_variance.png, id=661, 974.9223
+pt x 346.1733pt>
+File: gfx/m3l1_notes_fig3_portfolio_variance_vs_asset_variance.png Graphic file
+ (type png)
+<use gfx/m3l1_notes_fig3_portfolio_variance_vs_asset_variance.png>
+Package pdftex.def Info: gfx/m3l1_notes_fig3_portfolio_variance_vs_asset_varian
+ce.png  used on input line 650.
+(pdftex.def)             Requested size: 441.01678pt x 156.59528pt.
+
+
+[14 <./gfx/m3l1_notes_fig3_portfolio_variance_vs_asset_variance.png>]
+<gfx/m3l1_notes_fig4_portfolio_variance_vs_correlation.png, id=688, 638.8668pt 
+x 360.6273pt>
+File: gfx/m3l1_notes_fig4_portfolio_variance_vs_correlation.png Graphic file (t
+ype png)
+<use gfx/m3l1_notes_fig4_portfolio_variance_vs_correlation.png>
+Package pdftex.def Info: gfx/m3l1_notes_fig4_portfolio_variance_vs_correlation.
+png  used on input line 705.
+(pdftex.def)             Requested size: 441.02328pt x 248.94865pt.
+
+
+[15 <./gfx/m3l1_notes_fig4_portfolio_variance_vs_correlation.png>]
+
+[16]
+
+[17]
+<gfx/m3l1_notes_fig5_returns_vs_risk_portfolios.png, id=813, 618.6312pt x 401.8
+212pt>
+File: gfx/m3l1_notes_fig5_returns_vs_risk_portfolios.png Graphic file (type png
+)
+<use gfx/m3l1_notes_fig5_returns_vs_risk_portfolios.png>
+Package pdftex.def Info: gfx/m3l1_notes_fig5_returns_vs_risk_portfolios.png  us
+ed on input line 834.
+(pdftex.def)             Requested size: 441.01529pt x 286.45386pt.
+
+
+[18 <./gfx/m3l1_notes_fig5_returns_vs_risk_portfolios.png>]
+
+[19])
+
+[20]
+\openout2 = `Chapters/M3_L1_DocThem1.aux'.
+
+ (./Chapters/M3_L1_DocThem1.tex
+Ch\uhorn \ohorn ng 2.
+
+
+[21
+
+
+
+
+]
+
+[22]
+<gfx/m3l1_dahlquist_table15-1_dal_investment_value.png, id=867, 400.49625pt x 4
+95.35063pt>
+File: gfx/m3l1_dahlquist_table15-1_dal_investment_value.png Graphic file (type 
+png)
+<use gfx/m3l1_dahlquist_table15-1_dal_investment_value.png>
+Package pdftex.def Info: gfx/m3l1_dahlquist_table15-1_dal_investment_value.png 
+ used on input line 103.
+(pdftex.def)             Requested size: 308.71106pt x 381.852pt.
+
+
+[23]
+<gfx/m3l1_dahlquist_table15-2_dal_geometric_avg.png, id=873, 566.86781pt x 568.
+37344pt>
+File: gfx/m3l1_dahlquist_table15-2_dal_geometric_avg.png Graphic file (type png
+)
+<use gfx/m3l1_dahlquist_table15-2_dal_geometric_avg.png>
+Package pdftex.def Info: gfx/m3l1_dahlquist_table15-2_dal_geometric_avg.png  us
+ed on input line 121.
+(pdftex.def)             Requested size: 330.76329pt x 331.65154pt.
+
+
+[24 <./gfx/m3l1_dahlquist_table15-1_dal_investment_value.png (PNG copy)>]
+<gfx/m3l1_dahlquist_table15-3_cvs_annual_returns.png, id=879, 150.5625pt x 520.
+94624pt>
+File: gfx/m3l1_dahlquist_table15-3_cvs_annual_returns.png Graphic file (type pn
+g)
+<use gfx/m3l1_dahlquist_table15-3_cvs_annual_returns.png>
+Package pdftex.def Info: gfx/m3l1_dahlquist_table15-3_cvs_annual_returns.png  u
+sed on input line 138.
+(pdftex.def)             Requested size: 168.8845pt x 584.3938pt.
+<gfx/m3l1_dahlquist_table15-4_cvs_avg_return_calc.png, id=880, 1102.1175pt x 88
+4.30376pt>
+File: gfx/m3l1_dahlquist_table15-4_cvs_avg_return_calc.png Graphic file (type p
+ng)
+<use gfx/m3l1_dahlquist_table15-4_cvs_avg_return_calc.png>
+Package pdftex.def Info: gfx/m3l1_dahlquist_table15-4_cvs_avg_return_calc.png  
+used on input line 150.
+(pdftex.def)             Requested size: 358.88765pt x 287.96204pt.
+
+
+[25 <./gfx/m3l1_dahlquist_table15-2_dal_geometric_avg.png (PNG copy)>]
+Underfull \vbox (badness 10000) detected at line 155
+ []
+
+
+Underfull \vbox (badness 10000) detected at line 155
+ []
+
+
+
+[26 <./gfx/m3l1_dahlquist_table15-3_cvs_annual_returns.png (PNG copy)>]
+
+[27 <./gfx/m3l1_dahlquist_table15-4_cvs_avg_return_calc.png (PNG copy)>]
+<gfx/m3l1_dahlquist_table15-5_cvs_stddev.png, id=896, 754.31813pt x 548.80031pt
+>
+File: gfx/m3l1_dahlquist_table15-5_cvs_stddev.png Graphic file (type png)
+<use gfx/m3l1_dahlquist_table15-5_cvs_stddev.png>
+Package pdftex.def Info: gfx/m3l1_dahlquist_table15-5_cvs_stddev.png  used on i
+nput line 178.
+(pdftex.def)             Requested size: 232.22104pt x 168.94559pt.
+
+
+[28 <./gfx/m3l1_dahlquist_table15-5_cvs_stddev.png (PNG copy)>]
+<gfx/m3l1_dahlquist_table15-6_yearly_returns.png, id=902, 567.11874pt x 863.225
+pt>
+File: gfx/m3l1_dahlquist_table15-6_yearly_returns.png Graphic file (type png)
+<use gfx/m3l1_dahlquist_table15-6_yearly_returns.png>
+Package pdftex.def Info: gfx/m3l1_dahlquist_table15-6_yearly_returns.png  used 
+on input line 193.
+(pdftex.def)             Requested size: 330.76329pt x 503.47644pt.
+
+
+[29 <./gfx/m3l1_dahlquist_table15-6_yearly_returns.png (PNG copy)>]
+<gfx/m3l1_dahlquist_fig15-2_yearly_returns.png, id=909, 1288.0622pt x 652.68843
+pt>
+File: gfx/m3l1_dahlquist_fig15-2_yearly_returns.png Graphic file (type png)
+<use gfx/m3l1_dahlquist_fig15-2_yearly_returns.png>
+Package pdftex.def Info: gfx/m3l1_dahlquist_fig15-2_yearly_returns.png  used on
+ input line 201.
+(pdftex.def)             Requested size: 441.02107pt x 223.47473pt.
+
+
+[30 <./gfx/m3l1_dahlquist_fig15-2_yearly_returns.png (PNG copy)>]
+<gfx/m3l1_dahlquist_table15-7_two_stock_portfolio_returns.png, id=915, 571.3846
+9pt x 532.99126pt>
+File: gfx/m3l1_dahlquist_table15-7_two_stock_portfolio_returns.png Graphic file
+ (type png)
+<use gfx/m3l1_dahlquist_table15-7_two_stock_portfolio_returns.png>
+Package pdftex.def Info: gfx/m3l1_dahlquist_table15-7_two_stock_portfolio_retur
+ns.png  used on input line 246.
+(pdftex.def)             Requested size: 374.86775pt x 349.67706pt.
+
+
+[31]
+
+[32 <./gfx/m3l1_dahlquist_table15-7_two_stock_portfolio_returns.png (PNG copy)>
+]
+
+[33])
+
+[34]
+\openout2 = `Chapters/M3_L2_LessonNotes.aux'.
+
+ (./Chapters/M3_L2_LessonNotes.tex
+Ch\uhorn \ohorn ng 3.
+
+
+[35
+
+
+
+
+]
+
+[36]
+
+[37]
+<gfx/m3l2_notes_fig1_tsla_split_adjusted_close.png, id=982, 723.4227pt x 457.46
+91pt>
+File: gfx/m3l2_notes_fig1_tsla_split_adjusted_close.png Graphic file (type png)
+
+<use gfx/m3l2_notes_fig1_tsla_split_adjusted_close.png>
+Package pdftex.def Info: gfx/m3l2_notes_fig1_tsla_split_adjusted_close.png  use
+d on input line 159.
+(pdftex.def)             Requested size: 441.02228pt x 278.88821pt.
+
+
+[38 <./gfx/m3l2_notes_fig1_tsla_split_adjusted_close.png>]
+
+[39]
+
+[40]
+
+[41]
+
+[42]
+
+[43]
+
+[44]
+
+[45]
+<gfx/m3l2_notes_fig2_efficient_frontier.png, id=1118, 618.6312pt x 401.8212pt>
+File: gfx/m3l2_notes_fig2_efficient_frontier.png Graphic file (type png)
+<use gfx/m3l2_notes_fig2_efficient_frontier.png>
+Package pdftex.def Info: gfx/m3l2_notes_fig2_efficient_frontier.png  used on in
+put line 481.
+(pdftex.def)             Requested size: 441.01529pt x 286.45386pt.
+
+
+[46]
+
+[47 <./gfx/m3l2_notes_fig2_efficient_frontier.png>]
+<gfx/m3l2_notes_fig3_efficient_frontier_cml.png, id=1153, 842.6682pt x 513.117p
+t>
+File: gfx/m3l2_notes_fig3_efficient_frontier_cml.png Graphic file (type png)
+<use gfx/m3l2_notes_fig3_efficient_frontier_cml.png>
+Package pdftex.def Info: gfx/m3l2_notes_fig3_efficient_frontier_cml.png  used o
+n input line 544.
+(pdftex.def)             Requested size: 441.01875pt x 268.54488pt.
+
+
+[48]
+
+[49 <./gfx/m3l2_notes_fig3_efficient_frontier_cml.png>]
+
+[50]
+<gfx/m3l2_notes_fig4_btcusd_returns_histogram.png, id=1190, 419.166pt x 334.610
+1pt>
+File: gfx/m3l2_notes_fig4_btcusd_returns_histogram.png Graphic file (type png)
+<use gfx/m3l2_notes_fig4_btcusd_returns_histogram.png>
+Package pdftex.def Info: gfx/m3l2_notes_fig4_btcusd_returns_histogram.png  used
+ on input line 619.
+(pdftex.def)             Requested size: 330.76329pt x 264.04295pt.
+
+
+[51 <./gfx/m3l2_notes_fig4_btcusd_returns_histogram.png>]
+
+[52]
+
+[53]
+
+Package hyperref Warning: Token not allowed in a PDF string (Unicode):
+(hyperref)                removing `math shift' on input line 745.
+
+
+Package hyperref Warning: Token not allowed in a PDF string (Unicode):
+(hyperref)                removing `math shift' on input line 745.
+
+
+
+[54]
+Underfull \hbox (badness 1400) in paragraph at lines 787--788
+[]\T5/ppl/m/n/10.95 (+20) Engle, Robert. "GARCH 101: The Use of ARCH/GARCH Mode
+ls in Applied
+ []
+
+)
+
+[55]
+\openout2 = `Chapters/M3_L2_DocThem1.aux'.
+
+ (./Chapters/M3_L2_DocThem1.tex
+Ch\uhorn \ohorn ng 4.
+
+
+[56
+
+
+
+
+]
+
+[57]
+<gfx/m3l2_dahlquist_fig15-3_beta_calc.png, id=1289, 1237.62375pt x 830.35219pt>
+
+File: gfx/m3l2_dahlquist_fig15-3_beta_calc.png Graphic file (type png)
+<use gfx/m3l2_dahlquist_fig15-3_beta_calc.png>
+Package pdftex.def Info: gfx/m3l2_dahlquist_fig15-3_beta_calc.png  used on inpu
+t line 69.
+(pdftex.def)             Requested size: 308.71106pt x 207.11874pt.
+
+
+[58 <./gfx/m3l2_dahlquist_fig15-3_beta_calc.png (PNG copy)>]
+
+[59]
+
+[60])
+
+[61]
+\openout2 = `Chapters/M3_L2_DocThem2.aux'.
+
+ (./Chapters/M3_L2_DocThem2.tex
+Ch\uhorn \ohorn ng 5.
+LaTeX Font Info:    Font shape `U/msa/m/n' will be
+(Font)              scaled to size 9.37807pt on input line 19.
+LaTeX Font Info:    Font shape `U/msa/m/n' will be
+(Font)              scaled to size 7.29405pt on input line 19.
+LaTeX Font Info:    Font shape `U/msa/m/n' will be
+(Font)              scaled to size 5.21004pt on input line 19.
+LaTeX Font Info:    Font shape `U/msb/m/n' will be
+(Font)              scaled to size 9.37807pt on input line 19.
+LaTeX Font Info:    Font shape `U/msb/m/n' will be
+(Font)              scaled to size 7.29405pt on input line 19.
+LaTeX Font Info:    Font shape `U/msb/m/n' will be
+(Font)              scaled to size 5.21004pt on input line 19.
+
+
+[62
+
+
+
+
+]
+
+[63]
+
+[64]
+Overfull \hbox (11.97882pt too wide) detected at line 91
+[]
+ []
+
+
+
+[65]
+
+[66]
+
+[67]
+
+[68])
+
+[69]
+\openout2 = `Chapters/M3_L3_LessonNotes.aux'.
+
+ (./Chapters/M3_L3_LessonNotes.tex
+Ch\uhorn \ohorn ng 6.
+
+
+[70
+
+
+
+
+]
+<gfx/m3l3_notes_fig0_crash1929_ticker_tape.png, id=1351, 483.8075pt x 358.33875
+pt>
+File: gfx/m3l3_notes_fig0_crash1929_ticker_tape.png Graphic file (type png)
+<use gfx/m3l3_notes_fig0_crash1929_ticker_tape.png>
+Package pdftex.def Info: gfx/m3l3_notes_fig0_crash1929_ticker_tape.png  used on
+ input line 42.
+(pdftex.def)             Requested size: 371.8759pt x 275.43506pt.
+
+
+[71 <./gfx/m3l3_notes_fig0_crash1929_ticker_tape.png>]
+
+[72]
+
+[73]
+
+[74]
+<gfx/m3l3_notes_fig1_btcusdt_price_volume.png, id=1410, 848.4498pt x 328.8285pt
+>
+File: gfx/m3l3_notes_fig1_btcusdt_price_volume.png Graphic file (type png)
+<use gfx/m3l3_notes_fig1_btcusdt_price_volume.png>
+Package pdftex.def Info: gfx/m3l3_notes_fig1_btcusdt_price_volume.png  used on 
+input line 203.
+(pdftex.def)             Requested size: 441.01518pt x 170.92155pt.
+
+
+[75 <./gfx/m3l3_notes_fig1_btcusdt_price_volume.png>]
+<gfx/m3l3_notes_fig2_raw_tick_histograms.png, id=1444, 905.5431pt x 273.1806pt>
+
+File: gfx/m3l3_notes_fig2_raw_tick_histograms.png Graphic file (type png)
+<use gfx/m3l3_notes_fig2_raw_tick_histograms.png>
+Package pdftex.def Info: gfx/m3l3_notes_fig2_raw_tick_histograms.png  used on i
+nput line 265.
+(pdftex.def)             Requested size: 441.01178pt x 133.04265pt.
+
+
+[76]
+
+[77 <./gfx/m3l3_notes_fig2_raw_tick_histograms.png>]
+<gfx/m3l3_notes_fig3_aggregated_histograms.png, id=1515, 898.3161pt x 273.1806p
+t>
+File: gfx/m3l3_notes_fig3_aggregated_histograms.png Graphic file (type png)
+<use gfx/m3l3_notes_fig3_aggregated_histograms.png>
+Package pdftex.def Info: gfx/m3l3_notes_fig3_aggregated_histograms.png  used on
+ input line 318.
+(pdftex.def)             Requested size: 441.01488pt x 134.11392pt.
+
+
+[78 <./gfx/m3l3_notes_fig3_aggregated_histograms.png>]
+
+[79]
+<gfx/m3l3_notes_fig4_buying_selling_volume.png, id=1566, 883.8621pt x 286.9119p
+t>
+File: gfx/m3l3_notes_fig4_buying_selling_volume.png Graphic file (type png)
+<use gfx/m3l3_notes_fig4_buying_selling_volume.png>
+Package pdftex.def Info: gfx/m3l3_notes_fig4_buying_selling_volume.png  used on
+ input line 423.
+(pdftex.def)             Requested size: 441.01288pt x 143.15788pt.
+
+
+[80]
+<gfx/m3l3_notes_fig5_buyer_seller_scatter.png, id=1607, 926.5014pt x 346.1733pt
+>
+File: gfx/m3l3_notes_fig5_buyer_seller_scatter.png Graphic file (type png)
+<use gfx/m3l3_notes_fig5_buyer_seller_scatter.png>
+Package pdftex.def Info: gfx/m3l3_notes_fig5_buyer_seller_scatter.png  used on 
+input line 461.
+(pdftex.def)             Requested size: 441.0258pt x 164.78264pt.
+
+
+[81 <./gfx/m3l3_notes_fig4_buying_selling_volume.png>]
+
+[82 <./gfx/m3l3_notes_fig5_buyer_seller_scatter.png>]
+
+[83]
+
+[84]
+
+[85]
+<gfx/m3l3_notes_fig6_order_flow_imbalance.png, id=1784, 959.7456pt x 346.1733pt
+>
+File: gfx/m3l3_notes_fig6_order_flow_imbalance.png Graphic file (type png)
+<use gfx/m3l3_notes_fig6_order_flow_imbalance.png>
+Package pdftex.def Info: gfx/m3l3_notes_fig6_order_flow_imbalance.png  used on 
+input line 677.
+(pdftex.def)             Requested size: 441.01971pt x 159.07262pt.
+
+
+[86]
+
+[87 <./gfx/m3l3_notes_fig6_order_flow_imbalance.png>]
+
+[88]
+
+[89]
+
+[90])
+
+[91]
+\openout2 = `Chapters/M3_L3_DocThem1.aux'.
+
+ (./Chapters/M3_L3_DocThem1.tex
+Ch\uhorn \ohorn ng 7.
+
+
+[92
+
+
+
+
+]
+
+[93])
+
+
+Overfull \hbox (23.86118pt too wide) has occurred while \output is active
+[]|[]|  
+ []
+
+[94]
+\openout2 = `Chapters/M3_L3_DocThem2.aux'.
+
+ (./Chapters/M3_L3_DocThem2.tex
+Ch\uhorn \ohorn ng 8.
+<gfx/m3l3_brownlees_fig1_trade_quote_oneday.png, id=1925, 481.8pt x 361.35pt>
+File: gfx/m3l3_brownlees_fig1_trade_quote_oneday.png Graphic file (type png)
+<use gfx/m3l3_brownlees_fig1_trade_quote_oneday.png>
+Package pdftex.def Info: gfx/m3l3_brownlees_fig1_trade_quote_oneday.png  used o
+n input line 19.
+(pdftex.def)             Requested size: 308.71106pt x 231.5389pt.
+<gfx/m3l3_brownlees_fig2_trade_quote_oneminute.png, id=1926, 481.8pt x 361.35pt
+>
+File: gfx/m3l3_brownlees_fig2_trade_quote_oneminute.png Graphic file (type png)
+
+<use gfx/m3l3_brownlees_fig2_trade_quote_oneminute.png>
+Package pdftex.def Info: gfx/m3l3_brownlees_fig2_trade_quote_oneminute.png  use
+d on input line 27.
+(pdftex.def)             Requested size: 308.71106pt x 231.5389pt.
+
+
+[95
+
+
+
+
+ <./gfx/m3l3_brownlees_fig1_trade_quote_oneday.png (PNG copy)>]
+
+[96 <./gfx/m3l3_brownlees_fig2_trade_quote_oneminute.png (PNG copy)>]
+<gfx/m3l3_brownlees_fig3_trading_activity_minute.png, id=1940, 451.6875pt x 361
+.35pt>
+File: gfx/m3l3_brownlees_fig3_trading_activity_minute.png Graphic file (type pn
+g)
+<use gfx/m3l3_brownlees_fig3_trading_activity_minute.png>
+Package pdftex.def Info: gfx/m3l3_brownlees_fig3_trading_activity_minute.png  u
+sed on input line 70.
+(pdftex.def)             Requested size: 308.71106pt x 246.98291pt.
+
+
+[97]
+
+[98 <./gfx/m3l3_brownlees_fig3_trading_activity_minute.png (PNG copy)>]
+
+[99]
+<gfx/m3l3_brownlees_fig4_open_close_minute.png, id=1954, 451.6875pt x 361.35pt>
+
+File: gfx/m3l3_brownlees_fig4_open_close_minute.png Graphic file (type png)
+<use gfx/m3l3_brownlees_fig4_open_close_minute.png>
+Package pdftex.def Info: gfx/m3l3_brownlees_fig4_open_close_minute.png  used on
+ input line 131.
+(pdftex.def)             Requested size: 308.71106pt x 246.98291pt.
+
+
+[100]
+
+[101 <./gfx/m3l3_brownlees_fig4_open_close_minute.png (PNG copy)>])
+
+[102]
+\openout2 = `Chapters/M3_L4_LessonNotes.aux'.
+
+ (./Chapters/M3_L4_LessonNotes.tex
+Ch\uhorn \ohorn ng 9.
+
+
+[103
+
+
+
+
+]
+
+Package microtype Warning: I cannot find a protrusion list for font
+(microtype)                `T5/ppl/m/it/10'. Switching off
+(microtype)                protrusion for this font on input line 132.
+
+
+
+[104]
+
+[105]
+
+[106]
+
+[107]
+
+[108]
+
+[109]
+
+[110])
+
+[111]
+\openout2 = `Chapters/M3_L4_DocThem1.aux'.
+
+ (./Chapters/M3_L4_DocThem1.tex
+Ch\uhorn \ohorn ng 10.
+Package microtype Info: Loading generic protrusion settings for font family
+(microtype)             `cmss' (encoding: OT1).
+(microtype)             For optimal results, create family-specific settings.
+(microtype)             See the microtype manual for details.
+<gfx/m3l4_murphy_fig7-8_svd_decomposition.png, id=2148, 934.24031pt x 258.21469
+pt>
+File: gfx/m3l4_murphy_fig7-8_svd_decomposition.png Graphic file (type png)
+<use gfx/m3l4_murphy_fig7-8_svd_decomposition.png>
+Package pdftex.def Info: gfx/m3l4_murphy_fig7-8_svd_decomposition.png  used on 
+input line 32.
+(pdftex.def)             Requested size: 374.86775pt x 103.61105pt.
+
+
+[112
+
+
+
+
+ <./gfx/m3l4_murphy_fig7-8_svd_decomposition.png (PNG copy)>]
+pdfTeX warning (ext4): destination with the same identifier (name{equation.10.1
+}) has been already used, duplicate ignored
+<to be read again> 
+                   \relax 
+l.44 \begin{equation}
+                     
+pdfTeX warning (ext4): destination with the same identifier (name{equation.10.1
+}) has been already used, duplicate ignored
+<to be read again> 
+                   \relax 
+l.53 \begin{equation}
+                     
+pdfTeX warning (ext4): destination with the same identifier (name{equation.10.1
+}) has been already used, duplicate ignored
+<to be read again> 
+                   \relax 
+l.60 \begin{equation}
+                     
+pdfTeX warning (ext4): destination with the same identifier (name{equation.10.1
+}) has been already used, duplicate ignored
+<to be read again> 
+                   \relax 
+l.67 \begin{equation}
+                     
+pdfTeX warning (ext4): destination with the same identifier (name{equation.10.1
+}) has been already used, duplicate ignored
+<to be read again> 
+                   \relax 
+l.72 \begin{equation}
+                     
+pdfTeX warning (ext4): destination with the same identifier (name{equation.10.1
+}) has been already used, duplicate ignored
+<to be read again> 
+                   \relax 
+l.79 \begin{equation}
+                     
+pdfTeX warning (ext4): destination with the same identifier (name{equation.10.1
+}) has been already used, duplicate ignored
+<to be read again> 
+                   \relax 
+l.86 \begin{equation}
+                     )
+
+[113]
+\openout2 = `Chapters/M4_L1_LessonNotes.aux'.
+
+ (./Chapters/M4_L1_LessonNotes.tex
+Ch\uhorn \ohorn ng 11.
+
+
+[114
+
+
+
+
+]
+
+[115]
+
+[116]
+
+[117]
+
+[118]
+
+[119]
+Overfull \hbox (43.52893pt too wide) detected at line 278
+[]
+ []
+
+
+
+[120]
+Overfull \hbox (5.7292pt too wide) detected at line 313
+[]
+ []
+
+
+
+[121]
+Overfull \hbox (69.53351pt too wide) detected at line 345
+[]
+ []
+
+
+
+[122]
+
+[123]
+
+[124]
+
+[125]
+
+[126]
+
+[127]
+
+[128]
+
+[129]
+
+[130]
+
+[131]
+Overfull \hbox (13.07143pt too wide) in paragraph at lines 682--683
+\T5/ppl/m/n/10.95 (-20) nh§t câ trong dú li»u, dáng m¢ cuèi còng \T5/fvm/m/n/10
+.95 feature_names = vectorizer.get_feature_names_out()
+ []
+
+
+
+[132]
+
+[133]
+
+[134])
+
+[135]
+\openout2 = `Chapters/M4_L1_DocThem1.aux'.
+
+ (./Chapters/M4_L1_DocThem1.tex
+Ch\uhorn \ohorn ng 12.
+
+
+[136
+
+
+
+
+]
+
+[137]
+
+[138]
+
+[139]
+
+[140])
+
+[141]
+\openout2 = `Chapters/M4_L1_DocThem2.aux'.
+
+ (./Chapters/M4_L1_DocThem2.tex
+Ch\uhorn \ohorn ng 13.
+
+
+[142
+
+
+
+
+]
+
+[143]
+
+Package microtype Warning: I cannot find a protrusion list for font
+(microtype)                `T5/ppl/m/it/8'. Switching off
+(microtype)                protrusion for this font on input line 70.
+
+
+
+[144]
+
+[145]
+
+Package microtype Warning: I cannot find a protrusion list for font
+(microtype)                `T5/ppl/m/it/9'. Switching off
+(microtype)                protrusion for this font on input line 144.
+
+
+
+[146]
+
+[147]
+
+[148]
+
+[149]
+
+[150
+pdfTeX warning (ext4): destination with the same identifier (name{equation.13.1
+}) has been already used, duplicate ignored
+<argument> ...shipout:D \box_use:N \l_shipout_box 
+                                                  \__shipout_drop_firstpage_...
+l.279 $$
+        
+pdfTeX warning (ext4): destination with the same identifier (name{equation.13.1
+}) has been already used, duplicate ignored
+<argument> ...shipout:D \box_use:N \l_shipout_box 
+                                                  \__shipout_drop_firstpage_...
+l.279 $$
+        
+pdfTeX warning (ext4): destination with the same identifier (name{equation.13.1
+}) has been already used, duplicate ignored
+<argument> ...shipout:D \box_use:N \l_shipout_box 
+                                                  \__shipout_drop_firstpage_...
+l.279 $$
+        ]
+
+[151]
+pdfTeX warning (ext4): destination with the same identifier (name{equation.13.1
+}) has been already used, duplicate ignored
+<to be read again> 
+                   \relax 
+l.323 \begin{equation}
+                      
+pdfTeX warning (ext4): destination with the same identifier (name{equation.13.1
+}) has been already used, duplicate ignored
+<to be read again> 
+                   \relax 
+l.329 \begin{equation}
+                      
+pdfTeX warning (ext4): destination with the same identifier (name{equation.13.1
+}) has been already used, duplicate ignored
+<to be read again> 
+                   \relax 
+l.335 \begin{equation}
+                      
+
+[152]
+pdfTeX warning (ext4): destination with the same identifier (name{equation.13.1
+}) has been already used, duplicate ignored
+<to be read again> 
+                   \relax 
+l.341 \begin{equation}
+                      
+pdfTeX warning (ext4): destination with the same identifier (name{equation.13.1
+}) has been already used, duplicate ignored
+<to be read again> 
+                   \relax 
+l.347 \begin{equation}
+                      
+pdfTeX warning (ext4): destination with the same identifier (name{equation.13.1
+}) has been already used, duplicate ignored
+<to be read again> 
+                   \relax 
+l.353 \begin{equation}
+                      
+pdfTeX warning (ext4): destination with the same identifier (name{equation.13.1
+}) has been already used, duplicate ignored
+<to be read again> 
+                   \relax 
+l.359 \begin{equation}
+                      
+pdfTeX warning (ext4): destination with the same identifier (name{equation.13.1
+}) has been already used, duplicate ignored
+<to be read again> 
+                   \relax 
+l.362 \begin{equation}
+                      
+
+[153]
+pdfTeX warning (ext4): destination with the same identifier (name{equation.13.1
+}) has been already used, duplicate ignored
+<to be read again> 
+                   \relax 
+l.399 \begin{equation}
+                      
+pdfTeX warning (ext4): destination with the same identifier (name{equation.13.1
+}) has been already used, duplicate ignored
+<to be read again> 
+                   \relax 
+l.405 \begin{equation}
+                      
+
+[154]
+pdfTeX warning (ext4): destination with the same identifier (name{equation.13.1
+}) has been already used, duplicate ignored
+<to be read again> 
+                   \relax 
+l.432 \begin{equation}
+                      
+pdfTeX warning (ext4): destination with the same identifier (name{equation.13.1
+}) has been already used, duplicate ignored
+<to be read again> 
+                   \relax 
+l.444 \begin{equation}
+                      
+pdfTeX warning (ext4): destination with the same identifier (name{equation.13.1
+}) has been already used, duplicate ignored
+<to be read again> 
+                   \relax 
+l.447 \begin{equation}
+                      
+pdfTeX warning (ext4): destination with the same identifier (name{equation.13.1
+}) has been already used, duplicate ignored
+<to be read again> 
+                   \relax 
+l.450 \begin{equation}
+                      
+
+[155]
+pdfTeX warning (ext4): destination with the same identifier (name{equation.13.1
+}) has been already used, duplicate ignored
+<to be read again> 
+                   \relax 
+l.456 \begin{equation}
+                      
+pdfTeX warning (ext4): destination with the same identifier (name{equation.13.1
+}) has been already used, duplicate ignored
+<to be read again> 
+                   \relax 
+l.459 \begin{equation}
+                      
+pdfTeX warning (ext4): destination with the same identifier (name{equation.13.1
+}) has been already used, duplicate ignored
+<to be read again> 
+                   \relax 
+l.462 \begin{equation}
+                      
+
+[156]
+
+[157]
+pdfTeX warning (ext4): destination with the same identifier (name{equation.13.1
+}) has been already used, duplicate ignored
+<to be read again> 
+                   \relax 
+l.525 \begin{equation}
+                      
+
+[158]
+
+[159]
+
+[160]
+
+[161]
+
+[162]
+
+[163]
+Underfull \hbox (badness 1052) in paragraph at lines 615--616
+[]\T5/ppl/m/n/10.95 (+20) Dòng sè ^^_¸m ^^_çng xu§t hi»n trong H¼nh 5.2, t½nh $
+[]\OT1/zplm/m/n/10.95 ([]\OT1/ppl/m/n/10.95 (+20) , []\OT1/zplm/m/n/10.95 )$ \T
+5/ppl/m/n/10.95 (+20) v 
+ []
+
+)
+
+[164]
+\openout2 = `Chapters/M4_L2_LessonNotes.aux'.
+
+ (./Chapters/M4_L2_LessonNotes.tex
+Ch\uhorn \ohorn ng 14.
+
+Package microtype Warning: I cannot find a protrusion list for font
+(microtype)                `T5/fvm/m/it/10.95'. Switching off
+(microtype)                protrusion for this font on input line 23.
+
+
+
+[165
+
+
+
+
+]
+
+[166]
+
+[167]
+
+[168]
+<gfx/m4l2_notes_fig1_google_trends_aapl_tsla_nvda.png, id=2607, 950.3505pt x 39
+5.3169pt>
+File: gfx/m4l2_notes_fig1_google_trends_aapl_tsla_nvda.png Graphic file (type p
+ng)
+<use gfx/m4l2_notes_fig1_google_trends_aapl_tsla_nvda.png>
+Package pdftex.def Info: gfx/m4l2_notes_fig1_google_trends_aapl_tsla_nvda.png  
+used on input line 161.
+(pdftex.def)             Requested size: 441.00935pt x 183.44646pt.
+
+
+[169 <./gfx/m4l2_notes_fig1_google_trends_aapl_tsla_nvda.png>]
+
+[170]
+
+[171]
+
+[172]
+
+[173]
+
+[174]
+
+[175]
+
+[176]
+
+[177]
+
+[178]
+
+[179]
+
+[180]
+
+[181]
+
+[182]
+
+[183]
+
+[184]
+
+[185]
+
+[186]
+
+[187]
+
+[188]
+
+[189])
+
+[190]
+\openout2 = `Chapters/M4_L2_DocThem1.aux'.
+
+ (./Chapters/M4_L2_DocThem1.tex
+Ch\uhorn \ohorn ng 15.
+
+
+[191
+
+
+
+
+]
+
+
+Overfull \hbox (52.49396pt too wide) has occurred while \output is active
+[]|[]|  
+ []
+
+[192]
+<gfx/m4l2_preis_fig1_search_volume_stock_moves.png, id=2972, 1092.33093pt x 338
+.01282pt>
+File: gfx/m4l2_preis_fig1_search_volume_stock_moves.png Graphic file (type png)
+
+<use gfx/m4l2_preis_fig1_search_volume_stock_moves.png>
+Package pdftex.def Info: gfx/m4l2_preis_fig1_search_volume_stock_moves.png  use
+d on input line 46.
+(pdftex.def)             Requested size: 352.81552pt x 109.1772pt.
+
+
+[193 <./gfx/m4l2_preis_fig1_search_volume_stock_moves.png (PNG copy)>]
+<gfx/m4l2_preis_fig2_cumulative_performance_strategy.png, id=2978, 1092.33093pt
+ x 345.54094pt>
+File: gfx/m4l2_preis_fig2_cumulative_performance_strategy.png Graphic file (typ
+e png)
+<use gfx/m4l2_preis_fig2_cumulative_performance_strategy.png>
+Package pdftex.def Info: gfx/m4l2_preis_fig2_cumulative_performance_strategy.pn
+g  used on input line 68.
+(pdftex.def)             Requested size: 352.81552pt x 111.60876pt.
+
+
+
+Overfull \hbox (52.49396pt too wide) has occurred while \output is active
+[]|[]|  
+ []
+
+[194 <./gfx/m4l2_preis_fig2_cumulative_performance_strategy.png (PNG copy)>]
+<gfx/m4l2_preis_fig3_performances_search_volume_strategies.png, id=2984, 1092.3
+3093pt x 1445.4pt>
+File: gfx/m4l2_preis_fig3_performances_search_volume_strategies.png Graphic fil
+e (type png)
+<use gfx/m4l2_preis_fig3_performances_search_volume_strategies.png>
+Package pdftex.def Info: gfx/m4l2_preis_fig3_performances_search_volume_strateg
+ies.png  used on input line 80.
+(pdftex.def)             Requested size: 352.81552pt x 466.86023pt.
+
+
+Package microtype Warning: I cannot find a protrusion list for font
+(microtype)                `T5/ppl/m/n/7.6'. Switching off
+(microtype)                protrusion for this font on input line 81.
+
+
+
+[195]
+Overfull \vbox (41.16432pt too high) has occurred while \output is active []
+
+
+
+
+Overfull \hbox (52.49396pt too wide) has occurred while \output is active
+[]|[]|  
+ []
+
+[196 <./gfx/m4l2_preis_fig3_performances_search_volume_strategies.png (PNG copy
+)>]
+<gfx/m4l2_preis_fig4_long_short_positions_analysis.png, id=2994, 1092.33093pt x
+ 1443.89438pt>
+File: gfx/m4l2_preis_fig4_long_short_positions_analysis.png Graphic file (type 
+png)
+<use gfx/m4l2_preis_fig4_long_short_positions_analysis.png>
+Package pdftex.def Info: gfx/m4l2_preis_fig4_long_short_positions_analysis.png 
+ used on input line 94.
+(pdftex.def)             Requested size: 352.81552pt x 466.37392pt.
+
+
+[197]
+
+
+Overfull \hbox (52.49396pt too wide) has occurred while \output is active
+[]|[]|  
+ []
+
+[198 <./gfx/m4l2_preis_fig4_long_short_positions_analysis.png (PNG copy)>]
+
+[199])
+
+
+Overfull \hbox (52.49396pt too wide) has occurred while \output is active
+[]|[]|  
+ []
+
+[200]
+\openout2 = `Chapters/M4_L2_DocThem2.aux'.
+
+ (./Chapters/M4_L2_DocThem2.tex
+Ch\uhorn \ohorn ng 16.
+
+
+[201
+
+
+
+
+]
+
+
+Overfull \hbox (15.17111pt too wide) has occurred while \output is active
+[]|[]|  
+ []
+
+[202]
+
+[203]
+Overfull \hbox (90.88954pt too wide) in paragraph at lines 61--73
+ [][] 
+ []
+
+
+
+
+Overfull \hbox (15.17111pt too wide) has occurred while \output is active
+[]|[]|  
+ []
+
+[204]
+
+[205]
+
+
+Overfull \hbox (15.17111pt too wide) has occurred while \output is active
+[]|[]|  
+ []
+
+[206]
+<gfx/m4l2_challetbel_fig1_tstat_vs_movwindow.png, id=3048, 1080.28593pt x 505.1
+3719pt>
+File: gfx/m4l2_challetbel_fig1_tstat_vs_movwindow.png Graphic file (type png)
+<use gfx/m4l2_challetbel_fig1_tstat_vs_movwindow.png>
+Package pdftex.def Info: gfx/m4l2_challetbel_fig1_tstat_vs_movwindow.png  used 
+on input line 121.
+(pdftex.def)             Requested size: 352.81552pt x 164.96924pt.
+<gfx/m4l2_challetbel_fig2_tstat_debt_moonpatrol.png, id=3049, 1080.28593pt x 47
+3.51906pt>
+File: gfx/m4l2_challetbel_fig2_tstat_debt_moonpatrol.png Graphic file (type png
+)
+<use gfx/m4l2_challetbel_fig2_tstat_debt_moonpatrol.png>
+Package pdftex.def Info: gfx/m4l2_challetbel_fig2_tstat_debt_moonpatrol.png  us
+ed on input line 127.
+(pdftex.def)             Requested size: 352.81552pt x 154.6433pt.
+
+
+Package microtype Warning: I cannot find a protrusion list for font
+(microtype)                `T5/fvm/m/n/10'. Switching off
+(microtype)                protrusion for this font on input line 128.
+
+
+
+[207 <./gfx/m4l2_challetbel_fig1_tstat_vs_movwindow.png (PNG copy)> <./gfx/m4l2
+_challetbel_fig2_tstat_debt_moonpatrol.png (PNG copy)>]
+<gfx/m4l2_challetbel_fig3_cumperf_debt_tc.png, id=3056, 1069.74657pt x 505.1371
+9pt>
+File: gfx/m4l2_challetbel_fig3_cumperf_debt_tc.png Graphic file (type png)
+<use gfx/m4l2_challetbel_fig3_cumperf_debt_tc.png>
+Package pdftex.def Info: gfx/m4l2_challetbel_fig3_cumperf_debt_tc.png  used on 
+input line 137.
+(pdftex.def)             Requested size: 264.61333pt x 124.95053pt.
+<gfx/m4l2_challetbel_fig4_cumperf_keyword_sets.png, id=3057, 1080.28593pt x 514
+.17094pt>
+File: gfx/m4l2_challetbel_fig4_cumperf_keyword_sets.png Graphic file (type png)
+
+<use gfx/m4l2_challetbel_fig4_cumperf_keyword_sets.png>
+Package pdftex.def Info: gfx/m4l2_challetbel_fig4_cumperf_keyword_sets.png  use
+d on input line 143.
+(pdftex.def)             Requested size: 352.81552pt x 167.91951pt.
+
+
+
+Overfull \hbox (15.17111pt too wide) has occurred while \output is active
+[]|[]|  
+ []
+
+[208 <./gfx/m4l2_challetbel_fig3_cumperf_debt_tc.png (PNG copy)> <./gfx/m4l2_ch
+alletbel_fig4_cumperf_keyword_sets.png (PNG copy)>]
+Underfull \hbox (badness 2564) in paragraph at lines 172--174
+\T5/ppl/m/n/10 (+20) Anorexia nervosa, Antisocial personality disorder, Arthrit
+is, Asperger syndrome, Asthma,
+ []
+
+
+Underfull \hbox (badness 1072) in paragraph at lines 172--174
+\T5/ppl/m/n/10 (+20) Depression, Diabetes mellitus, Diabetes mellitus type 1, D
+iaper rash, Diarrhea, Disabilities,
+ []
+
+
+Underfull \hbox (badness 3838) in paragraph at lines 172--174
+\T5/ppl/m/n/10 (+20) disorder, Hyperglycemia, Hyperkalemia, Hypertension, Hyper
+thyroidism, Hypothyroidism,
+ []
+
+
+
+[209]
+
+
+Overfull \hbox (15.17111pt too wide) has occurred while \output is active
+[]|[]|  
+ []
+
+[210])
+
+[211]
+\openout2 = `Chapters/M4_L2_DocThem3.aux'.
+
+ (./Chapters/M4_L2_DocThem3.tex
+Ch\uhorn \ohorn ng 17.
+
+
+[212
+
+
+
+
+]
+
+[213]
+<gfx/m4l2_aslanidis_fig1_gtc_gtu.png, id=3092, 1391.1975pt x 637.38126pt>
+File: gfx/m4l2_aslanidis_fig1_gtc_gtu.png Graphic file (type png)
+<use gfx/m4l2_aslanidis_fig1_gtc_gtu.png>
+Package pdftex.def Info: gfx/m4l2_aslanidis_fig1_gtc_gtu.png  used on input lin
+e 48.
+(pdftex.def)             Requested size: 396.91325pt x 181.84033pt.
+
+
+
+Overfull \hbox (159.33792pt too wide) has occurred while \output is active
+[]|[]|  
+ []
+
+[214]
+
+[215
+pdfTeX warning (ext4): destination with the same identifier (name{equation.17.1
+}) has been already used, duplicate ignored
+<argument> ...shipout:D \box_use:N \l_shipout_box 
+                                                  \__shipout_drop_firstpage_...
+l.76 \end{equation}
+                   
+pdfTeX warning (ext4): destination with the same identifier (name{equation.17.1
+}) has been already used, duplicate ignored
+<argument> ...shipout:D \box_use:N \l_shipout_box 
+                                                  \__shipout_drop_firstpage_...
+l.76 \end{equation}
+                    <./gfx/m4l2_aslanidis_fig1_gtc_gtu.png>]
+<gfx/m4l2_aslanidis_table1_descriptive_stats.png, id=3106, 691.08188pt x 257.46
+187pt>
+File: gfx/m4l2_aslanidis_table1_descriptive_stats.png Graphic file (type png)
+<use gfx/m4l2_aslanidis_table1_descriptive_stats.png>
+Package pdftex.def Info: gfx/m4l2_aslanidis_table1_descriptive_stats.png  used 
+on input line 98.
+(pdftex.def)             Requested size: 352.81552pt x 131.4413pt.
+
+
+
+Overfull \hbox (159.33792pt too wide) has occurred while \output is active
+[]|[]|  
+ []
+
+[216 <./gfx/m4l2_aslanidis_table1_descriptive_stats.png (PNG copy)>]
+<gfx/m4l2_aslanidis_table2_te_gtu_bitcoin.png, id=3113, 600.74437pt x 167.87718
+pt>
+File: gfx/m4l2_aslanidis_table2_te_gtu_bitcoin.png Graphic file (type png)
+<use gfx/m4l2_aslanidis_table2_te_gtu_bitcoin.png>
+Package pdftex.def Info: gfx/m4l2_aslanidis_table2_te_gtu_bitcoin.png  used on 
+input line 106.
+(pdftex.def)             Requested size: 352.81552pt x 98.59583pt.
+<gfx/m4l2_aslanidis_fig2_ete_gtu_bitcoin.png, id=3114, 1414.28375pt x 463.7325p
+t>
+File: gfx/m4l2_aslanidis_fig2_ete_gtu_bitcoin.png Graphic file (type png)
+<use gfx/m4l2_aslanidis_fig2_ete_gtu_bitcoin.png>
+Package pdftex.def Info: gfx/m4l2_aslanidis_fig2_ete_gtu_bitcoin.png  used on i
+nput line 112.
+(pdftex.def)             Requested size: 396.91325pt x 130.1414pt.
+<gfx/m4l2_aslanidis_table3_te_gtc_bitcoin.png, id=3115, 590.205pt x 167.87718pt
+>
+File: gfx/m4l2_aslanidis_table3_te_gtc_bitcoin.png Graphic file (type png)
+<use gfx/m4l2_aslanidis_table3_te_gtc_bitcoin.png>
+Package pdftex.def Info: gfx/m4l2_aslanidis_table3_te_gtc_bitcoin.png  used on 
+input line 122.
+(pdftex.def)             Requested size: 352.81552pt x 100.35565pt.
+
+
+[217 <./gfx/m4l2_aslanidis_table2_te_gtu_bitcoin.png (PNG copy)> <./gfx/m4l2_as
+lanidis_fig2_ete_gtu_bitcoin.png> <./gfx/m4l2_aslanidis_table3_te_gtc_bitcoin.p
+ng (PNG copy)>]
+<gfx/m4l2_aslanidis_fig3_ete_gtc_crypto.png, id=3123, 1414.28375pt x 451.6875pt
+>
+File: gfx/m4l2_aslanidis_fig3_ete_gtc_crypto.png Graphic file (type png)
+<use gfx/m4l2_aslanidis_fig3_ete_gtc_crypto.png>
+Package pdftex.def Info: gfx/m4l2_aslanidis_fig3_ete_gtc_crypto.png  used on in
+put line 130.
+(pdftex.def)             Requested size: 396.91325pt x 126.76111pt.
+<gfx/m4l2_aslanidis_fig4_renyi_transfer_entropy.png, id=3124, 1435.3625pt x 107
+6.02pt>
+File: gfx/m4l2_aslanidis_fig4_renyi_transfer_entropy.png Graphic file (type png
+)
+<use gfx/m4l2_aslanidis_fig4_renyi_transfer_entropy.png>
+Package pdftex.def Info: gfx/m4l2_aslanidis_fig4_renyi_transfer_entropy.png  us
+ed on input line 142.
+(pdftex.def)             Requested size: 418.96548pt x 314.07373pt.
+
+
+
+Overfull \hbox (159.33792pt too wide) has occurred while \output is active
+[]|[]|  
+ []
+
+[218 <./gfx/m4l2_aslanidis_fig3_ete_gtc_crypto.png>]
+
+[219 <./gfx/m4l2_aslanidis_fig4_renyi_transfer_entropy.png>]
+
+
+Overfull \hbox (159.33792pt too wide) has occurred while \output is active
+[]|[]|  
+ []
+
+[220])
+
+[221]
+\openout2 = `Chapters/M4_L3_LessonNotes.aux'.
+
+ (./Chapters/M4_L3_LessonNotes.tex
+Ch\uhorn \ohorn ng 18.
+
+
+[222
+
+
+
+
+]
+
+[223]
+
+[224]
+
+[225]
+
+[226]
+
+[227]
+
+[228]
+
+[229]
+
+[230]
+
+[231]
+
+[232]
+Overfull \hbox (30.02773pt too wide) in paragraph at lines 398--399
+[]\T5/ppl/m/n/10.95 (-20) Tr÷îc h¸t, ta l¤i chuyºn c¡c gi¡ trà ng y sang ^^_èi 
+t÷ñng DateTime. Dáng \T5/fvm/m/it/10.95 stocktwits_df['DateTime']
+ []
+
+
+
+[233]
+
+[234]
+
+[235]
+<gfx/m4l3_notes_fig1_stocktwits_sentiment_counts.png, id=3527, 727.71875pt x 36
+1.35pt>
+File: gfx/m4l3_notes_fig1_stocktwits_sentiment_counts.png Graphic file (type pn
+g)
+<use gfx/m4l3_notes_fig1_stocktwits_sentiment_counts.png>
+Package pdftex.def Info: gfx/m4l3_notes_fig1_stocktwits_sentiment_counts.png  u
+sed on input line 545.
+(pdftex.def)             Requested size: 441.03183pt x 218.99512pt.
+
+
+[236]
+
+[237 <./gfx/m4l3_notes_fig1_stocktwits_sentiment_counts.png>]
+
+[238]
+<gfx/m4l3_notes_fig2_twitter_vs_stocktwits_daily_counts.png, id=3604, 859.2903p
+t x 426.393pt>
+File: gfx/m4l3_notes_fig2_twitter_vs_stocktwits_daily_counts.png Graphic file (
+type png)
+<use gfx/m4l3_notes_fig2_twitter_vs_stocktwits_daily_counts.png>
+Package pdftex.def Info: gfx/m4l3_notes_fig2_twitter_vs_stocktwits_daily_counts
+.png  used on input line 615.
+(pdftex.def)             Requested size: 441.01193pt x 218.83687pt.
+
+
+[239 <./gfx/m4l3_notes_fig2_twitter_vs_stocktwits_daily_counts.png>])
+
+[240]
+\openout2 = `Chapters/M4_L3_DocThem1.aux'.
+
+ (./Chapters/M4_L3_DocThem1.tex
+Ch\uhorn \ohorn ng 19.
+
+
+[241
+
+
+
+
+]
+
+
+Overfull \hbox (93.29944pt too wide) has occurred while \output is active
+[]|[]|  
+ []
+
+[242]
+
+[243]
+
+
+Overfull \hbox (93.29944pt too wide) has occurred while \output is active
+[]|[]|  
+ []
+
+[244]
+
+[245]
+<gfx/m4l3_taborda_fig1_samais_architecture.png, id=3644, 2140.99875pt x 757.831
+25pt>
+File: gfx/m4l3_taborda_fig1_samais_architecture.png Graphic file (type png)
+<use gfx/m4l3_taborda_fig1_samais_architecture.png>
+Package pdftex.def Info: gfx/m4l3_taborda_fig1_samais_architecture.png  used on
+ input line 87.
+(pdftex.def)             Requested size: 374.86775pt x 132.68027pt.
+<gfx/m4l3_taborda_table1_tweets_per_sector.png, id=3645, 1027.58907pt x 265.742
+81pt>
+File: gfx/m4l3_taborda_table1_tweets_per_sector.png Graphic file (type png)
+<use gfx/m4l3_taborda_table1_tweets_per_sector.png>
+Package pdftex.def Info: gfx/m4l3_taborda_table1_tweets_per_sector.png  used on
+ input line 95.
+(pdftex.def)             Requested size: 396.91325pt x 102.64581pt.
+
+
+
+Overfull \hbox (93.29944pt too wide) has occurred while \output is active
+[]|[]|  
+ []
+
+[246 <./gfx/m4l3_taborda_fig1_samais_architecture.png>]
+<gfx/m4l3_taborda_table2_annotated_data_distribution.png, id=3651, 1027.58907pt
+ x 265.74281pt>
+File: gfx/m4l3_taborda_table2_annotated_data_distribution.png Graphic file (typ
+e png)
+<use gfx/m4l3_taborda_table2_annotated_data_distribution.png>
+Package pdftex.def Info: gfx/m4l3_taborda_table2_annotated_data_distribution.pn
+g  used on input line 101.
+(pdftex.def)             Requested size: 396.91325pt x 102.64581pt.
+
+
+[247 <./gfx/m4l3_taborda_table1_tweets_per_sector.png (PNG copy)> <./gfx/m4l3_t
+aborda_table2_annotated_data_distribution.png (PNG copy)>]
+<gfx/m4l3_taborda_table3_lmcd20_words.png, id=3658, 1028.34187pt x 579.66562pt>
+
+File: gfx/m4l3_taborda_table3_lmcd20_words.png Graphic file (type png)
+<use gfx/m4l3_taborda_table3_lmcd20_words.png>
+Package pdftex.def Info: gfx/m4l3_taborda_table3_lmcd20_words.png  used on inpu
+t line 125.
+(pdftex.def)             Requested size: 374.86775pt x 211.30641pt.
+
+
+
+Overfull \hbox (93.29944pt too wide) has occurred while \output is active
+[]|[]|  
+ []
+
+[248]
+
+[249 <./gfx/m4l3_taborda_table3_lmcd20_words.png (PNG copy)>]
+<gfx/m4l3_taborda_fig2_comparing_lexicons_war.png, id=3668, 1104.37593pt x 710.
+655pt>
+File: gfx/m4l3_taborda_fig2_comparing_lexicons_war.png Graphic file (type png)
+<use gfx/m4l3_taborda_fig2_comparing_lexicons_war.png>
+Package pdftex.def Info: gfx/m4l3_taborda_fig2_comparing_lexicons_war.png  used
+ on input line 147.
+(pdftex.def)             Requested size: 374.86775pt x 241.22913pt.
+
+
+
+Overfull \hbox (93.29944pt too wide) has occurred while \output is active
+[]|[]|  
+ []
+
+[250 <./gfx/m4l3_taborda_fig2_comparing_lexicons_war.png (PNG copy)>]
+
+
+Overfull \hbox (1.82552pt too wide) has occurred while \output is active
+ []|[]|
+ []
+
+[251]
+<gfx/m4l3_taborda_fig3_comparing_generalist_sa.png, id=3679, 1104.37593pt x 832
+.61063pt>
+File: gfx/m4l3_taborda_fig3_comparing_generalist_sa.png Graphic file (type png)
+
+<use gfx/m4l3_taborda_fig3_comparing_generalist_sa.png>
+Package pdftex.def Info: gfx/m4l3_taborda_fig3_comparing_generalist_sa.png  use
+d on input line 198.
+(pdftex.def)             Requested size: 330.76329pt x 249.36586pt.
+
+
+
+Overfull \hbox (93.29944pt too wide) has occurred while \output is active
+[]|[]|  
+ []
+
+[252 <./gfx/m4l3_taborda_fig3_comparing_generalist_sa.png (PNG copy)>]
+<gfx/m4l3_taborda_table4_textblob_confusion.png, id=3685, 1028.34187pt x 216.81
+pt>
+File: gfx/m4l3_taborda_table4_textblob_confusion.png Graphic file (type png)
+<use gfx/m4l3_taborda_table4_textblob_confusion.png>
+Package pdftex.def Info: gfx/m4l3_taborda_table4_textblob_confusion.png  used o
+n input line 232.
+(pdftex.def)             Requested size: 374.86775pt x 79.03409pt.
+<gfx/m4l3_taborda_table5_vader_confusion.png, id=3686, 1028.34187pt x 216.81pt>
+
+File: gfx/m4l3_taborda_table5_vader_confusion.png Graphic file (type png)
+<use gfx/m4l3_taborda_table5_vader_confusion.png>
+Package pdftex.def Info: gfx/m4l3_taborda_table5_vader_confusion.png  used on i
+nput line 238.
+(pdftex.def)             Requested size: 374.86775pt x 79.03409pt.
+<gfx/m4l3_taborda_table6_bertweet_confusion.png, id=3687, 1028.34187pt x 217.56
+28pt>
+File: gfx/m4l3_taborda_table6_bertweet_confusion.png Graphic file (type png)
+<use gfx/m4l3_taborda_table6_bertweet_confusion.png>
+Package pdftex.def Info: gfx/m4l3_taborda_table6_bertweet_confusion.png  used o
+n input line 244.
+(pdftex.def)             Requested size: 374.86775pt x 79.3085pt.
+
+
+
+Overfull \hbox (1.82552pt too wide) has occurred while \output is active
+ []|[]|
+ []
+
+[253 <./gfx/m4l3_taborda_table4_textblob_confusion.png (PNG copy)> <./gfx/m4l3_
+taborda_table5_vader_confusion.png (PNG copy)>]
+<gfx/m4l3_taborda_fig4_lmcd20_vader_lambda.png, id=3694, 1304.62407pt x 602.25p
+t>
+File: gfx/m4l3_taborda_fig4_lmcd20_vader_lambda.png Graphic file (type png)
+<use gfx/m4l3_taborda_fig4_lmcd20_vader_lambda.png>
+Package pdftex.def Info: gfx/m4l3_taborda_fig4_lmcd20_vader_lambda.png  used on
+ input line 254.
+(pdftex.def)             Requested size: 330.76329pt x 152.68492pt.
+<gfx/m4l3_taborda_table7_metrics_vader_lmcd20.png, id=3695, 1027.58907pt x 183.
+68625pt>
+File: gfx/m4l3_taborda_table7_metrics_vader_lmcd20.png Graphic file (type png)
+<use gfx/m4l3_taborda_table7_metrics_vader_lmcd20.png>
+Package pdftex.def Info: gfx/m4l3_taborda_table7_metrics_vader_lmcd20.png  used
+ on input line 262.
+(pdftex.def)             Requested size: 264.61333pt x 47.30043pt.
+<gfx/m4l3_taborda_table8_correct_prediction_examples.png, id=3696, 1027.58907pt
+ x 161.10187pt>
+File: gfx/m4l3_taborda_table8_correct_prediction_examples.png Graphic file (typ
+e png)
+<use gfx/m4l3_taborda_table8_correct_prediction_examples.png>
+Package pdftex.def Info: gfx/m4l3_taborda_table8_correct_prediction_examples.pn
+g  used on input line 270.
+(pdftex.def)             Requested size: 396.91325pt x 62.2272pt.
+
+
+
+Overfull \hbox (93.29944pt too wide) has occurred while \output is active
+[]|[]|  
+ []
+
+[254 <./gfx/m4l3_taborda_table6_bertweet_confusion.png (PNG copy)> <./gfx/m4l3_
+taborda_fig4_lmcd20_vader_lambda.png (PNG copy)> <./gfx/m4l3_taborda_table7_met
+rics_vader_lmcd20.png (PNG copy)>]
+
+[255 <./gfx/m4l3_taborda_table8_correct_prediction_examples.png (PNG copy)>])
+
+
+Overfull \hbox (93.29944pt too wide) has occurred while \output is active
+[]|[]|  
+ []
+
+[256]
+\openout2 = `Chapters/M4_L3_DocThem2.aux'.
+
+ (./Chapters/M4_L3_DocThem2.tex
+Ch\uhorn \ohorn ng 20.
+
+
+[257
+
+
+
+
+]
+<gfx/m4l3_liu_fig1_stocktwits_ui.png, id=3727, 1104.37593pt x 1279.02844pt>
+File: gfx/m4l3_liu_fig1_stocktwits_ui.png Graphic file (type png)
+<use gfx/m4l3_liu_fig1_stocktwits_ui.png>
+Package pdftex.def Info: gfx/m4l3_liu_fig1_stocktwits_ui.png  used on input lin
+e 31.
+(pdftex.def)             Requested size: 264.61333pt x 306.46567pt.
+
+
+
+Overfull \hbox (149.58066pt too wide) has occurred while \output is active
+[]|[]|  
+ []
+
+[258 <./gfx/m4l3_liu_fig1_stocktwits_ui.png (PNG copy)>]
+
+[259]
+
+
+Overfull \hbox (149.58066pt too wide) has occurred while \output is active
+[]|[]|  
+ []
+
+[260]
+
+[261]
+<gfx/m4l3_liu_fig2_pretraining_overview.png, id=3751, 1888.05376pt x 1673.50218
+pt>
+File: gfx/m4l3_liu_fig2_pretraining_overview.png Graphic file (type png)
+<use gfx/m4l3_liu_fig2_pretraining_overview.png>
+Package pdftex.def Info: gfx/m4l3_liu_fig2_pretraining_overview.png  used on in
+put line 83.
+(pdftex.def)             Requested size: 374.86775pt x 332.26863pt.
+
+
+
+Overfull \hbox (149.58066pt too wide) has occurred while \output is active
+[]|[]|  
+ []
+
+[262]
+
+[263 <./gfx/m4l3_liu_fig2_pretraining_overview.png (PNG copy)>]
+<gfx/m4l3_liu_fig3_tweets_stocktwits.png, id=3762, 1693.82813pt x 1820.30063pt>
+
+File: gfx/m4l3_liu_fig3_tweets_stocktwits.png Graphic file (type png)
+<use gfx/m4l3_liu_fig3_tweets_stocktwits.png>
+Package pdftex.def Info: gfx/m4l3_liu_fig3_tweets_stocktwits.png  used on input
+ line 101.
+(pdftex.def)             Requested size: 264.61333pt x 284.36572pt.
+<gfx/m4l3_liu_table1_historical_stock_data.png, id=3765, 1122.44344pt x 274.776
+57pt>
+File: gfx/m4l3_liu_table1_historical_stock_data.png Graphic file (type png)
+<use gfx/m4l3_liu_table1_historical_stock_data.png>
+Package pdftex.def Info: gfx/m4l3_liu_table1_historical_stock_data.png  used on
+ input line 111.
+(pdftex.def)             Requested size: 418.96548pt x 102.56297pt.
+
+
+
+Overfull \hbox (149.58066pt too wide) has occurred while \output is active
+[]|[]|  
+ []
+
+[264 <./gfx/m4l3_liu_fig3_tweets_stocktwits.png (PNG copy)>]
+<gfx/m4l3_liu_table2_realtime_data_samples.png, id=3772, 808.52063pt x 252.1921
+8pt>
+File: gfx/m4l3_liu_table2_realtime_data_samples.png Graphic file (type png)
+<use gfx/m4l3_liu_table2_realtime_data_samples.png>
+Package pdftex.def Info: gfx/m4l3_liu_table2_realtime_data_samples.png  used on
+ input line 119.
+(pdftex.def)             Requested size: 374.86775pt x 116.9295pt.
+
+
+[265 <./gfx/m4l3_liu_table1_historical_stock_data.png (PNG copy)> <./gfx/m4l3_l
+iu_table2_realtime_data_samples.png (PNG copy)>]
+<gfx/m4l3_liu_fig4_prediction_architecture.png, id=3785, 1304.62407pt x 1577.14
+218pt>
+File: gfx/m4l3_liu_fig4_prediction_architecture.png Graphic file (type png)
+<use gfx/m4l3_liu_fig4_prediction_architecture.png>
+Package pdftex.def Info: gfx/m4l3_liu_fig4_prediction_architecture.png  used on
+ input line 140.
+(pdftex.def)             Requested size: 242.5611pt x 293.21065pt.
+
+
+
+Overfull \hbox (149.58066pt too wide) has occurred while \output is active
+[]|[]|  
+ []
+
+[266 <./gfx/m4l3_liu_fig4_prediction_architecture.png (PNG copy)>]
+<gfx/m4l3_liu_fig5_svm_hyperplane.png, id=3791, 793.46437pt x 783.67781pt>
+File: gfx/m4l3_liu_fig5_svm_hyperplane.png Graphic file (type png)
+<use gfx/m4l3_liu_fig5_svm_hyperplane.png>
+Package pdftex.def Info: gfx/m4l3_liu_fig5_svm_hyperplane.png  used on input li
+ne 168.
+(pdftex.def)             Requested size: 264.61333pt x 261.35284pt.
+
+
+[267 <./gfx/m4l3_liu_fig5_svm_hyperplane.png (PNG copy)>]
+<gfx/m4l3_liu_table3_kernel_functions.png, id=3797, 805.50937pt x 167.87718pt>
+File: gfx/m4l3_liu_table3_kernel_functions.png Graphic file (type png)
+<use gfx/m4l3_liu_table3_kernel_functions.png>
+Package pdftex.def Info: gfx/m4l3_liu_table3_kernel_functions.png  used on inpu
+t line 243.
+(pdftex.def)             Requested size: 396.91325pt x 82.72162pt.
+
+
+
+Overfull \hbox (149.58066pt too wide) has occurred while \output is active
+[]|[]|  
+ []
+
+[268]
+<gfx/m4l3_liu_fig6_bagging_procedure.png, id=3802, 1847.40187pt x 727.21687pt>
+File: gfx/m4l3_liu_fig6_bagging_procedure.png Graphic file (type png)
+<use gfx/m4l3_liu_fig6_bagging_procedure.png>
+Package pdftex.def Info: gfx/m4l3_liu_fig6_bagging_procedure.png  used on input
+ line 275.
+(pdftex.def)             Requested size: 374.86775pt x 147.56021pt.
+
+
+[269 <./gfx/m4l3_liu_table3_kernel_functions.png (PNG copy)>]
+<gfx/m4l3_liu_fig7_top10_symbols.png, id=3810, 2047.65pt x 1407.75937pt>
+File: gfx/m4l3_liu_fig7_top10_symbols.png Graphic file (type png)
+<use gfx/m4l3_liu_fig7_top10_symbols.png>
+Package pdftex.def Info: gfx/m4l3_liu_fig7_top10_symbols.png  used on input lin
+e 293.
+(pdftex.def)             Requested size: 374.86775pt x 257.70335pt.
+
+
+
+Overfull \hbox (149.58066pt too wide) has occurred while \output is active
+[]|[]|  
+ []
+
+[270 <./gfx/m4l3_liu_fig6_bagging_procedure.png (PNG copy)>]
+
+[271 <./gfx/m4l3_liu_fig7_top10_symbols.png (PNG copy)>]
+<gfx/m4l3_liu_table4_extracted_features.png, id=3821, 811.53188pt x 571.38469pt
+>
+File: gfx/m4l3_liu_table4_extracted_features.png Graphic file (type png)
+<use gfx/m4l3_liu_table4_extracted_features.png>
+Package pdftex.def Info: gfx/m4l3_liu_table4_extracted_features.png  used on in
+put line 320.
+(pdftex.def)             Requested size: 418.96548pt x 294.9944pt.
+<gfx/m4l3_liu_table5_svc_settings.png, id=3822, 807.7678pt x 167.12437pt>
+File: gfx/m4l3_liu_table5_svc_settings.png Graphic file (type png)
+<use gfx/m4l3_liu_table5_svc_settings.png>
+Package pdftex.def Info: gfx/m4l3_liu_table5_svc_settings.png  used on input li
+ne 328.
+(pdftex.def)             Requested size: 352.81552pt x 72.99686pt.
+
+
+
+Overfull \hbox (149.58066pt too wide) has occurred while \output is active
+[]|[]|  
+ []
+
+[272 <./gfx/m4l3_liu_table4_extracted_features.png (PNG copy)>]
+<gfx/m4l3_liu_table6_bagging_settings.png, id=3828, 807.7678pt x 167.12437pt>
+File: gfx/m4l3_liu_table6_bagging_settings.png Graphic file (type png)
+<use gfx/m4l3_liu_table6_bagging_settings.png>
+Package pdftex.def Info: gfx/m4l3_liu_table6_bagging_settings.png  used on inpu
+t line 334.
+(pdftex.def)             Requested size: 352.81552pt x 72.99686pt.
+
+
+[273 <./gfx/m4l3_liu_table5_svc_settings.png (PNG copy)> <./gfx/m4l3_liu_table6
+_bagging_settings.png (PNG copy)>]
+<gfx/m4l3_liu_fig8_rolling_window_procedure.png, id=3838, 1203.7472pt x 861.217
+5pt>
+File: gfx/m4l3_liu_fig8_rolling_window_procedure.png Graphic file (type png)
+<use gfx/m4l3_liu_fig8_rolling_window_procedure.png>
+Package pdftex.def Info: gfx/m4l3_liu_fig8_rolling_window_procedure.png  used o
+n input line 383.
+(pdftex.def)             Requested size: 264.61333pt x 189.31073pt.
+
+
+
+Overfull \hbox (149.58066pt too wide) has occurred while \output is active
+[]|[]|  
+ []
+
+[274]
+<gfx/m4l3_liu_table7_forecasting_results.png, id=3844, 811.53188pt x 279.29344p
+t>
+File: gfx/m4l3_liu_table7_forecasting_results.png Graphic file (type png)
+<use gfx/m4l3_liu_table7_forecasting_results.png>
+Package pdftex.def Info: gfx/m4l3_liu_table7_forecasting_results.png  used on i
+nput line 393.
+(pdftex.def)             Requested size: 418.96548pt x 144.19357pt.
+
+
+[275 <./gfx/m4l3_liu_fig8_rolling_window_procedure.png (PNG copy)> <./gfx/m4l3_
+liu_table7_forecasting_results.png (PNG copy)>]
+<gfx/m4l3_liu_fig9_f1score_histogram.png, id=3852, 1276.77pt x 2080.02094pt>
+File: gfx/m4l3_liu_fig9_f1score_histogram.png Graphic file (type png)
+<use gfx/m4l3_liu_fig9_f1score_histogram.png>
+Package pdftex.def Info: gfx/m4l3_liu_fig9_f1score_histogram.png  used on input
+ line 413.
+(pdftex.def)             Requested size: 374.86775pt x 610.71266pt.
+
+
+
+Overfull \hbox (149.58066pt too wide) has occurred while \output is active
+[]|[]|  
+ []
+
+[276]
+
+[277 <./gfx/m4l3_liu_fig9_f1score_histogram.png (PNG copy)>]
+
+
+Overfull \hbox (149.58066pt too wide) has occurred while \output is active
+[]|[]|  
+ []
+
+[278])
+
+[279]
+\openout2 = `Chapters/M4_L4_LessonNotes.aux'.
+
+ (./Chapters/M4_L4_LessonNotes.tex
+Ch\uhorn \ohorn ng 21.
+
+
+[280
+
+
+
+
+]
+
+[281]
+
+[282]
+
+[283]
+
+[284]
+
+[285]
+
+[286]
+
+[287]
+
+[288]
+
+[289]
+
+[290])
+
+[291] (./main-wqu-financial-data-module3-4-dich.aux
+(./Chapters/M3_L1_LessonNotes.aux) (./Chapters/M3_L1_DocThem1.aux)
+(./Chapters/M3_L2_LessonNotes.aux) (./Chapters/M3_L2_DocThem1.aux)
+(./Chapters/M3_L2_DocThem2.aux) (./Chapters/M3_L3_LessonNotes.aux)
+(./Chapters/M3_L3_DocThem1.aux) (./Chapters/M3_L3_DocThem2.aux)
+(./Chapters/M3_L4_LessonNotes.aux) (./Chapters/M3_L4_DocThem1.aux)
+(./Chapters/M4_L1_LessonNotes.aux) (./Chapters/M4_L1_DocThem1.aux)
+(./Chapters/M4_L1_DocThem2.aux) (./Chapters/M4_L2_LessonNotes.aux)
+(./Chapters/M4_L2_DocThem1.aux) (./Chapters/M4_L2_DocThem2.aux)
+(./Chapters/M4_L2_DocThem3.aux) (./Chapters/M4_L3_LessonNotes.aux)
+(./Chapters/M4_L3_DocThem1.aux) (./Chapters/M4_L3_DocThem2.aux)
+(./Chapters/M4_L4_LessonNotes.aux)
+
+Package mparhack Warning: Marginpars may have changed.
+(mparhack)                Rerun to get them right.
+
+)
+ ***********
+LaTeX2e <2024-11-01> patch level 2
+L3 programming layer <2020/03/25>
+ ***********
+
+
+ *File List*
+  fix-cm.sty    2020/11/24 v1.1t fixes to LaTeX
+  ts1enc.def    2001/06/05 v3.0e (jk/car/fm) Standard LaTeX file
+scrreprt.cls    2024/10/24 v3.43 KOMA-Script document class (report)
+scrkbase.sty    2024/10/24 v3.43 KOMA-Script package (KOMA-Script-dependent bas
+ics and keyval usage)
+ scrbase.sty    2024/10/24 v3.43 KOMA-Script package (KOMA-Script-independent b
+asics and keyval usage)
+scrlfile.sty    2024/10/24 v3.43 KOMA-Script package (file load hooks)
+scrlfile-hook.sty    2024/10/24 v3.43 KOMA-Script package (using LaTeX hooks)
+ scrlogo.sty    2024/10/24 v3.43 KOMA-Script package (logo)
+  keyval.sty    2022/05/29 v1.15 key=value parser (DPC)
+tocbasic.sty    2024/10/24 v3.43 KOMA-Script package (handling toc-files)
+scrsize11pt.clo    2024/10/24 v3.43 KOMA-Script font size class option (11pt)
+typearea.sty    2024/10/24 v3.43 KOMA-Script package (type area)
+classicthesis-config.tex
+inputenc.sty    2024/02/08 v1.3d Input encoding file
+ fontenc.sty    2021/04/29 v2.0v Standard LaTeX package
+   t5enc.def    2006/11/21 v1.4 Vietnamese T5 encoding
+   t5enc.dfu    2006/08/19 v1.1 UTF8 support for Vietnamese
+mathpazo.sty    2020/03/25 PSNFSS-v9.3 Palatino w/ Pazo Math (D.Puga, WaS) 
+listings.sty    2024/09/23 1.10c (Carsten Heinz)
+lstpatch.sty    2024/09/23 1.10c (Carsten Heinz)
+ lstmisc.sty    2024/09/23 1.10c (Carsten Heinz)
+listings.cfg    2024/09/23 1.10c listings configuration
+   babel.sty    2025/02/14 v25.4 The multilingual framework for pdfLaTeX, LuaLa
+TeX and XeLaTeX
+vietnamese.ldf    
+   t5enc.def    2006/11/21 v1.4 Vietnamese T5 encoding
+babel-vietnamese.tex
+csquotes.sty    2024-04-04 v5.2o context-sensitive quotations (JAW)
+etoolbox.sty    2025/02/11 v2.5l e-TeX tools for LaTeX (JAW)
+csquotes.def    2024-04-04 v5.2o csquotes generic definitions (JAW)
+csquotes.cfg    
+ amsmath.sty    2024/11/05 v2.17t AMS math features
+ amstext.sty    2021/08/26 v2.01 AMS text
+  amsgen.sty    1999/11/30 v2.0 generic functions
+  amsbsy.sty    1999/11/29 v1.2d Bold Symbols
+  amsopn.sty    2022/04/08 v2.04 operator names
+ amssymb.sty    2013/01/14 v3.01 AMS font symbols
+amsfonts.sty    2013/01/14 v3.01 Basic AMSFonts support
+graphicx.sty    2021/09/16 v1.2d Enhanced LaTeX Graphics (DPC,SPQR)
+graphics.sty    2024/08/06 v1.4g Standard LaTeX Graphics (DPC,SPQR)
+    trig.sty    2023/12/02 v1.11 sin cos tan (DPC)
+graphics.cfg    2016/06/04 v1.11 sample graphics configuration
+  pdftex.def    2024/04/13 v1.2c Graphics/color driver for pdftex
+ scrhack.sty    2024-09-04 v3.42 scrhack emulation package
+  xspace.sty    2014/10/28 v1.13 Space after command names (DPC,MH)
+tabularx.sty    2023/12/11 v2.12a `tabularx' package (DPC)
+   array.sty    2024/10/17 v2.6g Tabular extension package (FMi)
+  subfig.sty    2005/06/28 ver: 1.3 subfig package
+ caption.sty    2023/08/05 v3.6o Customizing captions (AR)
+caption3.sty    2023/07/31 v2.4d caption3 kernel (AR)
+caption-koma.sto    2023/09/08 v2.0e Adaption of the caption package to the KOM
+A-Script document classes (AR)
+    tikz.sty    2023-01-15 v3.1.10 (3.1.10)
+     pgf.sty    2023-01-15 v3.1.10 (3.1.10)
+  pgfrcs.sty    2023-01-15 v3.1.10 (3.1.10)
+pgfrcs.code.tex
+ pgfcore.sty    2023-01-15 v3.1.10 (3.1.10)
+  pgfsys.sty    2023-01-15 v3.1.10 (3.1.10)
+pgfsys.code.tex
+pgfsyssoftpath.code.tex    2023-01-15 v3.1.10 (3.1.10)
+pgfsysprotocol.code.tex    2023-01-15 v3.1.10 (3.1.10)
+  xcolor.sty    2024/09/29 v3.02 LaTeX color extensions (UK)
+   color.cfg    2016/01/02 v1.6 sample color configuration
+mathcolor.ltx
+dvipsnam.def    2016/06/17 v3.0m Driver-dependent file (DPC,SPQR)
+pgfcore.code.tex
+pgfcomp-version-0-65.sty    2023-01-15 v3.1.10 (3.1.10)
+pgfcomp-version-1-18.sty    2023-01-15 v3.1.10 (3.1.10)
+  pgffor.sty    2023-01-15 v3.1.10 (3.1.10)
+ pgfkeys.sty    
+pgfkeys.code.tex
+ pgfmath.sty    
+pgfmath.code.tex
+pgffor.code.tex
+tikz.code.tex
+classicthesis.sty    2025/02/02 v4.8 Typographic style for a classic-looking th
+esis
+  ifthen.sty    2024/03/16 v1.1e Standard LaTeX ifthen package (DPC)
+kvoptions.sty    2022-06-15 v3.15 Key value format for package options (HO)
+ ltxcmds.sty    2023-12-04 v1.26 LaTeX kernel commands for general use (HO)
+kvsetkeys.sty    2022-10-05 v1.19 Key value parser (HO)
+   ifpdf.sty    2019/10/25 v3.4 ifpdf legacy package. Use iftex instead.
+   iftex.sty    2024/12/12 v1.0g TeX engine tests
+ ifxetex.sty    2019/10/25 v0.7 ifxetex legacy package. Use iftex instead.
+ifluatex.sty    2019/10/25 v1.5 ifluatex legacy package. Use iftex instead.
+beramono.sty    2004/01/31 (WaS)
+  t1pplj.fd    2004/09/06 font definitions for T1/pplj.
+microtype.sty    2025/02/11 v3.2a Micro-typographical refinements (RS)
+microtype-pdftex.def    2025/02/11 v3.2a Definitions specific to pdftex (RS)
+microtype.cfg    2025/02/11 v3.2a microtype main configuration file (RS)
+mparhack.sty    2021-05-02 v1.5 (T. Sgouros and S. Ulrich)
+booktabs.sty    2020/01/12 v1.61803398 Publication quality tables
+textcase.sty    2025/02/16 v1.05 Text only upper/lower case changing (DPC)
+scrlayer-scrpage.sty    2024/10/24 v3.43 KOMA-Script package (end user interfac
+e for scrlayer)
+scrlayer.sty    2024/10/24 v3.43 KOMA-Script package (defining layers and page 
+styles)
+titlesec.sty    2025/01/04 v2.17 Sectioning titles
+ tocloft.sty    2017/08/31 v2.3i parameterised ToC, etc., typesetting
+ scrtime.sty    2024/10/24 v3.43 KOMA-Script package (time of LaTeX run)
+hyperref.sty    2024-11-05 v7.01l Hypertext links for LaTeX
+kvdefinekeys.sty    2019-12-19 v1.6 Define keys (HO)
+pdfescape.sty    2019/12/09 v1.15 Implements pdfTeX's escape features (HO)
+pdftexcmds.sty    2020-06-27 v0.33 Utility functions of pdfTeX for LuaTeX (HO)
+infwarerr.sty    2019/12/03 v1.5 Providing info/warning/error messages (HO)
+ hycolor.sty    2020-01-27 v1.10 Color options for hyperref/bookmark (HO)
+ nameref.sty    2023-11-26 v2.56 Cross-referencing by name of section
+refcount.sty    2019/12/15 v3.6 Data extraction from label references (HO)
+gettitlestring.sty    2019/12/15 v1.6 Cleanup title references (HO)
+stringenc.sty    2019/11/29 v1.12 Convert strings between diff. encodings (HO)
+  pd1enc.def    2024-11-05 v7.01l Hyperref: PDFDocEncoding definition (HO)
+ intcalc.sty    2019/12/15 v1.3 Expandable calculations with integers (HO)
+   puenc.def    2024-11-05 v7.01l Hyperref: PDF Unicode definition (HO)
+     url.sty    2013/09/16  ver 3.4  Verb mode for urls, etc.
+  bitset.sty    2019/12/09 v1.3 Handle bit-vector datatype (HO)
+bigintcalc.sty    2019/12/15 v1.5 Expandable calculations on big integers (HO)
+atbegshi-ltx.sty    2021/01/10 v1.0c Emulation of the original atbegshi
+package with kernel methods
+ hpdftex.def    2024-11-05 v7.01l Hyperref driver for pdfTeX
+atveryend-ltx.sty    2020/08/19 v1.0a Emulation of the original atveryend packa
+ge
+with kernel methods
+rerunfilecheck.sty    2022-07-10 v1.10 Rerun checks for auxiliary files (HO)
+uniquecounter.sty    2019/12/15 v1.4 Provide unlimited unique counter (HO)
+mdframed.sty    2013/07/01 1.9b: mdframed
+  xparse.sty    2024-08-16 L3 Experimental document command parser
+   expl3.sty    2025-01-18 L3 programming layer (loader) 
+l3backend-pdftex.def    2024-05-08 L3 backend support: PDF output (pdfTeX)
+zref-abspage.sty    2023-09-14 v2.35 Module abspage for zref (HO)
+zref-base.sty    2023-09-14 v2.35 Module base for zref (HO)
+etexcmds.sty    2019/12/15 v1.7 Avoid name clashes with e-TeX commands (HO)
+ auxhook.sty    2019-12-17 v1.6 Hooks for auxiliary files (HO)
+needspace.sty    2010/09/12 v1.3d reserve vertical space
+md-frame-0.mdf    2013/07/01\ 1.9b: md-frame-0
+tcolorbox.sty    2024/10/22 version 6.4.1 text color boxes
+verbatim.sty    2024-01-22 v1.5x LaTeX2e package for verbatim enhancements
+ environ.sty    2014/05/04 v0.3 A new way to define environments
+trimspaces.sty    2009/09/17 v1.1 Trim spaces around a token list
+multirow.sty    2024/11/12 v2.9 Span multiple rows of a table
+adjustbox.sty    2025/02/26 v1.3c Adjusting TeX boxes (trim, clip, ...)
+ xkeyval.sty    2022/06/16 v2.9 package option processing (HA)
+ xkeyval.tex    2014/12/03 v2.7a key=value parser (HA)
+ adjcalc.sty    2012/05/16 v1.1 Provides advanced setlength with multiple back-
+ends (calc, etex, pgfmath)
+trimclip.sty    2025/02/21 v1.2a Trim and clip general TeX material
+collectbox.sty    2022/10/17 v0.4c Collect macro arguments as boxes
+tc-pdftex.def    2025/02/26 v2.3 Clipping driver for pdftex
+ifoddpage.sty    2022/10/18 v1.2 Conditionals for odd/even page detection
+varwidth.sty    2009/03/30 ver 0.92;  Variable-width minipages
+   float.sty    2001/11/08 v1.3d Float enhancements (AL)
+floatbytocbasic.sty    2023-08-16 v1.0 improved float package using tocbasic
+  xpatch.sty    2020/03/25 v0.3a Extending etoolbox patching commands
+geometry.sty    2020/01/02 v5.9 Page Geometry
+  ifvtex.sty    2019/10/25 v1.7 ifvtex legacy package. Use iftex instead.
+    xurl.sty    2022/01/09 v 0.10 modify URL breaks
+  framed.sty    2011/10/22 v 0.96: framed or shaded text with page breaks
+pdfpages.sty    2025/01/30 v0.6e Insert pages of external PDF documents (AM)
+    calc.sty    2023/07/08 v4.3 Infix arithmetic (KKT,FJ)
+ eso-pic.sty    2023/05/03 v3.0c eso-pic (RN)
+pppdftex.def    2025/01/30 v0.6e Pdfpages driver for pdfTeX (AM)
+longtable.sty    2024-10-27 v4.22 Multi-page Table package (DPC)
+pdflscape.sty    2022-10-27 v0.13 Display of landscape pages in PDF
+pdflscape-nometadata.sty    2022-10-28 v0.13 Display of landscape pages in PDF 
+(HO)
+  lscape.sty    2020/05/28 v3.02 Landscape Pages (DPC)
+lscapeenhanced.sty    2024-04-16 v1.0 improved lscape package
+   t1ppl.fd    2001/06/04 font definitions for T1/ppl.
+   t5ppl.fd
+   t5cmr.fd    1999/05/25 v2.5h Standard LaTeX font definitions
+supp-pdf.mkii
+epstopdf-base.sty    2020-01-24 v2.11 Base part for package epstopdf
+epstopdf-sys.cfg    2010/07/13 v1.3 Configuration of (r)epstopdf for TeX Live
+ltcaption.sty    2021/01/08 v1.4c longtable captions (AR)
+  mt-ppl.cfg    2005/11/16 v1.6 microtype config. file: Palatino (RS)
+main-wqu-financial-data-module3-4-dich.out
+main-wqu-financial-data-module3-4-dich.out
+bookmark.sty    2023-12-10 v1.31 PDF bookmarks (HO)
+bkm-pdftex.def    2023-12-10 v1.31 bookmark driver for pdfTeX and luaTeX (HO)
+gfx/cover.pdf
+gfx/cover.pdf
+gfx/cover.pdf
+disclaimer.tex
+  ot1ppl.fd    2001/06/04 font definitions for OT1/ppl.
+ omlzplm.fd    2002/09/08 Fontinst v1.914 font definitions for OML/zplm.
+ omszplm.fd    2002/09/08 Fontinst v1.914 font definitions for OMS/zplm.
+ omxzplm.fd    2002/09/08 Fontinst v1.914 font definitions for OMX/zplm.
+ ot1zplm.fd    2002/09/08 Fontinst v1.914 font definitions for OT1/zplm.
+  mt-msa.cfg    2006/02/04 v1.1 microtype config. file: AMS symbols (a) (RS)
+  mt-msb.cfg    2005/06/01 v1.0 microtype config. file: AMS symbols (b) (RS)
+  ts1ppl.fd    2001/06/04 font definitions for TS1/ppl.
+Chapters/M3_L1_LessonNotes.tex
+lstlang1.sty    2024/09/23 1.10c listings language file
+  mt-cmr.cfg    2013/05/19 v2.2 microtype config. file: Computer Modern Roman (
+RS)
+ ufplmbb.fd    2003/10/30 Fontinst v1.914 font definitions for U/fplmbb.
+gfx/m3l1_notes_fig1_pct_vs_log_returns_msft.png
+gfx/m3l1_notes_fig2_assets_vs_portfolio_volatility_returns.png
+gfx/m3l1_notes_fig3_portfolio_variance_vs_asset_variance.png
+gfx/m3l1_notes_fig4_portfolio_variance_vs_correlation.png
+gfx/m3l1_notes_fig5_returns_vs_risk_portfolios.png
+Chapters/M3_L1_DocThem1.tex
+gfx/m3l1_dahlquist_table15-1_dal_investment_value.png
+gfx/m3l1_dahlquist_table15-2_dal_geometric_avg.png
+gfx/m3l1_dahlquist_table15-3_cvs_annual_returns.png
+gfx/m3l1_dahlquist_table15-4_cvs_avg_return_calc.png
+gfx/m3l1_dahlquist_table15-5_cvs_stddev.png
+gfx/m3l1_dahlquist_table15-6_yearly_returns.png
+gfx/m3l1_dahlquist_fig15-2_yearly_returns.png
+gfx/m3l1_dahlquist_table15-7_two_stock_portfolio_returns.png
+Chapters/M3_L2_LessonNotes.tex
+gfx/m3l2_notes_fig1_tsla_split_adjusted_close.png
+gfx/m3l2_notes_fig2_efficient_frontier.png
+gfx/m3l2_notes_fig3_efficient_frontier_cml.png
+gfx/m3l2_notes_fig4_btcusd_returns_histogram.png
+Chapters/M3_L2_DocThem1.tex
+gfx/m3l2_dahlquist_fig15-3_beta_calc.png
+Chapters/M3_L2_DocThem2.tex
+Chapters/M3_L3_LessonNotes.tex
+gfx/m3l3_notes_fig0_crash1929_ticker_tape.png
+gfx/m3l3_notes_fig1_btcusdt_price_volume.png
+gfx/m3l3_notes_fig2_raw_tick_histograms.png
+gfx/m3l3_notes_fig3_aggregated_histograms.png
+gfx/m3l3_notes_fig4_buying_selling_volume.png
+gfx/m3l3_notes_fig5_buyer_seller_scatter.png
+gfx/m3l3_notes_fig6_order_flow_imbalance.png
+Chapters/M3_L3_DocThem1.tex
+Chapters/M3_L3_DocThem2.tex
+gfx/m3l3_brownlees_fig1_trade_quote_oneday.png
+gfx/m3l3_brownlees_fig2_trade_quote_oneminute.png
+gfx/m3l3_brownlees_fig3_trading_activity_minute.png
+gfx/m3l3_brownlees_fig4_open_close_minute.png
+Chapters/M3_L4_LessonNotes.tex
+Chapters/M3_L4_DocThem1.tex
+gfx/m3l4_murphy_fig7-8_svd_decomposition.png
+Chapters/M4_L1_LessonNotes.tex
+Chapters/M4_L1_DocThem1.tex
+Chapters/M4_L1_DocThem2.tex
+Chapters/M4_L2_LessonNotes.tex
+gfx/m4l2_notes_fig1_google_trends_aapl_tsla_nvda.png
+Chapters/M4_L2_DocThem1.tex
+gfx/m4l2_preis_fig1_search_volume_stock_moves.png
+gfx/m4l2_preis_fig2_cumulative_performance_strategy.png
+gfx/m4l2_preis_fig3_performances_search_volume_strategies.png
+gfx/m4l2_preis_fig4_long_short_positions_analysis.png
+Chapters/M4_L2_DocThem2.tex
+gfx/m4l2_challetbel_fig1_tstat_vs_movwindow.png
+gfx/m4l2_challetbel_fig2_tstat_debt_moonpatrol.png
+gfx/m4l2_challetbel_fig3_cumperf_debt_tc.png
+gfx/m4l2_challetbel_fig4_cumperf_keyword_sets.png
+Chapters/M4_L2_DocThem3.tex
+gfx/m4l2_aslanidis_fig1_gtc_gtu.png
+gfx/m4l2_aslanidis_table1_descriptive_stats.png
+gfx/m4l2_aslanidis_table2_te_gtu_bitcoin.png
+gfx/m4l2_aslanidis_fig2_ete_gtu_bitcoin.png
+gfx/m4l2_aslanidis_table3_te_gtc_bitcoin.png
+gfx/m4l2_aslanidis_fig3_ete_gtc_crypto.png
+gfx/m4l2_aslanidis_fig4_renyi_transfer_entropy.png
+Chapters/M4_L3_LessonNotes.tex
+gfx/m4l3_notes_fig1_stocktwits_sentiment_counts.png
+gfx/m4l3_notes_fig2_twitter_vs_stocktwits_daily_counts.png
+Chapters/M4_L3_DocThem1.tex
+gfx/m4l3_taborda_fig1_samais_architecture.png
+gfx/m4l3_taborda_table1_tweets_per_sector.png
+gfx/m4l3_taborda_table2_annotated_data_distribution.png
+gfx/m4l3_taborda_table3_lmcd20_words.png
+gfx/m4l3_taborda_fig2_comparing_lexicons_war.png
+gfx/m4l3_taborda_fig3_comparing_generalist_sa.png
+gfx/m4l3_taborda_table4_textblob_confusion.png
+gfx/m4l3_taborda_table5_vader_confusion.png
+gfx/m4l3_taborda_table6_bertweet_confusion.png
+gfx/m4l3_taborda_fig4_lmcd20_vader_lambda.png
+gfx/m4l3_taborda_table7_metrics_vader_lmcd20.png
+gfx/m4l3_taborda_table8_correct_prediction_examples.png
+Chapters/M4_L3_DocThem2.tex
+gfx/m4l3_liu_fig1_stocktwits_ui.png
+gfx/m4l3_liu_fig2_pretraining_overview.png
+gfx/m4l3_liu_fig3_tweets_stocktwits.png
+gfx/m4l3_liu_table1_historical_stock_data.png
+gfx/m4l3_liu_table2_realtime_data_samples.png
+gfx/m4l3_liu_fig4_prediction_architecture.png
+gfx/m4l3_liu_fig5_svm_hyperplane.png
+gfx/m4l3_liu_table3_kernel_functions.png
+gfx/m4l3_liu_fig6_bagging_procedure.png
+gfx/m4l3_liu_fig7_top10_symbols.png
+gfx/m4l3_liu_table4_extracted_features.png
+gfx/m4l3_liu_table5_svc_settings.png
+gfx/m4l3_liu_table6_bagging_settings.png
+gfx/m4l3_liu_fig8_rolling_window_procedure.png
+gfx/m4l3_liu_table7_forecasting_results.png
+gfx/m4l3_liu_fig9_f1score_histogram.png
+Chapters/M4_L4_LessonNotes.tex
+ ***********
+
+
+LaTeX Font Warning: Some font shapes were not available, defaults substituted.
+
+Package rerunfilecheck Info: File `main-wqu-financial-data-module3-4-dich.out' 
+has not changed.
+(rerunfilecheck)             Checksum: D41D8CD98F00B204E9800998ECF8427E;0.
+ ) 
+Here is how much of TeX's memory you used:
+ 48343 strings out of 473190
+ 954023 string characters out of 5715801
+ 2547099 words of memory out of 5000000
+ 67099 multiletter control sequences out of 15000+600000
+ 737685 words of font info for 615 fonts, out of 8000000 for 9000
+ 1141 hyphenation exceptions out of 8191
+ 108i,23n,135p,10933b,2264s stack positions out of 10000i,1000n,20000p,200000b,200000s
+</usr/local/texlive/2025/texmf-dist/fonts/type1/public/amsfonts/cm/cmex10.pfb
+></usr/local/texlive/2025/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi10.pfb>
+</usr/local/texlive/2025/texmf-dist/fonts/type1/public/amsfonts/cm/cmr10.pfb></
+usr/local/texlive/2025/texmf-dist/fonts/type1/public/amsfonts/cm/cmss8.pfb></us
+r/local/texlive/2025/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy10.pfb></usr
+/local/texlive/2025/texmf-dist/fonts/type1/public/mathpazo/fplmbb.pfb></usr/loc
+al/texlive/2025/texmf-dist/fonts/type1/public/mathpazo/fplmbi.pfb></usr/local/t
+exlive/2025/texmf-dist/fonts/type1/public/mathpazo/fplmr.pfb></usr/local/texliv
+e/2025/texmf-dist/fonts/type1/public/mathpazo/fplmri.pfb></usr/local/texlive/20
+25/texmf-dist/fonts/type1/urw/palatino/uplb8a.pfb></usr/local/texlive/2025/texm
+f-dist/fonts/type1/vntex/urwvn/uplb8v.pfb></usr/local/texlive/2025/texmf-dist/f
+onts/type1/urw/palatino/uplbi8a.pfb></usr/local/texlive/2025/texmf-dist/fonts/t
+ype1/urw/palatino/uplr8a.pfb></usr/local/texlive/2025/texmf-dist/fonts/type1/vn
+tex/urwvn/uplr8v.pfb></usr/local/texlive/2025/texmf-dist/fonts/type1/urw/palati
+no/uplri8a.pfb></usr/local/texlive/2025/texmf-dist/fonts/type1/vntex/urwvn/uplr
+i8v.pfb></usr/local/texlive/2025/texmf-dist/fonts/type1/vntex/vnr/vnr10.pfb></u
+sr/local/texlive/2025/texmf-dist/fonts/type1/vntex/vnr/vnr9.pfb>
+Output written on main-wqu-financial-data-module3-4-dich.pdf (299 pages, 110009
+33 bytes).
+PDF statistics:
+ 5509 PDF objects out of 6186 (max. 8388607)
+ 5021 compressed objects within 51 object streams
+ 2870 named destinations out of 2984 (max. 500000)
+ 140704 words of extra memory for PDF output out of 154059 (max. 10000000)
+

@@ -1,0 +1,618 @@
+% ============================================================
+%  documentation.tex  —  bookcover.cls documentation
+%  Compile with LuaLaTeX (or XeLaTeX).
+% ============================================================
+
+\documentclass[12pt, a4paper]{article}
+
+% ── Packages ─────────────────────────────────────────────────
+\usepackage{fontspec}
+\usepackage{geometry}
+\usepackage{hyperref}
+\usepackage{listings}
+\usepackage{xcolor}
+\usepackage{booktabs}
+\usepackage{parskip}
+\usepackage{titlesec}
+\usepackage{tcolorbox}
+\usepackage{enumitem}
+\usepackage{microtype}
+
+\geometry{margin=2cm}
+
+% ── Fonts ────────────────────────────────────────────────────
+\setmainfont{Latin Modern Roman}
+\setmonofont{Latin Modern Mono}
+
+% ── Colours ──────────────────────────────────────────────────
+\definecolor{bcBlue}    {HTML}{1B6B7B}
+\definecolor{bcGold}    {HTML}{D4A96A}
+\definecolor{bcGray}    {HTML}{F5F5F5}
+\definecolor{bcDarkGray}{HTML}{444444}
+\definecolor{bcGreen}   {HTML}{2E7D32}
+\definecolor{bcPurple}  {HTML}{6A1B9A}
+
+% ── Code block style ─────────────────────────────────────────
+\lstdefinestyle{latex}{
+  language          = [LaTeX]TeX,
+  backgroundcolor   = \color{bcGray},
+  basicstyle        = \ttfamily\small,
+  keywordstyle      = \color{bcBlue}\bfseries,
+  commentstyle      = \color{bcGreen}\itshape,
+  stringstyle       = \color{bcPurple},
+  breaklines        = true,
+  breakatwhitespace = true,
+  frame             = single,
+  framerule         = 0.4pt,
+  rulecolor         = \color{bcGold},
+  xleftmargin       = 6pt,
+  xrightmargin      = 6pt,
+  aboveskip         = 8pt,
+  belowskip         = 8pt,
+  tabsize           = 2,
+  showstringspaces  = false,
+}
+\lstset{style=latex}
+
+% ── Section headings ─────────────────────────────────────────
+\titleformat{\section}
+  {\Large\bfseries\color{bcBlue}}
+  {\thesection}{1em}{}[\vspace{-0.5cm}\color{bcGold}\rule{\linewidth}{0.8pt}]
+
+\titleformat{\subsection}
+  {\large\bfseries\color{bcDarkGray}}
+  {\thesubsection}{1em}{}
+
+\titleformat{\subsubsection}
+  {\normalsize\bfseries\color{bcDarkGray}}
+  {\thesubsubsection}{1em}{}
+
+% ── Hyperlinks ───────────────────────────────────────────────
+\hypersetup{
+  colorlinks = true,
+  linkcolor  = bcBlue,
+  urlcolor   = bcBlue,
+  citecolor  = bcBlue,
+  pdftitle   = {bookcover.cls — Documentation},
+  pdfauthor  = {bookcover},
+}
+
+% ── Warning box ──────────────────────────────────────────────
+\newtcolorbox{warning}{
+  colback  = bcGold!15,
+  colframe = bcGold,
+  boxrule  = 0.6pt,
+  arc      = 3pt,
+  left = 8pt, right  = 8pt,
+  top  = 6pt, bottom = 6pt,
+  fontupper = \small,
+}
+
+% ── Note box ─────────────────────────────────────────────────
+\newtcolorbox{note}{
+  colback  = bcBlue!8,
+  colframe = bcBlue,
+  boxrule  = 0.6pt,
+  arc      = 3pt,
+  left = 8pt, right  = 8pt,
+  top  = 6pt, bottom = 6pt,
+  fontupper = \small,
+}
+
+% ── Inline helpers ───────────────────────────────────────────
+\newcommand{\cmd}[1]{\texttt{\textbackslash #1}}
+\newcommand{\env}[1]{\texttt{#1}}
+\newcommand{\opt}[1]{\texttt{#1}}
+
+% ════════════════════════════════════════════════════════════
+\begin{document}
+% ════════════════════════════════════════════════════════════
+
+% ── Cover page ───────────────────────────────────────────────
+\begin{titlepage}
+  \centering
+  \vspace*{3cm}
+  {\fontsize{36}{40}\selectfont\bfseries\color{bcBlue}
+    bookcover\texttt{.cls}\par}
+  \vspace{0.5cm}
+  {\color{bcGold}\rule{0.5\linewidth}{1.2pt}\par}
+  \vspace{0.8cm}
+  {\Large Documentation — User Manual\par}
+  \vspace{0.4cm}
+  {\normalsize \LaTeX{} class for generating print-ready book covers\par}
+  \vfill
+  {\small Compile with \textbf{Lua\LaTeX} or \textbf{Xe\LaTeX}\par}
+  \vspace{1cm}
+  {\small v2.0 — 2026\par}
+\end{titlepage}
+
+% ── Table of contents ────────────────────────────────────────
+\tableofcontents
+\newpage
+
+% ════════════════════════════════════════════════════════════
+\section{Installation}
+% ════════════════════════════════════════════════════════════
+
+Place \texttt{bookcover.cls} in the same folder as your \texttt{.tex} file,
+or in any directory on your \LaTeX{} search path.
+On Overleaf, simply upload the file to your project.
+
+% ════════════════════════════════════════════════════════════
+\section{Class options}
+% ════════════════════════════════════════════════════════════
+
+\begin{lstlisting}
+\documentclass[
+  width       = 148,    % book page width in mm        (default: 148)
+  height      = 210,    % book page height in mm       (default: 210)
+  margin      = 10,     % content margin in mm; groove side gets
+                        % margin + groove automatically (default: 10)
+  bleed       = 20,     % bleed extension in mm        (default: 20)
+  groove      = 8,      % binding hinge width in mm    (default: 8)
+  paperwidth  = 420,    % output sheet width in mm     (default: 420)
+  paperheight = 297,    % output sheet height in mm    (default: 297)
+  pages       = 300,    % number of pages (sets spine width)
+  grammage    = 75,     % paper weight in g/m²         (default: 75)
+  colorFront  = 1B6B7B, % front panel colour, hex without #
+  colorBack   = 1B6B7B, % back panel colour,  hex without #
+  colorSpine  = D4A96A, % spine colour,       hex without #
+]{bookcover}
+\end{lstlisting}
+
+\subsection{Supported grammage values}
+
+\begin{center}
+\begin{tabular}{cc}
+  \toprule
+  \textbf{Grammage (g/m²)} & \textbf{Thickness per sheet} \\
+  \midrule
+  56  & 0.07 mm \\
+  60  & 0.08 mm \\
+  75  & 0.10 mm \\
+  90  & 0.12 mm \\
+  115 & 0.15 mm \\
+  \bottomrule
+\end{tabular}
+\end{center}
+
+% ════════════════════════════════════════════════════════════
+\section{Sheet anatomy}
+% ════════════════════════════════════════════════════════════
+
+The full artwork is centred on the output sheet. Reading left to right:
+
+\begin{center}
+\ttfamily
+|{\normalfont←}bleed{\normalfont→}|{\normalfont←}\ back\ {\normalfont→}|{\normalfont←}groove{\normalfont→}|{\normalfont←}spine{\normalfont→}|{\normalfont←}groove{\normalfont→}|{\normalfont←}\ front\ {\normalfont→}|{\normalfont←}bleed{\normalfont→}|
+\end{center}
+
+\begin{description}[style=nextline, leftmargin=2cm, labelwidth=1.8cm]
+  \item[\opt{bleed}]  Colour extends beyond the trim edge so no white border appears after guillotining.
+  \item[\opt{back}]   Back cover panel (\texttt{width} mm wide).
+  \item[\opt{groove}] Hinge recess for hardcover binding. Filled with the panel colour; text is kept clear automatically
+  \item[\opt{spine}]  Width calculated from \opt{pages} and \opt{grammage}.
+  \item[\opt{front}]  Front cover panel (\texttt{width} mm wide).
+\end{description}
+
+% ════════════════════════════════════════════════════════════
+\section{Spine width calculation}
+% ════════════════════════════════════════════════════════════
+
+\begin{center}
+  \texttt{spine\_width = (pages × mm\_per\_sheet) / 2}
+\end{center}
+
+The division by 2 accounts for two pages per physical sheet. Example:
+
+\begin{center}
+  \texttt{600 pages × 0.10 mm/sheet ÷ 2 = 30 mm}
+\end{center}
+
+% ════════════════════════════════════════════════════════════
+\section{Basic structure}
+% ════════════════════════════════════════════════════════════
+
+\begin{lstlisting}
+\documentclass[
+  pages=600, 
+  grammage=75,
+  colorFront=1B6B7B, 
+  colorSpine=D4A96A]
+{bookcover}
+
+\begin{front}
+  % front cover content
+\end{front}
+
+\begin{back}
+  % back cover content
+\end{back}
+
+\begin{spine}
+  % spine content
+\end{spine}
+
+\begin{document}
+  \makecover
+\end{document}
+\end{lstlisting}
+
+\begin{note}
+\cmd{makecover} is the only command needed inside\env{document}.
+\end{note}
+
+% ════════════════════════════════════════════════════════════
+\section{Environments}
+% ════════════════════════════════════════════════════════════
+
+\subsection{front}
+
+Defines the content of the front (right-hand) cover panel.
+
+\begin{itemize}[noitemsep]
+  \item Live area width: \texttt{width} mm (groove is included in the
+        underlying minipage but hidden from text by the automatic margin).
+  \item Automatic margins: \opt{margin}+\opt{groove} on the left (hinge side),
+        \opt{margin} on the right.
+  \item Use \cmd{colorblock} for full-width colour bands that span the groove.
+\end{itemize}
+
+\begin{lstlisting}
+\begin{front}
+  \centering\color{white}
+  {\Huge\bfseries BOOK TITLE}
+  \vfill
+  {\large\bfseries AUTHOR NAME}
+  \vspace{4mm}
+  \colorblock{D4A96A}{10mm}{\centering\color{1B6B7B} Publisher}
+\end{front}
+\end{lstlisting}
+
+\subsection{back}
+
+Defines the content of the back (left-hand) cover panel.
+
+\begin{itemize}[noitemsep]
+  \item Live area width: \texttt{width} mm.
+  \item Automatic margins: \opt{margin} on the left,
+        \opt{margin}+\opt{groove} on the right (hinge side).
+\end{itemize}
+
+\begin{lstlisting}
+\begin{back}
+  \vspace{10mm}
+  \color{white}
+  \setlength{\parskip}{14pt}
+  {\normalsize Book description goes here.}
+  \vfill
+  {\centering\includegraphics[width=0.25\linewidth]{logo.png}\par}
+  \hfill{\color{gold}\small\bfseries ISBN 978-0-000-00000-0}
+  \vspace{1cm}
+\end{back}
+\end{lstlisting}
+
+\subsection{spine}
+
+Defines the content of the spine strip.
+
+\begin{itemize}[noitemsep]
+  \item Width is calculated automatically from \opt{pages} and \opt{grammage}.
+  \item No automatic margins as the spine may be too thin — layout is fully manual.
+  \item Use \cmd{spinerotated} to rotate text top-to-bottom.
+  \item Use \cmd{centering} and \cmd{vfill} to distribute elements vertically.
+  \item \cmd{colorblock} is \textbf{not} available inside \env{spine}.
+\end{itemize}
+
+\begin{lstlisting}
+\begin{spine}
+  \centering
+  \vspace{4mm}
+  \color{teal}
+  \spinerotated{\normalsize\bfseries Author Name}\par
+  \vfill
+  \spinerotated{\large\bfseries Book Title}\par
+  \vfill
+  \spinerotated{\small 4th ed.}\par
+  \vfill
+  {\normalsize\bfseries Vol.\\1\par}
+  \vspace{4mm}
+\end{spine}
+\end{lstlisting}
+
+\begin{warning}
+\textbf{Spine width and readability:} if the spine is narrower than
+approximately 12 mm, consider using only the title — or omitting text
+entirely — to avoid overcrowding.
+\end{warning}
+
+% ════════════════════════════════════════════════════════════
+\section{Commands}
+% ════════════════════════════════════════════════════════════
+
+\subsection{\cmd{colorblock}}
+
+Draws a full-panel-width colour band inside \env{front} or \env{back}.
+Unlike a plain \cmd{colorbox}, it deliberately escapes the automatic content
+margins so the band always spans the complete panel width, including the
+groove area.
+
+\begin{lstlisting}
+\colorblock{color}{height}{content}
+
+% Parameters:
+%   color   -- xcolor name or HTML hex without #
+%   height  -- band height (any TeX length: mm, pt, \textheight...)
+%   content -- any LaTeX content; receives full panel \linewidth
+
+% Examples:
+\colorblock{D4A96A}{0.25\textheight}{
+  \centering\color{1B6B7B}
+  {\Huge\bfseries\MakeUppercase{Book Title}}
+}
+
+\colorblock{D4A96A}{10mm}{
+  \centering\color{1B6B7B}{\bfseries Publisher Name}
+}
+\end{lstlisting}
+
+\begin{note}
+Content inside \cmd{colorblock} is vertically centred. If you need top or bottom alignment, use a \cmd{minipage} with the desired \texttt{[t]} or \texttt{[b]} to wrap the content argument.
+\end{note}
+
+\subsection{\cmd{spinerotated}}
+
+Rotates content $-90°$ (top-to-bottom, standard book spine direction) and centres it across the full spine width.
+
+\begin{lstlisting}
+\spinerotated{text}
+\spinerotated{\large\bfseries Book Title}\par
+\vfill
+\spinerotated{\normalsize Author Name}\par
+\end{lstlisting}
+
+\begin{warning}
+\textbf{Do not} wrap multiple elements in a single \cmd{spinerotated} call if you intend to use \cmd{vfill} between them — the fill will not work inside a rotated box. Call \cmd{spinerotated} once per element instead, and do not forget the \cm{par} at the end.
+\end{warning}
+
+\subsection{\cmd{makecover}}
+
+Triggers the full TikZ render of the cover sheet. Must be the \textbf{only content} inside \env{document}.
+
+\begin{lstlisting}
+\begin{document}
+  \makecover
+\end{document}
+\end{lstlisting}
+
+\cmd{makecover} performs the following steps in order:
+
+\begin{enumerate}[noitemsep]
+  \item Converts all lengths to unitless mm values for \texttt{pgfmath}.
+  \item Computes horizontal and vertical zone boundaries.
+  \item Fills background colours (back, front, spine) with a 0.2 mm overlap between adjacent fills to prevent hairline seams in PDF viewers.
+  \item Draws crop marks at the four corners of the trim box.
+  \item Draws dimension annotations below and to the right of the artwork (for reference only — you may remove before sending to press).
+  \item Places content nodes for back, spine, and front panels inside clipped scopes so overflow cannot bleed across zones.
+\end{enumerate}
+
+% ════════════════════════════════════════════════════════════
+\section{Automatic margin behaviour}
+% ════════════════════════════════════════════════════════════
+
+The \opt{margin} class option sets a horizontal content margin that is
+applied automatically to \env{front} and \env{back}. The groove-adjacent
+side always receives \opt{margin}+\opt{groove} to keep text clear of the
+binding hinge:
+
+\begin{center}
+\begin{tabular}{lll}
+  \toprule
+  \textbf{Panel} & \textbf{Left margin} & \textbf{Right margin} \\
+  \midrule
+  front & margin + groove & margin \\
+  back  & margin          & margin + groove \\
+  \bottomrule
+\end{tabular}
+\end{center}
+
+\cmd{colorblock} bypasses these margins intentionally so that colour bands
+span the full panel. All other content respects them.
+
+% ════════════════════════════════════════════════════════════
+\section{Dimension annotations}
+% ════════════════════════════════════════════════════════════
+
+\cmd{makecover} automatically draws labelled arrows below and to the right
+of the artwork showing:
+
+\begin{itemize}[noitemsep]
+  \item bleed, back, spine, front, bleed widths (horizontal)
+  \item groove widths (horizontal, labelled below the arrow line)
+  \item cover height (vertical, on the right)
+\end{itemize}
+
+These annotations are \textbf{not} part of the print-ready output.
+To remove them before sending to press, comment out the annotation block
+in \cmd{bc@drawall} (step 3 in the source), or simply crop the PDF to the
+trim box using your prepress software.
+
+% ════════════════════════════════════════════════════════════
+\section{Complete example}
+% ════════════════════════════════════════════════════════════
+
+\begin{lstlisting}
+\documentclass[
+  margin      = 10,
+  pages       = 600,
+  grammage    = 75, 
+  colorFront  = 1B6B7B,
+  colorBack   = 1B6B7B,
+  colorSpine  = D4A96A
+]{bookcover}
+
+\usepackage[english]{babel}  % hyphenation patterns
+\usepackage{graphicx}        % \includegraphics
+\usepackage{ragged2e}        % \justifying
+\usepackage{fontspec}        % requires XeLaTeX or LuaLaTeX.
+    \setmainfont{TeX Gyre Adventor}
+    \newfontfamily\TitleFont{TeX Gyre Adventor}[LetterSpace=10.0]
+\usepackage{xcolor}
+    \definecolor{teal} {HTML}{1B6B7B}  % matches colorFront / colorBack
+    \definecolor{gold} {HTML}{D4A96A}  % matches colorSpine
+    \definecolor{white}{rgb}{1,1,1}
+
+%% ============================================================
+%% TYPOGRAPHIC SCALE
+%% ============================================================
+\def\hugefont  {\fontsize{48}{56}}  % main cover title
+\def\largefont {\fontsize{30}{36}}  % spine title
+\def\mediumfont{\fontsize{20}{24}}  % subtitle, edition
+\def\normalfont{\fontsize{16}{19}}  % authors, publisher, description
+\def\smallfont {\fontsize{12}{14}}  % spine edition, ISBN
+
+%% ============================================================
+%% BOOK METADATA
+%% ============================================================
+%% --- Front cover ---
+\def\booktitle{Discrete\\Mathematics}
+\def\booksubtitle{Finally Proving P\,=\,NP (We Think)}
+\def\bookedition{$\infty$th edition}
+\def\coverimage{cover_graph.pdf}
+\def\bookauthors{%
+  Al G. Bra
+  \quad\textbullet\quad
+  Kay O. S. Theory%
+}
+\def\bookpublisher{$\mathcal{O}(1)$ Press}
+
+%% --- Back cover ---
+\def\bookdescription{%
+  This textbook provides a rigorous introduction to discrete
+  mathematics. All proofs are straightforward and left as an
+  exercise to the reader.
+
+  The second edition features twice the content of the first,
+  achieved via the Banach--Tarski decomposition method.
+  The publisher has been informed.
+
+  The third part covers graph theory, including a definitive
+  solution to the Bridges of K\"{o}nigsberg problem.
+  (We added a bridge. You're welcome.)%
+}
+\def\publisherlogo{logo.png}
+\def\bookisbn{ISBN 978-0-314-15926-5}
+
+%% --- Spine ---
+\def\spinetitle{Discrete Mathematics}
+\def\spineauthors{Bra \textbullet\ Theory}
+\def\spineedition{$\infty$th ed.}
+\def\spinevolume{Vol.\\$n$}
+
+%% ============================================================
+%% FRONT COVER
+%% ============================================================
+\begin{front}
+
+  %% Title and Subtitle — full-width band at the top
+  \colorblock{gold}{0.25\textheight}{%
+    \centering
+    \color{teal}
+
+    {\hugefont\TitleFont\bfseries\selectfont
+      \MakeUppercase{\booktitle}\par}
+
+    \vspace{2mm}
+    {\rule{0.85\textwidth}{2pt}\par}
+    \vspace{2mm}
+
+    {\mediumfont\bfseries\selectfont
+      \MakeUppercase{\booksubtitle}\par}
+  }
+
+  \centering
+  \color{gold}
+
+  %% Edition — pushed to the right margin with \hfill.
+  \vspace{5mm} 
+  \hfill{\mediumfont\itshape\selectfont\bookedition}
+
+  %% Cover image — fills available vertical space between edition line and author names.
+  \vfill 
+  \includegraphics[width=\linewidth]{\coverimage}
+  
+  %% Author names — bold, uppercased, centred.
+  \vfill 
+  {\normalfont\bfseries\selectfont\MakeUppercase{\bookauthors}}
+
+  %% Publisher strip — another full-width band at the bottom.
+  \vspace{4mm} 
+  \colorblock{gold}{10mm}{%
+    \centering
+    \color{teal}
+    {\normalfont\bfseries\selectfont\bookpublisher}
+  }
+
+\end{front}
+
+%% ============================================================
+%% BACK COVER
+%% ============================================================
+\begin{back}
+
+  \vspace{10mm}
+  \color{white}
+  \setlength{\parindent}{0pt}
+  \setlength{\parskip}{14pt}     % breathing room between paragraphs
+
+  %% Book description — justified text using ragged2e's \justifying,
+  {\normalfont\selectfont\justifying\bookdescription}
+
+  \vfill
+
+  %% Publisher logo — centred, sized to 25% of the text width.
+  {\centering\includegraphics[width=0.25\linewidth]{\publisherlogo}\par}
+
+  %% ISBN — right-aligned, at the very bottom.
+  \hfill{\color{gold}\smallfont\bfseries\selectfont\bookisbn}
+
+  \vspace{1cm}
+\end{back}
+
+%% ============================================================
+%% SPINE
+%% ============================================================
+\begin{spine}
+  \centering
+  \vspace{2mm}
+  \color{teal}
+
+  %% Authors at the top
+  \spinerotated{{\normalfont\bfseries\selectfont\spineauthors}}\par
+
+  %% Title in the centre — largest element on the spine
+  \vfill 
+  \spinerotated{{\largefont\bfseries\selectfont\spinetitle}}\par
+
+  %% Edition below the title
+  \vfill 
+  \spinerotated{{\smallfont\bfseries\selectfont\spineedition}}\par
+
+  %% Volume badge — upright text at the bottom of the spine
+  \vfill 
+  {\centering\normalfont\bfseries\selectfont\spinevolume\par}
+
+  \vspace{2mm}
+
+\end{spine}
+
+%% ============================================================
+%% DOCUMENT BODY
+%% \makecover is the only content needed
+%% ============================================================
+\begin{document}
+\makecover
+\end{document}
+\end{lstlisting}
+
+\end{document}

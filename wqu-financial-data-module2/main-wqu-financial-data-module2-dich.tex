@@ -1,0 +1,84 @@
+%****************************************************************************************************
+% main — WQU Financial Data — Module 2
+% Bản dịch tiếng Việt (tài liệu học tập cá nhân)
+%****************************************************************************************************
+\RequirePackage{fix-cm}
+\documentclass[
+  oneside, titlepage, numbers=noenddot, headinclude,
+  footinclude=true, cleardoublepage=empty, abstractoff,
+  BCOR=5mm, paper=a4, fontsize=11pt
+]{scrreprt}
+
+\input{classicthesis-config}
+\usepackage{framed}
+\usepackage{tikz}
+\usetikzlibrary{arrows.meta, positioning, calc}
+\usepackage{pdfpages}
+\usepackage{xcolor}
+\usepackage{longtable}
+\usepackage{pdflscape}
+
+% ---- Style riêng cho khối code/output (lstlisting), chỉ áp dụng ở main.tex,
+% ---- không chỉnh sửa classicthesis-config.tex. Mục tiêu: chống tràn lề
+% ---- (breaklines) và trình bày chuẩn học thuật cho các đoạn code Python.
+\lstset{
+  basicstyle=\ttfamily\footnotesize,
+  breaklines=true,
+  breakatwhitespace=false,
+  columns=fullflexible,
+  keepspaces=true,
+  showstringspaces=false,
+  tabsize=4,
+  frame=single,
+  framerule=0.4pt,
+  rulecolor=\color{black!30},
+  backgroundcolor=\color{black!4},
+  captionpos=b,
+  aboveskip=1em,
+  belowskip=1em,
+  keywordstyle=\color{blue!55!black}\bfseries,
+  commentstyle=\color{green!40!black}\itshape,
+  stringstyle=\color{orange!65!black},
+  numberstyle=\tiny\color{black!50}
+}
+
+\begin{document}
+\frenchspacing
+\raggedbottom
+\selectlanguage{vietnamese}
+\pagenumbering{roman}
+\pagestyle{plain}
+
+\includepdf[pages=-]{gfx/cover.pdf}
+\input{disclaimer}
+
+\pagestyle{scrheadings}
+\tableofcontents
+\cleardoublepage
+\pagenumbering{arabic}
+
+% ============ MODULE 2: EQUITIES AND CRYPTOCURRENCIES ============
+
+% ---- Lesson 1: Financial Asset Data ----
+% Thứ tự đọc: Lesson Notes -> Đọc thêm
+\include{Chapters/M2_L1_DuLieuTaiSanTaiChinh}
+\include{Chapters/M2_L1_DocThem2_Damodaran_CorpFinPacket1}
+
+% ---- Lesson 2: Financial Asset & Return Analysis ----
+% Thứ tự đọc: Lesson Notes -> Đọc thêm
+\include{Chapters/M2_L2_PhanTichTaiSanVaLoiSuat}
+\include{Chapters/M2_L2_DocThem2_ThinkStats}
+
+% ---- Lesson 3: Special Matrices for Equity Analysis ----
+% Thứ tự đọc: Lesson Notes -> Đọc thêm
+\include{Chapters/M2_L3_MaTranDacBietChoPhanTichCoPhieu}
+\include{Chapters/M2_L3_DocThem_MatrixWorld}
+
+% ---- Lesson 4: Ethical Practices with Data ----
+% Thứ tự đọc: Lesson Notes -> Đọc thêm
+\include{Chapters/M2_L4_ThucHanhDaoDucVoiDuLieu}
+\include{Chapters/M2_L4_DocThem1_BenfordLaw}
+\include{Chapters/M2_L4_DocThem2_DataTheft}
+\include{Chapters/M2_L4_DocThem3_DataQuality}
+
+\end{document}

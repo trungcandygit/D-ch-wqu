@@ -1,0 +1,436 @@
+\chapter{Đọc thêm: Trị riêng và Vector riêng của Ma trận}
+\label{ch:M1L4-reading}
+
+\section{Trị riêng và Vector riêng của Ma trận}
+
+\subsection{Kết quả đạt được}
+A. Mô tả trị riêng (eigenvalues) theo cả khía cạnh hình học và đại số. \\
+B. Tìm trị riêng và vector riêng (eigenvectors) cho một ma trận vuông.
+
+Lý thuyết Phổ (Spectral Theory) đề cập đến việc nghiên cứu các trị riêng và vector riêng của một ma trận. Nó có tầm quan trọng cơ bản trong nhiều lĩnh vực và là chủ đề nghiên cứu của chúng ta trong chương này.
+
+\subsection{Định nghĩa về Vector riêng và Trị riêng}
+
+Trong phần này, chúng ta sẽ làm việc với toàn bộ tập hợp các số phức, được ký hiệu là $\mathbb{C}$. Hãy nhớ lại rằng các số thực, $\mathbb{R}$ được chứa trong các số phức, vì vậy các cuộc thảo luận trong phần này áp dụng cho cả số thực và số phức.
+
+Để minh họa ý tưởng đằng sau những gì sẽ được thảo luận, hãy xem xét ví dụ sau.
+
+\textbf{Ví dụ: Vector riêng và Trị riêng} \\
+Tính tích $AX$ cho
+\begin{equation*}
+A=\begin{bmatrix}0&5&-10\\ 0&22&16\\ 0&-9&-2\end{bmatrix} \quad \text{và} \quad X=\begin{bmatrix}-5\\ -4\\ 3\end{bmatrix} \quad X=\begin{bmatrix}1\\ 0\\ 0\end{bmatrix}
+\end{equation*}
+Bạn nhận thấy điều gì về $AX$ trong mỗi tích này?
+
+\textbf{Giải} \\
+Đầu tiên, tính $AX$ cho
+\begin{equation*}
+X=\begin{bmatrix}-5\\ -4\\ 3\end{bmatrix}
+\end{equation*}
+Tích này được cho bởi
+\begin{equation*}
+AX=\begin{bmatrix}0&5&-10\\ 0&22&16\\ 0&-9&-2\end{bmatrix}\begin{bmatrix}-5\\ -4\\ 3\end{bmatrix}=\begin{bmatrix}-50\\ -40\\ 30\end{bmatrix}=10\begin{bmatrix}-5\\ -4\\ 3\end{bmatrix}
+\end{equation*}
+Trong trường hợp này, tích $AX$ tạo ra một vector bằng 10 lần vector $X$. Nói cách khác, $AX=10X$.
+
+Hãy xem chuyện gì xảy ra trong tích tiếp theo. Tính $AX$ cho vector
+\begin{equation*}
+X=\begin{bmatrix}1\\ 0\\ 0\end{bmatrix}
+\end{equation*}
+Tích này được cho bởi
+\begin{equation*}
+AX=\begin{bmatrix}0&5&-10\\ 0&22&16\\ 0&-9&-2\end{bmatrix}\begin{bmatrix}1\\ 0\\ 0\end{bmatrix}=\begin{bmatrix}0\\ 0\\ 0\end{bmatrix}=0\begin{bmatrix}1\\ 0\\ 0\end{bmatrix}
+\end{equation*}
+Trong trường hợp này, tích $AX$ tạo ra một vector bằng 0 lần vector $X$, $AX=0X$.
+
+Có lẽ ma trận này sao cho $AX$ tạo ra $kX$, cho mọi vector $X$. Tuy nhiên, hãy xem xét
+\begin{equation*}
+\begin{bmatrix}0&5&-10\\ 0&22&16\\ 0&-9&-2\end{bmatrix}\begin{bmatrix}1\\ 1\\ 1\end{bmatrix}=\begin{bmatrix}-5\\ 38\\ -11\end{bmatrix}
+\end{equation*}
+Trong trường hợp này, $AX$ không tạo ra một vector có dạng $kX$ cho một số vô hướng $k$.
+
+Có một điều đặc biệt về hai tích đầu tiên được tính toán trong Ví dụ 7.1.1. Lưu ý rằng đối với mỗi tích, $AX=kX$ trong đó $k$ là một số vô hướng. Khi phương trình này đúng với một $X$ và $k$ nào đó, chúng ta gọi số vô hướng $k$ là một \textbf{trị riêng} (eigenvalue) của $A$. Chúng ta thường sử dụng ký hiệu đặc biệt $\lambda$ thay vì $k$ khi nhắc đến các trị riêng. Trong Ví dụ 7.1.1, các giá trị 10 và 0 là các trị riêng cho ma trận $A$ và chúng ta có thể gắn nhãn chúng là $\lambda_{1}=10$ và $\lambda_{2}=0$.
+
+Khi $AX=\lambda X$ đối với một số $X\ne0$, chúng ta gọi một $X$ như vậy là một \textbf{vector riêng} (eigenvector) của ma trận $A$. Các vector riêng của $A$ được liên kết với một trị riêng. Do đó, nếu $\lambda_{1}$ là một trị riêng của $A$ và $AX=\lambda_{1}X$, chúng ta có thể gắn nhãn vector riêng này là $X_{1}$. Lưu ý lại rằng để trở thành một vector riêng, $X$ phải khác không.
+
+Cũng có một ý nghĩa hình học đối với các vector riêng. Khi bạn có một vector khác không mà khi nhân với một ma trận lại tạo ra một vector khác song song với nó hoặc bằng không, vector này được gọi là một vector riêng của ma trận. Đây là ý nghĩa khi các vector nằm trong $\mathbb{R}^{n}$.
+
+Định nghĩa chính thức của trị riêng và vector riêng như sau.
+
+\begin{tcolorbox}[title={Định nghĩa: Trị riêng và Vector riêng}]
+Cho $A$ là một ma trận $n\times n$ và cho $X\in\mathbb{C}^{n}$ là một vector khác không sao cho
+\begin{equation}
+AX=\lambda X
+\end{equation}
+đối với một số vô hướng $\lambda$. Khi đó $\lambda$ được gọi là một \textbf{trị riêng} của ma trận $A$ và $X$ được gọi là một \textbf{vector riêng} của $A$ liên kết với $\lambda$, hoặc một \textbf{$\lambda$-vector riêng} của $A$.
+
+Tập hợp tất cả các trị riêng của một ma trận $n\times n$ $A$ được ký hiệu là $\sigma(A)$ và được gọi là \textbf{phổ} (spectrum) của $A$.
+\end{tcolorbox}
+
+Các vector riêng của một ma trận $A$ là những vector $X$ mà phép nhân với $A$ tạo ra một vector có cùng hướng hoặc ngược hướng với $X$. Vì vector không $\mathbf{0}$ không có hướng nên điều này sẽ không có ý nghĩa đối với vector không. Như đã lưu ý ở trên, $\mathbf{0}$ không bao giờ được phép là một vector riêng.
+
+Hãy xem xét các vector riêng chi tiết hơn. Giả sử $X$ thỏa mãn phương trình (7.1.1). Vậy
+\begin{equation*}
+AX-\lambda X=0
+\end{equation*}
+hoặc
+\begin{equation*}
+(A-\lambda I)X=0
+\end{equation*}
+đối với một số $X\ne0$. Tương đương bạn có thể viết $(\lambda I-A)X=0$, cách này được sử dụng phổ biến hơn. Do đó, khi chúng ta đang tìm kiếm các vector riêng, chúng ta đang tìm kiếm các nghiệm không tầm thường (nontrivial solutions) cho hệ phương trình thuần nhất này!
+
+Hãy nhớ lại rằng các nghiệm của một hệ phương trình thuần nhất bao gồm các nghiệm cơ bản, và các tổ hợp tuyến tính của các nghiệm cơ bản đó. Trong bối cảnh này, chúng ta gọi các nghiệm cơ bản của phương trình $(\lambda I-A)X=0$ là các \textbf{vector riêng cơ bản} (basic eigenvectors). Từ đó suy ra rằng bất kỳ tổ hợp tuyến tính (khác không) nào của các vector riêng cơ bản lại là một vector riêng.
+
+Giả sử ma trận $(\lambda I-A)$ là khả nghịch, do đó $(\lambda I-A)^{-1}$ tồn tại. Khi đó phương trình sau sẽ đúng.
+\begin{align*}
+X &= IX \\
+&= ((\lambda I-A)^{-1}(\lambda I-A))X \\
+&= (\lambda I-A)^{-1}((\lambda I-A)X) \\
+&= (\lambda I-A)^{-1}0 \\
+&= 0
+\end{align*}
+Điều này khẳng định rằng $X=0$. Tuy nhiên, chúng ta đã yêu cầu rằng $X\ne0$. Do đó, $(\lambda I-A)$ không thể có ma trận nghịch đảo!
+
+Nhớ lại rằng nếu một ma trận không khả nghịch, thì định thức của nó bằng 0. Do đó, chúng ta có thể kết luận rằng
+\begin{equation}
+\det(\lambda I-A)=0
+\end{equation}
+Lưu ý rằng điều này tương đương với $\det(A-\lambda I)=0$.
+
+Biểu thức $\det(\lambda I-A)$ là một đa thức (với biến $\lambda$) được gọi là \textbf{đa thức đặc trưng} (characteristic polynomial) của $A$, và $\det(\lambda I-A)=0$ được gọi là \textbf{phương trình đặc trưng} (characteristic equation). Vì lý do này, đôi khi chúng ta cũng có thể gọi các trị riêng của $A$ là các giá trị đặc trưng (characteristic values), nhưng từ trước thường được dùng vì những lý do mang tính lịch sử.
+
+Định lý sau đây khẳng định rằng các nghiệm của đa thức đặc trưng là các trị riêng của $A$. Do đó khi phương trình đặc trưng đúng, $A$ có một vector riêng khác không.
+
+\begin{tcolorbox}[title={Định lý: Sự tồn tại của một Vector riêng}]
+Cho $A$ là một ma trận $n\times n$ và giả sử $\det(\lambda I-A)=0$ đối với một số $\lambda\in\mathbb{C}$.
+Khi đó $\lambda$ là một trị riêng của $A$ và do đó tồn tại một vector khác không $X\in\mathbb{C}^{n}$ sao cho $AX=\lambda X$.
+\end{tcolorbox}
+\textbf{Chứng minh} \\
+Đối với ma trận $A$ kích thước $n\times n$, phương pháp Khai triển Laplace minh họa rằng $\det(\lambda I-A)$ là một đa thức bậc $n$. Như vậy, phương trình (7.1.3) có một nghiệm $\lambda\in\mathbb{C}$ theo Định lý Cơ bản của Đại số. Việc chứng minh $\lambda$ là một trị riêng được để lại như một bài tập.
+
+\subsection{Tìm Vector riêng và Trị riêng}
+Bây giờ khi trị riêng và vector riêng đã được định nghĩa, chúng ta sẽ nghiên cứu cách tìm chúng cho một ma trận $A$.
+
+Đầu tiên, hãy xem xét định nghĩa sau.
+
+\begin{tcolorbox}[title={Định nghĩa: Bội số của một Trị riêng (Multiplicity)}]
+Cho $A$ là một ma trận $n\times n$ với đa thức đặc trưng được cho bởi $\det(\lambda I-A)$. Khi đó, \textbf{bội số} của một trị riêng $\lambda$ của $A$ là số lần $\lambda$ xuất hiện dưới dạng nghiệm của đa thức đặc trưng đó.
+\end{tcolorbox}
+
+Ví dụ, giả sử đa thức đặc trưng của $A$ được cho bởi $(\lambda-2)^{2}$. Giải tìm các nghiệm của đa thức này, chúng ta đặt $(\lambda-2)^{2}=0$ và giải tìm $\lambda$. Chúng ta thấy rằng $\lambda=2$ là một nghiệm xuất hiện hai lần. Do đó, trong trường hợp này, $\lambda=2$ là một trị riêng của $A$ có bội số bằng 2.
+
+Bây giờ chúng ta sẽ xem xét cách tìm các trị riêng và vector riêng cho một ma trận $A$ một cách chi tiết. Các bước sử dụng được tóm tắt trong quy trình sau.
+
+\begin{tcolorbox}[title={Quy trình: Tìm Trị riêng và Vector riêng}]
+Cho $A$ là một ma trận $n\times n$.
+1. Đầu tiên, tìm các trị riêng $\lambda$ của $A$ bằng cách giải phương trình $\det(\lambda I-A)=0$.
+2. Đối với mỗi $\lambda$, tìm các vector riêng cơ bản $X\ne0$ bằng cách tìm các nghiệm cơ bản cho $(\lambda I-A)X=0$.
+
+Để xác minh công việc của bạn, hãy đảm bảo rằng $AX=\lambda X$ đối với mỗi $\lambda$ và vector riêng $X$ liên kết.
+\end{tcolorbox}
+
+Chúng ta sẽ khám phá các bước này sâu hơn trong ví dụ sau.
+
+\textbf{Ví dụ: Tìm các Trị riêng và Vector riêng} \\
+Cho $A=\begin{bmatrix}-5&2\\ -7&4\end{bmatrix}$. Tìm các trị riêng và vector riêng của nó.
+
+\textbf{Giải} \\
+Chúng ta sẽ sử dụng Quy trình 7.1.1. Đầu tiên chúng ta tìm các trị riêng của $A$ bằng cách giải phương trình
+\begin{equation*}
+\det(\lambda I-A)=0
+\end{equation*}
+Điều này mang lại
+\begin{equation}
+\det\left(\lambda\begin{bmatrix}1&0\\ 0&1\end{bmatrix}-\begin{bmatrix}-5&2\\ -7&4\end{bmatrix}\right)=0
+\end{equation}
+\begin{equation*}
+\det\begin{bmatrix}\lambda+5&-2\\ 7&\lambda-4\end{bmatrix}=0
+\end{equation*}
+Tính định thức như bình thường, kết quả là
+\begin{equation*}
+\lambda^{2}+\lambda-6=0
+\end{equation*}
+Giải phương trình này, chúng ta tìm thấy $\lambda_{1}=2$ và $\lambda_{2}=-3$.
+
+Bây giờ chúng ta cần tìm các vector riêng cơ bản cho mỗi $\lambda$. Đầu tiên chúng ta sẽ tìm các vector riêng cho $\lambda_{1}=2$. Chúng ta muốn tìm tất cả các vector $X\ne0$ sao cho $AX=2X$. Đây là những nghiệm cho $(2I-A)X=0$.
+\begin{equation*}
+\left(2\begin{bmatrix}1&0\\ 0&1\end{bmatrix}-\begin{bmatrix}-5&2\\ -7&4\end{bmatrix}\right)\begin{bmatrix}x\\ y\end{bmatrix}=\begin{bmatrix}0\\ 0\end{bmatrix}
+\end{equation*}
+\begin{equation*}
+\begin{bmatrix}7&-2\\ 7&-2\end{bmatrix}\begin{bmatrix}x\\ y\end{bmatrix}=\begin{bmatrix}0\\ 0\end{bmatrix}
+\end{equation*}
+Ma trận bổ sung cho hệ này và dạng bậc thang rút gọn (reduced row-echelon form) tương ứng của nó được cho bởi
+\begin{equation}
+\begin{bmatrix}7&-2&0\\ 7&-2&0\end{bmatrix}\rightarrow\cdot\cdot\cdot\rightarrow\begin{bmatrix}1&-\frac{2}{7}&0\\ 0&0&0\end{bmatrix}
+\end{equation}
+Nghiệm là bất kỳ vector nào có dạng
+\begin{equation*}
+\begin{bmatrix}\frac{2}{7}s\\ s\end{bmatrix}=s\begin{bmatrix}\frac{2}{7}\\ 1\end{bmatrix}
+\end{equation*}
+Nhân vector này với 7, chúng ta nhận được một mô tả đơn giản hơn cho nghiệm của hệ này, được cho bởi
+\begin{equation*}
+t\begin{bmatrix}2\\ 7\end{bmatrix}
+\end{equation*}
+Điều này mang lại vector riêng cơ bản cho $\lambda_{1}=2$ là
+\begin{equation*}
+\begin{bmatrix}2\\ 7\end{bmatrix}
+\end{equation*}
+Để kiểm tra, chúng ta xác minh rằng $AX=2X$ đối với vector riêng cơ bản này.
+\begin{equation*}
+\begin{bmatrix}-5&2\\ -7&4\end{bmatrix}\begin{bmatrix}2\\ 7\end{bmatrix}=\begin{bmatrix}4\\ 14\end{bmatrix}=2\begin{bmatrix}2\\ 7\end{bmatrix}
+\end{equation*}
+Đây là những gì chúng ta muốn, vì vậy chúng ta biết vector riêng cơ bản này là chính xác.
+
+Tiếp theo, chúng ta sẽ lặp lại quá trình này để tìm vector riêng cơ bản cho $\lambda_{2}=-3$. Chúng ta muốn tìm tất cả các vector $X\ne0$ sao cho $AX=-3X$. Đây là những nghiệm cho $((-3)I-A)X=0$.
+\begin{equation*}
+\left((-3)\begin{bmatrix}1&0\\ 0&1\end{bmatrix}-\begin{bmatrix}-5&2\\ -7&4\end{bmatrix}\right)\begin{bmatrix}x\\ y\end{bmatrix}=\begin{bmatrix}0\\ 0\end{bmatrix}
+\end{equation*}
+\begin{equation*}
+\begin{bmatrix}2&-2\\ 7&-7\end{bmatrix}\begin{bmatrix}x\\ y\end{bmatrix}=\begin{bmatrix}0\\ 0\end{bmatrix}
+\end{equation*}
+Ma trận bổ sung cho hệ này và dạng bậc thang rút gọn tương ứng của nó được cho bởi
+\begin{equation}
+\begin{bmatrix}2&-2&0\\ 7&-7&0\end{bmatrix}\rightarrow\cdot\cdot\cdot\rightarrow\begin{bmatrix}1&-1&0\\ 0&0&0\end{bmatrix}
+\end{equation}
+Nghiệm là bất kỳ vector nào có dạng
+\begin{equation*}
+\begin{bmatrix}s\\ s\end{bmatrix}=s\begin{bmatrix}1\\ 1\end{bmatrix}
+\end{equation*}
+Điều này mang lại vector riêng cơ bản cho $\lambda_{2}=-3$ là
+\begin{equation*}
+\begin{bmatrix}1\\ 1\end{bmatrix}
+\end{equation*}
+Để kiểm tra, chúng ta xác minh rằng $AX=-3X$ đối với vector riêng cơ bản này.
+\begin{equation*}
+\begin{bmatrix}-5&2\\ -7&4\end{bmatrix}\begin{bmatrix}1\\ 1\end{bmatrix}=\begin{bmatrix}-3\\ -3\end{bmatrix}=-3\begin{bmatrix}1\\ 1\end{bmatrix}
+\end{equation*}
+Đây là những gì chúng ta muốn, vì vậy chúng ta biết vector riêng cơ bản này là chính xác.
+
+Sau đây là một ví dụ sử dụng Quy trình 7.1.1 cho ma trận $3\times3$.
+
+\textbf{Ví dụ: Tìm các Trị riêng và Vector riêng} \\
+Tìm các trị riêng và vector riêng cho ma trận
+\begin{equation*}
+A=\begin{bmatrix}5&-10&-5\\ 2&14&2\\ -4&-8&6\end{bmatrix}
+\end{equation*}
+
+\textbf{Giải} \\
+Chúng ta sẽ sử dụng Quy trình 7.1.1. Đầu tiên chúng ta cần tìm các trị riêng của $A$. Hãy nhớ lại rằng chúng là các nghiệm của phương trình
+\begin{equation*}
+\det(\lambda I-A)=0
+\end{equation*}
+Trong trường hợp này, phương trình là
+\begin{equation*}
+\det\left(\lambda\begin{bmatrix}1&0&0\\ 0&1&0\\ 0&0&1\end{bmatrix}-\begin{bmatrix}5&-10&-5\\ 2&14&2\\ -4&-8&6\end{bmatrix}\right)=0
+\end{equation*}
+sẽ trở thành
+\begin{equation*}
+\det\begin{bmatrix}\lambda-5&10&5\\ -2&\lambda-14&-2\\ 4&8&\lambda-6\end{bmatrix}=0
+\end{equation*}
+Sử dụng Khai triển Laplace, tính định thức này và đơn giản hóa. Kết quả là phương trình sau đây.
+\begin{equation*}
+(\lambda-5)(\lambda^{2}-20\lambda+100)=0
+\end{equation*}
+Giải phương trình này, chúng ta tìm thấy các trị riêng là $\lambda_{1}=5$, $\lambda_{2}=10$ và $\lambda_{3}=10$. Lưu ý rằng 10 là một nghiệm có bội số hai (nghiệm kép) vì
+\begin{equation*}
+\lambda^{2}-20\lambda+100=(\lambda-10)^{2}
+\end{equation*}
+Do đó, $\lambda_{2}=10$ là một trị riêng có bội số là hai.
+
+Bây giờ chúng ta đã tìm thấy các trị riêng cho $A$, chúng ta có thể tính các vector riêng.
+Đầu tiên chúng ta sẽ tìm các vector riêng cơ bản cho $\lambda_{1}=5$. Nói cách khác, chúng ta muốn tìm tất cả các vector khác không $X$ sao cho $AX=5X$. Điều này đòi hỏi chúng ta phải giải phương trình $(5I-A)X=0$ cho $X$ như sau.
+Nghĩa là bạn cần tìm nghiệm cho
+\begin{equation*}
+\left(5\begin{bmatrix}1&0&0\\ 0&1&0\\ 0&0&1\end{bmatrix}-\begin{bmatrix}5&-10&-5\\ 2&14&2\\ -4&-8&6\end{bmatrix}\right)\begin{bmatrix}x\\ y\\ z\end{bmatrix}=\begin{bmatrix}0\\ 0\\ 0\end{bmatrix}
+\end{equation*}
+\begin{equation*}
+\begin{bmatrix}0&10&5\\ -2&-9&-2\\ 4&8&-1\end{bmatrix}\begin{bmatrix}x\\ y\\ z\end{bmatrix}=\begin{bmatrix}0\\ 0\\ 0\end{bmatrix}
+\end{equation*}
+Đến đây thì đây là một bài toán quen thuộc. Bạn thiết lập ma trận bổ sung và biến đổi sơ cấp theo hàng để nhận được nghiệm. Như vậy, ma trận bạn phải rút gọn hàng là
+\begin{equation*}
+\begin{bmatrix}0&10&5&0\\ -2&-9&-2&0\\ 4&8&-1&0\end{bmatrix}
+\end{equation*}
+Dạng bậc thang rút gọn theo hàng là
+\begin{equation*}
+\begin{bmatrix}1&0&-\frac{5}{2}&0\\ 0&1&\frac{1}{2}&0\\ 0&0&0&0\end{bmatrix}
+\end{equation*}
+và vì vậy nghiệm là bất kỳ vector nào có dạng
+\begin{equation*}
+\begin{bmatrix}\frac{3}{4}s\\ -\frac{1}{2}s\\ s\end{bmatrix}=s\begin{bmatrix}\frac{3}{4}\\ -\frac{1}{2}\\ 1\end{bmatrix}
+\end{equation*}
+trong đó $s\in\mathbb{R}$. Nếu chúng ta nhân vector này với 4, chúng ta nhận được một mô tả đơn giản hơn cho nghiệm của hệ này, như được cho bởi
+\begin{equation*}
+t\begin{bmatrix}3\\ -2\\ 4\end{bmatrix}
+\end{equation*}
+trong đó $t\in\mathbb{R}$. Ở đây, vector riêng cơ bản được cho bởi
+\begin{equation}
+X_{1}=\begin{bmatrix}3\\ -2\\ 4\end{bmatrix}
+\end{equation}
+Lưu ý rằng chúng ta không thể để $t=0$ ở đây, vì điều này sẽ dẫn đến vector không và các vector riêng không bao giờ bằng không! Ngoài giá trị này, mọi lựa chọn khác của $t$ trong (7.1.7) đều dẫn đến một vector riêng.
+
+Luôn luôn kiểm tra lại kết quả của bạn là một ý kiến hay! Để làm như vậy, chúng ta sẽ lấy ma trận gốc và nhân với vector riêng cơ bản $X_{1}$. Chúng ta kiểm tra để xem liệu chúng ta có nhận được $5X_{1}$ hay không.
+\begin{equation*}
+\begin{bmatrix}5&-10&-5\\ 2&14&2\\ -4&-8&6\end{bmatrix}\begin{bmatrix}3\\ -2\\ 4\end{bmatrix}=\begin{bmatrix}15\\ -10\\ 20\end{bmatrix}=5\begin{bmatrix}3\\ -2\\ 4\end{bmatrix}
+\end{equation*}
+Đây là những gì chúng ta mong muốn, vì vậy chúng ta biết rằng các tính toán của mình đã chính xác.
+
+Tiếp theo chúng ta sẽ tìm các vector riêng cơ bản cho $\lambda_{2},\lambda_{3}=10$. Những vector này là các nghiệm cơ bản cho phương trình,
+\begin{equation*}
+\left(10\begin{bmatrix}1&0&0\\ 0&1&0\\ 0&0&1\end{bmatrix}-\begin{bmatrix}5&-10&-5\\ 2&14&2\\ -4&-8&6\end{bmatrix}\right)\begin{bmatrix}x\\ y\\ z\end{bmatrix}=\begin{bmatrix}0\\ 0\\ 0\end{bmatrix}
+\end{equation*}
+Nghĩa là bạn phải tìm các nghiệm cho
+\begin{equation*}
+\begin{bmatrix}5&10&5\\ -2&-4&-2\\ 4&8&4\end{bmatrix}\begin{bmatrix}x\\ y\\ z\end{bmatrix}=\begin{bmatrix}0\\ 0\\ 0\end{bmatrix}
+\end{equation*}
+Hãy xem xét ma trận bổ sung
+\begin{equation*}
+\begin{bmatrix}5&10&5&0\\ -2&-4&-2&0\\ 4&8&4&0\end{bmatrix}
+\end{equation*}
+Dạng bậc thang rút gọn theo hàng cho ma trận này là
+\begin{equation*}
+\begin{bmatrix}1&2&1&0\\ 0&0&0&0\\ 0&0&0&0\end{bmatrix}
+\end{equation*}
+và vì vậy các vector riêng có dạng
+\begin{equation*}
+\begin{bmatrix}-2s-t\\ s\\ t\end{bmatrix}=s\begin{bmatrix}-2\\ 1\\ 0\end{bmatrix}+t\begin{bmatrix}-1\\ 0\\ 1\end{bmatrix}
+\end{equation*}
+Lưu ý rằng bạn không thể chọn $t$ và $s$ đồng thời bằng không vì điều này sẽ dẫn đến vector không và vector riêng không bao giờ bằng không.
+Ở đây, có hai vector riêng cơ bản, được cho bởi
+\begin{equation*}
+X_{2}=\begin{bmatrix}-2\\ 1\\ 0\end{bmatrix} \quad \text{và} \quad X_{3}=\begin{bmatrix}-1\\ 0\\ 1\end{bmatrix}
+\end{equation*}
+Thực hiện bất kỳ tổ hợp tuyến tính (khác không) nào của $X_{2}$ và $X_{3}$ cũng sẽ dẫn đến một vector riêng cho trị riêng $\lambda=10$. Cũng giống như trường hợp cho $\lambda=5$, hãy luôn kiểm tra kết quả của bạn! Đối với vector riêng cơ bản đầu tiên, chúng ta có thể kiểm tra $AX_{2}=10X_{2}$ như sau.
+\begin{equation*}
+\begin{bmatrix}5&-10&-5\\ 2&14&2\\ -4&-8&6\end{bmatrix}\begin{bmatrix}-2\\ 1\\ 0\end{bmatrix}=\begin{bmatrix}-20\\ 10\\ 0\end{bmatrix}=10\begin{bmatrix}-2\\ 1\\ 0\end{bmatrix}
+\end{equation*}
+Đây là những gì chúng ta mong muốn. Việc kiểm tra vector riêng cơ bản thứ hai, $X_{3}$, được để lại như một bài tập.
+
+Điều quan trọng cần nhớ là đối với bất kỳ vector riêng $X$ nào, $X\ne0$. Tuy nhiên, việc có các trị riêng bằng không là hoàn toàn khả thi. Điều này được minh họa trong ví dụ sau.
+
+\textbf{Ví dụ: Một Trị riêng Bằng không} \\
+Cho
+\begin{equation*}
+A=\begin{bmatrix}2&2&-2\\ 1&3&-1\\ -1&1&1\end{bmatrix}
+\end{equation*}
+Tìm các trị riêng và vector riêng của $A$.
+
+\textbf{Giải} \\
+Đầu tiên chúng ta tìm các trị riêng của $A$. Chúng ta sẽ thực hiện việc đó thông qua Định nghĩa 7.1.1.
+Để tìm các trị riêng của $A$, chúng ta giải phương trình sau.
+\begin{equation*}
+\det(\lambda I-A)=\det\begin{bmatrix}\lambda-2&-2&2\\ -1&\lambda-3&1\\ 1&-1&\lambda-1\end{bmatrix}=0
+\end{equation*}
+Điều này thu gọn thành $\lambda^{3}-6\lambda^{2}+8\lambda=0$. Bạn có thể tự xác minh rằng các nghiệm là $\lambda_{1}=0$, $\lambda_{2}=2$, $\lambda_{3}=4$. Lưu ý rằng mặc dù các vector riêng không bao giờ có thể bằng 0, nhưng việc có một trị riêng bằng 0 là hoàn toàn có thể.
+
+Bây giờ chúng ta sẽ tìm các vector riêng cơ bản. Đối với $\lambda_{1}=0$, chúng ta cần giải phương trình $(0I-A)X=0$. Phương trình này trở thành $-AX=0$ và do đó ma trận bổ sung để tìm nghiệm được cho bởi
+\begin{equation*}
+\begin{bmatrix}-2&-2&2&0\\ -1&-3&1&0\\ 1&-1&-1&0\end{bmatrix}
+\end{equation*}
+Dạng bậc thang rút gọn theo hàng là
+\begin{equation*}
+\begin{bmatrix}1&0&-1&0\\ 0&1&0&0\\ 0&0&0&0\end{bmatrix}
+\end{equation*}
+Do đó, các vector riêng có dạng $\begin{bmatrix}t\\ 0\\ t\end{bmatrix}$ trong đó $t\ne0$ và vector riêng cơ bản được cho bởi
+\begin{equation*}
+X_{1}=\begin{bmatrix}1\\ 0\\ 1\end{bmatrix}
+\end{equation*}
+Chúng ta có thể xác minh rằng vector riêng này là chính xác bằng cách kiểm tra xem phương trình $AX_{1}=0X_{1}$ có đúng không. Tích $AX_{1}$ được cho bởi
+\begin{equation*}
+AX_{1}=\begin{bmatrix}2&2&-2\\ 1&3&-1\\ -1&1&1\end{bmatrix}\begin{bmatrix}1\\ 0\\ 1\end{bmatrix}=\begin{bmatrix}0\\ 0\\ 0\end{bmatrix}
+\end{equation*}
+Điều này rõ ràng bằng $0X_{1}$, vì vậy phương trình thỏa mãn. Do đó, $AX_{1}=0X_{1}$ và vì vậy 0 là một trị riêng của $A$.
+
+Việc tính toán các vector riêng cơ bản khác được để lại như một bài tập.
+
+Trong các phần sau, chúng ta sẽ xem xét các cách để đơn giản hóa quá trình tìm trị riêng và vector riêng bằng cách sử dụng các thuộc tính của các loại ma trận đặc biệt.
+
+\subsection{Trị riêng và Vector riêng cho Các Loại Ma trận Đặc biệt}
+Có ba loại ma trận đặc biệt mà chúng ta có thể sử dụng để đơn giản hóa quá trình tìm trị riêng và vector riêng. Trong suốt phần này, chúng ta sẽ thảo luận về ma trận đồng dạng, ma trận sơ cấp, cũng như ma trận tam giác.
+
+Chúng ta bắt đầu với một định nghĩa.
+
+\begin{tcolorbox}[title={Định nghĩa: Ma trận Đồng dạng (Similar Matrices)}]
+Cho $A$ và $B$ là các ma trận $n\times n$. Giả sử tồn tại một ma trận khả nghịch $P$ sao cho
+\begin{equation*}
+A=P^{-1}BP
+\end{equation*}
+Khi đó $A$ và $B$ được gọi là các ma trận đồng dạng.
+\end{tcolorbox}
+
+Hóa ra chúng ta có thể sử dụng khái niệm ma trận đồng dạng để giúp chúng ta tìm các trị riêng của ma trận. Hãy xem xét bổ đề sau.
+
+\begin{tcolorbox}[title={Bổ đề: Ma trận Đồng dạng và Trị riêng}]
+Cho $A$ và $B$ là các ma trận đồng dạng, sao cho $A=P^{-1}BP$ trong đó $A, B$ là các ma trận $n\times n$ và $P$ khả nghịch. Khi đó $A, B$ có các trị riêng giống nhau.
+\end{tcolorbox}
+\textbf{Chứng minh} \\
+Chúng ta cần chứng minh hai điều. Đầu tiên, chúng ta cần chứng minh rằng nếu $A=P^{-1}BP$, thì $A$ và $B$ có các trị riêng giống nhau. Thứ hai, chúng ta chứng minh rằng nếu $A$ và $B$ có cùng các trị riêng, thì $A=P^{-1}BP$.
+
+Dưới đây là phần chứng minh cho phát biểu đầu tiên. Giả sử $A=P^{-1}BP$ và $\lambda$ là một trị riêng của $A$, tức là $AX=\lambda X$ đối với một số $X\ne0$. Khi đó
+\begin{equation*}
+P^{-1}BPX=\lambda X
+\end{equation*}
+và do đó
+\begin{equation*}
+BPX=\lambda PX
+\end{equation*}
+Vì $P$ là ma trận song ánh (one-to-one) và $X\ne0$, nên suy ra $PX\ne0$. Ở đây, $PX$ đóng vai trò của vector riêng trong phương trình này. Do đó $\lambda$ cũng là một trị riêng của $B$. Người ta có thể tương tự xác minh rằng bất kỳ trị riêng nào của $B$ cũng là một trị riêng của $A$, và vì vậy cả hai ma trận đều có các trị riêng giống nhau theo ý muốn.
+
+Việc chứng minh phát biểu thứ hai cũng tương tự và được để lại như một bài tập.
+
+Lưu ý rằng bằng chứng này cũng chỉ ra rằng các vector riêng của $A$ và $B$ (thường) sẽ khác nhau. Chúng ta thấy trong chứng minh rằng $AX=\lambda X$, trong khi $B(PX)=\lambda(PX)$. Do đó, đối với một trị riêng $\lambda$, $A$ sẽ có vector riêng $X$ trong khi $B$ sẽ có vector riêng $PX$.
+
+Loại ma trận đặc biệt thứ hai mà chúng ta thảo luận trong phần này là ma trận sơ cấp. Nhớ lại từ Định nghĩa 2.8.1 rằng một ma trận sơ cấp $E$ đạt được bằng cách áp dụng một phép toán trên hàng vào ma trận đơn vị.
+Có thể sử dụng các ma trận sơ cấp để đơn giản hóa một ma trận trước khi tìm kiếm các trị riêng và vector riêng của nó. Điều này được minh họa trong ví dụ sau.
+
+\textbf{Ví dụ: Đơn giản hóa Sử dụng Ma trận Sơ cấp} \\
+Tìm các trị riêng cho ma trận
+\begin{equation*}
+A=\begin{bmatrix}33&105&105\\ 10&28&30\\ -20&-60&-62\end{bmatrix}
+\end{equation*}
+
+\textbf{Giải} \\
+Ma trận này có các số lớn và do đó chúng ta muốn đơn giản hóa càng nhiều càng tốt trước khi tính các trị riêng. Chúng ta sẽ làm điều đó bằng cách sử dụng các phép toán hàng. Đầu tiên, cộng 2 lần hàng thứ hai vào hàng thứ ba. Để thực hiện, nhân ma trận $A$ bên trái với $E(2,2)$. Sau đó nhân bên phải $A$ với nghịch đảo của $E(2,2)$ như được minh họa.
+\begin{equation*}
+\begin{bmatrix}1&0&0\\ 0&1&0\\ 0&2&1\end{bmatrix}\begin{bmatrix}33&105&105\\ 10&28&30\\ -20&-60&-62\end{bmatrix}\begin{bmatrix}1&0&0\\ 0&1&0\\ 0&-2&1\end{bmatrix}=\begin{bmatrix}33&-105&105\\ 10&-32&30\\ 0&0&-2\end{bmatrix}
+\end{equation*}
+Theo Bổ đề 7.1.1, ma trận kết quả có các trị riêng giống như $A$ trong đó, ma trận $E(2,2)$ đóng vai trò của $P$.
+
+Chúng ta thực hiện bước này một lần nữa, như sau. Trong bước này, chúng ta sử dụng ma trận sơ cấp thu được bằng cách cộng -3 lần hàng thứ hai vào hàng thứ nhất.
+\begin{equation}
+\begin{bmatrix}1&-3&0\\ 0&1&0\\ 0&0&1\end{bmatrix}\begin{bmatrix}33&-105&105\\ 10&-32&30\\ 0&0&-2\end{bmatrix}\begin{bmatrix}1&3&0\\ 0&1&0\\ 0&0&1\end{bmatrix}=\begin{bmatrix}3&0&15\\ 10&-2&30\\ 0&0&-2\end{bmatrix}
+\end{equation}
+Một lần nữa theo Bổ đề 7.1.1, ma trận kết quả này có các trị riêng giống như $A$. Tại điểm này, chúng ta có thể dễ dàng tìm thấy các trị riêng. Gọi
+\begin{equation*}
+B=\begin{bmatrix}3&0&15\\ 10&-2&30\\ 0&0&-2\end{bmatrix}
+\end{equation*}
+Sau đó, chúng ta tìm các trị riêng của $B$ (và do đó của $A$) bằng cách giải phương trình $\det(\lambda I-B)=0$. Bạn nên xác minh rằng phương trình này trở thành
+\begin{equation*}
+(\lambda+2)(\lambda+2)(\lambda-3)=0
+\end{equation*}
+Giải phương trình này mang lại các trị riêng $\lambda_{1}=-2$, $\lambda_{2}=-2$ và $\lambda_{3}=3$. Do đó, đây cũng là các trị riêng của $A$.
+
+Thông qua việc sử dụng các ma trận sơ cấp, chúng ta đã có thể tạo ra một ma trận mà việc tìm các trị riêng sẽ dễ dàng hơn so với $A$. Tại điểm này, bạn có thể quay lại ma trận gốc $A$ và giải $(\lambda I-A)X=0$ để có được các vector riêng của $A$.
+
+Lưu ý rằng khi bạn nhân ở bên phải với một ma trận sơ cấp, bạn đang thực hiện phép toán trên cột được xác định bởi ma trận sơ cấp đó. Trong (7.1.8) phép nhân với ma trận sơ cấp ở bên phải chỉ liên quan đến việc lấy ba lần cột thứ nhất và cộng vào cột thứ hai. Do đó, mà không cần nhắc đến các ma trận sơ cấp, quá trình chuyển đổi sang ma trận mới trong (7.1.8) có thể được minh họa bởi
+\begin{equation*}
+\begin{bmatrix}33&-105&105\\ 10&-32&30\\ 0&0&-2\end{bmatrix}\rightarrow\begin{bmatrix}3&-9&15\\ 10&-32&30\\ 0&0&-2\end{bmatrix}\rightarrow\begin{bmatrix}3&0&15\\ 10&-2&30\\ 0&0&-2\end{bmatrix}
+\end{equation*}
+
+Loại ma trận đặc biệt thứ ba chúng ta sẽ xem xét trong phần này là ma trận tam giác. Nhớ lại Định nghĩa 3.1.6, trong đó phát biểu rằng ma trận tam giác trên (dưới) chứa toàn các số không bên dưới (bên trên) đường chéo chính. Hãy nhớ rằng tìm định thức của một ma trận tam giác là một quy trình đơn giản chỉ là lấy tích của các phần tử trên đường chéo chính. Hóa ra cũng có một cách đơn giản để tìm các trị riêng của một ma trận tam giác.
+
+Trong ví dụ tiếp theo, chúng ta sẽ chứng minh rằng các trị riêng của một ma trận tam giác chính là các phần tử trên đường chéo chính.
+
+\textbf{Ví dụ: Trị riêng cho một Ma trận Tam giác} \\
+Cho $A=\begin{bmatrix}1&2&4\\ 0&4&7\\ 0&0&6\end{bmatrix}$. Tìm các trị riêng của $A$.
+
+\textbf{Giải} \\
+Chúng ta cần giải phương trình $\det(\lambda I-A)=0$ như sau
+\begin{equation}
+\det(\lambda I-A)=\det\begin{bmatrix}\lambda-1&-2&-4\\ 0&\lambda-4&-7\\ 0&0&\lambda-6\end{bmatrix}=(\lambda-1)(\lambda-4)(\lambda-6)=0
+\end{equation}
+Giải phương trình $(\lambda-1)(\lambda-4)(\lambda-6)=0$ đối với $\lambda$ mang lại các trị riêng $\lambda_{1}=1$, $\lambda_{2}=4$ và $\lambda_{3}=6$. Vì vậy, các trị riêng là các phần tử trên đường chéo chính của ma trận ban đầu.
+
+Kết quả tương tự cũng đúng cho các ma trận tam giác dưới. Đối với bất kỳ ma trận tam giác nào, các trị riêng luôn bằng với các phần tử trên đường chéo chính. Để tìm các vector riêng của một ma trận tam giác, chúng ta sử dụng quy trình thông thường.
+
+Trong phần tiếp theo, chúng ta sẽ khám phá một quá trình quan trọng liên quan đến các trị riêng và vector riêng của một ma trận.
+

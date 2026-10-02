@@ -1,0 +1,799 @@
+\chapter{Các Thước đo Độ tương đồng}
+\label{ch:M4L1}
+
+% Lesson: Similarity Measures
+
+\section*{Lesson Notes}
+
+MODULE 4 | BÀI 1
+
+{\small
+\begin{longtable}{>{\raggedright\arraybackslash}p{0.213\linewidth}>{\raggedright\arraybackslash}p{0.727\linewidth}}
+\toprule
+\textbf{Thời gian đọc} & 45 phút \\
+\addlinespace[2pt]
+\textbf{Kiến thức nền tảng} & Thống kê cơ bản: quen thuộc với các khái niệm như trung bình, độ lệch chuẩn, tương quan và các phân phối. Đại số tuyến tính: kiến thức cơ bản về vectơ, ma trận và các phép toán như tích vô hướng. Xác suất: hiểu biết cơ bản về các khái niệm xác suất để diễn giải các thước đo thống kê và ý nghĩa của chúng. Kiến thức tài chính và đầu tư: hiểu biết cơ bản về thị trường tài chính, các công cụ và chiến lược đầu tư; quen thuộc với các khái niệm đánh giá và quản trị rủi ro; kiến thức cơ bản về phân tích cảm xúc (sentiment analysis) và vai trò của nó trong việc hiểu xu hướng thị trường. \\
+\addlinespace[2pt]
+\textbf{Từ khóa} & Khoảng cách Euclid, khoảng cách Manhattan, độ tương đồng cosine, chỉ số Jaccard, Word Mover's Distance (WMD), Dynamic Time Warping, tương quan Pearson, tương quan hạng Spearman, Term Frequency-Inverse Document Frequency (TF-IDF), phân tích văn bản, xử lý ngôn ngữ tự nhiên (NLP), truy xuất thông tin \\
+\addlinespace[2pt]
+\bottomrule
+\end{longtable}
+}
+
+\emph{Trong bài học này, chúng ta khám phá các thước đo độ tương đồng và cách sử dụng chúng trong thị trường tài chính, đặc biệt là Term Frequency-Inverse Document Frequency (TF-IDF) để phân tích dữ liệu văn bản như tin tức và mạng xã hội nhằm thu được hiểu biết phục vụ các quyết định đầu tư. Chúng ta sẽ đề cập các loại thước đo độ tương đồng khác nhau, những lợi ích của TF-IDF, cùng các ứng dụng của nó trong phân tích cảm xúc, quản trị rủi ro và các chiến lược đầu tư khác.}
+
+\begin{lstlisting}[language=Python,escapeinside={(*@}{@*)}]
+# (*@Tải@*) (*@các@*) (*@thư@*) (*@viện@*)
+import numpy as np
+import pandas as pd
+
+from sklearn.feature_extraction.text import TfidfVectorizer
+\end{lstlisting}
+
+\section{1 Các Thước đo Độ tương đồng}
+
+Các thước đo độ tương đồng là những phương pháp dùng để định lượng mức độ giống nhau giữa hai đối tượng dữ liệu. Chúng thiết yếu trong nhiều lĩnh vực, bao gồm khai phá dữ liệu, học máy và truy xuất thông tin. Việc lựa chọn thước đo độ tương đồng phụ thuộc vào loại dữ liệu và cách diễn giải mong muốn về độ tương đồng. Các loại thước đo độ tương đồng phổ biến gồm:
+
+\textbf{Các thước đo khoảng cách:} Những thước đo này định lượng độ khác biệt. Khoảng cách càng nhỏ thì độ tương đồng càng cao:
+
+\begin{itemize}
+  \item Khoảng cách Euclid
+  \item Khoảng cách Manhattan
+  \item Khoảng cách Minkowski
+  \item Word Mover's Distance (WMD)
+  \item Dynamic Time Warping
+\end{itemize}
+
+\textbf{Các hệ số tương đồng:} Những thước đo này định lượng trực tiếp độ tương đồng. Giá trị càng cao thì độ tương đồng càng lớn:
+
+\begin{itemize}
+  \item Độ tương đồng cosine
+  \item Chỉ số Jaccard
+  \item Hệ số tương quan Pearson
+  \item Tương quan hạng Spearman
+\end{itemize}
+
+Dưới đây chúng ta sẽ xem xét từng thước đo chi tiết hơn.
+
+\subsection{1.1 Các Thước đo Khoảng cách}
+
+\textbf{1. Khoảng cách Euclid}
+
+\begin{itemize}
+  \item \textbf{Loại:} Thước đo khoảng cách
+  \item \textbf{Kiểu dữ liệu:} Dữ liệu số
+  \item \textbf{Mô tả:} Đo khoảng cách đường thẳng giữa hai điểm trong không gian Euclid.
+  \item \textbf{Công thức:} $\sqrt{\sum (x_i - y_i)^2}$ (trong đó $x$ và $y$ là các điểm dữ liệu, và $i$ biểu thị các chiều)
+  \item \textbf{Diễn giải:} Khoảng cách càng nhỏ = độ tương đồng càng cao
+  \item \textbf{Các trường hợp sử dụng:}
+  \begin{itemize}
+    \item Phân cụm K-means
+    \item K láng giềng gần nhất (K-nearest neighbors)
+    \item Tìm các điểm dữ liệu tương tự
+  \end{itemize}
+\end{itemize}
+
+\textbf{2. Khoảng cách Manhattan}
+
+\begin{itemize}
+  \item \textbf{Loại:} Thước đo khoảng cách
+  \item \textbf{Kiểu dữ liệu:} Dữ liệu số
+  \item \textbf{Mô tả:} Đo khoảng cách giữa hai điểm bằng cách cộng các chênh lệch tuyệt đối của tọa độ. Còn được gọi là khoảng cách khối phố (city block distance) hay khoảng cách L1.
+  \item \textbf{Công thức:} $\sum |x_i - y_i|$
+  \item Diễn giải: Khoảng cách càng nhỏ = độ tương đồng càng cao
+  \item \textbf{Các trường hợp sử dụng:}
+  \begin{itemize}
+    \item Hệ thống gợi ý
+    \item Lựa chọn đặc trưng
+    \item Bền vững trước các giá trị ngoại lai
+  \end{itemize}
+\end{itemize}
+
+\textbf{3. Khoảng cách Minkowski}
+
+\begin{itemize}
+  \item \textbf{Loại:} Thước đo khoảng cách
+  \item \textbf{Kiểu dữ liệu:} Dữ liệu số
+  \item \textbf{Mô tả:} Một thước đo khoảng cách tổng quát bao gồm khoảng cách Euclid và khoảng cách Manhattan như các trường hợp đặc biệt.
+  \item \textbf{Công thức:} $(\sum |x_i - y_i|^p)^{(1/p)}$ (trong đó $p$ là bậc của khoảng cách)
+  \begin{itemize}
+    \item $p = 1$: khoảng cách Manhattan
+    \item $p = 2$: khoảng cách Euclid
+  \end{itemize}
+  \item \textbf{Diễn giải:} Khoảng cách càng nhỏ = độ tương đồng càng cao
+  \item \textbf{Các trường hợp sử dụng:}
+  \begin{itemize}
+    \item Thích ứng với các phân phối dữ liệu khác nhau
+    \item Thử nghiệm với các thước đo khoảng cách khác nhau
+  \end{itemize}
+\end{itemize}
+
+\textbf{4. Word Mover's Distance (WMD)}
+
+\begin{itemize}
+  \item \textbf{Loại:} Thước đo khoảng cách
+  \item \textbf{Kiểu dữ liệu:} Dữ liệu văn bản (tài liệu, câu)
+  \item \textbf{Mô tả:} Đo độ khác biệt giữa hai tài liệu văn bản dựa trên ``chi phí di chuyển'' của các từ từ tài liệu này để khớp với các từ trong tài liệu kia. Sử dụng các embedding từ để biểu diễn từ trong một không gian ngữ nghĩa.
+  \item \textbf{Diễn giải:} WMD càng thấp thì độ tương đồng càng cao.
+  \item \textbf{Các trường hợp sử dụng:}
+  \begin{itemize}
+    \item Phân loại tài liệu
+    \item Các tác vụ về độ tương đồng văn bản mà ý nghĩa ngữ nghĩa là quan trọng
+    \item Phân cụm tài liệu
+  \end{itemize}
+\end{itemize}
+
+\textbf{5. Dynamic Time Warping}
+
+\begin{itemize}
+  \item \textbf{Loại:} Thước đo khoảng cách
+  \item \textbf{Kiểu dữ liệu:} Dữ liệu chuỗi thời gian
+  \item \textbf{Mô tả:} Đo độ tương đồng giữa hai chuỗi thời gian có thể khác nhau về tốc độ hoặc bị lệch thời gian. Nó tìm phép căn chỉnh tối ưu giữa các chuỗi thời gian bằng cách ``uốn'' trục thời gian.
+  \item \textbf{Diễn giải:} Khoảng cách DTW càng thấp thì độ tương đồng càng cao.
+  \item \textbf{Các trường hợp sử dụng:}
+  \begin{itemize}
+    \item Nhận dạng giọng nói
+    \item Nhận dạng cử chỉ
+    \item Phân tích chuỗi thời gian tài chính
+    \item Phát hiện bất thường trong chuỗi thời gian
+  \end{itemize}
+\end{itemize}
+
+\subsection{1.2 Các Hệ số Tương đồng}
+
+\textbf{1. Độ tương đồng cosine}
+
+\begin{itemize}
+  \item \textbf{Loại:} Hệ số tương đồng
+  \item \textbf{Kiểu dữ liệu:} Các vectơ số (thường dùng cho dữ liệu văn bản sau khi vectơ hóa)
+  \item \textbf{Mô tả:} Đo cosine của góc giữa hai vectơ.
+  \item \textbf{Công thức:} $(A \cdot B) / (\lVert A \rVert \lVert B \rVert)$ (trong đó $A$ và $B$ là các vectơ, $\cdot$ là tích vô hướng, và $\lVert \rVert$ biểu thị độ lớn)
+  \item \textbf{Miền giá trị:} từ -1 đến 1 (1 = tương đồng hoàn hảo, 0 = không tương đồng, -1 = khác biệt hoàn toàn)
+  \item \textbf{Các trường hợp sử dụng:}
+  \begin{itemize}
+    \item Độ tương đồng tài liệu
+    \item Truy xuất thông tin
+    \item Hệ thống gợi ý
+  \end{itemize}
+\end{itemize}
+
+\textbf{2. Chỉ số Jaccard}
+
+\begin{itemize}
+  \item \textbf{Loại:} Hệ số tương đồng
+  \item \textbf{Kiểu dữ liệu:} Tập hợp (dữ liệu phân loại)
+  \item \textbf{Mô tả:} Đo độ tương đồng giữa hai tập hợp bằng cách chia số phần tử chung của chúng cho tổng số phần tử của cả hai tập hợp.
+  \item \textbf{Công thức:} $|A \cap B| / |A \cup B|$ (trong đó $\cap$ là giao và $\cup$ là hợp)
+  \item \textbf{Miền giá trị:} từ 0 đến 1 (1 = tương đồng hoàn hảo, 0 = không tương đồng)
+  \item \textbf{Các trường hợp sử dụng:}
+  \begin{itemize}
+    \item Phân tích văn bản (so sánh các tài liệu dựa trên tập từ)
+    \item Nhận dạng hình ảnh (so sánh các đặc trưng hình ảnh)
+    \item Hệ thống gợi ý
+  \end{itemize}
+\end{itemize}
+
+\textbf{3. Hệ số tương quan Pearson}
+
+\begin{itemize}
+  \item \textbf{Loại:} Hệ số tương đồng (nhưng có thể được diễn giải như một thước đo khoảng cách khi xét 1 - tương quan)
+  \item \textbf{Kiểu dữ liệu:} Dữ liệu số
+  \item \textbf{Mô tả:} Đo mối quan hệ tuyến tính giữa hai biến.
+  \item \textbf{Miền giá trị:} từ -1 đến 1 (1 = tương quan dương hoàn hảo, 0 = không tương quan, -1 = tương quan âm hoàn hảo)
+  \item \textbf{Các trường hợp sử dụng:}
+  \begin{itemize}
+    \item Tìm các mối quan hệ giữa các biến
+    \item Lựa chọn đặc trưng
+    \item Phân tích thị trường chứng khoán
+  \end{itemize}
+\end{itemize}
+
+\textbf{4. Tương quan hạng Spearman}
+
+\begin{itemize}
+  \item \textbf{Loại:} Hệ số tương đồng (nhưng có thể được diễn giải như một thước đo khoảng cách khi xét 1 - tương quan).
+  \item \textbf{Kiểu dữ liệu:} Dữ liệu thứ bậc, hoặc dữ liệu số mà thứ hạng quan trọng hơn giá trị thực tế.
+  \item \textbf{Mô tả:} Đo mối quan hệ đơn điệu giữa hai biến. Nó đánh giá mức độ mà mối quan hệ giữa hai biến có thể được mô tả bằng một hàm đơn điệu (luôn tăng hoặc luôn giảm).
+  \item \textbf{Miền giá trị:} từ -1 đến 1, tương tự tương quan Pearson.
+  \item \textbf{Các trường hợp sử dụng:}
+  \begin{itemize}
+    \item Đánh giá tương quan khi dữ liệu không thỏa mãn các giả định của tương quan Pearson (tính tuyến tính, tính chuẩn).
+    \item Phân tích dữ liệu xếp hạng (ví dụ: sở thích khách hàng, phản hồi khảo sát).
+  \end{itemize}
+\end{itemize}
+
+\subsection{1.3 Các Ứng dụng của Thước đo Độ tương đồng}
+
+Bây giờ chúng ta hãy mở rộng bối cảnh của các thước đo độ tương đồng trong phạm vi rộng hơn của khoa học dữ liệu và học máy, cũng như mức độ liên quan của chúng đối với các ứng dụng tài chính.
+
+\textbf{Bối cảnh rộng hơn của các Thước đo Độ tương đồng:}
+
+\begin{itemize}
+  \item \textbf{Khai phá dữ liệu và Học máy:} Các thước đo độ tương đồng là những khối nền tảng trong nhiều thuật toán khai phá dữ liệu và học máy. Chúng được dùng cho các tác vụ như phân cụm (nhóm các điểm dữ liệu tương tự), phân loại (gán các điểm dữ liệu vào các nhóm dựa trên độ tương đồng với các nhóm hiện có) và phát hiện bất thường (nhận diện các điểm dữ liệu bất thường khác biệt đáng kể so với các điểm còn lại).
+  \item \textbf{Truy xuất thông tin:} Trong các hệ thống truy xuất thông tin, chẳng hạn công cụ tìm kiếm, các thước đo độ tương đồng được dùng để xếp hạng tài liệu hoặc trang web dựa trên mức độ liên quan của chúng với truy vấn của người dùng. Các tài liệu tương đồng với truy vấn hơn sẽ được xếp hạng cao hơn trong kết quả tìm kiếm.
+  \item \textbf{Hệ thống gợi ý:} Các hệ thống gợi ý tận dụng các thước đo độ tương đồng để đề xuất sản phẩm, phim hoặc các mục khác tương tự những gì người dùng đã thích hoặc đã tương tác trong quá khứ.
+\end{itemize}
+
+\textbf{Mức độ liên quan đối với các ứng dụng tài chính:}
+
+\begin{itemize}
+  \item \textbf{Phân tích chuỗi thời gian tài chính:} Các thước đo độ tương đồng như DTW đóng vai trò then chốt trong việc phân tích dữ liệu chuỗi thời gian tài chính, chẳng hạn giá cổ phiếu, tỷ giá hối đoái hoặc các chỉ báo kinh tế. DTW có thể giúp nhận diện các mô hình, xu hướng và tương quan giữa các chuỗi thời gian khác nhau, ngay cả khi chúng có sự khác biệt về căn chỉnh thời gian. Thông tin này có thể được dùng cho dự báo, quản trị rủi ro và các chiến lược đầu tư.
+  \item \textbf{Quản trị rủi ro:} Các thước đo độ tương đồng có thể được dùng để đánh giá độ tương đồng giữa các công cụ tài chính hoặc danh mục đầu tư khác nhau nhằm nhận diện rủi ro tiềm ẩn và cơ hội đa dạng hóa. Bằng cách đo độ tương đồng của các hồ sơ rủi ro, nhà đầu tư có thể đưa ra các quyết định sáng suốt hơn về xây dựng danh mục và giảm thiểu rủi ro.
+  \item \textbf{Giao dịch thuật toán:} Các thước đo độ tương đồng có thể được đưa vào các chiến lược giao dịch thuật toán để nhận diện cơ hội giao dịch dựa trên các mô hình và mối quan hệ giữa các tài sản tài chính khác nhau. Chẳng hạn, một thuật toán giao dịch có thể nhận diện các cổ phiếu từng biến động theo cách tương tự trong lịch sử và dùng thông tin này để đưa ra các quyết định giao dịch.
+\end{itemize}
+
+Nhìn chung, bài học này cung cấp nền tảng để hiểu tầm quan trọng của các thước đo độ tương đồng trong nhiều ứng dụng khoa học dữ liệu và học máy, với trọng tâm cụ thể là mức độ liên quan của chúng đối với phân tích tài chính. Nếu xem xét bối cảnh rộng hơn và các ứng dụng tiềm năng của những thước đo này, chúng ta có thể đánh giá đúng hơn vai trò của chúng trong việc rút ra hiểu biết và đưa ra các quyết định sáng suốt trong lĩnh vực tài chính. Sau đây là một vài ví dụ về cách các thước đo độ tương đồng có thể được áp dụng trong các tình huống kỹ thuật tài chính:
+
+\begin{itemize}
+  \item \textbf{Phân cụm các Công cụ Tài chính:} Khoảng cách Euclid hoặc các hệ số tương quan có thể được dùng để phân cụm cổ phiếu hoặc các công cụ tài chính khác dựa trên biến động giá lịch sử hoặc các chỉ số tài chính khác. Điều này có thể giúp nhà đầu tư nhận diện các nhóm tài sản có hành vi tương tự và đa dạng hóa danh mục tương ứng.
+  \item \textbf{Phát hiện Bất thường trong Dữ liệu Tài chính:} Các thước đo độ tương đồng có thể được dùng để phát hiện bất thường hoặc giá trị ngoại lai trong dữ liệu tài chính, chẳng hạn hoạt động giao dịch bất thường hoặc biến động giá đột ngột. Những bất thường này có thể chỉ ra hoạt động gian lận hoặc các gián đoạn thị trường.
+  \item \textbf{Dự báo Biến động Giá Cổ phiếu:} Các thước đo độ tương đồng có thể được dùng để xây dựng các mô hình dự báo biến động giá cổ phiếu bằng cách nhận diện các mô hình và mối quan hệ giữa các chỉ báo tài chính khác nhau hoặc cảm xúc tin tức.
+\end{itemize}
+
+\subsection{1.4 Các Ví dụ Đơn giản hóa}
+
+Bây giờ chúng ta hãy xét một ví dụ đơn giản hóa dùng dữ liệu tài chính để minh họa cách tính độ tương đồng bằng khoảng cách Euclid, khoảng cách Manhattan và độ tương đồng cosine. Chúng ta cũng sẽ đi sâu vào hình học của các thước đo độ tương đồng này.
+
+\textbf{Kịch bản:} Chúng ta có hai cổ phiếu, Cổ phiếu A và Cổ phiếu B, và muốn đo độ tương đồng của chúng dựa trên lợi suất hàng ngày trong khoảng thời gian 5 ngày.
+
+\begin{center}
+\begin{tabular}{ccc}
+\toprule
+Ngày & Lợi suất Cổ phiếu A & Lợi suất Cổ phiếu B \\
+\midrule
+1 & 0.02 & 0.03 \\
+2 & -0.01 & 0.01 \\
+3 & 0.03 & 0.02 \\
+4 & 0.01 & 0.00 \\
+5 & -0.02 & -0.01 \\
+\bottomrule
+\end{tabular}
+\end{center}
+
+Hãy biểu diễn dữ liệu của kịch bản này trong mã bằng các danh sách Python hoặc mảng NumPy, điều này cho phép tính toán bằng chương trình và thao tác dễ dàng hơn trong các đoạn mã tiếp theo:
+
+\begin{lstlisting}[language=Python,escapeinside={(*@}{@*)}]
+# (*@Dữ@*) (*@liệu@*) (*@lợi@*) (*@suất@*) (*@cổ@*) (*@phiếu@*)
+stock_a_returns = [0.02, -0.01, 0.03, 0.01, -0.02]
+stock_b_returns = [0.03, 0.01, 0.02, 0.00, -0.01]
+
+# (*@Chuyển@*) (*@sang@*) (*@mảng@*) NumPy (*@để@*) (*@tính@*) (*@toán@*) (*@dễ@*) (*@dàng@*) (*@hơn@*)
+stock_a = np.array(stock_a_returns)
+stock_b = np.array(stock_b_returns)
+\end{lstlisting}
+
+Bây giờ, lợi suất hàng ngày của Cổ phiếu A và Cổ phiếu B đã được lưu trong các biến \texttt{stock\_a} và \texttt{stock\_b}. Các biến này có thể được dùng trực tiếp trong các phép tính tiếp theo.
+
+\subsubsection*{Khoảng cách Euclid:}
+
+Khoảng cách Euclid biểu diễn khoảng cách đường thẳng giữa hai điểm trong không gian nhiều chiều. Đó là khoảng cách ngắn nhất giữa các điểm, như thể ta vẽ một đường thẳng nối chúng. Hãy hình dung hai điểm trên một mặt phẳng Descartes. Khoảng cách Euclid là độ dài của đoạn thẳng nối các điểm này. Ở các chiều cao hơn, khái niệm được mở rộng tương tự, nhưng đoạn thẳng nằm trong một không gian nhiều chiều hơn.
+
+Khoảng cách Euclid giữa hai cổ phiếu được tính như sau:
+
+\begin{align*}
+    & \text{Khoảng cách Euclid (A, B)} = \sqrt{ \Sigma (\text{ReturnA}_i - \text{ReturnB}_i)^2} = \\
+    & = \sqrt{(0.02 - 0.03)^2 + (-0.01 - 0.01)^2 + (0.03 - 0.02)^2 + (0.01 - 0.00)^2 + (-0.02 - (-0.01))^2} = \\
+    & = \sqrt{0.0001 + 0.0004 + 0.0001 + 0.0001 + 0.0001} = \\
+    & \approx 0.0283
+\end{align*}
+
+Ở đây:
+
+\begin{itemize}
+  \item $\text{ReturnA}_i$ là lợi suất của Cổ phiếu A vào ngày $i$.
+  \item $\text{ReturnB}_i$ là lợi suất của Cổ phiếu B vào ngày $i$.
+  \item Và $\Sigma$ là phép lấy tổng trên tất cả các ngày ($i$ = 1 đến 5).
+\end{itemize}
+
+Chúng ta có thể tính khoảng cách Euclid giữa Cổ phiếu A và Cổ phiếu B bằng chương trình như sau:
+
+\begin{lstlisting}[language=Python,escapeinside={(*@}{@*)}]
+# (*@Khoảng@*) (*@cách@*) Euclid
+euclidean_distance = np.sqrt(np.sum((stock_a - stock_b)**2))
+print(f"Euclidean Distance: {euclidean_distance}")
+\end{lstlisting}
+
+\begin{lstlisting}[escapeinside={(*@}{@*)}]
+Euclidean Distance: 0.0282842712474619
+\end{lstlisting}
+
+\textbf{Diễn giải:} Khoảng cách Euclid giữa Cổ phiếu A và Cổ phiếu B xấp xỉ 0.0283. Điều này cho thấy lợi suất hàng ngày của hai cổ phiếu tương đối gần nhau, gợi ý một mức độ tương đồng nào đó trong biến động giá của chúng.
+
+\subsubsection*{Khoảng cách Manhattan:}
+
+Khoảng cách Manhattan, còn được gọi là khoảng cách L1 hay khoảng cách khối phố, biểu diễn khoảng cách giữa hai điểm nếu ta chỉ có thể di chuyển dọc theo các đường lưới hay các khối phố. Ta chỉ có thể di chuyển theo phương ngang hoặc dọc, không thể đi chéo. Hãy hình dung việc di chuyển trong một thành phố có bố cục dạng lưới. Khoảng cách Manhattan là tổng quãng đường ta sẽ đi dọc theo các con phố để đi từ điểm này đến điểm khác.
+
+Khoảng cách Manhattan được tính bằng cách cộng các chênh lệch tuyệt đối của lợi suất hàng ngày:
+
+\begin{align*}
+    & \text{Khoảng cách Manhattan (A, B)} = \Sigma|\text{ReturnA}_i - \text{ReturnB}_i| = \\
+    &= |0.02 - 0.03| + |-0.01 - 0.01| + |0.03 - 0.02| + |0.01 - 0.00| + |-0.02 - (-0.01)| = \\
+    &= 0.01 + 0.02 + 0.01 + 0.01 + 0.01 = \\
+    &= 0.06
+\end{align*}
+
+Việc tính khoảng cách Manhattan giữa hai cổ phiếu bằng chương trình được cho trong đoạn mã sau:
+
+\begin{lstlisting}[language=Python,escapeinside={(*@}{@*)}]
+# (*@Khoảng@*) (*@cách@*) Manhattan
+manhattan_distance = np.sum(np.abs(stock_a - stock_b))
+print(f"Manhattan Distance: {manhattan_distance}")
+\end{lstlisting}
+
+\begin{lstlisting}[escapeinside={(*@}{@*)}]
+Manhattan Distance: 0.06
+\end{lstlisting}
+
+\textbf{Diễn giải:} Khoảng cách Manhattan giữa Cổ phiếu A và Cổ phiếu B là 0.06. Con số này biểu diễn tổng chênh lệch tuyệt đối trong lợi suất hàng ngày của chúng trong khoảng thời gian 5 ngày.
+
+\subsubsection*{Độ tương đồng cosine:}
+
+Độ tương đồng cosine đo cosine của góc giữa hai vectơ. Nó tập trung vào hướng của các vectơ hơn là độ lớn của chúng. Hãy hình dung hai vectơ xuất phát từ cùng một điểm. Độ tương đồng cosine liên quan đến góc giữa các vectơ này. Nếu các vectơ cùng hướng, góc bằng 0 độ và độ tương đồng cosine bằng 1 (tương đồng hoàn hảo). Nếu các vectơ vuông góc, góc bằng 90 độ và độ tương đồng cosine bằng 0 (không tương đồng). Giá trị độ tương đồng cosine càng cao cho thấy các vectơ càng gần nhau về hướng, còn giá trị càng thấp cho thấy các vectơ càng lệch nhau về hướng.
+
+Chúng ta có thể đo độ tương đồng giữa hai cổ phiếu bằng công thức độ tương đồng cosine:
+
+$$\text{Độ tương đồng cosine (A, B)} = \frac{A \cdot B}{\Vert A \Vert \Vert B \Vert}$$
+
+Ở đây $A \cdot B$ là tích vô hướng của các vectơ lợi suất hàng ngày của Cổ phiếu A và Cổ phiếu B. $\Vert A \Vert$ và $\Vert B \Vert$ lần lượt là độ lớn của các vectơ lợi suất hàng ngày của Cổ phiếu A và Cổ phiếu B.
+
+Hãy hoàn tất phép tính độ tương đồng cosine bằng các giá trị đã cho. Trước hết ta tính tích vô hướng và các độ lớn:
+
+\begin{align*}
+    A \cdot B &= (0.02 * 0.03) + ((-0.01) * 0.01) + (0.03 * 0.02) + (0.01 * 0.00) + ((-0.02) * (-0.01)) = 0.0013 \\
+    \Vert A \Vert &= \sqrt{0.02^2 + (-0.01)^2 + 0.03^2 + 0.01^2 + (-0.02)^2} \approx 0.0436 \\
+    \Vert B \Vert &= \sqrt{0.03^2 + 0.01^2 + 0.02^2 + 0.00^2 + (-0.01)^2} \approx 0.0387
+\end{align*}
+
+Bây giờ ta thay các giá trị này vào công thức độ tương đồng cosine:
+
+$$\text{Độ tương đồng cosine (A, B)} = \frac{A \cdot B}{\Vert A \Vert \Vert B \Vert} = \frac{0.0013}{(0.0436 * 0.0387)} \approx 0.77$$
+
+Đoạn mã sau tính độ tương đồng cosine cho các cổ phiếu đã cho:
+
+\begin{lstlisting}[language=Python,escapeinside={(*@}{@*)}]
+# (*@Tính@*) (*@tích@*) (*@vô@*) (*@hướng@*) (*@và@*) (*@các@*) (*@độ@*) (*@lớn@*)
+dot_product = np.dot(stock_a, stock_b)
+magnitude_a = np.linalg.norm(stock_a)
+magnitude_b = np.linalg.norm(stock_b)
+
+# (*@Tính@*) (*@độ@*) (*@tương@*) (*@đồng@*) (*@cosine@*)
+cosine_similarity = dot_product / (magnitude_a * magnitude_b)
+print(f"Cosine Similarity: {cosine_similarity}")
+\end{lstlisting}
+
+\begin{lstlisting}[escapeinside={(*@}{@*)}]
+Cosine Similarity: 0.7700535410868201
+\end{lstlisting}
+
+\textbf{Diễn giải:} Giá trị độ tương đồng cosine 0.77 cho thấy độ tương đồng tương đối cao giữa lợi suất hàng ngày của Cổ phiếu A và Cổ phiếu B. Điều này gợi ý rằng hai cổ phiếu có xu hướng biến động theo các hướng tương tự, dù không nhất thiết có cùng độ lớn.
+
+\subsubsection*{Tổng kết:}
+
+Dựa trên các phép tính đã thực hiện, chúng ta có thể rút ra bản tóm tắt sau về các thước đo độ tương đồng đối với Cổ phiếu A và Cổ phiếu B:
+
+\begin{itemize}
+  \item \textbf{Khoảng cách Euclid và Manhattan:} Trong phân tích dữ liệu tài chính, các khoảng cách này có thể được dùng để đo độ khác biệt tổng thể giữa các chuỗi thời gian hoặc các vectơ chỉ số tài chính. Chẳng hạn, ta có thể dùng chúng để so sánh lợi suất lịch sử của hai cổ phiếu hoặc để phân cụm các cổ phiếu dựa trên đặc điểm tài chính của chúng. Trong ví dụ của chúng ta, cả hai khoảng cách đều tương đối nhỏ ($\approx$0.0283 đối với khoảng cách Euclid và $\approx$0.06 đối với khoảng cách Manhattan), cho thấy lợi suất hàng ngày của Cổ phiếu A và Cổ phiếu B khá giống nhau xét về độ lớn tổng thể của các chênh lệch. Khoảng cách càng nhỏ thì các cổ phiếu càng được coi là tương đồng.
+  \item \textbf{Độ tương đồng cosine:} Độ tương đồng cosine thường được dùng trong tài chính để đánh giá tương quan hoặc sự đồng biến động giữa các tài sản. Nó có thể giúp nhận diện các cổ phiếu có xu hướng biến động theo các hướng tương tự, ngay cả khi lợi suất của chúng có độ lớn khác nhau. Thông tin này có giá trị cho đa dạng hóa danh mục và quản trị rủi ro. Trong ví dụ của chúng ta, giá trị độ tương đồng cosine 0.77 cho thấy độ tương đồng tương đối cao về hướng biến động giữa hai cổ phiếu. Điều này gợi ý rằng chúng có xu hướng biến động cùng hướng (tăng hoặc giảm) trong hầu hết các ngày, dù độ lớn lợi suất có thể khác nhau.
+\end{itemize}
+
+Những kết quả này cho thấy Cổ phiếu A và Cổ phiếu B thể hiện một mức độ tương đồng đáng kể trong biến động giá. Chúng có xu hướng biến động cùng hướng, và các chênh lệch tổng thể trong lợi suất hàng ngày là tương đối nhỏ.
+
+Cần lưu ý rằng các thước đo độ tương đồng này dựa trên một tập dữ liệu hạn chế chỉ gồm 5 ngày. Để rút ra các kết luận vững chắc hơn về mối quan hệ giữa hai cổ phiếu, điều thiết yếu là phải phân tích một tập dữ liệu lớn hơn trong khoảng thời gian dài hơn. Ngoài ra, cũng quan trọng là cân nhắc sử dụng các chỉ số và kỹ thuật liên quan khác để có được hiểu biết toàn diện về mối quan hệ của chúng.
+
+\subsection{1.5 Lựa chọn Thước đo Độ tương đồng}
+
+Điều quan trọng là phải hiểu các yếu tố ảnh hưởng đến việc lựa chọn thước đo độ tương đồng. Việc lựa chọn thước đo độ tương đồng phụ thuộc vào loại dữ liệu, cách diễn giải mong muốn về độ tương đồng và đặc thù của ứng dụng. Dưới đây chúng ta xem xét chi tiết từng yếu tố:
+
+\textbf{Kiểu dữ liệu:} Bản chất của dữ liệu định hướng một cách căn bản cho việc lựa chọn thước đo độ tương đồng.
+
+\begin{itemize}
+  \item \textbf{Dữ liệu số:} Nếu dữ liệu gồm các giá trị số liên tục, ta thường dùng các thước đo khoảng cách như Euclid, Manhattan hoặc Minkowski, hoặc các hệ số tương quan như Pearson hay Spearman để đánh giá các mối quan hệ giữa các biến số. Các thước đo này định lượng độ lớn của các chênh lệch hoặc mức độ mạnh của các mối quan hệ giữa các biến số.
+  \item \textbf{Dữ liệu phân loại:} Khi xử lý dữ liệu thuộc các danh mục riêng biệt, tức là dữ liệu phân loại được biểu diễn dưới dạng tập hợp, chỉ số Jaccard là một lựa chọn phổ biến. Nó tập trung vào sự chồng lấn hoặc các đặc điểm chung giữa các tập hợp danh mục.
+  \item \textbf{Dữ liệu văn bản:} Word Mover's Distance (WMD) là một cách đo độ tương đồng ngữ nghĩa giữa các tài liệu văn bản. WMD xét đến ý nghĩa của các từ và ``nỗ lực'' cần thiết để biến đổi tài liệu này thành tài liệu kia.
+  \item \textbf{Dữ liệu chuỗi thời gian:} Đối với dữ liệu thay đổi theo thời gian, Dynamic Time Warping (DTW) là thiết yếu nhờ khả năng xử lý các khác biệt về tốc độ và độ lệch thời gian. Nó giải quyết thách thức căn chỉnh các chuỗi thời gian có thể khác nhau về tốc độ hoặc bị lệch thời gian, cho phép so sánh độ tương đồng chính xác.
+\end{itemize}
+
+\textbf{Cách diễn giải mong muốn:} Cách ta muốn diễn giải kết quả độ tương đồng và mục tiêu chung của phân tích cũng đóng một vai trò.
+
+\begin{itemize}
+  \item \textbf{Khoảng cách so với độ tương đồng:} Việc ta muốn định lượng độ khác biệt (khoảng cách) hay trực tiếp định lượng độ tương đồng tùy thuộc vào mục tiêu của tác vụ. Các thước đo khoảng cách hữu ích để nhận diện sự khác biệt hoặc giá trị ngoại lai, trong khi các hệ số tương đồng phù hợp hơn để tìm các mục tương tự hoặc nhóm các điểm dữ liệu lại với nhau. Các thước đo khoảng cách cho giá trị nhỏ hơn khi độ tương đồng cao hơn, còn các hệ số tương đồng cho giá trị lớn hơn khi độ tương đồng cao hơn. Ta cần chọn thước đo phù hợp với nhu cầu diễn giải.
+  \item \textbf{Quan hệ tuyến tính so với phi tuyến:} Khi làm việc với dữ liệu số, ta cần cân nhắc loại quan hệ mà ta muốn nắm bắt. Tương quan Pearson phù hợp với các quan hệ tuyến tính, trong khi tương quan hạng Spearman phù hợp hơn với các xu hướng đơn điệu hoặc phi tuyến. Nếu ta quan tâm đến các quan hệ tuyến tính giữa các biến số, tương quan Pearson là phù hợp. Đối với các quan hệ phi tuyến hoặc đơn điệu, tương quan hạng Spearman là lựa chọn tốt hơn.
+\end{itemize}
+
+\textbf{Đặc điểm dữ liệu:} Một số đặc điểm nhất định của dữ liệu có thể ảnh hưởng đến việc lựa chọn thước đo độ tương đồng.
+
+\begin{itemize}
+  \item \textbf{Giá trị ngoại lai:} Nếu dữ liệu chứa các giá trị ngoại lai (những giá trị cực đoan hoặc bất thường), ta cần cân nhắc dùng khoảng cách Manhattan. Khoảng cách Manhattan ít nhạy cảm với giá trị ngoại lai hơn so với khoảng cách Euclid.
+  \item \textbf{Độ lệch thời gian (đối với dữ liệu chuỗi thời gian):} Khi so sánh các chuỗi thời gian, sự khác biệt về tốc độ hoặc độ lệch thời gian có thể ảnh hưởng đáng kể đến các phép tính độ tương đồng. DTW là thiết yếu đối với dữ liệu chuỗi thời gian có khả năng có độ lệch thời gian hoặc khác biệt về tốc độ. DTW được thiết kế riêng để giải quyết vấn đề này bằng cách tìm phép căn chỉnh tối ưu giữa các chuỗi thời gian trước khi tính khoảng cách.
+\end{itemize}
+
+Bằng cách cân nhắc cẩn thận kiểu dữ liệu, cách diễn giải mong muốn, đặc điểm dữ liệu và đặc thù của các ứng dụng, chúng ta có thể chọn được thước đo độ tương đồng phù hợp nhất. Khi xét đến các yếu tố bối cảnh rộng hơn này, ta có thể đưa ra quyết định sáng suốt hơn về thước đo độ tương đồng phù hợp nhất cho tác vụ và dữ liệu cụ thể.
+
+\section{2 Dữ liệu Văn bản}
+
+Dữ liệu thay thế (alternative data) là các nguồn dữ liệu phi truyền thống được dùng để thu được hiểu biết về các cơ hội đầu tư hoặc xu hướng thị trường. Loại dữ liệu này thường không có trong các tập dữ liệu tài chính truyền thống như giá thị trường. Dữ liệu thay thế ngày càng trở nên quan trọng trong tài chính khi các nhà đầu tư tìm kiếm những cách mới để thu được hiểu biết và đưa ra các quyết định đầu tư tốt hơn. Dù có những thách thức đi kèm khi sử dụng dữ liệu thay thế, nó có tiềm năng mang lại lợi thế đáng kể cho những ai có thể khai thác hiệu quả.
+
+\textbf{Dữ liệu văn bản là gì?} Nói một cách đơn giản, dữ liệu văn bản là dữ liệu ở dạng văn bản. Điều này bao gồm những thứ như: bài báo tin tức, bài đăng trên mạng xã hội, bản ghi cuộc gọi báo cáo thu nhập (earnings call), hồ sơ công ty, tài liệu quy định, đánh giá của khách hàng và nhiều loại thông tin dựa trên văn bản khác.
+
+Dữ liệu văn bản chứa một lượng thông tin phong phú có thể có giá trị đối với nhà đầu tư và nhà phân tích tài chính. Nó có thể cung cấp hiểu biết về:
+
+\begin{itemize}
+  \item Cảm xúc thị trường: Bằng cách phân tích giọng điệu và ngôn ngữ được dùng trong các bài báo tin tức và bài đăng mạng xã hội, ta có thể đánh giá thị trường cảm nhận thế nào về các công ty, ngành hoặc tài sản cụ thể. Điều này có thể giúp dự báo các biến động thị trường tiềm ẩn hoặc nhận diện các xu hướng mới nổi.
+  \item Hiệu quả hoạt động và chiến lược của công ty: Dữ liệu văn bản như bản ghi cuộc gọi báo cáo thu nhập và hồ sơ công ty có thể cung cấp thông tin về kết quả tài chính, định hướng chiến lược và các kế hoạch tương lai của một công ty.
+  \item Đánh giá rủi ro: Bằng cách phân tích tin tức và mạng xã hội để tìm các đề cập đến rủi ro hoặc mối đe dọa tiềm ẩn, nhà đầu tư có thể nhận diện các rủi ro mới nổi hoặc theo dõi cảm xúc thị trường liên quan đến các yếu tố rủi ro cụ thể.
+  \item Phân tích dữ liệu thay thế: Dữ liệu văn bản là nguồn phong phú của ``dữ liệu thay thế'', có thể bổ sung cho dữ liệu tài chính truyền thống và cung cấp bức tranh toàn diện hơn về thị trường hoặc các khoản đầu tư cụ thể.
+\end{itemize}
+
+\subsection{2.1 Các Kỹ thuật Phân tích Văn bản}
+
+Có một số cách tiếp cận có giá trị để phân tích dữ liệu văn bản, tùy thuộc vào tác vụ cụ thể và bản chất của dữ liệu văn bản. Dưới đây là một số kỹ thuật thường dùng:
+
+\textbf{Term Frequency-Inverse Document Frequency (TF-IDF):} TF-IDF là một thước đo thống kê đánh giá mức độ quan trọng của một từ đối với một tài liệu trong một tập hợp các tài liệu. Nó hoạt động bằng cách tính hai chỉ số: Term Frequency (TF), đo mức độ thường xuyên một từ xuất hiện trong một tài liệu, và Inverse Document Frequency (IDF), đo mức độ hiếm của từ đó trên toàn bộ tập hợp. Bằng cách kết hợp TF và IDF, TF-IDF làm nổi bật những từ xuất hiện thường xuyên trong một tài liệu cụ thể nhưng tương đối hiếm trên toàn bộ kho ngữ liệu (corpus), qua đó nhận diện hiệu quả các từ đặc trưng và có ý nghĩa nhất cho mỗi tài liệu.
+
+\textbf{Embedding từ (Word2Vec, GloVe, FastText):} Các embedding từ biểu diễn từ dưới dạng các vectơ dày đặc trong một không gian nhiều chiều, trong đó các từ có ý nghĩa tương tự nằm gần nhau hơn. Điều này cho phép nắm bắt các quan hệ ngữ nghĩa giữa các từ và hiểu ý nghĩa theo ngữ cảnh của chúng. Các embedding từ được huấn luyện trên các kho ngữ liệu văn bản lớn và có thể được dùng cho nhiều tác vụ khác nhau, bao gồm phân tích cảm xúc, độ tương đồng tài liệu và xây dựng đặc trưng cho các mô hình học máy. Chúng giúp nắm bắt bản chất của ý nghĩa từ và các quan hệ giữa chúng, vượt ra ngoài việc đếm tần suất từ đơn giản.
+
+\textbf{Phân tích Cảm xúc (dựa trên từ điển, dựa trên học máy):} Phân tích cảm xúc nhằm xác định sắc thái cảm xúc hoặc quan điểm được thể hiện trong văn bản. Nó có thể dựa trên quy tắc bằng cách dùng các từ điển cảm xúc (sentiment lexicon), tức là danh sách các từ kèm điểm cảm xúc, hoặc dựa trên học máy bằng cách dùng các bộ phân loại được huấn luyện trên dữ liệu có nhãn. Phân tích cảm xúc được sử dụng rộng rãi trong tài chính để đánh giá cảm xúc thị trường, nhận diện phản hồi của khách hàng và dự báo biến động giá cổ phiếu dựa trên cảm xúc của tin tức. Nó giúp hiểu tính tích cực hoặc tiêu cực tổng thể được thể hiện trong văn bản, cung cấp những hiểu biết có giá trị cho các quyết định đầu tư.
+
+\textbf{Mô hình hóa Chủ đề (LDA, NMF):} Mô hình hóa chủ đề khám phá các cấu trúc chủ đề ẩn trong một tập hợp tài liệu bằng cách nhận diện các nhóm từ thường xuyên đồng xuất hiện. Điều này giúp hiểu các chủ đề chính được thảo luận trong dữ liệu văn bản. Các kỹ thuật như Latent Dirichlet Allocation (LDA) và Non-negative Matrix Factorization (NMF) thường được dùng cho mô hình hóa chủ đề. Trong tài chính, mô hình hóa chủ đề có thể được áp dụng để nhận diện xu hướng ngành, phân loại các bài báo tin tức và phân tích đánh giá của khách hàng nhằm hiểu các chủ đề hoặc mối quan ngại phổ biến.
+
+\textbf{Nhận dạng Thực thể Có tên (Named Entity Recognition, NER):} Nhận dạng thực thể có tên (NER) nhận diện và phân loại các thực thể có tên trong văn bản, chẳng hạn con người, tổ chức, địa điểm, ngày tháng và giá trị tiền tệ. Nó trích xuất thông tin có cấu trúc từ văn bản phi cấu trúc, giúp việc phân tích và hiểu các mối quan hệ giữa các thực thể khác nhau dễ dàng hơn. Trong tài chính, NER có thể được dùng để nhận diện các bên chủ chốt trong tin tức tài chính, trích xuất tên công ty từ các hồ sơ quy định và hiểu các mối quan hệ giữa các thực thể khác nhau được đề cập trong văn bản.
+
+\textbf{Phân loại Văn bản:} Phân loại văn bản gán các danh mục hoặc nhãn được định sẵn cho các tài liệu văn bản dựa trên nội dung của chúng. Nó có thể dựa trên quy tắc, dùng các quy tắc định sẵn để phân loại tài liệu, hoặc dựa trên học máy, dùng các bộ phân loại được huấn luyện trên dữ liệu có nhãn. Trong tài chính, phân loại văn bản có thể được dùng cho các tác vụ như phân loại các bài báo tin tức tài chính, nhận diện thư rác hoặc email lừa đảo và phân loại đánh giá của khách hàng dựa trên cảm xúc. Nó giúp tự động hóa quá trình phân loại dữ liệu văn bản, giúp việc phân tích và hiểu khối lượng lớn thông tin văn bản dễ dàng hơn.
+
+Thông thường, một sự kết hợp của các kỹ thuật này được dùng để đạt được kết quả mong muốn. Chẳng hạn, ta có thể dùng TF-IDF để nhận diện các từ quan trọng, embedding từ để nắm bắt các quan hệ ngữ nghĩa và phân tích cảm xúc để xác định cảm xúc tổng thể của một tài liệu. Ở phần sau của module này, chúng ta sẽ đi sâu hơn và tìm hiểu các ứng dụng của một số kỹ thuật này.
+
+\subsection{2.2 Định nghĩa Term Frequency-Inverse Document Frequency}
+
+Term Frequency-Inverse Document Frequency (TF-IDF) là một thước đo thống kê dùng để đánh giá mức độ quan trọng của một từ đối với một tài liệu trong một tập hợp hay kho ngữ liệu. Nó được sử dụng rộng rãi trong truy xuất thông tin và khai phá văn bản để giúp nhận diện các từ liên quan nhất trong một tài liệu.
+
+\begin{itemize}
+  \item \textbf{Term Frequency (TF):}
+  \begin{itemize}
+    \item Thành phần này đo mức độ thường xuyên một thuật ngữ xuất hiện trong một tài liệu. Trực giác cơ bản là một từ xuất hiện nhiều hơn trong một tài liệu thì có khả năng quan trọng hơn đối với ý nghĩa của tài liệu đó. Có nhiều cách tính TF khác nhau, nhưng một cách phổ biến là tần suất thô:
+
+    $$\text{TF(term, document)} = \frac{ \text{(Số lần thuật ngữ xuất hiện trong tài liệu)}}{\text{(Tổng số thuật ngữ trong tài liệu)}}$$
+  \end{itemize}
+  \item \textbf{Inverse Document Frequency (IDF):}
+  \begin{itemize}
+    \item IDF đo mức độ quan trọng của một thuật ngữ trong toàn bộ kho ngữ liệu. Những từ hiếm xuất hiện trong kho ngữ liệu có điểm IDF cao hơn. IDF làm giảm trọng số của các thuật ngữ xuất hiện rất thường xuyên trên toàn kho ngữ liệu và do đó ít mang thông tin về một tài liệu cụ thể. Nó gán trọng số cao hơn cho các thuật ngữ hiếm. Một cách phổ biến để tính IDF là:
+
+    $$\text{IDF(term, corpus)} = log \Big[ \frac{\text{(Tổng số tài liệu trong kho ngữ liệu)}}{\text{(Số tài liệu chứa thuật ngữ)}} \Big]$$
+
+    \item Nếu một thuật ngữ xuất hiện trong tất cả các tài liệu, điểm IDF của nó bằng 0. Nếu một thuật ngữ rất hiếm, điểm IDF của nó cao.
+  \end{itemize}
+  \item \textbf{Tính TF-IDF:}
+  \begin{itemize}
+    \item Điểm TF-IDF đơn giản là tích của các điểm TF và IDF:
+
+    $$\text{TF-IDF(term, document, corpus)} = \text{TF(term, document)} \times \text{IDF(term, corpus)}$$
+  \end{itemize}
+\end{itemize}
+
+\subsection{2.3 Các Ứng dụng của TF-IDF}
+
+Dù vẫn là một lĩnh vực đang nổi lên, việc ứng dụng TF-IDF trong đầu tư tài chính có tiềm năng tận dụng dữ liệu văn bản để thu được hiểu biết, quản trị rủi ro và có thể cải thiện các chiến lược đầu tư. Một số ứng dụng của TF-IDF cụ thể trong lĩnh vực tài chính và các trường hợp sử dụng tiềm năng có thể là:
+
+\textbf{Phân tích Cảm xúc cho Thị trường Tài chính:}
+
+\begin{itemize}
+  \item \textbf{Đánh giá Cảm xúc Thị trường:} TF-IDF có thể được dùng để phân tích các bài báo tin tức tài chính, bài đăng mạng xã hội, bản ghi cuộc gọi báo cáo thu nhập và các dữ liệu văn bản khác nhằm đánh giá cảm xúc thị trường đối với các công ty, ngành hoặc tài sản cụ thể. Bằng cách nhận diện các thuật ngữ gắn chặt với cảm xúc tích cực hoặc tiêu cực, nhà đầu tư có thể nắm được cảm xúc thị trường tổng thể đối với một khoản đầu tư cụ thể.
+  \item \textbf{Dự báo Biến động Thị trường:} TF-IDF có thể góp phần xây dựng các mô hình dự báo biến động thị trường bằng cách nhận diện các thuật ngữ chỉ báo cho những thay đổi giá trong tương lai. Chẳng hạn, sự gia tăng điểm TF-IDF của các thuật ngữ liên quan đến cảm xúc tích cực có thể gợi ý một đợt tăng giá sắp tới của một cổ phiếu cụ thể.
+  \item \textbf{Ví dụ:} Một quỹ đầu cơ có thể dùng TF-IDF để phân tích các bài báo tin tức và cảm xúc trên mạng xã hội nhằm dự báo biến động giá cổ phiếu ngắn hạn. Bằng cách nhận diện các thay đổi trong cảm xúc đối với một công ty, họ có thể đưa ra các quyết định giao dịch sáng suốt.
+\end{itemize}
+
+\textbf{Phân tích Dữ liệu Thay thế:}
+
+\begin{itemize}
+  \item \textbf{Hiểu biết từ Dữ liệu Phi cấu trúc:} TF-IDF có thể được áp dụng để phân tích các nguồn dữ liệu phi cấu trúc như bản ghi cuộc gọi báo cáo thu nhập, hồ sơ công ty, tài liệu quy định và thậm chí cả nội dung trang web để trích xuất các thông tin chính mà có thể không dễ thấy từ dữ liệu tài chính truyền thống. Điều này có thể giúp nhà đầu tư hiểu sâu hơn về hiệu quả hoạt động, chiến lược và triển vọng tương lai của một công ty.
+  \item \textbf{Trích xuất Thông tin Chính:} Bằng cách nhận diện các thuật ngữ có TF-IDF cao, nhà đầu tư có thể trích xuất các thông tin quan trọng, chẳng hạn các đề cập đến sản phẩm mới, quan hệ đối tác hoặc rủi ro tiềm ẩn. Thông tin này có thể được dùng để đưa ra các quyết định đầu tư sáng suốt hơn.
+  \item \textbf{Ví dụ:} Một công ty đầu tư có thể dùng TF-IDF để nhận diện các công ty có sản phẩm hoặc dịch vụ đổi mới bằng cách phân tích các hồ sơ bằng sáng chế và các bài nghiên cứu. Bằng cách nhận diện các thuật ngữ liên quan đến đổi mới và tiến bộ công nghệ, họ có thể xác định các công ty có tiềm năng tăng trưởng cao.
+\end{itemize}
+
+\textbf{Quản trị Rủi ro:}
+
+\begin{itemize}
+  \item \textbf{Nhận diện Rủi ro Mới nổi:} Việc phân tích tin tức và mạng xã hội bằng TF-IDF có thể giúp nhận diện các rủi ro mới nổi hoặc các mối đe dọa tiềm ẩn đối với các khoản đầu tư. Bằng cách theo dõi điểm TF-IDF của các thuật ngữ liên quan đến các yếu tố rủi ro, chẳng hạn thay đổi quy định, suy thoái kinh tế hoặc thiên tai, nhà đầu tư có thể nhận được cảnh báo sớm về các gián đoạn thị trường tiềm ẩn.
+  \item \textbf{Theo dõi Cảm xúc Thị trường:} Việc theo dõi các thay đổi trong điểm TF-IDF của các thuật ngữ cụ thể liên quan đến các yếu tố rủi ro có thể đưa ra cảnh báo sớm về các đợt suy giảm thị trường tiềm ẩn. Chẳng hạn, sự gia tăng điểm TF-IDF của các thuật ngữ liên quan đến bất định kinh tế có thể gợi ý một đợt điều chỉnh thị trường sắp tới.
+  \item \textbf{Ví dụ:} Một nhà quản trị rủi ro có thể dùng TF-IDF để theo dõi tin tức và mạng xã hội nhằm tìm các đề cập đến những rủi ro tiềm ẩn đối với các khoản đầu tư của họ. Bằng cách nhận diện sớm các rủi ro mới nổi, họ có thể thực hiện các bước để giảm thiểu các khoản lỗ tiềm ẩn.
+\end{itemize}
+
+\textbf{Tối ưu hóa Danh mục Đầu tư:}
+
+\begin{itemize}
+  \item \textbf{Đa dạng hóa Dựa trên Văn bản:} TF-IDF có thể được dùng để phân tích các mô tả văn bản của tài sản (ví dụ: hồ sơ công ty, mô tả sản phẩm) và đa dạng hóa danh mục dựa trên độ tương đồng hoặc khác biệt ngữ nghĩa của các hoạt động kinh doanh cơ sở của chúng. Điều này có thể giúp nhà đầu tư xây dựng các danh mục đa dạng hóa hơn, ít dễ bị tổn thương trước các cú sốc thị trường.
+  \item \textbf{Nhận diện các Rủi ro Chồng lấn:} Bằng cách phân tích các hồ sơ TF-IDF của các tài sản khác nhau, nhà đầu tư có thể nhận diện các chồng lấn tiềm ẩn trong các khoản đầu tư của mình. Điều này có thể giúp họ tránh phơi nhiễm quá mức đối với các ngành hoặc yếu tố rủi ro cụ thể.
+  \item \textbf{Ví dụ:} Một cố vấn đầu tư có thể dùng TF-IDF để phân tích các mô tả văn bản của các cổ phiếu khác nhau trong danh mục của khách hàng nhằm nhận diện các vùng chồng lấn tiềm ẩn. Điều này có thể giúp họ đa dạng hóa danh mục và giảm rủi ro.
+\end{itemize}
+
+\textbf{Giao dịch Thuật toán:}
+
+\begin{itemize}
+  \item \textbf{Giao dịch Dựa trên Tin tức:} TF-IDF có thể được đưa vào các chiến lược giao dịch thuật toán phản ứng với các sự kiện tin tức. Bằng cách nhận diện cảm xúc và mức độ liên quan của các bài báo tin tức, các thuật toán giao dịch có thể đưa ra các quyết định giao dịch tự động dựa trên thông tin thời gian thực.
+  \item \textbf{Giao dịch Theo Cảm xúc:} Các quyết định giao dịch có thể được tự động hóa dựa trên phân tích cảm xúc thời gian thực dùng TF-IDF. Chẳng hạn, một thuật toán giao dịch có thể mua một cổ phiếu nếu cảm xúc đối với công ty đột nhiên trở nên tích cực hơn.
+  \item \textbf{Ví dụ:} Một công ty giao dịch tần suất cao có thể dùng TF-IDF để phân tích các tiêu đề tin tức và bài đăng mạng xã hội nhằm nhận diện các cơ hội giao dịch. Bằng cách phản ứng nhanh với các sự kiện tin tức, họ có thể có khả năng thu lợi từ các biến động thị trường ngắn hạn.
+\end{itemize}
+
+Những ví dụ này làm nổi bật tính linh hoạt và tiềm năng của TF-IDF trong nhiều ứng dụng tài chính khác nhau. Khi dữ liệu văn bản ngày càng trở nên quan trọng trong lĩnh vực tài chính, TF-IDF và các kỹ thuật phân tích văn bản khác sẽ tiếp tục đóng vai trò quan trọng trong việc giúp nhà đầu tư thu được hiểu biết, quản trị rủi ro và cải thiện các chiến lược đầu tư.
+
+\subsection{2.4 Lợi ích của TF-IDF}
+
+Lợi ích của việc dùng TF-IDF cho phân tích văn bản, đặc biệt trong bối cảnh tài chính, có nhiều khía cạnh có thể được tóm tắt như sau:
+
+\textbf{Tăng cường Mức độ Liên quan và Tập trung vào các Từ Quan trọng:}
+
+\begin{itemize}
+  \item Các từ đặc trưng: TF-IDF làm nổi bật những từ đặc trưng và có ý nghĩa trong một tài liệu cụ thể so với một kho ngữ liệu lớn hơn. Nó vượt ra ngoài tần suất từ đơn giản bằng cách xét toàn bộ tập hợp. Nó nhấn mạnh các thuật ngữ xuất hiện thường xuyên trong một tài liệu nhưng tương đối hiếm trên toàn bộ tập hợp.
+  \item Khả năng phân biệt: Bằng cách nhấn mạnh các thuật ngữ xuất hiện thường xuyên trong một tài liệu nhưng tương đối hiếm trên toàn bộ tập hợp, TF-IDF phân biệt hiệu quả giữa các từ thông dụng (như ``the'', ``a'', ``is'') và các từ mang nhiều thông tin hơn, đặc trưng cho nội dung của tài liệu. Điều này giúp tập trung vào những từ thực sự quan trọng để hiểu ý nghĩa của tài liệu.
+  \item Cải thiện Kết quả Tìm kiếm: Trong các ứng dụng tài chính như tìm kiếm các bài báo tin tức hoặc báo cáo nghiên cứu liên quan, TF-IDF giúp truy xuất các tài liệu liên quan hơn đến một truy vấn bằng cách ưu tiên các tài liệu chứa các thuật ngữ TF-IDF cao khớp với truy vấn. Điều này bảo đảm thông tin liên quan nhất được trình bày cho người dùng.
+\end{itemize}
+
+\textbf{Giảm Chiều Dữ liệu và Lựa chọn Đặc trưng:}
+
+\begin{itemize}
+  \item Lựa chọn Đặc trưng: TF-IDF hoạt động như một kỹ thuật lựa chọn đặc trưng bằng cách gán trọng số cho các thuật ngữ. Các thuật ngữ có điểm TF-IDF cao hơn được coi là các đặc trưng quan trọng hơn để biểu diễn tài liệu. Điều này giúp giảm số đặc trưng dùng cho phân tích, làm cho quá trình hiệu quả hơn.
+  \item Giảm Chi phí Tính toán: Bằng cách tập trung vào các từ mang nhiều thông tin nhất, TF-IDF giảm hiệu quả số chiều của dữ liệu, dẫn đến xử lý và phân tích nhanh hơn, đặc biệt đối với các tập dữ liệu lớn. Điều này đặc biệt quan trọng trong tài chính, nơi khối lượng lớn dữ liệu văn bản thường được phân tích.
+\end{itemize}
+
+\textbf{Cải thiện Truy xuất Thông tin và Độ tương đồng Ngữ nghĩa:}
+
+\begin{itemize}
+  \item Độ tương đồng Ngữ nghĩa: Các tài liệu có hồ sơ TF-IDF tương tự nhiều khả năng có liên quan về mặt ngữ nghĩa, ngay cả khi chúng không có chung các từ khóa chính xác. Điều này là do TF-IDF nắm bắt ý nghĩa cơ bản của tài liệu bằng cách tập trung vào các từ đặc trưng nhất.
+  \item Xếp hạng Tài liệu Tốt hơn: Các công cụ tìm kiếm và hệ thống gợi ý tận dụng TF-IDF để xếp hạng tài liệu hoặc các mục dựa trên mức độ liên quan của chúng với một truy vấn hoặc hồ sơ người dùng. Trong tài chính, điều này có thể được dùng để xếp hạng các bài báo tin tức, báo cáo nghiên cứu hoặc dữ liệu văn bản khác dựa trên mức độ liên quan của chúng với một chủ đề đầu tư hoặc công ty cụ thể.
+\end{itemize}
+
+\textbf{Tính Linh hoạt và Khả năng Ứng dụng Rộng:}
+
+\begin{itemize}
+  \item Khả năng Ứng dụng Rộng: TF-IDF có thể được áp dụng cho nhiều tác vụ phân tích văn bản, bao gồm phân loại tài liệu, phân cụm, tóm tắt và mô hình hóa chủ đề. Điều này làm cho nó trở thành công cụ linh hoạt cho một loạt ứng dụng tài chính.
+  \item Không phụ thuộc Ngôn ngữ: Các nguyên lý cốt lõi của TF-IDF có thể áp dụng cho các ngôn ngữ khác nhau, khiến nó trở thành công cụ linh hoạt cho phân tích văn bản đa ngôn ngữ. Điều này quan trọng trong tài chính, nơi thông tin thường được thu thập từ các nguồn bằng những ngôn ngữ khác nhau.
+\end{itemize}
+
+Tóm lại, TF-IDF là một kỹ thuật có giá trị để tăng cường mức độ liên quan của các thuật ngữ, giảm chiều dữ liệu và cải thiện truy xuất thông tin trong nhiều ứng dụng phân tích văn bản.
+
+\subsection{2.5 Ví dụ Đơn giản hóa về Áp dụng TF-IDF}
+
+Hãy minh họa việc áp dụng TF-IDF bằng một ví dụ đơn giản hóa trong bối cảnh phân tích cảm xúc tài chính.
+
+\begin{quote}
+\textbf{Kịch bản:} Giả sử chúng ta có một tập hợp nhỏ các tiêu đề tin tức tài chính liên quan đến một công ty tên là ``Acme Corp.'':
+
+\begin{enumerate}
+  \item ``Acme Corp. announces record profits, stock surges.''
+  \item ``Acme Corp. faces regulatory scrutiny, shares decline.''
+  \item ``Market volatility impacts Acme Corp. earnings.''
+  \item ``Acme Corp. expands into new markets, analysts optimistic.''
+\end{enumerate}
+
+\textbf{Mục tiêu:} Chúng ta muốn dùng TF-IDF để nhận diện các từ quan trọng nhất trong mỗi tiêu đề và hiểu cảm xúc tổng thể đối với Acme Corp.
+\end{quote}
+
+\textbf{Các bước:}
+
+\textbf{Bước 1. Tách từ và Tiền xử lý:}
+
+\begin{itemize}
+  \item Tách mỗi tiêu đề thành các từ riêng lẻ (token).
+  \item Loại bỏ các từ dừng (stop word; các từ thông dụng như ``the'', ``a'', ``is'') và dấu câu.
+  \item Chuyển các từ về chữ thường.
+\end{itemize}
+
+\textbf{Bước 2. Tính Term Frequency (TF):}
+
+\begin{itemize}
+  \item Với mỗi tiêu đề, đếm số lần xuất hiện của mỗi từ.
+  \item Chia số lần đếm của từ cho tổng số từ trong tiêu đề để được TF.
+\end{itemize}
+
+\textbf{Bước 3. Tính Inverse Document Frequency (IDF):}
+
+\begin{itemize}
+  \item Với mỗi từ, đếm số tiêu đề mà nó xuất hiện.
+  \item Chia tổng số tiêu đề cho số tiêu đề chứa từ đó.
+  \item Lấy logarit của kết quả để được IDF.
+\end{itemize}
+
+\textbf{Bước 4. Tính TF-IDF:}
+
+Nhân điểm TF và IDF của mỗi từ trong mỗi tiêu đề để được điểm TF-IDF.
+
+\subsubsection*{Ví dụ Minh họa:}
+
+Hãy trình bày cách thực hiện trên ví dụ Tiêu đề 1: ``Acme Corp. announces record profits, stock surges.''
+
+\begin{itemize}
+  \item Tách từ và Tiền xử lý:
+  \begin{itemize}
+    \item Các token: [``acme'', ``corp'', ``announces'', ``record'', ``profits'', ``stock'', ``surges'']
+  \end{itemize}
+  \item Tính TF:
+  \begin{itemize}
+    \item TF(``acme'') = 1/7
+    \item TF(``corp'') = 1/7
+    \item TF(``announces'') = 1/7
+    \item TF(``record'') = 1/7
+    \item TF(``profits'') = 1/7
+    \item TF(``stock'') = 1/7
+    \item TF(``surges'') = 1/7
+  \end{itemize}
+  \item Tính IDF:
+  \begin{itemize}
+    \item IDF(``acme'') = log(4/4) = 0 (xuất hiện trong tất cả các tiêu đề)
+    \item IDF(``corp'') = log(4/4) = 0 (xuất hiện trong tất cả các tiêu đề)
+    \item IDF(``announces'') = log(4/1) = log(4)
+    \item IDF(``record'') = log(4/1) = log(4)
+    \item IDF(``profits'') = log(4/1) = log(4)
+    \item IDF(``stock'') = log(4/2) = log(2)
+    \item IDF(``surges'') = log(4/1) = log(4)
+  \end{itemize}
+  \item Tính TF-IDF:
+  \begin{itemize}
+    \item TF-IDF(``acme'') = (1/7) * 0 = 0
+    \item TF-IDF(``corp'') = (1/7) * 0 = 0
+    \item TF-IDF(``announces'') = (1/7) * log(4)
+    \item TF-IDF(``record'') = (1/7) * log(4)
+    \item TF-IDF(``profits'') = (1/7) * log(4)
+    \item TF-IDF(``stock'') = (1/7) * log(2)
+    \item TF-IDF(``surges'') = (1/7) * log(4)
+  \end{itemize}
+\end{itemize}
+
+\textbf{Diễn giải:} Các từ có điểm TF-IDF cao hơn thì quan trọng hơn đối với tiêu đề này. Trong trường hợp này, ``announces'', ``record'', ``profits'' và ``surges'' có điểm TF-IDF cao hơn, cho thấy tầm quan trọng của chúng trong việc truyền tải cảm xúc tích cực của tiêu đề.
+
+Sau đó chúng ta có thể tiến hành áp dụng các kỹ thuật này cho tất cả các tiêu đề. Bằng cách lặp lại quá trình này cho tất cả các tiêu đề, chúng ta có thể nhận diện các từ quan trọng nhất trong mỗi tiêu đề và hiểu cảm xúc tổng thể đối với Acme Corp.
+
+\subsubsection*{Mã Python:}
+
+Hãy trình bày cách áp dụng TF-IDF bằng mã Python với thư viện sklearn. Đoạn mã sau nhận một tập hợp các tiêu đề tin tức tài chính và chuyển chúng thành một biểu diễn số (ma trận TF-IDF) nắm bắt mức độ quan trọng của mỗi từ trong mỗi tiêu đề. Chúng ta làm điều này bằng cách dùng \texttt{TfidfVectorizer}, một công cụ mạnh để chuyển một tập hợp các tài liệu thô thành một ma trận các đặc trưng TF-IDF. Về bản chất, nó tự động hóa quá trình tính điểm TF-IDF cho mỗi từ trong mỗi tài liệu:
+
+\begin{lstlisting}[language=Python,escapeinside={(*@}{@*)}]
+# (*@Các@*) (*@tiêu@*) (*@đề@*) (*@mẫu@*)
+headlines = [
+    "Acme Corp. announces record profits, stock surges.",
+    "Acme Corp. faces regulatory scrutiny, shares decline.",
+    "Market volatility impacts Acme Corp. earnings.",
+    "Acme Corp. expands into new markets, analysts optimistic."
+]
+
+# (*@Tạo@*) (*@một@*) (*@đối@*) (*@tượng@*) TfidfVectorizer
+vectorizer = TfidfVectorizer(stop_words='english')
+
+# (*@Khớp@*) vectorizer (*@với@*) (*@các@*) (*@tiêu@*) (*@đề@*)
+vectorizer.fit(headlines)
+
+# (*@Chuyển@*) (*@các@*) (*@tiêu@*) (*@đề@*) (*@thành@*) (*@ma@*) (*@trận@*) TF-IDF
+tfidf_matrix = vectorizer.transform(headlines)
+
+# (*@Lấy@*) (*@tên@*) (*@các@*) (*@đặc@*) (*@trưng@*) ((*@các@*) (*@từ@*))
+feature_names = vectorizer.get_feature_names_out()
+\end{lstlisting}
+
+Sau khi định nghĩa các tiêu đề mẫu trong biến \texttt{headlines}, trước hết ta tạo đối tượng \texttt{TfidfVectorizer}. Dòng \texttt{vectorizer = TfidfVectorizer(stop\_words='english')} tạo một thể hiện của lớp \texttt{TfidfVectorizer} và gán nó cho biến \texttt{vectorizer}. Đối số \texttt{stop\_words='english'} yêu cầu vectorizer tự động loại bỏ các từ tiếng Anh thông dụng (như ``the'', ``a'', ``is'') vốn thường không mang nhiều ý nghĩa trong phân tích văn bản. Điều này giúp tập trung vào các từ mang nhiều thông tin hơn.
+
+Sau đó mã khớp vectorizer. Dòng \texttt{vectorizer.fit(headlines)} ``khớp'' vectorizer với dữ liệu các tiêu đề. Điều này có nghĩa là vectorizer phân tích các tiêu đề.
+
+Bây giờ chúng ta sẵn sàng chuyển các tiêu đề thành ma trận TF-IDF. Dòng \texttt{tfidf\_matrix = vectorizer.transform(headlines)} là bước then chốt, nơi phép biến đổi TF-IDF thực sự diễn ra. Phương thức transform nhận các tiêu đề làm đầu vào và chuyển chúng thành một biểu diễn ma trận gọi là \texttt{tfidf\_matrix}. Cấu trúc của \texttt{tfidf\_matrix} gồm:
+
+\begin{itemize}
+  \item Các hàng biểu diễn các tiêu đề;
+  \item Các cột biểu diễn các từ (token) duy nhất từ bộ từ vựng mà vectorizer đã học được;
+  \item Các giá trị là điểm TF-IDF của mỗi từ trong mỗi tiêu đề. Điểm TF-IDF càng cao cho thấy một từ càng quan trọng hoặc càng đặc trưng trong một tiêu đề cụ thể.
+\end{itemize}
+
+Sau khi khớp \texttt{TfidfVectorizer} với các tiêu đề và học một bộ từ vựng gồm tất cả các từ duy nhất có trong dữ liệu, dòng mã cuối cùng \texttt{feature\_names = vectorizer.get\_feature\_names\_out()} lấy danh sách các từ (đặc trưng) đã được dùng để tạo ma trận TF-IDF. Danh sách tên các đặc trưng sau đó được gán cho biến \texttt{feature\_names}.
+
+Cuối cùng, chúng ta có thể in danh sách tên các đặc trưng (các từ) đã được trích xuất từ các tiêu đề và dùng để tạo ma trận TF-IDF:
+
+\begin{lstlisting}[language=Python,escapeinside={(*@}{@*)}]
+# (*@In@*) (*@tên@*) (*@các@*) (*@đặc@*) (*@trưng@*)
+print(feature_names)
+\end{lstlisting}
+
+\begin{lstlisting}[escapeinside={(*@}{@*)}]
+['acme' 'analysts' 'announces' 'corp' 'decline' 'earnings' 'expands'
+ 'faces' 'impacts' 'market' 'markets' 'new' 'optimistic' 'profits'
+ 'record' 'regulatory' 'scrutiny' 'shares' 'stock' 'surges' 'volatility']
+\end{lstlisting}
+
+Đầu ra này biểu diễn bộ từ vựng gồm các từ duy nhất mà \texttt{TfidfVectorizer} đã trích xuất từ các tiêu đề sau khi tiền xử lý (loại bỏ các từ dừng). Các từ trong danh sách thường được sắp xếp theo thứ tự bảng chữ cái. Mỗi từ trong danh sách này tương ứng với một cột của ma trận TF-IDF (\texttt{tfidf\_matrix}). Các giá trị trong cột đó biểu diễn điểm TF-IDF của từ cụ thể đó trong mỗi tiêu đề.
+
+Chúng ta có thể dùng \texttt{feature\_names} để truy cập các từ cụ thể. Khi muốn phân tích điểm TF-IDF của một từ nhất định, ta có thể dùng danh sách \texttt{feature\_names} để tìm chỉ số của nó. Đoạn mã sau tập trung vào việc truy cập điểm TF-IDF của một tiêu đề và một từ cụ thể. Đoạn mã này xác định tiêu đề cụ thể (tiêu đề đầu tiên) và từ (``profits'') mà chúng ta quan tâm. Sau đó nó tìm hàng và cột tương ứng trong ma trận TF-IDF, lấy điểm TF-IDF từ vị trí đó trong ma trận và in điểm số:
+
+\begin{lstlisting}[language=Python,escapeinside={(*@}{@*)}]
+# (*@Truy@*) (*@cập@*) (*@điểm@*) TF-IDF (*@của@*) (*@một@*) (*@tiêu@*) (*@đề@*) (*@và@*) (*@một@*) (*@từ@*) (*@cụ@*) (*@thể@*)
+headline_index = 0  # (*@Chỉ@*) (*@số@*) (*@của@*) (*@tiêu@*) (*@đề@*) (*@đầu@*) (*@tiên@*)
+word_index = feature_names.tolist().index('profits')  # (*@Lấy@*) (*@chỉ@*) (*@số@*) (*@của@*) (*@từ@*) "profits"
+
+# (*@Tìm@*) (*@điểm@*) TF-IDF (*@và@*) (*@in@*) (*@ra@*)
+tfidf_score = tfidf_matrix[headline_index, word_index]
+print(f"TF-IDF score for 'profits' in the first headline: {tfidf_score}")
+\end{lstlisting}
+
+\begin{lstlisting}[escapeinside={(*@}{@*)}]
+TF-IDF score for 'profits' in the first headline: 0.42468159315633897
+\end{lstlisting}
+
+Ma trận TF-IDF là thành phần cốt lõi của phân tích TF-IDF, vì nó lưu trữ các điểm TF-IDF đã tính cho mỗi từ trong mỗi tài liệu. Bây giờ hãy xem biểu diễn số của ma trận TF-IDF. Dòng mã sau hiển thị biểu diễn số của ma trận TF-IDF:
+
+\begin{lstlisting}[language=Python,escapeinside={(*@}{@*)}]
+# (*@In@*) (*@ma@*) (*@trận@*) TF-IDF
+print(tfidf_matrix.toarray())
+\end{lstlisting}
+
+\begin{lstlisting}[escapeinside={(*@}{@*)}]
+[[0.22161647 0.         0.42468159 0.22161647 0.         0.
+  0.         0.         0.         0.         0.         0.
+  0.         0.42468159 0.42468159 0.         0.         0.
+  0.42468159 0.42468159 0.        ]
+ [0.22161647 0.         0.         0.22161647 0.42468159 0.
+  0.         0.42468159 0.         0.         0.         0.
+  0.         0.         0.         0.42468159 0.42468159 0.42468159
+  0.         0.         0.        ]
+ [0.24478737 0.         0.         0.24478737 0.         0.46908376
+  0.         0.         0.46908376 0.46908376 0.         0.
+  0.         0.         0.         0.         0.         0.
+  0.         0.         0.46908376]
+ [0.22161647 0.42468159 0.         0.22161647 0.         0.
+  0.42468159 0.         0.         0.         0.42468159 0.42468159
+  0.42468159 0.         0.         0.         0.         0.
+  0.         0.         0.        ]]
+\end{lstlisting}
+
+Trong khi \texttt{print(tfidf\_matrix.toarray())} cho biểu diễn số, nó thiếu ngữ cảnh. Sau đây là cách chúng ta có thể cải thiện và làm cho đầu ra của ma trận TF-IDF dễ đọc hơn bằng cách thêm tiêu đề hàng và cột. Cách thuận tiện nhất để thêm tiêu đề là dùng thư viện Pandas để tạo một DataFrame. Điều này cho phép gán nhãn cho các hàng và cột, làm cho đầu ra rõ ràng hơn nhiều.
+
+\begin{lstlisting}[language=Python,escapeinside={(*@}{@*)}]
+# (*@Tạo@*) (*@danh@*) (*@sách@*) (*@các@*) (*@nhãn@*) (*@tiêu@*) (*@đề@*) (*@chung@*)
+headline_labels = ["Headline1", "Headline2", "Headline3", "Headline4"]
+
+# (*@Tạo@*) (*@một@*) DataFrame Pandas
+pd.DataFrame(tfidf_matrix.toarray(), columns=feature_names, index=headline_labels)
+\end{lstlisting}
+
+\begin{lstlisting}[escapeinside={(*@}{@*)}]
+               acme  analysts  announces      corp   decline  earnings  \
+Headline1  0.221616  0.000000   0.424682  0.221616  0.000000  0.000000   
+Headline2  0.221616  0.000000   0.000000  0.221616  0.424682  0.000000   
+Headline3  0.244787  0.000000   0.000000  0.244787  0.000000  0.469084   
+Headline4  0.221616  0.424682   0.000000  0.221616  0.000000  0.000000   
+
+            expands     faces   impacts    market  ...       new  optimistic  \
+Headline1  0.000000  0.000000  0.000000  0.000000  ...  0.000000    0.000000   
+Headline2  0.000000  0.424682  0.000000  0.000000  ...  0.000000    0.000000   
+Headline3  0.000000  0.000000  0.469084  0.469084  ...  0.000000    0.000000   
+Headline4  0.424682  0.000000  0.000000  0.000000  ...  0.424682    0.424682   
+
+            profits    record  regulatory  scrutiny    shares     stock  \
+Headline1  0.424682  0.424682    0.000000  0.000000  0.000000  0.424682   
+Headline2  0.000000  0.000000    0.424682  0.424682  0.424682  0.000000   
+Headline3  0.000000  0.000000    0.000000  0.000000  0.000000  0.000000   
+Headline4  0.000000  0.000000    0.000000  0.000000  0.000000  0.000000   
+
+             surges  volatility  
+Headline1  0.424682  0.000000  
+Headline2  0.000000  0.000000  
+Headline3  0.000000  0.469084  
+Headline4  0.000000  0.000000  
+
+[4 rows x 21 columns]
+\end{lstlisting}
+
+Bây giờ, thay vì chỉ thấy một mảng các con số, chúng ta có một bảng được định dạng đẹp với các tiêu đề làm nhãn hàng và các từ làm nhãn cột. Mỗi ô trong bảng chứa điểm TF-IDF của từ đó trong tiêu đề đó.
+
+Ví dụ đơn giản hóa này minh họa các bước cơ bản trong việc áp dụng TF-IDF. Trong các ứng dụng thực tế, chúng ta có thể cần thực hiện tiền xử lý nâng cao hơn, dùng các tham số khác nhau cho \texttt{TfidfVectorizer} và áp dụng các kỹ thuật phân tích tinh vi hơn để trích xuất những hiểu biết có ý nghĩa từ dữ liệu văn bản tài chính.
+
+\section{Kết luận}
+
+Trong bài học này, chúng ta chủ yếu tập trung vào các thước đo độ tương đồng và ứng dụng của chúng trong thị trường tài chính. Chúng ta đã giới thiệu khái niệm các thước đo độ tương đồng, giải thích cách chúng được dùng để định lượng mức độ giống nhau giữa các đối tượng dữ liệu. Chúng ta đã biết rằng có hai loại thước đo độ tương đồng chính: các Thước đo Khoảng cách và các Hệ số Tương đồng.
+
+Sau đó chúng ta chuyển trọng tâm sang Term Frequency-Inverse Document Frequency (TF-IDF), một thước đo thống kê dùng để đánh giá mức độ quan trọng của các từ trong một tài liệu thuộc một tập hợp các tài liệu. Chúng ta đã tìm hiểu cách TF-IDF hoạt động, các lợi ích của nó và các ứng dụng của nó trong phân tích tài chính. Các ứng dụng này bao gồm phân tích cảm xúc cho thị trường tài chính, phân tích dữ liệu thay thế, quản trị rủi ro, giao dịch thuật toán và tối ưu hóa danh mục đầu tư.
+
+Trong bài học tiếp theo, chúng ta sẽ tìm cách khám phá việc áp dụng các kỹ thuật này vào thực tế.
+
+\textbf{Tài liệu tham khảo}
+
+\begin{itemize}
+  \item Daniel Jurafsky and James H. Martin. (2024). Speech and Language Processing: An Introduction to Natural Language Processing, Computational Linguistics, and Speech Recognition with Language Models, 3rd edition. Online manuscript released August 20, 2024. \url{https://web.stanford.edu/~jurafsky/slp3}
+  \item Wikipedia Contributors (2024). Similarity measure. [online] Wikipedia. Available at: \url{https://en.wikipedia.org/wiki/Similarity_measure}
+\end{itemize}
+
+Bản quyền 2024 WorldQuant University. Nội dung này được cấp phép chỉ để sử dụng cá nhân. Nghiêm cấm phân phối lại hoặc xuất bản tài liệu này.
+

@@ -1,0 +1,174 @@
+%% example.tex -- example cover for bookcover.cls
+%% For further help, refer to the documentation provided for the class
+
+\documentclass[
+  margin      = 10,
+  pages       = 600,
+  grammage    = 75, 
+  colorFront  = 1B6B7B,
+  colorBack   = 1B6B7B,
+  colorSpine  = D4A96A
+]{bookcover}
+
+\usepackage[english]{babel}  % hyphenation patterns
+\usepackage{graphicx}        % \includegraphics
+\usepackage{ragged2e}        % \justifying
+\usepackage{fontspec}        % requires XeLaTeX or LuaLaTeX.
+    \setmainfont{TeX Gyre Adventor}
+    \newfontfamily\TitleFont{TeX Gyre Adventor}[LetterSpace=10.0]
+\usepackage{xcolor}
+    \definecolor{teal} {HTML}{1B6B7B}  % matches colorFront / colorBack
+    \definecolor{gold} {HTML}{D4A96A}  % matches colorSpine
+    \definecolor{white}{rgb}{1,1,1}
+
+%% ============================================================
+%% TYPOGRAPHIC SCALE
+%% ============================================================
+\def\hugefont  {\fontsize{48}{56}}  % main cover title
+\def\largefont {\fontsize{30}{36}}  % spine title
+\def\mediumfont{\fontsize{20}{24}}  % subtitle, edition
+\def\normalfont{\fontsize{16}{19}}  % authors, publisher, description
+\def\smallfont {\fontsize{12}{14}}  % spine edition, ISBN
+
+%% ============================================================
+%% BOOK METADATA
+%% ============================================================
+%% --- Front cover ---
+\def\booktitle{Discrete\\Mathematics}
+\def\booksubtitle{Finally Proving P\,=\,NP (We Think)}
+\def\bookedition{$\infty$th edition}
+\def\coverimage{cover_graph.pdf}
+\def\bookauthors{%
+  Al G. Bra
+  \quad\textbullet\quad
+  Kay O. S. Theory%
+}
+\def\bookpublisher{$\mathcal{O}(1)$ Press}
+
+%% --- Back cover ---
+\def\bookdescription{%
+  This textbook provides a rigorous introduction to discrete
+  mathematics. All proofs are straightforward and left as an
+  exercise to the reader.
+
+  The second edition features twice the content of the first,
+  achieved via the Banach--Tarski decomposition method.
+  The publisher has been informed.
+
+  The third part covers graph theory, including a definitive
+  solution to the Bridges of K\"{o}nigsberg problem.
+  (We added a bridge. You're welcome.)%
+}
+\def\publisherlogo{logo.png}
+\def\bookisbn{ISBN 978-0-314-15926-5}
+
+%% --- Spine ---
+\def\spinetitle{Discrete Mathematics}
+\def\spineauthors{Bra \textbullet\ Theory}
+\def\spineedition{$\infty$th ed.}
+\def\spinevolume{Vol.\\$n$}
+
+%% ============================================================
+%% FRONT COVER
+%% ============================================================
+\begin{front}
+
+  %% Title and Subtitle — full-width band at the top
+  \colorblock{gold}{0.25\textheight}{%
+    \centering
+    \color{teal}
+
+    {\hugefont\TitleFont\bfseries\selectfont
+      \MakeUppercase{\booktitle}\par}
+
+    \vspace{2mm}
+    {\rule{0.85\textwidth}{2pt}\par}
+    \vspace{2mm}
+
+    {\mediumfont\bfseries\selectfont
+      \MakeUppercase{\booksubtitle}\par}
+  }
+
+  \centering
+  \color{gold}
+
+  %% Edition — pushed to the right margin with \hfill.
+  \vspace{5mm} 
+  \hfill{\mediumfont\itshape\selectfont\bookedition}
+
+  %% Cover image — fills available vertical space between
+  %% edition line and author names.
+  %% \vfill \includegraphics[width=\linewidth]{\coverimage}
+  
+  %% Author names — bold, uppercased, centred.
+  \vfill 
+  {\normalfont\bfseries\selectfont\MakeUppercase{\bookauthors}}
+
+  %% Publisher strip — another full-width band at the bottom.
+  \vspace{4mm} 
+  \colorblock{gold}{10mm}{%
+    \centering
+    \color{teal}
+    {\normalfont\bfseries\selectfont\bookpublisher}
+  }
+
+\end{front}
+
+%% ============================================================
+%% BACK COVER
+%% ============================================================
+\begin{back}
+
+  \vspace{10mm}
+  \color{white}
+  \setlength{\parindent}{0pt}
+  \setlength{\parskip}{14pt}     % breathing room between paragraphs
+
+  %% Book description — justified text using ragged2e's \justifying,
+  {\normalfont\selectfont\justifying\bookdescription}
+
+  \vfill
+
+  %% Publisher logo — centred, sized to 25% of the text width.
+  %% {\centering\includegraphics[width=0.25\linewidth]{\publisherlogo}\par}
+
+  %% ISBN — right-aligned, at the very bottom.
+  \hfill{\color{gold}\smallfont\bfseries\selectfont\bookisbn}
+
+  \vspace{1cm}
+\end{back}
+
+%% ============================================================
+%% SPINE
+%% ============================================================
+\begin{spine}
+  \centering
+  \vspace{2mm}
+  \color{teal}
+
+  %% Authors at the top
+  \spinerotated{{\normalfont\bfseries\selectfont\spineauthors}}\par
+
+  %% Title in the centre — largest element on the spine
+  \vfill 
+  \spinerotated{{\largefont\bfseries\selectfont\spinetitle}}\par
+
+  %% Edition below the title
+  \vfill 
+  \spinerotated{{\smallfont\bfseries\selectfont\spineedition}}\par
+
+  %% Volume badge — upright text at the bottom of the spine
+  \vfill 
+  {\centering\normalfont\bfseries\selectfont\spinevolume\par}
+
+  \vspace{2mm}
+
+\end{spine}
+
+%% ============================================================
+%% DOCUMENT BODY
+%% \makecover is the only content needed
+%% ============================================================
+\begin{document}
+\makecover
+\end{document}

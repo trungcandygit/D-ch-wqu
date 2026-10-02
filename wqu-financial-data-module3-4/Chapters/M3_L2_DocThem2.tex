@@ -1,0 +1,147 @@
+\chapter{Đọc thêm: Các Thước đo Rủi ro dựa trên Phân vị (Dowd \& Blake)}
+\label{ch:M3L2-reading2}
+
+% Nguồn: Dowd, Kevin, and David Blake. "After VaR: The Theory, Estimation, and Insurance Applications of Quantile-Based Risk Measures." Journal of Risk and Insurance, vol. 73, no. 2, 2006, pp. 193-229.
+% Phần cần đọc: Sections 2.1-2.4 (Quantile-Based Measures of Risk) & 3.1-3.3 (Estimation Methods)
+% Nội dung bắt buộc đọc: được kiểm tra trong mọi bài đánh giá (kể cả Quiz).
+
+\section{Thông tin nguồn}
+
+\begin{itemize}
+  \item \textbf{Nguồn:} Dowd, Kevin, and David Blake. "After VaR: The Theory, Estimation, and Insurance Applications of Quantile-Based Risk Measures." \emph{Journal of Risk and Insurance}, vol. 73, no. 2, 2006, pp. 193--229. \url{https://dhenriet.perso.centrale-med.fr/var2.pdf}
+  \item \textbf{Phần cần đọc:} Sections 2.1--2.4 và 3.1--3.3
+\end{itemize}
+
+\section{Các Thước đo Rủi ro dựa trên Phân vị (Quantile-Based Measures of Risk)}
+
+\subsection{Value at Risk}
+
+Về mặt thực tiễn, ta có thể truy nguồn gốc của VaR về cuối thập niên 1970 và 1980, khi một số định chế tài chính lớn bắt đầu xây dựng các mô hình dự báo rủi ro nội bộ để đo lường và tổng hợp rủi ro trên toàn định chế.\footnote{Gốc rễ của thước đo này còn xa hơn nữa. Có thể lập luận rằng VaR đã hàm chứa trong thước đo dự trữ ban đầu xuất hiện trong bài toán xác suất phá sản cổ điển mà các nhà tính toán bảo hiểm (actuary) đã quen thuộc từ đầu thế kỷ 20. VaR cũng có thể được quy về Baumol (1963), người đề xuất một thước đo rủi ro bằng $\mu - k\sigma$. Tuy nhiên, thuật ngữ "value at risk" chỉ trở nên phổ biến từ đầu thập niên 1990.} Họ xây dựng các mô hình này vì mục đích quản lý rủi ro riêng, khi các công ty trở nên phức tạp hơn, việc tổng hợp rủi ro có tính đến cách chúng tương tác với nhau ngày càng khó khăn nhưng cũng ngày càng quan trọng, và các định chế thiếu phương pháp luận để làm điều đó. Hệ thống nổi tiếng nhất trong số này là hệ thống do JP Morgan phát triển, đi vào hoạt động khoảng năm 1990. Hệ thống này dựa trên lý thuyết danh mục đầu tư chuẩn, sử dụng ước lượng độ lệch chuẩn và tương quan giữa lợi suất của các công cụ giao dịch khác nhau, tổng hợp trên toàn định chế thành một thước đo rủi ro duy nhất. Thước đo được sử dụng là khái niệm khi đó gần như chưa ai biết đến: value-at-risk hàng ngày (VaR), mức lỗ tối đa có khả năng xảy ra trong ngày giao dịch tiếp theo.
+
+"Khả năng" được diễn giải theo mức tin cậy 95\%, vậy VaR là mức lỗ tối đa mà công ty có thể kỳ vọng trải qua trong "95 ngày tốt nhất" trong số 100 ngày. Tuy nhiên, các mô hình VaR khác nhau về khung thời gian và mức tin cậy sử dụng, cũng như về phương pháp luận ước lượng: một số dựa trên lý thuyết danh mục đầu tư, một số dựa trên phương pháp mô phỏng lịch sử (historical simulation, HS), và một số khác dựa trên phương pháp mô phỏng ngẫu nhiên.
+
+Một khi đi vào hoạt động, các mô hình VaR lan rộng rất nhanh, đầu tiên trong các công ty chứng khoán và ngân hàng đầu tư, sau đó đến ngân hàng thương mại, quỹ hưu trí, công ty bảo hiểm, và các tập đoàn phi tài chính. Khái niệm VaR cũng trở nên quen thuộc hơn khi các mô hình này lan rộng, và đến giữa thập niên 1990, VaR đã trở thành thước đo thống trị về rủi ro tài chính trong lĩnh vực rủi ro tài chính chính thống. Kể từ đó, các mô hình VaR đã trở nên tinh vi hơn nhiều, và các phương pháp VaR đã được mở rộng ra ngoài rủi ro thị trường để đo các loại rủi ro khác như rủi ro tín dụng, thanh khoản (hay dòng tiền), và rủi ro vận hành.
+
+Để xem xét thước đo VaR một cách chính thức hơn, giả sử ta có một danh mục tạo ra một khoản lỗ ngẫu nhiên trong một khung thời gian đã chọn.\footnote{Ta dùng thuật ngữ "danh mục" như một nhãn tiện lợi. Tuy nhiên, trong thực tế nó có thể là bất kỳ vị thế tài chính hoặc tập hợp vị thế nào.} Gọi $\alpha$ là một xác suất được chọn và $q_\alpha$ là phân vị $\alpha$ của hàm mật độ lỗ. VaR của danh mục tại mức tin cậy $\alpha$ khi đó đơn giản là phân vị $q_\alpha$ của phân phối lỗ, tức là:
+
+\begin{equation*}
+VaR_\alpha = q_\alpha \tag{1}
+\end{equation*}
+
+Sự trỗi dậy nhanh chóng của VaR phần lớn là do VaR có một số đặc điểm mang lại lợi thế so với các phương pháp đánh giá rủi ro truyền thống hơn trong bối cảnh thị trường vốn:
+
+\begin{itemize}
+  \item VaR cung cấp một thước đo rủi ro chung cho các vị thế và yếu tố rủi ro khác nhau. Nó có thể áp dụng cho bất kỳ loại danh mục nào, và cho phép ta so sánh rủi ro giữa các danh mục khác nhau (ví dụ: thu nhập cố định và cổ phiếu). Các phương pháp truyền thống hạn chế hơn: thước đo duration chỉ áp dụng cho vị thế thu nhập cố định, thước đo Greek chỉ áp dụng cho vị thế phái sinh, thước đo lý thuyết danh mục chỉ áp dụng cho vị thế cổ phiếu và tương tự, v.v.
+  \item VaR cho phép ta tổng hợp rủi ro của các vị thế có tính đến cách các yếu tố rủi ro tương quan với nhau, trong khi hầu hết các thước đo rủi ro truyền thống không cho phép tổng hợp "hợp lý" các rủi ro thành phần.
+  \item VaR mang tính toàn diện (holistic) ở chỗ nó tính đầy đủ mọi yếu tố rủi ro chi phối, trong khi nhiều thước đo truyền thống chỉ xem xét từng yếu tố rủi ro một lúc (ví dụ: thước đo Greek) hoặc dùng các đơn giản hóa gộp nhiều yếu tố rủi ro thành một (ví dụ: thước đo duration-convexity và CAPM). VaR cũng toàn diện ở chỗ nó tập trung đánh giá trên toàn bộ danh mục, chứ không chỉ từng vị thế riêng lẻ trong đó.
+  \item VaR mang tính xác suất, và cung cấp cho người quản lý rủi ro thông tin hữu ích về xác suất gắn với các mức lỗ cụ thể. Nhiều thước đo truyền thống (ví dụ duration, Greeks, v.v.) chỉ trả lời các câu hỏi "điều gì xảy ra nếu?" và không cho biết khả năng xảy ra mức lỗ.
+  \item VaR được biểu diễn bằng đơn vị đo đơn giản và dễ hiểu nhất, đó là "tiền bị mất." Nhiều thước đo khác được biểu diễn bằng các đơn vị kém trực quan hơn (ví dụ: thời gian trung bình đến dòng tiền, v.v.).
+\end{itemize}
+
+Đây là những điểm hấp dẫn rất đáng kể.
+
+Tuy nhiên, VaR cũng có một số hạn chế nghiêm trọng. Một hạn chế là VaR chỉ cho ta biết mức lỗ tối đa trong các trạng thái "tốt" khi không xảy ra sự kiện đuôi; nó không cho ta biết gì về mức có thể mất trong các trạng thái "xấu" khi sự kiện đuôi xảy ra (tức khi ta chịu lỗ vượt quá VaR). Việc VaR không xem xét các khoản lỗ đuôi có thể tạo ra một số kết quả trái ngược. Ví dụ, nếu một khoản đầu tư tiềm năng có lợi suất kỳ vọng cao nhưng cũng có khả năng lỗ rất lớn, một phép tính quyết định dựa trên VaR có thể gợi ý nhà đầu tư nên tiến hành khoản đầu tư đó nếu khoản lỗ lớn hơn không ảnh hưởng đến VaR, bất kể quy mô lợi suất kỳ vọng cao hơn và khoản lỗ tiềm năng lớn hơn ra sao. Điều này làm suy yếu phân tích rủi ro-lợi suất "hợp lý", và có thể khiến nhà đầu tư đối mặt với mức lỗ rất lớn.
+
+VaR cũng có thể tạo ra vấn đề rủi ro đạo đức (moral hazard) khi các trader hoặc nhà quản lý tài sản làm việc theo các mục tiêu rủi ro hoặc gói lương thưởng dựa trên VaR. Trader đối mặt với mục tiêu rủi ro dựa trên VaR có thể có động cơ bán các quyền chọn phi tiền tệ (out-of-the-money), mang lại thu nhập cao hơn trong hầu hết các trạng thái của thế giới và thỉnh thoảng chịu một cú sốc lớn khi công ty gặp xui rủi. Nếu các quyền chọn được chọn phù hợp, các kết quả xấu sẽ có xác suất đủ thấp để không ảnh hưởng đến VaR, và trader sẽ hưởng lợi từ thu nhập cao hơn (và do đó thưởng cao hơn) kiếm được trong thời kỳ "bình thường" khi các quyền chọn hết hạn ngoài tiền tệ.
+
+\subsection{Lý thuyết về Các Thước đo Rủi ro Chặt chẽ (Coherent Risk Measures)}
+
+Nhiều ánh sáng hơn đã được soi rọi vào các hạn chế của VaR bởi một số công trình lý thuyết quan trọng của Artzner, Delbaen, Eber, và Heath trong thập niên 1990 (Artzner et al., 1997, 1999). Điểm xuất phát của họ là dù tất cả chúng ta đều có cảm nhận trực quan về rủi ro tài chính là gì, rất khó để đánh giá tốt về rủi ro tài chính trừ khi ta xác định rõ một thước đo rủi ro tài chính thực sự có nghĩa là gì. Để làm rõ những vấn đề này, Artzner et al. đề xuất làm cho rủi ro điều mà Euclid và những người khác đã làm cho hình học: họ đặt ra một tập hợp tiên đề cho thước đo rủi ro, các tiên đề của tính chặt chẽ (coherence), và bắt đầu suy ra các hệ quả của chúng.
+
+Giả sử ta có một vị thế rủi ro $X$ và một thước đo rủi ro $\rho(X)$ xác định trên $X$. Ta định nghĩa khái niệm tập chấp nhận (acceptance set) là tập hợp tất cả các vị thế được chấp nhận bởi một bên liên quan nào đó (ví dụ, cơ quan quản lý tài chính). Ta sau đó diễn giải thước đo rủi ro $\rho(\cdot)$ là lượng tiền mặt bổ sung tối thiểu cần thêm vào một vị thế rủi ro và đầu tư thận trọng vào một tài sản tham chiếu nào đó để khiến vị thế rủi ro trở nên chấp nhận được. Nếu $\rho(\cdot)$ dương, một khoản dương phải được thêm vào để vị thế trở nên chấp nhận được; và nếu $\rho(\cdot)$ âm, giá trị tuyệt đối của nó có thể diễn giải là khoản tối đa có thể rút ra mà vị thế vẫn chấp nhận được.
+
+Xét hai vị thế rủi ro bất kỳ $X$ và $Y$, với giá trị lần lượt là $V(X)$ và $V(Y)$. Thước đo rủi ro $\rho(\cdot)$ khi đó được gọi là chặt chẽ (coherent) nếu nó thỏa mãn các tính chất sau:
+
+\begin{itemize}
+  \item \textbf{Tính đơn điệu (Monotonicity):} $V(Y) \geq V(X) \Rightarrow \rho(Y) \leq \rho(X)$
+  \item \textbf{Tính dưới cộng tính (Subadditivity):} $\rho(X + Y) \leq \rho(X) + \rho(Y)$
+  \item \textbf{Tính thuần nhất dương (Positive homogeneity):} $\rho(hX) = h\rho(X)$ với $h > 0$
+  \item \textbf{Tính bất biến tịnh tiến (Translational invariance):} $\rho(X + n) = \rho(X) - n$ với một khoản chắc chắn $n$ nào đó.
+\end{itemize}
+
+Tính chất thứ nhất, thứ ba, và thứ tư có thể coi là các điều kiện "cư xử tốt" (well-behavedness). Tính đơn điệu nghĩa là nếu $Y$ có giá trị lớn hơn $X$, thì $Y$ nên có rủi ro thấp hơn: điều này hợp lý, vì nó nghĩa là cần thêm ít hơn vào $Y$ so với $X$ để làm nó chấp nhận được, và khoản cần thêm chính là thước đo rủi ro. Tính thuần nhất dương ngụ ý rủi ro của một vị thế tỷ lệ thuận với quy mô của nó. Tính bất biến tịnh tiến yêu cầu việc thêm một khoản chắc chắn sẽ giảm tương ứng lượng tiền mặt còn cần để làm vị thế của ta chấp nhận được.
+
+Tính chất then chốt là tính chất thứ hai, tính dưới cộng tính. Điều này cho ta biết rằng một danh mục cấu thành từ các danh mục con sẽ có rủi ro không nhiều hơn, và trong một số trường hợp ít hơn, tổng rủi ro của các danh mục con cấu thành. Tính dưới cộng tính là tiêu chí quan trọng nhất mà ta kỳ vọng một thước đo rủi ro "đáng tin cậy" phải thỏa mãn. Nó phản ánh kỳ vọng của ta rằng việc tổng hợp các rủi ro riêng lẻ không nên làm tăng tổng rủi ro.
+
+Từ đó suy ra rằng VaR không thể là một thước đo "đáng tin cậy" theo nghĩa này, vì VaR không có tính dưới cộng tính.\footnote{Tính không dưới cộng tính của VaR được minh họa dễ nhất bằng một phản ví dụ: giả sử ta có hai trái phiếu giống hệt nhau A và B, mỗi trái phiếu vỡ nợ với xác suất 4\%, gây lỗ 100 nếu vỡ nợ và 0 nếu không. VaR 95\% của mỗi trái phiếu là 0. Nhưng nếu các vỡ nợ độc lập, $VaR_{0.95}(A+B) = 100 > 0 = VaR_{0.95}(A) + VaR_{0.95}(B)$, vi phạm tính dưới cộng tính.} Thực tế, VaR chỉ có tính dưới cộng tính trong trường hợp hạn chế khi phân phối lỗ là phân phối elip (elliptically distributed), và điều này có ý nghĩa an ủi hạn chế vì hầu hết các phân phối lỗ trong thực tế không phải phân phối elip. Việc VaR không có tính dưới cộng tính là một vấn đề nền tảng vì về bản chất nó có nghĩa là VaR không có cơ sở để được coi là một thước đo rủi ro "thực sự". VaR chỉ đơn thuần là một phân vị.
+
+Trước những vấn đề này, ta tìm kiếm các thước đo rủi ro thay thế giữ được lợi ích của VaR, về tính toàn cục, tính phổ quát, nội dung xác suất, v.v., trong khi tránh được các nhược điểm của nó.
+
+\subsection{Expected Shortfall}
+
+Một ứng viên đầy hứa hẹn là expected shortfall (ES), là mức lỗ trung bình của $1-\alpha$ khoản lỗ tệ nhất. Trong trường hợp phân phối lỗ liên tục, ES được cho bởi:
+
+\begin{equation*}
+ES_\alpha = \frac{1}{1-\alpha} \int_\alpha^1 q_p \, dp \tag{2}
+\end{equation*}
+
+Nếu phân phối rời rạc, ES là dạng rời rạc tương đương của (2):
+
+\begin{equation*}
+ES_\alpha = \frac{1}{1-\alpha} \sum_{p=\alpha}^{1} (\text{kết quả tệ thứ } p) \times (\text{xác suất của kết quả tệ thứ } p) \tag{3}
+\end{equation*}
+
+Thước đo rủi ro ES này rất quen thuộc với các nhà tính toán bảo hiểm (actuary), dù thường được biết đến trong giới bảo hiểm là Conditional Tail Expectation (tại Bắc Mỹ) hoặc Tail VaR (tại châu Âu). Trong giới rủi ro tài chính chính thống, nó được gọi bằng nhiều tên khác nhau như Expected Tail Loss, Tail Conditional Expectation, Conditional VaR, Tail Conditional VaR, và Worst Conditional Expectation. Như vậy, không có sự nhất quán về thuật ngữ trong cả tài liệu bảo hiểm lẫn quản lý rủi ro tài chính. Tuy nhiên, điểm cốt lõi ở đây là thước đo này (dù ta gọi nó là gì) thuộc về một họ thước đo rủi ro có hai thành viên chính. Thành viên thứ nhất là thước đo ta gọi là ES, được định nghĩa theo một ngưỡng xác suất. Thành viên kia là "người anh em họ" giới hạn theo phân vị của nó, mức lỗ trung bình vượt quá VaR, tức $\mathbb{E}[X \mid X > q_\alpha(X)]$. Hai thước đo này luôn trùng nhau khi phân phối lỗ liên tục. Tuy nhiên, thước đo sau có thể mơ hồ và không chặt chẽ khi phân phối lỗ rời rạc, trong khi ES luôn duy nhất và chặt chẽ. Về thuật ngữ, ta ưu tiên dùng "expected shortfall" vì nó rõ ràng hơn các lựa chọn khác.
+
+Việc chứng minh tính chặt chẽ của ES khá đơn giản. Nếu ta có $N$ phân vị xác suất bằng nhau trong một phân phối rời rạc, thì:
+
+\begin{align*}
+ES_\alpha(X) + ES_\alpha(Y) &= \text{TB } N\alpha \text{ trường hợp tệ nhất của } X + \text{TB } N\alpha \text{ trường hợp tệ nhất của } Y \\
+&\geq \text{TB } N\alpha \text{ trường hợp tệ nhất của } (X+Y) = ES_\alpha(X+Y) \tag{4}
+\end{align*}
+
+Một phân phối liên tục có thể coi là trường hợp giới hạn khi $N$ lớn dần. Nhìn chung, trung bình của $N\alpha$ trường hợp tệ nhất của $X$ cộng với trung bình của $N\alpha$ trường hợp tệ nhất của $Y$ sẽ lớn hơn trung bình của $N\alpha$ trường hợp tệ nhất của $(X+Y)$, trừ trường hợp đặc biệt khi các trường hợp tệ nhất của $X$ và $Y$ xảy ra trong cùng $N\alpha$ sự kiện. Điều này cho thấy ES có tính dưới cộng tính, và cũng dễ dàng chứng minh ES thỏa mãn các tính chất chặt chẽ còn lại.
+
+ES là một thước đo rủi ro hấp dẫn vì nhiều lý do ngoài tính chặt chẽ của nó. Nó có một số ứng dụng rất tự nhiên trong bảo hiểm (ví dụ, nó là thước đo hiển nhiên để dùng khi ta muốn ước lượng mức bảo hiểm cần thiết cho một hợp đồng tái bảo hiểm vượt mức tổn thất, excess-of-loss reinsurance treaty). Nó cũng có sức hấp dẫn ở chỗ rất dễ ước lượng: nhà tính toán bảo hiểm chỉ đơn giản tạo ra một số lượng lớn các kịch bản lỗ và lấy ES là trung bình của $100(1-\alpha)$ phần trăm các khoản lỗ lớn nhất.
+
+\subsection{Kịch bản và Kịch bản Tổng quát hóa}
+
+Lý thuyết về các thước đo rủi ro chặt chẽ có một số hệ quả căn bản (và đôi khi bất ngờ). Ví dụ, hóa ra kết quả của phân tích kịch bản (hay kiểm định sức chịu đựng, stress test) có thể được diễn giải là các thước đo rủi ro chặt chẽ. Giả sử ta xem xét một tập các kết quả lỗ kết hợp với một tập các xác suất tương ứng. Các khoản lỗ có thể coi là các mẫu đuôi rút ra từ hàm phân phối liên quan, và giá trị kỳ vọng (hay trung bình) của chúng chính là ES gắn với hàm phân phối đó. Vì ES là một thước đo rủi ro chặt chẽ, điều này có nghĩa là kết quả của các phân tích kịch bản cũng là các thước đo rủi ro chặt chẽ. Do đó, lý thuyết về các thước đo rủi ro chặt chẽ cung cấp một cơ sở biện minh về mặt lý thuyết rủi ro cho thực hành kiểm định sức chịu đựng.
+
+Lập luận này cũng có thể được tổng quát hóa theo một số cách thú vị. Xét một tập "kịch bản tổng quát hóa", một tập $n$ kết quả lỗ và một họ các hàm phân phối mà từ đó các khoản lỗ được rút ra. Lấy bất kỳ phân phối nào trong số này và thu được ES tương ứng. Sau đó làm lại điều tương tự với một hàm phân phối khác, dẫn đến một ES thay thế. Cứ tiếp tục như vậy. Hóa ra giá trị lớn nhất trong số các ES này tự nó là một thước đo rủi ro chặt chẽ: nếu ta có một tập $m$ ES có thể so sánh được, mỗi ES tương ứng với một hàm phân phối lỗ khác nhau, thì giá trị lớn nhất trong số các ES này là một thước đo rủi ro chặt chẽ.\footnote{Một ví dụ điển hình về một khung kiểm định sức chịu đựng chuẩn có kết quả đủ điều kiện là thước đo rủi ro chặt chẽ là hệ thống SPAN được Chicago Mercantile Exchange dùng để tính yêu cầu ký quỹ.} Hơn nữa, nếu ta đặt $n=1$, khi đó chỉ có một khoản lỗ đuôi trong mỗi kịch bản và mỗi ES giống với mức lỗ tối đa có khả năng xảy ra hay kết quả kịch bản xấu nhất khả dĩ.
+
+\section{Phương pháp Ước lượng (Estimation Methods)}
+
+Bây giờ ta chuyển sang việc ước lượng các thước đo rủi ro của mình. Điều này đòi hỏi ta ước lượng toàn bộ hoặc một phần hàm phân phối lỗ. Khi làm vậy, ta có thể nghĩ đến một tập các xác suất tích lũy $p$ đã cho, và ta tìm cách ước lượng tập các phân vị $q_p$ gắn với chúng. Hàm phân phối có thể liên tục, trong trường hợp đó ta sẽ có một hàm cho $q_p$ theo $p$ giá trị liên tục, hoặc có thể rời rạc, trong trường hợp đó ta sẽ có $N$ giá trị $q_p$ khác nhau cho mỗi $p$ bằng, ví dụ, $1/N, 2/N$, v.v.
+
+Một khi đã ước lượng được (các) phân vị cần thiết, việc thu được ước lượng của các thước đo rủi ro khá đơn giản:
+
+\begin{itemize}
+  \item Nếu thước đo rủi ro của ta là VaR, thước đo rủi ro ước lượng chính là phân vị ước lượng (1).
+  \item Nếu thước đo rủi ro của ta là một thước đo chặt chẽ hoặc phổ (spectral), ta giả định một hàm trọng số $\phi(p)$, rời rạc hóa, ước lượng các phân vị liên quan, và lấy ước lượng rủi ro chặt chẽ của ta là trung bình có trọng số phù hợp của các ước lượng phân vị.
+  \item Nếu thước đo rủi ro của ta là một thước đo biến dạng (distortion), trước tiên ta rời rạc hóa các xác suất "gốc" và ước lượng các phân vị khớp với chúng. Sau đó ta biến dạng các xác suất bằng cách cho chúng qua hàm biến dạng đã chọn, và thước đo rủi ro ước lượng của ta là trung bình có trọng số của các ước lượng phân vị, trong đó trọng số bằng các mức tăng trong xác suất (tích lũy) đã biến dạng.
+\end{itemize}
+
+Về mặt thực tiễn, có rất ít khác biệt trong khối lượng công việc cần thiết để ước lượng các loại thước đo rủi ro khác nhau này. Điều này rất hữu ích vì tất cả các khối xây dựng cần cho ước lượng phân vị hoặc VaR, các yếu tố rủi ro, cơ sở dữ liệu, quy trình tính toán, v.v., cũng chính xác là những gì ta cần cho việc ước lượng các loại thước đo rủi ro khác. Do đó, nếu một định chế đã có sẵn một công cụ tính VaR, công cụ đó chỉ cần điều chỉnh nhỏ để tạo ra ước lượng của các thước đo rủi ro tinh vi hơn.
+
+Ta có thể tập trung vào nhiệm vụ còn lại là ước lượng phân vị (hay tương đương, mật độ). Tuy nhiên, đây không phải là vấn đề đơn giản, và tài liệu về ước lượng phân vị/VaR/mật độ rất đồ sộ. Nói chung, có ba lớp phương pháp ta có thể dùng:
+
+\begin{itemize}
+  \item Phương pháp tham số (Parametric methods).
+  \item Phương pháp phi tham số (Nonparametric methods).
+  \item Phương pháp mô phỏng ngẫu nhiên (Stochastic/Monte Carlo simulation methods).
+\end{itemize}
+
+Bây giờ ta xem xét ngắn gọn lần lượt từng phương pháp.
+
+\subsection{Phương pháp Tham số}
+
+Các phương pháp tham số ước lượng phân vị dựa trên giả định rằng phân phối lỗ có một dạng tham số cụ thể, và nhiệm vụ đầu tiên là xác định dạng đó có thể là gì. Việc chọn phân phối sẽ được định hướng bởi các chẩn đoán không chính thức (ví dụ, dùng đồ thị quantile-quantile, đồ thị hàm vượt trung bình, v.v.) trong đó ta kiểm tra không chính thức mức độ phù hợp của nhiều phân phối khả dĩ. Việc chọn phân phối cũng có thể được định hướng bởi các cân nhắc lý thuyết nếu có lý do để nghĩ rằng phân phối có thể có một dạng cụ thể: ví dụ, nếu ta xử lý các giá trị cực đoan, ta sẽ dùng một phân phối giá trị cực đoan (extreme-value distribution). Nó cũng sẽ được định hướng bởi kinh nghiệm quá khứ (ví dụ, biết rằng các phân phối cụ thể có xu hướng khớp tốt với các tập dữ liệu tương tự). Khi chọn một phân phối, ta cũng phải tính đến bất kỳ tính điều kiện nào trong quá trình lỗ: các khoản lỗ có thể theo một mô hình thời gian (tức phụ thuộc vào lỗ quá khứ), hoặc có thể bị chi phối bởi một số biến ngẫu nhiên khác. Tùy vào bài toán, phân phối được chọn có thể là bất kỳ phân phối nào trong số rất nhiều loại, bao gồm: chuẩn (normal), log-chuẩn (lognormal), $t$, log-$t$, stable Paretian, elip (elliptical), hyperbolic, Pareto, hỗn hợp chuẩn (normal-mixture), jump-diffusion, họ Pearson, họ Johnson, skew-$t$, giá trị cực đoan (extreme-value), v.v.
+
+Sau khi xác định được phân phối, ta có thể tra công thức phân vị của phân phối đó. Tuy nhiên, công thức phân vị sẽ chứa các tham số cần được ước lượng, và ta sẽ ước lượng các tham số này bằng một phương pháp phù hợp với phân phối đã chọn: phương pháp này có thể là hợp lý cực đại (maximum-likelihood), bình phương tối thiểu (least-squares), phương pháp mô-men (method-of-moments), bán tham số (semiparametric), v.v. Sau đó ta thay các ước lượng tham số vào phương trình phân vị của ta để thu được ước lượng phân vị.
+
+Khi xử lý nhiều phân phối (ví dụ, một tập hợp các phân phối lỗ áp dụng cho các vị thế khác nhau), ta sẽ muốn mô hình hóa một phân phối đa biến (multivariate distribution). Các phương pháp đa biến yêu cầu ta hoặc xác định một phân phối đa biến cụ thể (ví dụ, chuẩn đa biến, $t$ đa biến, v.v.) với cấu trúc phụ thuộc giữa các biến ngẫu nhiên được mô hình hóa bằng ma trận tương quan, hoặc xác định một hàm copula, trong trường hợp đó ta sẽ chọn các phân phối biên (marginal distributions) cho mỗi biến ngẫu nhiên và một hàm copula phù hợp để mô hình hóa cấu trúc phụ thuộc của chúng. Các phương pháp tương quan quen thuộc hơn và dễ làm việc hơn, nhưng (thường) chỉ có thể áp dụng cho các phân phối elip; mặt khác, các phương pháp copula linh hoạt hơn nhiều vì chúng cho phép ta khớp các phân phối biên khác nhau cho các yếu tố rủi ro khác nhau và cũng cho phép một phạm vi cấu trúc phụ thuộc khả dĩ rộng hơn nhiều. Tuy nhiên, chúng cũng khó làm việc hơn và trong thực tế thường đòi hỏi mô phỏng ngẫu nhiên.
+
+Các phương pháp tham số phù hợp cho các bài toán đo lường rủi ro mà phân phối liên quan đã biết hoặc được ước lượng đáng tin cậy. Tuy nhiên, điều kiện này thường không được đáp ứng trong thực tế, đặc biệt khi ta có cỡ mẫu nhỏ, và trong các trường hợp đó chúng có thể rất không đáng tin cậy. Hơn nữa, chúng nhìn chung chỉ phù hợp cho các bài toán đo lường rủi ro tương đối "đơn giản", mà rất ít bài toán bảo hiểm thuộc dạng đó.
+
+\subsection{Phương pháp Phi tham số}
+
+Các phương pháp phi tham số tìm cách ước lượng rủi ro mà không đưa ra các giả định mạnh về phân phối đang xét. Thay vì áp đặt một phân phối tham số nào đó lên dữ liệu, chúng để dữ liệu "tự nói" nhiều nhất có thể, và ước lượng các thước đo rủi ro từ phân phối thực nghiệm. So với các phương pháp tham số, các phương pháp phi tham số có sức hấp dẫn lớn là tránh được nguy cơ xác định sai phân phối, điều có thể dẫn đến sai số lớn trong các thước đo rủi ro ước lượng của ta. Chúng dựa trên giả định rằng tương lai gần sẽ đủ giống với quá khứ gần để ta có thể dùng dữ liệu lịch sử gần đây (phản ánh trong phân phối thực nghiệm) để dự báo tương lai. Do đó, tính hữu ích của chúng trong thực tế phụ thuộc vào việc giả định này có đúng trong tình huống cụ thể hay không. May mắn là điều này thường đúng, và các phương pháp phi tham số có thành tích tốt. Mặt khác, chúng có thể không chính xác khi giả định này không đúng. Các ước lượng của chúng cũng có thể thiếu chính xác, đặc biệt ở vùng đuôi nơi dữ liệu đặc biệt thưa thớt. Kết quả là, các phương pháp phi tham số thường gặp khó khăn khi xử lý các giá trị cực đoan.
+
+Phương pháp phi tham số phổ biến nhất là HS (historical simulation, mô phỏng lịch sử), trong đó ta đọc các phân vị từ một histogram các khoản lỗ lịch sử, nhưng có thể được tinh chỉnh theo nhiều cách. Ta có thể thay histogram bằng kernel; đây là các bộ ước lượng mật độ phi tham số tinh vi hơn, về bản chất tìm cách làm mượt các cạnh gồ ghề của các cột histogram mà không áp đặt giả định mạnh lên dữ liệu. Ta cũng có thể tinh chỉnh HS bằng HS có trọng số (ví dụ, ta có thể gán trọng số cho dữ liệu theo độ tuổi, độ biến động, hoặc tương quan để tính đến các điều kiện thị trường thay đổi), mạng neural (cũng cho phép ta điều chỉnh theo các điều kiện thị trường thay đổi), phương pháp bootstrap (giúp đánh giá độ chính xác), và các phương pháp phân tích thành phần chính và nhân tố (rất hữu ích để giảm chiều dữ liệu).
+
+Ta cũng có thể mở rộng các phương pháp phi tham số để bao gồm các kịch bản phi lịch sử. Ví dụ, ta có thể xây dựng một số kịch bản giả định, gán cho các kịch bản này một số xác suất, rồi áp dụng các phương pháp phi tham số cho hỗn hợp các kịch bản lịch sử và giả định. Việc thêm các sự kiện giả định vào tập dữ liệu của ta giúp khắc phục các điểm yếu chính của các phương pháp phi tham số dựa trên lịch sử, cụ thể là sự phụ thuộc hoàn toàn vào tập dữ liệu lịch sử và khó khăn khi xử lý các giá trị cực đoan, và cũng cho phép xử lý tích hợp và nhất quán các kịch bản lịch sử và giả định.
+
+\subsection{Phương pháp Mô phỏng Ngẫu nhiên}
+
+Lớp phương pháp thứ ba là mô phỏng ngẫu nhiên (hay mô phỏng Monte Carlo). Các phương pháp này mô phỏng phân phối lỗ bằng một công cụ mô phỏng số ngẫu nhiên, và mạnh mẽ, linh hoạt hơn nhiều so với các phương pháp trước đó. Điều này là vì phân phối lỗ được suy ra từ một công cụ tính toán nền tảng có thể tính đến hầu như bất kỳ mức độ phức tạp nào. Phương pháp cơ bản là xác định mô hình "đằng sau" phân phối lỗ: ta xác định tất cả các yếu tố (ví dụ, ta xác định các biến ngoại sinh và ngẫu nhiên, các phân phối, mối quan hệ giữa các biến khác nhau, hiệu chỉnh tham số, v.v.) cùng nhau xác định khoản lỗ. Sau khi thiết lập mô hình này, ta thực hiện một số lượng lớn các lần thử mô phỏng, mỗi lần tạo ra một khoản lỗ mô phỏng dựa trên một tập các hiện thực mô phỏng của các yếu tố rủi ro "chi phối", thu được bằng cách lấy mẫu ngẫu nhiên từ các phân phối đã xác định của chúng. Nếu ta thực hiện một số lượng lớn các lần thử như vậy, phân phối các khoản lỗ mô phỏng thu được theo cách này sẽ cung cấp một xấp xỉ tốt cho phân phối lỗ thực nhưng chưa biết mà ta đang tìm kiếm. Sau đó ta thu được ước lượng của các thước đo rủi ro bằng cách áp dụng các phương pháp phi tham số cho phân phối lỗ mô phỏng này.

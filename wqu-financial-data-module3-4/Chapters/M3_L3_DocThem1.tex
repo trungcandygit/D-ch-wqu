@@ -1,0 +1,68 @@
+\chapter{Đọc thêm 1: Quy trình Làm sạch Dữ liệu Tần suất Cao (Barndorff-Nielsen et al.)}
+\label{ch:M3L3DT1}
+
+% Nguồn: Barndorff-Nielsen, O. E., Hansen, P. R., Lunde, A., & Shephard, N. ``Realized Kernels in Practice: Trades and Quotes.'' Econometrics Journal, vol. 12, 2009, pp. C1-C32.
+% Phần cần đọc: Trang C7-C8
+% Nội dung bắt buộc đọc: được kiểm tra trong mọi bài đánh giá (kể cả Quiz).
+
+\section{Thông tin nguồn}
+
+\begin{itemize}
+  \item \textbf{Nguồn:} Barndorff-Nielsen, O. E., et al. \emph{Realized Kernels in Practice: Trades and Quotes}. Econometrics Journal, vol. 12, 2009. \url{https://onlinelibrary.wiley.com/doi/epdf/10.1111/j.1368-423X.2008.00275.x}
+  \item \textbf{Phần cần đọc:} Trang C7-C8
+\end{itemize}
+
+\section{3. Quy trình làm sạch dữ liệu tần suất cao}
+
+Làm sạch dữ liệu cẩn thận là một trong những khía cạnh quan trọng nhất khi ước lượng biến động từ dữ liệu tần suất cao. Làm sạch dữ liệu tần suất cao đã nhận được sự chú ý đặc biệt, chẳng hạn trong Dacorogna et al. (2001, chương 4), Falkenberry (2001), Hansen và Lunde (2006), và Brownlees và Gallo (2006). Cụ thể, Hansen và Lunde (2006) cho thấy việc loại bỏ một số lượng lớn quan sát trên thực tế có thể cải thiện các ước lượng biến động. Kết quả này thoạt nhìn có vẻ phản trực giác, nhưng lý do khá đơn giản. Một ước lượng sử dụng tối ưu toàn bộ dữ liệu thường sẽ đặt trọng số cao cho dữ liệu chính xác và ít bị ảnh hưởng bởi các quan sát kém chính xác nhất. Ước lượng bình phương tối thiểu tổng quát (generalized least-squares, GLS) trong mô hình hồi quy cổ điển là một phép tương tự tốt cho điều này. Mặt khác, độ chính xác của ước lượng bình phương tối thiểu thông thường có thể xấu đi khi các quan sát tương đối nhiễu được đưa vào ước lượng. Vì vậy, việc đưa vào các quan sát chất lượng kém có thể gây hại nhiều hơn là có lợi cho ước lượng bình phương tối thiểu thông thường, và đây chính là phép so sánh phù hợp với tình huống hiện tại. Realized kernel và các ước lượng liên quan ``đối xử với tất cả các quan sát như nhau'', và một vài giá trị ngoại lai cũng có thể ảnh hưởng nghiêm trọng đến các ước lượng này.
+
+\subsection*{3.1. Quy trình làm sạch từng bước}
+
+Trong phân tích thực nghiệm của chúng tôi, chúng tôi sử dụng dữ liệu giao dịch và báo giá từ cơ sở dữ liệu Trade and Quote (TAQ) của NYSE, với mục tiêu ước lượng biến phân toàn phương (quadratic variation) cho khoảng thời gian từ 9:30 sáng đến 4 giờ chiều. Việc làm sạch dữ liệu tần suất cao TAQ được thực hiện theo các bước sau. Các quy tắc P1 đến P3 được áp dụng cho cả dữ liệu giao dịch lẫn dữ liệu báo giá, các quy tắc T1 đến T4 chỉ áp dụng cho dữ liệu giao dịch, còn các quy tắc Q1 đến Q4 chỉ áp dụng cho dữ liệu báo giá.
+
+\subsubsection*{Tất cả dữ liệu}
+
+\begin{itemize}
+  \item[\textbf{P1.}] Xóa các mục có dấu thời gian nằm ngoài khung 9:30 sáng đến 4 giờ chiều, tức giờ mở cửa của sàn giao dịch.
+  \item[\textbf{P2.}] Xóa các mục có giá chào mua (bid), giá chào bán (ask) hoặc giá giao dịch bằng 0.
+  \item[\textbf{P3.}] Chỉ giữ lại các mục có nguồn gốc từ một sàn giao dịch duy nhất (NYSE, trong ứng dụng của chúng tôi). Xóa các mục còn lại.
+\end{itemize}
+
+\subsubsection*{Chỉ dữ liệu báo giá}
+
+\begin{itemize}
+  \item[\textbf{Q1.}] Khi nhiều báo giá có cùng dấu thời gian, chúng tôi thay thế tất cả các báo giá đó bằng một mục duy nhất, sử dụng giá chào mua trung vị và giá chào bán trung vị.
+  \item[\textbf{Q2.}] Xóa các mục có mức chênh lệch giá (spread) âm.
+  \item[\textbf{Q3.}] Xóa các mục có mức chênh lệch giá lớn hơn 50 lần mức chênh lệch giá trung vị của ngày hôm đó.
+  \item[\textbf{Q4.}] Xóa các mục có giá giữa (mid-quote) lệch nhiều hơn 10 lần độ lệch tuyệt đối trung bình so với trung vị cuộn có tâm (rolling centred median, không tính quan sát đang xét) của 50 quan sát (25 quan sát trước và 25 quan sát sau).
+\end{itemize}
+
+\subsubsection*{Chỉ dữ liệu giao dịch}
+
+\begin{itemize}
+  \item[\textbf{T1.}] Xóa các mục có giao dịch đã được đính chính. (Các giao dịch có \emph{Chỉ báo Đính chính} (Correction Indicator), CORR $\neq$ 0).
+  \item[\textbf{T2.}] Xóa các mục có \emph{Điều kiện Bán} (Sale Condition) bất thường. (Các giao dịch mà COND mang mã chữ cái, ngoại trừ 'E' và 'F'). Xem TAQ 3 User's Guide để biết thêm chi tiết về các điều kiện bán.
+  \item[\textbf{T3.}] Nếu nhiều giao dịch có cùng dấu thời gian, sử dụng giá trung vị.
+  \item[\textbf{T4.}] Xóa các mục có giá cao hơn giá ``ask'' cộng với mức chênh lệch giá chào mua chào bán (bid-ask spread). Tương tự đối với các mục có giá thấp hơn giá ``bid'' trừ đi mức chênh lệch giá chào mua chào bán.
+\end{itemize}
+
+\subsection*{3.2. Thảo luận về các quy tắc lọc}
+
+Bước đầu tiên, P1, xác định các mục liên quan đến phân tích của chúng tôi, vốn tập trung vào biến động trong khoảng 9:30 sáng đến 4 giờ chiều.
+
+Các bước P2 và T1 loại bỏ những lỗi rất nghiêm trọng trong cơ sở dữ liệu, chẳng hạn như ghi sai giá (ví dụ giá bằng 0 hoặc đặt sai vị trí dấu thập phân), và các dấu thời gian có thể sai lệch đáng kể. T2 loại bỏ các điểm dữ liệu mà cơ sở dữ liệu TAQ đang gắn cờ là có vấn đề. Bảng 1 tóm tắt số lượng dữ liệu bị xóa hoặc được tổng hợp bằng các quy tắc lọc này đối với cơ sở dữ liệu được sử dụng trong Mục 4, phân tích cổ phiếu Alcoa.
+
+Quan trọng hơn cả ở đây là các quy tắc P3, T3 và Q1. Trong công trình thực nghiệm của chúng tôi, chúng tôi sẽ xem xét tác động của việc tạm ngưng áp dụng P3. Quy tắc này được dùng để giảm tác động của độ trễ thời gian trong việc báo cáo giao dịch và cập nhật báo giá. Một dạng nào đó của quy tắc T3 và Q1 dường như là không thể tránh khỏi ở đây, và chính các quy tắc này dẫn đến lượng dữ liệu bị xóa lớn nhất.
+
+Chúng tôi sử dụng Q4 để bắt các giá trị ngoại lai mà Q3 bỏ sót. Bằng cách xây dựng cửa sổ dựa trên số lượng quan sát, chúng tôi để cửa sổ đó giãn ra và co lại theo thời gian đồng hồ (clock time) tùy cường độ giao dịch. Việc lựa chọn 50 quan sát cho cửa sổ là \emph{tùy ý theo kinh nghiệm} (\emph{ad hoc}), nhưng đã được kiểm chứng qua thực nghiệm mở rộng.
+
+T4 là một quy tắc hấp dẫn, vì nó kiểm soát chặt dữ liệu giao dịch bằng dữ liệu báo giá. Tuy nhiên, nó có nhược điểm là không thể áp dụng được khi không có sẵn dữ liệu báo giá.\footnote{Khi không có sẵn dữ liệu báo giá, Q4 có thể được áp dụng thay cho T4, bằng cách thay mid-quote (giá giữa) bằng price (giá).} Bảng 1 cho thấy quy tắc này hiếm khi được kích hoạt trong thực tế, trong khi các kết quả sau này mà chúng tôi sẽ thảo luận ở Bảng 2 về realized kernel cho thấy ước lượng RK (khác với thống kê RV) không nhạy cảm lắm với việc sử dụng T4.
+
+Việc so sánh một số quy tắc lọc của chúng tôi với các quy tắc được Falkenberry (2001) và Brownlees và Gallo (2006) đề xuất là điều thú vị. Trong sự so sánh như vậy, các quy tắc được thiết kế để loại bỏ giá trị ngoại lai hoặc dữ liệu ghi sai là những quy tắc có thể gây tranh cãi.
+
+Trong số các quy tắc của chúng tôi, Q4 và T4 là những quy tắc liên quan. Q4 có liên hệ rất chặt chẽ với quy trình mà Brownlees và Gallo (2006, tr. 2237) đề xuất để loại bỏ giá trị ngoại lai. Họ loại bỏ quan sát $i$ nếu điều kiện $|p_i - \bar{p}_i(k)| > 3 s_i(k) + \gamma$ được thỏa mãn. Ở đây, $\bar{p}_i(k)$ và $s_i(k)$ lần lượt biểu thị trung bình mẫu $\delta$-cắt ($\delta$-trimmed sample mean) và độ lệch chuẩn mẫu của một lân cận gồm $k$ quan sát xung quanh $i$, còn $\gamma$ là một tham số hạt (granularity parameter). Chúng tôi sử dụng trung vị thay cho trung bình mẫu đã cắt $\bar{p}_i(k)$, và độ lệch tuyệt đối trung bình so với trung vị thay cho $s_i(k)$. Bằng cách không sử dụng độ lệch chuẩn mẫu, phương pháp của chúng tôi ít nhạy cảm hơn với các chuỗi giá trị ngoại lai liên tiếp (runs of outliers).
+
+Falkenberry (2001) cũng sử dụng một cách tiếp cận ngưỡng để xác định liệu một quan sát nhất định có phải là giá trị ngoại lai hay không. Nhưng thay vì sử dụng phương pháp ``Tìm kiếm và Loại bỏ'' (Search and Purge), ông áp dụng phương pháp luận ``Tìm kiếm và Chỉnh sửa'' (Search and Modify). Các mức giá lệch một lượng nhất định so với bộ lọc trượt (moving filter) của tất cả các mức giá sẽ được chỉnh sửa lại thành giá trị của bộ lọc. Đối với các giao dịch, cách này có ưu điểm là duy trì được khối lượng của một giao dịch ngay cả khi mức giá liên quan là sai.
+
+Cuối cùng, chúng tôi lưu ý rằng cách tiếp cận của chúng tôi trong việc kiểm soát chặt chẽ dữ liệu giao dịch bằng dữ liệu báo giá, tức quy tắc T4, trước đây mới chỉ được áp dụng trong Hansen và Lunde (2006), Barndorff-Nielsen et al. (2006), và Barndorff-Nielsen et al. (2008a).
+</content>

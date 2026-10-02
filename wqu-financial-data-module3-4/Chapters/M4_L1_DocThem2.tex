@@ -1,0 +1,620 @@
+\chapter{Đọc thêm 2: Embeddings (Jurafsky \& Martin)}
+\label{ch:M4L1DT2}
+
+% Nguồn: Jurafsky, D. & Martin, J. H. ``Speech and Language Processing.'' 3rd edition draft. Chapter 5: Embeddings. https://web.stanford.edu/~jurafsky/slp3/5.pdf
+% Phần cần đọc: Toàn bộ chương
+% Nội dung bắt buộc đọc: được kiểm tra trong mọi bài đánh giá (kể cả Quiz).
+
+\section{Thông tin nguồn}
+
+\begin{itemize}
+  \item \textbf{Nguồn:} Jurafsky, Daniel, and James H. Martin. \emph{Speech and Language Processing}. 3rd edition draft. Chapter 5: Embeddings. \url{https://web.stanford.edu/~jurafsky/slp3/5.pdf}
+  \item \textbf{Phần cần đọc:} Toàn bộ chương (Chapter 5: Embeddings)
+\end{itemize}
+
+\section*{Mở đầu}
+
+\begin{quote}
+\emph{Nơm dùng để bắt cá, bắt được cá thì quên nơm.} \\
+\emph{Lời dùng để chở ý, hiểu được ý thì quên lời.} \\
+Trang Tử (Zhuangzi), Chương 26
+\end{quote}
+
+Nhựa đường mà Los Angeles nổi tiếng chủ yếu xuất hiện trên các xa lộ của thành phố. Nhưng giữa lòng thành phố còn có một mảng nhựa đường khác, hố nhựa đường La Brea, và mảng nhựa đường này lưu giữ hàng triệu bộ xương hóa thạch từ kỷ băng hà cuối cùng của thế Pleistocen. Một trong những hóa thạch đó là \emph{Smilodon}, hay hổ răng kiếm, ngay lập tức được nhận ra nhờ hàm răng nanh dài. Khoảng năm triệu năm trước, một loài hổ răng kiếm hoàn toàn khác có tên \emph{Thylacosmilus} từng sống ở Argentina và các nơi khác của Nam Mỹ. \emph{Thylacosmilus} là thú có túi trong khi \emph{Smilodon} là thú có nhau thai, nhưng \emph{Thylacosmilus} có cùng cặp răng nanh trên dài, và giống Smilodon, có một gờ bảo vệ ở hàm dưới. Sự tương đồng giữa hai loài thú này là một trong nhiều ví dụ về tiến hóa song song hoặc hội tụ, trong đó các ngữ cảnh hay môi trường sống riêng biệt dẫn đến sự tiến hóa của những cấu trúc rất giống nhau ở các loài khác nhau (Gould, 1980).
+
+Vai trò của ngữ cảnh cũng quan trọng đối với sự tương đồng của một loại ``sinh vật'' kém tính sinh học hơn: từ ngữ. Những từ xuất hiện trong \emph{ngữ cảnh tương tự} thường có \emph{nghĩa tương tự}. Mối liên hệ giữa sự tương đồng về cách phân bố của các từ và sự tương đồng về nghĩa của chúng được gọi là \textbf{giả thuyết phân bố} (distributional hypothesis). Giả thuyết này lần đầu được phát biểu vào những năm 1950 bởi các nhà ngôn ngữ học như Joos (1950), Harris (1954) và Firth (1957), những người nhận thấy rằng các từ đồng nghĩa (như \emph{oculist} và \emph{eye-doctor}, đều có nghĩa ``bác sĩ nhãn khoa'') có xu hướng xuất hiện trong cùng môi trường (ví dụ gần các từ như \emph{eye} hay \emph{examined}) với mức độ khác biệt về nghĩa giữa hai từ ``tương ứng khá sát với mức độ khác biệt trong môi trường của chúng'' (Harris, 1954, tr. 157).
+
+Trong chương này chúng ta giới thiệu \textbf{embedding}, các biểu diễn vector của nghĩa từ được học trực tiếp từ cách các từ được phân bố trong văn bản. Embedding là cốt lõi của các mô hình ngôn ngữ lớn và nhiều ứng dụng hiện đại khác. Các \textbf{embedding tĩnh} (static embeddings) mà chúng ta giới thiệu ở đây là nền tảng cho các \textbf{embedding ngữ cảnh} (contextual) hay embedding động mạnh mẽ hơn như \textbf{BERT} mà ta sẽ thấy ở Chương 7 và Chương 9.
+
+Lĩnh vực ngôn ngữ học nghiên cứu embedding và nghĩa của chúng được gọi là \textbf{ngữ nghĩa vector} (vector semantics). Embedding cũng là ví dụ đầu tiên trong cuốn sách này về \textbf{học biểu diễn} (representation learning), tức tự động học các biểu diễn hữu ích của văn bản đầu vào. Việc tìm ra những cách \textbf{tự giám sát} (self-supervised) như vậy để học biểu diễn ngôn ngữ, thay vì tạo ra biểu diễn thủ công thông qua \textbf{kỹ thuật đặc trưng} (feature engineering), là một nguyên lý quan trọng của xử lý ngôn ngữ tự nhiên (NLP) hiện đại (Bengio và cộng sự, 2013).
+
+\section{5.1 Ngữ nghĩa Từ vựng}
+
+Hãy bắt đầu bằng việc giới thiệu một số nguyên lý cơ bản về nghĩa của từ. Ta nên biểu diễn nghĩa của một từ như thế nào? Trong các mô hình n-gram ở Chương 3, và trong các ứng dụng NLP cổ điển, biểu diễn duy nhất của một từ là một chuỗi ký tự, hoặc một chỉ mục trong danh sách từ vựng. Cách biểu diễn này không khác nhiều so với một truyền thống trong triết học mà có lẽ bạn từng thấy trong các lớp logic nhập môn, trong đó nghĩa của từ được biểu diễn đơn giản bằng cách đánh vần từ đó với chữ hoa nhỏ; biểu diễn nghĩa của ``dog'' là DOG, và ``cat'' là CAT, hoặc dùng một dấu phẩy trên (DOG').
+
+Biểu diễn nghĩa của một từ bằng cách viết hoa nó là một mô hình còn nhiều bất cập. Bạn có thể đã từng thấy một phiên bản của một câu đùa vốn ban đầu do nhà ngữ nghĩa học Barbara Partee đặt ra (Carlson, 1977):
+
+\begin{quote}
+Hỏi: Nghĩa của cuộc sống là gì? \\
+Đáp: LIFE' (SỐNG')
+\end{quote}
+
+Chắc chắn ta có thể làm tốt hơn thế này! Một mô hình về nghĩa của từ cần làm nhiều việc hơn cho chúng ta. Nó cần cho ta biết rằng một số từ có nghĩa tương tự nhau (\emph{cat} tương tự \emph{dog}), một số từ khác trái nghĩa nhau (\emph{cold} là ngược lại của \emph{hot}), một số từ mang hàm nghĩa tích cực (\emph{happy}) trong khi những từ khác mang hàm nghĩa tiêu cực (\emph{sad}). Nó cần thể hiện được thực tế rằng nghĩa của \emph{buy}, \emph{sell}, và \emph{pay} thể hiện các góc nhìn khác nhau về cùng một sự kiện mua bán (nếu tôi mua thứ gì đó từ bạn, hẳn bạn đã bán nó cho tôi và có lẽ tôi đã trả tiền cho bạn). Nói rộng hơn, một mô hình về nghĩa của từ cần cho phép ta rút ra các suy luận để giải quyết các tác vụ liên quan đến nghĩa như trả lời câu hỏi hay đối thoại.
+
+Trong mục này chúng ta tóm tắt một số yêu cầu (desiderata) nói trên, dựa trên các kết quả trong lĩnh vực nghiên cứu ngôn ngữ học về nghĩa của từ, gọi là \textbf{ngữ nghĩa từ vựng} (lexical semantics); ta sẽ quay lại và mở rộng danh sách này ở Phụ lục I và Chương 22.
+
+\subsection*{Lemma và Nghĩa (Senses)}
+
+Hãy bắt đầu bằng cách xem một từ (ta sẽ chọn \emph{mouse}) được định nghĩa như thế nào trong từ điển (đơn giản hóa từ từ điển trực tuyến WordNet):
+
+\begin{quote}
+mouse (N) \\
+1. bất kỳ loài gặm nhấm nhỏ nào... \\
+2. một thiết bị điều khiển bằng tay có chức năng điều khiển con trỏ...
+\end{quote}
+
+Ở đây dạng \emph{mouse} là \textbf{lemma}, còn gọi là \textbf{dạng trích dẫn} (citation form). Dạng \emph{mouse} cũng sẽ là lemma cho từ \emph{mice}; từ điển không có mục riêng cho các dạng biến hình như \emph{mice}. Tương tự \emph{sing} là lemma cho \emph{sing}, \emph{sang}, \emph{sung}. Trong nhiều ngôn ngữ, dạng nguyên thể được dùng làm lemma cho động từ, vì vậy tiếng Tây Ban Nha \emph{dormir} ``ngủ'' là lemma cho \emph{duermes} ``bạn ngủ''. Các dạng cụ thể như \emph{sung}, \emph{carpets}, \emph{sing}, hay \emph{duermes} được gọi là \textbf{wordform} (dạng từ).
+
+Như ví dụ trên cho thấy, mỗi lemma có thể có nhiều nghĩa; ta gọi những khía cạnh nghĩa khác nhau này của lemma \emph{mouse} là một \textbf{nghĩa của từ} (word sense). Lemma có thể \textbf{đa nghĩa} (polysemous, tức có nhiều nghĩa), và điều này gây khó khăn cho việc diễn giải (liệu ai đó tìm kiếm ``mouse info'' đang tìm kiếm một con vật cưng hay một thiết bị?). Chương 9 và Phụ lục I sẽ thảo luận vấn đề đa nghĩa và giới thiệu \textbf{khử nhập nhằng nghĩa của từ} (word sense disambiguation), tác vụ xác định nghĩa nào của một từ đang được sử dụng trong một ngữ cảnh cụ thể.
+
+\subsection*{Đồng nghĩa (Synonymy)}
+
+Một thành phần quan trọng của nghĩa từ là mối quan hệ giữa các nghĩa của từ. Khi một từ có một nghĩa gần như giống hệt với nghĩa của một từ khác, ta nói hai nghĩa đó là \textbf{từ đồng nghĩa} (synonyms). Các từ đồng nghĩa bao gồm những cặp như
+
+\begin{quote}
+\emph{couch/sofa \quad vomit/throw up \quad filbert/hazelnut \quad car/automobile}
+\end{quote}
+
+Một định nghĩa chính xác hơn về đồng nghĩa (giữa các từ chứ không phải giữa các nghĩa) là hai từ là đồng nghĩa nếu chúng có thể thay thế cho nhau trong bất kỳ câu nào mà không làm thay đổi \emph{điều kiện chân trị} (truth conditions) của câu, tức các tình huống mà câu đó là đúng.
+
+Dù việc thay thế qua lại giữa một số cặp từ như \emph{car / automobile} hay \emph{water / H\textsubscript{2}O} bảo toàn chân trị, các từ đó vẫn không hoàn toàn giống nhau về nghĩa. Thực tế, có lẽ không có hai từ nào hoàn toàn giống hệt nhau về nghĩa. Một trong những nguyên lý cơ bản của ngữ nghĩa học, gọi là \textbf{nguyên lý tương phản} (principle of contrast) (Girard 1718, Bréal 1897, Clark 1987), phát biểu rằng một sự khác biệt trong hình thức ngôn ngữ luôn gắn liền với một khác biệt nào đó về nghĩa. Ví dụ, từ \emph{H\textsubscript{2}O} được dùng trong ngữ cảnh khoa học và sẽ không phù hợp trong một cẩm nang leo núi, trong khi \emph{water} sẽ phù hợp hơn, và sự khác biệt về thể loại này là một phần của nghĩa của từ. Trong thực tế, từ \emph{synonym} do đó thường được dùng để mô tả một mối quan hệ đồng nghĩa gần đúng hoặc tương đối.
+
+\subsection*{Độ tương đồng của từ (Word Similarity)}
+
+Trong khi các từ không có nhiều từ đồng nghĩa, hầu hết các từ đều có nhiều từ \emph{tương tự}. \emph{Cat} không phải là từ đồng nghĩa của \emph{dog}, nhưng \emph{cat} và \emph{dog} chắc chắn là những từ tương tự nhau. Khi chuyển từ khái niệm đồng nghĩa sang khái niệm tương đồng, sẽ hữu ích nếu ta chuyển từ việc nói về quan hệ giữa các nghĩa của từ (như đồng nghĩa) sang quan hệ giữa các từ (như tương đồng). Bàn về các từ giúp ta khỏi phải cam kết vào một biểu diễn cụ thể nào đó về nghĩa của từ, và điều này hóa ra sẽ đơn giản hóa nhiệm vụ của ta.
+
+Khái niệm \textbf{tương đồng} (similarity) của từ rất hữu ích trong các tác vụ ngữ nghĩa lớn hơn. Việc biết hai từ tương tự nhau đến mức nào có thể giúp tính toán mức độ tương đồng về nghĩa giữa hai cụm từ hay câu, một thành phần quan trọng trong các tác vụ như trả lời câu hỏi, diễn giải lại (paraphrasing), và tóm tắt. Một cách để có được các giá trị về độ tương đồng của từ là yêu cầu con người đánh giá mức độ tương tự của một từ với một từ khác. Một số bộ dữ liệu đã được xây dựng từ các thí nghiệm như vậy. Ví dụ bộ dữ liệu SimLex-999 (Hill và cộng sự, 2015) đưa ra các giá trị trên thang từ 0 đến 10 cho 999 cặp từ, gồm các ví dụ trải dài từ các cặp gần đồng nghĩa (\emph{vanish, disappear}) đến các cặp gần như không có điểm chung nào (\emph{hole, agreement}):
+
+\begin{center}
+\begin{tabular}{ll r}
+vanish & disappear & 9.8 \\
+belief & impression & 5.95 \\
+muscle & bone & 3.65 \\
+modest & flexible & 0.98 \\
+hole & agreement & 0.3 \\
+\end{tabular}
+\end{center}
+
+\subsection*{Liên quan giữa các từ (Word Relatedness)}
+
+Nghĩa của hai từ có thể liên quan với nhau theo những cách khác ngoài sự tương đồng. Một lớp quan hệ như vậy được gọi là \textbf{liên quan} (relatedness) giữa các từ (Budanitsky và Hirst, 2006), cũng thường được gọi theo truyền thống là \textbf{liên tưởng} (association) trong tâm lý học.
+
+Hãy xét nghĩa của các từ \emph{coffee} và \emph{cup}. Coffee không tương tự với cup; chúng gần như không có đặc điểm chung nào (coffee là một loại cây hoặc một thức uống, trong khi cup là một vật thể được chế tạo có hình dạng riêng). Nhưng coffee và cup rõ ràng có liên quan với nhau; chúng liên hệ với nhau qua việc cùng tham gia vào một sự kiện thường ngày (sự kiện uống cà phê ra khỏi một chiếc cốc). Tương tự, \emph{scalpel} và \emph{surgeon} không tương tự nhưng có liên quan với nhau qua một sự kiện (bác sĩ phẫu thuật thường dùng dao mổ).
+
+Một loại liên quan phổ biến giữa các từ là khi chúng thuộc cùng một \textbf{trường ngữ nghĩa} (semantic field). Một trường ngữ nghĩa là một tập hợp các từ bao trùm một lĩnh vực cụ thể và có các quan hệ có cấu trúc với nhau. Ví dụ các từ có thể liên quan với nhau nhờ nằm trong trường ngữ nghĩa của bệnh viện (\emph{surgeon, scalpel, nurse, anesthetic, hospital}), nhà hàng (\emph{waiter, menu, plate, food, chef}), hoặc nhà cửa (\emph{door, roof, kitchen, family, bed}). Các trường ngữ nghĩa cũng liên quan đến một hình thức hóa gọi là \textbf{mô hình chủ đề} (topic models), như \textbf{Phân bổ Dirichlet Ẩn} (Latent Dirichlet Allocation, LDA), áp dụng học không giám sát trên các tập văn bản lớn để suy ra các tập từ liên kết với nhau. Trường ngữ nghĩa và mô hình chủ đề là những công cụ rất hữu ích để phát hiện cấu trúc chủ đề trong tài liệu.
+
+Trong Phụ lục I chúng ta sẽ giới thiệu thêm các quan hệ khác giữa các nghĩa như \textbf{thượng danh} (hypernymy) hay quan hệ \textbf{IS-A}, \textbf{trái nghĩa} (antonymy, đối lập nhau) và \textbf{quan hệ bộ phận-toàn thể} (meronymy).
+
+\subsection*{Hàm nghĩa (Connotation)}
+
+Cuối cùng, các từ có \textbf{nghĩa tình cảm} (affective meanings) hay \textbf{hàm nghĩa} (connotations). Từ \emph{connotation} có nhiều nghĩa khác nhau trong các lĩnh vực khác nhau, nhưng ở đây ta dùng nó để chỉ những khía cạnh nghĩa của một từ liên quan đến cảm xúc, tình cảm, quan điểm, hoặc đánh giá của người viết hay người đọc. Ví dụ một số từ mang hàm nghĩa tích cực (\emph{wonderful}) trong khi những từ khác mang hàm nghĩa tiêu cực (\emph{dreary}). Ngay cả những từ có nghĩa tương tự nhau theo những cách khác cũng có thể khác nhau về hàm nghĩa; hãy xét sự khác biệt về hàm nghĩa giữa \emph{fake}, \emph{knockoff}, \emph{forgery}, một bên, và \emph{copy}, \emph{replica}, \emph{reproduction}, bên còn lại, hoặc \emph{innocent} (hàm nghĩa tích cực) và \emph{naive} (hàm nghĩa tiêu cực). Một số từ diễn tả đánh giá tích cực (\emph{great, love}) và những từ khác diễn tả đánh giá tiêu cực (\emph{terrible, hate}). Ngôn ngữ đánh giá tích cực hay tiêu cực được gọi là \textbf{sentiment} (tình cảm/quan điểm), và tình cảm của từ đóng vai trò quan trọng trong các tác vụ như phân tích tình cảm (sentiment analysis), phát hiện lập trường (stance detection), và các ứng dụng NLP vào ngôn ngữ chính trị và đánh giá của người tiêu dùng.
+
+Các nghiên cứu ban đầu về nghĩa tình cảm (Osgood và cộng sự, 1957) nhận thấy rằng các từ biến đổi theo ba chiều quan trọng của nghĩa tình cảm:
+
+\begin{itemize}
+  \item \textbf{valence (giá trị cảm xúc):} mức độ dễ chịu của tác nhân kích thích
+  \item \textbf{arousal (mức kích thích):} cường độ cảm xúc mà tác nhân kích thích gợi lên
+  \item \textbf{dominance (mức chi phối):} mức độ kiểm soát mà tác nhân kích thích thể hiện
+\end{itemize}
+
+Như vậy các từ như \emph{happy} hay \emph{satisfied} có valence cao, trong khi \emph{unhappy} hay \emph{annoyed} có valence thấp. \emph{Excited} có arousal cao, trong khi \emph{calm} có arousal thấp. \emph{Controlling} có dominance cao, trong khi \emph{awed} hay \emph{influenced} có dominance thấp. Mỗi từ do đó được biểu diễn bằng ba con số, tương ứng với giá trị của nó trên mỗi chiều trong ba chiều:
+
+\begin{center}
+\begin{tabular}{lccc}
+ & Valence & Arousal & Dominance \\
+courageous & 8.0 & 5.5 & 7.4 \\
+music & 7.7 & 5.6 & 6.5 \\
+heartbreak & 2.5 & 5.7 & 3.6 \\
+cub & 6.7 & 4.0 & 4.2 \\
+\end{tabular}
+\end{center}
+
+Osgood và cộng sự (1957) nhận thấy rằng khi dùng 3 con số này để biểu diễn nghĩa của một từ, mô hình đã biểu diễn mỗi từ như một điểm trong không gian ba chiều, một vector với ba chiều tương ứng với điểm đánh giá của từ đó trên ba thang đo. Ý tưởng mang tính cách mạng này, rằng nghĩa của từ có thể được biểu diễn như một điểm trong không gian (ví dụ một phần nghĩa của \emph{heartbreak} có thể được biểu diễn bằng điểm $[2.5, 5.7, 3.6]$), là biểu hiện đầu tiên của các mô hình ngữ nghĩa vector mà ta sẽ giới thiệu tiếp theo.
+
+\section{5.2 Ngữ nghĩa Vector: Trực giác}
+
+\textbf{Ngữ nghĩa vector} (vector semantics) là cách chuẩn để biểu diễn nghĩa của từ trong NLP, giúp ta mô hình hóa nhiều khía cạnh của nghĩa từ đã thấy trong mục trước. Gốc rễ của mô hình này nằm ở những năm 1950 khi hai ý tưởng lớn hội tụ với nhau: ý tưởng của Osgood năm 1957 nêu trên về việc dùng một điểm trong không gian ba chiều để biểu diễn hàm nghĩa của một từ, và đề xuất của các nhà ngôn ngữ học như Joos (1950), Harris (1954), và Firth (1957) về việc định nghĩa nghĩa của một từ bằng \textbf{phân bố} (distribution) của nó trong việc sử dụng ngôn ngữ, tức các từ láng giềng hoặc môi trường ngữ pháp xung quanh nó. Ý tưởng của họ là hai từ xuất hiện trong các phân bố rất tương tự nhau (có các từ láng giềng tương tự nhau) sẽ có nghĩa tương tự nhau.
+
+Ví dụ, giả sử bạn không biết nghĩa của từ \emph{ongchoi} (một từ mượn gần đây từ tiếng Quảng Đông) nhưng bạn thấy nó trong các ngữ cảnh sau:
+
+\begin{enumerate}
+  \item[(5.1)] Ongchoi is delicious sauteed with garlic.
+  \item[(5.2)] Ongchoi is superb over rice.
+  \item[(5.3)] ...ongchoi leaves with salty sauces...
+\end{enumerate}
+
+Và giả sử bạn từng thấy nhiều từ ngữ cảnh này trong các ngữ cảnh khác:
+
+\begin{enumerate}
+  \item[(5.4)] ...spinach sauteed with garlic over rice...
+  \item[(5.5)] ...chard stems and leaves are delicious...
+  \item[(5.6)] ...collard greens and other salty leafy greens
+\end{enumerate}
+
+Việc \emph{ongchoi} xuất hiện cùng các từ như \emph{rice} và \emph{garlic} và \emph{delicious} và \emph{salty}, cũng như các từ \emph{spinach}, \emph{chard}, và \emph{collard greens}, có thể gợi ý rằng ongchoi là một loại rau lá xanh tương tự những loại rau lá xanh khác này.\footnote{Thực ra đó là \emph{Ipomoea aquatica}, một loài họ hàng với bìm bìm (morning glory), đôi khi được gọi là ``water spinach'' trong tiếng Anh.} Ta có thể hiện thực hóa trực giác này trên máy tính chỉ bằng cách đếm các từ xuất hiện trong ngữ cảnh của \emph{ongchoi}.
+
+\textit{[Hình minh họa trong nguyên bản (Hình 5.1): biểu diễn t-SNE hai chiều của các embedding word2vec 200 chiều cho một số từ gần với từ \emph{sweet}, cho thấy các từ có nghĩa tương tự nằm gần nhau trong không gian, xem file gốc.]}
+
+Ý tưởng của ngữ nghĩa vector là biểu diễn một từ như một điểm trong một không gian ngữ nghĩa đa chiều được suy ra (theo nhiều cách khác nhau ta sẽ thấy) từ phân bố của các từ láng giềng. Các vector dùng để biểu diễn từ được gọi là \textbf{embedding}.
+
+Từ ``embedding'' có nguồn gốc lịch sử từ nghĩa toán học của nó như một ánh xạ từ một không gian hoặc cấu trúc này sang một không gian hoặc cấu trúc khác, mặc dù nghĩa này đã dịch chuyển; xem phần cuối chương.
+
+Hình 5.1 cho thấy một biểu diễn trực quan của các embedding học được bởi thuật toán word2vec, cho thấy vị trí của các từ được chọn (các từ láng giềng của ``sweet'') được chiếu từ không gian 200 chiều xuống không gian 2 chiều. Chú ý rằng các từ láng giềng gần nhất của \emph{sweet} là các từ có liên quan về nghĩa như \emph{honey, candy, juice, chocolate}. Ý tưởng rằng các từ tương tự nhau là láng giềng của nhau trong không gian nhiều chiều mang lại sức mạnh to lớn cho các mô hình ngôn ngữ và các ứng dụng NLP khác. Ví dụ các bộ phân loại tình cảm ở Chương 4 phụ thuộc vào việc cùng các từ xuất hiện trong cả tập huấn luyện và tập kiểm tra. Nhưng bằng cách biểu diễn các từ như embedding, một bộ phân loại có thể gán nhãn miễn là nó thấy một số từ có nghĩa \emph{tương tự}. Và như ta sẽ thấy, các mô hình ngữ nghĩa vector như những mô hình được minh họa trong Hình 5.1 có thể được học một cách tự động từ văn bản mà không cần giám sát.
+
+Trong chương này ta sẽ bắt đầu với một mô hình sư phạm đơn giản về embedding, trong đó nghĩa của một từ được định nghĩa bằng một vector chứa số lần xuất hiện của các từ láng giềng. Ta giới thiệu mô hình này như một cách hữu ích để hiểu khái niệm vector và ý nghĩa của việc một vector là một biểu diễn nghĩa của từ, nhưng có những biến thể tinh vi hơn như mô hình \textbf{tf-idf} mà ta sẽ giới thiệu ở Chương 11 là những phương pháp quan trọng bạn nên hiểu. Ta sẽ thấy rằng phương pháp này dẫn đến những vector rất dài và \textbf{thưa} (sparse), tức phần lớn là số 0 (vì hầu hết các từ đơn giản là không bao giờ xuất hiện trong ngữ cảnh của nhau). Sau đó ta sẽ giới thiệu họ mô hình \textbf{word2vec} để xây dựng các vector \textbf{đặc} (dense), ngắn hơn nhưng có thêm nhiều thuộc tính ngữ nghĩa hữu ích.
+
+Ta cũng sẽ giới thiệu \textbf{cosine}, cách chuẩn để dùng embedding tính \emph{độ tương đồng ngữ nghĩa} (semantic similarity) giữa hai từ, hai câu, hay hai tài liệu, một công cụ quan trọng trong các ứng dụng thực tế.
+
+\section{5.3 Embedding dựa trên đếm đơn giản}
+
+\begin{quote}
+``Ba thuộc tính quan trọng nhất của một vector trong không gian 3 chiều là {Vị trí, Vị trí, Vị trí}'' \\
+Randall Munroe, chú thích cho bức tranh treo tường tại \url{https://xkcd.com/2358/}
+\end{quote}
+
+Bây giờ hãy giới thiệu cách đầu tiên để tính các embedding vector từ. Mô hình vector đơn giản nhất về nghĩa này dựa trên \textbf{ma trận đồng xuất hiện} (co-occurrence matrix), một cách biểu diễn tần suất các từ đồng xuất hiện với nhau. Ta sẽ định nghĩa một loại ma trận đồng xuất hiện cụ thể, \textbf{ma trận từ-ngữ cảnh} (word-context matrix), trong đó mỗi hàng trong ma trận biểu diễn một từ trong từ vựng và mỗi cột biểu diễn tần suất xuất hiện gần đó của mỗi từ ngữ cảnh khác trong từ vựng. Ma trận này do đó có số chiều $|V| \times |V|$ và mỗi ô ghi lại số lần từ hàng (từ mục tiêu) và từ cột (từ ngữ cảnh) đồng xuất hiện gần nhau trong một số ngữ liệu huấn luyện.
+
+Ta muốn nói ``gần nhau'' là gì? Ta có thể triển khai nhiều phương pháp khác nhau, nhưng hãy bắt đầu với một phương pháp rất đơn giản: một cửa sổ ngữ cảnh xung quanh từ, ví dụ 4 từ bên trái và 4 từ bên phải. Nếu làm vậy, mỗi ô sẽ biểu diễn số lần (trong một ngữ liệu huấn luyện nào đó) từ cột xuất hiện trong một cửa sổ $\pm 4$ từ như vậy xung quanh từ hàng.
+
+Hãy xem điều này hoạt động ra sao với 4 từ: \emph{cherry}, \emph{strawberry}, \emph{digital}, và \emph{information}. Với mỗi từ ta lấy một lần xuất hiện đơn từ ngữ liệu, và ta hiển thị cửa sổ $\pm 4$ từ từ lần xuất hiện đó:
+
+\begin{center}
+\begin{tabular}{r l l}
+is traditionally followed by & \textbf{cherry} & pie, a traditional dessert \\
+often mixed, such as & \textbf{strawberry} & rhubarb pie. Apple pie \\
+computer peripherals and personal & \textbf{digital} & assistants. These devices usually \\
+a computer. This includes & \textbf{information} & available on the internet \\
+\end{tabular}
+\end{center}
+
+Nếu ta lấy mọi lần xuất hiện của mỗi từ trong một ngữ liệu lớn và đếm các từ ngữ cảnh xung quanh nó, ta có được một ma trận đồng xuất hiện từ-ngữ cảnh. Ma trận đồng xuất hiện từ-ngữ cảnh đầy đủ rất lớn, vì với mỗi từ trong từ vựng (có kích thước $|V|$) ta phải đếm số lần nó xuất hiện cùng mọi từ khác trong từ vựng, nên có số chiều $|V| \times |V|$. Vì vậy ta hãy phác họa quá trình này ở quy mô nhỏ hơn. Hãy tưởng tượng ta chỉ xem xét 4 từ trên, và chỉ xét 3 từ ngữ cảnh sau: \emph{a}, \emph{computer}, và \emph{pie}. Hơn nữa hãy giả sử ta chỉ đếm số lần xuất hiện trong ``ngữ liệu mini'' ở trên.
+
+Vậy trước khi xem bảng dưới đây, hãy tự tính bằng tay số đếm cho 3 từ ngữ cảnh này với bốn từ \emph{cherry}, \emph{strawberry}, \emph{digital}, và \emph{information}.
+
+\begin{center}
+\begin{tabular}{lccc}
+ & a & computer & pie \\
+cherry & 1 & 0 & 1 \\
+strawberry & 0 & 0 & 2 \\
+digital & 0 & 1 & 0 \\
+information & 1 & 1 & 0 \\
+\end{tabular}
+\end{center}
+
+Hy vọng số đếm của bạn khớp với những gì hiển thị ở bảng trên, trong đó mỗi ô biểu diễn số lần một từ cụ thể (được xác định bởi hàng) xuất hiện trong một ngữ cảnh cụ thể (được xác định bởi cột từ). Lưu ý rằng một vector từ thực tế sẽ có nhiều chiều hơn rất nhiều và do đó sẽ thưa hơn nữa.
+
+Mỗi hàng, do đó, là một vector biểu diễn một từ. Để ôn lại một số đại số tuyến tính cơ bản, một \textbf{vector} về cơ bản chỉ là một danh sách hoặc mảng các con số. Vậy \emph{cherry} được biểu diễn bằng danh sách $[1,0,1]$ (vector hàng đầu tiên) và \emph{information} được biểu diễn bằng danh sách $[1,1,0]$ (vector hàng thứ tư).
+
+Một \textbf{không gian vector} (vector space) là một tập hợp các vector, và được đặc trưng bởi \textbf{số chiều} (dimension) của nó. Các vector trong một không gian vector 3 chiều có một phần tử cho mỗi chiều của không gian. Ta sẽ nói tương đối lỏng lẻo về một vector trong một không gian 3 chiều như một vector 3 chiều, với một phần tử theo mỗi chiều. Trong ví dụ trên, ta đã chọn làm các vector từ có số chiều là 3, chỉ để chúng vừa trên trang; trong các ma trận từ-từ thực tế, các vector sẽ có số chiều $|V|$, tức kích thước từ vựng.
+
+Thứ tự của các con số trong một không gian vector chỉ ra các chiều khác nhau mà các từ biến đổi theo. Chiều thứ ba đối với tất cả các vector này tương ứng với số lần \emph{pie} xuất hiện trong ngữ cảnh. Chiều thứ hai đối với tất cả chúng tương ứng với số lần từ \emph{computer} xuất hiện. Lưu ý rằng các vector cho \emph{information} và \emph{digital} có cùng giá trị (1) cho chiều ``computer'' này.
+
+Trong thực tế, ta không tính vector từ trên một cửa sổ ngữ cảnh đơn lẻ. Thay vào đó, ta tính chúng trên toàn bộ một ngữ liệu. Hãy xem một số số đếm thực tế trông ra sao. Hình 5.3 cho thấy một tập con của ma trận đồng xuất hiện từ-từ cho bốn từ này, trong đó, một lần nữa vì không thể trực quan hóa tất cả $|V|$ từ ngữ cảnh có thể có trên trang của cuốn giáo trình này, ta hiển thị một tập con gồm 6 chiều, với số đếm được tính từ ngữ liệu Wikipedia (Davies, 2015).
+
+\begin{center}
+\begin{tabular}{lccccccc}
+ & aardvark & \ldots & computer & data & result & pie & sugar \\
+cherry & 0 & \ldots & 2 & 8 & 9 & 442 & 25 \\
+strawberry & 0 & \ldots & 0 & 0 & 1 & 60 & 19 \\
+digital & 0 & \ldots & 1670 & 1683 & 85 & 5 & 4 \\
+information & 0 & \ldots & 3325 & 3982 & 378 & 5 & 13 \\
+\end{tabular}
+\end{center}
+
+Hãy chú ý trong bảng trên rằng hai từ \emph{cherry} và \emph{strawberry} tương tự nhau hơn (cả \emph{pie} và \emph{sugar} đều có xu hướng xuất hiện trong cửa sổ của chúng) so với các từ khác như \emph{digital}; ngược lại, \emph{digital} và \emph{information} tương tự nhau hơn so với, chẳng hạn, \emph{strawberry}.
+
+Ta có thể nghĩ về vector cho một từ như một điểm trong không gian $|V|$ chiều; vậy các từ trong bảng trên là các điểm trong không gian 6 chiều. Ta có thể biểu diễn trực quan không gian này trong 2 chiều: điểm dữ liệu cho \emph{digital} sẽ nằm ở tọa độ $[1683, 1670]$ (theo hai chiều \emph{data} và \emph{computer}), còn điểm dữ liệu cho \emph{information} sẽ nằm ở tọa độ $[3982, 3325]$.
+
+\textit{[Hình minh họa trong nguyên bản (Hình 5.4): biểu diễn trực quan trong không gian của các vector từ cho \emph{digital} và \emph{information}, chỉ theo hai chiều tương ứng với các từ \emph{data} và \emph{computer}, xem file gốc.]}
+
+Lưu ý rằng $|V|$, số chiều của vector, nhìn chung là kích thước của từ vựng, thường nằm giữa 10,000 và 50,000 từ (dùng các từ xuất hiện thường xuyên nhất trong ngữ liệu huấn luyện; giữ lại các từ sau khoảng 50,000 từ phổ biến nhất nhìn chung không hữu ích). Vì hầu hết các con số này bằng 0 nên đây là các biểu diễn vector \textbf{thưa} (sparse); có các thuật toán hiệu quả để lưu trữ và tính toán với các ma trận thưa.
+
+Ta cũng có thể áp dụng nhiều loại hàm trọng số khác nhau lên các ô này. Cách gán trọng số phổ biến nhất như vậy là tf-idf, mà ta sẽ giới thiệu ở Chương 11, nhưng trong lịch sử đã có rất nhiều cách gán trọng số khác.
+
+Bây giờ khi đã có một số trực giác, hãy chuyển sang xem xét chi tiết về cách tính độ tương đồng của từ.
+
+\section{5.4 Cosine để Đo Độ tương đồng}
+
+Để đo độ tương đồng giữa hai từ mục tiêu $v$ và $w$, ta cần một độ đo lấy hai vector (cùng số chiều, hoặc cả hai đều có các từ là chiều, tức độ dài $|V|$, hoặc cả hai đều có các tài liệu là chiều, độ dài $|D|$) và cho ra một thước đo mức độ tương đồng của chúng. Độ đo tương đồng phổ biến nhất chính là \textbf{cosine} của góc giữa hai vector.
+
+Cosine, cũng như hầu hết các độ đo tương đồng vector được dùng trong NLP, dựa trên toán tử \textbf{tích vô hướng} (dot product) từ đại số tuyến tính, còn gọi là \textbf{tích trong} (inner product):
+
+\begin{equation}
+\text{dot product}(\mathbf{v}, \mathbf{w}) = \mathbf{v} \cdot \mathbf{w} = \sum_{i=1}^{N} v_i w_i = v_1 w_1 + v_2 w_2 + \ldots + v_N w_N \tag{5.7}
+\end{equation}
+
+Tích vô hướng hoạt động như một độ đo tương đồng vì nó sẽ có xu hướng cao đúng khi cả hai vector có giá trị lớn ở cùng các chiều. Ngược lại, các vector có số 0 ở các chiều khác nhau, tức các vector \textbf{trực giao} (orthogonal), sẽ có tích vô hướng bằng 0, thể hiện sự khác biệt mạnh của chúng.
+
+Tuy nhiên, tích vô hướng thô này có một vấn đề khi dùng làm độ đo tương đồng: nó thiên vị các vector \textbf{dài}. \textbf{Độ dài vector} (vector length) được định nghĩa là
+
+\begin{equation}
+|\mathbf{v}| = \sqrt{\sum_{i=1}^{N} v_i^2} \tag{5.8}
+\end{equation}
+
+Tích vô hướng sẽ cao hơn nếu một vector dài hơn, với các giá trị lớn hơn ở mỗi chiều. Các từ xuất hiện thường xuyên hơn có xu hướng có vector dài hơn, vì chúng có xu hướng đồng xuất hiện với nhiều từ hơn và có giá trị đồng xuất hiện cao hơn với mỗi từ đó. Tích vô hướng thô do đó sẽ cao hơn đối với các từ phổ biến. Nhưng đây là một vấn đề; ta muốn một độ đo tương đồng cho biết hai từ tương tự nhau đến đâu bất kể tần suất xuất hiện của chúng.
+
+Ta điều chỉnh tích vô hướng để chuẩn hóa theo độ dài vector bằng cách chia tích vô hướng cho độ dài của mỗi trong hai vector. \textbf{Tích vô hướng chuẩn hóa} này hóa ra chính là cosine của góc giữa hai vector, theo định nghĩa của tích vô hướng giữa hai vector $\mathbf{a}$ và $\mathbf{b}$:
+
+\begin{equation}
+\mathbf{a} \cdot \mathbf{b} = |\mathbf{a}||\mathbf{b}| \cos \theta \tag{5.9}
+\end{equation}
+$$
+\frac{\mathbf{a} \cdot \mathbf{b}}{|\mathbf{a}||\mathbf{b}|} = \cos \theta
+$$
+
+Do đó độ đo tương đồng \textbf{cosine} giữa hai vector $\mathbf{v}$ và $\mathbf{w}$ có thể được tính như sau:
+
+\begin{equation}
+\text{cosine}(\mathbf{v}, \mathbf{w}) = \frac{\mathbf{v} \cdot \mathbf{w}}{|\mathbf{v}||\mathbf{w}|} = \frac{\sum_{i=1}^{N} v_i w_i}{\sqrt{\sum_{i=1}^{N} v_i^2} \sqrt{\sum_{i=1}^{N} w_i^2}} \tag{5.10}
+\end{equation}
+
+Đối với một số ứng dụng, ta chuẩn hóa trước mỗi vector bằng cách chia nó cho độ dài của nó, tạo ra một \textbf{vector đơn vị} (unit vector) có độ dài 1. Như vậy ta có thể tính một vector đơn vị từ $\mathbf{a}$ bằng cách chia nó cho $|\mathbf{a}|$. Đối với các vector đơn vị, tích vô hướng chính là cosine.
+
+Giá trị cosine nằm trong khoảng từ 1 đối với các vector cùng hướng, qua 0 đối với các vector trực giao, đến $-1$ đối với các vector hướng ngược nhau. Nhưng vì các giá trị tần suất thô luôn không âm, cosine cho các vector này nằm trong khoảng từ 0 đến 1.
+
+Hãy xem cosine tính toán như thế nào để xác định từ nào trong hai từ \emph{cherry} hay \emph{digital} gần nghĩa với \emph{information} hơn, chỉ dùng số đếm thô từ bảng rút gọn sau:
+
+\begin{center}
+\begin{tabular}{lccc}
+ & pie & data & computer \\
+\hline
+cherry & 442 & 8 & 2 \\
+digital & 5 & 1683 & 1670 \\
+information & 5 & 3982 & 3325 \\
+\end{tabular}
+\end{center}
+
+$$
+\cos(\text{cherry}, \text{information}) = \frac{442 \times 5 + 8 \times 3982 + 2 \times 3325}{\sqrt{442^2+8^2+2^2}\sqrt{5^2+3982^2+3325^2}} = .018
+$$
+
+$$
+\cos(\text{digital}, \text{information}) = \frac{5 \times 5 + 1683 \times 3982 + 1670 \times 3325}{\sqrt{5^2+1683^2+1670^2}\sqrt{5^2+3982^2+3325^2}} = .996
+$$
+
+\textit{[Hình minh họa trong nguyên bản (Hình 5.5): biểu diễn trực quan của độ tương đồng cosine trong không gian 2 chiều được định nghĩa bởi số đếm của các từ \emph{computer} và \emph{pie}, cho thấy góc giữa \emph{digital} và \emph{information} nhỏ hơn góc giữa \emph{cherry} và \emph{information}, xem file gốc.]}
+
+Mô hình xác định rằng \emph{information} gần với \emph{digital} hơn nhiều so với gần \emph{cherry}, một kết quả có vẻ hợp lý. Khi hai vector tương đồng hơn, cosine lớn hơn và góc nhỏ hơn; cosine đạt giá trị lớn nhất (1) khi góc giữa hai vector nhỏ nhất ($0^\circ$); cosine của mọi góc khác đều nhỏ hơn 1.
+
+Độ tương đồng cosine có thể được dùng để ước lượng độ tương đồng của từ, cho các tác vụ như tìm các cách diễn đạt tương đương (paraphrase) của từ, theo dõi sự thay đổi nghĩa của từ theo thời gian, hoặc tự động phát hiện nghĩa của các từ trong các ngữ liệu khác nhau. Ví dụ, ta có thể tìm 10 từ tương tự nhất với một từ mục tiêu bất kỳ $w$ bằng cách tính cosine giữa $w$ và từng từ trong số $|V| - 1$ từ còn lại, sắp xếp, và xem 10 từ đứng đầu.
+
+\section{5.5 Word2vec}
+
+Trong các mục trước ta đã thấy cách biểu diễn một từ như một vector thưa, dài, với các chiều tương ứng với các từ trong từ vựng. Bây giờ ta giới thiệu một cách biểu diễn từ mạnh mẽ hơn: \textbf{embedding}, các vector đặc và ngắn. Khác với các vector ta đã thấy trước đây, embedding thì \textbf{ngắn}, với số chiều $d$ dao động trong khoảng từ 50 đến 1000, thay vì kích thước từ vựng $|V|$ lớn hơn nhiều. Các chiều $d$ này không có cách diễn giải rõ ràng. Và các vector thì \textbf{đặc} (dense): thay vì các phần tử vector là số đếm thưa, phần lớn bằng 0 hoặc các hàm của số đếm, các giá trị sẽ là các số thực và có thể âm.
+
+Hóa ra các vector đặc hoạt động tốt hơn trong mọi tác vụ NLP so với các vector thưa. Mặc dù ta không hiểu hết mọi lý do của điều này, ta có một số trực giác. Việc biểu diễn từ như các vector đặc 300 chiều đòi hỏi các bộ phân loại của ta phải học ít trọng số hơn nhiều so với khi ta biểu diễn từ như các vector 50,000 chiều, và không gian tham số nhỏ hơn có thể giúp cải thiện khả năng tổng quát hóa và tránh hiện tượng quá khớp (overfitting). Các vector đặc cũng có thể làm tốt hơn trong việc nắm bắt tính đồng nghĩa. Ví dụ, trong biểu diễn vector thưa, các chiều dành cho các từ đồng nghĩa như \emph{car} và \emph{automobile} là riêng biệt và không liên quan; các vector thưa do đó có thể không nắm bắt được sự tương đồng giữa một từ có \emph{car} là láng giềng và một từ có \emph{automobile} là láng giềng.
+
+Trong mục này ta giới thiệu một phương pháp tính embedding: \textbf{skip-gram với lấy mẫu âm} (skip-gram with negative sampling), đôi khi được gọi là \textbf{SGNS}. Thuật toán skip-gram là một trong hai thuật toán trong một gói phần mềm gọi là \textbf{word2vec}, và vì vậy đôi khi thuật toán này được gọi luôn là word2vec (Mikolov và cộng sự, 2013a, 2013b). Các phương pháp word2vec nhanh, hiệu quả khi huấn luyện, và dễ dàng có sẵn trực tuyến cùng với mã nguồn và các embedding đã huấn luyện trước. Embedding word2vec là các \textbf{embedding tĩnh} (static embeddings), nghĩa là phương pháp này học một embedding cố định duy nhất cho mỗi từ trong từ vựng. Ở Chương 9 ta sẽ giới thiệu các phương pháp học các \textbf{embedding ngữ cảnh} (contextual) động, như họ biểu diễn phổ biến \textbf{BERT}, trong đó vector cho mỗi từ khác nhau tùy theo ngữ cảnh khác nhau.
+
+Trực giác của word2vec là thay vì đếm số lần mỗi từ ngữ cảnh $c$ xuất hiện gần, chẳng hạn, \emph{apricot}, ta sẽ huấn luyện một bộ phân loại trên một tác vụ dự đoán nhị phân: ``Liệu từ $c$ có khả năng xuất hiện gần \emph{apricot} hay không?'' Ta không thực sự quan tâm đến bản thân tác vụ dự đoán này; thay vào đó ta sẽ lấy \textbf{trọng số} (weights) đã học của bộ phân loại làm các embedding từ.
+
+Trực giác mang tính cách mạng ở đây là ta có thể dùng chính văn bản đang chạy làm dữ liệu huấn luyện có giám sát ngầm định cho một bộ phân loại như vậy; một từ $c$ xuất hiện gần từ mục tiêu \emph{apricot} đóng vai trò là ``câu trả lời đúng'' chuẩn cho câu hỏi ``Liệu từ $c$ có khả năng xuất hiện gần \emph{apricot} hay không?'' Phương pháp này, thường được gọi là \textbf{tự giám sát} (self-supervision), tránh được nhu cầu về bất kỳ hình thức gán nhãn thủ công nào cho tín hiệu giám sát. Ý tưởng này lần đầu được đề xuất trong tác vụ mô hình hóa ngôn ngữ nơ-ron, khi Bengio và cộng sự (2003) và Collobert và cộng sự (2011) cho thấy một mô hình ngôn ngữ nơ-ron (một mạng nơ-ron học dự đoán từ tiếp theo từ các từ trước đó) có thể chỉ đơn giản dùng từ tiếp theo trong văn bản đang chạy làm tín hiệu giám sát. Mô hình đó cũng học được một biểu diễn embedding cho mỗi từ ngay trong quá trình thực hiện tác vụ dự đoán này.
+
+Ta sẽ thấy cách thực hiện mạng nơ-ron ở chương tiếp theo, nhưng word2vec là một mô hình đơn giản hơn nhiều so với mô hình ngôn ngữ nơ-ron, theo hai cách. Thứ nhất, word2vec đơn giản hóa tác vụ (biến nó thành phân loại nhị phân thay vì dự đoán từ). Thứ hai, word2vec đơn giản hóa kiến trúc (huấn luyện một bộ phân loại hồi quy logistic thay vì một mạng nơ-ron nhiều lớp đòi hỏi các thuật toán huấn luyện phức tạp hơn). Trực giác của skip-gram là:
+
+\begin{enumerate}
+  \item Coi từ mục tiêu và một từ ngữ cảnh láng giềng là các ví dụ dương.
+  \item Lấy mẫu ngẫu nhiên các từ khác trong từ vựng để làm mẫu âm.
+  \item Dùng hồi quy logistic để huấn luyện một bộ phân loại phân biệt hai trường hợp đó.
+  \item Dùng các trọng số đã học làm embedding.
+\end{enumerate}
+
+\subsection*{5.5.1 Bộ phân loại}
+
+Hãy bắt đầu bằng cách nghĩ về tác vụ phân loại, rồi chuyển sang cách huấn luyện. Hãy tưởng tượng một câu như sau, với từ mục tiêu \emph{apricot}, và giả sử ta dùng cửa sổ $\pm 2$ từ ngữ cảnh:
+
+\begin{center}
+\texttt{...lemon, a [tablespoon of apricot jam, a] pinch...}\\
+\texttt{\hspace{2.3cm}c1 \hspace{0.6cm} c2 \hspace{0.3cm} w \hspace{0.5cm} c3 \hspace{0.7cm} c4}
+\end{center}
+
+Mục tiêu của ta là huấn luyện một bộ phân loại sao cho, cho một cặp $\langle w,c \rangle$ gồm một từ mục tiêu $w$ và một từ ngữ cảnh ứng viên $c$ (ví dụ (\emph{apricot}, \emph{jam}), hoặc có thể (\emph{apricot}, \emph{aardvark})) nó sẽ trả về xác suất $c$ là một từ ngữ cảnh thực sự (đúng cho \emph{jam}, sai cho \emph{aardvark}):
+
+\begin{equation}
+P(+|w,c) \tag{5.11}
+\end{equation}
+
+Xác suất từ $c$ không phải là một từ ngữ cảnh thực sự đối với $w$ chỉ đơn giản là 1 trừ Công thức 5.11:
+
+\begin{equation}
+P(-|w,c) = 1 - P(+|w,c) \tag{5.12}
+\end{equation}
+
+Bộ phân loại tính xác suất $P$ như thế nào? Trực giác của mô hình skip-gram là lấy độ tương đồng embedding làm cơ sở cho xác suất này: một từ có khả năng xuất hiện gần từ mục tiêu nếu vector embedding của nó tương tự với embedding mục tiêu. Để tính độ tương đồng giữa các embedding đặc này, ta dựa trên trực giác rằng hai vector tương tự nhau nếu chúng có \textbf{tích vô hướng} (dot product) cao (xét cho cùng, cosine chỉ là tích vô hướng đã chuẩn hóa). Nói cách khác:
+
+\begin{equation}
+\text{Similarity}(w,c) \approx \mathbf{c} \cdot \mathbf{w} \tag{5.13}
+\end{equation}
+
+Tích vô hướng $\mathbf{c} \cdot \mathbf{w}$ không phải là một xác suất, mà chỉ là một con số nằm trong khoảng từ $-\infty$ đến $\infty$ (vì các phần tử trong embedding word2vec có thể âm, tích vô hướng có thể âm). Để biến tích vô hướng thành một xác suất, ta sẽ dùng hàm \textbf{logistic} hay \textbf{sigmoid} $\sigma(x)$, cốt lõi của hồi quy logistic:
+
+\begin{equation}
+\sigma(x) = \frac{1}{1+\exp(-x)} \tag{5.14}
+\end{equation}
+
+Ta mô hình hóa xác suất từ $c$ là một từ ngữ cảnh thực sự đối với từ mục tiêu $w$ như sau:
+
+\begin{equation}
+P(+|w,c) = \sigma(\mathbf{c} \cdot \mathbf{w}) = \frac{1}{1+\exp(-\mathbf{c} \cdot \mathbf{w})} \tag{5.15}
+\end{equation}
+
+Hàm sigmoid trả về một con số nằm trong khoảng từ 0 đến 1, nhưng để làm cho nó là một xác suất, ta cũng cần tổng xác suất của hai sự kiện có thể ($c$ là một từ ngữ cảnh, và $c$ không phải là một từ ngữ cảnh) bằng 1. Do đó ta ước lượng xác suất từ $c$ không phải là một từ ngữ cảnh thực sự đối với $w$ như sau:
+
+\begin{equation}
+P(-|w,c) = 1-P(+|w,c) = \sigma(-\mathbf{c} \cdot \mathbf{w}) = \frac{1}{1+\exp(\mathbf{c} \cdot \mathbf{w})} \tag{5.16}
+\end{equation}
+
+Công thức 5.15 cho ta xác suất đối với một từ, nhưng có nhiều từ ngữ cảnh trong cửa sổ. Skip-gram đưa ra giả định đơn giản hóa rằng tất cả các từ ngữ cảnh đều độc lập, cho phép ta chỉ cần nhân các xác suất này với nhau:
+
+\begin{equation}
+P(+|w,c_{1:L}) = \prod_{i=1}^{L} \sigma(\mathbf{c_i} \cdot \mathbf{w}) \tag{5.17}
+\end{equation}
+\begin{equation}
+\log P(+|w,c_{1:L}) = \sum_{i=1}^{L} \log \sigma(\mathbf{c_i} \cdot \mathbf{w}) \tag{5.18}
+\end{equation}
+
+Tóm lại, skip-gram huấn luyện một bộ phân loại xác suất: với một từ mục tiêu kiểm tra $w$ và cửa sổ ngữ cảnh $L$ từ $c_{1:L}$ của nó, bộ phân loại gán một xác suất dựa trên mức độ tương đồng của cửa sổ ngữ cảnh này với từ mục tiêu. Xác suất này dựa trên việc áp dụng hàm logistic (sigmoid) lên tích vô hướng của các embedding của từ mục tiêu với mỗi từ ngữ cảnh. Để tính xác suất này, ta chỉ cần các embedding cho mỗi từ mục tiêu và từ ngữ cảnh trong từ vựng.
+
+\textit{[Hình minh họa trong nguyên bản (Hình 5.6): sơ đồ minh họa các tham số $\theta$ mà mô hình skip-gram học, gồm ma trận embedding mục tiêu $\mathbf{W}$ và ma trận embedding ngữ cảnh và nhiễu $\mathbf{C}$, xem file gốc.]}
+
+Hình 5.6 cho thấy trực giác về các tham số ta cần. Skip-gram thực tế lưu trữ hai embedding cho mỗi từ, một cho từ với vai trò là mục tiêu, và một cho từ với vai trò là ngữ cảnh. Vì vậy các tham số ta cần học là hai ma trận $\mathbf{W}$ và $\mathbf{C}$, mỗi ma trận chứa một embedding cho mỗi từ trong số $|V|$ từ trong từ vựng $V$.\footnote{Về nguyên tắc ma trận mục tiêu và ma trận ngữ cảnh có thể dùng các từ vựng khác nhau, nhưng ta sẽ đơn giản hóa bằng cách giả định một từ vựng $V$ dùng chung.} Bây giờ hãy chuyển sang việc học các embedding này (đây mới thực sự là mục tiêu của việc huấn luyện bộ phân loại này ngay từ đầu).
+
+\subsection*{5.5.2 Học embedding skip-gram}
+
+Thuật toán học cho embedding skip-gram nhận đầu vào là một ngữ liệu văn bản, và một kích thước từ vựng được chọn $N$. Nó bắt đầu bằng cách gán một vector embedding ngẫu nhiên cho mỗi từ trong số $N$ từ của từ vựng, rồi tiến hành lặp đi lặp lại việc dịch chuyển embedding của mỗi từ $w$ để giống hơn với các embedding của các từ xuất hiện gần nó trong văn bản, và ít giống hơn với các embedding của các từ không xuất hiện gần nó. Hãy bắt đầu bằng cách xem xét một đoạn dữ liệu huấn luyện đơn lẻ:
+
+\begin{center}
+\texttt{...lemon, a [tablespoon of apricot jam, a] pinch...}\\
+\texttt{\hspace{2.3cm}c1 \hspace{0.6cm} c2 \hspace{0.3cm} w \hspace{0.5cm} c3 \hspace{0.7cm} c4}
+\end{center}
+
+Ví dụ này có một từ mục tiêu $w$ (\emph{apricot}), và 4 từ ngữ cảnh trong cửa sổ $L=\pm 2$, dẫn đến 4 ví dụ huấn luyện dương (bên trái dưới đây):
+
+\begin{center}
+\begin{tabular}{ll @{\hspace{2cm}} llll}
+\multicolumn{2}{l}{\textbf{ví dụ dương +}} & \multicolumn{4}{l}{\textbf{ví dụ âm -}} \\
+$w$ & $c_{pos}$ & $w$ & $c_{neg}$ & $w$ & $c_{neg}$ \\
+\hline
+apricot & tablespoon & apricot & aardvark & apricot & seven \\
+apricot & of & apricot & my & apricot & forever \\
+apricot & jam & apricot & where & apricot & dear \\
+apricot & a & apricot & coaxial & apricot & if \\
+\end{tabular}
+\end{center}
+
+Để huấn luyện một bộ phân loại nhị phân ta cũng cần các ví dụ âm. Thực tế skip-gram với lấy mẫu âm (SGNS) dùng nhiều ví dụ âm hơn ví dụ dương (với tỷ lệ giữa chúng được đặt bởi một tham số $k$). Vậy đối với mỗi trường hợp huấn luyện $(w, c_{pos})$ này, ta sẽ tạo ra $k$ mẫu âm, mỗi mẫu gồm từ mục tiêu $w$ cùng một ``từ nhiễu'' $c_{neg}$. Một từ nhiễu là một từ lấy ngẫu nhiên từ từ vựng, với ràng buộc là nó không phải là từ mục tiêu $w$. Bảng bên trên minh họa trường hợp $k=2$, vậy ta sẽ có 2 ví dụ âm trong tập huấn luyện âm, cho mỗi ví dụ dương $w, c_{pos}$.
+
+Các từ nhiễu được chọn theo xác suất unigram có trọng số của chúng $P_{\alpha}(w)$, trong đó $\alpha$ là một trọng số. Nếu ta lấy mẫu theo xác suất không trọng số $P(w)$, điều đó có nghĩa là với xác suất unigram $P(\text{the})$ ta sẽ chọn từ \emph{the} làm từ nhiễu, với xác suất unigram $P(\text{aardvark})$ ta sẽ chọn \emph{aardvark}, và cứ như vậy. Nhưng trong thực tế, người ta thường đặt $\alpha = 0.75$, tức dùng trọng số $P_{\frac{3}{4}}(w)$:
+
+\begin{equation}
+P_{\alpha}(w) = \frac{\text{count}(w)^{\alpha}}{\sum_{w'} \text{count}(w')^{\alpha}} \tag{5.19}
+\end{equation}
+
+Việc đặt $\alpha = .75$ mang lại hiệu suất tốt hơn vì nó cho các từ nhiễu hiếm gặp xác suất cao hơn một chút: đối với các từ hiếm, $P_{\alpha}(w) > P(w)$. Để minh họa trực giác này, ta có thể tính các xác suất cho một ví dụ với $\alpha = .75$ và hai sự kiện, $P(a) = 0.99$ và $P(b) = 0.01$:
+
+\begin{equation}
+P_{\alpha}(a) = \frac{.99^{.75}}{.99^{.75}+.01^{.75}} = 0.97 \tag{5.20}
+\end{equation}
+$$
+P_{\alpha}(b) = \frac{.01^{.75}}{.99^{.75}+.01^{.75}} = 0.03
+$$
+
+Như vậy việc dùng $\alpha = .75$ làm tăng xác suất của sự kiện hiếm $b$ từ 0.01 lên 0.03.
+
+Với tập các ví dụ dương và âm, và một tập embedding khởi tạo ban đầu, mục tiêu của thuật toán học là điều chỉnh các embedding đó để
+
+\begin{itemize}
+  \item Tối đa hóa độ tương đồng của cặp từ mục tiêu, từ ngữ cảnh $(w, c_{pos})$ rút ra từ các ví dụ dương.
+  \item Tối thiểu hóa độ tương đồng của các cặp $(w, c_{neg})$ từ các ví dụ âm.
+\end{itemize}
+
+Xét một cặp từ/ngữ cảnh $(w, c_{pos})$ cùng $k$ từ nhiễu $c_{neg_1} \ldots c_{neg_k}$ của nó. Ta biểu diễn hai mục tiêu trên thành hàm mất mát (loss function) $L$ cần tối thiểu hóa (do đó có dấu $-$). Số hạng đầu thể hiện mong muốn bộ phân loại gán cho từ ngữ cảnh thực sự $c_{pos}$ một xác suất cao là láng giềng. Số hạng thứ hai thể hiện mong muốn gán cho mỗi từ nhiễu $c_{neg_i}$ một xác suất cao là không-láng-giềng. Các số hạng được nhân với nhau vì ta giả định tính độc lập:
+
+$$
+L(w,c_{pos},c_{neg*}) = -\log \left[ P(+|w,c_{pos}) \prod_{i=1}^{k} P(-|w,c_{neg_i}) \right]
+$$
+$$
+= -\left[ \log P(+|w,c_{pos}) + \sum_{i=1}^{k} \log P(-|w,c_{neg_i}) \right]
+$$
+$$
+= -\left[ \log P(+|w,c_{pos}) + \sum_{i=1}^{k} \log \left(1-P(+|w,c_{neg_i})\right) \right]
+$$
+\begin{equation}
+= -\left[ \log \sigma(c_{pos} \cdot w) + \sum_{i=1}^{k} \log \sigma(-c_{neg_i} \cdot w) \right] \tag{5.21}
+\end{equation}
+
+Nghĩa là, ta muốn tối đa hóa tích vô hướng của từ với các từ ngữ cảnh thực sự, và tối thiểu hóa tích vô hướng của từ với $k$ từ không-láng-giềng được lấy mẫu âm.
+
+Ta tối thiểu hóa hàm mất mát này bằng thuật toán hạ gradient ngẫu nhiên (stochastic gradient descent). Hình 5.7 cho thấy trực giác của một bước học.
+
+\textit{[Hình minh họa trong nguyên bản (Hình 5.7): sơ đồ minh họa trực giác của một bước hạ gradient, mô hình skip-gram dịch chuyển các embedding mục tiêu (ở đây cho \emph{apricot}) để gần hơn với (có tích vô hướng cao hơn với) các embedding ngữ cảnh của các từ láng giềng (ở đây \emph{jam}) và xa hơn khỏi (giảm tích vô hướng với) các embedding ngữ cảnh của các từ nhiễu không xuất hiện gần đó (ở đây \emph{Tolstoy} và \emph{matrix}), xem file gốc.]}
+
+Để tính gradient, ta cần lấy đạo hàm của Công thức 5.21 theo các embedding khác nhau. Hóa ra các đạo hàm như sau (ta để phần chứng minh làm bài tập ở cuối chương):
+
+\begin{equation}
+\frac{\partial L}{\partial c_{pos}} = \left[\sigma(c_{pos} \cdot w)-1\right]w \tag{5.22}
+\end{equation}
+\begin{equation}
+\frac{\partial L}{\partial c_{neg_i}} = \left[\sigma(c_{neg_i} \cdot w)\right]w \tag{5.23}
+\end{equation}
+\begin{equation}
+\frac{\partial L}{\partial w} = \left[\sigma(c_{pos} \cdot w)-1\right]c_{pos} + \sum_{i=1}^{k}\left[\sigma(c_{neg_i} \cdot w)\right]c_{neg_i} \tag{5.24}
+\end{equation}
+
+Các công thức cập nhật đi từ bước thời gian $t$ đến $t+1$ trong hạ gradient ngẫu nhiên do đó là:
+
+\begin{equation}
+c_{pos}^{t+1} = c_{pos}^{t} - \eta\left[\sigma(c_{pos}^{t} \cdot w^{t})-1\right]w^{t} \tag{5.25}
+\end{equation}
+\begin{equation}
+c_{neg_i}^{t+1} = c_{neg_i}^{t} - \eta\left[\sigma(c_{neg_i}^{t} \cdot w^{t})\right]w^{t} \tag{5.26}
+\end{equation}
+\begin{equation}
+w^{t+1} = w^{t} - \eta\left[\left[\sigma(c_{pos}^{t} \cdot w^{t})-1\right]c_{pos}^{t} + \sum_{i=1}^{k}\left[\sigma(c_{neg_i}^{t} \cdot w^{t})\right]c_{neg_i}^{t}\right] \tag{5.27}
+\end{equation}
+
+Cũng như trong hồi quy logistic, thuật toán học sau đó bắt đầu với các ma trận $\mathbf{W}$ và $\mathbf{C}$ được khởi tạo ngẫu nhiên, rồi duyệt qua ngữ liệu huấn luyện bằng hạ gradient để dịch chuyển $\mathbf{W}$ và $\mathbf{C}$ nhằm tối thiểu hóa hàm mất mát ở Công thức 5.21 bằng cách thực hiện các cập nhật ở Công thức 5.25 đến Công thức 5.27.
+
+Nhắc lại rằng mô hình skip-gram học \textbf{hai} embedding riêng biệt cho mỗi từ $i$: embedding \textbf{mục tiêu} $\mathbf{w_i}$ và embedding \textbf{ngữ cảnh} $\mathbf{c_i}$, được lưu trong hai ma trận, \textbf{ma trận mục tiêu} $\mathbf{W}$ và \textbf{ma trận ngữ cảnh} $\mathbf{C}$. Một cách làm phổ biến là đơn giản cộng chúng lại với nhau, biểu diễn từ $i$ bằng vector $\mathbf{w_i} + \mathbf{c_i}$. Hoặc ta có thể bỏ đi ma trận $\mathbf{C}$ và chỉ biểu diễn mỗi từ $i$ bằng vector $\mathbf{w_i}$.
+
+Cũng như các phương pháp đếm đơn giản, kích thước cửa sổ ngữ cảnh ảnh hưởng đến hiệu suất của embedding skip-gram, và các thí nghiệm thường điều chỉnh tham số kích thước cửa sổ ngữ cảnh trên một tập phát triển (devset).
+
+\subsection*{5.5.3 Các loại embedding tĩnh khác}
+
+Có nhiều loại embedding tĩnh khác. Một phần mở rộng của word2vec, \textbf{fasttext} (Bojanowski và cộng sự, 2017), giải quyết một vấn đề với word2vec như ta thấy cho đến nay: nó không có cách tốt để xử lý \textbf{các từ chưa biết} (unknown words), tức những từ xuất hiện trong một ngữ liệu kiểm tra nhưng chưa từng xuất hiện trong ngữ liệu huấn luyện. Một vấn đề liên quan là sự thưa thớt của từ, chẳng hạn trong các ngôn ngữ có hình thái học phong phú, nơi một số trong nhiều dạng của mỗi danh từ và động từ có thể chỉ xuất hiện hiếm khi. Fasttext giải quyết những vấn đề này bằng cách dùng mô hình từ-con (subword), biểu diễn mỗi từ bằng chính nó cộng với một túi (bag) các n-gram ký tự cấu thành, với các ký hiệu biên đặc biệt $<$ và $>$ được thêm vào mỗi từ. Ví dụ, với $n=3$ thì từ \emph{where} sẽ được biểu diễn bằng chuỗi $<$where$>$ cộng với các n-gram ký tự cấu thành:
+
+\begin{center}
+\texttt{<wh, whe, her, ere, re>}
+\end{center}
+
+Sau đó một embedding skip-gram được học cho mỗi n-gram cấu thành, và từ \emph{where} được biểu diễn bằng tổng của tất cả các embedding của các n-gram cấu thành của nó. Các từ chưa biết khi đó có thể được biểu diễn chỉ bằng tổng các embedding của các n-gram cấu thành của chúng. Một thư viện mã nguồn mở fasttext, bao gồm các embedding đã huấn luyện trước cho 157 ngôn ngữ, có sẵn tại \url{https://fasttext.cc}.
+
+Một mô hình embedding tĩnh khác được sử dụng rất rộng rãi là \textbf{GloVe} (Pennington và cộng sự, 2014), viết tắt của Global Vectors, vì mô hình dựa trên việc nắm bắt các thống kê ngữ liệu toàn cục. GloVe dựa trên các tỷ số xác suất từ ma trận đồng xuất hiện từ-từ.
+
+Hóa ra các embedding đặc như word2vec thực ra có một mối quan hệ toán học thanh nhã với các embedding dựa trên đếm, trong đó word2vec có thể được xem như đang ngầm tối ưu hóa một hàm của ma trận đếm với một trọng số (PPMI) cụ thể (Levy và Goldberg, 2014c).
+
+\section{5.6 Trực quan hóa Embedding}
+
+\begin{quote}
+``Tôi nhìn tốt trong nhiều chiều miễn là các chiều đó khoảng chừng hai.'' \\
+Nhà kinh tế học quá cố Martin Shubik
+\end{quote}
+
+Trực quan hóa embedding là một mục tiêu quan trọng để hiểu, áp dụng, và cải thiện các mô hình nghĩa từ này. Nhưng làm sao ta có thể trực quan hóa một vector (ví dụ) 100 chiều?
+
+Cách đơn giản nhất để trực quan hóa nghĩa của một từ $w$ được nhúng trong một không gian là liệt kê các từ tương tự nhất với $w$ bằng cách sắp xếp các vector của tất cả các từ trong từ vựng theo cosine của chúng với vector cho $w$. Ví dụ 7 từ gần nhất với \emph{frog} dùng một tập embedding cụ thể được tính bằng thuật toán GloVe là: \emph{frogs, toad, litoria, leptodactylidae, rana, lizard,} và \emph{eleutherodactylus} (Pennington và cộng sự, 2014).
+
+\textit{[Hình minh họa trong nguyên bản: biểu đồ phân cụm phân cấp (hierarchical clustering) của một số embedding cho danh từ, dùng làm phương pháp trực quan hóa, xem file gốc.]}
+
+Một phương pháp trực quan hóa khác là dùng một thuật toán phân cụm để cho thấy một biểu diễn phân cấp về việc các từ nào tương tự với các từ khác trong không gian embedding. Hình bên trái (trong nguyên bản) dùng phân cụm phân cấp của một số vector embedding cho các danh từ làm phương pháp trực quan hóa (Rohde và cộng sự, 2006).
+
+Có lẽ phương pháp trực quan hóa phổ biến nhất là chiếu 100 chiều của một từ xuống 2 chiều. Hình 5.1 đã cho thấy một trực quan hóa như vậy, cũng như Hình 5.10, dùng một phương pháp chiếu gọi là t-SNE (van der Maaten và Hinton, 2008).
+
+\section{5.7 Các thuộc tính ngữ nghĩa của embedding}
+
+Trong mục này ta tóm tắt ngắn gọn một số thuộc tính ngữ nghĩa của embedding đã được nghiên cứu.
+
+\textbf{Các loại tương đồng hay liên tưởng khác nhau:} Một tham số của các mô hình ngữ nghĩa vector là kích thước của cửa sổ ngữ cảnh dùng để thu thập số đếm. Kích thước này nhìn chung nằm trong khoảng từ 1 đến 10 từ ở mỗi bên của từ mục tiêu (tổng ngữ cảnh từ 2 đến 20 từ).
+
+Lựa chọn này phụ thuộc vào mục tiêu của biểu diễn. Các cửa sổ ngữ cảnh ngắn hơn có xu hướng dẫn đến các biểu diễn mang tính cú pháp hơn một chút, vì thông tin đến từ các từ ngay gần kề. Khi các vector được tính từ các cửa sổ ngữ cảnh ngắn, các từ tương tự nhất với một từ mục tiêu $w$ có xu hướng là các từ tương tự về nghĩa với cùng từ loại. Khi các vector được tính từ các cửa sổ ngữ cảnh dài, các từ có cosine cao nhất với một từ mục tiêu $w$ có xu hướng là các từ liên quan về chủ đề nhưng không tương tự.
+
+Ví dụ, Levy và Goldberg (2014a) cho thấy rằng khi dùng skip-gram với cửa sổ $\pm 2$, các từ tương tự nhất với từ \emph{Hogwarts} (từ loạt truyện \emph{Harry Potter}) là tên của các trường học hư cấu khác: \emph{Sunnydale} (từ \emph{Buffy the Vampire Slayer}) hay \emph{Evernight} (từ một loạt truyện về ma cà rồng). Với cửa sổ $\pm 5$, các từ tương tự nhất với \emph{Hogwarts} là các từ khác liên quan về chủ đề đến loạt truyện \emph{Harry Potter}: \emph{Dumbledore, Malfoy}, và \emph{half-blood}.
+
+Cũng thường hữu ích khi phân biệt hai loại tương đồng hay liên tưởng giữa các từ (Schütze và Pedersen, 1993). Hai từ có \textbf{đồng xuất hiện bậc một} (first-order co-occurrence) (đôi khi gọi là \textbf{liên kết cú đoạn} (syntagmatic association)) nếu chúng thường ở gần nhau. Như vậy \emph{wrote} là một liên tưởng bậc một của \emph{book} hoặc \emph{poem}. Hai từ có \textbf{đồng xuất hiện bậc hai} (second-order co-occurrence) (đôi khi gọi là \textbf{liên kết hệ hình} (paradigmatic association)) nếu chúng có các từ láng giềng tương tự nhau. Như vậy \emph{wrote} là một liên tưởng bậc hai của các từ như \emph{said} hay \emph{remarked}.
+
+\textbf{Loại suy/Tương đồng quan hệ:} Một thuộc tính ngữ nghĩa khác của embedding là khả năng nắm bắt các nghĩa quan hệ. Trong một mô hình không gian vector nhận thức sớm quan trọng, Rumelhart và Abrahamson (1973) đề xuất \textbf{mô hình hình bình hành} (parallelogram model) để giải các bài toán loại suy đơn giản có dạng \emph{a is to b as a* is to what?}. Trong các bài toán như vậy, một hệ thống được cho một bài toán như \emph{apple:tree::grape:?}, tức \emph{apple to tree as grape is to} \underline{\hspace{1cm}}, và phải điền vào chỗ trống từ \emph{vine}. Trong mô hình hình bình hành, được minh họa trong Hình 5.8, vector từ \emph{apple} đến \emph{tree} ($= \overrightarrow{tree} - \overrightarrow{apple}$) được cộng vào vector cho \emph{grape} ($\overrightarrow{grape}$); từ gần nhất với điểm đó được trả về.
+
+\textit{[Hình minh họa trong nguyên bản (Hình 5.8): mô hình hình bình hành cho các bài toán loại suy, cho thấy vị trí của \emph{vine} có thể được tìm ra bằng cách trừ \emph{apple} khỏi \emph{tree} và cộng \emph{grape}, xem file gốc.]}
+
+Trong các công trình đầu tiên với embedding thưa, các học giả cho thấy các mô hình vector thưa của nghĩa có thể giải các bài toán loại suy như vậy (Turney và Littman, 2005), nhưng phương pháp hình bình hành được chú ý nhiều hơn gần đây nhờ thành công của nó với các vector word2vec hoặc GloVe (Mikolov và cộng sự 2013c, Levy và Goldberg 2014b, Pennington và cộng sự 2014). Ví dụ, kết quả của biểu thức $\overrightarrow{king} - \overrightarrow{man} + \overrightarrow{woman}$ là một vector gần với $\overrightarrow{queen}$. Tương tự, $\overrightarrow{Paris} - \overrightarrow{France} + \overrightarrow{Italy}$ cho ra một vector gần với $\overrightarrow{Rome}$. Mô hình embedding do đó dường như đang trích xuất các biểu diễn của các quan hệ như NAM-NỮ, hay THỦ-ĐÔ-CỦA, hay thậm chí SO-SÁNH-HƠN/SO-SÁNH-NHẤT, như minh họa trong Hình 5.9 từ GloVe.
+
+\textit{[Hình minh họa trong nguyên bản (Hình 5.9): các thuộc tính quan hệ của không gian vector GloVe, minh họa qua chiếu các vector lên hai chiều; (a) $\overrightarrow{king}-\overrightarrow{man}+\overrightarrow{woman}$ gần với $\overrightarrow{queen}$; (b) các độ lệch (offset) dường như nắm bắt hình thái so sánh hơn và so sánh nhất, xem file gốc.]}
+
+Đối với một bài toán $a:b::a^*:b^*$, nghĩa là thuật toán được cho các vector $\mathbf{a}$, $\mathbf{b}$, và $\mathbf{a^*}$ và phải tìm $\mathbf{b^*}$, phương pháp hình bình hành như sau:
+
+\begin{equation}
+\hat{\mathbf{b}}^* = \operatorname{argmin}_{\mathbf{x}} \text{distance}(\mathbf{x}, \mathbf{b}-\mathbf{a}+\mathbf{a}^*) \tag{5.28}
+\end{equation}
+
+với một hàm khoảng cách nào đó, chẳng hạn khoảng cách Euclid.
+
+Có một số lưu ý. Ví dụ, từ gần nhất mà thuật toán hình bình hành trả về trong không gian embedding word2vec hoặc GloVe thường không thực sự là $b^*$ mà là một trong 3 từ đầu vào hoặc các biến thể hình thái của chúng (tức \emph{cherry:red::potato:x} trả về \emph{potato} hoặc \emph{potatoes} thay vì \emph{brown}), vì vậy các trường hợp này phải được loại trừ một cách rõ ràng. Hơn nữa, trong khi các không gian embedding hoạt động tốt nếu tác vụ liên quan đến các từ phổ biến, khoảng cách nhỏ, và một số quan hệ nhất định (như liên hệ các quốc gia với thủ đô của chúng hoặc động từ/danh từ với các dạng biến hình của chúng), phương pháp hình bình hành với embedding không hoạt động tốt bằng đối với các quan hệ khác (Linzen 2016, Gladkova và cộng sự 2016, Schluter 2018, Ethayarajh và cộng sự 2019a), và thực tế Peterson và cộng sự (2020) lập luận rằng phương pháp hình bình hành nhìn chung quá đơn giản để mô hình hóa quá trình nhận thức của con người trong việc hình thành các loại suy dạng này.
+
+\subsection*{5.7.1 Embedding và Ngữ nghĩa học Lịch sử}
+
+Embedding cũng có thể là một công cụ hữu ích để nghiên cứu cách nghĩa thay đổi theo thời gian, bằng cách tính nhiều không gian embedding, mỗi không gian từ các văn bản được viết trong một giai đoạn thời gian cụ thể. Ví dụ Hình 5.10 cho thấy một biểu diễn trực quan về sự thay đổi nghĩa của các từ tiếng Anh trong hai thế kỷ qua, được tính bằng cách xây dựng các không gian embedding riêng biệt cho mỗi thập kỷ từ các ngữ liệu lịch sử như Google n-grams (Lin và cộng sự, 2012) và Corpus of Historical American English (Davies, 2012).
+
+\textit{[Hình minh họa trong nguyên bản (Hình 5.10): biểu diễn trực quan t-SNE về sự thay đổi ngữ nghĩa lịch sử của 3 từ tiếng Anh dùng vector word2vec, cho thấy sự thay đổi nghĩa của từ \emph{gay} (từ nghĩa ``vui vẻ'' hay ``hóm hỉnh'' sang chỉ đồng tính luyến ái), sự phát triển của nghĩa ``truyền phát'' (transmission) hiện đại của từ \emph{broadcast} từ nghĩa gốc ``gieo hạt'', và sự biến đổi nghĩa xấu đi (pejoration) của từ \emph{awful} khi nó chuyển từ nghĩa ``đầy sự tôn kính'' sang nghĩa ``khủng khiếp hay kinh khủng'' (Hamilton và cộng sự, 2016), xem file gốc.]}
+
+\section{5.8 Thiên kiến và Embedding}
+
+Bên cạnh khả năng học nghĩa từ từ văn bản, embedding, đáng tiếc thay, cũng tái tạo lại những thiên kiến và định kiến ngầm ẩn trong văn bản đó. Như mục trước vừa cho thấy, embedding có thể mô hình hóa khá tốt độ tương đồng quan hệ: việc ``queen'' là từ gần nhất với ``king'' $-$ ``man'' $+$ ``woman'' ngụ ý phép loại suy \emph{man:woman::king:queen}. Nhưng những phép loại suy embedding tương tự này cũng thể hiện định kiến giới. Ví dụ Bolukbasi và cộng sự (2016) nhận thấy rằng nghề nghiệp gần nhất với ``computer programmer'' - ``man'' + ``woman'' trong các embedding word2vec được huấn luyện trên văn bản tin tức là ``homemaker'' (người nội trợ), và các embedding tương tự cũng gợi ý phép loại suy ``father'' đối với ``doctor'' cũng giống như ``mother'' đối với ``nurse''. Điều này có thể dẫn đến điều mà Crawford (2017) và Blodgett và cộng sự (2020) gọi là \textbf{tổn hại phân bổ} (allocational harm), khi một hệ thống phân bổ nguồn lực (việc làm hoặc tín dụng) một cách bất công cho các nhóm khác nhau. Ví dụ các thuật toán dùng embedding như một phần của việc tìm kiếm các lập trình viên hoặc bác sĩ tiềm năng có thể vì thế đánh giá thấp không đúng mức các hồ sơ của phụ nữ.
+
+Hóa ra embedding không chỉ phản ánh thống kê của dữ liệu đầu vào, mà còn \textbf{khuếch đại} (amplify) thiên kiến; các thuật ngữ mang tính giới trở nên \textbf{càng} mang tính giới hơn trong không gian embedding so với chúng vốn có trong thống kê văn bản đầu vào (Zhao và cộng sự 2017, Ethayarajh và cộng sự 2019b, Jia và cộng sự 2020), và các thiên kiến này còn được phóng đại hơn cả trong các thống kê việc làm thực tế (Garg và cộng sự, 2018).
+
+Embedding cũng mã hóa các liên tưởng ngầm ẩn vốn là một thuộc tính của tư duy con người. Bài kiểm tra Liên tưởng Ngầm (Implicit Association Test, Greenwald và cộng sự, 1998) đo lường các liên tưởng của con người giữa các khái niệm (như ``flowers'' hoặc ``insects'') và các thuộc tính (như ``pleasantness'' và ``unpleasantness'') bằng cách đo sự khác biệt về độ trễ mà con người dùng để gán nhãn các từ trong các hạng mục khác nhau.\footnote{Nói một cách gần đúng, nếu con người liên tưởng ``flowers'' với ``pleasantness'' và ``insects'' với ``unpleasantness'', khi được yêu cầu bấm nút xanh cho ``flowers'' (daisy, iris, lilac) và ``pleasant words'' (love, laughter, pleasure) và nút đỏ cho ``insects'' (flea, spider, mosquito) và ``unpleasant words'' (abuse, hatred, ugly) họ bấm nhanh hơn so với trong điều kiện không tương thích, khi họ phải bấm nút đỏ cho ``flowers'' và ``unpleasant words'' và nút xanh cho ``insects'' và ``pleasant words''.} Dùng các phương pháp như vậy, người ta đã cho thấy rằng người dân tại Hoa Kỳ có xu hướng liên tưởng các tên người Mỹ gốc Phi với các từ mang nghĩa khó chịu (nhiều hơn so với tên người Mỹ gốc Âu), tên nam giới với toán học nhiều hơn, và tên nữ giới với nghệ thuật, và tên người già với các từ mang nghĩa khó chịu (Greenwald và cộng sự 1998, Nosek và cộng sự 2002a, Nosek và cộng sự 2002b). Caliskan và cộng sự (2017) đã tái tạo lại tất cả những phát hiện về liên tưởng ngầm này bằng cách dùng vector GloVe và độ tương đồng cosine thay vì độ trễ của con người. Ví dụ các tên người Mỹ gốc Phi như ``Leroy'' và ``Shaniqua'' có độ tương đồng cosine GloVe cao hơn với các từ khó chịu trong khi các tên người Mỹ gốc Âu (``Brad'', ``Greg'', ``Courtney'') có độ tương đồng cosine cao hơn với các từ dễ chịu. Những vấn đề này với embedding là một ví dụ của \textbf{tổn hại biểu diễn} (representational harm, Crawford 2017, Blodgett và cộng sự 2020), một loại tổn hại gây ra bởi một hệ thống hạ thấp hoặc thậm chí bỏ qua một số nhóm xã hội. Bất kỳ thuật toán nào dùng embedding và khai thác sắc thái tình cảm của từ đều có thể làm trầm trọng thêm định kiến đối với người Mỹ gốc Phi.
+
+Các nghiên cứu gần đây tập trung vào các cách cố gắng loại bỏ những loại thiên kiến này, ví dụ bằng cách phát triển một phép biến đổi không gian embedding nhằm loại bỏ các định kiến giới nhưng vẫn giữ nguyên giới tính mang tính định nghĩa (definitional gender) (Bolukbasi và cộng sự 2016, Zhao và cộng sự 2017) hoặc thay đổi quy trình huấn luyện (Zhao và cộng sự, 2018). Tuy nhiên, mặc dù những cách \textbf{khử thiên kiến} (debiasing) này có thể làm giảm thiên kiến trong embedding, chúng không loại bỏ hoàn toàn thiên kiến (Gonen và Goldberg, 2019), và đây vẫn là một vấn đề mở.
+
+Các embedding lịch sử cũng đang được dùng để đo lường các thiên kiến trong quá khứ. Garg và cộng sự (2018) đã dùng các embedding từ các văn bản lịch sử để đo mối liên hệ giữa embedding cho các nghề nghiệp và embedding cho tên của các sắc tộc hoặc giới tính khác nhau (ví dụ độ tương đồng cosine tương đối giữa tên của phụ nữ so với tên của nam giới với các từ nghề nghiệp như ``librarian'' hay ``carpenter'') trong suốt thế kỷ 20. Họ nhận thấy các giá trị cosine tương quan với tỷ lệ phần trăm phụ nữ hoặc các nhóm sắc tộc trong lịch sử thực tế trong các nghề nghiệp đó. Các embedding lịch sử cũng tái tạo lại các định kiến sắc tộc cũ trong các khảo sát; xu hướng của những người tham gia thí nghiệm năm 1933 liên tưởng các tính từ như ``industrious'' hay ``superstitious'' với sắc tộc Trung Quốc, tương quan với độ tương đồng cosine giữa các họ tên Trung Quốc và các tính từ đó dùng embedding được huấn luyện trên văn bản những năm 1930. Họ cũng có thể ghi lại các thiên kiến giới lịch sử liên quan đến năng lực, chẳng hạn thực tế rằng các embedding cho các tính từ liên quan đến năng lực (``smart'', ``wise'', ``thoughtful'', ``resourceful'') có độ tương đồng cosine cao hơn với các từ nam giới so với các từ nữ giới, và cho thấy thiên kiến này đã giảm dần kể từ năm 1960. Ta sẽ quay lại vấn đề về vai trò của thiên kiến trong xử lý ngôn ngữ tự nhiên ở các chương sau.
+
+\section{5.9 Đánh giá các Mô hình Vector}
+
+Độ đo đánh giá quan trọng nhất cho các mô hình vector là đánh giá ngoại tại (extrinsic evaluation) trên các tác vụ, tức dùng các vector trong một tác vụ NLP và xem liệu điều này có cải thiện hiệu suất so với một mô hình khác hay không.
+
+Tuy nhiên vẫn hữu ích khi có các phép đánh giá nội tại (intrinsic evaluations). Độ đo phổ biến nhất là kiểm tra hiệu suất trên \textbf{độ tương đồng} (similarity), tính tương quan giữa điểm số tương đồng từ của một thuật toán và các đánh giá tương đồng từ do con người gán. \textbf{WordSim-353} (Finkelstein và cộng sự, 2002) là một tập đánh giá thường được dùng, từ 0 đến 10 cho 353 cặp danh từ; ví dụ (\emph{plane, car}) có điểm trung bình là 5.77. \textbf{SimLex-999} (Hill và cộng sự, 2015) là một bộ dữ liệu phức tạp hơn, định lượng độ tương đồng (\emph{cup, mug}) thay vì mức độ liên quan (\emph{cup, coffee}), và bao gồm các cặp từ tính từ, danh từ và động từ cụ thể và trừu tượng. Bộ dữ liệu \textbf{TOEFL} là một tập gồm 80 câu hỏi, mỗi câu hỏi gồm một từ mục tiêu với 4 lựa chọn từ bổ sung; nhiệm vụ là chọn từ nào là từ đồng nghĩa đúng, như trong ví dụ: \emph{Levied is closest in meaning to: imposed, believed, requested, correlated} (Landauer và Dumais, 1997). Tất cả những bộ dữ liệu này đưa ra các từ mà không có ngữ cảnh.
+
+Các tác vụ tương đồng nội tại có ngữ cảnh thực tế hơn một chút. Bộ dữ liệu Stanford Contextual Word Similarity (SCWS) (Huang và cộng sự, 2012) và bộ dữ liệu Word-in-Context (WiC) (Pilehvar và Camacho-Collados, 2019) đưa ra các kịch bản đánh giá phong phú hơn. SCWS đưa ra đánh giá của con người trên 2,003 cặp từ trong ngữ cảnh câu của chúng, trong khi WiC đưa ra các từ mục tiêu trong hai ngữ cảnh câu cùng nghĩa hoặc khác nghĩa; xem Phụ lục I. Tác vụ \emph{độ tương đồng ngữ nghĩa văn bản} (semantic textual similarity) (Agirre và cộng sự 2012, Agirre và cộng sự 2015) đánh giá hiệu suất của các thuật toán độ tương đồng cấp câu, gồm một tập các cặp câu, mỗi cặp câu đi kèm điểm số tương đồng gán bởi con người.
+
+Một tác vụ khác dùng để đánh giá là tác vụ loại suy, đã thảo luận ở Mục 5.7, trong đó hệ thống phải giải các bài toán dạng \emph{a is to b as a* is to b*}, cho $a$, $b$, và $a^*$, và phải tìm $b^*$ (Turney và Littman, 2005). Một số tập các bộ (tuple) đã được tạo ra cho tác vụ này (Mikolov và cộng sự 2013a, Mikolov và cộng sự 2013c, Gladkova và cộng sự 2016), bao gồm các quan hệ hình thái (\emph{city:cities::child:children}), quan hệ từ vựng (\emph{leg:table::spout:teapot}) và các quan hệ bách khoa (\emph{Beijing:China::Dublin:Ireland}), một số được lấy từ bộ dữ liệu SemEval-2012 Task 2 gồm 79 quan hệ khác nhau (Jurgens và cộng sự, 2012).
+
+Tất cả các thuật toán embedding đều có sự biến thiên vốn có. Ví dụ vì tính ngẫu nhiên trong khởi tạo và lấy mẫu âm ngẫu nhiên, các thuật toán như word2vec có thể tạo ra các kết quả khác nhau ngay cả từ cùng một tập dữ liệu, và các tài liệu riêng lẻ trong một bộ sưu tập có thể ảnh hưởng mạnh mẽ đến các embedding kết quả (Tian và cộng sự 2016, Hellrich và Hahn 2016, Antoniak và Mimno 2018). Do đó khi embedding được dùng để nghiên cứu các liên tưởng từ trong các ngữ liệu cụ thể, cách làm tốt nhất là huấn luyện nhiều embedding với lấy mẫu bootstrap trên các tài liệu và lấy trung bình các kết quả (Antoniak và Mimno, 2018).
+
+\section{5.10 Tóm tắt}
+
+\begin{itemize}
+  \item Trong ngữ nghĩa vector, một từ được mô hình hóa như một vector, một điểm trong không gian nhiều chiều, còn gọi là một \textbf{embedding}. Trong chương này ta tập trung vào \textbf{embedding tĩnh}, trong đó mỗi từ được ánh xạ tới một embedding cố định.
+  \item Các mô hình ngữ nghĩa vector chia làm hai lớp: \textbf{thưa} (sparse) và \textbf{đặc} (dense). Trong các mô hình thưa mỗi chiều tương ứng với một từ trong từ vựng $V$ và các ô là các hàm của \textbf{số đếm đồng xuất hiện}. Ma trận \textbf{từ-ngữ cảnh} hay \textbf{thuật ngữ-thuật ngữ} (term-term) có một hàng cho mỗi từ (mục tiêu) trong từ vựng và một cột cho mỗi thuật ngữ ngữ cảnh trong từ vựng.
+  \item Các mô hình vector đặc thường có số chiều từ 50 đến 1000. Các thuật toán word2vec như \textbf{skip-gram} là một cách phổ biến để tính các embedding đặc. Skip-gram huấn luyện một bộ phân loại hồi quy logistic để tính xác suất hai từ ``có khả năng xuất hiện gần nhau trong văn bản''. Xác suất này được tính từ tích vô hướng giữa các embedding của hai từ.
+  \item Skip-gram dùng hạ gradient ngẫu nhiên để huấn luyện bộ phân loại, bằng cách học các embedding có tích vô hướng cao với các embedding của các từ xuất hiện gần nó và tích vô hướng thấp với các từ nhiễu.
+  \item Các thuật toán embedding quan trọng khác gồm \textbf{GloVe}, một phương pháp dựa trên các tỷ số xác suất đồng xuất hiện từ.
+  \item Dù dùng vector thưa hay đặc, độ tương đồng của từ và tài liệu được tính bằng một hàm nào đó của \textbf{tích vô hướng} giữa các vector. Cosine của hai vector, một tích vô hướng đã chuẩn hóa, là độ đo phổ biến nhất trong số các độ đo như vậy.
+\end{itemize}
+
+\section*{Ghi chú Lịch sử}
+
+Ý tưởng về ngữ nghĩa vector nảy sinh từ các nghiên cứu trong những năm 1950 trong ba lĩnh vực riêng biệt: ngôn ngữ học, tâm lý học, và khoa học máy tính, mỗi lĩnh vực đóng góp một khía cạnh nền tảng của mô hình.
+
+Ý tưởng rằng nghĩa liên quan đến sự phân bố của các từ trong ngữ cảnh đã phổ biến trong lý thuyết ngôn ngữ học những năm 1950, trong số các nhà phân bố học (distributionalist) như Zellig Harris, Martin Joos, và J. R. Firth, và các nhà ký hiệu học như Thomas Sebeok. Như Joos (1950) đã viết,
+
+\begin{quote}
+``nghĩa'' của một hình vị theo cách hiểu của nhà ngôn ngữ học... chính là, theo định nghĩa, tập hợp các xác suất có điều kiện về sự xuất hiện của nó trong ngữ cảnh với tất cả các hình vị khác.
+\end{quote}
+
+Ý tưởng rằng nghĩa của một từ có thể được mô hình hóa như một điểm trong một không gian ngữ nghĩa nhiều chiều bắt nguồn từ các nhà tâm lý học như Charles E. Osgood, người đã nghiên cứu cách con người phản hồi trước nghĩa của các từ bằng cách gán các giá trị trên các thang đo như \emph{happy/sad} hay \emph{hard/soft}. Osgood và cộng sự (1957) đề xuất rằng nghĩa của một từ nói chung có thể được mô hình hóa như một điểm trong một không gian Euclid nhiều chiều, và rằng độ tương đồng về nghĩa giữa hai từ có thể được mô hình hóa như khoảng cách giữa các điểm này trong không gian đó.
+
+Một nguồn gốc trí tuệ cuối cùng trong những năm 1950 và đầu những năm 1960 là lĩnh vực khi đó được gọi là \textbf{lập chỉ mục cơ học} (mechanical indexing), nay được gọi là \textbf{truy hồi thông tin} (information retrieval). Trong công trình sau này trở thành mô hình không gian vector (vector space model) cho truy hồi thông tin (Salton 1971, Sparck Jones 1986), các nhà nghiên cứu đã chứng minh những cách mới để định nghĩa nghĩa của từ dưới dạng vector (Switzer, 1965), và tinh chỉnh các phương pháp về độ tương đồng của từ dựa trên các độ đo liên kết thống kê giữa các từ như thông tin tương hỗ (mutual information) (Giuliano, 1965) và idf (Sparck Jones, 1972), và cho thấy nghĩa của tài liệu có thể được biểu diễn trong cùng không gian vector dùng cho từ. Cũng vào thời điểm đó, Cordier (1965) cho thấy phân tích nhân tố (factor analysis) của các liên tưởng từ có thể được dùng để hình thành các biểu diễn vector đặc của từ.
+
+Một phần nền tảng triết học của cách tư duy phân bố đến từ các tác phẩm cuối đời của triết gia Wittgenstein, người hoài nghi về khả năng xây dựng một lý thuyết hình thức hoàn chỉnh về các định nghĩa nghĩa cho mỗi từ. Wittgenstein thay vào đó đề xuất rằng ``nghĩa của một từ là cách sử dụng nó trong ngôn ngữ'' (Wittgenstein, 1953, PI 43). Nghĩa là, thay vì dùng một ngôn ngữ logic nào đó để định nghĩa mỗi từ, hoặc dựa vào các biểu vật (denotations) hay giá trị chân lý, ý tưởng của Wittgenstein là ta nên định nghĩa một từ bằng cách con người sử dụng và hiểu nó trong tương tác hàng ngày, từ đó báo trước xu hướng chuyển sang các mô hình hiện thân (embodied) và trải nghiệm (experiential) trong ngôn ngữ học và NLP (Glenberg và Robertson 2000, Lake và Murphy 2021, Bisk và cộng sự 2020, Bender và Koller 2020).
+
+Có liên quan xa hơn là ý tưởng định nghĩa từ bằng một vector các đặc trưng rời rạc, vốn có nguồn gốc ít nhất từ Descartes và Leibniz (Wierzbicka 1992, Wierzbicka 1996). Vào giữa thế kỷ 20, bắt đầu với công trình của Hjelmslev (1969) (bản gốc 1943) và được phát triển thêm trong ngữ pháp tạo sinh thời kỳ đầu (Katz và Fodor, 1963), ý tưởng nảy sinh về việc biểu diễn nghĩa với \textbf{đặc trưng ngữ nghĩa} (semantic features), các ký hiệu biểu diễn một loại nghĩa nguyên thủy nào đó. Ví dụ các từ như \emph{hen}, \emph{rooster}, hay \emph{chick}, có điểm chung nào đó (tất cả đều mô tả gà) và điểm khác biệt nào đó (tuổi và giới tính của chúng), có thể được biểu diễn như:
+
+\begin{center}
+\begin{tabular}{ll}
+hen & +female, +chicken, +adult \\
+rooster & -female, +chicken, +adult \\
+chick & +chicken, -adult \\
+\end{tabular}
+\end{center}
+
+Các chiều mà mô hình vector của nghĩa dùng để định nghĩa từ chỉ liên quan một cách trừu tượng đến ý tưởng về một số lượng nhỏ cố định các chiều được xây dựng thủ công này. Dù vậy, đã có một số nỗ lực cho thấy một số chiều nhất định của các mô hình embedding có đóng góp một khía cạnh cấu thành cụ thể nào đó của nghĩa giống như các đặc trưng ngữ nghĩa sớm này.
+
+Việc sử dụng các vector đặc để mô hình hóa nghĩa từ, và thực tế bản thân thuật ngữ \textbf{embedding}, bắt nguồn từ mô hình \textbf{lập chỉ mục ngữ nghĩa tiềm ẩn} (latent semantic indexing, LSI) (Deerwester và cộng sự, 1988) được diễn đạt lại thành \textbf{LSA} (\textbf{phân tích ngữ nghĩa tiềm ẩn}, latent semantic analysis) (Deerwester và cộng sự, 1990). Trong LSA, \textbf{phân rã giá trị kỳ dị} (singular value decomposition, SVD) được áp dụng lên một ma trận thuật ngữ-tài liệu (mỗi ô được đánh trọng số theo log tần suất và chuẩn hóa theo entropy), và sau đó 300 chiều quan trọng nhất được dùng làm embedding LSA. SVD là một phương pháp để tìm các chiều quan trọng nhất của một tập dữ liệu, tức các chiều mà dữ liệu biến thiên nhiều nhất theo đó. LSA sau đó nhanh chóng được áp dụng rộng rãi: như một mô hình nhận thức (Landauer và Dumais, 1997), và cho các tác vụ như kiểm tra chính tả (Jones và Martin, 1997), mô hình hóa ngôn ngữ (Bellegarda 1997, Coccaro và Jurafsky 1998, Bellegarda 2000), suy diễn hình thái học (Schone và Jurafsky 2000, Schone và Jurafsky 2001b), các biểu thức đa từ (MWE) (Schone và Jurafsky 2001a), và chấm điểm bài luận (Rehder và cộng sự, 1998). Các mô hình liên quan cũng được phát triển đồng thời và áp dụng vào khử nhập nhằng nghĩa của từ bởi Schütze (1992). LSA cũng dẫn đến việc sử dụng embedding sớm nhất để biểu diễn từ trong một bộ phân loại xác suất, trong bộ định tuyến tài liệu hồi quy logistic của Schütze và cộng sự (1995). Ý tưởng về SVD trên ma trận thuật ngữ-thuật ngữ (thay vì ma trận thuật ngữ-tài liệu) như một mô hình nghĩa cho NLP được đề xuất không lâu sau LSA bởi Schütze (1992). Schütze đã áp dụng các embedding hạng thấp (97 chiều) tạo ra bởi SVD cho tác vụ khử nhập nhằng nghĩa của từ, phân tích không gian ngữ nghĩa kết quả, và cũng đề xuất các kỹ thuật khả dĩ như loại bỏ các chiều bậc cao. Xem Schütze (1997).
+
+Một số mô hình ma trận thay thế đã tiếp nối công trình SVD ban đầu, bao gồm Lập chỉ mục Ngữ nghĩa Tiềm ẩn Xác suất (Probabilistic Latent Semantic Indexing, PLSI) (Hofmann, 1999), Phân bổ Dirichlet Ẩn (Latent Dirichlet Allocation, LDA) (Blei và cộng sự, 2003), và Phân rã Ma trận Không âm (Non-negative Matrix Factorization, NMF) (Lee và Seung, 1999).
+
+Cộng đồng LSA dường như là những người đầu tiên sử dụng từ ``embedding'' trong Landauer và cộng sự (1997), trong một biến thể của nghĩa toán học của nó như một ánh xạ từ một không gian hay cấu trúc này sang một không gian hay cấu trúc khác. Trong LSA, embedding từ dường như mô tả ánh xạ từ không gian các vector đếm thưa sang không gian tiềm ẩn của các vector đặc SVD. Mặc dù ban đầu từ này có nghĩa là ánh xạ từ không gian này sang không gian khác, nó đã dịch chuyển theo phép hoán dụ (metonymy) để chỉ vector đặc kết quả trong không gian tiềm ẩn, và chính theo nghĩa này mà ta hiện đang sử dụng từ này.
+
+Sang thập kỷ tiếp theo, Bengio và cộng sự (2003) và Bengio và cộng sự (2006) cho thấy các mô hình ngôn ngữ nơ-ron cũng có thể được dùng để phát triển embedding như một phần của tác vụ dự đoán từ. Collobert và Weston (2007), Collobert và Weston (2008), và Collobert và cộng sự (2011) sau đó chứng minh rằng embedding có thể được dùng để biểu diễn nghĩa từ cho một số tác vụ NLP. Turian và cộng sự (2010) so sánh giá trị của các loại embedding khác nhau cho các tác vụ NLP khác nhau. Mikolov và cộng sự (2011) cho thấy mạng nơ-ron hồi quy có thể được dùng làm mô hình ngôn ngữ. Ý tưởng đơn giản hóa lớp ẩn của các mô hình ngôn ngữ nơ-ron này để tạo ra thuật toán skip-gram (và cả CBOW) được đề xuất bởi Mikolov và cộng sự (2013a). Thuật toán huấn luyện lấy mẫu âm được đề xuất trong Mikolov và cộng sự (2013b). Có nhiều khảo sát tổng quan về embedding tĩnh và các tham số hóa của chúng (Bullinaria và Levy 2007, Bullinaria và Levy 2012, Lapesa và Evert 2014, Kiela và Clark 2014, Levy và cộng sự 2015).
+
+Xem Manning và cộng sự (2008) và Chương 11 để hiểu sâu hơn về vai trò của vector trong truy hồi thông tin, bao gồm cách so sánh truy vấn với tài liệu, thêm chi tiết về tf-idf, và các vấn đề về mở rộng quy mô đến các tập dữ liệu rất lớn. Xem Kim (2019) để có một hướng dẫn rõ ràng và toàn diện về word2vec. Cruse (2004) là một văn bản ngôn ngữ học nhập môn hữu ích về ngữ nghĩa từ vựng.
+
+\section*{Bài tập}
+
+\begin{enumerate}
+  \item[5.1] Dùng số đếm đồng xuất hiện trong Hình 5.2, tính $\cos(\text{cherry}, \text{strawberry})$ và $\cos(\text{cherry}, \text{digital})$ chỉ dùng các chiều \emph{pie} và \emph{result}. Cặp nào tương tự nhau hơn, và kết quả có khớp với trực giác của bạn về nghĩa của các từ hay không?
+  \item[5.2] Chứng minh rằng độ tương đồng cosine bất biến với phép co giãn (scaling): với mọi hằng số dương $c$, $\cos(cv, w) = \cos(v, w)$. Tại sao đây là một thuộc tính mong muốn đối với một độ đo tương đồng từ, xét theo phần thảo luận về tần suất và độ dài vector ở Mục 5.4?
+  \item[5.3] Đạo hàm các gradient SGNS trong Công thức 5.22 đến Công thức 5.24 bằng cách lấy đạo hàm của hàm mất mát trong Công thức 5.21 theo $c_{pos}$, $c_{neg}$, và $w$. Bạn có thể dùng sự kiện rằng $\frac{d\sigma(z)}{dz} = \sigma(z)(1-\sigma(z))$ và $\frac{d(\mathbf{c}\mathbf{w})}{d\mathbf{w}} = \mathbf{c}$.
+\end{enumerate}
+
+% [Đã lược bỏ danh mục Tài liệu tham khảo gốc (tiếng Anh, trích dẫn của tác giả bài gốc) để giảm dung lượng chương; không ảnh hưởng nội dung học thuật chính.]

@@ -1,0 +1,343 @@
+\chapter{Thực hành tốt trong dữ liệu tài chính}
+\label{ch:M1L1}
+
+\section{Lesson Notes: Thực hành tốt trong dữ liệu tài chính}
+\label{sec:M1L1-lessonnotes}
+
+\begin{center}
+\begin{tabular}{|l|p{10cm}|}
+\hline
+\textbf{Thời gian đọc} & 60 phút \\
+\hline
+\textbf{Kiến thức nền} & Đặc điểm dữ liệu, các loại dữ liệu, chuỗi thời gian tài chính \\
+\hline
+\textbf{Từ khóa} & dữ liệu, dữ liệu thay thế (alternative data), kinh tế học, dữ liệu lớn, chất lượng, độ chính xác, tính kịp thời, tính đầy đủ, tính nhất quán, 5V, khối lượng, đa dạng, độ tin cậy, giá trị, tốc độ \\
+\hline
+\end{tabular}
+\end{center}
+
+Trong môn Thị trường Tài chính, chúng ta đã tìm hiểu thế giới kỹ thuật tài chính chịu ảnh hưởng như thế nào bởi các khái niệm như rủi ro tín dụng, tài trợ vốn, biến động, tương quan, thanh khoản, quy định, đòn bẩy, phi tuyến tính, thất bại mô hình và khủng hoảng tài chính. Trong môn Dữ liệu Tài chính, chúng ta sẽ quay lại tất cả các khái niệm này bằng cách đưa vào dữ liệu — thứ giúp chúng ta xây dựng các mô hình có thể diễn giải, dự báo và thậm chí đề xuất giải pháp cho những thách thức mà các kỹ sư tài chính gặp phải.
+
+Trong bài học này, chúng ta sẽ xem xét dữ liệu tài chính bao gồm những gì: nó đến từ đâu, những yếu tố ảnh hưởng đến dữ liệu, các loại dữ liệu, cấu trúc dữ liệu và độ phức tạp của dữ liệu. Chúng ta cũng sẽ có cái nhìn tổng quan về các nguồn dữ liệu và định danh dữ liệu, cùng với những thách thức khi kết hợp dữ liệu đến từ các múi giờ khác nhau.
+
+\subsection{Sự tiến hóa và tầm quan trọng của dữ liệu trong tài chính}
+
+Sự bùng nổ của dữ liệu sẵn có trong những năm gần đây đã thay đổi cách các chuyên gia tiếp cận phân tích tài chính và ra quyết định. Trước đây, người ta thường nghĩ rằng nhà phân tích tài chính chỉ dựa vào dữ liệu thị trường, các chỉ số và báo cáo tài chính doanh nghiệp. Nhưng ngày nay, một nhà phân tích còn khai thác cả dữ liệu y tế, ảnh vệ tinh, dữ liệu khí hậu, mức độ tiếng ồn và ô nhiễm, dữ liệu giáo dục, và nhiều hơn nữa.
+
+Hãy thử nghĩ xem: những tập dữ liệu đa dạng này có giá trị gì cho phân tích tài chính không? Một quyết định đầu tư có thể bị ảnh hưởng bởi những thông tin này không?
+
+Câu trả lời là CÓ, và điều này sẽ được minh chứng bằng các ví dụ thực tế xuyên suốt môn Dữ liệu Tài chính. Kinh tế học gắn liền với xã hội, và bất kỳ dữ liệu nào được tạo ra cũng có thể được nhìn nhận dưới góc độ kinh tế. Ví dụ:
+
+\begin{itemize}
+  \item Giả sử một nhà đầu tư đang cân nhắc đầu tư vào một công ty dược phẩm. Ngoài báo cáo tài chính và dữ liệu thị trường, dữ liệu y tế có thể cho biết xu hướng và tỷ lệ mắc bệnh, từ đó gợi ý nhu cầu tương lai đối với sản phẩm của công ty.
+  \item Dữ liệu vệ tinh có thể cho biết tình trạng cây trồng, sản lượng thu hoạch và mức sử dụng nước — những thông tin định lượng được cho việc định giá hàng hóa nông nghiệp.
+  \item Dữ liệu khí hậu là giá trị gia tăng trong việc dự báo tác động dài hạn đến năng suất cây trồng và nhu cầu năng lượng, cùng nhiều yếu tố khác.
+\end{itemize}
+
+Tập hợp các nguồn dữ liệu đa dạng này được gọi là ``dữ liệu thay thế'' (alternative data) và ngày càng trở nên có giá trị trong phân tích tài chính. Việc phân tích các tập dữ liệu như vậy trở nên khả thi nhờ những tiến bộ công nghệ: sự xuất hiện của hạ tầng dữ liệu lớn, điện toán đám mây và các công cụ phân tích. Cụ thể hơn, một số bước phát triển then chốt đã thúc đẩy cuộc cách mạng dữ liệu trong tài chính:
+
+\begin{itemize}
+  \item \textbf{Số hóa thông tin} dẫn đến sự tăng trưởng theo cấp số nhân của lượng dữ liệu sẵn có.
+  \item \textbf{Điện toán hiệu năng cao và hệ thống phân tán} cho phép nhà phân tích xử lý các tập dữ liệu khổng lồ. Các nền tảng và dịch vụ đám mây như Apache Kafka, Amazon Kinesis, Google Cloud Pub/Sub và Microsoft Azure Event Hubs cung cấp hạ tầng thiết yếu để truyền và xử lý hàng triệu sự kiện mỗi giây.
+  \item \textbf{Công cụ phân tích tiên tiến}, thường có thể truy cập miễn phí, đóng vai trò then chốt trong phân tích thống kê, mô hình hóa và suy luận. Ví dụ:
+
+  \textit{Công cụ miễn phí}
+  \begin{itemize}
+    \item \textbf{Python}: ngôn ngữ lập trình mã nguồn mở dùng cho phân tích và xử lý dữ liệu với các thư viện như NumPy, Pandas, SciPy, v.v.
+    \item \textbf{R}: một ngôn ngữ lập trình được tạo ra chuyên cho tính toán thống kê. Được dùng trong tài chính cho phân tích kinh tế lượng và trực quan hóa dữ liệu, đồng thời cũng có các thư viện cho phân tích hình học và tô pô.
+    \item \textbf{Jupyter Notebook}: cho phép nhà nghiên cứu chạy từng khối lệnh trong các ô (cell) mà không cần chạy lại toàn bộ script. Cách này cho phép kiểm thử liên tục từng phần của phân tích mà không cần khởi động lại kernel. Đồng thời có thể viết văn bản markdown và biểu thức toán học.
+  \end{itemize}
+
+  \textit{Công cụ trả phí}
+  \begin{itemize}
+    \item \textbf{Bloomberg Terminal, Thomson Reuters Eikon}, v.v.: cung cấp phân tích thời gian thực và dữ liệu tài chính cho giao dịch và quản trị rủi ro.
+    \item \textbf{MATLAB \& Mathematica}: môi trường tính toán số cung cấp công cụ cần thiết cho kỹ sư và nhà phân tích tài chính.
+    \item \textbf{SAS, Stata, EViews}: các gói phần mềm thống kê dùng trong kinh doanh và tài chính để phân tích dữ liệu, mô hình hóa kinh tế lượng và dự báo.
+  \end{itemize}
+
+  \item \textbf{Tiến bộ trong các giao thức} dẫn đến việc tiêu thụ và phân tích dữ liệu theo thời gian thực.
+  \begin{itemize}
+    \item \textbf{Giao thức WebSocket}: sử dụng một kết nối duy nhất, liên tục, hai chiều và bền vững giữa client và server. Qua kênh luôn mở này, server có thể phát (broadcast) các luồng dữ liệu thị trường như giao dịch, cập nhật sổ lệnh, biến động giá theo thời gian thực đến client. Đồng thời, client có thể đặt hoặc hủy lệnh ngay lập tức mà không cần thiết lập kết nối mới cho mỗi lần tương tác.
+    \item \textbf{Giao thức FIX (Financial Information Exchange)}: là chuẩn nhắn tin không phụ thuộc nhà cung cấp (vendor-agnostic), cung cấp phương thức giao tiếp điện tử được chuẩn hóa giữa các tổ chức tài chính. Nhờ được áp dụng rộng rãi và khả năng giao tiếp thời gian thực, FIX đã trở thành chuẩn công nghiệp cho giao dịch điện tử. Giao thức này ra đời năm 1992 từ sự hợp tác giữa Salomon Brothers và Fidelity Investments, và đã qua nhiều lần cải tiến.
+    \item \textbf{Giao thức đồng bộ thời gian chính xác (PTP — Precision Time Protocol)}: cho phép đồng bộ thời gian chính xác trên toàn mạng. Các sàn giao dịch dùng giao thức này để đảm bảo giao dịch được đóng dấu thời gian chính xác đến từng micro giây — yếu tố then chốt cho giao dịch tần suất cao và để đáp ứng yêu cầu đóng dấu thời gian của MiFID II.
+  \end{itemize}
+\end{itemize}
+
+\subsection{Các loại dữ liệu tài chính}
+
+Nói một cách tổng quát, có ba loại dữ liệu: dữ liệu có cấu trúc, dữ liệu phi cấu trúc và dữ liệu bán cấu trúc.
+
+\subsubsection{Dữ liệu có cấu trúc}
+
+Dữ liệu có cấu trúc thường có dạng hình chữ nhật (dữ liệu có cấu trúc cũng có thể ở dạng mảng đa chiều, nhưng trong bối cảnh tài chính, nhà phân tích thường gặp dữ liệu dạng bảng nhiều nhất). Nó có thể được tổ chức thành hàng và cột: hàng thể hiện các thời điểm quan sát, cột thể hiện các biến số.
+
+Ví dụ, bạn có thể có một ma trận giá cổ phiếu 1000 hàng × 50 cột. Một nghìn hàng tương ứng khoảng 4 năm giá đóng cửa hằng ngày (tức các ngày làm việc). Năm mươi cột tương ứng với 50 cổ phiếu trong một quỹ ETF.
+
+Dữ liệu này dễ dàng lưu trữ nhờ cấu trúc thân thiện:
+\begin{itemize}
+  \item \textbf{Cắt ngang (Cross-Section)}: một hàng cho ta bức ảnh chụp danh mục tại một thời điểm cụ thể.
+  \item \textbf{Chuỗi thời gian (Time Series)}: một cột cho ta ``đoạn phim'' về một cổ phiếu trong bốn năm.
+\end{itemize}
+
+Trong ví dụ này, khoảng cách giữa các lần quan sát về cơ bản là như nhau: một ngày làm việc (dù có thể là một ngày lịch với ngày trong tuần, ba ngày lịch với cuối tuần, hoặc bốn ngày lịch với kỳ nghỉ ba ngày liên tiếp).
+
+Cũng có thể có dữ liệu có cấu trúc mà các thời điểm quan sát tạo thành một chuỗi thời gian không đều. Ví dụ, nếu 1000 điểm này phản ánh các thời điểm quan sát trong ngày (intraday), thì bản thân thời gian cũng có thể là một biến số.
+
+\textbf{Dữ liệu có cấu trúc trong Python}
+
+Trong Python, dữ liệu có cấu trúc có thể được xử lý bằng nhiều cấu trúc dữ liệu khác nhau, nhưng \texttt{pandas.DataFrame} thường là lựa chọn tốt nhất sau khi đã nạp dữ liệu vào bộ nhớ. Tuy nhiên, \texttt{numpy.array} cũng có thể được dùng khi xử lý các tập dữ liệu đồng nhất và hiệu năng là ưu tiên hàng đầu.
+
+\textbf{Lưu trữ dài hạn dữ liệu có cấu trúc}
+
+Với mục đích lưu trữ dài hạn, dữ liệu tài chính có cấu trúc thường được lưu trong cơ sở dữ liệu hoặc các định dạng file chuyên biệt. Lựa chọn phương thức lưu trữ phụ thuộc vào mục đích sử dụng:
+\begin{itemize}
+  \item \textbf{Cơ sở dữ liệu chuỗi thời gian (TSDB)} như InfluxDB, KDB+/q, TimescaleDB, Prometheus — được tối ưu để lưu trữ và truy vấn dữ liệu chuỗi thời gian.
+  \item \textbf{Định dạng file dạng cột (Columnar)} như Apache Parquet hoặc Apache ORC — thường dùng trong phân tích dữ liệu lớn khi thời gian nạp dữ liệu là mối quan tâm.
+  \item \textbf{File dễ đọc bằng mắt người} như CSV (Comma Separated Values) và file Excel — dễ đọc và chia sẻ vì không cần kiến thức chuyên biệt để mở, nhưng không hiệu quả lắm về hiệu năng.
+  \item \textbf{Định dạng dữ liệu chuyên biệt khác} như HDF5 (Hierarchical Data Format phiên bản 5) — lựa chọn xuất sắc cho các tập dữ liệu số lớn nhờ hỗ trợ cấu trúc phân cấp phức tạp, hữu ích cho tính toán khoa học với dữ liệu số lớn.
+\end{itemize}
+
+\subsubsection{Dữ liệu phi cấu trúc}
+
+Phần lớn dữ liệu tài chính là dữ liệu số, nhưng tất nhiên cũng có dữ liệu phi số. Các loại dữ liệu này bao gồm bài đăng mạng xã hội, trang đánh giá, hình ảnh, file âm thanh và video. Nếu bạn đang định giá phái sinh thời tiết, có lẽ ảnh vệ tinh về thời tiết được coi là dữ liệu then chốt. Nếu bạn đang theo dõi một công ty cụ thể, có lẽ cảm xúc (sentiment) từ Facebook, Twitter hay các mạng xã hội khác phản ánh sự lạc quan ngắn hạn về cổ phiếu đó. Tương tự, bạn có thể xem đánh giá của khách hàng trên Yelp hoặc ảnh trên Instagram từ những người dùng hài lòng để xác định mức độ chấp nhận sản phẩm, độ phổ biến, lòng trung thành với thương hiệu và tỷ lệ rời bỏ khách hàng. Thật vậy, phần lớn học máy khai thác loại dữ liệu này để xây dựng các mô hình được gọi là phân tích cảm xúc (sentiment analysis). Dữ liệu phi cấu trúc không dễ lưu trữ như dữ liệu có cấu trúc do định dạng không theo quy ước, không phải dạng hình chữ nhật.
+
+\textbf{Dữ liệu phi cấu trúc trong Python}
+
+Trong Python, dữ liệu phi cấu trúc có thể được xử lý bằng dictionary và list, cho phép linh hoạt về khóa (key), kiểu dữ liệu và độ dài dữ liệu. Cả \texttt{dict} và \texttt{list} đều có thể lồng nhau tùy ý và chứa bất kỳ loại dữ liệu nào ta cần. Ví dụ, ta có thể có một tập hợp các dictionary có schema không giống nhau: một số giá trị trong một số dictionary là list, và trong các list đó lại có thêm các dictionary khác mà giá trị có thể là hình ảnh. Đồng thời, trong một số dictionary khác, giá trị lại là các đối tượng DataFrame chứa dữ liệu tài liệu bán cấu trúc!
+
+\subsubsection{Dữ liệu bán cấu trúc}
+
+Dữ liệu tạo thành một quang phổ trải dài từ phi cấu trúc đến có cấu trúc. Ta có thể xem xét một loại ở giữa. Ví dụ, email là bán cấu trúc: chúng có các trường được định nghĩa rõ ràng như ``To,'' ``From,'' ``Subject,'' và ``Date,'' nhưng phần nội dung email lại phi cấu trúc, gồm văn bản tự do.
+
+\textbf{Đặc điểm của dữ liệu bán cấu trúc}
+
+Dữ liệu bán cấu trúc bao gồm một dạng schema nào đó, giúp nó dễ tìm kiếm và lập chỉ mục hơn dữ liệu phi cấu trúc. Tuy nhiên, dữ liệu không tuân theo một định dạng chặt chẽ. Ví dụ điển hình là các file JSON và XML, nơi schema có thể thay đổi từ file này sang file khác và chứa các cấu trúc dữ liệu lồng nhau. Thông thường, ở dạng bán cấu trúc, nhiều loại dữ liệu vẫn sẽ tuân theo một cấu trúc nào đó.
+
+\textbf{Dữ liệu bán cấu trúc trong Python}
+
+Trong Python, dữ liệu bán cấu trúc có thể được xử lý bằng sự kết hợp của nhiều cấu trúc dữ liệu. Cách tiếp cận khả dĩ nhất là dùng dictionary và list như đã trình bày ở phần Dữ liệu phi cấu trúc. Nếu một kiểu dữ liệu Python có thể chứa dữ liệu phi cấu trúc, thì rõ ràng nó cũng có thể xử lý dữ liệu bán cấu trúc và có cấu trúc.
+
+Nhưng ta cũng có thể tận dụng \texttt{pandas.DataFrame} cùng \texttt{MultiIndex} mạnh mẽ của nó trong bất kỳ trường hợp nào mà schema có thể được tổ chức theo dạng bảng.
+
+\subsection{Nguồn dữ liệu}
+
+Ở bài trước, chúng ta đã bàn về tầm quan trọng của nhà cung cấp (vendor). Điều đầu tiên cần cân nhắc là chất lượng dữ liệu mà nhà cung cấp đưa ra. Nói một cách không chính thức, có bốn loại nhà cung cấp dữ liệu:
+
+\textbf{A. Nguồn sơ cấp (Primary Sources)}
+
+Bao gồm các sàn giao dịch và tổ chức tín dụng như công ty xếp hạng tín nhiệm, thẻ tín dụng và văn phòng tín dụng. Đây là nơi dữ liệu bắt nguồn từ giao dịch, mua bán, thanh toán hoặc việc không thanh toán. Ví dụ:
+\begin{itemize}
+  \item \textbf{Sàn chứng khoán}: NYSE, NASDAQ, Thượng Hải, Thẩm Quyến, Euronext, Nigeria, Nairobi, Sở Giao dịch Chứng khoán Mauritius, v.v.
+  \item \textbf{Sàn quyền chọn}: Chicago Board Option Exchange
+  \item \textbf{Sàn hàng hóa}: Chicago Mercantile Exchange, London Metal Exchange
+  \item \textbf{Sàn ngoại hối}: London, New York, Sydney, Tokyo
+  \item \textbf{Sàn tiền mã hóa}: Bitcoin, Coinbase, Binance, Gemini, FTX
+  \item \textbf{Tổ chức tín dụng}: S\&P, Moody's, Fitch, Transunion, Equifax, Experian, Visa, Mastercard
+\end{itemize}
+
+\textbf{B. Nền tảng tài chính (Financial Platforms)}
+
+Các công ty này cung cấp nền tảng giao dịch, tin tức, phân tích và truyền thông. Dù có cung cấp dữ liệu, họ thường chỉ là bên phân phối lại dữ liệu từ sàn giao dịch, thị trường OTC và các nguồn tài chính khác. Có thể phân tích dữ liệu ngay trong nền tảng của họ hoặc qua API. Ví dụ: Bloomberg, Thomson-Reuters, Factset.
+
+\textbf{C. Nhà cung cấp dữ liệu chuyên biệt (Data Vendors)}
+
+Các công ty này tập trung vào dữ liệu và phân tích, thường cung cấp dữ liệu qua API, doanh thu chủ yếu từ việc bán hoặc truyền dữ liệu cho khách hàng. Ví dụ: BarChart, RavenPack, Capital IQ, CRISP, Datastream, Morningstar, Exante Data, Xignite, Refinitiv, Short Trends, dxFeed.
+
+\textbf{D. Nguồn miễn phí (Free Sites)}
+
+Cuối cùng là các trang miễn phí — dịch vụ công, trang chính phủ hoặc nhóm người dùng — cung cấp dữ liệu miễn phí cho mục đích giáo dục hoặc cá nhân, thường giới hạn lượng dữ liệu truy cập được. Ví dụ: Quandl, Alpha Vantage, FRED (Federal Reserve Economic Database), Yahoo Finance, Google Finance.
+
+Điều quan trọng ở đây không phải là biết nhà cung cấp nào thuộc loại nào, mà là cách họ cung cấp dữ liệu. Sàn giao dịch thường cung cấp dữ liệu đầy đủ, gồm cả dữ liệu báo giá (quote) và giao dịch (trade). Một trang miễn phí như Yahoo Finance có thể chỉ cung cấp dữ liệu cuối ngày dựa trên giao dịch chứ không có báo giá. Một số nhà cung cấp làm sạch dữ liệu; số khác trình bày dữ liệu đúng như khi thu thập và để khách hàng tự xử lý lỗi. Một số dữ liệu có thể ở định dạng FIX (Financial Information eXchange Protocol); dữ liệu khác có thể chỉ đơn giản ở dạng phân tách bằng dấu phẩy, tab, v.v.
+
+Bản thân dữ liệu là một loại hàng hóa, và các sàn giao dịch, thị trường, nhà cung cấp kiếm tiền từ việc cung cấp dữ liệu — dù là lịch sử, hằng ngày hay thời gian thực — cho khách hàng cần đưa ra quyết định nhanh chóng, nếu không muốn nói là theo thời gian thực.
+
+\subsection{Bộ mô tả và định danh dữ liệu}
+
+Làm sao để tham chiếu đến dữ liệu liên quan đến một chứng khoán cụ thể? Hầu hết chứng khoán đều có định danh (identifier). Tùy vào loại tài sản, các loại định danh khác nhau được sử dụng. Trong môn Thị trường Tài chính, chúng ta đã bàn về trái phiếu, cổ phiếu, tiền mã hóa, ETF, quyền chọn và các sản phẩm chứng khoán hóa. Hãy bắt đầu với cổ phiếu.
+
+\textbf{Mã chứng khoán (Ticker)}
+
+Ticker là loại định danh phổ biến nhất. Bạn sẽ thấy ticker xuất hiện trên màn hình trong các chương trình truyền hình, báo và tin tức trực tuyến, vì ticker thường có sự liên hệ với tên hoặc loại hình công ty. Ai cũng biết Facebook là FB (dù nay đã đổi thành Meta), Apple là AAPL, và IBM thì… vẫn là IBM! Ticker không chỉ là định danh mà còn là cách để ghi nhớ công ty. Ví dụ, Papa John's là công ty chuyên về pizza, có ticker là PZZA. Thermogenesis Corporation là công ty năng lượng với ticker KOOL. Ticker của Southwest Airlines là LUV. WideOpenWest có ticker là WOW.
+
+Ticker rất quan trọng nhưng thường chỉ áp dụng cho cổ phiếu và ETF. Trái phiếu, chẳng hạn, không có ticker. Hãy xem một số cách định danh chứng khoán khác.
+
+\textbf{CUSIP}
+
+CUSIP là viết tắt của Committee on Uniform Security Identification Procedures. Được dùng ở Bắc Mỹ, đây là mã gồm chín ký tự chữ-số, định danh duy nhất không chỉ chứng khoán mà còn cả thông tin về loại hình và tổ chức phát hành. Sáu ký tự đầu định danh tổ chức phát hành, hai ký tự tiếp theo xác định loại chứng khoán, ký tự cuối cùng là số kiểm tra để đảm bảo mã được tạo đúng. CIN là mã CUSIP cho chứng khoán tại các thị trường nước ngoài — đây là các ký tự bổ sung, trong đó chữ cái đầu đại diện cho quốc gia phát hành. Tên gọi này bắt nguồn từ CUSIP International Numbering System.
+
+\textbf{SEDOL}
+
+SEDOL cũng là một từ viết tắt: Stock Exchange Daily Official List. Khi một công ty niêm yết trên sàn giao dịch, nó có một mã SEDOL. Nếu bị hủy niêm yết, mã SEDOL đó cũng mất đi. Xét trường hợp Hertz Rental Cars — từng là công ty cho thuê xe số một thế giới trước khi gặp khó khăn tài chính. Công ty tiếp tục chịu ảnh hưởng trong đại dịch COVID-19, tác động đến cả du lịch công tác và du lịch nghỉ dưỡng. Tháng 5/2020, Hertz nộp đơn phá sản theo Chương 11. Đến tháng 10/2020, Hertz bị hủy niêm yết khỏi NYSE. Lúc đó, mã SEDOL thay đổi để phản ánh việc công ty không còn niêm yết trên NYSE mà chuyển sang NASDAQ. Do đó, bất kỳ dữ liệu nào thu thập về Hertz cũng phải ghi nhận sự chuyển đổi sàn giao dịch này.
+
+\textbf{ISIN}
+
+ISIN là International Securities Identification Number, sử dụng mã định danh gồm 12 ký tự. Hai ký tự đầu là chữ cái xác định quốc gia. Chín ký tự chữ-số tiếp theo định danh chứng khoán. ISIN có tính phổ quát hơn — ví dụ, hợp đồng tương lai thường không có CUSIP nhưng có ISIN. Tỷ giá ngoại hối có ticker dễ nhận biết (ví dụ GBP/USD) nhưng được tham chiếu quốc tế bằng ISIN của chúng.
+
+Các chứng khoán mô tả ở trên đều có tính \textbf{thay thế được (fungible)} — nghĩa là có thể hoán đổi cho nhau. Ví dụ, 100 cổ phiếu phổ thông AAPL cũng giống như bất kỳ 100 cổ phiếu AAPL nào khác. Phần lớn chứng khoán tài chính đều có tính thay thế được. Lưu ý rằng thay thế được không có nghĩa là giống hệt nhau. Vàng được coi là có tính thay thế được, miễn là nó không có số seri hay dấu hiệu định danh riêng (tiền giấy USD có số seri nhưng vẫn được coi là có tính thay thế được). Tương tự, Bitcoin cũng có tính thay thế được — bạn trả ai đó một Bitcoin, họ có thể gửi lại cho bạn một Bitcoin khác, và chúng được coi là có thể hoán đổi, giống như tiền giấy ở bất kỳ quốc gia nào.
+
+Khi xét đến những thứ cụ thể hơn hoặc độc nhất, ta có chứng khoán \textbf{không thể thay thế được (infungible)}. Bất động sản không phải hàng hóa có tính thay thế vì không thể hoán đổi cho nhau. Ngay cả hai căn nhà cùng diện tích, vật liệu, cùng khu vực cũng không thể hoán đổi vì chúng ở vị trí vật lý khác nhau, với tầm nhìn, ánh sáng, hàng xóm, đặc điểm khác nhau, v.v. Tương tự, tác phẩm nghệ thuật cũng không có tính thay thế — một bức tranh hay tác phẩm điêu khắc nguyên bản không giống bất kỳ cái nào khác. Những chứng khoán không thể thay thế được sẽ rất khó định danh vì bản chất chúng là duy nhất.
+
+Ví dụ, Zillow có thể hiển thị một bất động sản trị giá 100.000 đô la, rồi một năm sau là 500.000 đô la. Ngôi nhà có thực sự tăng giá gấp năm lần? Không. Zillow phản ánh giá trị của bất cứ thứ gì tại địa chỉ đó. Ban đầu, khu đất chưa phát triển — đó là một lô đất trống. Nó được một nhà thầu mua với giá 100.000 đô la. Nhà thầu xây một căn nhà và sau đó bán với giá 500.000 đô la. Bản thân đất có giá trị (``chưa phát triển''), và bất kỳ công trình nào (nhà, tòa nhà) đều tạo thêm giá trị thông qua việc ``phát triển'' trên đất đó. Zillow dựa vào giấy chứng nhận quyền sở hữu hoặc hồ sơ bất động sản, thường được lưu ở cấp địa phương, để tham chiếu đến bất động sản. Với hàng triệu bất động sản, việc định danh duy nhất một bất động sản là khó khăn và gần như không thể (và cũng không cần thiết) có một hệ thống chuẩn hóa quốc tế.
+
+Chuyển sang trang sức quý, kim cương là loại không thể thay thế được. Tại Mỹ, một số viên kim cương được Viện Ngọc học Hoa Kỳ (GIA) phân loại và khắc số seri. Tương tự vàng có số seri, điều này khiến kim cương không thể hoán đổi và do đó không thể thay thế được. Kim cương không có khắc số thì có tính thay thế cao hơn — nhưng có rủi ro là nó không được thẩm định đúng về độ trong hay số carat, hoặc ``vàng'' thực chất là nhân tạo hay giả.
+
+Khi muốn phân tích hành vi của chứng khoán, hãy nghĩ về dữ liệu mà bạn đang thu thập, và tự hỏi liệu đó là một tài sản cụ thể, độc nhất (nhà, tác phẩm nghệ thuật, trang sức) hay một tài sản có thể thay thế được, dễ hoán đổi (cổ phiếu, trái phiếu, ETF). Sử dụng định danh nếu chúng hữu ích.
+
+\subsection{Múi giờ, ngày giao dịch và giao dịch 24/7}
+
+``Lấy cho tôi giá đóng cửa'' là câu bạn sẽ nghe thấy khi làm kỹ sư tài chính. Nhưng ``giá đóng cửa'' nào?
+
+Câu trả lời nghe như một câu hỏi vật lý lượng tử: tùy vào vị trí của bạn, giá đóng cửa sẽ khác nhau, dựa trên địa điểm và múi giờ.
+
+Rõ ràng, nếu ở Lagos, Nigeria, giao dịch cổ phiếu Dangote Cement, ta có thể kỳ vọng giá đóng cửa chính thức vào lúc thị trường chứng khoán Nigeria đóng cửa — 2:30 chiều giờ địa phương, tức GMT+1. Nếu ở Sydney, Australia, giao dịch cổ phiếu BHP của Úc, ta quan sát thị trường vào thời điểm đóng cửa của nó, 4:00 chiều giờ Sydney: GMT+10 giờ.
+
+Giả sử ta muốn tính tương quan lợi suất của hai công ty này bằng giá đóng cửa. Ta phải nhớ rằng giờ đóng cửa chính thức của hai sàn cách nhau khoảng chín giờ! Dưới đây là bảng giờ mở/đóng cửa của các thị trường:
+
+\begin{center}
+\begin{tabular}{|c|c|c|l|}
+\hline
+\textbf{GMT} & \textbf{Sydney, Australia} & \textbf{Lagos, Nigeria} & \textbf{Sự kiện} \\
+\hline
+00:00 & 10:00 & 01:00 & Sàn Sydney mở cửa \\
+06:00 & 16:00 & 07:00 & Sàn Sydney đóng cửa \\
+09:00 & 19:00 & 10:00 & Sàn Nigeria mở cửa \\
+13:30 & 23:30 & 14:30 & Sàn Nigeria đóng cửa \\
+\hline
+\end{tabular}
+\end{center}
+
+Tùy vào mục tiêu phân tích, ta có thể:
+\begin{itemize}
+  \item \textbf{Phương án A}: GMT = 06:00. Lấy dữ liệu tại giờ đóng cửa của Sydney, nhưng khi đó sàn Nigeria chưa mở cửa!
+  \item \textbf{Phương án B}: GMT = 13:30. Lấy dữ liệu tại giờ đóng cửa của Nigeria, nhưng khi đó sàn Sydney đã đóng cửa.
+\end{itemize}
+
+Ưu điểm của Phương án B là ngày dữ liệu sẽ phản ánh giá đóng cửa của cả hai sàn. Dù Sydney đã đóng cửa, đó vẫn là mức giá quan sát được cuối cùng trong ngày giao dịch đó. Lưu ý rằng dữ liệu chỉ có sẵn từ GMT = 13:30 trở đi, khi sàn Nigeria đóng cửa.
+
+Nếu bạn xây dựng chiến lược giao dịch dựa trên tương quan giá đóng cửa này và quyết định mua Dangote, lệnh mua đó sẽ phải thực hiện vào ngày giao dịch tiếp theo. Thật vậy, người mới thường mất cảm giác về dấu thời gian (timestamp). Nếu xây dựng chiến lược mua Dangote dựa trên tương quan này mà không chú ý đến độ trễ thời gian, ta sẽ vô tình đảo ngược nguyên nhân và kết quả.
+
+Vấn đề càng tinh vi hơn nếu ta xét cùng một chứng khoán giao dịch ở nhiều nơi trên thế giới. Xét một phái sinh tín dụng đã bàn trong môn Thị trường Tài chính, chẳng hạn hợp đồng hoán đổi rủi ro tín dụng (CDS) kỳ hạn 5 năm trên IBM.
+
+Bạn có thể mua CDS này từ một ngân hàng ở Tokyo, London, hay New York, trong số nhiều địa điểm khác. Mỗi ngân hàng này nằm ở một khu vực địa lý khác nhau. Tùy thời điểm trong năm (do giờ mùa hè), Tokyo đi trước New York 12 giờ, London đi trước New York 5 giờ. Mỗi địa điểm này có giờ đóng cửa chính thức riêng. Với các chứng khoán không gắn với một địa điểm cụ thể (như CDS 5 năm), có thể có ``nhiều giờ đóng cửa khác nhau'' vì CDS không giao dịch trên sàn mà là phi tập trung (OTC). Vì thị trường OTC tồn tại trên toàn cầu, khái niệm ``đóng cửa'' mang tính tương đối theo vị trí địa lý.
+
+Nhìn lại phần~3 (Nguồn dữ liệu), hãy suy nghĩ về chất lượng nhà cung cấp dữ liệu của bạn. Họ có cung cấp múi giờ, thị trường, đơn vị tiền tệ, v.v. của giá trị CDS không? Nếu không, sẽ có sự không chắc chắn về nguồn gốc dữ liệu.
+
+Điều gì sẽ xảy ra nếu có một sàn giao dịch không bao giờ đóng cửa? Ví dụ, Bitcoin có thể dùng GMT$-$5 giờ làm giờ đóng cửa chính thức. Nhưng với một thị trường giao dịch 24/7, liệu mức giá này có thực sự quan trọng hơn mức giá tại mỗi thời điểm GMT trong ngày?
+
+Khi dữ liệu tồn tại ở các khu vực địa lý khác nhau, hoặc đơn giản là trên các sàn có giờ đóng cửa khác nhau, hãy đảm bảo căn chỉnh đúng để ngày giao dịch phản ánh đúng giá đóng cửa của ngày đó.
+
+\subsection{Sự phức tạp trong dữ liệu tài chính}
+
+Ngoài sự khác biệt về đơn vị, dấu thời gian và đơn vị tiền tệ, dữ liệu tài chính còn có những sự phức tạp riêng. Ví dụ, cổ phiếu có thể bị chia tách (split), khi đó số lượng cổ phiếu lưu hành tăng lên và giá mỗi cổ phiếu giảm xuống. Chẳng hạn, một công ty có 100.000.000 cổ phiếu với giá 200 đô la mỗi cổ phiếu có thể thực hiện chia tách 2-đổi-1, khi đó sẽ có 200.000.000 cổ phiếu với giá 100 đô la mỗi cổ phiếu. Tương tự, một công ty có thể gộp cổ phiếu (reverse split) — 100.000.000 cổ phiếu giá 200 đô la có thể trở thành 50.000.000 cổ phiếu giá 400 đô la. Trong cả hai trường hợp, vốn hóa thị trường luôn không đổi. Ý tưởng đằng sau việc chia tách là làm cổ phiếu trở nên dễ mua hơn (giá thấp hơn). Khi cổ phiếu chia tách, lịch sử giá cần được điều chỉnh để tránh hiểu lầm cổ phiếu giảm 50\% giá trị.
+
+Ngoài ra, cổ phiếu nhận cổ tức, điều này ảnh hưởng đến giá, nên giá cổ phiếu cũng cần được điều chỉnh cho phần thu nhập nhận được dưới dạng cổ tức. Ta thường thấy giá cổ phiếu được điều chỉnh cho cả chia tách và cổ tức. Ví dụ, khi nhập dữ liệu từ Yahoo Finance, cột phù hợp nhất là cột ``Adjusted Close'' (giá đóng cửa đã điều chỉnh) thay vì cột Close thông thường.
+
+Khi nâng cấp từ chứng khoán đơn lẻ lên ETF, ta có thêm những sự phức tạp. Một ETF theo ngành có các thành viên mà tên và tỷ trọng thay đổi theo thời gian. Vì vậy, ngoài việc theo dõi lịch sử giá và khối lượng của ETF, ta còn cần theo dõi việc thêm, bớt và tái cân bằng tỷ trọng thành phần.
+
+Cần lưu ý rằng việc bỏ qua các trường hợp bị loại bỏ sẽ tạo ra thiên lệch sống sót (survivorship bias). Giả sử bạn thực hiện một nghiên cứu 5 năm về một chỉ số cổ phiếu như S\&P500. Bạn bắt đầu từ năm 2022 và nhìn lại 15 năm, và chỉ sử dụng những công ty tồn tại suốt 15 năm đó. Những công ty khởi đầu năm 2007 nhưng không tồn tại được sẽ bị loại khỏi nghiên cứu, nên nghiên cứu chỉ xem xét những cổ phiếu đã sống sót qua giai đoạn 15 năm. Thiên lệch sống sót này khiến kết quả của ta trông tốt hơn thực tế, vì có những công ty đã phá sản, kéo lợi suất trung bình xuống.
+
+Rời khỏi thế giới cổ phiếu, có một sự phức tạp liên quan đến thời gian. Trái phiếu đáo hạn. Trái phiếu đang lưu hành (on-the-run) được luân chuyển (roll). Quyền chọn hết hạn. Giả sử bạn có một trái phiếu kỳ hạn 10 năm cụ thể được phát hành ở Mỹ. Nếu thu thập dữ liệu này qua nhiều năm, bạn đang theo dõi một trái phiếu có thời gian đến đáo hạn ngày càng giảm. Sau 10 năm, trái phiếu đáo hạn.
+
+Tuy nhiên, ta vẫn có thể tìm được hàng thập kỷ lịch sử của trái phiếu kỳ hạn 10 năm. Bằng cách nào? Ta dùng mã CUSIP chung (generic) kỳ hạn 10 năm.
+
+Điều gì làm cho nó ``chung''? Giả sử một trái phiếu 10 năm mới được phát hành mỗi 3 tháng. Khi đó, cứ mỗi 3 tháng, mã chung sẽ chuyển từ đợt phát hành cũ sang đợt phát hành mới. Miễn là trái phiếu 10 năm được phát hành đều đặn, ta có thể tiếp tục luân chuyển đợt cũ sang đợt mới. Đây chính là cách các chuỗi chung (generic series) hoạt động. Cách này cũng áp dụng cho hợp đồng tương lai. Vì hợp đồng tương lai có ngày đáo hạn, ta cũng đơn giản dùng phiên bản chung để theo dõi.
+
+Quyền chọn phức tạp hơn vì chúng không được luân chuyển như hợp đồng tương lai. Ở phần tiếp theo, ta sẽ thấy vì sao quyền chọn thực ra là khó xử lý nhất.
+
+\subsection{Chất lượng dữ liệu}
+
+Là kỹ sư tài chính, ta coi dữ liệu là thông tin do thị trường cung cấp. Những thị trường đó có thể là sàn giao dịch chứng khoán, thị trường OTC, tổ chức tín dụng, ngân hàng trung ương, tổ chức kinh tế, v.v. Dữ liệu có thể do chính các sàn giao dịch cung cấp, các nhà môi giới-giao dịch (broker-dealer) mà ta giao dịch cùng, các tổ chức xây dựng và bán mô hình tín dụng, ngân hàng trung ương và tổ chức kinh tế qua cổng API của họ. Cũng có các công ty bên thứ ba sử dụng dữ liệu để xây dựng mô hình yếu tố (factor model), hoặc các mô hình gia tăng giá trị khác nhằm chấm điểm hoặc xếp hạng cổ phiếu, chứng khoán, yếu tố và ngành để hỗ trợ ra quyết định tài chính.
+
+Bất kể nguồn gốc, có bốn đặc tính chất lượng dữ liệu ta luôn tìm kiếm:
+\begin{itemize}
+  \item Độ chính xác (Accuracy)
+  \item Tính đầy đủ (Completeness)
+  \item Tính nhất quán (Consistency)
+  \item Tính kịp thời (Timeliness)
+\end{itemize}
+
+Giả sử ta đang đưa ra quyết định cho vay đối với một người tiêu dùng. Làm sao ta biết được rủi ro tín dụng để xác định hạn mức tín dụng, lãi suất và điều khoản trả nợ phù hợp? Cả bốn nguyên tắc trên đều áp dụng. Dưới đây là cách bốn đặc tính này áp dụng (Government Data Quality Hub).
+
+\subsubsection{Độ chính xác}
+
+Trước tiên, ta muốn đảm bảo dữ liệu ta có là về đúng người mà ta định cho vay. Ta cần chắc chắn xác định đúng cá nhân đó, dựa vào dữ liệu tham chiếu chỉ đến người đó (mã số định danh quốc gia). Cũng giống như chứng khoán có khóa chính (primary key) như CUSIP hay SEDOL, con người cũng cần có định danh duy nhất. Ta cần đảm bảo không nhầm lẫn giữa những người trùng tên, hoặc thậm chí các thành viên trong gia đình trùng tên sống cùng địa chỉ.
+
+\subsubsection{Tính đầy đủ}
+
+Thứ hai, ta muốn có lịch sử đầy đủ. Hãy tưởng tượng nếu ta chỉ lấy báo cáo tín dụng trong 10 năm gần nhất cho các khoản vay có thế chấp như nhà đất nhưng không lấy cho thẻ tín dụng thông thường — ta sẽ chỉ có bức tranh một phần. Tính đầy đủ đòi hỏi bên cho vay phải thực hiện thẩm định (due diligence) để phát hiện mọi thông tin. Tất nhiên, quy định có thể cấm bên cho vay lấy những thông tin không được phép. Ví dụ, một số quy định cấm dùng tuổi hoặc giới tính của một người làm tiêu chí cho vay. Những nhóm được bảo vệ này đảm bảo tính công bằng trong cho vay. Tính đầy đủ phải tuân thủ trong giới hạn thông tin được phép thu thập.
+
+\subsubsection{Tính nhất quán}
+
+Thứ ba, ta muốn dữ liệu từ các nguồn khác nhau phải khớp nhau. Vì có nhiều công ty thu thập và cung cấp điểm tín dụng, ta có thể muốn lấy dữ liệu từ hai hoặc nhiều tổ chức tín dụng để xem liệu dữ liệu có nhất quán không. Thật vậy, việc dùng nhiều tổ chức tín dụng giúp ta điều chỉnh các sai lệch.
+
+\subsubsection{Tính kịp thời}
+
+Thứ tư, ta muốn dữ liệu phải kịp thời. Giả sử một khách hàng đăng ký sáu thẻ tín dụng khác nhau chỉ trong một buổi sáng. Ta cần đảm bảo việc kiểm tra tín dụng phản ánh đúng tình hình cho vay theo thời gian thực. Ngay cả dữ liệu chỉ cũ một ngày cũng sẽ không phản ánh được khoản tín dụng hay dư nợ bổ sung mà một cá nhân có thể đã phát sinh. Một hệ thống như vậy có thể bị lợi dụng, và những người vay có ý đồ xấu có thể vay được một lượng tiền quá lớn, đạt mức dư nợ vượt xa những gì được chấp nhận nếu họ đăng ký các khoản vay này trong một khoảng thời gian dài hơn. Thật vậy, gánh nặng đối với nhiều nhà cung cấp phân tích hiện nay là việc phân tích dữ liệu phải được thực hiện theo thời gian thực. Điều này đòi hỏi khả năng không chỉ xử lý các yêu cầu thời gian thực mà còn phải chạy các phân tích trong thời gian ngắn để quyết định có thể được đưa ra nhanh chóng. Ví dụ, nhiều thẻ tín dụng cung cấp cơ hội tăng hạn mức tín dụng và có thể trả lời trong chưa đầy một phút.
+
+Gánh nặng tính toán và mô hình hóa mà những yêu cầu này đặt ra đòi hỏi sự hiểu biết thấu đáo về dữ liệu.
+
+\subsection{Dữ liệu lớn: 5V}
+
+Trong lĩnh vực khoa học dữ liệu, học máy đã cung cấp các thực hành tốt nhất về dữ liệu trong hơn 20 năm qua. Có khái niệm nổi tiếng ``5V của Big Data'' (Ishwarappa). Chúng ta sẽ bàn về năm đặc điểm này:
+
+\begin{itemize}
+  \item \textbf{Khối lượng (Volume)}: lượng dữ liệu. Các luồng dữ liệu liên tục đổ vào.
+  \item \textbf{Đa dạng (Variety)}: các nguồn và định dạng khác nhau. Ở các phần trước, ta đã thấy dữ liệu có thể là có cấu trúc, bán cấu trúc hoặc phi cấu trúc.
+  \item \textbf{Tốc độ (Velocity)}: tốc độ mà dữ liệu được tạo ra theo thời gian thực. Dữ liệu sàn giao dịch có thể nhanh đến mức chỉ vài phần nghìn giây! Các dữ liệu tài chính khác có thể chỉ có sẵn không quá một lần mỗi ngày, hoặc thậm chí theo quý đối với các chỉ số kinh tế.
+  \item \textbf{Độ tin cậy (Veracity)}: mức độ tin tưởng vào nguồn dữ liệu. Hãy nghĩ đến tin giả hoặc các giao dịch giả mạo (spoofed trades).
+  \item \textbf{Giá trị (Value)}: những hiểu biết sâu sắc (insight) có được từ dữ liệu.
+\end{itemize}
+
+\subsection{Hiểu rõ dữ liệu của bạn}
+
+Trong tài chính, khi làm việc với khách hàng, có một cụm từ viết tắt: KYC — Know Your Customer (Hiểu rõ khách hàng). Trong kỹ thuật tài chính, khi làm việc với dữ liệu, ta có thể dùng một cụm từ tương tự: KYD — Know Your Data (Hiểu rõ dữ liệu của bạn).
+
+Dưới đây là 10 câu hỏi bạn có thể đặt ra về dữ liệu mà bạn thu thập và định sử dụng cho mô hình tài chính:
+
+\begin{enumerate}
+  \item Dữ liệu có các trường được định nghĩa trước hay không?
+  \item Dữ liệu có được chuẩn hóa (scaled) không?
+  \item Dữ liệu có bị giới hạn (bounded) không?
+  \item Dữ liệu có thể quan sát được (observable) không?
+  \item Dữ liệu đến từ một giao dịch, một sổ lệnh giới hạn (limit order book), hay không phải cả hai?
+  \item Dữ liệu là định lượng, định tính, hay kết hợp cả hai?
+  \item Dữ liệu là liên tục hay phân loại (categorical)?
+  \item Nếu không phải dữ liệu số, có vấn đề về ngôn ngữ không?
+  \item Dữ liệu được thu thập với tần suất giống như khi nó được tạo ra không?
+  \item Dữ liệu có được nhà cung cấp làm sạch hoặc kiểm tra không?
+\end{enumerate}
+
+Hãy cùng xem lại các câu hỏi này:
+
+\begin{itemize}
+  \item Khi dữ liệu có các trường được định nghĩa trước, cấu trúc dữ liệu sẽ dễ xác định và duy trì hơn. Khi dữ liệu thiếu các trường được định nghĩa trước, cần một cấu trúc dữ liệu lỏng lẻo hơn.
+  \item Một số dữ liệu tốt nhất nên để nguyên dạng thô, trong khi dữ liệu khác có thể cần được chuẩn hóa. Việc chuẩn hóa có thể đơn giản như biến đổi logarit, hoặc trọng số theo khối lượng áp dụng cho giá để tạo ra Giá Trung bình Trọng số theo Khối lượng (VWAP — Volume Weighted Average Price).
+  \item Nếu dữ liệu bị giới hạn, ta nên xác định giá trị thấp nhất và cao nhất có thể có của dữ liệu. Nếu đo xác suất, ta kỳ vọng không có giá trị nào âm và không có giá trị nào lớn hơn 1. Giả sử giá trị bị thiếu được mã hóa bằng $-99$. Rõ ràng ta cần nhận ra đây là giá trị bị thiếu chứ không phải dữ liệu thật. Đây thường là lỗi khi nhập dữ liệu.
+  \item Nhiều chuỗi dữ liệu tài chính có thể quan sát trực tiếp — như giá cổ phiếu, khối lượng cổ phiếu, phát hành trái phiếu, v.v. Trớ trêu thay, không phải mọi dữ liệu đều quan sát trực tiếp được. Ví dụ, số lượng vỡ nợ có thể không được công bố vì một số dữ liệu là độc quyền. Một số dữ liệu chỉ có thể nhìn thấy dựa trên một mô hình nhất định — chẳng hạn, xác suất vỡ nợ không quan sát trực tiếp trên thị trường mà là giá trị được suy ra hoặc xuất ra từ các mô hình rủi ro tín dụng. Việc chọn mô hình rủi ro tín dụng nào sẽ ảnh hưởng lớn đến xác suất vỡ nợ mà ta thấy. Điều tương tự cũng đúng với một số loại biến động — chúng không quan sát trực tiếp được.
+  \item Cần phân biệt rõ dữ liệu giao dịch (trade) — mức giá mà người mua và người bán đã thực hiện giao dịch — với dữ liệu báo giá (quote), là giá chào mua/chào bán (bid/ask) và khối lượng tương ứng. Khi chênh lệch giá mua-bán (bid-ask spread) lớn, giá giữa (midquote — trung bình giữa bid và ask) có thể không phải là đại diện tốt cho mức giá.
+  \item Rõ ràng, dữ liệu định tính cần được xử lý và diễn giải, thông qua khai thác văn bản (text mining), phân tích cảm xúc, hoặc phương pháp khác.
+  \item Nhiều chuỗi dữ liệu tài chính thực chất là phân loại (categorical). Ví dụ, chênh lệch tín dụng (credit spread) vừa phân loại vừa có thứ tự. Một số khác chỉ đơn thuần là phân loại, chẳng hạn phân loại ngành. Dễ nhầm lẫn hai loại này khi các danh mục được liệt kê dưới dạng số.
+  \item Dữ liệu phi chuẩn phức tạp hơn vì có thể ở nhiều ngôn ngữ khác nhau. Phân tích cảm xúc cần tính đến các thành phần ngôn ngữ như ẩn dụ, tu từ, thành ngữ, phủ định nhiều lớp, thậm chí cả châm biếm và emoji.
+  \item Đối với các sàn giao dịch, thường có một lượng lớn dữ liệu được cung cấp — giá đóng cửa, top of book, và các gói dữ liệu độ sâu sổ lệnh (depth of book) khác nhau. Nếu bạn là nhà giao dịch không thường xuyên, chẳng hạn trong tài khoản hưu trí của chính mình, bạn có thể bị ngập trong dữ liệu tần suất cao — cung cấp quá nhiều thông tin và đòi hỏi khối lượng xử lý khổng lồ chỉ để hiểu được ở quy mô phù hợp với các quyết định giao dịch bạn sẽ đưa ra. Ngược lại, dữ liệu hằng ngày sẽ không phù hợp với nhà tạo lập thị trường (market maker). Nhà tạo lập thị trường chịu ảnh hưởng bởi biến động trong ngày vì họ phải chào giá hai chiều (mua và bán) suốt cả ngày. Biến động ở cấp độ hằng ngày có tần suất quá thấp để nắm bắt được điều có thể là một sự kiện quan trọng.
+  \item Nếu bạn giả định dữ liệu đã được nhà cung cấp làm sạch, bạn sẽ vô tình để lọt vào dữ liệu của mình những khoảng trống, thiếu sót, sơ suất, lỗi in ấn, nhầm lẫn và hoán đổi từ phía nhà cung cấp, cũng như các lỗi trong quá trình truyền và nhập dữ liệu từ phía họ sang phía bạn. Một cách để làm sạch dữ liệu là có các nguồn dư thừa (redundant). Hãy tưởng tượng bạn có bốn nguồn cho biết giá của một cổ phiếu. Mọi sai lệch có thể được xác định và xử lý thủ công; tốt hơn nữa, có thể áp dụng các quy tắc và bộ lọc để dữ liệu tự nhất quán với chính nó.
+\end{itemize}
+
+\subsection{Kết luận}
+
+Bài học này giới thiệu vai trò không ngừng thay đổi của dữ liệu trong tài chính hiện đại. Chúng ta đã tìm hiểu tầm quan trọng ngày càng tăng của các tập dữ liệu đa dạng, từ dữ liệu thị trường truyền thống đến dữ liệu thay thế. Những điểm chính cần ghi nhớ:
+
+\begin{itemize}
+  \item Hiểu các loại dữ liệu tài chính khác nhau
+  \item Xác định các nguồn dữ liệu, định danh và bộ mô tả cho các công cụ tài chính
+  \item Nắm được sự phức tạp xoay quanh múi giờ và giờ giao dịch
+  \item Hiểu các khía cạnh quan trọng nhất của chất lượng dữ liệu
+  \item Khám phá các chữ V của dữ liệu lớn
+\end{itemize}
+
+\textbf{Tài liệu tham khảo (theo Lesson Notes gốc)}
+\begin{itemize}
+  \item Netnod. ``What is Precision Time Protocol (PTP)?'' \url{https://www.netnod.se/knowledge-base/What-is-Precision-Time-Protocol-PTP}.
+  \item Government Data Quality Hub. ``Meet the Data Quality Dimensions.'' GOV.UK, 2 July 2020, \url{www.gov.uk/government/news/meet-the-data-quality-dimensions}.
+  \item Ishwarappa, J. Anuradha. ``A Brief Introduction on Big Data 5Vs Characteristics and Hadoop Technology.'' \textit{Procedia Computer Science}, vol.~48, 2015, pp.~319--324.
+\end{itemize}
+
