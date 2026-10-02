@@ -1,0 +1,241 @@
+\chapter{Đọc thêm 2: FinBERT -- Mô hình ngôn ngữ tiền huấn luyện cho truyền thông tài chính (Yang và cộng sự)}
+\label{ch:M5L2DocThem2}
+
+\section{Thông tin nguồn}
+
+\begin{itemize}
+  \item \textbf{Nguồn:} Yang, Y., Uy, M. C. S. \& Huang, A. ``FinBERT: A Pretrained Language Model for Financial Communications.'' arXiv:2006.08097, 2020.
+  \item \textbf{Phần cần đọc:} Toàn bộ bài báo (5 trang)
+  \item \textbf{Ghi chú:} bản chuyển ngữ tiếng Việt súc tích, bám cấu trúc nguồn (giữ nguyên tiêu đề, công thức, số liệu, bảng, chú thích và danh mục tài liệu tham khảo).
+\end{itemize}
+
+FinBERT: Mô hình ngôn ngữ tiền huấn luyện cho truyền thông tài chính
+
+Yi Yang, Mark Christopher Siy UY, Allen Huang School of Business and Management, Hong Kong University of Science and Technology \{imyiyang,acahuang\}@ust.hk, mcsuy@connect.ust.hk
+
+arXiv:2006.08097v2 {[}cs.CL{]} 9 Jul 2020
+
+\subsection{Tóm tắt}
+
+Các mô hình ngôn ngữ tiền huấn luyện theo ngữ cảnh, như BERT (Devlin et al., 2019), đã tạo bước đột phá trong nhiều tác vụ NLP nhờ huấn luyện trên lượng lớn văn bản chưa gán nhãn. Lĩnh vực tài chính cũng tích lũy nhiều văn bản truyền thông tài chính, nhưng chưa có mô hình ngôn ngữ tiền huấn luyện chuyên biệt cho tài chính. Nhóm tác giả đáp ứng nhu cầu này bằng cách tiền huấn luyện FinBERT, một mô hình BERT chuyên biệt cho miền tài chính, trên kho ngữ liệu truyền thông tài chính quy mô lớn. Thực nghiệm trên ba tác vụ phân loại cảm xúc tài chính cho thấy FinBERT vượt trội so với BERT miền tổng quát. Mã nguồn và mô hình tiền huấn luyện có tại https://github.com/yya518/FinBERT, hy vọng hữu ích cho các nhà thực hành và nghiên cứu về NLP tài chính.
+
+\section{1 Giới thiệu}
+
+Sự trưởng thành của kỹ thuật và tài nguyên NLP đang thay đổi mạnh mẽ lĩnh vực tài chính. Các nhà thực hành và nghiên cứu thị trường vốn rất quan tâm đến việc dùng NLP để theo dõi cảm xúc thị trường theo thời gian thực từ tin tức trực tuyến hoặc mạng xã hội, vì cảm xúc có thể là tín hiệu định hướng cho giao dịch. Theo trực giác, nếu có thông tin tích cực về một công ty thì giá cổ phiếu của công ty đó được kỳ vọng tăng, và ngược lại. Chẳng hạn, Bloomberg báo cáo rằng các danh mục giao dịch theo cảm xúc vượt trội đáng kể so với chỉ số chuẩn (Cui et al., 2016). Nghiên cứu kinh tế tài chính trước đây cũng cho thấy cảm xúc từ tin tức và mạng xã hội có thể dùng để dự báo lợi suất thị trường và hiệu quả hoạt động của doanh nghiệp (Tetlock, 2007; Tetlock et al., 2008).
+
+Gần đây, tiền huấn luyện không giám sát các mô hình ngôn ngữ trên kho ngữ liệu lớn đã cải thiện đáng kể hiệu năng của nhiều tác vụ NLP. Tuy nhiên, các mô hình này được tiền huấn luyện trên kho ngữ liệu tổng quát như Wikipedia, trong khi phân tích cảm xúc là tác vụ phụ thuộc mạnh vào miền. Lĩnh vực tài chính đã tích lũy lượng lớn văn bản truyền thông tài chính và kinh doanh, nên kết hợp tiền huấn luyện không giám sát với nguồn văn bản này có thể mang lại lợi ích cho nhiều ứng dụng tài chính.
+
+Để lấp khoảng trống đó, nhóm tác giả tiền huấn luyện FinBERT, mô hình BERT chuyên biệt cho tài chính, trên kho ngữ liệu truyền thông tài chính gồm 4,9 tỷ token, bao gồm báo cáo doanh nghiệp, bản ghi cuộc họp báo cáo thu nhập (earnings call) và báo cáo của nhà phân tích. Bài viết mô tả kho ngữ liệu và chi tiết tiền huấn luyện FinBERT. Thực nghiệm trên ba tác vụ phân loại cảm xúc tài chính cho thấy FinBERT vượt trội các mô hình BERT tổng quát. Đóng góp của nhóm khá rõ ràng: tổng hợp kho ngữ liệu quy mô lớn, mang tính đại diện nhất cho truyền thông tài chính và kinh doanh; tiền huấn luyện và công bố FinBERT, một tài nguyên mới đã được chứng minh cải thiện hiệu năng phân tích cảm xúc tài chính.
+
+\section{2 Các nghiên cứu liên quan}
+
+Gần đây, tiền huấn luyện không giám sát trên kho ngữ liệu lớn, như BERT (Devlin et al., 2019), ELMo (Peters et al., 2018), ULM-Fit (Howard và Ruder, 2018), XLNet và GPT (Radford et al., 2019), đã cải thiện đáng kể hiệu năng nhiều tác vụ xử lý ngôn ngữ tự nhiên, từ phân loại câu đến hỏi đáp. Khác với nhúng từ (word embeddings) truyền thống (Mikolov et al., 2013; Pennington et al., 2014), trong đó mỗi từ chỉ có một vector biểu diễn, các mô hình ngôn ngữ này trả về embedding theo ngữ cảnh cho từng token để đưa vào các tác vụ hạ nguồn.
+
+Các mô hình đã công bố được huấn luyện trên kho ngữ liệu miền tổng quát như tin tức và Wikipedia. Dù có thể dễ dàng tinh chỉnh (fine-tune) mô hình cho tác vụ hạ nguồn, đã có bằng chứng rằng tiền huấn luyện trên kho ngữ liệu miền quy mô lớn còn cải thiện hiệu năng hơn so với chỉ tinh chỉnh mô hình tổng quát. Vì vậy, nhiều mô hình BERT chuyên biệt theo miền đã được huấn luyện và công bố: BioBERT (Lee et al., 2019) tiền huấn luyện mô hình biểu diễn ngôn ngữ cho miền y sinh trên kho ngữ liệu y sinh lớn; ClinicalBERT (Huang et al., 2019) áp dụng BERT vào ghi chú lâm sàng cho bài toán dự đoán tái nhập viện, và Alsentzer et al. (2019) áp dụng BERT vào ghi chú lâm sàng và tóm tắt xuất viện; SciBERT (Beltagy et al., 2019) huấn luyện BERT cho miền khoa học trên kho ấn phẩm khoa học đa lĩnh vực lớn nhằm cải thiện các tác vụ NLP khoa học hạ nguồn. Nhóm tác giả là những người đầu tiên tiền huấn luyện và công bố mô hình BERT chuyên biệt cho tài chính.
+
+\section{3 Kho ngữ liệu tài chính}
+
+Nhóm tác giả tổng hợp kho ngữ liệu miền tài chính lớn, mang tính đại diện nhất cho truyền thông tài chính và kinh doanh.
+
+\textbf{Báo cáo doanh nghiệp 10-K và 10-Q.} Dữ liệu văn bản quan trọng nhất trong truyền thông tài chính và kinh doanh là báo cáo doanh nghiệp. Tại Hoa Kỳ, Ủy ban Chứng khoán và Giao dịch (SEC) bắt buộc mọi công ty niêm yết nộp báo cáo năm (Form 10-K) và báo cáo quý (Form 10-Q). Các tài liệu này cung cấp cái nhìn toàn diện về hoạt động kinh doanh và tình hình tài chính của công ty; luật và quy định cấm công ty đưa ra phát biểu sai lệch trọng yếu trong 10-K. Form 10-K và 10-Q được công khai và truy cập được trên website của SEC.¹
+
+Nhóm thu thập từ website SEC 60.490 Form 10-K và 142.622 Form 10-Q của các công ty thuộc Russell 3000 trong giai đoạn 1994-2019, chỉ giữ các phần văn bản như Mục 1 (Business) trong 10-K, Mục 1A (Risk Factors) trong cả 10-K và 10-Q, và Mục 7 (Management\textquotesingle s Discussion and Analysis) trong 10-K.
+
+¹ http://www.sec.gov/edgar.shtml
+
+\textbf{Bản ghi cuộc gọi báo cáo thu nhập (Earnings Call Transcripts).} Cuộc gọi báo cáo thu nhập là cuộc họp qua điện thoại hằng quý giữa lãnh đạo công ty với nhà đầu tư và nhà phân tích để thảo luận về kết quả hoạt động chung của doanh nghiệp. Trong cuộc gọi, các giám đốc điều hành như CEO và CFO đọc các phát biểu hướng tới tương lai, đồng thời cung cấp thông tin và diễn giải về kết quả kinh doanh của công ty trong quý. Các nhà phân tích cũng có cơ hội yêu cầu ban lãnh đạo làm rõ thông tin. Nhà đầu tư tổ chức và cá nhân nghe cuộc gọi và nhận ra giọng điệu của lãnh đạo, vốn báo hiệu tin tốt hoặc xấu cho công ty. Nhóm tác giả thu thập 136.578 bản ghi cuộc gọi báo cáo thu nhập của 7.740 công ty đại chúng trong giai đoạn 2004-2019, lấy từ trang web Seeking Alpha.
+
+\textbf{Báo cáo phân tích (Analyst Reports).} Báo cáo của nhà phân tích là một nguồn thông tin hữu ích khác cho nhà đầu tư tổ chức và cá nhân (sri International, 1987). Một báo cáo thường gồm một số thước đo định lượng tóm tắt, như khuyến nghị cổ phiếu, dự báo thu nhập và đôi khi là giá mục tiêu, cùng phần phân tích chi tiết về công ty, chủ yếu dưới dạng văn bản. Các nhà đầu tư tổ chức chi hàng triệu đô la mỗi năm để mua toàn văn báo cáo nhằm đọc phần phân tích này. Nhóm tác giả thu thập các báo cáo trong cơ sở dữ liệu Investext phát hành cho các công ty thuộc S\&P trong giai đoạn 1995-2008, thu được 488.494 báo cáo.
+
+\textbf{Thống kê chung về các kho ngữ liệu.} Tổng quy mô của cả 4 kho ngữ liệu xấp xỉ 4,9 tỷ token. Thống kê kho ngữ liệu tiền huấn luyện tài chính được trình bày ở Bảng 1. Để so sánh, kho ngữ liệu tiền huấn luyện của BERT gồm hai kho văn bản với tổng cộng 3,3 tỷ token.
+
+Kho ngữ liệu:
+
+\begin{itemize}
+\item
+  Báo cáo doanh nghiệp 10-K \& 10-Q
+\item
+  Bản ghi cuộc gọi báo cáo thu nhập
+\item
+  Báo cáo phân tích
+\end{itemize}
+
+{\small
+\begin{longtable}[]{@{}ll@{}}
+\toprule\noalign{}
+Kho ngữ liệu & Số token \\
+\midrule\noalign{}
+\endhead
+\bottomrule\noalign{}
+\endlastfoot
+Báo cáo doanh nghiệp 10-K \& 10-Q & 2,5 tỷ \\
+Bản ghi cuộc họp công bố kết quả kinh doanh (Earnings Call) & 1,3 tỷ \\
+Báo cáo của nhà phân tích & 1,1 tỷ \\
+\end{longtable}
+}
+
+Bảng 1: Quy mô các kho ngữ liệu tài chính dùng để tiền huấn luyện.
+
+\section{4 Huấn luyện FinBERT}
+
+\textbf{Từ vựng.} Nhóm tác giả xây dựng FinVocab, một bộ từ vựng WordPiece mới trên các kho ngữ liệu tài chính bằng thư viện SentencePiece. Có cả hai phiên bản phân biệt hoa thường (cased) và không phân biệt (uncased), với kích thước lần lượt là 28.573 và 30.873 token, rất gần với 28.996 và 30.522 token của BaseVocab gốc của BERT. Mức trùng lặp giữa BaseVocab của BERT và FinVocab là 41\% cho cả hai phiên bản.
+
+\textbf{Các biến thể FinBERT.} Dùng mã BERT gốc (github.com/google-research/bert) để huấn luyện FinBERT trên kho ngữ liệu tài chính với cấu hình như BERT-Base. Theo cách huấn luyện BERT gốc, độ dài câu tối đa ban đầu là 128 token, huấn luyện đến khi hàm mất mát huấn luyện bắt đầu hội tụ, sau đó tiếp tục với câu dài tới 512 token. Có bốn phiên bản FinBERT: cased hoặc uncased; BaseVocab hoặc FinVocab.
+
+\begin{itemize}
+\item
+  FinBERT-BaseVocab (uncased/cased): khởi tạo từ mô hình BERT-Base uncased/cased gốc, tiếp tục tiền huấn luyện trên kho ngữ liệu tài chính 250 nghìn vòng lặp với tốc độ học nhỏ hơn là 2e\ensuremath{-}5, theo khuyến nghị của mã BERT.
+\item
+  FinBERT-FinVocab (uncased/cased): huấn luyện từ đầu với bộ từ vựng tài chính FinVocab mới (uncased/cased) trong 1 triệu vòng lặp.
+\end{itemize}
+
+\textbf{Huấn luyện.} Toàn bộ huấn luyện dùng máy NVIDIA DGX-1 với 4 GPU Tesla P100, tổng bộ nhớ GPU 128 GB, cho phép dùng kích thước batch 128. Khung Horovod (Sergeev và Del Balso, 2018) được dùng cho huấn luyện đa GPU. Tổng thời gian tiền huấn luyện một mô hình khoảng 2 ngày. Khi phát hành FinBERT, nhóm tác giả hy vọng giới thực hành và nghiên cứu tài chính có thể dùng FinBERT mà không cần nguồn lực tính toán lớn để huấn luyện.
+
+\section{5 Thực nghiệm phân tích cảm xúc tài chính}
+
+Do tầm quan trọng của phân tích cảm xúc trong các tác vụ NLP tài chính, nhóm tác giả thực nghiệm trên các bộ dữ liệu phân loại cảm xúc tài chính.
+
+\subsection{5.1 Dữ liệu}
+
+\begin{itemize}
+\item
+  \textbf{Financial Phrase Bank}: bộ dữ liệu công khai về phân loại cảm xúc tài chính (Malo và cs., 2014), gồm 4.840 câu chọn từ tin tức tài chính, được 16 nhà nghiên cứu có đủ kiến thức nền về thị trường tài chính gán nhãn thủ công. Nhãn cảm xúc là tích cực, trung lập hoặc tiêu cực.
+\item
+  \textbf{AnalystTone}: bộ dữ liệu đo quan điểm trong báo cáo của nhà phân tích, thường dùng trong văn liệu kế toán và tài chính (Huang và cs., 2014). Gồm 10.000 câu chọn ngẫu nhiên từ cơ sở dữ liệu Investext, gán nhãn thủ công thành tích cực, tiêu cực hoặc trung lập: 3.580 câu tích cực, 1.830 tiêu cực và 4.590 trung lập.
+\item
+  \textbf{FiQA}: bộ dữ liệu thử thách mở về phân tích cảm xúc tài chính (sites.google.com/view/fiqa/home), gồm 1.111 câu. Với câu tiếng Anh thuộc lĩnh vực tài chính (tin nhắn microblog, phát biểu tin tức), nhiệm vụ là dự đoán điểm cảm xúc số trong khoảng từ \ensuremath{-}1 đến 1. Bài toán hồi quy gốc được chuyển thành phân loại nhị phân để so sánh nhất quán với hai bộ trên.
+\end{itemize}
+
+Mỗi bộ dữ liệu được chia ngẫu nhiên 90\% huấn luyện và 10\% kiểm tra, lặp 10 lần và lấy trung bình. Vì đều là phân loại cảm xúc, thước đo báo cáo là độ chính xác.
+
+\subsection{5.2 Chiến lược tinh chỉnh}
+
+Dùng kiến trúc tinh chỉnh và lựa chọn tối ưu hóa như Devlin và cs. (2019): một tầng tuyến tính đơn giản làm tầng phân loại với hàm kích hoạt softmax, và hàm mất mát cross-entropy. Một phương án khác là đưa embedding ngữ cảnh của từng token vào kiến trúc học sâu như Bi-LSTM đặt trên embedding BERT đã đóng băng; nhóm không chọn vì cách này cho kết quả kém hơn đáng kể so với tinh chỉnh BERT (Beltagy và cs., 2019).
+
+\subsection{5.3 Kết quả thực nghiệm}
+
+FinBERT được so sánh với BERT-Base gốc (Devlin và cs., 2019), đánh giá cả phiên bản cased và uncased. Kết quả chính ở Bảng 2.
+
+\textbf{FinBERT so với BERT.} FinBERT cải thiện đáng kể so với BERT tổng quát. Trên PhraseBank, mô hình tốt nhất là FinBERT-FinVocab uncased đạt độ chính xác 0,872, tăng 4,4\% so với BERT uncased và 15,4\% so với BERT cased. Trên FiQA, FinBERT-FinVocab uncased đạt 0,844, tăng 15,6\% so với BERT uncased và 29,2\% so với BERT cased.
+
+{\small
+\begin{longtable}[]{@{}
+  >{\raggedright\arraybackslash}p{(\columnwidth - 12\tabcolsep) * \real{0.1429}}
+  >{\raggedright\arraybackslash}p{(\columnwidth - 12\tabcolsep) * \real{0.1429}}
+  >{\raggedright\arraybackslash}p{(\columnwidth - 12\tabcolsep) * \real{0.1429}}
+  >{\raggedright\arraybackslash}p{(\columnwidth - 12\tabcolsep) * \real{0.1429}}
+  >{\raggedright\arraybackslash}p{(\columnwidth - 12\tabcolsep) * \real{0.1429}}
+  >{\raggedright\arraybackslash}p{(\columnwidth - 12\tabcolsep) * \real{0.1429}}
+  >{\raggedright\arraybackslash}p{(\columnwidth - 12\tabcolsep) * \real{0.1429}}@{}}
+\toprule\noalign{}
+\begin{minipage}[b]{\linewidth}\raggedright
+Bộ dữ liệu
+\end{minipage} & \begin{minipage}[b]{\linewidth}\raggedright
+BERT cased
+\end{minipage} & \begin{minipage}[b]{\linewidth}\raggedright
+BERT uncased
+\end{minipage} & \begin{minipage}[b]{\linewidth}\raggedright
+FinBERT-BaseVocab cased
+\end{minipage} & \begin{minipage}[b]{\linewidth}\raggedright
+FinBERT-BaseVocab uncased
+\end{minipage} & \begin{minipage}[b]{\linewidth}\raggedright
+FinBERT-FinVocab cased
+\end{minipage} & \begin{minipage}[b]{\linewidth}\raggedright
+FinBERT-FinVocab uncased
+\end{minipage} \\
+\midrule\noalign{}
+\endhead
+\bottomrule\noalign{}
+\endlastfoot
+PhraseBank & 0.755 & 0.835 & 0.856 & 0.870 & 0.864 & 0.872 \\
+FiQA & 0.653 & 0.730 & 0.767 & 0.796 & 0.814 & 0.844 \\
+AnalystTone & 0.840 & 0.850 & 0.872 & 0.880 & 0.876 & 0.887 \\
+\end{longtable}
+}
+
+Bảng 2: Hiệu năng của các mô hình BERT khác nhau trên ba tác vụ phân tích cảm xúc tài chính.
+
+{\small
+\begin{longtable}[]{@{}
+  >{\raggedright\arraybackslash}p{(\columnwidth - 10\tabcolsep) * \real{0.1667}}
+  >{\raggedright\arraybackslash}p{(\columnwidth - 10\tabcolsep) * \real{0.1667}}
+  >{\raggedright\arraybackslash}p{(\columnwidth - 10\tabcolsep) * \real{0.1667}}
+  >{\raggedright\arraybackslash}p{(\columnwidth - 10\tabcolsep) * \real{0.1667}}
+  >{\raggedright\arraybackslash}p{(\columnwidth - 10\tabcolsep) * \real{0.1667}}
+  >{\raggedright\arraybackslash}p{(\columnwidth - 10\tabcolsep) * \real{0.1667}}@{}}
+\toprule\noalign{}
+\begin{minipage}[b]{\linewidth}\raggedright
+Từ vựng
+\end{minipage} & \begin{minipage}[b]{\linewidth}\raggedright
+Bộ dữ liệu
+\end{minipage} & \begin{minipage}[b]{\linewidth}\raggedright
+10-Ks/10-Qs
+\end{minipage} & \begin{minipage}[b]{\linewidth}\raggedright
+Earnings Call
+\end{minipage} & \begin{minipage}[b]{\linewidth}\raggedright
+Báo cáo nhà phân tích
+\end{minipage} & \begin{minipage}[b]{\linewidth}\raggedright
+Tất cả
+\end{minipage} \\
+\midrule\noalign{}
+\endhead
+\bottomrule\noalign{}
+\endlastfoot
+BaseVocab & PhraseBank & 0.835 & 0.843 & 0.845 & 0.856 \\
+BaseVocab & FiQA & 0.707 & 0.731 & 0.744 & 0.767 \\
+BaseVocab & AnalystTone & 0.845 & 0.862 & 0.871 & 0.872 \\
+FinVocab & PhraseBank & 0.847 & 0.860 & 0.861 & 0.864 \\
+FinVocab & FiQA & 0.766 & 0.778 & 0.796 & 0.814 \\
+FinVocab & AnalystTone & 0.858 & 0.870 & 0.872 & 0.876 \\
+\end{longtable}
+}
+
+Bảng 3: Hiệu năng khi tiền huấn luyện trên các kho ngữ liệu tài chính khác nhau.
+
+độ chính xác 0,872, cải thiện 4,4\% so với mô hình BERT uncased và 15,4\% so với mô hình BERT cased. Trên bộ dữ liệu FiQA, mô hình tốt nhất là FinBERT-FinVocab uncased đạt độ chính xác 0,844, cải thiện 15,6\% so với BERT uncased và 29,2\% so với BERT cased. Cuối cùng, trên bộ dữ liệu AnalystTone, FinBERT-FinVocab uncased tốt nhất cải thiện lần lượt 4,3\% và 5,5\% so với BERT uncased và cased. Nhìn chung, như kỳ vọng, việc tiền huấn luyện (pretraining) trên kho ngữ liệu tài chính là hiệu quả và nâng cao các tác vụ phân loại cảm xúc tài chính ở khâu sau. Trong thị trường tài chính, nơi việc nắm bắt chính xác tín hiệu cảm xúc có tầm quan trọng hàng đầu, nhóm tác giả cho rằng mức cải thiện chung của FinBERT chứng tỏ tính hữu dụng thực tiễn của mô hình.
+
+\textbf{FinVocab so với BaseVocab.} Nhóm đánh giá tầm quan trọng của bộ từ vựng chuyên ngành tài chính bằng cách tiền huấn luyện các mô hình FinBERT với BaseVocab và FinVocab. Với cả mô hình uncased và cased, FinBERT-FinVocab đều vượt trội so với phiên bản BaseVocab tương ứng. Tuy nhiên, mức cải thiện khá nhỏ trên các tác vụ PhraseBank và AnalystTone; chỉ trên FiQA mới thấy cải thiện đáng kể (0,844 so với 0,796). Dựa trên độ lớn của mức cải thiện, nhóm cho rằng dù bộ từ vựng chuyên ngành có ích, FinBERT được lợi nhiều nhất từ việc tiền huấn luyện trên kho ngữ liệu truyền thông tài chính.
+
+\textbf{Cased so với Uncased.} Theo Devlin et al. (2019), nhóm dùng cả mô hình cased và uncased cho mọi tác vụ. Kết quả thực nghiệm cho thấy mô hình uncased tốt hơn mô hình cased ở mọi tác vụ, nhất quán với các nghiên cứu trước về mô hình BERT cho lĩnh vực khoa học và y sinh.
+
+\textbf{Đóng góp của từng kho ngữ liệu.} Nhóm cũng huấn luyện các mô hình FinBERT riêng trên từng kho ngữ liệu trong ba kho tài chính. Kết quả của các mô hình FinBERT (phiên bản cased) trên các tác vụ được trình bày ở Bảng 3. FinBERT huấn luyện trên toàn bộ kho ngữ liệu đạt hiệu năng tổng thể tốt nhất, cho thấy việc kết hợp thêm các kho ngữ liệu truyền thông tài chính có thể nâng cao chất lượng mô hình ngôn ngữ. Trong ba bộ dữ liệu, bộ Analyst Reports có hiệu năng tốt trên cả ba tác vụ dù chỉ có 1,1 tỷ token từ. Nghiên cứu trước cho thấy báo cáo doanh nghiệp như 10-K và 10-Q chứa nội dung dư thừa, và một phần lớn khối lượng văn bản trong báo cáo 10-K là do quyền tự quyết của ban quản lý trong cách đáp ứng các yêu cầu công bố thông tin bắt buộc (Cazier and Pfeiffer, 2016). Điều này có gợi ý rằng dữ liệu Analyst Reports chứa nhiều thông tin hơn báo cáo doanh nghiệp và bản ghi các cuộc họp công bố kết quả kinh doanh (earnings call) hay không? Nhóm để dành câu hỏi này cho nghiên cứu tương lai.
+
+\section{6 Kết luận}
+
+Trong công trình này, nhóm tiền huấn luyện một mô hình BERT hướng đến tác vụ tài chính, FinBERT. FinBERT được huấn luyện trên kho ngữ liệu tài chính lớn, đại diện cho truyền thông tài chính bằng tiếng Anh. Nhóm chỉ ra rằng FinBERT vượt trội so với các mô hình BERT tổng quát trên ba tác vụ phân loại cảm xúc tài chính. Với việc phát hành FinBERT, nhóm hy vọng các nhà thực hành và nhà nghiên cứu có thể dùng FinBERT cho nhiều ứng dụng rộng hơn, nơi mục tiêu dự đoán vượt ra ngoài cảm xúc, chẳng hạn các kết quả liên quan đến tài chính như lợi suất cổ phiếu, biến động cổ phiếu, gian lận doanh nghiệp, v.v.
+
+\subsection{Lời cảm ơn}
+
+Công trình này được hỗ trợ bởi Theme-based Research Scheme (số T31-604/18-N) của Research Grants Council tại Hong Kong.
+
+\subsection{References}
+
+Tomas Mikolov, Ilya Sutskever, Kai Chen, Greg Corrado, and Jeffrey Dean. 2013. Distributed representations of words and phrases and their compositionality. In Proceedings of NIPS, pages 3111--3119.
+
+Jeffrey Pennington, Richard Socher, and Christopher D Manning. 2014. Glove: Global vectors for word representation. In Proceedings of EMNLP, pages 1532--1543.
+
+Matthew E. Peters, Mark Neumann, Mohit Iyyer, Matt Gardner, Christopher Clark, Kenton Lee, and Luke Zettlemoyer. 2018. Deep contextualized word representations. In Proc. of NAACL.
+
+Emily Alsentzer, John Murphy, William Boag, Wei-Hung Weng, Di Jindi, Tristan Naumann, and Matthew McDermott. 2019. Publicly available clinical bert embeddings. In Proceedings of the 2nd Clinical Natural Language Processing Workshop, pages 72--78.
+
+Iz Beltagy, Kyle Lo, and Arman Cohan. 2019. Scibert: Pretrained language model for scientific text. In Proceedings of EMNLP.
+
+Richard A Cazier and Ray J Pfeiffer. 2016. Why are 10-k filings so long? Accounting Horizons, 30(1):1--21.
+
+X Cui, D Lam, and A Verma. 2016. Embedded value in bloomberg news and social sentiment data. Bloomberg LP.
+
+Jacob Devlin, Ming-Wei Chang, Kenton Lee, and Kristina Toutanova. 2019. Bert: Pre-training of deep bidirectional transformers for language understanding. In Proceedings of NAACL, pages 4171--4186.
+
+Jeremy Howard and Sebastian Ruder. 2018. Universal language model fine-tuning for text classification. In Proceedings ACL, pages 328--339.
+
+Allen H Huang, Amy Y Zang, and Rong Zheng. 2014. Evidence on the information content of text in analyst reports. The Accounting Review, 89(6):2151--2180.
+
+Kexin Huang, Jaan Altosaar, and Rajesh Ranganath. 2019. Clinicalbert: Modeling clinical notes and predicting hospital readmission. arXiv:1904.05342.
+
+sri International. 1987. Investor information needs and the annual report. Financial Executives Research Foundation.
+
+Jinhyuk Lee, Wonjin Yoon, Sungdong Kim, Donghyeon Kim, Sunkyu Kim, Chan Ho So, and Jaewoo Kang. 2019. BioBERT: a pre-trained biomedical language representation model for biomedical text mining. Bioinformatics.
+
+Pekka Malo, Ankur Sinha, Pekka Korhonen, Jyrki Wallenius, and Pyry Takala. 2014. Good debt or bad debt: Detecting semantic orientations in economic texts. Journal of the Association for Information Science and Technology, 65(4):782--796.
+
+Alec Radford, Jeff Wu, Rewon Child, David Luan, Dario Amodei, and Ilya Sutskever. 2019. Language models are unsupervised multitask learners. Alexander Sergeev and Mike Del Balso. 2018. Horovod: fast and easy distributed deep learning in tensorflow. arXiv preprint arXiv:1802.05799. Paul C Tetlock. 2007. Giving content to investor sentiment: The role of media in the stock market. The Journal of finance, 62(3):1139--1168. Paul C Tetlock, Maytal Saar-Tsechansky, and Sofus Macskassy. 2008. More than words: Quantifying language to measure firms' fundamentals. The Journal of Finance, 63(3):1437--1467.

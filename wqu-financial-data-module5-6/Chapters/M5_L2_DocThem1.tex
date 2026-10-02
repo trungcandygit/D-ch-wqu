@@ -1,0 +1,510 @@
+\chapter{Đọc thêm 1: FinBERT -- Phân tích cảm xúc tài chính bằng mô hình ngôn ngữ tiền huấn luyện (Araci)}
+\label{ch:M5L2DocThem1}
+
+\section{Thông tin nguồn}
+
+\begin{itemize}
+  \item \textbf{Nguồn:} Araci, D. ``FinBERT: Financial Sentiment Analysis with Pre-trained Language Models.'' arXiv:1908.10063, 2019.
+  \item \textbf{Phần cần đọc:} Toàn bộ bài báo (11 trang)
+  \item \textbf{Ghi chú:} bản chuyển ngữ tiếng Việt súc tích, bám cấu trúc nguồn (giữ nguyên tiêu đề, công thức, số liệu, bảng, chú thích và danh mục tài liệu tham khảo).
+\end{itemize}
+
+FinBERT: Phân tích cảm xúc tài chính bằng các mô hình ngôn ngữ tiền huấn luyện
+
+arXiv:1908.10063v1 {[}cs.CL{]} 27 Aug 2019
+
+Luận văn nộp một phần yêu cầu để lấy bằng thạc sĩ khoa học --- Dogu Araci (12255068), ngành Nghiên cứu thông tin, chuyên ngành Khoa học dữ liệu, Khoa Khoa học, Đại học Amsterdam, 2019-06-25.
+
+{\small
+\begin{longtable}[]{@{}
+  >{\raggedright\arraybackslash}p{(\columnwidth - 6\tabcolsep) * \real{0.2500}}
+  >{\raggedright\arraybackslash}p{(\columnwidth - 6\tabcolsep) * \real{0.2500}}
+  >{\raggedright\arraybackslash}p{(\columnwidth - 6\tabcolsep) * \real{0.2500}}
+  >{\raggedright\arraybackslash}p{(\columnwidth - 6\tabcolsep) * \real{0.2500}}@{}}
+\toprule\noalign{}
+\begin{minipage}[b]{\linewidth}\raggedright
+Vai trò
+\end{minipage} & \begin{minipage}[b]{\linewidth}\raggedright
+Họ tên
+\end{minipage} & \begin{minipage}[b]{\linewidth}\raggedright
+Đơn vị
+\end{minipage} & \begin{minipage}[b]{\linewidth}\raggedright
+Email
+\end{minipage} \\
+\midrule\noalign{}
+\endhead
+\bottomrule\noalign{}
+\endlastfoot
+Người hướng dẫn nội bộ & Dr Pengjie Ren & UvA, ILPS & p.ren@uva.nl \\
+Người hướng dẫn bên ngoài & Dr Zulkuf Genc & Naspers Group & zulkuf.genc@naspers.com \\
+\end{longtable}
+}
+
+FinBERT: Phân tích cảm xúc tài chính bằng các mô hình ngôn ngữ tiền huấn luyện
+
+Dogu Tan Araci, dogu.araci@student.uva.nl, University of Amsterdam, Amsterdam, Hà Lan
+
+\subsection{TÓM TẮT}
+
+Các phương pháp học chuyển giao (transfer learning) trong xử lý ngôn ngữ tự nhiên (NLP) là giải pháp đầy triển vọng cho cả hai thách thức nêu trên và là trọng tâm của luận văn. Ý tưởng cốt lõi: huấn luyện mô hình ngôn ngữ trên các kho ngữ liệu rất lớn, rồi khởi tạo các mô hình tác vụ hạ nguồn bằng trọng số học được từ tác vụ mô hình hóa ngôn ngữ, nhờ đó đạt hiệu năng tốt hơn nhiều. Phần được khởi tạo có thể chỉ là một lớp nhúng từ (word embedding) {[}23{]} hoặc toàn bộ mô hình {[}5{]}. Về lý thuyết, cách này giải quyết bài toán khan hiếm dữ liệu có nhãn: mô hình ngôn ngữ không cần nhãn vì tác vụ là dự đoán từ tiếp theo, và vẫn học được cách biểu diễn thông tin ngữ nghĩa. Khi đó, bước tinh chỉnh (fine-tune) trên dữ liệu có nhãn chỉ còn phải học cách dùng thông tin ngữ nghĩa này để dự đoán nhãn.
+
+Một thành phần đặc thù của học chuyển giao là khả năng tiếp tục tiền huấn luyện mô hình ngôn ngữ trên kho ngữ liệu không nhãn thuộc lĩnh vực cụ thể. Nhờ vậy mô hình học được các quan hệ ngữ nghĩa trong văn bản của lĩnh vực đích, vốn có khả năng phân phối khác với kho ngữ liệu tổng quát. Cách tiếp cận này đặc biệt hứa hẹn với lĩnh vực ngách như tài chính, nơi ngôn ngữ và từ vựng khác biệt rất lớn so với ngôn ngữ thông thường.
+
+Mục tiêu của luận văn là kiểm chứng các ưu thế được giả định của việc sử dụng và tinh chỉnh mô hình ngôn ngữ tiền huấn luyện cho lĩnh vực tài chính. Để làm vậy, luận văn dự đoán cảm xúc của một câu trong bài báo tài chính đối với chủ thể tài chính được nhắc đến trong câu, sử dụng Financial PhraseBank do Malo et al. (2014) {[}17{]} xây dựng và tập dữ liệu chấm điểm cảm xúc FiQA Task 1 {[}15{]}.
+
+Các đóng góp chính của luận văn như sau:
+
+Phân tích cảm xúc tài chính là tác vụ khó do ngôn ngữ chuyên biệt và thiếu dữ liệu có nhãn trong lĩnh vực này. Các mô hình đa dụng kém hiệu quả vì ngôn ngữ tài chính chuyên biệt. Giả thuyết của chúng tôi là mô hình ngôn ngữ tiền huấn luyện giúp giải quyết vấn đề, vì cần ít ví dụ có nhãn hơn và có thể huấn luyện thêm trên kho ngữ liệu chuyên ngành. Chúng tôi giới thiệu FinBERT, mô hình ngôn ngữ dựa trên BERT, cho các tác vụ NLP tài chính. Kết quả cho thấy cải thiện ở mọi chỉ số đo được so với kết quả tốt nhất hiện nay (state-of-the-art) trên hai tập dữ liệu phân tích cảm xúc tài chính. Ngay cả với tập huấn luyện nhỏ hơn và chỉ tinh chỉnh một phần mô hình, FinBERT vẫn vượt các phương pháp học máy tốt nhất hiện có.
+
+\section{1 GIỚI THIỆU}
+
+Giá trong thị trường mở phản ánh toàn bộ thông tin sẵn có về các tài sản được giao dịch trong nền kinh tế {[}16{]}. Khi có thông tin mới, mọi chủ thể cập nhật vị thế và giá điều chỉnh theo, khiến việc liên tục đánh bại thị trường là bất khả thi. Tuy nhiên, định nghĩa "thông tin mới" có thể thay đổi khi xuất hiện các công nghệ truy xuất thông tin mới, và việc sớm áp dụng chúng có thể mang lại lợi thế ngắn hạn.
+
+Phân tích văn bản tài chính (tin tức, báo cáo phân tích, thông báo chính thức của công ty) là một nguồn thông tin mới tiềm năng. Lượng văn bản như vậy được tạo ra mỗi ngày chưa từng có, nên không một đơn vị nào đủ sức phân tích thủ công và rút ra thông tin khả dụng. Vì thế, phân tích cảm xúc hay độ phân cực (polarity) tự động của văn bản do các chủ thể tài chính tạo ra bằng các phương pháp NLP đã trở nên phổ biến trong thập kỷ qua {[}4{]}.
+
+Mối quan tâm nghiên cứu chính của luận văn là phân tích độ phân cực, tức phân loại văn bản thành tích cực, tiêu cực hoặc trung lập trong một lĩnh vực cụ thể. Việc này phải giải quyết hai thách thức: 1) Các phương pháp phân loại tinh vi nhất dùng mạng nơ-ron cần lượng dữ liệu có nhãn rất lớn, mà gán nhãn văn bản tài chính đòi hỏi chuyên môn tốn kém. 2) Các mô hình phân tích cảm xúc huấn luyện trên kho ngữ liệu tổng quát không phù hợp, vì văn bản tài chính có ngôn ngữ chuyên biệt với từ vựng riêng và thường dùng cách diễn đạt mơ hồ thay vì các từ tích cực/tiêu cực dễ nhận biết.
+
+Dùng các từ điển cảm xúc tài chính được xây dựng kỹ như Loughran và McDonald (2011) {[}11{]} có vẻ là giải pháp vì chúng đưa kiến thức tài chính sẵn có vào phân tích văn bản. Tuy nhiên, chúng dựa trên phương pháp "đếm từ", không đủ khả năng phân tích ý nghĩa ngữ nghĩa sâu hơn của văn bản.
+
+\begin{itemize}
+\item
+  Giới thiệu FinBERT, một mô hình ngôn ngữ dựa trên BERT cho các tác vụ NLP tài chính, được đánh giá trên hai bộ dữ liệu phân tích cảm xúc tài chính.
+\item
+  Đạt kết quả tốt nhất hiện nay (state-of-the-art) trên FiQA sentiment scoring và Financial PhraseBank.
+\item
+  Triển khai thêm hai mô hình ngôn ngữ tiền huấn luyện khác là ULMFit và ELMo cho phân tích cảm xúc tài chính và so sánh với FinBERT.
+\item
+  Thực hiện các thí nghiệm khảo sát nhiều khía cạnh của mô hình: tác động của việc tiền huấn luyện thêm trên kho ngữ liệu tài chính, các chiến lược huấn luyện nhằm tránh quên thảm khốc (catastrophic forgetting), và chỉ tinh chỉnh một tập con nhỏ các lớp của mô hình để giảm thời gian huấn luyện mà hiệu năng không giảm đáng kể.
+\end{itemize}
+
+Phần còn lại của luận văn được cấu trúc như sau: trước hết, các nghiên cứu liên quan về phân tích phân cực (polarity) trong tài chính và về các mô hình ngôn ngữ tiền huấn luyện được thảo luận (Mục 2). Tiếp theo, các mô hình được đánh giá được mô tả (Mục 3), rồi đến thiết lập thí nghiệm (Mục 4). Mục 5 trình bày kết quả thí nghiệm trên các bộ dữ liệu cảm xúc tài chính. Mục 6 phân tích sâu hơn FinBERT từ nhiều góc độ. Cuối cùng, Mục 7 là kết luận.
+
+\section{2 TÀI LIỆU LIÊN QUAN}
+
+Phần này mô tả các nghiên cứu trước đây về phân tích cảm xúc trong tài chính (2.1) và phân loại văn bản bằng mô hình ngôn ngữ tiền huấn luyện (2.2).
+
+\subsection{2.1 Phân tích cảm xúc trong tài chính}
+
+Phân tích cảm xúc là tác vụ trích xuất cảm xúc hay quan điểm của con người từ ngôn ngữ viết {[}10{]}. Các nỗ lực gần đây chia làm hai nhóm: 1) phương pháp học máy với đặc trưng trích từ văn bản bằng "đếm từ" (word counting) {[}1, 19, 28, 30{]}; 2) phương pháp học sâu, trong đó văn bản được biểu diễn bằng chuỗi embedding {[}2, 25, 32{]}. Nhóm đầu không biểu diễn được thông tin ngữ nghĩa phát sinh từ một chuỗi từ cụ thể, còn nhóm sau thường bị coi là quá "khát dữ liệu" vì phải học số tham số lớn hơn nhiều {[}18{]}.
+
+Phân tích cảm xúc tài chính khác phân tích cảm xúc thông thường không chỉ về lĩnh vực mà còn về mục đích: thường là đoán thị trường sẽ phản ứng thế nào với thông tin trong văn bản {[}9{]}. Loughran và McDonald (2016) tổng quan kỹ các công trình phân tích văn bản tài chính dùng học máy với cách tiếp cận "túi từ" (bag-of-words) hoặc phương pháp dựa trên từ điển {[}12{]}. Chẳng hạn, Loughran và McDonald (2011) xây dựng từ điển thuật ngữ tài chính gán các giá trị như "tích cực" hay "không chắc chắn" và đo sắc thái của tài liệu bằng cách đếm các từ có giá trị từ điển cụ thể {[}11{]}. Một ví dụ khác là Pagolu và cộng sự (2016), trong đó các n-gram từ tweet chứa thông tin tài chính được đưa vào các thuật toán học máy có giám sát để phát hiện cảm xúc đối với thực thể tài chính được nhắc đến.
+
+Một trong những bài báo đầu tiên dùng học sâu cho phân tích phân cực văn bản tài chính là Kraus và Feuerriegel (2017) {[}7{]}. Họ áp dụng mạng nơ-ron LSTM lên các thông báo ad-hoc của công ty để dự đoán biến động thị trường chứng khoán và cho thấy phương pháp này chính xác hơn các phương pháp học máy truyền thống. Họ nhận thấy tiền huấn luyện mô hình trên kho ngữ liệu lớn hơn cải thiện kết quả; tuy nhiên việc tiền huấn luyện đó dùng tập dữ liệu có nhãn, là cách tiếp cận hạn chế hơn của chúng tôi, vì chúng tôi tiền huấn luyện mô hình ngôn ngữ như một tác vụ không giám sát.
+
+Có nhiều công trình khác dùng các kiến trúc mạng nơ-ron khác nhau cho phân tích cảm xúc tài chính. Sohangir và cộng sự (2018) {[}26{]} áp dụng một số kiến trúc mạng nơ-ron thông dụng lên tập dữ liệu StockTwits và thấy CNN có hiệu quả nhất. Lutz và cộng sự (2018) {[}13{]} dùng doc2vec để tạo embedding câu trong thông báo ad-hoc của một công ty và dùng học đa thể hiện (multi-instance learning) để dự đoán kết quả thị trường chứng khoán. Maia và cộng sự (2018) {[}14{]} kết hợp đơn giản hóa văn bản và mạng LSTM để phân loại một tập câu từ tin tức tài chính theo cảm xúc, đạt kết quả state-of-the-art trên Financial PhraseBank, bộ dữ liệu cũng được dùng trong luận văn này.
+
+Do thiếu các bộ dữ liệu tài chính có nhãn quy mô lớn, rất khó khai thác hết tiềm năng của mạng nơ-ron cho phân tích cảm xúc. Ngay cả khi các lớp đầu tiên (lớp nhúng từ) được khởi tạo bằng giá trị tiền huấn luyện, phần còn lại của mô hình vẫn phải học các quan hệ phức tạp từ lượng dữ liệu có nhãn tương đối nhỏ. Một giải pháp triển vọng hơn là khởi tạo gần như toàn bộ mô hình bằng giá trị tiền huấn luyện và tinh chỉnh các giá trị đó theo tác vụ phân loại.
+
+\subsection{2.2 Phân loại văn bản bằng mô hình ngôn ngữ tiền huấn luyện}
+
+Mô hình hóa ngôn ngữ là nhiệm vụ dự đoán từ tiếp theo trong một đoạn văn bản. Một bước tiến quan trọng gần đây của xử lý ngôn ngữ tự nhiên (NLP) là nhận ra rằng mô hình được huấn luyện cho bài toán mô hình hóa ngôn ngữ có thể được tinh chỉnh (fine-tune) thành công cho hầu hết các tác vụ NLP hạ nguồn chỉ với những sửa đổi nhỏ. Các mô hình này thường được huấn luyện trên kho ngữ liệu rất lớn, sau đó được bổ sung các lớp đặc thù cho tác vụ và tinh chỉnh trên tập dữ liệu mục tiêu {[}6{]}. Phân loại văn bản, trọng tâm của luận văn này, là một trường hợp ứng dụng hiển nhiên của cách tiếp cận đó.
+
+ELMo (Embeddings from Language Models) {[}23{]} là một trong những ứng dụng thành công đầu tiên của cách tiếp cận này. Với ELMo, một mô hình ngôn ngữ hai chiều sâu được tiền huấn luyện trên kho ngữ liệu lớn; với mỗi từ, các trạng thái ẩn của mô hình được dùng để tính biểu diễn theo ngữ cảnh. Nhờ trọng số tiền huấn luyện của ELMo, có thể tính nhúng từ (word embeddings) theo ngữ cảnh cho bất kỳ đoạn văn bản nào. Việc khởi tạo embedding cho các tác vụ hạ nguồn bằng các nhúng này được chứng minh là cải thiện hiệu suất ở hầu hết tác vụ so với nhúng từ tĩnh như word2vec hay GloVe. Với các tác vụ phân loại văn bản như SST-5, ELMo đạt hiệu suất tiên tiến nhất (state-of-the-art) khi kết hợp với mạng phân loại bi-attentive {[}20{]}.
+
+Dù ELMo tận dụng mô hình ngôn ngữ tiền huấn luyện để ngữ cảnh hóa biểu diễn, thông tin trích xuất từ mô hình ngôn ngữ vẫn chỉ hiện diện ở lớp đầu tiên của mô hình sử dụng nó. ULMFit (Universal Language Model Fine-tuning) {[}5{]} là công trình đầu tiên đạt được học chuyển giao (transfer learning) đúng nghĩa cho NLP, nhờ các kỹ thuật mới như tinh chỉnh phân biệt theo lớp (discriminative fine-tuning), tốc độ học tam giác nghiêng (slanted triangular learning rates) và rã đông dần (gradual unfreezing). Nhóm tác giả đã tinh chỉnh hiệu quả toàn bộ mô hình ngôn ngữ tiền huấn luyện cho phân loại văn bản. Họ cũng đề xuất tiền huấn luyện thêm mô hình ngôn ngữ trên kho ngữ liệu đặc thù lĩnh vực, với giả định dữ liệu của tác vụ đích có phân phối khác với kho ngữ liệu tổng quát mà mô hình ban đầu được huấn luyện.
+
+Ý tưởng chính của ULMFit, tức tinh chỉnh hiệu quả mô hình ngôn ngữ tiền huấn luyện cho các tác vụ hạ nguồn, được nâng lên một tầm mới với Bidirectional Encoder Representations from Transformers (BERT) {[}3{]}, cũng là trọng tâm của bài báo này. BERT có hai điểm khác biệt quan trọng so với các mô hình trước: 1) BERT định nghĩa nhiệm vụ mô hình hóa ngôn ngữ là dự đoán các token bị che ngẫu nhiên trong chuỗi thay vì token tiếp theo, đồng thời thêm nhiệm vụ phân loại xem hai câu có nối tiếp nhau hay không. 2) BERT là mạng rất lớn, được huấn luyện trên kho ngữ liệu lớn chưa từng có. Hai yếu tố này giúp BERT đạt kết quả tiên tiến nhất trên nhiều tác vụ NLP như suy luận ngôn ngữ tự nhiên hay hỏi đáp.
+
+Các chi tiết về tinh chỉnh BERT cho phân loại văn bản chưa được nghiên cứu kỹ. Một công trình gần đây là Sun et al. (2019) {[}27{]}, trong đó họ tiến hành chuỗi thí nghiệm về các cấu hình BERT khác nhau cho phân loại văn bản. Một số kết quả của họ sẽ được dẫn lại trong phần còn lại của luận văn để xác định cấu hình mô hình của chúng tôi.
+
+3.1.4 Transformer. Transformer là kiến trúc dựa trên cơ chế chú ý (attention) để mô hình hóa thông tin tuần tự, là phương án thay thế cho mạng nơ-ron hồi quy (recurrent neural network) {[}29{]}. Nó được đề xuất như mô hình chuỗi-sang-chuỗi (sequence-to-sequence), nên gồm cơ chế bộ mã hóa (encoder) và bộ giải mã (decoder). Ở đây chỉ tập trung vào phần encoder (decoder khá tương tự). Encoder gồm nhiều lớp Transformer giống hệt nhau. Mỗi lớp có một lớp tự chú ý nhiều đầu (multi-headed self-attention) và một mạng truyền thẳng kết nối đầy đủ. Với mỗi lớp tự chú ý, ba ánh xạ từ embedding (key, query và value) được học. Từ key của mỗi token và các vector query của mọi token, điểm tương đồng được tính bằng tích vô hướng. Các điểm này được dùng để đặt trọng số cho các vector value nhằm thu được biểu diễn mới của token. Với tự chú ý nhiều đầu, các lớp này được nối lại với nhau để chuỗi được đánh giá từ nhiều "góc nhìn" khác nhau. Sau đó, các vector thu được đi qua các mạng kết nối đầy đủ với tham số dùng chung.
+
+Như Vaswani 2017 {[}29{]} đã lập luận, kiến trúc Transformer có nhiều ưu điểm so với các cách tiếp cận dựa trên RNN. Do bản chất tuần tự, RNN khó song song hóa trên GPU hơn nhiều, và quá nhiều bước giữa các phần tử ở xa nhau trong chuỗi khiến thông tin khó được duy trì.
+
+PHƯƠNG PHÁP
+
+Trong phần này, chúng tôi trình bày bản triển khai BERT cho lĩnh vực tài chính có tên FinBERT, sau khi điểm qua nền tảng ngắn gọn về các kiến trúc mạng nơ-ron liên quan.
+
+3.1 Kiến thức nền tảng
+
+3.1.1 LSTM. Bộ nhớ dài-ngắn hạn (LSTM) là một loại mạng nơ-ron hồi quy cho phép các phụ thuộc dài hạn trong chuỗi được duy trì trong mạng nhờ các cổng "quên" và "cập nhật". Đây là một trong những kiến trúc chủ đạo để mô hình hóa mọi quá trình sinh dữ liệu tuần tự, từ giá cổ phiếu đến ngôn ngữ tự nhiên. Vì văn bản là chuỗi các token, lựa chọn đầu tiên của mọi mô hình NLP dựa trên LSTM là xác định cách biểu diễn ban đầu cho một token. Dùng trọng số tiền huấn luyện để biểu diễn token ban đầu là thông lệ phổ biến. Một thuật toán tiền huấn luyện như vậy là GloVe (Global Vectors for Word Representation) {[}22{]}. GloVe là mô hình tính biểu diễn từ bằng tác vụ không giám sát: huấn luyện mô hình hồi quy song tuyến tính log (log-bilinear) trên ma trận đồng xuất hiện từ-từ từ một kho ngữ liệu lớn. Đây là mô hình hiệu quả để biểu diễn từ trong không gian vector, tuy nhiên nó không ngữ cảnh hóa các biểu diễn này theo chuỗi mà từ thực sự được sử dụng¹.
+
+3.1.5 BERT. BERT {[}3{]} về bản chất là một mô hình ngôn ngữ gồm nhiều bộ mã hóa Transformer (Transformer encoder) xếp chồng lên nhau. Tuy nhiên, BERT định nghĩa tác vụ mô hình hóa ngôn ngữ khác với ELMo và AWD-LSTM: thay vì dự đoán từ kế tiếp dựa trên các từ trước đó, BERT "che" (mask) ngẫu nhiên 15\% số token. Một lớp softmax trên toàn bộ từ vựng, đặt phía trên lớp mã hóa cuối cùng, được dùng để dự đoán các token bị che. Tác vụ thứ hai mà BERT được huấn luyện là "dự đoán câu kế tiếp": với hai câu cho trước, mô hình dự đoán xem hai câu đó có thực sự nối tiếp nhau hay không. Chuỗi đầu vào được biểu diễn bằng embedding của token và embedding vị trí. Hai token đặc biệt {[}CLS{]} và {[}SEP{]} lần lượt được thêm vào đầu và cuối chuỗi. Với mọi tác vụ phân loại, kể cả dự đoán câu kế tiếp, token {[}CLS{]} được sử dụng.
+
+BERT có hai phiên bản: BERT-base với 12 lớp mã hóa, kích thước ẩn 768, 12 đầu chú ý đa đầu (multi-head attention) và tổng cộng 110M tham số; BERT-large với 24 lớp mã hóa, kích thước ẩn 1024, 16 đầu chú ý và 340M tham số. Cả hai mô hình đều được huấn luyện trên BookCorpus {[}33{]} và Wikipedia tiếng Anh, với tổng cộng hơn 3.500M từ (chú thích 3).
+
+3.1.2 ELMo. Embedding ELMo {[}23{]} là biểu diễn từ có ngữ cảnh, theo nghĩa các từ xung quanh ảnh hưởng đến biểu diễn của một từ. Cốt lõi của ELMo là một mô hình ngôn ngữ hai chiều với nhiều lớp LSTM. Mục tiêu của mô hình ngôn ngữ là học phân phối xác suất trên các chuỗi token trong một từ vựng cho trước. ELMo mô hình hóa xác suất của một token dựa trên các token đứng trước (và riêng biệt, các token đứng sau) trong chuỗi. Sau đó mô hình còn học cách gán trọng số cho các biểu diễn từ những lớp LSTM khác nhau để tính ra một vector có ngữ cảnh cho mỗi token. Khi các biểu diễn có ngữ cảnh đã được trích xuất, chúng có thể dùng để khởi tạo bất kỳ tác vụ NLP hạ nguồn nào (chú thích 2).
+
+3.1.3 ULMFit. ULMFit là mô hình học chuyển giao (transfer learning) cho các tác vụ NLP hạ nguồn, tận dụng việc tiền huấn luyện mô hình ngôn ngữ {[}5{]}. Khác với ELMo, ở ULMFit toàn bộ mô hình ngôn ngữ được tinh chỉnh (fine-tune) cùng với các lớp riêng cho tác vụ. Mô hình ngôn ngữ nền tảng của ULMFit là AWD-LSTM, sử dụng các chiến lược điều chỉnh dropout tinh vi để chính quy hóa tốt hơn mô hình LSTM {[}21{]}. Để phân loại bằng ULMFit, hai lớp tuyến tính được thêm vào AWD-LSTM đã tiền huấn luyện, trong đó lớp thứ nhất nhận đầu vào là các trạng thái ẩn cuối cùng được gộp (pooled).
+
+ULMFit đi kèm các chiến lược huấn luyện mới để tiếp tục tiền huấn luyện mô hình ngôn ngữ trên kho ngữ liệu thuộc lĩnh vực chuyên biệt và để tinh chỉnh trên tác vụ hạ nguồn. Các chiến lược này được triển khai cùng FinBERT như giải thích ở mục 3.2.
+
+Chú thích:
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\item
+  Trọng số tiền huấn luyện của GloVe có tại https://nlp.stanford.edu/projects/glove/
+\item
+  Các mô hình ELMo tiền huấn luyện có tại: https://allennlp.org/elmo
+\item
+  Trọng số tiền huấn luyện do các tác giả của BERT công bố. Mã nguồn và trọng số có tại: https://github.com/google-research/bert
+\end{enumerate}
+
+\subsection{3.2 BERT cho lĩnh vực tài chính: FinBERT}
+
+Trong tiểu mục này, các tác giả mô tả cách triển khai BERT: 1) cách tiếp tục tiền huấn luyện trên kho ngữ liệu của lĩnh vực; 2-3) cách triển khai BERT cho tác vụ phân loại và hồi quy; 4) các chiến lược huấn luyện dùng trong lúc tinh chỉnh để tránh quên thảm khốc (catastrophic forgetting).
+
+3.2.1 Tiếp tục tiền huấn luyện. Howard và Ruder (2018) {[}5{]} cho thấy việc tiếp tục tiền huấn luyện mô hình ngôn ngữ trên kho ngữ liệu của lĩnh vực đích giúp cải thiện hiệu quả phân loại cuối cùng. Với BERT, chưa có nghiên cứu mang tính quyết định chứng minh điều tương tự. Dù vậy, các tác giả vẫn thực hiện bước tiếp tục tiền huấn luyện để quan sát xem sự thích nghi này có lợi cho lĩnh vực tài chính hay không. Có hai cách tiếp cận được thử nghiệm. Cách thứ nhất là tiền huấn luyện mô hình trên một kho ngữ liệu tương đối lớn của lĩnh vực đích: một mô hình ngôn ngữ BERT được tiền huấn luyện thêm trên kho ngữ liệu tài chính (chi tiết ở mục 4.2.1). Cách thứ hai là chỉ tiền huấn luyện trên các câu thuộc tập huấn luyện của bài toán phân loại. Dù kho ngữ liệu thứ hai nhỏ hơn nhiều, dữ liệu lấy trực tiếp từ đích có thể giúp thích nghi lĩnh vực đích tốt hơn.
+
+3.2.2 FinBERT cho phân loại văn bản. Phân loại cảm xúc được thực hiện bằng cách thêm một lớp dày đặc (dense layer) sau trạng thái ẩn cuối cùng của token {[}CLS{]}. Đây là cách làm được khuyến nghị khi dùng BERT cho mọi tác vụ phân loại {[}3{]}. Sau đó, mạng bộ phân loại được huấn luyện trên tập dữ liệu cảm xúc có gán nhãn. Tổng quan các bước của quy trình được trình bày ở hình 1.
+
+Bảng 1: Phân bố nhãn cảm xúc và mức độ đồng thuận trong Financial PhraseBank
+
+{\small
+\begin{longtable}[]{@{}lllll@{}}
+\toprule\noalign{}
+Mức đồng thuận & Tích cực & Tiêu cực & Trung lập & Số lượng \\
+\midrule\noalign{}
+\endhead
+\bottomrule\noalign{}
+\endlastfoot
+100\% & 25,2\% & 13,4\% & 61,4\% & 2262 \\
+75\% - 99\% & 26,6\% & 9,8\% & 63,6\% & 1191 \\
+66\% - 74\% & 36,7\% & 12,3\% & 50,9\% & 765 \\
+50\% - 65\% & 31,1\% & 14,4\% & 54,5\% & 627 \\
+Tất cả & 28,1\% & 12,4\% & 59,4\% & 4845 \\
+\end{longtable}
+}
+
+Các câu hỏi nghiên cứu (RQ):
+
+\begin{itemize}
+\item
+  (RQ2) FinBERT so với các phương pháp tốt nhất hiện nay (state-of-the-art) trong phân tích cảm xúc tài chính như thế nào, với mục tiêu rời rạc hoặc liên tục?
+\item
+  (RQ3) Việc tiếp tục tiền huấn luyện BERT trên lĩnh vực tài chính, hoặc trên kho ngữ liệu đích, ảnh hưởng thế nào đến hiệu quả phân loại?
+\item
+  (RQ4) Các chiến lược huấn luyện như tốc độ học tam giác nghiêng (slanted triangular learning rates), tinh chỉnh phân biệt theo lớp (discriminative fine-tuning) và rã đông dần (gradual unfreezing) ảnh hưởng thế nào đến hiệu quả phân loại? Chúng có ngăn được hiện tượng quên thảm khốc không?
+\item
+  (RQ5) Lớp mã hóa nào cho kết quả tốt nhất (hoặc kém nhất) khi phân loại câu?
+\item
+  (RQ6) Tinh chỉnh bao nhiêu là đủ? Tức là sau tiền huấn luyện, cần tinh chỉnh bao nhiêu lớp để đạt hiệu quả tương đương với tinh chỉnh toàn bộ mô hình?
+\end{itemize}
+
+3.2.3 FinBERT cho hồi quy. Dù trọng tâm của bài báo là phân loại, nhóm tác giả cũng triển khai hồi quy với kiến trúc gần như giống hệt trên một bộ dữ liệu khác có mục tiêu liên tục. Khác biệt duy nhất là hàm mất mát được dùng là sai số bình phương trung bình thay cho hàm mất mát entropy chéo.
+
+3.2.4 Chiến lược huấn luyện để tránh quên thảm khốc (catastrophic forgetting). Như Howard và Ruder (2018) {[}5{]} đã chỉ ra, quên thảm khốc là nguy cơ đáng kể của cách tinh chỉnh này, vì quá trình tinh chỉnh có thể nhanh chóng khiến mô hình "quên" thông tin từ tác vụ mô hình hóa ngôn ngữ khi cố thích nghi với tác vụ mới. Để xử lý hiện tượng này, nhóm áp dụng ba kỹ thuật do Howard và Ruder (2018) đề xuất: tốc độ học tam giác xiên (slanted triangular learning rates), tinh chỉnh phân biệt (discriminative fine-tuning) và rã đông dần (gradual unfreezing).
+
+\begin{itemize}
+\item
+  Tốc độ học tam giác xiên: áp dụng lịch tốc độ học có dạng tam giác xiên, tức là tốc độ học tăng tuyến tính đến một điểm nào đó rồi giảm tuyến tính sau điểm đó.
+\item
+  Tinh chỉnh phân biệt: dùng tốc độ học thấp hơn cho các lớp thấp hơn của mạng. Giả sử tốc độ học ở lớp l là \ensuremath{\alpha}; với hệ số phân biệt \ensuremath{\theta}, tốc độ học của lớp l \ensuremath{-} 1 được tính là \ensuremath{\alpha}l \ensuremath{-}1 = \ensuremath{\theta}\ensuremath{\alpha}l. Giả định đằng sau phương pháp là các lớp thấp biểu diễn thông tin ngôn ngữ ở mức sâu, còn các lớp trên chứa thông tin cho tác vụ phân loại thực tế, nên cần tinh chỉnh chúng khác nhau.
+\item
+  Rã đông dần: bắt đầu huấn luyện với mọi lớp bị đóng băng trừ lớp bộ phân loại. Trong quá trình huấn luyện, các lớp được rã đông dần, bắt đầu từ lớp cao nhất, sao cho các đặc trưng mức thấp được tinh chỉnh ít nhất. Nhờ vậy, ở các giai đoạn đầu, mô hình không "quên" thông tin ngôn ngữ mức thấp đã học từ tiền huấn luyện.
+\end{itemize}
+
+4.2
+
+Bộ dữ liệu
+
+4.2.1 TRC2-financial. Để tiền huấn luyện thêm cho BERT, nhóm dùng một kho ngữ liệu tài chính gọi là TRC2-financial. Đây là tập con của TRC2 của Reuters (chú thích 4), gồm 1,8 triệu bài báo do Reuters đăng từ 2008 đến 2010. Nhóm lọc theo một số từ khóa tài chính để kho ngữ liệu sát chủ đề hơn và phù hợp với năng lực tính toán sẵn có. Kết quả, TRC2-financial gồm 46.143 tài liệu với hơn 29 triệu từ và gần 400 nghìn câu.
+
+4.2.2 Financial PhraseBank. Bộ dữ liệu phân tích cảm xúc chính của bài báo là Financial PhraseBank (chú thích 5) của Malo và cs. 2014 {[}17{]}. Bộ này gồm 4845 câu tiếng Anh được chọn ngẫu nhiên từ tin tức tài chính trên cơ sở dữ liệu LexisNexis, sau đó được 16 người có nền tảng tài chính và kinh doanh gán nhãn. Người gán nhãn được yêu cầu đánh nhãn theo việc họ cho rằng thông tin trong câu có thể ảnh hưởng thế nào đến giá cổ phiếu của công ty được nhắc đến. Bộ dữ liệu cũng có thông tin về mức độ đồng thuận giữa những người gán nhãn đối với từng câu; phân bố các mức đồng thuận và nhãn cảm xúc xem ở bảng 1. Nhóm để riêng 20\% tổng số câu làm tập kiểm tra và 20\% phần còn lại làm tập xác thực; cuối cùng tập huấn luyện gồm 3101 mẫu. Với một số thí nghiệm, nhóm còn dùng kiểm định chéo 10 lần (10-fold cross validation).
+
+Chú thích:
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\setcounter{enumi}{3}
+\item
+  Kho ngữ liệu có thể xin dùng cho mục đích nghiên cứu tại: https://trec.nist.gov/data/reuters/reuters.html
+\item
+  Bộ dữ liệu có tại: https://www.researchgate.net/publication/251231364\_FinancialPhraseBank-v10
+\end{enumerate}
+
+4 THIẾT LẬP THÍ NGHIỆM
+
+4.1 Câu hỏi nghiên cứu
+
+Nhóm tìm cách trả lời các câu hỏi nghiên cứu sau:
+
+(RQ1) Hiệu năng của FinBERT trong phân loại câu ngắn là bao nhiêu so với các phương pháp học chuyển giao khác như ELMo và ULMFit?
+
+Hình 1: Tổng quan về tiền huấn luyện, tiền huấn luyện thêm và tinh chỉnh phân loại. Ba giai đoạn gồm: mô hình ngôn ngữ trên kho ngữ liệu tổng quát (BookCorpus + Wikipedia); mô hình ngôn ngữ trên kho ngữ liệu tài chính (Reuters TRC2-financial); mô hình phân loại trên bộ dữ liệu cảm xúc tài chính (Financial PhraseBank). Mỗi giai đoạn dùng cùng kiến trúc gồm lớp Embeddings, 12 bộ mã hóa (Encoder 1 đến Encoder 12) trên các token {[}CLS{]}, Token 1, Token 2, ..., {[}MASK{]}/Token k, {[}SEP{]}; hai giai đoạn đầu có đầu dự đoán câu kế tiếp ({[}is next sentence{]}) và dự đoán Masked LM, còn giai đoạn cuối có đầu dự đoán cảm xúc (Sentiment prediction).
+
+4.2.3 FiQA Sentiment. FiQA {[}15{]} là bộ dữ liệu được tạo cho thử thách khai phá ý kiến và hỏi đáp tài chính của hội nghị WWW \textquotesingle18 (chú thích 6). Nhóm dùng dữ liệu của Tác vụ 1, gồm 1.174 tiêu đề tin tài chính và tweet kèm điểm cảm xúc tương ứng. Khác với Financial PhraseBank, mục tiêu của bộ dữ liệu này là liên tục trong khoảng {[}\ensuremath{-}1, 1{]}, với 1 là tích cực nhất. Mỗi mẫu cũng có thông tin về thực thể tài chính được nhắm tới trong câu. Nhóm dùng kiểm định chéo 10 lần để đánh giá mô hình trên bộ dữ liệu này.
+
+4.3
+
+Mô hình phân loại được xây trên bộ PhraseBank bằng cách thêm một lớp kết nối đầy đủ vào đầu ra của mô hình ngôn ngữ tiền huấn luyện.
+
+4.4 Các chỉ số đánh giá
+
+Với các mô hình phân loại, nhóm dùng ba chỉ số: độ chính xác (Accuracy), hàm mất mát entropy chéo và trung bình macro F1. Hàm mất mát entropy chéo được đánh trọng số bằng căn bậc hai của nghịch đảo tần suất; ví dụ, nếu một nhãn chiếm 25\% tổng số mẫu thì mất mát của nhãn đó được nhân trọng số 2. Trung bình macro F1 tính điểm F1 cho từng lớp rồi lấy trung bình. Vì dữ liệu Financial PhraseBank bị mất cân bằng nhãn (gần 60\% số câu là trung tính), chỉ số này là thước đo bổ sung tốt cho chất lượng phân loại. Với mô hình hồi quy, nhóm báo cáo sai số bình phương trung bình và R², vì cả hai đều là chuẩn và cũng được các bài báo tiên tiến nhất trên bộ dữ liệu FiQA báo cáo.
+
+\subsection{4.3 Các phương pháp cơ sở (Baseline)}
+
+Để so sánh đối chứng, chúng tôi xét ba phương pháp cơ sở: bộ phân loại LSTM với embedding GLoVe, bộ phân loại LSTM với embedding ELMo và bộ phân loại ULMFit. Lưu ý rằng các phương pháp này không được thử nghiệm kỹ như BERT, nên kết quả không nên được diễn giải như kết luận dứt khoát rằng phương pháp nào tốt hơn.
+
+\subsubsection{4.3.1 Bộ phân loại LSTM}
+
+Chúng tôi cài đặt hai bộ phân loại dùng LSTM hai chiều. Cả hai đều có kích thước ẩn 128, nên trạng thái ẩn cuối có kích thước 256 do tính hai chiều. Một lớp truyền thẳng kết nối đầy đủ ánh xạ trạng thái ẩn cuối thành vectơ ba chiều, biểu diễn khả năng của ba nhãn. Hai mô hình chỉ khác nhau ở chỗ một dùng embedding GLoVe, còn một dùng embedding ELMo. Cả hai dùng xác suất dropout 0,3 và tốc độ học 3e-5; huấn luyện đến khi hàm mất mát trên tập xác thực không cải thiện sau 10 epoch.
+
+\subsection{4.4 Chi tiết cài đặt}
+
+Với BERT, chúng tôi dùng xác suất dropout p = 0,1, tỷ lệ warm-up 0,2, độ dài chuỗi tối đa 64 token, tốc độ học 2e-5 và mini-batch 64. Mô hình được huấn luyện 6 epoch, đánh giá trên tập xác thực và chọn phiên bản tốt nhất. Với tinh chỉnh phân biệt (discriminative fine-tuning), tỷ lệ phân biệt đặt là 0,85. Quá trình bắt đầu chỉ với lớp phân loại được mở khóa; sau mỗi một phần ba epoch thì mở khóa lớp kế tiếp. Máy chủ Amazon p2.xlarge EC2 với một GPU NVIDIA K80, 4 vCPU và 64 GiB bộ nhớ chủ được dùng để huấn luyện.
+
+\subsubsection{4.3.2 ULMFit}
+
+Như đã giải thích ở mục 3.1.3, phân loại bằng ULMFit gồm ba bước. Bước đầu, tiền huấn luyện mô hình ngôn ngữ, đã hoàn tất và trọng số tiền huấn luyện do Howard và Ruder (2018) công bố. Chúng tôi tiền huấn luyện thêm mô hình ngôn ngữ AWD-LSTM trên kho ngữ liệu TRC2-financial trong 3 epoch, sau đó tinh chỉnh mô hình cho phân loại trên Financial PhraseBank.
+
+\section{5. Kết quả thực nghiệm (RQ1 và RQ2)}
+
+Kết quả của FinBERT, các phương pháp cơ sở và các mô hình tiên tiến nhất (state-of-the-art) trên tác vụ phân loại bộ dữ liệu Financial PhraseBank được trình bày ở bảng 2, cho cả toàn bộ dữ liệu lẫn tập con có 100\% người chú thích đồng thuận.
+
+Bảng 2: Kết quả thực nghiệm trên bộ dữ liệu Financial PhraseBank
+
+{\small
+\begin{longtable}[]{@{}
+  >{\raggedright\arraybackslash}p{(\columnwidth - 12\tabcolsep) * \real{0.1429}}
+  >{\raggedright\arraybackslash}p{(\columnwidth - 12\tabcolsep) * \real{0.1429}}
+  >{\raggedright\arraybackslash}p{(\columnwidth - 12\tabcolsep) * \real{0.1429}}
+  >{\raggedright\arraybackslash}p{(\columnwidth - 12\tabcolsep) * \real{0.1429}}
+  >{\raggedright\arraybackslash}p{(\columnwidth - 12\tabcolsep) * \real{0.1429}}
+  >{\raggedright\arraybackslash}p{(\columnwidth - 12\tabcolsep) * \real{0.1429}}
+  >{\raggedright\arraybackslash}p{(\columnwidth - 12\tabcolsep) * \real{0.1429}}@{}}
+\toprule\noalign{}
+\begin{minipage}[b]{\linewidth}\raggedright
+Mô hình
+\end{minipage} & \begin{minipage}[b]{\linewidth}\raggedright
+Toàn bộ: Loss
+\end{minipage} & \begin{minipage}[b]{\linewidth}\raggedright
+Toàn bộ: Accuracy
+\end{minipage} & \begin{minipage}[b]{\linewidth}\raggedright
+Toàn bộ: F1
+\end{minipage} & \begin{minipage}[b]{\linewidth}\raggedright
+100\% đồng thuận: Loss
+\end{minipage} & \begin{minipage}[b]{\linewidth}\raggedright
+100\% đồng thuận: Accuracy
+\end{minipage} & \begin{minipage}[b]{\linewidth}\raggedright
+100\% đồng thuận: F1
+\end{minipage} \\
+\midrule\noalign{}
+\endhead
+\bottomrule\noalign{}
+\endlastfoot
+LSTM & 0.81 & 0.71 & 0.64 & 0.57 & 0.81 & 0.74 \\
+LSTM with ELMo & 0.72 & 0.75 & 0.7 & 0.50 & 0.84 & 0.77 \\
+ULMFit & 0.41 & 0.83 & 0.79 & 0.20 & 0.93 & 0.91 \\
+LPS & - & 0.71 & 0.71 & - & 0.79 & 0.80 \\
+HSC & - & 0.71 & 0.76 & - & 0.83 & 0.86 \\
+FinSSLX & - & - & - & - & 0.91 & 0.88 \\
+FinBERT & 0.37 & 0.86 & 0.84 & 0.13 & 0.97 & 0.95 \\
+\end{longtable}
+}
+
+Chú thích: chữ đậm là kết quả tốt nhất theo từng chỉ số. Kết quả của LPS {[}17{]}, HSC {[}8{]} và FinSSLX {[}15{]} lấy từ các bài báo gốc; với LPS và HSC, độ chính xác tổng thể không được báo cáo nên chúng tôi tính lại từ độ bao phủ (recall) của từng lớp. Với các mô hình tự cài đặt, chúng tôi báo cáo kết quả kiểm định chéo 10 lần.
+
+Trên mọi chỉ số, FinBERT rõ ràng tốt nhất, hơn cả các mô hình tự cài đặt (LSTM, ULMFit) lẫn các mô hình trong bài báo khác (LPS {[}17{]}, HSC {[}8{]}, FinSSLX {[}14{]}).
+
+\begin{itemize}
+\item
+  LSTM không có thông tin mô hình ngôn ngữ kém nhất. Về độ chính xác nó gần LPS và HSC (thậm chí hơn LPS với các mẫu đồng thuận hoàn toàn) nhưng F1 thấp, do nó hoạt động tốt hơn hẳn ở lớp trung lập.
+\item
+  LSTM với embedding ELMo cải thiện so với LSTM dùng embedding tĩnh trên mọi chỉ số, nhưng F1 trung bình vẫn thấp do kém ở các nhãn ít xuất hiện. Hiệu năng tương đương LPS và HSC, vượt chúng về độ chính xác. Như vậy nhúng từ theo ngữ cảnh cho hiệu năng gần với các phương pháp dựa trên học máy ở bộ dữ liệu cỡ này.
+\item
+  ULMFit cải thiện đáng kể mọi chỉ số, không bị lệch giữa các lớp, và vượt rõ LPS, HSC, cho thấy hiệu quả của tiền huấn luyện mô hình ngôn ngữ. AWD-LSTM là mô hình rất lớn nên có thể bị quá khớp với bộ dữ liệu nhỏ, nhưng nhờ tiền huấn luyện và chiến lược huấn luyện hiệu quả, nó vượt qua vấn đề dữ liệu nhỏ. ULMFit cũng vượt FinSSLX, vốn có bước đơn giản hóa văn bản và tiền huấn luyện nhúng từ trên kho ngữ liệu tài chính lớn có nhãn cảm xúc.
+\item
+  FinBERT vượt ULMFit và do đó vượt mọi phương pháp khác trên mọi chỉ số.
+\end{itemize}
+
+Để đo hiệu năng với các kích thước tập huấn luyện có nhãn khác nhau, chúng tôi chạy LSTM, ULMFit và FinBERT trên 5 cấu hình; hình 2 vẽ hàm mất mát cross entropy trên tập kiểm tra của từng mô hình. 100 mẫu huấn luyện là quá ít cho mọi mô hình. Từ 250 mẫu, ULMFit và FinBERT bắt đầu phân biệt nhãn thành công, FinBERT đạt độ chính xác tới 80\%. Mọi phương pháp đều tốt dần khi có thêm dữ liệu, nhưng với 250 mẫu ULMFit và FinBERT đã tốt hơn các bộ phân loại LSTM dùng toàn bộ dữ liệu, cho thấy hiệu quả của tiền huấn luyện mô hình ngôn ngữ.
+
+Hình 2: Hàm mất mát trên tập kiểm tra theo các kích thước tập huấn luyện khác nhau
+
+Kết quả trên bộ dữ liệu cảm xúc FiQA được trình bày ở Bảng 3. Mô hình của chúng tôi vượt các mô hình tiên tiến nhất (state-of-the-art) cả về MSE lẫn R². Cần lưu ý rằng hai bài báo {[}31{]} {[}24{]} dùng tập kiểm tra chính thức của FiQA Task 1; vì không có quyền truy cập tập này, chúng tôi báo cáo kết quả theo kiểm định chéo 10 lần (10-fold cross validation). Không có dấu hiệu nào ở {[}15{]} cho thấy tập huấn luyện và tập kiểm tra được công bố có phân phối khác nhau, và mô hình của chúng tôi có thể bị coi là chịu bất lợi do phải tách một phần tập huấn luyện làm tập kiểm tra, trong khi các bài báo tiên tiến được dùng toàn bộ tập huấn luyện.
+
+\section{6 PHÂN TÍCH THỰC NGHIỆM}
+
+\subsection{6.1 Ảnh hưởng của việc tiền huấn luyện bổ sung (RQ3)}
+
+Trước hết đo ảnh hưởng của tiền huấn luyện bổ sung (further pre-training) lên hiệu năng của bộ phân loại. So sánh ba mô hình: 1) không tiền huấn luyện bổ sung (Vanilla BERT); 2) tiền huấn luyện bổ sung trên tập huấn luyện của bài toán phân loại (FinBERT-task); 3) tiền huấn luyện bổ sung trên kho ngữ liệu miền tài chính TRC2-financial (FinBERT-domain). Các mô hình được đánh giá bằng loss, độ chính xác và F1 trung bình macro trên tập kiểm tra; kết quả ở Bảng 4.
+
+\textbf{Bảng 3: Kết quả thực nghiệm trên bộ dữ liệu cảm xúc FiQA}
+
+{\small
+\begin{longtable}[]{@{}lll@{}}
+\toprule\noalign{}
+Mô hình & MSE & R² \\
+\midrule\noalign{}
+\endhead
+\bottomrule\noalign{}
+\endlastfoot
+Yang et. al. (2018) & 0.08 & 0.40 \\
+Piao and Breslin (2018) & 0.09 & 0.41 \\
+FinBERT & 0.07 & 0.55 \\
+\end{longtable}
+}
+
+In đậm là kết quả tốt nhất theo từng chỉ số. Yang et. al. (2018) {[}31{]} và Piao and Breslin (2018) {[}24{]} báo cáo trên tập kiểm tra chính thức; do không có tập này, MSE và R² của chúng tôi được tính bằng kiểm định chéo 10 lần.
+
+\textbf{Bảng 4: Hiệu năng với các chiến lược tiền huấn luyện khác nhau}
+
+{\small
+\begin{longtable}[]{@{}llll@{}}
+\toprule\noalign{}
+Mô hình & Loss & Accuracy & F1 Score \\
+\midrule\noalign{}
+\endhead
+\bottomrule\noalign{}
+\endlastfoot
+Vanilla BERT & 0.38 & 0.85 & 0.84 \\
+FinBERT-task & 0.39 & 0.86 & 0.85 \\
+FinBERT-domain & 0.37 & 0.86 & 0.84 \\
+\end{longtable}
+}
+
+\textbf{Hình 3: Quỹ đạo hàm mất mát trên tập xác thực với các chiến lược huấn luyện khác nhau}
+
+Bộ phân loại được tiền huấn luyện bổ sung trên kho ngữ liệu miền tài chính cho kết quả tốt nhất trong ba mô hình, dù chênh lệch không lớn. Có thể có bốn nguyên nhân: 1) kho ngữ liệu có thể có phân phối khác với tập của bài toán; 2) bộ phân loại BERT có thể không cải thiện đáng kể nhờ tiền huấn luyện bổ sung; 3) phân loại câu ngắn có thể không hưởng lợi nhiều từ tiền huấn luyện bổ sung; 4) hiệu năng vốn đã rất cao nên còn ít dư địa cải thiện. Nhóm tác giả cho rằng nguyên nhân cuối là khả dĩ nhất, vì trên tập con của Financial Phrasebank mà mọi người gán nhãn đều đồng thuận, độ chính xác của Vanilla BERT đã đạt 0.96. Hiệu năng ở các mức đồng thuận khác hẳn thấp hơn vì ngay cả con người cũng không hoàn toàn thống nhất. Cần thêm thực nghiệm trên một bộ dữ liệu tài chính có nhãn khác để kết luận rằng ảnh hưởng của tiền huấn luyện bổ sung trên kho ngữ liệu miền là không đáng kể.
+
+\subsection{6.2 Quên thảm khốc (RQ4)}
+
+Để đo hiệu quả của các kỹ thuật chống quên thảm khốc (catastrophic forgetting), thử bốn thiết lập: không điều chỉnh (NA); chỉ dùng tốc độ học tam giác nghiêng (STL); STL kết hợp giải đóng băng dần (GU); và các kỹ thuật trước đó cùng với tinh chỉnh phân biệt (DFT). Hiệu năng của bốn thiết lập được báo cáo qua hàm mất mát trên tập kiểm tra và quỹ đạo hàm mất mát xác thực qua các epoch huấn luyện; kết quả ở Bảng 5 và Hình 3.
+
+\textbf{Bảng 5: Hiệu năng với các chiến lược tinh chỉnh khác nhau}
+
+{\small
+\begin{longtable}[]{@{}llll@{}}
+\toprule\noalign{}
+Chiến lược & Loss & Accuracy & F1 Score \\
+\midrule\noalign{}
+\endhead
+\bottomrule\noalign{}
+\endlastfoot
+None & 0.48 & 0.83 & 0.83 \\
+STL & 0.40 & 0.81 & 0.82 \\
+STL + GU & 0.40 & 0.86 & 0.86 \\
+STL + DFT & 0.42 & 0.79 & 0.79 \\
+All three & 0.37 & 0.86 & 0.84 \\
+\end{longtable}
+}
+
+In đậm là kết quả tốt nhất theo từng chỉ số; kết quả theo kiểm định chéo 10 lần. STL: tốc độ học tam giác nghiêng (slanted triangular learning rates); GU: giải đóng băng dần (gradual unfreezing); DFT: tinh chỉnh phân biệt (discriminative fine-tuning).
+
+Áp dụng cả ba chiến lược cho hiệu năng tốt nhất xét theo loss và độ chính xác trên tập kiểm tra. Giải đóng băng dần và tinh chỉnh phân biệt có chung lập luận: các đặc trưng ở tầng cao cần được tinh chỉnh nhiều hơn tầng thấp, vì thông tin học được từ mô hình hóa ngôn ngữ chủ yếu nằm ở các tầng thấp. Bảng 5 cho thấy chỉ dùng tinh chỉnh phân biệt cùng tốc độ học tam giác nghiêng kém hơn chỉ dùng tốc độ học tam giác nghiêng; điều này cho thấy giải đóng băng dần là kỹ thuật quan trọng nhất trong trường hợp này.
+
+Quên thảm khốc có thể biểu hiện qua việc loss xác thực tăng đột ngột sau vài epoch. Khi huấn luyện, mô hình nhanh chóng quá khớp (overfit) nếu không có biện pháp phòng ngừa. Hình 3 cho thấy đúng như vậy khi không áp dụng kỹ thuật nào ở trên: mô hình đạt hiệu năng tốt nhất trên tập xác thực sau epoch đầu rồi bắt đầu quá khớp; còn khi áp dụng cả ba, mô hình ổn định hơn nhiều. Các tổ hợp còn lại nằm giữa hai trường hợp này.
+
+\subsection{6.3 Chọn tầng tốt nhất để phân loại (RQ5)}
+
+BERT có 12 tầng bộ mã hóa Transformer. Không nhất thiết tầng cuối nắm giữ thông tin liên quan nhất đến bài toán phân loại trong quá trình huấn luyện mô hình ngôn ngữ.
+
+\textbf{Bảng 6: Hiệu năng khi dùng các tầng bộ mã hóa khác nhau để phân loại}
+
+{\small
+\begin{longtable}[]{@{}llll@{}}
+\toprule\noalign{}
+Tầng dùng để phân loại & Loss & Accuracy & F1 Score \\
+\midrule\noalign{}
+\endhead
+\bottomrule\noalign{}
+\endlastfoot
+Layer-1 & 0.65 & 0.76 & 0.77 \\
+Layer-2 & 0.54 & 0.78 & 0.78 \\
+Layer-3 & 0.52 & 0.76 & 0.77 \\
+Layer-4 & 0.48 & 0.80 & 0.77 \\
+Layer-5 & 0.52 & 0.80 & 0.80 \\
+Layer-6 & 0.45 & 0.82 & 0.82 \\
+Layer-7 & 0.43 & 0.82 & 0.83 \\
+Layer-8 & 0.44 & 0.83 & 0.81 \\
+Layer-9 & 0.41 & 0.84 & 0.82 \\
+Layer-10 & 0.42 & 0.83 & 0.82 \\
+Layer-11 & 0.38 & 0.84 & 0.83 \\
+Layer-12 & 0.37 & 0.86 & 0.84 \\
+Trung bình tất cả các tầng & 0.41 & 0.84 & 0.84 \\
+\end{longtable}
+}
+
+\textbf{Bảng 7: Hiệu năng khi bắt đầu huấn luyện từ các tầng khác nhau} (cột thời gian huấn luyện - Training time - tiếp tục ở phần sau)
+
+{\small
+\begin{longtable}[]{@{}lll@{}}
+\toprule\noalign{}
+Tầng đầu tiên được giải đóng băng & Loss & Accuracy \\
+\midrule\noalign{}
+\endhead
+\bottomrule\noalign{}
+\endlastfoot
+Embeddings layer & 0.37 & 0.86 \\
+Layer-1 & 0.39 & 0.83 \\
+Layer-2 & 0.39 & 0.83 \\
+Layer-3 & 0.38 & 0.83 \\
+Layer-4 & 0.38 & 0.82 \\
+Layer-5 & 0.40 & 0.83 \\
+Layer-6 & 0.40 & 0.81 \\
+Layer-7 & 0.39 & 0.82 \\
+Layer-8 & 0.39 & 0.84 \\
+Layer-9 & 0.39 & 0.84 \\
+Layer-10 & 0.41 & 0.84 \\
+Layer-11 & 0.45 & 0.82 \\
+Layer-12 & 0.47 & 0.81 \\
+Classification layer & 1.04 & 0.52 \\
+\end{longtable}
+}
+
+Theo Malo và cộng sự (2014) {[}17{]}, phần lớn bất đồng giữa các người gán nhãn nằm ở cặp nhãn tích cực và trung lập (mức đồng thuận khi phân tách tích cực-tiêu cực, tiêu cực-trung lập và tích cực-trung lập lần lượt là 98,7\%, 94,2\% và 75,2\%). Các tác giả cho rằng nguyên nhân là khó phân biệt "lối nói hoa mỹ thường dùng của doanh nghiệp" với "các phát biểu tích cực thực sự". Bài báo trình bày ma trận nhầm lẫn để kiểm tra xem FinBERT có gặp tình trạng tương tự hay không.
+
+Trong thí nghiệm về lớp, bài báo khảo sát lớp nào trong 12 lớp bộ mã hóa Transformer cho kết quả phân loại tốt nhất, bằng cách đặt lớp phân loại lên các biểu diễn token {[}CLS{]} của từng lớp; đồng thời thử lấy trung bình của tất cả các lớp. Như bảng 6 cho thấy, lớp cuối cùng đóng góp nhiều nhất vào hiệu năng mô hình ở mọi chỉ số đo. Điều này có thể phản ánh hai yếu tố: 1) khi dùng các lớp cao hơn, mô hình được huấn luyện lớn hơn nên có thể mạnh hơn; 2) các lớp thấp nắm bắt thông tin ngữ nghĩa sâu hơn nên khó tinh chỉnh (fine-tune) thông tin đó cho bài toán phân loại.
+
+\subsection{6.4. Chỉ huấn luyện một tập con các lớp (RQ6)}
+
+BERT là mô hình rất lớn. Ngay cả trên tập dữ liệu nhỏ, tinh chỉnh toàn bộ mô hình cũng đòi hỏi nhiều thời gian và sức mạnh tính toán. Vì vậy, nếu chỉ tinh chỉnh một tập con tham số mà hiệu năng giảm nhẹ thì có thể là lựa chọn đáng ưu tiên trong một số bối cảnh, nhất là khi tập huấn luyện rất lớn. Ở đây, bài báo thử nghiệm chỉ tinh chỉnh k lớp bộ mã hóa cuối cùng.
+
+Kết quả được trình bày ở bảng 7. Chỉ tinh chỉnh lớp phân loại thì không đạt hiệu năng gần với việc tinh chỉnh các lớp khác. Tuy nhiên, chỉ tinh chỉnh lớp cuối cùng đã vượt dễ dàng các phương pháp học máy hiện đại như HSC. Từ Layer-9 trở đi, hiệu năng gần như không đổi và chỉ bị việc tinh chỉnh toàn bộ mô hình vượt qua. Kết quả này cho thấy để tận dụng BERT, không bắt buộc phải huấn luyện toàn bộ mô hình tốn kém; có thể đánh đổi hợp lý để giảm mạnh thời gian huấn luyện với mức giảm hiệu năng nhỏ.
+
+\subsection{6.5. Mô hình sai ở đâu?}
+
+Với độ chính xác 97\% trên tập con của Financial PhraseBank có 100\% đồng thuận giữa người gán nhãn, bài báo cho rằng việc xem xét các trường hợp mô hình dự đoán sai nhãn thật là một bài tập thú vị. Do đó, phần này trình bày một số ví dụ mô hình dự đoán sai.
+
+Ví dụ 1: Pre-tax loss totaled euro 0.3 million , compared to a loss of euro 2.2 million in the first quarter of 2005 . Giá trị thật: Tích cực; Dự đoán: Tiêu cực
+
+Ví dụ 2: This implementation is very important to the operator , since it is about to launch its Fixed to Mobile convergence service in Brazil Giá trị thật: Trung lập; Dự đoán: Tích cực
+
+Ví dụ 3: The situation of coated magazine printing paper will continue to be weak . Giá trị thật: Tiêu cực; Dự đoán: Trung lập
+
+Ví dụ đầu tiên thực ra là kiểu lỗi phổ biến nhất. Mô hình không thực hiện được phép so sánh con số nào lớn hơn, và khi thiếu các từ chỉ hướng như "increased" thì có thể dự đoán trung lập. Tuy vậy, cũng có nhiều trường hợp tương tự mà mô hình dự đoán đúng. Ví dụ 2 và 3 là các biến thể của cùng một kiểu lỗi: mô hình không phân biệt được phát biểu trung lập về một tình huống với phát biểu mang phân cực (polarity) đối với công ty. Ở ví dụ thứ ba, thông tin về hoạt động kinh doanh của công ty có lẽ sẽ giúp ích.
+
+Ma trận nhầm lẫn được trình bày ở hình 4. 73\% số lỗi xảy ra giữa nhãn tích cực và trung lập, trong khi con số này là 5\% giữa tiêu cực và tích cực. Điều này nhất quán với cả mức đồng thuận giữa người gán nhãn lẫn lẽ thường: phân biệt tích cực với tiêu cực dễ hơn, còn xác định một phát biểu thể hiện triển vọng tích cực hay chỉ là quan sát khách quan thì khó hơn.
+
+Hình 4: Ma trận nhầm lẫn
+
+\section{7. Kết luận (đoạn cuối)}
+
+... dữ liệu lợi suất thị trường (cả về hướng lẫn biến động) trên tin tức tài chính. FinBERT đủ tốt để trích xuất các cảm xúc tường minh, nhưng mô hình hóa thông tin ẩn, vốn không nhất thiết hiển nhiên ngay cả với người viết văn bản, sẽ là nhiệm vụ đầy thách thức. Một hướng mở rộng khác là dùng FinBERT cho các tác vụ xử lý ngôn ngữ tự nhiên (NLP) khác như nhận dạng thực thể có tên hoặc hỏi đáp trong lĩnh vực tài chính.
+
+\section{8. Lời cảm ơn}
+
+Tác giả xin bày tỏ lòng biết ơn tới Pengjie Ren và Zulkuf Genc vì sự hướng dẫn xuất sắc: họ vừa để tác giả tự chủ định hướng nghiên cứu, vừa đưa ra những góp ý quý giá khi cần. Tác giả cũng cảm ơn nhóm Naspers AI đã tin tưởng giao dự án này và luôn khuyến khích chia sẻ công trình; biết ơn NIST đã chia sẻ kho ngữ liệu Reuters TRC-2, và Malo và cộng sự đã công bố công khai Financial PhraseBank xuất sắc.
+
+TÀI LIỆU THAM KHẢO {[}1{]} Basant Agarwal and Namita Mittal. 2016. Machine Learning Approach for Sentiment Analysis. Springer International Publishing, Cham, 21--45. https: //doi.org/10.1007/978-3-319-25343-5\_3 {[}2{]} Oscar Araque, Ignacio Corcuera-Platas, J. Fernando Sánchez-Rada, and Carlos A. Iglesias. 2017. Enhancing deep learning sentiment analysis with ensemble techniques in social applications. Expert Systems with Applications 77 (jul 2017), 236--246. https://doi.org/10.1016/j.eswa.2017.02.002 {[}3{]} Jacob Devlin, Ming-Wei Chang, Kenton Lee, and Kristina Toutanova. 2018. BERT: Pre-training of Deep Bidirectional Transformers for Language Understanding. (2018). https://doi.org/arXiv:1811.03600v2 arXiv:1810.04805 {[}4{]} Li Guo, Feng Shi, and Jun Tu. 2016. Textual analysis and machine leaning: Crack unstructured data in finance and accounting. The Journal of Finance and Data Science 2, 3 (sep 2016), 153--170. https://doi.org/10.1016/J.JFDS.2017.02.001 {[}5{]} Jeremy Howard and Sebastian Ruder. 2018. Universal Language Model Finetuning for Text Classification. (jan 2018). arXiv:1801.06146 http://arxiv.org/abs/ 1801.06146 {[}6{]} Neel Kant, Raul Puri, Nikolai Yakovenko, and Bryan Catanzaro. 2018. Practical Text Classification With Large Pre-Trained Language Models. (2018). arXiv:1812.01207 http://arxiv.org/abs/1812.01207 {[}7{]} Mathias Kraus and Stefan Feuerriegel. 2017. Decision support from financial disclosures with deep neural networks and transfer learning. Decision Support Systems 104 (2017), 38--48. https://doi.org/10.1016/j.dss.2017.10.001 arXiv:1710.03954 {[}8{]} Srikumar Krishnamoorthy. 2018. Sentiment analysis of financial news articles using performance indicators. Knowledge and Information Systems 56, 2 (aug 2018), 373--394. https://doi.org/10.1007/s10115-017-1134-1 {[}9{]} Xiaodong Li, Haoran Xie, Li Chen, Jianping Wang, and Xiaotie Deng. 2014. News impact on stock price return via sentiment analysis. Knowledge-Based Systems 69 (oct 2014), 14--23. https://doi.org/10.1016/j.knosys.2014.04.022 {[}10{]} Bing Liu. 2012. Sentiment Analysis and Opinion Mining. Synthesis Lectures on Human Language Technologies 5, 1 (may 2012), 1--167. https://doi.org/10.2200/ s00416ed1v01y201204hlt016 {[}11{]} Tim Loughran and Bill Mcdonald. 2011. When Is a Liability Not a Liability? Textual Analysis, Dictionaries, and 10-Ks. Journal of Finance 66, 1 (feb 2011), 35--65. https://doi.org/10.1111/j.1540-6261.2010.01625.x {[}12{]} Tim Loughran and Bill Mcdonald. 2016. Textual Analysis in Accounting and Finance: A Survey. Journal of Accounting Research 54, 4 (2016), 1187--1230. https://doi.org/10.1111/1475-679X.12123 {[}13{]} Bernhard Lutz, Nicolas Pröllochs, and Dirk Neumann. 2018. Sentence-Level Sentiment Analysis of Financial News Using Distributed Text Representations and Multi-Instance Learning. Technical Report. arXiv:1901.00400 http://arxiv.org/ abs/1901.00400 {[}14{]} Macedo Maia, Andrï£¡ Freitas, and Siegfried Handschuh. 2018. FinSSLx: A Sentiment Analysis Model for the Financial Domain Using Text Simplification. In 2018 IEEE 12th International Conference on Semantic Computing (ICSC). IEEE, 318--319. https://doi.org/10.1109/ICSC.2018.00065 {[}15{]} Macedo Maia, Siegfried Handschuh, André Freitas, Brian Davis, Ross Mcdermott, Manel Zarrouk, Alexandra Balahur, and Ross Mc-Dermott. 2018. Companion of the The Web Conference 2018 on The Web Conference 2018, \{WWW\} 2018, Lyon , France, April 23-27, 2018. ACM. https://doi.org/10.1145/3184558 {[}16{]} Burton G Malkiel. 2003. The Efficient Market Hypothesis and Its Critics. Journal of Economic Perspectives 17, 1 (feb 2003), 59--82. https://doi.org/10.1257/
+
+KẾT LUẬN VÀ HƯỚNG PHÁT TRIỂN
+
+Trong bài báo này, nhóm tác giả triển khai BERT cho lĩnh vực tài chính bằng cách tiếp tục tiền huấn luyện trên một kho ngữ liệu tài chính, rồi tinh chỉnh (fine-tune) cho phân tích cảm xúc (FinBERT). Theo hiểu biết của nhóm, đây là ứng dụng đầu tiên của BERT trong tài chính và là một trong số ít nghiên cứu thử nghiệm việc tiếp tục tiền huấn luyện trên kho ngữ liệu chuyên ngành. Trên cả hai bộ dữ liệu được sử dụng, mô hình đạt kết quả tốt nhất hiện nay (state-of-the-art) với biên độ đáng kể. Ở tác vụ phân loại, độ chính xác vượt mức tốt nhất trước đó 15\%.
+
+Ngoài BERT, nhóm còn triển khai các mô hình ngôn ngữ tiền huấn luyện khác như ELMo và ULMFit để so sánh. ULMFit, được tiếp tục tiền huấn luyện trên kho ngữ liệu tài chính, cũng vượt kết quả tốt nhất trước đó ở tác vụ phân loại, nhưng mức cải thiện nhỏ hơn BERT. Các kết quả này cho thấy hiệu quả của mô hình ngôn ngữ tiền huấn luyện đối với tác vụ hạ nguồn như phân tích cảm xúc, nhất là khi tập dữ liệu có nhãn nhỏ. Toàn bộ bộ dữ liệu có hơn 3000 mẫu, nhưng FinBERT vẫn vượt kết quả tốt nhất trước đó chỉ với tập huấn luyện 500 mẫu. Đây là kết quả quan trọng, vì các kỹ thuật học sâu cho NLP vốn bị coi là quá "khát dữ liệu", điều dường như không còn đúng nữa.
+
+Nhóm đã tiến hành nhiều thí nghiệm với BERT, khảo sát tác động của việc tiếp tục tiền huấn luyện và một số chiến lược huấn luyện. Chưa thể kết luận rằng tiếp tục tiền huấn luyện trên kho ngữ liệu chuyên ngành tốt hơn đáng kể so với không làm như vậy trong trường hợp này. Giả thuyết của nhóm là BERT vốn đã hoạt động đủ tốt trên bộ dữ liệu này nên không còn nhiều dư địa để tiếp tục tiền huấn luyện cải thiện thêm. Nhóm cũng thấy rằng các chế độ tốc độ học (learning rate) tinh chỉnh các tầng trên mạnh hơn các tầng dưới cho kết quả tốt hơn và hiệu quả hơn trong việc ngăn hiện tượng quên thảm khốc (catastrophic forgetting). Một kết luận khác: có thể đạt hiệu năng tương đương với thời gian huấn luyện ít hơn nhiều bằng cách chỉ tinh chỉnh 2 tầng cuối của BERT.
+
+Phân tích cảm xúc tài chính không phải là mục tiêu tự thân; giá trị của nó nằm ở mức độ hỗ trợ được các quyết định tài chính. Một hướng mở rộng khả dĩ của nghiên cứu là sử dụng trực tiếp FinBERT với thị trường chứng khoán
+
+ACM SIGIR Conference on Research and Development in Information Retrieval SIGIR \textquotesingle15. ACM Press. https://doi.org/10.1145/2766462.2767830 {[}26{]} Sahar Sohangir, Dingding Wang, Anna Pomeranets, and Taghi M Khoshgoftaar.
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\setcounter{enumi}{2017}
+\item
+  Big Data: Deep Learning for financial sentiment analysis. Journal of Big Data 5, 1 (2018). https://doi.org/10.1186/s40537-017-0111-6 {[}27{]} Chi Sun, Xipeng Qiu, Yige Xu, and Xuanjing Huang. 2019. How to Fine-Tune BERT for Text Classification? (2019). arXiv:1905.05583 https://arxiv.org/pdf/ 1905.05583v1.pdfhttp://arxiv.org/abs/1905.05583 {[}28{]} Abinash Tripathy, Ankit Agrawal, and Santanu Kumar Rath. 2016. Classification of sentiment reviews using n-gram machine learning approach. Expert Systems with Applications 57 (sep 2016), 117--126. https://doi.org/10.1016/j.eswa.2016.03. 028 {[}29{]} Ashish Vaswani, Noam Shazeer, Niki Parmar, Jakob Uszkoreit, Llion Jones, Aidan N. Gomez, Lukasz Kaiser, and Illia Polosukhin. 2017. Attention Is All You Need. Nips (2017). arXiv:1706.03762 http://arxiv.org/abs/1706.03762 {[}30{]} Casey Whitelaw, Navendu Garg, and Shlomo Argamon. 2005. Using appraisal groups for sentiment analysis. In Proceedings of the 14th ACM international conference on Information and knowledge management - CIKM \textquotesingle05. ACM Press. https://doi.org/10.1145/1099554.1099714 {[}31{]} Steve Yang, Jason Rosenfeld, and Jacques Makutonin. 2018. Financial AspectBased Sentiment Analysis using Deep Representations. (2018). arXiv:1808.07931 https://arxiv.org/pdf/1808.07931v1.pdfhttp://arxiv.org/abs/1808.07931 {[}32{]} Lei Zhang, Shuai Wang, and Bing Liu. 2018. Deep learning for sentiment analysis: A survey. Wiley Interdisciplinary Reviews: Data Mining and Knowledge Discovery 8, 4 (mar 2018), e1253. https://doi.org/10.1002/widm.1253 {[}33{]} Yukun Zhu, Ryan Kiros, Richard Zemel, Ruslan Salakhutdinov, Raquel Urtasun, Antonio Torralba, and Sanja Fidler. 2015. Aligning Books and Movies: Towards Story-like Visual Explanations by Watching Movies and Reading Books. (jun 2015). arXiv:1506.06724 http://arxiv.org/abs/1506.06724
+\end{enumerate}
+
+{[}17{]} Pekka Malo, Ankur Sinha, Pekka Korhonen, Jyrki Wallenius, and Pyry Takala.
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\setcounter{enumi}{2013}
+\item
+  Good debt or bad debt: Detecting semantic orientations in economic texts. Journal of the Association for Information Science and Technology 65, 4 (2014), 782--796. https://doi.org/10.1002/asi.23062 arXiv:arXiv:1307.5336v2 {[}18{]} G. Marcus. 2018. Deep Learning: A Critical Appraisal. arXiv e-prints (Jan. 2018). arXiv:cs.AI/1801.00631 {[}19{]} Justin Martineau and Tim Finin. 2009. Delta TFIDF: An Improved Feature Space for Sentiment Analysis.. In ICWSM, Eytan Adar, Matthew Hurst, Tim Finin, Natalie S. Glance, Nicolas Nicolov, and Belle L. Tseng (Eds.). The AAAI Press. http://dblp.uni-trier.de/db/conf/icwsm/icwsm2009.html\#MartineauF09 {[}20{]} Bryan McCann, James Bradbury, Caiming Xiong, and Richard Socher. 2017. Learned in Translation: Contextualized Word Vectors. Nips (2017), 1--12. arXiv:1708.00107 http://arxiv.org/abs/1708.00107 {[}21{]} Stephen Merity, Nitish Shirish Keskar, and Richard Socher. 2017. Regularizing and Optimizing LSTM Language Models. CoRR abs/1708.02182 (2017). arXiv:1708.02182 http://arxiv.org/abs/1708.02182 {[}22{]} Jeffrey Pennington, Richard Socher, and Christopher Manning. 2014. Glove: Global Vectors for Word Representation. In Proceedings of the 2014 Conference on Empirical Methods in Natural Language Processing (EMNLP). Association for Computational Linguistics, Doha, Qatar, 1532--1543. https://doi.org/10.3115/v1/ D14-1162 {[}23{]} Matthew E Peters, Mark Neumann, Mohit Iyyer, Matt Gardner, Christopher Clark, Kenton Lee, and Luke Zettlemoyer. 2018. Deep contextualized word representations. (2018). https://doi.org/10.18653/v1/N18-1202 arXiv:1802.05365 {[}24{]} Guangyuan Piao and John G Breslin. 2018. Financial Aspect and Sentiment Predictions with Deep Neural Networks. 1973--1977. https://doi.org/10.1145/ 3184558.3191829 {[}25{]} Aliaksei Severyn and Alessandro Moschitti. 2015. Twitter Sentiment Analysis with Deep Convolutional Neural Networks. In Proceedings of the 38th International
+\end{enumerate}

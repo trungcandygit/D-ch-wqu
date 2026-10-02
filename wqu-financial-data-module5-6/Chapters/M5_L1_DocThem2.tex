@@ -1,0 +1,218 @@
+\chapter{Đọc thêm 2: Phân rã ma trận không âm (Ghi chú bài giảng, TU Dortmund)}
+\label{ch:M5L1DocThem2}
+
+\section{Thông tin nguồn}
+
+\begin{itemize}
+  \item \textbf{Nguồn:} ``Non-negative Matrix Factorization -- Lecture Notes.'' TU Dortmund.
+  \item \textbf{Phần cần đọc:} Toàn bộ trang
+  \item \textbf{Ghi chú:} bản chuyển ngữ tiếng Việt súc tích, bám cấu trúc nguồn (giữ nguyên tiêu đề, công thức, số liệu, bảng, chú thích và danh mục tài liệu tham khảo).
+\end{itemize}
+
+\subsubsection{Phân rã ma trận không âm (NMF, NNMF) {[}LeSe99{]}}
+
+Cho ma trận dữ liệu \(X \in \mathbb{R}^{m \times n}_{\ge 0}\) và tham số \(k\) với \(1 \le k \le \min\{m, n\}\), hãy tìm hai ma trận
+
+\[W \in \mathbb{R}^{m \times k}_{\ge 0}\]
+
+\[H \in \mathbb{R}^{k \times n}_{\ge 0}\]
+
+sao cho
+
+\[X \approx WH\]
+
+\textbf{Biến thể 1: Sai số bình phương} -- cực tiểu hóa
+
+\[\|X - WH\|^2 = \sum_i \sum_j \left(X_{ij} - (WH)_{ij}\right)^2\]
+
+\textbf{Biến thể 2: Độ phân kỳ (divergence)} -- cực tiểu hóa log-hợp lý của \(X_{ij} \sim \text{Poisson}\left((WH)_{ij}\right)\)
+
+\[L(W, H) = -\sum_i \sum_j \left(X_{ij} \log (WH)_{ij} - (WH)_{ij}\right)\]
+
+\subsubsection{NMF: Cập nhật nhân tính cho sai số bình phương}
+
+Phương pháp hạ gradient cho sai số bình phương {[}LeSe00; LeSe99{]}:
+
+\[\|X - WH\|^2 = \sum_i \sum_j \left(X_{ij} - (WH)_{ij}\right)^2\]
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\item
+  Khởi tạo bằng các giá trị không âm ngẫu nhiên (về sau: dùng phương pháp heuristic tốt hơn).
+\item
+  Tối ưu \(W\):
+\end{enumerate}
+
+\[w_{ik} \leftarrow w_{ik}\,\frac{(XH^T)_{ik}}{(WHH^T)_{ik}}\]
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\setcounter{enumi}{2}
+\item
+  Tối ưu \(H\):
+\end{enumerate}
+
+\[h_{kj} \leftarrow h_{kj}\,\frac{(W^T X)_{kj}}{(W^T WH)_{kj}}\]
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\setcounter{enumi}{3}
+\item
+  Lặp lại bước 2-3 cho đến khi mức cải thiện của \(\|X - WH\|^2\) nhỏ hơn một ngưỡng.
+\end{enumerate}
+
+Thuật toán có thể mắc kẹt ở điểm bất động cục bộ hoặc điểm yên ngựa, nên không đảm bảo tìm được nghiệm tối ưu. Lưu ý: cần \(w_{ij} > 0\), \(h_{ij} > 0\), vì vậy thường cộng một hằng số nhỏ \(\varepsilon = 10^{-16}\) vào mọi giá trị.
+
+\subsection{NMF: cập nhật nhân tính cho độ phân kỳ KL}
+
+Phương pháp hạ gradient cho độ phân kỳ KL (KL-Divergence) {[}LeSe00; LeSe99{]}:
+
+\[L(W,H) = \sum_i \sum_j \left( x_{ij} \log (WH)_{ij} - (WH)_{ij} \right)\]
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\item
+  Khởi tạo ngẫu nhiên (hoặc bằng heuristic tốt hơn).
+\item
+  Tối ưu \(W\):
+\end{enumerate}
+
+\[w_{ik} \leftarrow w_{ik}\,\frac{\sum_{j=1}^{m} h_{kj}\,\dfrac{x_{ij}}{(WH)_{ij}}}{\sum_{j=1}^{m} h_{kj}}\]
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\setcounter{enumi}{2}
+\item
+  Tối ưu \(H\):
+\end{enumerate}
+
+\[h_{kj} \leftarrow h_{kj}\,\frac{\sum_{i=1}^{n} w_{ik}\,\dfrac{x_{ij}}{(WH)_{ij}}}{\sum_{i=1}^{n} w_{ik}}\]
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\setcounter{enumi}{3}
+\item
+  Lặp lại bước 2-3 cho đến khi mức cải thiện của \(L(W,H)\) nhỏ hơn một ngưỡng.
+\end{enumerate}
+
+Tương tự, thuật toán có thể mắc kẹt ở điểm bất động cục bộ hoặc điểm yên ngựa, không đảm bảo tìm được nghiệm tối ưu. Lưu ý: cần \(w_{ij} > 0\), \(h_{ij} > 0\), nên thường cộng hằng số nhỏ \(\varepsilon = 10^{-16}\) vào mọi giá trị.
+
+\subsection{Các thuật toán khác cho NMF}
+
+Khi cài đặt nguyên văn, các thuật toán trên chạy chậm do mỗi vòng lặp phải nhân ma trận dày đặc với độ phức tạp \(O(n^3)\). Nhiều biến thể đã được phát triển:
+
+\begin{itemize}
+\item
+  Bình phương tối thiểu luân phiên (Alternating Least Squares) {[}PaTa94{]}
+\item
+  ALS với gradient chiếu (Projected-gradient ALS) {[}Lin07{]}
+\item
+  Tối ưu hóa tựa Newton (Quasi-Newton) {[}ZdCi06{]}
+\item
+  Bình phương tối thiểu luân phiên phân cấp (Hierarchical ALS) {[}CiPh09{]}
+\item
+  Khởi tạo bằng spherical-\(k\)-means
+\item
+  Khởi tạo bằng SVD {[}BBLP07{]}
+\item
+  Khảo sát các phương pháp khởi tạo: {[}LMAC14{]}
+\item
+  Độ phân kỳ beta (Beta divergence) {[}FéId11{]}
+\item
+  Phân rã tensor không âm {[}CiPh09{]}
+\item
+  ...
+\end{itemize}
+
+\subsection{pLSI {[}Hofm99{]} là phân rã ma trận không âm {[}GaGo05{]}}
+
+Lập chỉ mục ngữ nghĩa ẩn xác suất (Probabilistic Latent Semantic Indexing, pLSI; xem Phần 4) là phiên bản xác suất của LSI/LSA. PLSI dùng mô hình hỗn hợp dạng đồ thị (ký hiệu mô hình hỗn hợp, khác với Phần 4):
+
+\[P(w_i \mid d_j) = \sum_t P(t)\,P(d_j \mid t)\,P(w_i \mid t)\]
+
+\begin{itemize}
+\item
+  \(W\): xác suất của từ trong mỗi chủ đề, \(P(w_i \mid t)P(t)\).
+\item
+  \(H\): xác suất của chủ đề trong mỗi tài liệu, \(P(d_j \mid t)\).
+\item
+  Các xác suất đều không âm.
+\end{itemize}
+
+"Mọi nghiệm cực đại hóa hợp lý (cục bộ) của PLSA đều là nghiệm của NMF với độ phân kỳ KL." {[}GaGo05{]}
+
+\subsection{Lịch sử của phân rã ma trận không âm}
+
+NMF được Daniel D. Lee và H. Sebastian Seung phổ biến qua công trình: Learning the parts of objects by non-negative matrix factorization. In: Nature 401, 4, 1999. DOI: 10.1038/44565.
+
+Các cách tiếp cận tương tự đã xuất hiện trước đó:
+
+\begin{itemize}
+\item
+  "Phân rã hạng không âm" (Non-negative Rank Factorization)
+
+  \begin{itemize}
+    \item
+    M.W. Jeter, and W.C. Pye. A note on nonnegative rank factorizations. In: Linear Algebra and its Applications 38, 3, 1981. DOI: 10.1016/0024-3795(81)90018-5
+  \item
+    Ji-Cheng Chen. The nonnegative rank factorizations of nonnegative matrices. In: Linear Algebra and its Applications 62, 11, 1984. DOI: 10.1016/0024-3795(84)90096-X
+  \end{itemize}
+\item
+  "Phân rã ma trận dương" (Positive Matrix Factorization)
+
+  \begin{itemize}
+    \item
+    Pentti Paatero, and Unto Tapper. Positive matrix factorization: A non-negative factor
+  \end{itemize}
+\end{itemize}
+
+model with optimal utilization of error estimates of data values. In: Environmetrics 5, 16, 1994. DOI: 10.1002/env.3170050203
+
+\subsection{Các vấn đề của NMF}
+
+Một phân tích lý thuyết đáng chú ý:
+
+David L. Donoho, and Victoria Stodden. When Does Non-Negative Matrix Factorization Give a Correct Decomposition into Parts? In: NIPS, 8, 2003
+
+Các quan sát:
+
+\begin{itemize}
+\item
+  Phép phân rã không trực giao (khác với SVD, PCA).
+\item
+  Phép phân rã không duy nhất (kể cả khi đạt được \(X = WH\); không chỉ do hoán vị và thay đổi tỷ lệ các thành phần).
+\item
+  Đặc biệt, các vùng bất biến bị phân rã một cách tùy ý (từ dừng \ensuremath{\approx} các thành phần bất biến của dữ liệu).
+\item
+  Các giá trị 0 gây khó khăn cho chiến lược cập nhật nhân tính (multiplicative update).
+\end{itemize}
+
+Cần thêm các ràng buộc bổ sung, chẳng hạn điều chuẩn thưa (sparsity regularization) {[}EgKo04; Hoye04{]}.
+
+\subsection{Tài liệu tham khảo}
+
+{[}BBLP07{]} Berry, M.W., Browne, M., Langville, A.N., Pauca, V.P. and Plemmons, R.J. 2007. Algorithms and applications for approximate nonnegative matrix factorization. Comput. Stat. Data Anal. 52, 1 (2007), 155--173. DOI:10.1016/j.csda.2006.11.006
+
+{[}CiPh09{]} Cichocki, A. and Phan, A.H. 2009. Fast local algorithms for large scale nonnegative matrix and tensor factorizations. IEICE Trans. Fundam. Electron. Commun. Comput. Sci. 92-A, 3 (2009), 708--721. DOI:10.1587/transfun.E92.A.708
+
+{[}EgKo04{]} Eggert, J. and Korner, E. 2004. Sparse coding and NMF. IJCNN (2004), 2529--2533.
+
+{[}FéId11{]} Févotte, C. and Idier, J. 2011. Algorithms for nonnegative matrix factorization with the \(\beta\)-divergence. Neural Computation. 23, 9 (2011), 2421--2456. DOI:10.1162/NECO\_a\_00168
+
+{[}GaGo05{]} Gaussier, É. and Goutte, C. 2005. Relation between PLSA and NMF and implications. SIGIR (2005), 601--602.
+
+{[}Hofm99{]} Hofmann, T. 1999. Learning the similarity of documents: An information-geometric approach to document retrieval and categorization. Neural information processing systems, NIPS (1999), 914--920.
+
+{[}Hoye04{]} Hoyer, P.O. 2004. Non-negative matrix factorization with sparseness constraints. Journal of Machine Learning Research. 5, (2004), 1457--1469.
+
+{[}LeSe00{]} Lee, D.D. and Seung, H.S. 2000. Algorithms for non-negative matrix factorization. NIPS (2000), 556--562.
+
+{[}LeSe99{]} Lee, D.D. and Seung, H.S. 1999. Learning the parts of objects by non-negative matrix factorization. Nature. 401, 6755 (1999), 788--791. DOI:10.1038/44565
+
+{[}Lin07{]} Lin, C.-J. 2007. Projected gradient methods for nonnegative matrix factorization. Neural Computation. 19, 10 (2007), 2756--2779. DOI:10.1162/neco.2007.19.10.2756
+
+{[}LMAC14{]} Langville, A.N., Meyer, C.D., Albright, R., Cox, J. and Duling, D. 2014. Algorithms, initializations, and convergence for the nonnegative matrix factorization. CoRR. abs/1407.7299, (2014).
+
+{[}PaTa94{]} Paatero, P. and Tapper, U. 1994. Positive matrix factorization: A non-negative factor model with optimal utilization of error estimates of data values. Environmetrics. 5, 2 (1994), 111--126. DOI:10.1002/env.3170050203
+
+{[}ZdCi06{]} Zdunek, R. and Cichocki, A. 2006. Non-negative matrix factorization with quasi-newton optimization. Artificial intelligence and soft computing (ICAISC) (2006), 870--879.

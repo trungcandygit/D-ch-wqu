@@ -1,5 +1,0 @@
-# Translation Configuration
-input_file=M6L3_notes.md
-input_lang=auto
-output_lang=vi
-conversion_method=markdown

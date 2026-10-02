@@ -1,8 +1,0 @@
-# Translation Configuration
-input_file=M6L3_DT1.md
-input_lang=auto
-output_lang=vi
-conversion_method=markdown
-
-# Book Metadata
-original_title=M6L3_DT1

@@ -1,0 +1,1427 @@
+\chapter{Các bộ sưu tập dữ liệu tin tức quy mô lớn}
+\label{ch:M5L3LessonNotes}
+
+\section*{Lesson Notes}
+
+MODULE 5 \textbar{} BÀI 3
+
+\begin{center}\rule{0.5\linewidth}{0.5pt}\end{center}
+
+{\small
+\begin{longtable}[]{@{}
+  >{\raggedright\arraybackslash}p{(\columnwidth - 2\tabcolsep) * \real{0.2022}}
+  >{\raggedright\arraybackslash}p{(\columnwidth - 2\tabcolsep) * \real{0.7865}}@{}}
+\toprule\noalign{}
+\endhead
+\bottomrule\noalign{}
+\endlastfoot
+\textbf{Thời gian đọc} & 60 phút \\
+\textbf{Kiến thức nền tảng} & \begin{minipage}[t]{\linewidth}\raggedright
+Lập trình Python cơ bản: cấu trúc dữ liệu, luồng điều khiển, hàm, xử lý tệp, biểu thức chính quy, HTML cơ bản;\\
+Kỹ thuật tài chính: hiểu biết cơ bản về các khái niệm và ứng dụng của kỹ thuật tài chính để đặt việc sử dụng dữ liệu tin tức vào đúng bối cảnh.\strut
+\end{minipage} \\
+\textbf{Từ khóa} & \begin{minipage}[t]{\linewidth}\raggedright
+WARC (Web ARChive), GDELT (Global Database of Events, Language, and Tone), GKG (Global Knowledge Graph), CSV, Warcio,\\
+Newspaper3k, Tqdm, Biểu thức chính quy (Regex), Xử lý ngôn ngữ tự nhiên (NLP), Dữ liệu quy mô lớn, Dữ liệu lớn (Big Data)\strut
+\end{minipage} \\
+\end{longtable}
+}
+
+\begin{center}\rule{0.5\linewidth}{0.5pt}\end{center}
+
+\emph{Trong bài học này, chúng ta tìm hiểu cách tận dụng (leverage) hai bộ dữ liệu tin tức quy mô lớn là Common Crawl News Crawl và GDELT cho các ứng dụng kỹ thuật tài chính. Chúng ta học cách truy cập và xử lý các bài báo thô từ các tệp WARC của Common Crawl, trích xuất những thông tin chính như tiêu đề và nội dung, đồng thời lọc theo ngôn ngữ và từ khóa. Bên cạnh đó, chúng ta học cách làm việc với dữ liệu GKG của GDELT để phân tích các sự kiện tin tức, các thực thể và cảm xúc, bao gồm việc tải xuống, lọc và phân tích điểm Tone của GDELT nhằm thu được những hiểu biết tinh tế về cảm xúc. Chúng ta khám phá mã nguồn và các kỹ thuật cần thiết để khai thác sức mạnh của các bộ dữ liệu này phục vụ nghiên cứu và phân tích tài chính.}
+
+In {[}14{]}:
+
+\begin{lstlisting}[escapeinside={(*@}{@*)}]
+# Loading libraries
+import gc
+import gzip
+import io
+import nltk
+import pandas as pd
+import plotly.graph_objects as go
+import re
+import requests
+import time
+import tqdm
+import warcio
+import yfinance as yf
+import zipfile
+
+from datetime import datetime, timedelta
+from newspaper import Article
+from nltk.corpus import stopwords
+from sklearn.decomposition import NMF
+from sklearn.feature_extraction.text import TfidfVectorizer
+\end{lstlisting}
+
+Thu thập dữ liệu quy mô lớn là quá trình tập hợp và lưu trữ một lượng dữ liệu khổng lồ từ nhiều nguồn khác nhau. Trong bài học này, chúng ta xem xét hai nguồn: Common Crawl và GDELT. Cả hai sáng kiến đều thu thập dữ liệu quy mô lớn từ một số lượng rất lớn các nguồn tin tức trực tuyến. Chúng sử dụng các kỹ thuật thu thập dữ liệu web (web crawling) cùng các phương pháp khác để thu thập các bài báo từ nhiều trang web và ấn phẩm đa dạng trên toàn thế giới. Việc thu thập dữ liệu rộng khắp này cho phép phân tích toàn diện và đem lại những hiểu biết sâu sắc về mức độ đưa tin toàn cầu. Mặc dù việc thu thập dữ liệu quy mô lớn có những thách thức đi kèm, nhưng những lợi ích về phân tích toàn diện, độ chính xác được cải thiện và khả năng khám phá tri thức mới khiến đây trở thành một cách tiếp cận có giá trị cho phân tích và nghiên cứu tin tức, bao gồm cả các ứng dụng trong kỹ thuật tài chính.
+
+\section{Common Crawl}
+
+Common Crawl là một tổ chức phi lợi nhuận thu thập dữ liệu web và cung cấp một bộ dữ liệu mã nguồn mở gồm các trang web. Common Crawl sử dụng các trình thu thập dữ liệu web (web crawler) để thu thập các trang web và lưu trữ chúng trong một kho lưu trữ công khai gọi là kho ngữ liệu Common Crawl.
+
+Tổ chức này cũng có một bộ dữ liệu riêng gọi là News Crawl, sử dụng các nguồn cấp RSS và sơ đồ trang web (sitemap) để thu thập riêng các bài báo tin tức. Bộ dữ liệu này có khoảng 600.000 bài báo mỗi ngày bằng nhiều ngôn ngữ, trải dài trong vài năm trở lại đây, và bao gồm toàn bộ mã HTML của các trang.
+
+Common Crawl sử dụng nhiều kỹ thuật khác nhau như đi theo các liên kết, dùng sơ đồ trang web và tuân thủ các quy tắc robots.txt để tìm các trang mới và cập nhật các trang hiện có. Dữ liệu được lưu trữ ở định dạng gọi là tệp WARC (Web ARChive). Các tệp này không chỉ chứa nội dung HTML của các trang web mà còn chứa siêu dữ liệu như dấu thời gian, URL và loại nội dung. Bất kỳ ai cũng có thể truy cập và phân tích dữ liệu này bằng nhiều công cụ và kỹ thuật khác nhau.
+
+Kho ngữ liệu Common Crawl ước tính có hơn 250 TiB dữ liệu thô đã nén. Dữ liệu này bao gồm hàng petabyte dữ liệu văn bản, hình ảnh và siêu dữ liệu. Xét trên khối lượng khổng lồ, tốc độ cao, sự đa dạng về định dạng và giá trị tiềm năng, dữ liệu Common Crawl được coi là dữ liệu lớn (big data) một cách không thể chối cãi. Để xử lý dữ liệu hiệu quả và rút ra những hiểu biết có ý nghĩa, cần có các công cụ và hạ tầng chuyên dụng, chẳng hạn như các khung tính toán phân tán và lưu trữ trên nền tảng đám mây. Mặc dù cần giải quyết các thách thức liên quan đến tính xác thực và chất lượng dữ liệu, quy mô và phạm vi của bộ dữ liệu Common Crawl vẫn khẳng định rõ vị trí của nó trong lĩnh vực dữ liệu lớn dành cho phân tích tin tức và thông tin.
+
+Điều thú vị là Common Crawl là một nguồn tài nguyên quan trọng để xây dựng các mô hình ngôn ngữ lớn. Điều này cho phép các mô hình tận dụng nguồn thông tin rộng lớn và đa dạng trên web, cải thiện khả năng tạo ra văn bản giống con người và hiểu nhiều chủ đề khác nhau. Kho ngữ liệu Common Crawl, hoặc một phiên bản đã lọc của nó, đã đóng vai trò trong việc huấn luyện các mô hình GPT. GPT-3, hay Generative Pre-trained Transformer thế hệ thứ ba, là một mô hình học máy dạng mạng nơ-ron do OpenAI phát triển, được huấn luyện trên hỗn hợp gồm Common Crawl đã lọc (chiếm 60\% dữ liệu của GPT-3) và các kho ngữ liệu khác như WEBTEXT2, BOOKS1 và BOOKS2, cùng Wikipedia tiếng Anh (Brown et al.).
+
+\subsection{Thu thập dữ liệu News Crawl}
+
+Điều quan trọng là phải hiểu cấu trúc của dữ liệu News Crawl và cách truy cập dữ liệu này. Các tệp dữ liệu của Common Crawl chủ yếu được lưu trữ ở \textbf{định dạng WARC (Web ARChive)}. WARC là một chuẩn được sử dụng rộng rãi để lưu trữ nội dung web, rất phù hợp để lưu trữ lượng dữ liệu lớn, bao gồm các trang web, siêu dữ liệu (metadata) và các tài nguyên đi kèm. Các tệp này chứa các trang web thô đã được thu thập, cùng với siêu dữ liệu như URL, dấu thời gian, loại nội dung và tiêu đề HTTP. Đây là nguồn dữ liệu chính trong Common Crawl.
+
+Common Crawl cũng cung cấp các tập dữ liệu chính ở dạng \textbf{tệp WAT (Web Annotation Text)}, nơi lưu trữ siêu dữ liệu quan trọng về các bản ghi, cung cấp thêm ngữ cảnh và thông tin, và ở dạng \textbf{tệp WET (Web Extracted Text)} chứa nội dung văn bản thuần được trích xuất từ các trang web, giúp việc tìm kiếm và phân tích văn bản dễ dàng hơn mà không cần phân tích cú pháp HTML. Bạn có thể xem ví dụ về từng định dạng tệp trên trang web của Common Crawl tại đây: \url{https://commoncrawl.org/get-started}.
+
+Khác với các tập dữ liệu chính của Common Crawl, các tập dữ liệu News Crawl chỉ được cung cấp ở định dạng WARC. Các tập dữ liệu News của Common Crawl được tổ chức thành các phân đoạn theo tháng, gọi là \textbf{Danh sách đường dẫn tệp WARC (WARC File Path Listings)}, và dữ liệu trong mỗi phân đoạn được lưu trong các tệp WARC. Các tệp này tiếp tục được nhóm thành các đợt thu thập theo ngày. Danh sách đường dẫn tệp WARC có sẵn trên AWS (Amazon Web Services) và có thể truy cập theo mẫu \texttt{s3://commoncrawl/CC-NEWS/yyyy/mm/warc.paths.gz} (việc truy cập đám mây AWS có thể phát sinh phí truyền dữ liệu giữa các vùng tùy theo vị trí của bạn). Ngoài ra, dữ liệu cũng có thể truy cập qua lược đồ URL \texttt{https://data.commoncrawl.org/CC-NEWS/yyyy/mm/warc.paths.gz}. Chúng ta chỉ cần thay \texttt{yyyy} và \texttt{mm} lần lượt bằng giá trị số của năm và tháng.
+
+Bên trong mỗi danh sách đường dẫn WARC có một danh sách tất cả các đợt thu thập đã được lưu trong các tệp WARC của phân đoạn này trong tháng. Các tệp WARC được phát hành hằng ngày, và tên tệp WARC tuân theo mẫu: \texttt{crawl-data/CC-NEWS/yyyy/mm/CC-NEWS-yyyymmddHHMMSS-nnnnn.warc.gz}. Dấu thời gian (yyyymmddHHMMSS) cho biết thời điểm bản ghi đầu tiên trong tệp WARC được tạo, trong đó:
+
+{\small
+\begin{longtable}[]{@{}
+  >{\raggedright\arraybackslash}p{(\columnwidth - 2\tabcolsep) * \real{0.4865}}
+  >{\raggedright\arraybackslash}p{(\columnwidth - 2\tabcolsep) * \real{0.4865}}@{}}
+\toprule\noalign{}
+\endhead
+\bottomrule\noalign{}
+\endlastfoot
+yyyy & năm \\
+mm & tháng (01..12) \\
+dd & ngày trong tháng (01, v.v.) \\
+HH & giờ (00..23) \\
+MM & phút (00..59) \\
+SS & giây (00..59) \\
+nnnnn & số thứ tự của tệp WARC. Số thứ tự được đặt lại khi quá trình thu thập được tiếp tục. \\
+\end{longtable}
+}
+
+Bây giờ chúng ta hãy thử lấy dữ liệu News Crawl bằng Danh sách đường dẫn tệp WARC của Common Crawl. Đoạn mã sau nhằm tải xuống và hiển thị danh sách các đường dẫn tệp WARC của tập dữ liệu Common Crawl News cho tháng 9 năm 2024. Mã này tải xuống một tệp nén chứa danh sách đường dẫn tệp WARC của tập dữ liệu Common Crawl News, giải nén tệp, rồi in từng đường dẫn ra console:
+
+In {[}15{]}:
+
+\begin{lstlisting}[escapeinside={(*@}{@*)}]
+# Get September 2024 WARC paths list
+url = "https://data.commoncrawl.org/crawl-data/CC-NEWS/2024/09/warc.paths.gz"
+
+# Fetch the file
+response = requests.get(url, stream=True)
+response.raise_for_status()  # Raise an exception for bad responses (4xx or 5xx)
+
+# Decompress and print content
+with gzip.GzipFile(fileobj=io.BytesIO(response.content)) as gz:
+    for line in gz:
+        print(line.decode('utf-8').strip()) # Print each line, removing leading/trailing spaces
+\end{lstlisting}
+
+\begin{lstlisting}[escapeinside={(*@}{@*)}]
+crawl-data/CC-NEWS/2024/09/CC-NEWS-20240901011006-05863.warc.gz
+crawl-data/CC-NEWS/2024/09/CC-NEWS-20240901040313-05864.warc.gz
+crawl-data/CC-NEWS/2024/09/CC-NEWS-20240901061815-05865.warc.gz
+crawl-data/CC-NEWS/2024/09/CC-NEWS-20240901082058-05866.warc.gz
+crawl-data/CC-NEWS/2024/09/CC-NEWS-20240901100849-05867.warc.gz
+crawl-data/CC-NEWS/2024/09/CC-NEWS-20240901115147-05868.warc.gz
+crawl-data/CC-NEWS/2024/09/CC-NEWS-20240901132402-05869.warc.gz
+crawl-data/CC-NEWS/2024/09/CC-NEWS-20240901145127-05870.warc.gz
+crawl-data/CC-NEWS/2024/09/CC-NEWS-20240901161309-05871.warc.gz
+crawl-data/CC-NEWS/2024/09/CC-NEWS-20240901174029-05872.warc.gz
+crawl-data/CC-NEWS/2024/09/CC-NEWS-20240901191613-05873.warc.gz
+crawl-data/CC-NEWS/2024/09/CC-NEWS-20240901210159-05874.warc.gz
+crawl-data/CC-NEWS/2024/09/CC-NEWS-20240901230057-05875.warc.gz
+crawl-data/CC-NEWS/2024/09/CC-NEWS-20240902013240-05876.warc.gz
+crawl-data/CC-NEWS/2024/09/CC-NEWS-20240902035909-05877.warc.gz
+crawl-data/CC-NEWS/2024/09/CC-NEWS-20240902060627-05878.warc.gz
+crawl-data/CC-NEWS/2024/09/CC-NEWS-20240902073934-05879.warc.gz
+crawl-data/CC-NEWS/2024/09/CC-NEWS-20240902090600-05880.warc.gz
+crawl-data/CC-NEWS/2024/09/CC-NEWS-20240902102119-05881.warc.gz
+crawl-data/CC-NEWS/2024/09/CC-NEWS-20240902113551-05882.warc.gz
+crawl-data/CC-NEWS/2024/09/CC-NEWS-20240902124845-05883.warc.gz
+crawl-data/CC-NEWS/2024/09/CC-NEWS-20240902140154-05884.warc.gz
+crawl-data/CC-NEWS/2024/09/CC-NEWS-20240902151007-05885.warc.gz
+crawl-data/CC-NEWS/2024/09/CC-NEWS-20240902161834-05886.warc.gz
+crawl-data/CC-NEWS/2024/09/CC-NEWS-20240902172503-05887.warc.gz
+crawl-data/CC-NEWS/2024/09/CC-NEWS-20240902184143-05888.warc.gz
+crawl-data/CC-NEWS/2024/09/CC-NEWS-20240902200726-05889.warc.gz
+crawl-data/CC-NEWS/2024/09/CC-NEWS-20240902214146-05890.warc.gz
+crawl-data/CC-NEWS/2024/09/CC-NEWS-20240902231517-05891.warc.gz
+crawl-data/CC-NEWS/2024/09/CC-NEWS-20240903010221-05892.warc.gz
+crawl-data/CC-NEWS/2024/09/CC-NEWS-20240903031847-05893.warc.gz
+crawl-data/CC-NEWS/2024/09/CC-NEWS-20240903052128-05894.warc.gz
+crawl-data/CC-NEWS/2024/09/CC-NEWS-20240903065755-05895.warc.gz
+crawl-data/CC-NEWS/2024/09/CC-NEWS-20240903082335-05896.warc.gz
+crawl-data/CC-NEWS/2024/09/CC-NEWS-20240903093529-05897.warc.gz
+crawl-data/CC-NEWS/2024/09/CC-NEWS-20240903104052-05898.warc.gz
+crawl-data/CC-NEWS/2024/09/CC-NEWS-20240903114456-05899.warc.gz
+crawl-data/CC-NEWS/2024/09/CC-NEWS-20240903125242-05900.warc.gz
+crawl-data/CC-NEWS/2024/09/CC-NEWS-20240903135605-05901.warc.gz
+crawl-data/CC-NEWS/2024/09/CC-NEWS-20240903145856-05902.warc.gz
+crawl-data/CC-NEWS/2024/09/CC-NEWS-20240903155837-05903.warc.gz
+crawl-data/CC-NEWS/2024/09/CC-NEWS-20240903170339-05904.warc.gz
+crawl-data/CC-NEWS/2024/09/CC-NEWS-20240903180601-05905.warc.gz
+crawl-data/CC-NEWS/2024/09/CC-NEWS-20240903191349-05906.warc.gz
+crawl-data/CC-NEWS/2024/09/CC-NEWS-20240903203539-05907.warc.gz
+crawl-data/CC-NEWS/2024/09/CC-NEWS-20240903215955-05908.warc.gz
+crawl-data/CC-NEWS/2024/09/CC-NEWS-20240903233704-05909.warc.gz
+crawl-data/CC-NEWS/2024/09/CC-NEWS-20240904013100-05910.warc.gz
+crawl-data/CC-NEWS/2024/09/CC-NEWS-20240904032710-05911.warc.gz
+crawl-data/CC-NEWS/2024/09/CC-NEWS-20240904051857-05912.warc.gz
+crawl-data/CC-NEWS/2024/09/CC-NEWS-20240904065038-05913.warc.gz
+crawl-data/CC-NEWS/2024/09/CC-NEWS-20240904081044-05914.warc.gz
+crawl-data/CC-NEWS/2024/09/CC-NEWS-20240904092642-05915.warc.gz
+crawl-data/CC-NEWS/2024/09/CC-NEWS-20240904103523-05916.warc.gz
+crawl-data/CC-NEWS/2024/09/CC-NEWS-20240904113931-05917.warc.gz
+crawl-data/CC-NEWS/2024/09/CC-NEWS-20240904123755-05918.warc.gz
+crawl-data/CC-NEWS/2024/09/CC-NEWS-20240904133441-05919.warc.gz
+crawl-data/CC-NEWS/2024/09/CC-NEWS-20240904143625-05920.warc.gz
+crawl-data/CC-NEWS/2024/09/CC-NEWS-20240904153623-05921.warc.gz
+crawl-data/CC-NEWS/2024/09/CC-NEWS-20240904163717-05922.warc.gz
+crawl-data/CC-NEWS/2024/09/CC-NEWS-20240904174006-05923.warc.gz
+crawl-data/CC-NEWS/2024/09/CC-NEWS-20240904184511-05924.warc.gz
+crawl-data/CC-NEWS/2024/09/CC-NEWS-20240904195249-05925.warc.gz
+crawl-data/CC-NEWS/2024/09/CC-NEWS-20240904210940-05926.warc.gz
+crawl-data/CC-NEWS/2024/09/CC-NEWS-20240904223752-05927.warc.gz
+crawl-data/CC-NEWS/2024/09/CC-NEWS-20240905002041-05928.warc.gz
+crawl-data/CC-NEWS/2024/09/CC-NEWS-20240905022237-05929.warc.gz
+crawl-data/CC-NEWS/2024/09/CC-NEWS-20240905042413-05930.warc.gz
+crawl-data/CC-NEWS/2024/09/CC-NEWS-20240905060522-05931.warc.gz
+crawl-data/CC-NEWS/2024/09/CC-NEWS-20240905073724-05932.warc.gz
+crawl-data/CC-NEWS/2024/09/CC-NEWS-20240905085710-05933.warc.gz
+crawl-data/CC-NEWS/2024/09/CC-NEWS-20240905101445-05934.warc.gz
+crawl-data/CC-NEWS/2024/09/CC-NEWS-20240905112031-05935.warc.gz
+crawl-data/CC-NEWS/2024/09/CC-NEWS-20240905122602-05936.warc.gz
+crawl-data/CC-NEWS/2024/09/CC-NEWS-20240905133109-05937.warc.gz
+crawl-data/CC-NEWS/2024/09/CC-NEWS-20240905143153-05938.warc.gz
+crawl-data/CC-NEWS/2024/09/CC-NEWS-20240905153656-05939.warc.gz
+crawl-data/CC-NEWS/2024/09/CC-NEWS-20240905164601-05940.warc.gz
+crawl-data/CC-NEWS/2024/09/CC-NEWS-20240905175318-05941.warc.gz
+crawl-data/CC-NEWS/2024/09/CC-NEWS-20240905190722-05942.warc.gz
+crawl-data/CC-NEWS/2024/09/CC-NEWS-20240905202310-05943.warc.gz
+crawl-data/CC-NEWS/2024/09/CC-NEWS-20240905214353-05944.warc.gz
+crawl-data/CC-NEWS/2024/09/CC-NEWS-20240905231222-05945.warc.gz
+crawl-data/CC-NEWS/2024/09/CC-NEWS-20240906010900-05946.warc.gz
+crawl-data/CC-NEWS/2024/09/CC-NEWS-20240906030941-05947.warc.gz
+crawl-data/CC-NEWS/2024/09/CC-NEWS-20240906050807-05948.warc.gz
+crawl-data/CC-NEWS/2024/09/CC-NEWS-20240906065107-05949.warc.gz
+crawl-data/CC-NEWS/2024/09/CC-NEWS-20240906082009-05950.warc.gz
+crawl-data/CC-NEWS/2024/09/CC-NEWS-20240906094326-05951.warc.gz
+crawl-data/CC-NEWS/2024/09/CC-NEWS-20240906105841-05952.warc.gz
+crawl-data/CC-NEWS/2024/09/CC-NEWS-20240906120732-05953.warc.gz
+crawl-data/CC-NEWS/2024/09/CC-NEWS-20240906131638-05954.warc.gz
+crawl-data/CC-NEWS/2024/09/CC-NEWS-20240906142320-05955.warc.gz
+\end{lstlisting}
+
+\begin{lstlisting}[escapeinside={(*@}{@*)}]
+crawl-data/CC-NEWS/2024/09/CC-NEWS-20240906152619-05956.warc.gz
+crawl-data/CC-NEWS/2024/09/CC-NEWS-20240906163110-05957.warc.gz
+crawl-data/CC-NEWS/2024/09/CC-NEWS-20240906173354-05958.warc.gz
+crawl-data/CC-NEWS/2024/09/CC-NEWS-20240906184712-05959.warc.gz
+crawl-data/CC-NEWS/2024/09/CC-NEWS-20240906200553-05960.warc.gz
+crawl-data/CC-NEWS/2024/09/CC-NEWS-20240906213748-05961.warc.gz
+crawl-data/CC-NEWS/2024/09/CC-NEWS-20240906233021-05962.warc.gz
+crawl-data/CC-NEWS/2024/09/CC-NEWS-20240907013152-05963.warc.gz
+crawl-data/CC-NEWS/2024/09/CC-NEWS-20240907035007-05964.warc.gz
+crawl-data/CC-NEWS/2024/09/CC-NEWS-20240907054419-05965.warc.gz
+crawl-data/CC-NEWS/2024/09/CC-NEWS-20240907074026-05966.warc.gz
+crawl-data/CC-NEWS/2024/09/CC-NEWS-20240907092730-05967.warc.gz
+crawl-data/CC-NEWS/2024/09/CC-NEWS-20240907110444-05968.warc.gz
+crawl-data/CC-NEWS/2024/09/CC-NEWS-20240907124603-05969.warc.gz
+crawl-data/CC-NEWS/2024/09/CC-NEWS-20240907142103-05970.warc.gz
+crawl-data/CC-NEWS/2024/09/CC-NEWS-20240907155542-05971.warc.gz
+crawl-data/CC-NEWS/2024/09/CC-NEWS-20240907173455-05972.warc.gz
+crawl-data/CC-NEWS/2024/09/CC-NEWS-20240907191153-05973.warc.gz
+crawl-data/CC-NEWS/2024/09/CC-NEWS-20240907205831-05974.warc.gz
+crawl-data/CC-NEWS/2024/09/CC-NEWS-20240907231853-05975.warc.gz
+crawl-data/CC-NEWS/2024/09/CC-NEWS-20240908015357-05976.warc.gz
+crawl-data/CC-NEWS/2024/09/CC-NEWS-20240908040656-05977.warc.gz
+crawl-data/CC-NEWS/2024/09/CC-NEWS-20240908060718-05978.warc.gz
+crawl-data/CC-NEWS/2024/09/CC-NEWS-20240908081344-05979.warc.gz
+crawl-data/CC-NEWS/2024/09/CC-NEWS-20240908101336-05980.warc.gz
+crawl-data/CC-NEWS/2024/09/CC-NEWS-20240908120649-05981.warc.gz
+crawl-data/CC-NEWS/2024/09/CC-NEWS-20240908134929-05982.warc.gz
+crawl-data/CC-NEWS/2024/09/CC-NEWS-20240908153540-05983.warc.gz
+crawl-data/CC-NEWS/2024/09/CC-NEWS-20240908171204-05984.warc.gz
+crawl-data/CC-NEWS/2024/09/CC-NEWS-20240908190054-05985.warc.gz
+crawl-data/CC-NEWS/2024/09/CC-NEWS-20240908205832-05986.warc.gz
+crawl-data/CC-NEWS/2024/09/CC-NEWS-20240908230926-05987.warc.gz
+crawl-data/CC-NEWS/2024/09/CC-NEWS-20240909014132-05988.warc.gz
+crawl-data/CC-NEWS/2024/09/CC-NEWS-20240909041252-05989.warc.gz
+crawl-data/CC-NEWS/2024/09/CC-NEWS-20240909061255-05990.warc.gz
+crawl-data/CC-NEWS/2024/09/CC-NEWS-20240909074938-05991.warc.gz
+crawl-data/CC-NEWS/2024/09/CC-NEWS-20240909090924-05992.warc.gz
+crawl-data/CC-NEWS/2024/09/CC-NEWS-20240909102430-05993.warc.gz
+crawl-data/CC-NEWS/2024/09/CC-NEWS-20240909114056-05994.warc.gz
+crawl-data/CC-NEWS/2024/09/CC-NEWS-20240909124837-05995.warc.gz
+crawl-data/CC-NEWS/2024/09/CC-NEWS-20240909135659-05996.warc.gz
+crawl-data/CC-NEWS/2024/09/CC-NEWS-20240909150113-05997.warc.gz
+crawl-data/CC-NEWS/2024/09/CC-NEWS-20240909160420-05998.warc.gz
+crawl-data/CC-NEWS/2024/09/CC-NEWS-20240909171132-05999.warc.gz
+crawl-data/CC-NEWS/2024/09/CC-NEWS-20240909182110-06000.warc.gz
+crawl-data/CC-NEWS/2024/09/CC-NEWS-20240909194226-06001.warc.gz
+crawl-data/CC-NEWS/2024/09/CC-NEWS-20240909210954-06002.warc.gz
+crawl-data/CC-NEWS/2024/09/CC-NEWS-20240909223948-06003.warc.gz
+crawl-data/CC-NEWS/2024/09/CC-NEWS-20240910000938-06004.warc.gz
+crawl-data/CC-NEWS/2024/09/CC-NEWS-20240910015530-06005.warc.gz
+crawl-data/CC-NEWS/2024/09/CC-NEWS-20240910035916-06006.warc.gz
+crawl-data/CC-NEWS/2024/09/CC-NEWS-20240910054350-06007.warc.gz
+crawl-data/CC-NEWS/2024/09/CC-NEWS-20240910071415-06008.warc.gz
+crawl-data/CC-NEWS/2024/09/CC-NEWS-20240910083555-06009.warc.gz
+crawl-data/CC-NEWS/2024/09/CC-NEWS-20240910095403-06010.warc.gz
+crawl-data/CC-NEWS/2024/09/CC-NEWS-20240910110544-06011.warc.gz
+crawl-data/CC-NEWS/2024/09/CC-NEWS-20240910120950-06012.warc.gz
+crawl-data/CC-NEWS/2024/09/CC-NEWS-20240910131713-06013.warc.gz
+crawl-data/CC-NEWS/2024/09/CC-NEWS-20240910142142-06014.warc.gz
+crawl-data/CC-NEWS/2024/09/CC-NEWS-20240910152401-06015.warc.gz
+crawl-data/CC-NEWS/2024/09/CC-NEWS-20240910162737-06016.warc.gz
+crawl-data/CC-NEWS/2024/09/CC-NEWS-20240910173605-06017.warc.gz
+crawl-data/CC-NEWS/2024/09/CC-NEWS-20240910184728-06018.warc.gz
+crawl-data/CC-NEWS/2024/09/CC-NEWS-20240910200614-06019.warc.gz
+crawl-data/CC-NEWS/2024/09/CC-NEWS-20240910212959-06020.warc.gz
+crawl-data/CC-NEWS/2024/09/CC-NEWS-20240910230702-06021.warc.gz
+crawl-data/CC-NEWS/2024/09/CC-NEWS-20240911004909-06022.warc.gz
+crawl-data/CC-NEWS/2024/09/CC-NEWS-20240911025351-06023.warc.gz
+crawl-data/CC-NEWS/2024/09/CC-NEWS-20240911044419-06024.warc.gz
+crawl-data/CC-NEWS/2024/09/CC-NEWS-20240911061740-06025.warc.gz
+crawl-data/CC-NEWS/2024/09/CC-NEWS-20240911074400-06026.warc.gz
+crawl-data/CC-NEWS/2024/09/CC-NEWS-20240911090014-06027.warc.gz
+crawl-data/CC-NEWS/2024/09/CC-NEWS-20240911101042-06028.warc.gz
+crawl-data/CC-NEWS/2024/09/CC-NEWS-20240911111607-06029.warc.gz
+crawl-data/CC-NEWS/2024/09/CC-NEWS-20240911122232-06030.warc.gz
+crawl-data/CC-NEWS/2024/09/CC-NEWS-20240911132256-06031.warc.gz
+crawl-data/CC-NEWS/2024/09/CC-NEWS-20240911142629-06032.warc.gz
+crawl-data/CC-NEWS/2024/09/CC-NEWS-20240911153142-06033.warc.gz
+crawl-data/CC-NEWS/2024/09/CC-NEWS-20240911163901-06034.warc.gz
+crawl-data/CC-NEWS/2024/09/CC-NEWS-20240911174737-06035.warc.gz
+crawl-data/CC-NEWS/2024/09/CC-NEWS-20240911190449-06036.warc.gz
+crawl-data/CC-NEWS/2024/09/CC-NEWS-20240911202531-06037.warc.gz
+crawl-data/CC-NEWS/2024/09/CC-NEWS-20240911214957-06038.warc.gz
+crawl-data/CC-NEWS/2024/09/CC-NEWS-20240911233233-06039.warc.gz
+crawl-data/CC-NEWS/2024/09/CC-NEWS-20240912012239-06040.warc.gz
+crawl-data/CC-NEWS/2024/09/CC-NEWS-20240912031012-06041.warc.gz
+crawl-data/CC-NEWS/2024/09/CC-NEWS-20240912044405-06042.warc.gz
+crawl-data/CC-NEWS/2024/09/CC-NEWS-20240912062239-06043.warc.gz
+crawl-data/CC-NEWS/2024/09/CC-NEWS-20240912075437-06044.warc.gz
+crawl-data/CC-NEWS/2024/09/CC-NEWS-20240912091943-06045.warc.gz
+crawl-data/CC-NEWS/2024/09/CC-NEWS-20240912103138-06046.warc.gz
+crawl-data/CC-NEWS/2024/09/CC-NEWS-20240912113652-06047.warc.gz
+crawl-data/CC-NEWS/2024/09/CC-NEWS-20240912123923-06048.warc.gz
+\end{lstlisting}
+
+\begin{lstlisting}[escapeinside={(*@}{@*)}]
+crawl-data/CC-NEWS/2024/09/CC-NEWS-20240912134337-06049.warc.gz
+crawl-data/CC-NEWS/2024/09/CC-NEWS-20240912144443-06050.warc.gz
+crawl-data/CC-NEWS/2024/09/CC-NEWS-20240912154503-06051.warc.gz
+crawl-data/CC-NEWS/2024/09/CC-NEWS-20240912164409-06052.warc.gz
+crawl-data/CC-NEWS/2024/09/CC-NEWS-20240912174934-06053.warc.gz
+crawl-data/CC-NEWS/2024/09/CC-NEWS-20240912185646-06054.warc.gz
+crawl-data/CC-NEWS/2024/09/CC-NEWS-20240912200556-06055.warc.gz
+crawl-data/CC-NEWS/2024/09/CC-NEWS-20240912213446-06056.warc.gz
+crawl-data/CC-NEWS/2024/09/CC-NEWS-20240912231854-06057.warc.gz
+crawl-data/CC-NEWS/2024/09/CC-NEWS-20240913011714-06058.warc.gz
+crawl-data/CC-NEWS/2024/09/CC-NEWS-20240913032512-06059.warc.gz
+crawl-data/CC-NEWS/2024/09/CC-NEWS-20240913052116-06060.warc.gz
+crawl-data/CC-NEWS/2024/09/CC-NEWS-20240913065603-06061.warc.gz
+crawl-data/CC-NEWS/2024/09/CC-NEWS-20240913082219-06062.warc.gz
+crawl-data/CC-NEWS/2024/09/CC-NEWS-20240913094238-06063.warc.gz
+crawl-data/CC-NEWS/2024/09/CC-NEWS-20240913105733-06064.warc.gz
+crawl-data/CC-NEWS/2024/09/CC-NEWS-20240913120238-06065.warc.gz
+crawl-data/CC-NEWS/2024/09/CC-NEWS-20240913130937-06066.warc.gz
+crawl-data/CC-NEWS/2024/09/CC-NEWS-20240913141442-06067.warc.gz
+crawl-data/CC-NEWS/2024/09/CC-NEWS-20240913152009-06068.warc.gz
+crawl-data/CC-NEWS/2024/09/CC-NEWS-20240913162723-06069.warc.gz
+crawl-data/CC-NEWS/2024/09/CC-NEWS-20240913174056-06070.warc.gz
+crawl-data/CC-NEWS/2024/09/CC-NEWS-20240913185347-06071.warc.gz
+crawl-data/CC-NEWS/2024/09/CC-NEWS-20240913201437-06072.warc.gz
+crawl-data/CC-NEWS/2024/09/CC-NEWS-20240913214808-06073.warc.gz
+crawl-data/CC-NEWS/2024/09/CC-NEWS-20240913233605-06074.warc.gz
+crawl-data/CC-NEWS/2024/09/CC-NEWS-20240914013311-06075.warc.gz
+crawl-data/CC-NEWS/2024/09/CC-NEWS-20240914040042-06076.warc.gz
+crawl-data/CC-NEWS/2024/09/CC-NEWS-20240914060224-06077.warc.gz
+crawl-data/CC-NEWS/2024/09/CC-NEWS-20240914074631-06078.warc.gz
+crawl-data/CC-NEWS/2024/09/CC-NEWS-20240914091726-06079.warc.gz
+crawl-data/CC-NEWS/2024/09/CC-NEWS-20240914103658-06080.warc.gz
+crawl-data/CC-NEWS/2024/09/CC-NEWS-20240914115721-06081.warc.gz
+crawl-data/CC-NEWS/2024/09/CC-NEWS-20240914132005-06082.warc.gz
+crawl-data/CC-NEWS/2024/09/CC-NEWS-20240914144751-06083.warc.gz
+crawl-data/CC-NEWS/2024/09/CC-NEWS-20240914161308-06084.warc.gz
+crawl-data/CC-NEWS/2024/09/CC-NEWS-20240914174100-06085.warc.gz
+crawl-data/CC-NEWS/2024/09/CC-NEWS-20240914191457-06086.warc.gz
+crawl-data/CC-NEWS/2024/09/CC-NEWS-20240914205527-06087.warc.gz
+crawl-data/CC-NEWS/2024/09/CC-NEWS-20240914224724-06088.warc.gz
+crawl-data/CC-NEWS/2024/09/CC-NEWS-20240915004740-06089.warc.gz
+crawl-data/CC-NEWS/2024/09/CC-NEWS-20240915031133-06090.warc.gz
+crawl-data/CC-NEWS/2024/09/CC-NEWS-20240915051611-06091.warc.gz
+crawl-data/CC-NEWS/2024/09/CC-NEWS-20240915072156-06092.warc.gz
+crawl-data/CC-NEWS/2024/09/CC-NEWS-20240915092328-06093.warc.gz
+crawl-data/CC-NEWS/2024/09/CC-NEWS-20240915111559-06094.warc.gz
+crawl-data/CC-NEWS/2024/09/CC-NEWS-20240915124839-06095.warc.gz
+crawl-data/CC-NEWS/2024/09/CC-NEWS-20240915142355-06096.warc.gz
+crawl-data/CC-NEWS/2024/09/CC-NEWS-20240915160017-06097.warc.gz
+crawl-data/CC-NEWS/2024/09/CC-NEWS-20240915174929-06098.warc.gz
+crawl-data/CC-NEWS/2024/09/CC-NEWS-20240915193916-06099.warc.gz
+crawl-data/CC-NEWS/2024/09/CC-NEWS-20240915212838-06100.warc.gz
+crawl-data/CC-NEWS/2024/09/CC-NEWS-20240915233029-06101.warc.gz
+crawl-data/CC-NEWS/2024/09/CC-NEWS-20240916014123-06102.warc.gz
+crawl-data/CC-NEWS/2024/09/CC-NEWS-20240916040938-06103.warc.gz
+crawl-data/CC-NEWS/2024/09/CC-NEWS-20240916061055-06104.warc.gz
+crawl-data/CC-NEWS/2024/09/CC-NEWS-20240916074937-06105.warc.gz
+crawl-data/CC-NEWS/2024/09/CC-NEWS-20240916091433-06106.warc.gz
+crawl-data/CC-NEWS/2024/09/CC-NEWS-20240916103506-06107.warc.gz
+crawl-data/CC-NEWS/2024/09/CC-NEWS-20240916114119-06108.warc.gz
+crawl-data/CC-NEWS/2024/09/CC-NEWS-20240916125644-06109.warc.gz
+crawl-data/CC-NEWS/2024/09/CC-NEWS-20240916140523-06110.warc.gz
+crawl-data/CC-NEWS/2024/09/CC-NEWS-20240916150937-06111.warc.gz
+crawl-data/CC-NEWS/2024/09/CC-NEWS-20240916161444-06112.warc.gz
+crawl-data/CC-NEWS/2024/09/CC-NEWS-20240916172802-06113.warc.gz
+crawl-data/CC-NEWS/2024/09/CC-NEWS-20240916183845-06114.warc.gz
+crawl-data/CC-NEWS/2024/09/CC-NEWS-20240916200049-06115.warc.gz
+crawl-data/CC-NEWS/2024/09/CC-NEWS-20240916212716-06116.warc.gz
+crawl-data/CC-NEWS/2024/09/CC-NEWS-20240916230457-06117.warc.gz
+crawl-data/CC-NEWS/2024/09/CC-NEWS-20240917005553-06118.warc.gz
+crawl-data/CC-NEWS/2024/09/CC-NEWS-20240917031218-06119.warc.gz
+crawl-data/CC-NEWS/2024/09/CC-NEWS-20240917051457-06120.warc.gz
+crawl-data/CC-NEWS/2024/09/CC-NEWS-20240917065017-06121.warc.gz
+crawl-data/CC-NEWS/2024/09/CC-NEWS-20240917082326-06122.warc.gz
+crawl-data/CC-NEWS/2024/09/CC-NEWS-20240917094327-06123.warc.gz
+crawl-data/CC-NEWS/2024/09/CC-NEWS-20240917105219-06124.warc.gz
+crawl-data/CC-NEWS/2024/09/CC-NEWS-20240917115844-06125.warc.gz
+crawl-data/CC-NEWS/2024/09/CC-NEWS-20240917130526-06126.warc.gz
+crawl-data/CC-NEWS/2024/09/CC-NEWS-20240917140709-06127.warc.gz
+crawl-data/CC-NEWS/2024/09/CC-NEWS-20240917150805-06128.warc.gz
+crawl-data/CC-NEWS/2024/09/CC-NEWS-20240917160524-06129.warc.gz
+crawl-data/CC-NEWS/2024/09/CC-NEWS-20240917170833-06130.warc.gz
+crawl-data/CC-NEWS/2024/09/CC-NEWS-20240917181932-06131.warc.gz
+crawl-data/CC-NEWS/2024/09/CC-NEWS-20240917192405-06132.warc.gz
+crawl-data/CC-NEWS/2024/09/CC-NEWS-20240917203807-06133.warc.gz
+crawl-data/CC-NEWS/2024/09/CC-NEWS-20240917220124-06134.warc.gz
+crawl-data/CC-NEWS/2024/09/CC-NEWS-20240917233423-06135.warc.gz
+crawl-data/CC-NEWS/2024/09/CC-NEWS-20240918011508-06136.warc.gz
+crawl-data/CC-NEWS/2024/09/CC-NEWS-20240918031201-06137.warc.gz
+crawl-data/CC-NEWS/2024/09/CC-NEWS-20240918045945-06138.warc.gz
+crawl-data/CC-NEWS/2024/09/CC-NEWS-20240918063321-06139.warc.gz
+crawl-data/CC-NEWS/2024/09/CC-NEWS-20240918075834-06140.warc.gz
+crawl-data/CC-NEWS/2024/09/CC-NEWS-20240918091314-06141.warc.gz
+\end{lstlisting}
+
+\begin{lstlisting}[escapeinside={(*@}{@*)}]
+crawl-data/CC-NEWS/2024/09/CC-NEWS-20240918102024-06142.warc.gz
+crawl-data/CC-NEWS/2024/09/CC-NEWS-20240918112351-06143.warc.gz
+crawl-data/CC-NEWS/2024/09/CC-NEWS-20240918122715-06144.warc.gz
+crawl-data/CC-NEWS/2024/09/CC-NEWS-20240918133029-06145.warc.gz
+crawl-data/CC-NEWS/2024/09/CC-NEWS-20240918143146-06146.warc.gz
+crawl-data/CC-NEWS/2024/09/CC-NEWS-20240918153745-06147.warc.gz
+crawl-data/CC-NEWS/2024/09/CC-NEWS-20240918164120-06148.warc.gz
+crawl-data/CC-NEWS/2024/09/CC-NEWS-20240918174658-06149.warc.gz
+crawl-data/CC-NEWS/2024/09/CC-NEWS-20240918185703-06150.warc.gz
+crawl-data/CC-NEWS/2024/09/CC-NEWS-20240918200612-06151.warc.gz
+crawl-data/CC-NEWS/2024/09/CC-NEWS-20240918212045-06152.warc.gz
+crawl-data/CC-NEWS/2024/09/CC-NEWS-20240918224056-06153.warc.gz
+crawl-data/CC-NEWS/2024/09/CC-NEWS-20240919002201-06154.warc.gz
+crawl-data/CC-NEWS/2024/09/CC-NEWS-20240919021231-06155.warc.gz
+crawl-data/CC-NEWS/2024/09/CC-NEWS-20240919042052-06156.warc.gz
+crawl-data/CC-NEWS/2024/09/CC-NEWS-20240919055224-06157.warc.gz
+crawl-data/CC-NEWS/2024/09/CC-NEWS-20240919072441-06158.warc.gz
+crawl-data/CC-NEWS/2024/09/CC-NEWS-20240919084249-06159.warc.gz
+crawl-data/CC-NEWS/2024/09/CC-NEWS-20240919100223-06160.warc.gz
+crawl-data/CC-NEWS/2024/09/CC-NEWS-20240919110946-06161.warc.gz
+crawl-data/CC-NEWS/2024/09/CC-NEWS-20240919121417-06162.warc.gz
+crawl-data/CC-NEWS/2024/09/CC-NEWS-20240919131839-06163.warc.gz
+crawl-data/CC-NEWS/2024/09/CC-NEWS-20240919142514-06164.warc.gz
+crawl-data/CC-NEWS/2024/09/CC-NEWS-20240919153241-06165.warc.gz
+crawl-data/CC-NEWS/2024/09/CC-NEWS-20240919163900-06166.warc.gz
+crawl-data/CC-NEWS/2024/09/CC-NEWS-20240919174744-06167.warc.gz
+crawl-data/CC-NEWS/2024/09/CC-NEWS-20240919190057-06168.warc.gz
+crawl-data/CC-NEWS/2024/09/CC-NEWS-20240919201919-06169.warc.gz
+crawl-data/CC-NEWS/2024/09/CC-NEWS-20240919214621-06170.warc.gz
+crawl-data/CC-NEWS/2024/09/CC-NEWS-20240919232308-06171.warc.gz
+crawl-data/CC-NEWS/2024/09/CC-NEWS-20240920011440-06172.warc.gz
+crawl-data/CC-NEWS/2024/09/CC-NEWS-20240920033848-06173.warc.gz
+crawl-data/CC-NEWS/2024/09/CC-NEWS-20240920054029-06174.warc.gz
+crawl-data/CC-NEWS/2024/09/CC-NEWS-20240920072903-06175.warc.gz
+crawl-data/CC-NEWS/2024/09/CC-NEWS-20240920085438-06176.warc.gz
+crawl-data/CC-NEWS/2024/09/CC-NEWS-20240920101150-06177.warc.gz
+crawl-data/CC-NEWS/2024/09/CC-NEWS-20240920112400-06178.warc.gz
+crawl-data/CC-NEWS/2024/09/CC-NEWS-20240920122830-06179.warc.gz
+crawl-data/CC-NEWS/2024/09/CC-NEWS-20240920133425-06180.warc.gz
+crawl-data/CC-NEWS/2024/09/CC-NEWS-20240920144308-06181.warc.gz
+crawl-data/CC-NEWS/2024/09/CC-NEWS-20240920154658-06182.warc.gz
+crawl-data/CC-NEWS/2024/09/CC-NEWS-20240920165443-06183.warc.gz
+crawl-data/CC-NEWS/2024/09/CC-NEWS-20240920181129-06184.warc.gz
+crawl-data/CC-NEWS/2024/09/CC-NEWS-20240920193432-06185.warc.gz
+crawl-data/CC-NEWS/2024/09/CC-NEWS-20240920210356-06186.warc.gz
+crawl-data/CC-NEWS/2024/09/CC-NEWS-20240920224850-06187.warc.gz
+crawl-data/CC-NEWS/2024/09/CC-NEWS-20240921010627-06188.warc.gz
+crawl-data/CC-NEWS/2024/09/CC-NEWS-20240921034714-06189.warc.gz
+crawl-data/CC-NEWS/2024/09/CC-NEWS-20240921055059-06190.warc.gz
+crawl-data/CC-NEWS/2024/09/CC-NEWS-20240921075106-06191.warc.gz
+crawl-data/CC-NEWS/2024/09/CC-NEWS-20240921094007-06192.warc.gz
+crawl-data/CC-NEWS/2024/09/CC-NEWS-20240921111859-06193.warc.gz
+crawl-data/CC-NEWS/2024/09/CC-NEWS-20240921125154-06194.warc.gz
+crawl-data/CC-NEWS/2024/09/CC-NEWS-20240921142152-06195.warc.gz
+crawl-data/CC-NEWS/2024/09/CC-NEWS-20240921155205-06196.warc.gz
+crawl-data/CC-NEWS/2024/09/CC-NEWS-20240921173232-06197.warc.gz
+crawl-data/CC-NEWS/2024/09/CC-NEWS-20240921192053-06198.warc.gz
+crawl-data/CC-NEWS/2024/09/CC-NEWS-20240921211915-06199.warc.gz
+crawl-data/CC-NEWS/2024/09/CC-NEWS-20240921234040-06200.warc.gz
+crawl-data/CC-NEWS/2024/09/CC-NEWS-20240922022211-06201.warc.gz
+crawl-data/CC-NEWS/2024/09/CC-NEWS-20240922045224-06202.warc.gz
+crawl-data/CC-NEWS/2024/09/CC-NEWS-20240922063525-06203.warc.gz
+crawl-data/CC-NEWS/2024/09/CC-NEWS-20240922083214-06204.warc.gz
+crawl-data/CC-NEWS/2024/09/CC-NEWS-20240922102909-06205.warc.gz
+crawl-data/CC-NEWS/2024/09/CC-NEWS-20240922121527-06206.warc.gz
+crawl-data/CC-NEWS/2024/09/CC-NEWS-20240922135525-06207.warc.gz
+crawl-data/CC-NEWS/2024/09/CC-NEWS-20240922152907-06208.warc.gz
+crawl-data/CC-NEWS/2024/09/CC-NEWS-20240922170439-06209.warc.gz
+crawl-data/CC-NEWS/2024/09/CC-NEWS-20240922184410-06210.warc.gz
+crawl-data/CC-NEWS/2024/09/CC-NEWS-20240922202709-06211.warc.gz
+crawl-data/CC-NEWS/2024/09/CC-NEWS-20240922222303-06212.warc.gz
+crawl-data/CC-NEWS/2024/09/CC-NEWS-20240923005822-06213.warc.gz
+crawl-data/CC-NEWS/2024/09/CC-NEWS-20240923035139-06214.warc.gz
+crawl-data/CC-NEWS/2024/09/CC-NEWS-20240923060350-06215.warc.gz
+crawl-data/CC-NEWS/2024/09/CC-NEWS-20240923074837-06216.warc.gz
+crawl-data/CC-NEWS/2024/09/CC-NEWS-20240923091340-06217.warc.gz
+crawl-data/CC-NEWS/2024/09/CC-NEWS-20240923102329-06218.warc.gz
+crawl-data/CC-NEWS/2024/09/CC-NEWS-20240923112657-06219.warc.gz
+crawl-data/CC-NEWS/2024/09/CC-NEWS-20240923123101-06220.warc.gz
+crawl-data/CC-NEWS/2024/09/CC-NEWS-20240923133940-06221.warc.gz
+crawl-data/CC-NEWS/2024/09/CC-NEWS-20240923143733-06222.warc.gz
+crawl-data/CC-NEWS/2024/09/CC-NEWS-20240923154058-06223.warc.gz
+crawl-data/CC-NEWS/2024/09/CC-NEWS-20240923164018-06224.warc.gz
+crawl-data/CC-NEWS/2024/09/CC-NEWS-20240923174201-06225.warc.gz
+crawl-data/CC-NEWS/2024/09/CC-NEWS-20240923190106-06226.warc.gz
+crawl-data/CC-NEWS/2024/09/CC-NEWS-20240923202615-06227.warc.gz
+crawl-data/CC-NEWS/2024/09/CC-NEWS-20240923220036-06228.warc.gz
+crawl-data/CC-NEWS/2024/09/CC-NEWS-20240923235105-06229.warc.gz
+crawl-data/CC-NEWS/2024/09/CC-NEWS-20240924015653-06230.warc.gz
+crawl-data/CC-NEWS/2024/09/CC-NEWS-20240924041710-06231.warc.gz
+crawl-data/CC-NEWS/2024/09/CC-NEWS-20240924055946-06232.warc.gz
+crawl-data/CC-NEWS/2024/09/CC-NEWS-20240924073735-06233.warc.gz
+crawl-data/CC-NEWS/2024/09/CC-NEWS-20240924090019-06234.warc.gz
+\end{lstlisting}
+
+\begin{lstlisting}[escapeinside={(*@}{@*)}]
+crawl-data/CC-NEWS/2024/09/CC-NEWS-20240924101831-06235.warc.gz
+crawl-data/CC-NEWS/2024/09/CC-NEWS-20240924112743-06236.warc.gz
+crawl-data/CC-NEWS/2024/09/CC-NEWS-20240924123324-06237.warc.gz
+crawl-data/CC-NEWS/2024/09/CC-NEWS-20240924134506-06238.warc.gz
+crawl-data/CC-NEWS/2024/09/CC-NEWS-20240924144607-06239.warc.gz
+crawl-data/CC-NEWS/2024/09/CC-NEWS-20240924154631-06240.warc.gz
+crawl-data/CC-NEWS/2024/09/CC-NEWS-20240924164911-06241.warc.gz
+crawl-data/CC-NEWS/2024/09/CC-NEWS-20240924180107-06242.warc.gz
+crawl-data/CC-NEWS/2024/09/CC-NEWS-20240924191818-06243.warc.gz
+crawl-data/CC-NEWS/2024/09/CC-NEWS-20240924204810-06244.warc.gz
+crawl-data/CC-NEWS/2024/09/CC-NEWS-20240924222818-06245.warc.gz
+crawl-data/CC-NEWS/2024/09/CC-NEWS-20240925001051-06246.warc.gz
+crawl-data/CC-NEWS/2024/09/CC-NEWS-20240925020605-06247.warc.gz
+crawl-data/CC-NEWS/2024/09/CC-NEWS-20240925041112-06248.warc.gz
+crawl-data/CC-NEWS/2024/09/CC-NEWS-20240925054624-06249.warc.gz
+crawl-data/CC-NEWS/2024/09/CC-NEWS-20240925071505-06250.warc.gz
+crawl-data/CC-NEWS/2024/09/CC-NEWS-20240925083918-06251.warc.gz
+crawl-data/CC-NEWS/2024/09/CC-NEWS-20240925095325-06252.warc.gz
+crawl-data/CC-NEWS/2024/09/CC-NEWS-20240925110445-06253.warc.gz
+crawl-data/CC-NEWS/2024/09/CC-NEWS-20240925121530-06254.warc.gz
+crawl-data/CC-NEWS/2024/09/CC-NEWS-20240925132202-06255.warc.gz
+crawl-data/CC-NEWS/2024/09/CC-NEWS-20240925142612-06256.warc.gz
+crawl-data/CC-NEWS/2024/09/CC-NEWS-20240925153828-06257.warc.gz
+crawl-data/CC-NEWS/2024/09/CC-NEWS-20240925164632-06258.warc.gz
+crawl-data/CC-NEWS/2024/09/CC-NEWS-20240925175152-06259.warc.gz
+crawl-data/CC-NEWS/2024/09/CC-NEWS-20240925190432-06260.warc.gz
+crawl-data/CC-NEWS/2024/09/CC-NEWS-20240925203004-06261.warc.gz
+crawl-data/CC-NEWS/2024/09/CC-NEWS-20240925220746-06262.warc.gz
+crawl-data/CC-NEWS/2024/09/CC-NEWS-20240926000455-06263.warc.gz
+crawl-data/CC-NEWS/2024/09/CC-NEWS-20240926021249-06264.warc.gz
+crawl-data/CC-NEWS/2024/09/CC-NEWS-20240926042219-06265.warc.gz
+crawl-data/CC-NEWS/2024/09/CC-NEWS-20240926060949-06266.warc.gz
+crawl-data/CC-NEWS/2024/09/CC-NEWS-20240926074542-06267.warc.gz
+crawl-data/CC-NEWS/2024/09/CC-NEWS-20240926091134-06268.warc.gz
+crawl-data/CC-NEWS/2024/09/CC-NEWS-20240926102611-06269.warc.gz
+crawl-data/CC-NEWS/2024/09/CC-NEWS-20240926113551-06270.warc.gz
+crawl-data/CC-NEWS/2024/09/CC-NEWS-20240926124341-06271.warc.gz
+crawl-data/CC-NEWS/2024/09/CC-NEWS-20240926135053-06272.warc.gz
+crawl-data/CC-NEWS/2024/09/CC-NEWS-20240926144744-06273.warc.gz
+crawl-data/CC-NEWS/2024/09/CC-NEWS-20240926155114-06274.warc.gz
+crawl-data/CC-NEWS/2024/09/CC-NEWS-20240926164717-06275.warc.gz
+crawl-data/CC-NEWS/2024/09/CC-NEWS-20240926174829-06276.warc.gz
+crawl-data/CC-NEWS/2024/09/CC-NEWS-20240926190018-06277.warc.gz
+crawl-data/CC-NEWS/2024/09/CC-NEWS-20240926201130-06278.warc.gz
+crawl-data/CC-NEWS/2024/09/CC-NEWS-20240926212823-06279.warc.gz
+crawl-data/CC-NEWS/2024/09/CC-NEWS-20240926225648-06280.warc.gz
+crawl-data/CC-NEWS/2024/09/CC-NEWS-20240927004505-06281.warc.gz
+crawl-data/CC-NEWS/2024/09/CC-NEWS-20240927024051-06282.warc.gz
+crawl-data/CC-NEWS/2024/09/CC-NEWS-20240927044057-06283.warc.gz
+crawl-data/CC-NEWS/2024/09/CC-NEWS-20240927063703-06284.warc.gz
+crawl-data/CC-NEWS/2024/09/CC-NEWS-20240927081602-06285.warc.gz
+crawl-data/CC-NEWS/2024/09/CC-NEWS-20240927093514-06286.warc.gz
+crawl-data/CC-NEWS/2024/09/CC-NEWS-20240927105445-06287.warc.gz
+crawl-data/CC-NEWS/2024/09/CC-NEWS-20240927120902-06288.warc.gz
+crawl-data/CC-NEWS/2024/09/CC-NEWS-20240927132212-06289.warc.gz
+crawl-data/CC-NEWS/2024/09/CC-NEWS-20240927143355-06290.warc.gz
+crawl-data/CC-NEWS/2024/09/CC-NEWS-20240927154732-06291.warc.gz
+crawl-data/CC-NEWS/2024/09/CC-NEWS-20240927165808-06292.warc.gz
+crawl-data/CC-NEWS/2024/09/CC-NEWS-20240927181445-06293.warc.gz
+crawl-data/CC-NEWS/2024/09/CC-NEWS-20240927193612-06294.warc.gz
+crawl-data/CC-NEWS/2024/09/CC-NEWS-20240927211106-06295.warc.gz
+crawl-data/CC-NEWS/2024/09/CC-NEWS-20240927225219-06296.warc.gz
+crawl-data/CC-NEWS/2024/09/CC-NEWS-20240928011132-06297.warc.gz
+crawl-data/CC-NEWS/2024/09/CC-NEWS-20240928040334-06298.warc.gz
+crawl-data/CC-NEWS/2024/09/CC-NEWS-20240928061306-06299.warc.gz
+crawl-data/CC-NEWS/2024/09/CC-NEWS-20240928081118-06300.warc.gz
+crawl-data/CC-NEWS/2024/09/CC-NEWS-20240928100319-06301.warc.gz
+crawl-data/CC-NEWS/2024/09/CC-NEWS-20240928115144-06302.warc.gz
+crawl-data/CC-NEWS/2024/09/CC-NEWS-20240928133641-06303.warc.gz
+crawl-data/CC-NEWS/2024/09/CC-NEWS-20240928152459-06304.warc.gz
+crawl-data/CC-NEWS/2024/09/CC-NEWS-20240928170532-06305.warc.gz
+crawl-data/CC-NEWS/2024/09/CC-NEWS-20240928184547-06306.warc.gz
+crawl-data/CC-NEWS/2024/09/CC-NEWS-20240928203900-06307.warc.gz
+crawl-data/CC-NEWS/2024/09/CC-NEWS-20240928225518-06308.warc.gz
+crawl-data/CC-NEWS/2024/09/CC-NEWS-20240929011801-06309.warc.gz
+crawl-data/CC-NEWS/2024/09/CC-NEWS-20240929035219-06310.warc.gz
+crawl-data/CC-NEWS/2024/09/CC-NEWS-20240929061044-06311.warc.gz
+crawl-data/CC-NEWS/2024/09/CC-NEWS-20240929082310-06312.warc.gz
+crawl-data/CC-NEWS/2024/09/CC-NEWS-20240929102111-06313.warc.gz
+crawl-data/CC-NEWS/2024/09/CC-NEWS-20240929120854-06314.warc.gz
+crawl-data/CC-NEWS/2024/09/CC-NEWS-20240929135520-06315.warc.gz
+crawl-data/CC-NEWS/2024/09/CC-NEWS-20240929154117-06316.warc.gz
+crawl-data/CC-NEWS/2024/09/CC-NEWS-20240929171839-06317.warc.gz
+crawl-data/CC-NEWS/2024/09/CC-NEWS-20240929190454-06318.warc.gz
+crawl-data/CC-NEWS/2024/09/CC-NEWS-20240929204551-06319.warc.gz
+crawl-data/CC-NEWS/2024/09/CC-NEWS-20240929225111-06320.warc.gz
+crawl-data/CC-NEWS/2024/09/CC-NEWS-20240930012849-06321.warc.gz
+crawl-data/CC-NEWS/2024/09/CC-NEWS-20240930041208-06322.warc.gz
+crawl-data/CC-NEWS/2024/09/CC-NEWS-20240930061854-06323.warc.gz
+crawl-data/CC-NEWS/2024/09/CC-NEWS-20240930074933-06324.warc.gz
+crawl-data/CC-NEWS/2024/09/CC-NEWS-20240930091334-06325.warc.gz
+crawl-data/CC-NEWS/2024/09/CC-NEWS-20240930103308-06326.warc.gz
+crawl-data/CC-NEWS/2024/09/CC-NEWS-20240930114624-06327.warc.gz
+\end{lstlisting}
+
+\begin{lstlisting}[escapeinside={(*@}{@*)}]
+crawl-data/CC-NEWS/2024/09/CC-NEWS-20240930125257-06328.warc.gz
+crawl-data/CC-NEWS/2024/09/CC-NEWS-20240930135959-06329.warc.gz
+crawl-data/CC-NEWS/2024/09/CC-NEWS-20240930151334-06330.warc.gz
+crawl-data/CC-NEWS/2024/09/CC-NEWS-20240930162313-06331.warc.gz
+crawl-data/CC-NEWS/2024/09/CC-NEWS-20240930173229-06332.warc.gz
+crawl-data/CC-NEWS/2024/09/CC-NEWS-20240930183901-06333.warc.gz
+crawl-data/CC-NEWS/2024/09/CC-NEWS-20240930195256-06334.warc.gz
+crawl-data/CC-NEWS/2024/09/CC-NEWS-20240930212123-06335.warc.gz
+crawl-data/CC-NEWS/2024/09/CC-NEWS-20240930230449-06336.warc.gz
+\end{lstlisting}
+
+Mỗi dòng là đường dẫn đến một tệp WARC. Các tệp này là kho lưu trữ nén chứa các trang web cùng siêu dữ liệu (metadata) đi kèm, cụ thể trong trường hợp này là các bài báo tin tức. Những đường dẫn này rất cần thiết để truy cập dữ liệu tin tức thực sự trong bộ dữ liệu Common Crawl. Thông thường, chúng ta sẽ dùng các đường dẫn này cùng với các công cụ hoặc thư viện có thể đọc và xử lý tệp WARC.
+
+Bây giờ hãy xác định kích thước của một tệp WARC cụ thể trong bộ dữ liệu Common Crawl News. Ta chọn tệp \texttt{crawl-data/CC-NEWS/2024/09/CC-NEWS-20240923074837-06216.warc.gz}, tương ứng với dữ liệu được thu thập vào ngày 23 tháng 9 năm 2024 lúc khoảng 7:48 sáng:
+
+In {[}16{]}:
+
+\begin{lstlisting}[escapeinside={(*@}{@*)}]
+# (*@Chỉ@*) (*@định@*) (*@đường@*) (*@dẫn@*) (*@tệp@*) WARC
+warc_file_url = "https://data.commoncrawl.org/crawl-data/CC-NEWS/2024/09/CC-NEWS-20240923074837-06216.warc.gz"
+
+# (*@Dùng@*) (*@yêu@*) (*@cầu@*) HEAD (*@để@*) (*@chỉ@*) (*@lấy@*) (*@phần@*) (*@tiêu@*) (*@đề@*) (headers)
+response = requests.get(warc_file_url, stream=True)
+response.raise_for_status()
+
+# (*@Lấy@*) (*@kích@*) (*@thước@*) (*@tệp@*) (*@từ@*) headers (*@và@*) in ra
+file_size = int(response.headers.get('content-length', 0))
+print(f"File size: {file_size} bytes")
+print(f"File size: {file_size / (1024 * 1024):.2f} MB")  # (*@Đổi@*) sang MB
+\end{lstlisting}
+
+\begin{lstlisting}[escapeinside={(*@}{@*)}]
+File size: 1072759398 bytes
+File size: 1023.06 MB
+\end{lstlisting}
+
+Đoạn mã này lấy kích thước của một tệp WARC cụ thể từ bộ dữ liệu Common Crawl News một cách hiệu quả mà không cần tải xuống toàn bộ tệp. Như ta thấy, tệp WARC này có kích thước xấp xỉ 1,02 GB (1023,06 MB). Hiểu rõ kích thước của các tệp WARC giúp ta lập kế hoạch tốt hơn cho quy trình thu thập và xử lý dữ liệu. Trong trường hợp của chúng ta, cần lưu ý rằng một tệp 1 GB có thể mất khá nhiều thời gian để tải xuống, đặc biệt khi kết nối internet chậm.
+
+\subsection{Xử lý các bản ghi của tệp WARC}
+
+Với các tệp WARC lớn như thế này, chúng ta có thể xử lý chúng theo từng phần nhỏ để tránh các vấn đề về bộ nhớ. Dòng \texttt{requests.get(...,\ stream=True)} trong đoạn mã ở trên khởi tạo một lần tải xuống theo luồng (streaming), nghĩa là nó không nạp toàn bộ tệp WARC vào bộ nhớ cùng một lúc. Thay vào đó, nó tải từng khối dữ liệu khi cần. Cách này giúp giảm thiểu mức sử dụng bộ nhớ, đặc biệt đối với các tệp WARC lớn. Hàm \texttt{requests.get()} trả về một đối tượng Response, được gán cho biến \texttt{response}. Đối tượng này chứa thông tin về phản hồi của máy chủ, bao gồm mã trạng thái, tiêu đề (header) và nội dung của phản hồi (trong trường hợp này là dữ liệu của tệp WARC). Tuy nhiên, cần hiểu rằng đối tượng \texttt{response} không chứa toàn bộ tệp WARC. Hãy hình dung \texttt{response} như một chiếc hộp có nhiều ngăn. Một ngăn chứa thông tin về phản hồi (header, mã trạng thái), còn một ngăn khác là đường ống nối với máy chủ, nơi dữ liệu của tệp WARC chảy qua theo từng khối. Có thể ví nó như một ống nước nối với một hồ chứa. Chiếc ống (đối tượng \texttt{response}) tồn tại, nhưng toàn bộ hồ chứa (dữ liệu tệp WARC) không chảy qua ống cùng một lúc. Thay vào đó, nước chảy qua với lượng được kiểm soát khi cần.
+
+Sau này, chúng ta có thể tận dụng hiệu quả tính năng truyền luồng này để giữ mức chiếm dụng bộ nhớ ở mức tương đối thấp. May mắn là các thư viện như \texttt{warcio,} một thư viện Python để đọc và ghi tệp WARC, cho phép lặp qua các bản ghi trong tệp WARC mà không cần nạp toàn bộ tệp vào bộ nhớ. Khi truy cập nội dung bằng \texttt{response.raw}, chúng ta không nhận được một tệp hoàn chỉnh trong bộ nhớ; chúng ta đang truy cập đường ống mà dữ liệu truyền qua. \texttt{warcio.ArchiveIterator} được thiết kế để làm việc với đường ống này. Nó đọc từng khối dữ liệu khi chúng đi qua đường ống và xử lý lần lượt từng khối. Ví dụ, đoạn mã sau lặp qua tất cả các bản ghi và tạo một DataFrame với URL, ngày và độ dài nội dung của mỗi bản ghi trong tệp WARC đã chọn. Đoạn mã chỉ tập trung vào các bản ghi \texttt{"response"}, vốn thường chứa nội dung trang web thực tế:
+
+In {[} {]}:
+
+\begin{lstlisting}[escapeinside={(*@}{@*)}]
+# Function to process the WARC file and extract data
+def process_warc_file(warc_file_url):
+    data = []
+    with requests.get(warc_file_url, stream=True) as response:
+        response.raise_for_status()
+
+        # Process WARC records
+        for record in warcio.ArchiveIterator(response.raw):
+            if record.rec_type == 'response':
+
+                # Extract URL, date and content length
+                url = record.rec_headers.get_header('WARC-Target-URI')
+                date = record.rec_headers.get_header('WARC-Date')
+                content_length = record.rec_headers.get_header('Content-Length')
+
+                # Store extracted info in 'data' list
+                data.append([url, date, content_length])
+
+    # Create DataFrame
+    df = pd.DataFrame(data, columns=['URL', 'Date', 'Content-Length'])
+    return df
+
+# Process the WARC file and get the DataFrame
+df = process_warc_file(warc_file_url)
+df
+\end{lstlisting}
+
+Ở đây, chúng ta thấy có 25.498 bản ghi tin tức trong tệp WARC đã chọn này, được thu thập vào khoảng 7:48 sáng ngày 23 tháng 9 năm 2024. Số lượng này lớn, nhưng đoạn mã mất chưa đến một phút để lặp qua toàn bộ các bản ghi. Việc xử lý đoạn mã trên cũng tương đối nhanh vì tất cả các thuộc tính của bản ghi (URL, ngày thu thập và độ dài nội dung) đều được lưu trong phần header của bản ghi.
+
+Tuy nhiên, chúng ta vẫn chưa có bất kỳ thông tin nào về nội dung của các bài báo. Để làm việc với nội dung bài báo, chúng ta cần truy cập nội dung HTML từ phần thân của bản ghi tin tức, rồi dùng một thư viện phân tích cú pháp HTML để trích xuất các thành phần cụ thể từ HTML, chẳng hạn như tiêu đề bài báo, nội dung chính, tác giả và/hoặc ngày xuất bản. Việc xử lý HTML, đặc biệt là các tệp HTML lớn hoặc số lượng lớn tệp HTML, có thể tốn nhiều thời gian tùy thuộc vào độ phức tạp của HTML và các thao tác được thực hiện. Có những kỹ thuật nâng cao như xử lý song song hoặc tính toán phân tán để tối ưu hóa thêm thời gian xử lý. Tuy nhiên, để đơn giản, chúng ta sẽ chỉ giới hạn số bài báo cần xử lý ở vài nghìn bản ghi đầu tiên. Như vậy là đủ để hiểu cách trích xuất các thuộc tính của bản ghi tin tức từ các tệp WARC của News Crawl.
+
+Bây giờ, hãy bổ sung thêm chức năng cho hàm \texttt{process\_warc\_file()} trong đoạn mã ở trên. Lần này, chúng ta sẽ triển khai một hàm có thể tái sử dụng, được thiết kế để trích xuất các bài báo liên quan đến Netflix từ một tệp WARC. Hàm này xử lý việc lọc ngôn ngữ, lọc từ khóa, trích xuất dữ liệu, xử lý lỗi và tổ chức dữ liệu, cung cấp một cách gọn gàng để xử lý các tệp WARC nhằm truy xuất thông tin cụ thể:
+
+In {[} {]}:
+
+\begin{lstlisting}[escapeinside={(*@}{@*)}]
+# (*@Hàm@*) (*@hỗ@*) (*@trợ@*) (*@xử@*) (*@lý@*) (*@tệp@*) WARC
+def process_warc_file(warc_file_url, limit=1000):
+    data = []
+    count = 0
+
+    with requests.get(warc_file_url, stream=True) as response:
+        response.raise_for_status()
+
+        # (*@Bọc@*) iterator (*@bằng@*) tqdm (*@để@*) (*@xử@*) (*@lý@*) (*@các@*) (*@bản@*) ghi (*@kèm@*) thanh (*@tiến@*) (*@trình@*) (*@đến@*) (*@giới@*) (*@hạn@*)
+        for record in tqdm.tqdm(warcio.ArchiveIterator(response.raw), total=limit, desc="Processing records"):
+            if record.rec_type == 'response':
+
+                # (*@Tiến@*) (*@hành@*) (*@trích@*) (*@xuất@*) (*@và@*) (*@lọc@*) (*@dữ@*) (*@liệu@*)
+                url = record.rec_headers.get_header('WARC-Target-URI')
+                date = record.rec_headers.get_header('WARC-Date')
+                content_length = record.rec_headers.get_header('Content-Length')
+
+                try:
+                    html_content = record.content_stream().read().decode('utf-8', 'ignore')
+
+                    # (*@Kiểm@*) tra lang="en" (*@trước@*) <head> ((*@xử@*) (*@lý@*) (*@cả@*) (*@xuống@*) (*@dòng@*))
+                    if re.search(r'lang\s*=\s*[\'"]?en[\'"]?[\s\S]*?<head>', html_content, re.IGNORECASE):
+
+                        # (*@Trích@*) (*@xuất@*) (*@tiêu@*) (*@đề@*) (*@và@*) (*@nội@*) dung (*@bài@*) (*@viết@*) (*@bằng@*) newspaper3k
+                        article = Article(url, language='en')
+                        article.download(input_html=html_content)
+                        article.parse()
+                        title = article.title
+                        news_article = article.text
+
+                        # (*@Lọc@*) (*@các@*) (*@văn@*) (*@bản@*) tin (*@tức@*) (*@chứa@*) "netflix" ((*@không@*) (*@phân@*) (*@biệt@*) hoa (*@thường@*))
+                        if news_article and re.search(r'netflix', news_article, re.IGNORECASE):
+                            data.append([url, date, content_length, title, news_article])
+
+                # (*@Xử@*) (*@lý@*) (*@lỗi@*)
+                except UnicodeDecodeError as e:
+                    print(f"Error decoding HTML content from {url}: {e}")
+                except Exception as e:
+                    print(f"Error extracting article from {url}: {e}")
+
+            # (*@Tăng@*) (*@biến@*) (*@đếm@*) (*@và@*) (*@kiểm@*) tra (*@giới@*) (*@hạn@*) sau khi (*@xử@*) (*@lý@*) (*@mỗi@*) (*@bản@*) ghi
+            count += 1
+            if count > limit:
+                break # (*@Thoát@*) (*@vòng@*) (*@lặp@*) (*@nếu@*) (*@đạt@*) (*@giới@*) (*@hạn@*)
+
+    # (*@Tạo@*) DataFrame
+    df = pd.DataFrame(data, columns=['URL', 'Date', 'Content-Length', 'Title', 'News_Article'])
+    return df
+\end{lstlisting}
+
+Ở đây chúng ta dùng regex (biểu thức chính quy) \texttt{lang\textbackslash{}s*=\textbackslash{}s*{[}\textbackslash{}\textquotesingle{}"{]}?en{[}\textbackslash{}\textquotesingle{}"{]}?{[}\textbackslash{}s\textbackslash{}S{]}*?\textless{}head\textgreater{}}. Biểu thức này tìm thuộc tính \texttt{lang} trong nội dung HTML, kiểm tra cụ thể xem nó có được đặt là \texttt{"en"} hay không, rồi lấy mọi thứ từ vị trí đó đến thẻ \texttt{\textless{}head\textgreater{}}, kể cả khi giữa chúng có xuống dòng. Biểu thức này cho phép linh hoạt trong cách viết thuộc tính, ví dụ \texttt{lang="en"}, \texttt{lang\ =\ \textquotesingle{}en\textquotesingle{}}, \texttt{lang=en}.
+
+Tiếp theo, chúng ta tiến hành trích xuất chi tiết bài báo. Mã thực hiện việc này bằng thư viện \texttt{newspaper3k} để lấy tiêu đề và phần nội dung chính của bài báo từ HTML. \texttt{newspaper3k} là một thư viện Python dùng để trích xuất và phân tích các bài viết từ các trang tin tức và blog, được thiết kế để việc thu thập (web scraping) tin tức dễ dàng và hiệu quả hơn. Sau đó, mã lọc các văn bản tin tức có chứa "netflix" và thêm thông tin đã trích xuất vào danh sách \texttt{data}, danh sách này được dùng để tạo \texttt{df} (pandas DataFrame) cuối cùng do hàm trả về.
+
+Cũng lưu ý rằng lần này \texttt{warcio.ArchiveIterator} được bọc trong \texttt{tqdm.tqdm(...)} để tạo thanh tiến trình cập nhật khi vòng lặp duyệt qua các bản ghi WARC. Thanh tiến trình cho biết số thứ tự bản ghi hiện tại, phần trăm hoàn thành và thời gian còn lại ước tính, giúp bạn hình dung trực quan tiến độ xử lý.
+
+Bây giờ khi đã có hàm \texttt{process\_warc\_file()} hoàn chỉnh hơn, hãy gọi nó:
+
+In {[} {]}:
+
+\begin{lstlisting}[escapeinside={(*@}{@*)}]
+# Ghi (*@lại@*) (*@thời@*) (*@điểm@*) (*@bắt@*) (*@đầu@*)
+start_time = time.time()
+
+# (*@Xử@*) (*@lý@*) 5000 (*@bản@*) ghi (*@tiếng@*) Anh (*@đầu@*) (*@tiên@*) (*@có@*) "netflix" trong (*@tiêu@*) (*@đề@*)
+df = process_warc_file(warc_file_url, limit=5000)
+
+# (*@Tính@*) (*@và@*) in (*@tổng@*) (*@thời@*) gian (*@xử@*) (*@lý@*)
+end_time = time.time()
+processing_time = end_time - start_time
+print(f"\nTotal processing time: {processing_time:.2f} seconds")
+
+# (*@Hiển@*) (*@thị@*) DataFrame
+df
+\end{lstlisting}
+
+Đây chỉ là một ví dụ đơn giản hóa để minh họa cách lấy bộ dữ liệu tin tức từ tệp WARC của News Crawl. Kết quả là chúng ta có dữ liệu tin tức đã lọc trong DataFrame \texttt{df}, mà trong trường hợp này chỉ có một số ít bài viết liên quan đến Netflix. Chúng ta có thể dùng DataFrame này để xử lý tiếp theo cách tương tự như với các bộ dữ liệu tin tức thu được bằng những cách khác.
+
+\section{GDELT (Cơ sở dữ liệu toàn cầu về Sự kiện, Ngôn ngữ và Sắc thái)}
+
+\subsection{Giới thiệu về GDELT}
+
+\textbf{GDELT} (Global Database of Events, Language, and Tone) là một cơ sở dữ liệu mã nguồn mở khổng lồ khác, theo dõi truyền thông tin tức trên toàn thế giới bằng hơn 65 ngôn ngữ. Cơ sở dữ liệu này sử dụng các kỹ thuật tinh vi để nhận diện và phân loại sự kiện, phân tích giọng điệu và cảm xúc của các bản tin, đồng thời cung cấp những hiểu biết sâu sắc về các xu hướng và mô thức toàn cầu. Dữ liệu của GDELT được cung cấp miễn phí cho các nhà nghiên cứu, nhà báo và công chúng, giúp hiểu sâu hơn về xã hội loài người và các sự kiện toàn cầu.
+
+Dữ liệu GDELT có sẵn ở nhiều định dạng khác nhau, bao gồm CSV, JSON và một định dạng chuyên biệt gọi là GKG (Global Knowledge Graph). Cơ sở dữ liệu được cập nhật theo thời gian thực hoặc gần thời gian thực, với dữ liệu mới được bổ sung liên tục. Dự án GDELT tuyên bố sở hữu "cơ sở dữ liệu mở về xã hội loài người lớn nhất, toàn diện nhất và có độ phân giải cao nhất từng được tạo ra". Họ xử lý 100 triệu bài báo và bài đăng mạng xã hội mỗi ngày, với khoảng 65 ngôn ngữ có mặt trong tập dữ liệu. Dữ liệu có sẵn từ năm 1979 đến nay.
+
+Mặc dù không phải mọi khía cạnh của dữ liệu lớn đều thể hiện rõ như nhau trong GDELT, sự kết hợp giữa khối lượng, tốc độ, sự đa dạng và giá trị tiềm năng của nó đặt GDELT vững chắc trong phạm vi của dữ liệu lớn. Quy mô và độ phức tạp khổng lồ của dữ liệu GDELT đòi hỏi các công cụ và kỹ thuật chuyên biệt để xử lý, phân tích và lưu trữ hiệu quả. Điều này thường liên quan đến việc sử dụng các nền tảng đám mây, các khung tính toán phân tán và các phương pháp xử lý trong bộ nhớ để xử lý dữ liệu một cách hiệu quả. Tuy nhiên, cần lưu ý rằng định nghĩa "dữ liệu lớn" có thể mang tính chủ quan và phụ thuộc vào ngữ cảnh. Dù GDELT chắc chắn đặt ra những thách thức gắn với dữ liệu lớn, tập dữ liệu này vẫn có thể được xem là tương đối nhỏ so với các tập dữ liệu từ các nền tảng mạng xã hội hoặc các ứng dụng quy mô web. Dù vậy, khối lượng, tốc độ và sự đa dạng của dữ liệu GDELT đủ lớn để coi đây là dữ liệu lớn trong bối cảnh phân tích sự kiện và tin tức toàn cầu.
+
+\subsection{GDELT so với News Crawl}
+
+Cả GDELT và News Crawl đều là các bộ dữ liệu mã nguồn mở tập trung vào phân tích tin tức. Cả hai đều cung cấp lượng lớn dữ liệu tin tức từ nhiều nguồn khác nhau. Cả hai đều cho phép phân tích các xu hướng và mẫu hình của tin tức. Cả hai đều được công khai và có thể dùng cho nghiên cứu và phân tích. Tuy nhiên, giữa chúng có một số khác biệt quan trọng:
+
+{\small
+\begin{longtable}[]{@{}
+  >{\raggedright\arraybackslash}p{(\columnwidth - 4\tabcolsep) * \real{0.1633}}
+  >{\raggedright\arraybackslash}p{(\columnwidth - 4\tabcolsep) * \real{0.4014}}
+  >{\raggedright\arraybackslash}p{(\columnwidth - 4\tabcolsep) * \real{0.4218}}@{}}
+\toprule\noalign{}
+\begin{minipage}[b]{\linewidth}\raggedright
+Đặc trưng
+\end{minipage} & \begin{minipage}[b]{\linewidth}\raggedright
+News Crawl
+\end{minipage} & \begin{minipage}[b]{\linewidth}\raggedright
+GDELT
+\end{minipage} \\
+\midrule\noalign{}
+\endhead
+\bottomrule\noalign{}
+\endlastfoot
+Nguồn dữ liệu & \begin{minipage}[t]{\linewidth}\raggedright
+Chủ yếu là các bài báo được thu thập qua\\
+nguồn cấp RSS và sơ đồ trang web (sitemap).\strut
+\end{minipage} & \begin{minipage}[t]{\linewidth}\raggedright
+Các bài báo, bài đăng trên mạng xã hội\\
+và các phương tiện truyền thông trực tuyến khác.\strut
+\end{minipage} \\
+Định dạng dữ liệu & HTML thô của các trang web (tệp WARC) & CSV, JSON, GKG (Global Knowledge Graph) \\
+Trọng tâm & Cung cấp toàn bộ nội dung của các bài báo để phân tích. & Trích xuất sự kiện, thực thể và cảm xúc từ dữ liệu tin tức. \\
+Loại phân tích hỗ trợ & \begin{minipage}[t]{\linewidth}\raggedright
+Khai phá văn bản, xử lý ngôn ngữ tự nhiên (NLP),\\
+mô hình hóa chủ đề.\strut
+\end{minipage} & \begin{minipage}[t]{\linewidth}\raggedright
+Phát hiện sự kiện, phân tích cảm xúc,\\
+phân tích không gian địa lý và phân tích mạng lưới.\strut
+\end{minipage} \\
+Tần suất cập nhật & Cập nhật nhiều lần mỗi ngày. & \begin{minipage}[t]{\linewidth}\raggedright
+Cập nhật theo thời gian thực hoặc gần thời gian thực\\
+(mỗi 15 phút đối với GKG).\strut
+\end{minipage} \\
+Quy mô dữ liệu & Lớn (khoảng 600.000 bài báo mỗi ngày). & Rất lớn (xử lý 100 triệu bài báo và bài đăng mỗi ngày). \\
+Khung thời gian & Dữ liệu có sẵn trong vài năm gần đây. & Dữ liệu có sẵn từ năm 1979 đến nay. \\
+Ngôn ngữ & Hỗ trợ nhiều ngôn ngữ. & Hỗ trợ hơn 65 ngôn ngữ. \\
+Điểm mạnh & \begin{minipage}[t]{\linewidth}\raggedright
+Truy cập được toàn bộ nội dung bài báo,\\
+linh hoạt cho các phân tích tùy chỉnh.\strut
+\end{minipage} & \begin{minipage}[t]{\linewidth}\raggedright
+Dữ liệu đã được tiền xử lý, hiệu quả cho các tác vụ phân tích cụ thể,\\
+phân tích toàn diện về sự kiện và cảm xúc.\strut
+\end{minipage} \\
+Điểm yếu & \begin{minipage}[t]{\linewidth}\raggedright
+Cần tiền xử lý nhiều hơn,\\
+dữ liệu ít có cấu trúc hơn.\strut
+\end{minipage} & \begin{minipage}[t]{\linewidth}\raggedright
+Hạn chế trong việc truy cập nội dung gốc của bài báo,\\
+có khả năng tồn tại thiên lệch trong thu thập dữ liệu.\strut
+\end{minipage} \\
+\end{longtable}
+}
+
+Những khác biệt chính giữa dữ liệu News Crawl và GDELT có thể được tóm tắt như sau:
+
+\begin{itemize}
+\item
+  Định dạng dữ liệu: News Crawl chủ yếu cung cấp toàn bộ nội dung HTML của các bài báo. Điều này có nghĩa là bạn nhận được trọn vẹn trang web như nó hiển thị trực tuyến. GDELT cung cấp dữ liệu ở nhiều định dạng như CSV, JSON và GKG. Việc lựa chọn định dạng phụ thuộc vào nhu cầu cụ thể và các công cụ dùng để phân tích. Nhiều định dạng của GDELT mang lại sự linh hoạt cho các kiểu phân tích khác nhau, trong khi HTML thô của News Crawl đòi hỏi xử lý nhiều hơn nhưng cho phép truy cập toàn bộ nội dung trang web.
+\item
+  Phân tích: GDELT cung cấp phân tích về sự kiện, sắc thái (tone) và cảm xúc. News Crawl cung cấp dữ liệu thô để bạn tự thực hiện phân tích của mình.
+\item
+  Tần suất cập nhật: GDELT được cập nhật theo thời gian thực hoặc gần thời gian thực. News Crawl cập nhật ít thường xuyên hơn, chỉ nhiều lần mỗi ngày.
+\end{itemize}
+
+Các bộ dữ liệu GDELT được công khai và chủ yếu lưu trữ trên Google Cloud Storage. Vị trí cụ thể và phương thức truy cập có thể khác nhau tùy theo bộ dữ liệu và định dạng. GDELT cung cấp nhiều bộ dữ liệu khác nhau. Global Knowledge Graph (GKG), Events và Mentions là các bộ dữ liệu chính của GDELT. Các bộ dữ liệu và công cụ bổ sung có thể được sử dụng kết hợp với các bộ dữ liệu chính để hiểu toàn diện hơn về các sự kiện toàn cầu, mức độ đưa tin và diễn ngôn công chúng. Nên khám phá toàn bộ các sản phẩm của GDELT trên trang web của họ để xem bộ dữ liệu và công cụ nào phù hợp nhất với nhu cầu của chúng ta \url{https://www.gdeltproject.org/data.html\#rawdatafiles}. Trang web của GDELT cung cấp hướng dẫn và tài liệu chi tiết về cách truy cập dữ liệu.
+
+\subsection{Các bộ dữ liệu có sẵn từ GDELT}
+
+Dưới đây là tóm tắt một số bộ dữ liệu của GDELT và khả năng ứng dụng của chúng trong kỹ thuật tài chính:
+
+\begin{itemize}
+\item
+  \textbf{GKG 2.0:} Global Knowledge Graph (Đồ thị tri thức toàn cầu), trích xuất nhiều loại thông tin từ các bài báo trực tuyến và các nguồn truyền thông trực tuyến khác trên toàn cầu, bao gồm thực thể, chủ đề, sự kiện, địa điểm, cảm xúc, v.v.
+
+  \begin{itemize}
+  \item
+    Ứng dụng trong kỹ thuật tài chính:
+
+    \begin{itemize}
+        \item
+      Phân tích cảm xúc: Phân tích giọng điệu và cảm xúc của các bài báo liên quan đến từng công ty, ngành hoặc chỉ báo kinh tế cụ thể để đánh giá tâm lý thị trường và dự báo các biến động giá tiềm ẩn.
+    \item
+      Phát hiện sự kiện: Nhận diện các sự kiện liên quan có thể tác động đến thị trường tài chính, chẳng hạn như sáp nhập công ty, thay đổi quy định hoặc diễn biến địa chính trị.
+    \item
+      Trích xuất chủ đề: Trích xuất các chủ đề chính từ các bài báo để hiểu các xu hướng mới nổi và ảnh hưởng tiềm tàng của chúng đối với các quyết định đầu tư.
+    \end{itemize}
+  \item
+    Độ chi tiết: Cập nhật theo giờ, cung cấp cái nhìn gần như theo thời gian thực về tin tức và thông tin toàn cầu. Dữ liệu có sẵn từ tháng 2 năm 2015 đến nay.
+  \end{itemize}
+\item
+  \textbf{Events 2.0:} Tập trung vào các sự kiện và mối quan hệ giữa chúng, cung cấp các chi tiết như vai trò của các tác nhân, mã sự kiện và vị trí địa lý.
+
+  \begin{itemize}
+  \item
+    Ứng dụng trong kỹ thuật tài chính:
+
+    \begin{itemize}
+        \item
+      Đánh giá rủi ro: Đánh giá các rủi ro tiềm ẩn gắn với từng khoản đầu tư cụ thể bằng cách phân tích các sự kiện liên quan đến công ty, quốc gia hoặc ngành.
+    \item
+      Tối ưu hóa danh mục đầu tư: Sử dụng dữ liệu sự kiện để tối ưu hóa danh mục đầu tư bằng cách nhận diện các cơ hội hoặc mối đe dọa tiềm ẩn dựa trên các sự kiện toàn cầu và tác động có thể có của chúng.
+    \item
+      Giao dịch định lượng: Xây dựng các chiến lược giao dịch định lượng dựa trên các tín hiệu trích xuất từ dữ liệu sự kiện, chẳng hạn như những thay đổi trong quan hệ giữa các công ty hoặc quốc gia.
+    \end{itemize}
+  \item
+    Độ chi tiết: Dữ liệu ở cấp độ sự kiện, ghi nhận từng sự việc riêng lẻ cùng các chi tiết cụ thể. Dữ liệu có sẵn từ ngày 1 tháng 1 năm 1979 đến nay.
+  \end{itemize}
+\item
+  \textbf{Mentions 2.0:} Theo dõi các lượt đề cập đến con người, tổ chức và địa điểm trong toàn bộ bộ dữ liệu GDELT.
+
+  \begin{itemize}
+    \item
+    Ứng dụng trong kỹ thuật tài chính:
+
+    \begin{itemize}
+        \item
+      Theo dõi mức độ đưa tin và nhận diện các thực thể liên quan đến từng công ty cụ thể.
+    \item
+      Đánh giá cảm xúc và nhận thức của công chúng đối với các công ty.
+    \end{itemize}
+  \item
+    Độ chi tiết: Dữ liệu ở cấp độ lượt đề cập, cung cấp thông tin về tần suất và ngữ cảnh của các lượt đề cập thực thể. Dữ liệu có sẵn từ tháng 2 năm 2015 đến nay.
+  \end{itemize}
+\item
+  \textbf{Global Frontpage Graph (GFG):} Ghi lại các tiêu đề nổi bật nhất từ các trang web tin tức trên khắp thế giới, cung cấp thông tin về những tin tức nổi bật nhất.
+
+  \begin{itemize}
+    \item
+    Ứng dụng trong kỹ thuật tài chính: Nhanh chóng nhận diện tin nóng và các sự kiện có khả năng tác động đến thị trường.
+  \item
+    Độ chi tiết: Ảnh chụp nhanh theo giờ về các tin tức nổi bật nhất. Dữ liệu có sẵn từ tháng 4 năm 2017 đến nay.
+  \end{itemize}
+\item
+  \textbf{Television Explorer:} Phân tích các chương trình tin tức truyền hình và trích xuất thông tin về các chủ đề được đề cập, những người được nhắc đến và nội dung hình ảnh.
+
+  \begin{itemize}
+    \item
+    Ứng dụng trong kỹ thuật tài chính: Theo dõi cảm xúc và các luồng diễn ngôn trên các chương trình tin tức tài chính.
+  \item
+    Độ chi tiết: Dữ liệu gắn với từng chương trình và đoạn phát sóng truyền hình cụ thể. Mức độ sẵn có của dữ liệu phụ thuộc vào các kênh và chương trình tin tức truyền hình cụ thể được phân tích. Xem tài liệu GDELT Television Explorer để biết chi tiết.
+  \end{itemize}
+\item
+  \textbf{Geo 2.0:} Bộ dữ liệu không gian địa lý liên kết các sự kiện và lượt đề cập của GDELT với các vị trí địa lý và vùng hành chính cụ thể.
+
+  \begin{itemize}
+    \item
+    Ứng dụng trong kỹ thuật tài chính: Phân tích tác động địa lý của các sự kiện đối với đầu tư và thị trường.
+  \item
+    Độ chi tiết: Dữ liệu theo vị trí gắn với các sự kiện và lượt đề cập. Dữ liệu có sẵn từ ngày 1 tháng 1 năm 1979 đến nay (đồng bộ với Events 2.0).
+  \end{itemize}
+\item
+  \textbf{WEB NGrams 3.0:} Theo dõi tần suất của các cụm từ và thuật ngữ trên một tập hợp khổng lồ các bài báo trực tuyến và trang web.
+
+  \begin{itemize}
+    \item
+    Ứng dụng trong kỹ thuật tài chính: Nhận diện các xu hướng và chủ đề mới nổi trong diễn ngôn tài chính.
+  \item
+    Độ chi tiết: Dữ liệu về tần suất sử dụng từ và cụm từ theo thời gian. Dữ liệu có sẵn từ ngày 1 tháng 1 năm 2010 đến nay.
+  \end{itemize}
+\end{itemize}
+
+Bằng cách hiểu rõ điểm mạnh và độ chi tiết của từng bộ dữ liệu, các kỹ sư tài chính có thể tận dụng (leverage) nguồn thông tin đồ sộ của GDELT để tạo lợi thế cạnh tranh trong phân tích và ra quyết định.
+
+\section{Dữ liệu GDELT}
+
+\subsection{Nhập dữ liệu GDELT GKG}
+
+Trong bài học này, chúng ta tập trung sử dụng GDELT để phân tích dữ liệu. Trước khi chạy mã, chúng ta cần hiểu một vài chi tiết quan trọng:
+
+\begin{itemize}
+\item
+  Quy ước đặt tên: Dữ liệu GKG được cập nhật mỗi 15 phút và được lưu trong các tệp nén riêng biệt. Tên tệp tuân theo một mẫu cụ thể: \texttt{YYYYMMDDHHMMSS.gkg.csv.zip}, trong đó:
+
+  \begin{itemize}
+    \item
+    YYYY: Năm
+  \item
+    MM: Tháng
+  \item
+    DD: Ngày
+  \item
+    HH: Giờ
+  \item
+    MM: Phút
+  \item
+    SS: Giây
+  \end{itemize}
+\item
+  Không có hàng tiêu đề: Các tệp GKG thường không có hàng tiêu đề chứa tên cột. Bạn cần tham khảo Sổ mã GDELT GKG (GDELT GKG Codebook) để xác định ý nghĩa của từng cột. GKG có 27 cột biểu diễn các khía cạnh khác nhau của các bài báo. Vui lòng tham khảo \href{http://data.gdeltproject.org/documentation/GDELT-Global_Knowledge_Graph_Codebook-V2.1.pdf}{GDELT 2.0 Global Knowledge Graph Codebook (V2.1)} để biết hướng dẫn đầy đủ.
+\item
+  Dữ liệu phức tạp: Dữ liệu trong mỗi cột có thể phức tạp, với nhiều giá trị được phân tách bằng dấu phân cách (ví dụ: dấu chấm phẩy, dấu phẩy) hoặc thông tin được mã hóa.
+\end{itemize}
+
+Khi hiểu được cách tổ chức của dữ liệu GDELT GKG, chúng ta có thể truy cập, xử lý và phân tích thông tin một cách hiệu quả để rút ra những hiểu biết từ tin tức và sự kiện toàn cầu. Hãy nhớ tham khảo Sổ mã GDELT GKG để biết thông tin chi tiết về định dạng dữ liệu và mô tả các cột.
+
+Bây giờ chúng ta hãy chạy mã. Đoạn mã sau tải xuống dữ liệu GDELT GKG được chỉ định - \texttt{20240930081500.gkg.csv.zip} - tương ứng với dữ liệu GDELT được ghi nhận lúc 8:15 sáng ngày 30 tháng 9 năm 2024. Sau đó chúng ta sẽ giải nén, đọc vào một DataFrame của pandas, thêm tên cột, và lọc DataFrame để chỉ giữ lại các hàng mà cột "Organizations" chứa từ "netflix":
+
+In {[} {]}:
+
+\begin{lstlisting}[escapeinside={(*@}{@*)}]
+# URL for GDELT GKG data
+url = "http://data.gdeltproject.org/gdeltv2/20240930081500.gkg.csv.zip"
+
+# Download and save the zipped file
+response = requests.get(url, stream=True)
+with open("gdelt_data.csv.zip", "wb") as file:
+  for chunk in response.iter_content(chunk_size=1024):
+    if chunk:
+      file.write(chunk)
+
+# Unzip the file
+!unzip gdelt_data.csv.zip -d gdelt_data
+
+# Read the CSV file into a pandas DataFrame
+file_path = "gdelt_data/20240930081500.gkg.csv"
+df = pd.read_csv(file_path, sep='\t', header=None)
+
+# Add column names (replace with actual column names from GDELT documentation)
+gkg_columns = [
+    "GKGRECORDID", "DATE", "SourceCollectionIdentifier", "SourceCommonName",
+    "DocumentIdentifier", "Counts", "V2Counts", "Themes", "V2Themes",
+    "Locations", "V2Locations", "Persons", "V2Persons", "Organizations",
+    "V2Organizations", "V2Tone", "Dates", "GCAM", "SharingImage",
+    "RelatedImages", "SocialImageEmbeds", "SocialVideoEmbeds", "Quotations",
+    "AllNames", "Amounts", "TranslationInfo", "Extras"
+]
+df.columns = gkg_columns
+
+# Filter for news related to netflix (adjust column and keyword as needed)
+netflix_news = df[df['Organizations'].str.contains("netflix", na=False)].copy()
+netflix_news
+\end{lstlisting}
+
+Trước hết, xin lưu ý rằng các tệp GDELT GKG 2.0 (Global Knowledge Graph) thường có dung lượng khoảng 15-25 MB. Điều này có nghĩa là chúng ta thực sự không cần lo lắng về việc lập kế hoạch cho quy trình thu thập và phân tích dữ liệu, vì kích thước này tương đối nhỏ và không gây ra vấn đề đáng kể về bộ nhớ.
+
+Dữ liệu GDELT GKG 2.0 có 27 cột. Các cột chứa thông tin về:
+
+\begin{itemize}
+\item
+  Siêu dữ liệu bài báo: ID duy nhất, ngày/giờ, nguồn, URL.
+\item
+  Thực thể: Các đề cập đến chủ đề, địa điểm, con người và tổ chức, kèm số lần xuất hiện và mức độ liên quan.
+\item
+  Cảm xúc: Sắc thái tổng thể, điểm tích cực/tiêu cực, phân cực (polarity), v.v.
+\item
+  Sự kiện và bối cảnh: Các ngày được đề cập, phân tích nội dung, hình ảnh/video liên quan, trích dẫn.
+\item
+  Bổ sung: Tất cả tên gọi, số lượng, thông tin dịch thuật và siêu dữ liệu mở rộng.
+\end{itemize}
+
+Về cơ bản, các cột này cung cấp một bức tranh toàn diện về nội dung, bối cảnh và cảm xúc của một bài báo.
+
+Xin lưu ý rằng chúng ta chỉ lọc một tập dữ liệu GDELT nhỏ, vì dữ liệu GKG của nó được cập nhật mỗi 15 phút. Các tập dữ liệu trong khung thời gian ngắn như vậy, hoặc một chuỗi các tập dữ liệu liên tiếp, có thể hữu ích trong một số tình huống kỹ thuật tài chính như phân tích cấu trúc vi mô thị trường, quản lý rủi ro thời gian thực, thực thi thuật toán và phân tích cảm xúc tin tức.
+
+Những lưu ý quan trọng: Mặc dù các tập dữ liệu trong khung thời gian ngắn có thể hữu ích trong các tình huống này, cần nhận thức rõ những hạn chế của chúng. Kết quả thu được từ các tập dữ liệu khung thời gian ngắn có thể không vững chắc hoặc không có ý nghĩa thống kê bằng kết quả từ các tập dữ liệu khung thời gian dài hơn. Điều cần thiết là phải kiểm chứng kỹ lưỡng kết quả và bảo đảm khoảng thời gian được chọn phù hợp với ứng dụng cụ thể. Việc kết hợp dữ liệu từ nhiều nguồn và sử dụng các kỹ thuật thống kê mạnh có thể giúp nâng cao độ tin cậy của phân tích dựa trên các tập dữ liệu khung thời gian ngắn.
+
+\subsection{Cảm xúc (Tone) trong dữ liệu GDELT}
+
+GDELT sử dụng một quy trình tinh vi để xác định sắc thái cảm xúc và cảm xúc được thể hiện trong các bài báo tin tức và phương tiện truyền thông trực tuyến. GDELT kết hợp phân tích ngôn ngữ (xem xét từ ngữ và ngữ pháp) với thông tin ngữ cảnh (sự kiện, thực thể, địa điểm, thời gian) để chấm điểm sắc thái của các bài báo. GDELT tận dụng sự kết hợp tinh vi giữa NLP, học máy, các phương pháp thống kê, phân tích ngữ cảnh và các hệ thống dựa trên quy tắc để tính điểm Tone. GDELT kết hợp sự hiểu biết sâu sắc về ngôn ngữ với nhận thức rộng về ngữ cảnh để suy ra các điểm cảm xúc tinh tế cho các bài báo. Điều này mang lại những hiểu biết giá trị về bức tranh cảm xúc của các sự kiện toàn cầu và diễn ngôn trực tuyến.
+
+\textbf{Ưu điểm} của điểm Tone trong GDELT gồm:
+
+\begin{itemize}
+\item
+  \textbf{Quy mô và phạm vi rộng lớn:} GDELT xử lý lượng khổng lồ dữ liệu tin tức toàn cầu bằng nhiều ngôn ngữ, cung cấp góc nhìn rộng về cảm xúc và sắc thái trên nhiều nguồn đa dạng. Quy mô này vượt trội so với hầu hết các công cụ phân tích cảm xúc khác.
+\item
+  \textbf{Phân tích theo thời gian thực và lịch sử:} GDELT cung cấp cả cập nhật thời gian thực lẫn kho lưu trữ lịch sử, cho phép bạn phân tích xu hướng cảm xúc theo thời gian và nhận diện các mẫu hình mới nổi. Bối cảnh lịch sử này vô giá để hiểu sự tiến triển của cảm xúc đối với các chủ đề hoặc thực thể cụ thể.
+\item
+  \textbf{Phân rã cảm xúc chi tiết:} Cột \texttt{V2Tone} cung cấp bảng phân rã chi tiết các thành phần cảm xúc, gồm Tone, Positive Score, Negative Score, Polarity, Activity, Self Direction và Word Count. Mức độ chi tiết này giúp hiểu cảm xúc tinh tế hơn so với cách phân loại tích cực/tiêu cực đơn giản.
+\item
+  \textbf{Mở và dễ tiếp cận:} GDELT là nguồn tài nguyên miễn phí và mã nguồn mở, sẵn sàng cho các nhà nghiên cứu, nhà phân tích và nhà phát triển. Khả năng tiếp cận này loại bỏ rào cản gia nhập và thúc đẩy việc sử dụng rộng rãi hơn phân tích cảm xúc cho nhiều ứng dụng.
+\item
+  \textbf{Tích hợp với dữ liệu GDELT khác:} Điểm Tone của GDELT có thể được kết hợp với các bộ dữ liệu GDELT khác, chẳng hạn dữ liệu sự kiện hoặc thông tin địa lý, để hiểu toàn diện hơn về các sự kiện và bối cảnh cảm xúc của chúng. Phân tích tích hợp này có thể mang lại những hiểu biết sâu hơn về các xu hướng và mẫu hình toàn cầu.
+\end{itemize}
+
+\textbf{Hạn chế:} Dù tinh vi, độ chính xác của việc chấm điểm Tone trong GDELT có thể bị ảnh hưởng bởi nhiều yếu tố như sự mơ hồ của ngôn ngữ, sắc thái văn hóa và độ phức tạp của nội dung tin tức. Cũng cần hiểu các hạn chế của phân tích cảm xúc tự động:
+
+\begin{itemize}
+\item
+  \textbf{Thách thức về độ chính xác:} Phân tích cảm xúc tự động vốn phức tạp, và điểm Tone của GDELT không tránh khỏi sai sót. Sự mơ hồ của ngôn ngữ, sắc thái văn hóa và sự châm biếm đôi khi có thể dẫn đến hiểu sai cảm xúc.
+\item
+  \textbf{Phụ thuộc ngữ cảnh:} Cảm xúc có thể phụ thuộc rất nhiều vào ngữ cảnh, và phân tích của GDELT không phải lúc nào cũng nắm bắt đầy đủ các sắc thái ý nghĩa của văn bản. Cần xem xét ngữ cảnh xung quanh và các thiên lệch tiềm ẩn khi diễn giải điểm Tone.
+\item
+  \textbf{Giới hạn ở tin tức và phương tiện truyền thông trực tuyến:} GDELT chủ yếu tập trung vào các bài báo và nguồn truyền thông trực tuyến. Cảm xúc thể hiện trong các hình thức giao tiếp khác, như bài đăng mạng xã hội hay hội thoại cá nhân, có thể không được phản ánh chính xác trong điểm Tone.
+\item
+  \textbf{Khả năng thiên lệch:} Các nguồn và nội dung có trong bộ dữ liệu của GDELT có thể đưa thiên lệch vào điểm Tone. Cần nhận thức được các thiên lệch tiềm ẩn này và xem xét hệ quả của chúng khi diễn giải kết quả.
+\end{itemize}
+
+Nhìn chung, điểm Tone của GDELT là công cụ giá trị để hiểu cảm xúc và sắc thái trong tin tức toàn cầu và phương tiện truyền thông trực tuyến. Nó mang lại quy mô lớn, bối cảnh lịch sử và phân tích chi tiết. Tuy nhiên, cần nhận thức rõ các hạn chế của nó, đặc biệt về độ chính xác và sự phụ thuộc ngữ cảnh. Bằng cách cân nhắc cẩn thận các ưu điểm và hạn chế, chúng ta có thể tận dụng hiệu quả điểm Tone của GDELT để thu được những hiểu biết giá trị về các sự kiện toàn cầu và diễn ngôn trực tuyến.
+
+\subsection{Lấy các thành phần Tone trong dữ liệu GDELT}
+
+Chúng ta có thể dùng cột \texttt{V2Tone} để lọc các bài báo theo cảm xúc, nhận diện xu hướng sắc thái tin tức theo thời gian, hoặc phân tích bối cảnh cảm xúc xung quanh các sự kiện hay thực thể cụ thể. Cột này chứa một tập giá trị biểu diễn cảm xúc và sắc thái cảm xúc của bài báo hoặc nguồn truyền thông trực tuyến tương ứng. Các giá trị trong cột \texttt{V2Tone} thường được phân tách bằng dấu phẩy và bao gồm:
+
+\begin{itemize}
+\item
+  Tone: Biểu diễn sắc thái tổng thể, giá trị càng cao thì càng tích cực. Được biểu diễn dưới dạng số thực dấu phẩy động. Giá trị này được tính bằng Positive Score trừ Negative Score.
+\item
+  Positive Score: Cung cấp thông tin chi tiết hơn về cảm xúc. Có thể dùng để nhận diện các bài báo có cảm xúc tích cực mạnh. Đây là thước đo cảm xúc tích cực được thể hiện, là một số thực dấu phẩy động nằm trong khoảng từ 0 đến 100. Điểm 0 cho biết không có cảm xúc tích cực. Giá trị càng cao thì cảm xúc tích cực càng mạnh, trong đó 100 là mức cảm xúc tích cực mạnh nhất có thể có trong bài báo.
+\item
+  Negative Score: Cung cấp thông tin chi tiết hơn về cảm xúc. Có thể dùng để nhận diện các bài báo có cảm xúc tiêu cực mạnh. Đây là thước đo cảm xúc tiêu cực được thể hiện, là một số thực dấu phẩy động nằm trong khoảng từ 0 đến 100. Điểm 0 cho biết bài báo không có cảm xúc tiêu cực. Giá trị càng cao thì cảm xúc tiêu cực càng mạnh, trong đó 100 là mức cảm xúc tiêu cực mạnh nhất trong bài báo.
+\item
+  Polarity: Chỉ báo cho biết văn bản phân cực hay mang tính cảm xúc mạnh đến mức nào. Được suy ra từ một thuật toán phức tạp có xét đến nhiều đặc trưng ngôn ngữ và yếu tố ngữ cảnh.
+\item
+  Activity Reference Density: Thước đo mật độ các từ liên quan đến hoạt động hoặc hành động trong văn bản.
+\item
+  Self Direction: Thước đo mức độ văn bản tập trung vào tác giả hay vào chủ thể được nói đến.
+\item
+  WordCount: Số từ được phân tích sắc thái trong bài báo (giá trị số nguyên).
+\end{itemize}
+
+Đoạn mã sau chuyển dữ liệu GDELT sang định dạng dễ sử dụng hơn cho phân tích cảm xúc. Chúng ta lấy cột \texttt{V2Tone}, sau đó tách và chuyển đổi các thành phần cảm xúc liên quan từ cột này. Nhờ vậy bạn có thể dễ dàng làm việc với dữ liệu Tone và phân tích chúng ở các bước tiếp theo.
+
+In {[} {]}:
+
+\begin{lstlisting}[escapeinside={(*@}{@*)}]
+# Split V2Tone into separate columns
+netflix_news[['Tone', 'Positive Score', 'Negative Score', 'Polarity', 'Activity', 'Self Direction', 'WordCount']] = netflix_news['V2Tone'].str.split(',', expand=True)
+
+# Convert numeric columns to appropriate data types
+numeric_columns = ['Tone', 'Positive Score', 'Negative Score', 'Polarity', 'Activity', 'Self Direction']
+netflix_news[numeric_columns] = netflix_news[numeric_columns].astype(float).round(3)
+netflix_news[['Tone', 'Positive Score', 'Negative Score', 'Polarity', 'Activity', 'Self Direction', 'WordCount']]
+\end{lstlisting}
+
+Từ kết quả của đoạn mã này, chúng ta có thể rút ra các nhận xét sau:
+
+\begin{itemize}
+\item
+  Tone tiêu cực chiếm ưu thế: Nhiều bài báo có giá trị "Tone" âm hơn, cho thấy văn bản nhìn chung có khuynh hướng tiêu cực hoặc phê phán.
+\item
+  Cảm xúc tinh tế: Các giá trị "Positive Score" và "Negative Score" vẫn tương đối thấp, cho thấy cảm xúc được thể hiện có thể mang tính sắc thái hoặc gián tiếp hơn là tích cực hay tiêu cực một cách mạnh mẽ.
+\item
+  Mối quan hệ giữa Polarity và Tone: Có vẻ như trong tập dữ liệu cụ thể này, ngay cả những bài báo có Tone âm vẫn có thể mang hướng cảm xúc tổng thể tích cực, được phản ánh qua Polarity. Điều này nhấn mạnh tầm quan trọng của việc xem xét đồng thời cả Tone và Polarity để có bức tranh đầy đủ về cảm xúc được thể hiện trong văn bản. Trong khi Tone có thể cho thấy sắc thái nhìn chung tiêu cực hoặc phê phán, Polarity dương gợi ý rằng có thể tồn tại những yếu tố tích cực tiềm ẩn hoặc một cảm xúc tinh tế hơn được truyền tải trong các bài báo đó.
+\item
+  Activity cao hơn ở các bài báo ngắn hơn: Có vẻ tồn tại xu hướng "Activity Reference Density" cao hơn ở các bài báo có "WordCount" nhỏ. Điều này có thể cho thấy các bài báo ngắn thường dùng ngôn ngữ thiên về hành động hơn hoặc mô tả nhiều sự kiện hơn.
+\item
+  Self Direction đa dạng: Các giá trị "Self Direction" biến thiên, cho thấy một số bài báo tập trung nhiều hơn vào góc nhìn của tác giả, trong khi những bài khác khách quan hơn hoặc tập trung vào các sự kiện bên ngoài.
+\end{itemize}
+
+\textbf{Thông tin này có thể giúp ích như thế nào:} Bằng cách phân tích cẩn thận kết quả này kết hợp với các thông tin khác và chuyên môn lĩnh vực, các kỹ sư tài chính có thể thu được hiểu biết về cảm xúc thị trường đối với Netflix và xây dựng các chiến lược đầu tư và quản trị rủi ro. Một số cách diễn giải khả dĩ của các kết quả trên là:
+
+\begin{itemize}
+\item
+  Thay đổi và thích ứng chủ động: Kết quả có thể phản ánh một giai đoạn thay đổi hoặc chuyển đổi đáng kể của Netflix. Tin tức có thể phê phán những quyết định hoặc thách thức cụ thể (Tone âm) nhưng cũng ghi nhận những nỗ lực chủ động của công ty trong việc thích ứng, đổi mới hoặc phản ứng với diễn biến thị trường (Polarity và Activity dương).
+\item
+  Bối cảnh cạnh tranh: Cảm xúc trái chiều có thể phản ánh bối cảnh cạnh tranh của ngành phát trực tuyến. Các bài báo có thể thảo luận về Netflix trong mối quan hệ với các đối thủ cạnh tranh, làm nổi bật cả thách thức lẫn cơ hội.
+\item
+  Sự thận trọng của nhà đầu tư: Tone âm có thể cho thấy mức độ thận trọng hoặc hoài nghi nhất định của nhà đầu tư, ngay cả khi có những diễn biến tích cực. Điều này có thể gợi ý rằng Netflix cần giải quyết các mối lo ngại hoặc cải thiện tính minh bạch để duy trì niềm tin của nhà đầu tư.
+\end{itemize}
+
+Tập trung vào các khía cạnh Tone và Polarity, sau đây là một số kết luận tiềm năng từ góc độ kỹ thuật tài chính:
+
+\begin{itemize}
+\item
+  Chiến lược giao dịch dựa trên cảm xúc: Dữ liệu Tone và Polarity có thể được dùng để xây dựng các chiến lược giao dịch tận dụng những thay đổi trong cảm xúc thị trường đối với Netflix. Chẳng hạn, một chiến lược có thể là mua cổ phiếu Netflix khi Polarity dương mạnh, ngay cả khi Tone hơi âm, vì điều này cho thấy cổ phiếu có thể đang bị định giá thấp.
+\item
+  Quản trị rủi ro: Dữ liệu Tone có thể được dùng để đánh giá các rủi ro tiềm ẩn khi đầu tư vào Netflix. Tone âm có thể cho thấy sự bất định gia tăng hoặc mức độ đưa tin tiêu cực, từ đó cần điều tra thêm hoặc áp dụng các chiến lược giảm thiểu rủi ro.
+\item
+  Mô hình dự báo: Dữ liệu Tone và Polarity có thể được đưa vào các mô hình dự báo giá cổ phiếu Netflix hoặc các chỉ số tài chính khác. Sự kết hợp giữa Tone và Polarity có thể mang lại những hiểu biết giá trị về cảm xúc thị trường, giúp cải thiện độ chính xác của các mô hình này.
+\end{itemize}
+
+Nhìn chung, dữ liệu cho thấy một giai đoạn biến động và có khả năng nhiều biến động đối với Netflix, với việc đưa tin phản ánh cả thách thức lẫn cơ hội. Bằng cách xem xét cẩn thận tất cả các thành phần của V2Tone và kết hợp chúng với các dữ liệu GDELT khác cùng phân tích cơ bản, các kỹ sư tài chính có thể hiểu toàn diện hơn về cảm xúc thị trường và tác động tiềm tàng của nó đối với kết quả tài chính của Netflix.
+
+Tuy nhiên, chúng ta cũng cần lưu ý các điểm quan trọng sau:
+
+\begin{itemize}
+\item
+  Dữ liệu hạn chế: Phân tích này dựa trên một tập con nhỏ của dữ liệu. Cần có tập dữ liệu lớn hơn và phân tích toàn diện hơn để rút ra các kết luận vững chắc hơn.
+\item
+  Các yếu tố bên ngoài: Cần xem xét các yếu tố khác có thể đang ảnh hưởng đến cảm xúc thị trường đối với Netflix, chẳng hạn như xu hướng ngành, hành động của đối thủ cạnh tranh hoặc điều kiện kinh tế chung.
+\item
+  Nội dung tin tức: Hãy phân tích nội dung thực tế của các bài báo để hiểu các yếu tố cụ thể tác động đến điểm số Tone và Polarity. Phân tích định tính này có thể cung cấp bối cảnh giá trị cho dữ liệu số.
+\end{itemize}
+
+\subsection{Cách nâng cao phân tích cảm xúc}
+
+Bên cạnh cột \texttt{V2Tone}, bộ dữ liệu GDELT GKG 2.0 còn có các cột khác mà ta có thể tận dụng để nâng cao phân tích cảm xúc (sentiment analysis):
+
+\textbf{Themes và V2Themes:} Các cột này chứa danh sách các chủ đề được nhận diện trong bài báo. Ta có thể dùng chúng để xác định các chủ đề liên quan đến cảm xúc tích cực hoặc tiêu cực (ví dụ: "ECON\_INFLATION" có thể gắn với cảm xúc tiêu cực). Ta có thể xây dựng một từ điển ánh xạ các chủ đề sang điểm cảm xúc và dùng nó để phân tích cảm xúc gắn với các chủ đề xuất hiện trong các bài báo.
+
+Ta có thể dùng các cột này để tạo một từ điển cảm xúc hoặc bộ từ vựng (lexicon) dựa trên sự đồng xuất hiện của các chủ đề cụ thể với những từ khóa tích cực hoặc tiêu cực. Sau đó, ta có thể dùng bộ từ vựng này để chấm điểm cảm xúc của các bài báo dựa trên sự hiện diện của các chủ đề hoặc tên riêng đó.
+
+\textbf{Quotations:} Cột này chứa các trích dẫn trực tiếp từ bài báo. Việc phân tích cảm xúc của các trích dẫn này có thể mang lại sự hiểu biết sắc thái hơn về cảm xúc được thể hiện trong bài báo. Ta có thể áp dụng trực tiếp các kỹ thuật phân tích cảm xúc lên văn bản của các trích dẫn để hiểu chi tiết hơn về cảm xúc được thể hiện.
+
+\textbf{GCAM:} GCAM là viết tắt của Global Content Analysis Measures (các thước đo phân tích nội dung toàn cầu). Cột này trong bộ dữ liệu GKG cung cấp một tập hợp toàn diện các thước đo phân tích nội dung, được suy ra từ việc áp dụng Google Cloud Vision API lên các hình ảnh và video đi kèm một bài báo. Cột này chứa kết quả đầu ra của Google Cloud Vision API, có thể bao gồm các nhãn và mô tả của hình ảnh gắn với bài báo. Đôi khi, các nhãn và mô tả này gợi ra manh mối về cảm xúc của bài báo. Ta có thể áp dụng phân tích cảm xúc lên văn bản trích xuất từ dữ liệu GCAM để suy ra cảm xúc liên quan đến nội dung trực quan của bài báo.
+
+Ta có thể trích xuất văn bản từ dữ liệu GCAM và áp dụng các mô hình phân tích cảm xúc lên văn bản này để suy ra cảm xúc gắn với nội dung trực quan.
+
+\textbf{AllNames:} Cột này chứa danh sách tất cả các tên được nhắc đến trong bài báo. Cột này có thể được dùng để xác định các cá nhân hoặc tổ chức thường xuyên gắn với cảm xúc tích cực hoặc tiêu cực. Bằng cách phân tích cảm xúc gắn với các tên được nhắc đến, ta có thể xác định những tác nhân có ảnh hưởng hoặc các bên liên quan then chốt đang chi phối cảm xúc chung.
+
+Những lưu ý quan trọng: So với cột \texttt{V2Tone}, các cột này có thể đòi hỏi nhiều bước tiền xử lý và phân tích hơn. Ngoài ra, độ chính xác của phân tích cảm xúc dựa trên các cột này có thể thấp hơn so với dùng \texttt{V2Tone}, vốn được thiết kế riêng cho phân tích cảm xúc. Việc kết hợp những hiểu biết từ các cột này với dữ liệu \texttt{V2Tone} có thể mang lại cái nhìn toàn diện hơn về cảm xúc chung.
+
+\section{Động lực thay đổi của sắc thái}
+
+\subsection{Xem xét hai phương pháp}
+
+Bây giờ, hãy xem xét các phương pháp để quan sát động thái thay đổi của sắc thái (tone) đối với Netflix. Có thể có nhiều cách tiếp cận, nhưng chúng ta sẽ đi sâu vào hai phương pháp đơn giản và rất cơ bản để quan sát động thái thay đổi của sắc thái:
+
+\textbf{Phương pháp 1: Lấy trung bình Tone cho từng tệp 15 phút và so sánh các điểm số trung bình}
+
+Phương pháp này ưu tiên quan sát xu hướng cảm xúc tổng thể đối với Netflix theo thời gian bằng cách phân tích điểm Tone trung bình trong các khoảng 15 phút liên tiếp. Sau đây là phân tích chi tiết quy trình:
+
+\begin{itemize}
+\item
+  Thu thập và lọc dữ liệu: Quy trình bắt đầu bằng việc thu thập các tệp dữ liệu GDELT GKG liên quan cho giai đoạn mong muốn, thường bao gồm một chuỗi các khoảng 15 phút. Mỗi tệp chứa thông tin về nhiều bài báo và sự kiện được ghi nhận trong khung 15 phút cụ thể đó. Bước tiếp theo là lọc các tệp này để tách riêng các bài báo liên quan cụ thể đến Netflix, bằng cách dùng từ khóa, các lần nhắc đến thực thể hoặc các tiêu chí liên quan khác.
+\item
+  Trích xuất và tổng hợp Tone: Sau khi xác định được các bài báo liên quan đến Netflix trong từng tệp, cột "V2Tone" được trích xuất. Cột này chứa một chuỗi giá trị phân tách bằng dấu phẩy, biểu diễn các thành phần cảm xúc khác nhau, bao gồm điểm Tone tổng thể. Chuỗi "V2Tone" sau đó được phân tách để tách riêng giá trị Tone, thường là một điểm số bằng số cho biết cảm xúc được thể hiện trong bài báo. Điểm Tone thường được chuẩn hóa về một khoảng nhất định, chẳng hạn từ -100 đến +100, trong đó giá trị càng cao biểu thị cảm xúc càng tích cực. Với mỗi tệp 15 phút, điểm Tone của tất cả các bài báo liên quan đến Netflix được tổng hợp bằng cách tính trung bình. Điểm Tone trung bình này đại diện cho cảm xúc tổng thể đối với Netflix trong khoảng 15 phút cụ thể đó.
+\item
+  Xây dựng và phân tích chuỗi thời gian: Các điểm Tone trung bình, cùng với dấu thời gian tương ứng (thường là thời điểm bắt đầu của mỗi khoảng 15 phút), sau đó được dùng để xây dựng một chuỗi thời gian. Chuỗi thời gian này cho thấy cái nhìn theo trình tự thời gian về việc cảm xúc đối với Netflix đã diễn biến như thế nào trong khoảng thời gian dài. Có thể kiểm tra trực quan chuỗi thời gian để tìm các mẫu hình, xu hướng và những thay đổi đáng kể của cảm xúc. Ngoài ra, có thể áp dụng nhiều kỹ thuật phân tích khác nhau, bao gồm: trung bình trượt, để làm mượt các dao động ngắn hạn và nhận diện các xu hướng dài hạn; phân tích biến động, để định lượng mức độ biến thiên của cảm xúc theo thời gian; và tương quan với các dữ liệu khác, chẳng hạn giá cổ phiếu hoặc các sự kiện tin tức, để khám phá các mối quan hệ tiềm năng.
+\item
+  Ưu điểm: Ưu điểm chính của phương pháp này nằm ở sự tập trung rõ ràng vào việc quan sát thay đổi tổng thể của cảm xúc, cũng như tính tương đối đơn giản khi triển khai và diễn giải. Phương pháp này cũng hiệu quả về mặt tính toán, phù hợp với các ứng dụng thời gian thực hoặc các tập dữ liệu lớn. Tuy nhiên, cần lưu ý rằng phương pháp này đánh đổi một phần mức độ chi tiết do lấy trung bình cảm xúc của từng bài báo, và có thể nhạy cảm với các giá trị ngoại lai. Ngoài ra, phương pháp này cung cấp ít hiểu biết về các câu chuyện hay sự kiện tin tức cụ thể làm thay đổi cảm xúc.
+\end{itemize}
+
+\textbf{Phương pháp 2: Gộp tất cả các mẫu và phân tích các thành phần Tone của từng bài báo}
+
+Phương pháp này tập trung phân tích cảm xúc được thể hiện trong từng bài báo riêng lẻ và mối quan hệ tiềm năng của nó với các sự kiện hoặc câu chuyện tin tức cụ thể. Phương pháp này cung cấp góc nhìn chi tiết hơn và lấy sự kiện làm trung tâm so với Phương pháp 1. Sau đây là mô tả chi tiết:
+
+\begin{itemize}
+\item
+  Hợp nhất dữ liệu và trích xuất Tone: Tất cả các tệp dữ liệu GDELT GKG của giai đoạn mong muốn được gộp thành một tập dữ liệu duy nhất. Tập dữ liệu hợp nhất này bao gồm tất cả các bài báo liên quan đến Netflix và thông tin đi kèm, gồm dấu thời gian, điểm Tone và các đặc trưng liên quan khác. Cột "V2Tone" được trích xuất cho từng bài báo, và điểm Tone được phân tách và tách riêng, tương tự Phương pháp 1.
+\item
+  Phân tích cảm xúc ở cấp độ bài báo: Điểm Tone của từng bài báo sau đó được phân tích, có xét đến dấu thời gian và các đặc trưng liên quan khác như chủ đề, các thực thể được nhắc đến hoặc các trích dẫn. Phân tích này nhằm hiểu cảm xúc chi tiết được thể hiện trong từng câu chuyện tin tức cụ thể và cảm xúc đó có thể liên hệ ra sao với bối cảnh hoặc nội dung của bài báo.
+\item
+  Phát hiện sự kiện và tương quan: Phương pháp này cho phép xác định các sự kiện hoặc câu chuyện tin tức cụ thể trùng với những thay đổi đáng kể về cảm xúc của từng bài báo. Bằng cách xem xét dấu thời gian của các bài báo có điểm Tone đáng chú ý, các nhà nghiên cứu có thể xác định những nguyên nhân tiềm năng gây ra sự dịch chuyển cảm xúc. Hơn nữa, điểm Tone có thể được đối chiếu tương quan với các nguồn dữ liệu khác, chẳng hạn giá cổ phiếu hoặc cơ sở dữ liệu sự kiện tin tức, để khám phá các mối quan hệ và hiểu tác động của các sự kiện cụ thể lên cảm xúc đối với Netflix.
+\item
+  Ưu điểm: Ưu điểm của phương pháp này nằm ở thông tin cảm xúc chi tiết và tiềm năng phân tích sâu hơn, bao gồm khám phá mối quan hệ giữa Tone và các đặc trưng khác của bài báo. Phương pháp này cũng cho phép hiểu tác động của các sự kiện cụ thể lên cảm xúc. Tuy nhiên, cách tiếp cận này có thể đòi hỏi nhiều tính toán hơn và phức tạp hơn, có khả năng làm mất thông tin thời gian rõ ràng vì tập trung vào từng bài báo riêng lẻ thay vì các xu hướng tổng hợp. Việc diễn giải kết quả cũng có thể đòi hỏi nhiều công sức hơn do khối lượng lớn cảm xúc của từng bài báo.
+\end{itemize}
+
+\subsection{Ứng dụng Phương pháp 1: Lấy trung bình Tone cho từng tệp 15 phút và so sánh các điểm số trung bình}
+
+Trong phần này, chúng ta sẽ sử dụng Phương pháp 1. Đoạn mã dưới đây tải dữ liệu GDELT cho các khoảng 15 phút từ 8 giờ sáng đến 11:45 tối ngày 23 tháng 9 năm 2024, lọc các tin tức liên quan đến Netflix, trích xuất thông tin cảm xúc (điểm Tone) và tính cảm xúc trung bình cho từng khoảng. Mã thực hiện việc này một cách hiệu quả bằng cách xử lý từng tệp dữ liệu trong bộ nhớ mà không lưu xuống đĩa, nên phù hợp để phân tích các tập dữ liệu lớn hơn:
+
+\begin{lstlisting}[language=Python,escapeinside={(*@}{@*)}]
+# Generate timestamps from 8 AM to 11:45 PM on September 23, 2024
+start_time = datetime(2024, 9, 23, 8, 0, 0)
+end_time = datetime(2024, 9, 23, 23, 45, 0)
+timestamps = []
+current_time = start_time
+while current_time <= end_time:
+    timestamps.append(current_time.strftime("%Y%m%d%H%M%S"))
+    current_time += timedelta(minutes=15)
+
+# Create a dictionary to store average Tone for each timestamp
+avg_tones = {}
+
+# Loop through timestamps, download, process, and discard each file
+for timestamp in timestamps:
+    url = f"http://data.gdeltproject.org/gdeltv2/{timestamp}.gkg.csv.zip"
+    response = requests.get(url, stream=True)
+
+    # Process the zip file in memory without extracting to disk
+    with zipfile.ZipFile(io.BytesIO(response.content)) as zip_ref:
+        for file_name in zip_ref.namelist():
+            if file_name.endswith(".gkg.csv"):
+                with zip_ref.open(file_name) as file:
+                    # Specify the encoding as 'latin-1' to handle potential encoding issues
+                    df = pd.read_csv(file, sep='\t', header=None,
+                                     on_bad_lines='skip', # Skip lines with errors
+                                     engine='python', # Use Python engine to handle large files
+                                     encoding='latin-1') # Explicitly set encoding to 'latin-1'
+
+                # Add column names (refer to GDELT documentation)
+                gkg_columns = [
+                    "GKGRECORDID", "DATE", "SourceCollectionIdentifier", "SourceCommonName",
+                    "DocumentIdentifier", "Counts", "V2Counts", "Themes", "V2Themes",
+                    "Locations", "V2Locations", "Persons", "V2Persons", "Organizations",
+                    "V2Organizations", "V2Tone", "Dates", "GCAM", "SharingImage",
+                    "RelatedImages", "SocialImageEmbeds", "SocialVideoEmbeds", "Quotations",
+                    "AllNames", "Amounts", "TranslationInfo", "Extras"
+                ]
+                df.columns = gkg_columns
+
+                # Filter for news related to Netflix
+                netflix_news = df[df['Organizations'].str.contains("netflix", na=False)].copy()
+
+                # Extract Tone components (similar to previous code)
+                netflix_news[['Tone', 'Positive Score', 'Negative Score', 'Polarity', 'Activity', 'Self Direction', 'WordCount']] = netflix_news['V2Tone'].str.split(',', expand=True)
+                numeric_columns = ['Tone', 'Positive Score', 'Negative Score', 'Polarity', 'Activity', 'Self Direction']
+                netflix_news[numeric_columns] = netflix_news[numeric_columns].astype(float, errors='ignore').round(3) #ignore errors
+
+                # Calculate and store average Tone
+                avg_tone = netflix_news['Tone'].mean()
+                avg_tones[timestamp] = avg_tone
+
+    # File is automatically discarded when exiting the 'with' block
+
+# Create a DataFrame from the avg_tones dictionary converting 'Timestamp' column to datetime objects
+tone_df = pd.DataFrame(list(avg_tones.items()), columns=['Timestamp', 'AvgTone'])
+tone_df['Timestamp'] = pd.to_datetime(tone_df['Timestamp'], format='%Y%m%d%H%M%S')
+tone_df
+\end{lstlisting}
+
+Ở đây, trước hết chúng ta tạo một danh sách các mốc thời gian (timestamps) biểu diễn các khoảng 15 phút từ 4 giờ sáng đến 8 giờ tối ngày 23 tháng 9 năm 2024. Các mốc thời gian này sẽ được dùng để truy cập các tệp dữ liệu GDELT.
+
+Sau đó, chúng ta lặp qua từng mốc thời gian để tải dữ liệu GDELT, xử lý dữ liệu, tính Tone trung bình và loại bỏ tệp. Mã này sử dụng xử lý trong bộ nhớ (in-memory processing). Xử lý trong bộ nhớ là yếu tố thiết yếu đối với phân tích dữ liệu GDELT nhờ khả năng xử lý hiệu quả khối lượng dữ liệu lớn, tăng tốc độ và khả năng phản hồi, cải thiện khả năng mở rộng, tối ưu việc sử dụng tài nguyên và mang lại sự linh hoạt cao hơn cho phân tích. Bằng cách xử lý từng tệp riêng lẻ và loại bỏ nó trước khi chuyển sang tệp kế tiếp, các phương pháp xử lý trong bộ nhớ cho phép các nhà nghiên cứu rút ra những hiểu biết có ý nghĩa từ dữ liệu GDELT mà không bị giới hạn bởi dung lượng lưu trữ hay các nút thắt hiệu năng.
+
+Cuối cùng, chúng ta tạo một DataFrame pandas có tên \texttt{avg\_tones}, chứa các mốc thời gian và điểm Tone trung bình tương ứng của Netflix. Điều này cho phép chúng ta tiếp tục phân tích và trực quan hóa diễn biến cảm xúc theo thời gian.
+
+\subsubsection{Lấy dữ liệu trong ngày của Netflix}
+
+Bây giờ hãy lấy dữ liệu giá cổ phiếu trong ngày (intraday) của Netflix (NFLX) cho ngày 23 tháng 9 năm 2024 bằng thư viện \texttt{yfinance}. Đoạn mã sau tải dữ liệu cổ phiếu trong ngày của Netflix với khoảng thời gian 15 phút cho ngày 23 tháng 9 năm 2024 (bao gồm cả phiên trước và sau giờ giao dịch chính thức), lưu vào tệp CSV, rồi hiển thị dữ liệu:
+
+\begin{lstlisting}[escapeinside={(*@}{@*)}]
+# (*@Tải@*) (*@dữ@*) (*@liệu@*) trong (*@ngày@*) (*@bằng@*) yfinance
+nflx_intraday = yf.download(
+    tickers='NFLX',
+    start='2024-09-23',
+    end='2024-09-24',
+    interval='15m',
+    prepost=True, auto_adjust = False)
+
+# (*@Lưu@*) (*@dữ@*) (*@liệu@*) (*@vào@*) (*@tệp@*) CSV
+nflx_intraday.to_csv("netflix_intraday_20240923.csv")
+
+# (*@Hiển@*) (*@thị@*) DataFrame
+nflx_intraday
+\end{lstlisting}
+
+\textbf{Lưu ý quan trọng về tính khả dụng của dữ liệu:} Dữ liệu trong ngày thường chỉ có sẵn từ Yahoo Finance trong vòng 60 ngày gần nhất. Tại thời điểm viết bài, dữ liệu khả dụng cũng đã được tải xuống và lưu thành tệp \textquotesingle WQUnetflix\_intraday\_20240923.csv\textquotesingle{} để truy xuất sau này. Trong trường hợp bạn chạy notebook này khi dữ liệu trong ngày không còn khả dụng, hãy nạp dữ liệu từ tệp \textquotesingle WQUnetflix\_intraday\_20240923.csv\textquotesingle{} đã lưu cục bộ cho phần còn lại của bài học này.
+
+\begin{lstlisting}[escapeinside={(*@}{@*)}]
+# (*@Mở@*) DataFrame (*@đã@*) (*@lưu@*) - (*@TÙY@*) (*@CHỌN@*)
+nflx_intraday = pd.read_csv('WQU netflix_intraday_20240923.csv')
+nflx_intraday.set_index('Datetime', inplace=True)
+nflx_intraday
+\end{lstlisting}
+
+\subsubsection{Dữ liệu trong ngày của Netflix kết hợp với Tone trung bình trong tin tức}
+
+Trong đoạn mã trước, chúng ta đã lấy dữ liệu giá cổ phiếu trong ngày (intraday) của Netflix. Lưu ý tham số \texttt{prepost=True}, cho biết có bao gồm dữ liệu trước giờ mở cửa và sau giờ đóng cửa thị trường hay không. Trong trường hợp này, chúng ta bao gồm cả dữ liệu trước và sau phiên giao dịch. Như bạn có thể thấy, cột Volume hiển thị giá trị bằng không trước 9:30 sáng (thị trường mở cửa) và sau 4:00 chiều (thị trường đóng cửa). Yahoo sử dụng múi giờ gốc của sàn giao dịch. Với Netflix, đó là NASDAQ đặt tại thành phố New York. Vào ngày 23 tháng 9 tại New York, thời gian áp dụng là Giờ mùa hè miền Đông (EDT), chậm hơn múi giờ UTC 4 giờ. Hãy chuyển đổi các giá trị của cột Datetime trong DataFrame \texttt{nflx\_intraday} sang múi giờ UTC:
+
+In {[} {]}:
+
+\begin{lstlisting}[escapeinside={(*@}{@*)}]
+# (*@Chuyển@*) (*@đổi@*) Datetime sang (*@múi@*) (*@giờ@*) UTC
+nflx_intraday.index = pd.to_datetime(nflx_intraday.index).tz_localize('America/New_York').tz_convert('UTC')
+nflx_intraday
+\end{lstlisting}
+
+Bây giờ hãy vẽ biểu đồ nến. Biểu đồ nến được xem là công cụ hữu ích trong phân tích kỹ thuật tài chính vì nhiều lý do. Khả năng minh họa rõ ràng diễn biến giá, khả năng báo hiệu đảo chiều và mức độ được chấp nhận rộng rãi khiến chúng trở thành công cụ có giá trị cho phân tích kỹ thuật tài chính và các quyết định giao dịch có cơ sở. Đoạn mã sau tạo cả biểu đồ nến cho \texttt{nflx\_intraday} lẫn dữ liệu \texttt{tone\_df} trên cùng một biểu đồ tương tác. Mã sử dụng thư viện đồ họa Plotly, cho phép chúng ta khám phá trực quan hóa một cách tương tác. Chúng ta có thể phóng to một phần của biểu đồ hoặc di chuột qua từng cây nến/thanh để xem chính xác giá trị giá cổ phiếu/khối lượng tại một thời điểm cụ thể:
+
+In {[} {]}:
+
+\begin{lstlisting}[escapeinside={(*@}{@*)}]
+# (*@Tạo@*) trace (*@biểu@*) (*@đồ@*) (*@nến@*)
+candlestick_trace = go.Candlestick(x=nflx_intraday.index,
+                                 open=nflx_intraday['Open'],
+                                 high=nflx_intraday['High'],
+                                 low=nflx_intraday['Low'],
+                                 close=nflx_intraday['Close'],
+                                 name='Netflix Price')
+
+# (*@Tạo@*) trace tone
+tone_trace = go.Scatter(x=tone_df['Timestamp'],
+                        y=tone_df['AvgTone'],
+                        mode='lines',
+                        name='Average Tone',
+                        line=dict(color='blue', width=1),
+                        yaxis='y2')  # (*@Gán@*) cho (*@trục@*) y (*@thứ@*) (*@cấp@*)
+
+# (*@Tạo@*) figure (*@với@*) (*@cả@*) hai trace
+fig = go.Figure(data=[candlestick_trace, tone_trace])
+
+# (*@Cập@*) (*@nhật@*) (*@bố@*) (*@cục@*) (*@với@*) (*@trục@*) y (*@thứ@*) (*@cấp@*)
+fig.update_layout(title_text='Netflix Price and Average Tone',
+                  yaxis_title='Price (USD)',
+                  yaxis2=dict(title='Average Tone',
+                              overlaying='y',
+                              side='right'))
+fig.show()
+\end{lstlisting}
+
+Đoạn mã này tạo ra một biểu đồ gồm cả biểu đồ nến trong ngày của Netflix và dữ liệu tone trung bình được vẽ cùng nhau, cho phép chúng ta phân tích trực quan mối quan hệ giữa biến động giá và sự thay đổi của cảm xúc.
+
+Mỗi cây nến biểu diễn biến động giá cổ phiếu Netflix trong một khoảng thời gian cụ thể. Nến xanh cho biết giá tăng trong khoảng thời gian đó. Đáy của thân nến xanh là giá mở cửa, đỉnh là giá đóng cửa, và các đường (bấc nến) kéo dài từ thân nến biểu diễn giá cao nhất và thấp nhất trong khoảng thời gian đó. Nến đỏ cho biết giá giảm trong khoảng thời gian đó. Đỉnh của thân nến đỏ là giá mở cửa, đáy là giá đóng cửa, và các bấc nến biểu diễn giá cao nhất và thấp nhất.
+
+Bố cục được cập nhật để thêm một trục y thứ cấp ở bên phải (\texttt{yaxis2}) và đặt tiêu đề cho cả hai trục y. Trục y chính bên trái biểu diễn giá (USD) của cổ phiếu Netflix, còn trục y thứ cấp biểu diễn các giá trị tone trung bình. Việc dùng các trục y riêng biệt cho phép biểu diễn rõ ràng và có ý nghĩa cả hai tập dữ liệu mà không làm sai lệch giá trị của từng tập. Giờ đây chúng ta có thể so sánh trực quan biến động giá cổ phiếu Netflix với sự thay đổi của cảm xúc trung bình theo thời gian. Điều này có thể giúp xác định các mối quan hệ hoặc tương quan tiềm năng giữa giá và cảm xúc.
+
+Bằng cách quan sát các mô hình và xu hướng trong giá nến và đường tone, chúng ta có thể khám phá các tương quan và hiểu biết tiềm năng:
+
+\begin{itemize}
+\item
+  Tone tích cực và giá: Khi đường Tone ở mức cao (cảm xúc tích cực) và các cây nến có màu xanh (giá tăng), điều đó có thể cho thấy mức độ đưa tin tích cực đang tác động thuận lợi đến giá cổ phiếu Netflix. Chúng ta có thể quan sát thấy lượng tin tức có tone chủ yếu tích cực xuất hiện dồi dào vài giờ trước khi thị trường mở cửa, từ khoảng 10 giờ sáng. Điều này có thể giải thích cho các cây nến xanh tại thời điểm mở cửa lúc 13:30.
+\item
+  Tone tiêu cực và giá: Ngược lại, đường Tone thấp (cảm xúc tiêu cực) trùng với các cây nến đỏ (giá giảm) có thể cho thấy tin tức tiêu cực đang tác động bất lợi đến cổ phiếu.
+\item
+  Phân kỳ: Chúng ta cũng có thể quan sát thấy có những trường hợp đường Tone và mô hình nến phân kỳ. Điều này có thể đáng để điều tra thêm. Ví dụ, cảm xúc tin tức tích cực (Tone cao) nhưng giá cổ phiếu giảm (nến đỏ) có thể đặt ra câu hỏi về các yếu tố thị trường khác đang tác động.
+\end{itemize}
+
+Nhìn chung, biểu đồ cung cấp một công cụ trực quan để khám phá mối liên hệ tiềm năng giữa cảm xúc (Tone) rút ra từ dữ liệu GDELT và biến động giá cổ phiếu Netflix. Biểu đồ giúp các nhà phân tích và nhà giao dịch quan sát các tương quan, phát hiện các xu hướng tiềm năng và đưa ra quyết định có cơ sở hơn. Hãy lưu ý rằng đây chỉ là một khía cạnh của phân tích, và còn nhiều yếu tố khác ảnh hưởng đến giá cổ phiếu. Biểu đồ cho thấy các tương quan tiềm năng, nhưng cần điều tra thêm để xác lập bất kỳ mối quan hệ nhân quả nào giữa cảm xúc và biến động giá. Nhiều yếu tố khác, như xu hướng thị trường, tin tức kinh tế và các diễn biến riêng của công ty, có thể tác động đến giá cổ phiếu. Chúng ta cũng cần lưu ý rằng điểm Tone chỉ là một thước đo cảm xúc và có thể không nắm bắt được mọi sắc thái của tin tức.
+
+\subsection{Các kịch bản kỹ thuật tài chính khả dĩ}
+
+Chúng ta đã khám phá một ứng dụng của Phương pháp 1 trong ví dụ trước. Bằng cách lựa chọn và áp dụng các phương pháp này một cách có chiến lược, các kỹ sư tài chính có thể tận dụng phân tích cảm xúc để thu được những hiểu biết giá trị, hỗ trợ việc ra quyết định và nâng cao các chiến lược của mình trong nhiều ứng dụng khác nhau. Dưới đây là một số kịch bản kỹ thuật tài chính khả dĩ, trong đó có thể áp dụng việc quan sát động thái thay đổi của tông điệu (tone) đối với Netflix:
+
+\textbf{Phương pháp 1: Lấy trung bình Tone cho mỗi tệp 15 phút và so sánh các điểm số trung bình}
+
+Phương pháp này, tập trung vào xu hướng cảm xúc tổng thể, đặc biệt hữu ích cho các kịch bản đòi hỏi phân tích và ra quyết định theo thời gian thực hoặc gần thời gian thực, nhờ hiệu quả của nó trong việc nắm bắt các dịch chuyển cảm xúc trên diện rộng. Sau đây là cái nhìn chi tiết hơn về một số ứng dụng chính:
+
+\begin{itemize}
+\item
+  \textbf{Giao dịch dựa trên cảm xúc theo thời gian thực:} Kịch bản này liên quan đến việc tận dụng dữ liệu cảm xúc theo thời gian thực để hỗ trợ các quyết định giao dịch. Bằng cách theo dõi điểm Tone trung bình đối với Netflix qua các khoảng 15 phút liên tiếp, các nhà giao dịch có thể nhận diện các xu hướng đang hình thành trong cảm xúc thị trường. Chẳng hạn, nếu điểm Tone trung bình liên tục vượt một ngưỡng dương định trước, điều đó có thể báo hiệu cảm xúc tích cực đối với Netflix đang gia tăng, từ đó có khả năng dẫn đến giá tăng. Điều này có thể kích hoạt tín hiệu mua cho các hệ thống giao dịch tự động hoặc hỗ trợ quyết định của nhà giao dịch trong việc mở vị thế mua (long). Ngược lại, nếu điểm Tone trung bình sụt giảm kéo dài xuống dưới một ngưỡng âm, điều đó có thể cho thấy cảm xúc tiêu cực đang gia tăng và giá có khả năng giảm, thúc đẩy tín hiệu bán hoặc vị thế bán khống (short).
+\item
+  \textbf{Quản trị rủi ro và phân bổ danh mục đầu tư:} Quản trị rủi ro đóng vai trò then chốt trong kỹ thuật tài chính, và phân tích cảm xúc có thể đóng góp đáng kể vào việc đánh giá và giảm thiểu rủi ro gắn với các khoản đầu tư. Bằng cách theo dõi điểm Tone trung bình đối với Netflix, các nhà quản lý danh mục đầu tư có thể nắm được mức độ bất định hoặc tiêu cực xung quanh công ty. Sự sụt giảm đáng kể và kéo dài của cảm xúc có thể cho thấy rủi ro gia tăng, thúc đẩy việc đánh giá lại mức độ phơi nhiễm của danh mục. Trong những trường hợp như vậy, các nhà quản trị rủi ro có thể cân nhắc giảm tỷ trọng phân bổ vào Netflix hoặc triển khai các chiến lược phòng hộ (hedging) để bảo vệ trước các khoản lỗ tiềm tàng. Ngược lại, một giai đoạn cảm xúc tích cực nhất quán có thể báo hiệu rủi ro thấp hơn và có thể biện minh cho việc tăng mức độ phơi nhiễm với Netflix trong danh mục.
+\item
+  \textbf{Phân tích cấu trúc vi mô thị trường:} Kịch bản này đi sâu vào các động lực phức tạp về cách tin tức và cảm xúc tác động đến biến động giá ngắn hạn của cổ phiếu Netflix. Bằng cách tìm tương quan giữa điểm Tone trung bình với dữ liệu giá tần suất cao, các nhà nghiên cứu có thể nhận diện các mẫu hình và mối quan hệ giữa thay đổi cảm xúc và dao động giá. Ví dụ, một đợt tăng vọt đột ngột của cảm xúc tích cực có thể được theo sau bởi mức tăng nhanh của giá cổ phiếu Netflix, cho thấy mối tương quan mạnh giữa cảm xúc và phản ứng của thị trường. Hiểu được những mối quan hệ này có thể giúp các nhà giao dịch dự đoán biến động giá và có khả năng nhận diện các cơ hội kinh doanh chênh lệch giá (arbitrage).
+\item
+  \textbf{Phát hiện sự kiện dựa trên cảm xúc:} Kịch bản này liên quan đến việc sử dụng phân tích cảm xúc để phát hiện các sự kiện hoặc bản tin quan trọng gây ra những dịch chuyển đáng kể về cảm xúc đối với Netflix. Bằng cách phân tích chuỗi thời gian của điểm Tone trung bình để tìm các đợt tăng vọt hoặc sụt giảm đột ngột, các nhà nghiên cứu có thể xác định các tác nhân tiềm tàng gây ra thay đổi cảm xúc. Chẳng hạn, một đợt sụt giảm cảm xúc đột ngột có thể trùng với một bản tin tiêu cực hoặc một thông báo của cơ quan quản lý ảnh hưởng đến Netflix. Việc nhận diện các sự kiện này theo thời gian thực cho phép phản ứng chủ động và ra quyết định có cơ sở, giúp các nhà giao dịch và nhà đầu tư điều chỉnh chiến lược của mình cho phù hợp.
+\end{itemize}
+
+\textbf{Phương pháp 2: Gộp tất cả các mẫu và phân tích các thành phần Tone cho từng bài báo}
+
+Phương pháp này, cung cấp thông tin cảm xúc chi tiết cho từng bài báo, phù hợp hơn với các kịch bản đòi hỏi phân tích chuyên sâu và hiểu rõ bối cảnh đằng sau các thay đổi cảm xúc. Sau đây là cái nhìn chi tiết hơn về một số ứng dụng chính:
+
+\begin{itemize}
+\item
+  \textbf{Chiến lược giao dịch theo sự kiện (Event-Driven Trading Strategies):} Kịch bản này liên quan đến việc xây dựng các chiến lược giao dịch dựa trên cảm xúc được thể hiện trong các bài báo hoặc sự kiện cụ thể liên quan đến Netflix. Bằng cách phân tích điểm Tone của từng bài báo, nhà giao dịch có thể xác định những bài có cảm xúc tích cực hoặc tiêu cực mạnh. Chẳng hạn, một bài báo rất tích cực về một bộ phim gốc mới thành công của Netflix có thể kích hoạt tín hiệu mua, trong khi một bài báo tiêu cực nêu bật tình trạng thuê bao rời bỏ dịch vụ có thể dẫn đến tín hiệu bán. Cách tiếp cận này cho phép nhà giao dịch tận dụng phản ứng của thị trường đối với các thông tin và sự kiện cụ thể.
+\item
+  \textbf{Phân tích cơ bản (Fundamental Analysis):} Phân tích cơ bản đóng vai trò then chốt trong việc ra quyết định đầu tư, và việc kết hợp phân tích cảm xúc có thể mang lại những hiểu biết giá trị. Bằng cách phân tích điểm Tone của các bài báo liên quan đến báo cáo thu nhập, các lần ra mắt sản phẩm hoặc những sự kiện quan trọng khác của Netflix, các nhà phân tích có thể đánh giá nhận thức của thị trường và ước lượng tác động tiềm tàng đến hiệu quả tài chính. Ví dụ, nếu các bài báo về báo cáo thu nhập mới nhất của Netflix thể hiện cảm xúc tích cực áp đảo, điều đó có thể củng cố triển vọng tích cực về tương lai của công ty. Ngược lại, cảm xúc tiêu cực xoay quanh một sản phẩm mới ra mắt có thể làm dấy lên lo ngại về mức độ thị trường chấp nhận và tác động tiềm tàng đến doanh thu.
+\item
+  \textbf{Phân tích cạnh tranh (Competitive Analysis):} Hiểu rõ bối cảnh cạnh tranh là điều thiết yếu đối với việc ra quyết định chiến lược trong kỹ thuật tài chính. Phân tích cảm xúc có thể giúp theo dõi cảm xúc đối với Netflix và các đối thủ cạnh tranh, từ đó cung cấp hiểu biết về động lực thị trường cũng như các cơ hội hoặc mối đe dọa tiềm tàng. Bằng cách phân tích điểm Tone của các bài báo đề cập đến Netflix và các đối thủ, các nhà phân tích có thể nhận diện những thay đổi trong vị thế cạnh tranh và nhận thức của thị trường. Ví dụ, cảm xúc tích cực tăng vọt đối với dịch vụ phát trực tuyến mới của một đối thủ có thể báo hiệu mối đe dọa tiềm tàng đối với thị phần của Netflix, trong khi cảm xúc tiêu cực đối với Netflix giảm xuống có thể cho thấy triển vọng cạnh tranh đang cải thiện.
+\end{itemize}
+
+Về bản chất, mặc dù cả hai phương pháp đều cung cấp những hiểu biết giá trị cho các ứng dụng kỹ thuật tài chính, chúng đáp ứng những nhu cầu và kịch bản khác nhau:
+
+\begin{itemize}
+\item
+  Phương pháp 1 (lấy trung bình điểm Tone) lý tưởng cho việc phân tích theo thời gian thực hoặc gần thời gian thực đối với các xu hướng cảm xúc tổng thể, cho phép ra quyết định nhanh chóng trong giao dịch, quản trị rủi ro và phân tích cấu trúc vi mô thị trường. Việc tập trung vào cảm xúc tổng hợp giúp phương pháp này phù hợp để nắm bắt những chuyển dịch cảm xúc rộng của thị trường.
+\item
+  Phương pháp 2 (phân tích từng thành phần Tone riêng lẻ) phù hợp hơn cho việc phân tích chuyên sâu từng bài báo và tác động của chúng lên cảm xúc, mang lại sự hiểu biết tinh tế hơn về các sự kiện cụ thể và hệ quả tiềm tàng của chúng. Phương pháp này thường được dùng cho phân tích cơ bản và tình báo cạnh tranh, nơi việc hiểu bối cảnh đằng sau những thay đổi cảm xúc là rất quan trọng.
+\end{itemize}
+
+\section{Kết luận}
+
+Trong bài học này, chúng ta đã thực hành khám phá hai bộ dữ liệu tin tức quy mô lớn là Common Crawl News Crawl và GDELT, tập trung vào các ứng dụng trong kỹ thuật tài chính. Chúng ta đã tìm hiểu cách truy cập và xử lý các bài báo thô từ các tệp WARC của Common Crawl, học cách trích xuất thông tin chính, lọc theo ngôn ngữ và từ khóa, đồng thời sử dụng các thư viện Python để trích xuất nội dung bài báo một cách hiệu quả. Hơn nữa, chúng ta đã khám phá dữ liệu GKG của GDELT, tìm hiểu các kỹ thuật phân tích sự kiện tin tức, thực thể và cảm xúc. Chúng ta đã học cách tải xuống, lọc và phân tích các điểm Tone của GDELT để thu được những hiểu biết giá trị về cảm xúc. Qua bài học này, chúng ta đã biết cách tận dụng (leverage) các bộ dữ liệu này cho nghiên cứu và phân tích tài chính.
+
+\textbf{Tài liệu tham khảo}
+
+\begin{itemize}
+\item
+  Brown, Tom B., et al. "Language Models are Few-Shot Learners." \emph{Proceedings of the 34th International Conference on Neural Information Processing Systems}, no. 159, 2020, pp. 1877-1901. \url{https://dl.acm.org/doi/abs/10.5555/3495724.3495883}.
+\item
+  THE GDELT Project. \emph{The GDELT Global Knowledge Graph (GKG) Data Format Codebook}. v2.1, 2015. \url{http://data.gdeltproject.org/documentation/GDELT-Global_Knowledge_Graph_Codebook-V2.1.pdf}.
+\end{itemize}
+
+\begin{center}\rule{0.5\linewidth}{0.5pt}\end{center}
+
+Bản quyền 2024 WorldQuant University. Nội dung này chỉ được cấp phép cho mục đích sử dụng cá nhân. Nghiêm cấm phân phối lại hoặc xuất bản tài liệu này.

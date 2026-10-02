@@ -1,0 +1,145 @@
+\chapter{Đọc thêm 1: Kiến thức cơ bản về dữ liệu quan sát Trái Đất (NASA Earthdata)}
+\label{ch:M6L2DocThem1}
+
+\section{Thông tin nguồn}
+
+\begin{itemize}
+  \item \textbf{Nguồn:} NASA. ``Earth Observation Data Basics.'' NASA Earthdata.
+  \item \textbf{Phần cần đọc:} Toàn bộ trang (bỏ video Landsat 9)
+  \item \textbf{Ghi chú:} bản chuyển ngữ tiếng Việt súc tích, bám cấu trúc nguồn (giữ nguyên tiêu đề, công thức, số liệu, bảng, chú thích và danh mục tài liệu tham khảo).
+\end{itemize}
+
+Vòng đời của dữ liệu quan sát Trái Đất rất phong phú và phức tạp, với nhiều điểm đầu vào dọc theo toàn bộ quy trình. Từ khâu thu thập đến trực quan hóa, tài liệu đi sâu vào các kiến thức nền tảng để làm rõ nguồn dữ liệu đồ sộ trong danh mục của NASA.
+
+\textbf{Lấy dữ liệu (Get Data):} khám phá kho dữ liệu khoa học Trái Đất truy cập mở lớn nhất thế giới (Xem danh mục dữ liệu).
+
+\subsection{Viễn thám (Remote Sensing)}
+
+Viễn thám là việc thu thập thông tin từ xa. NASA quan sát Trái Đất và các thiên thể khác thông qua các thiết bị đo từ xa đặt trên nền tảng trong không gian (ví dụ vệ tinh hoặc tàu vũ trụ) và trên máy bay; các thiết bị này phát hiện và ghi lại năng lượng phản xạ hoặc phát xạ. Thiết bị viễn thám mang lại góc nhìn toàn cầu cùng lượng dữ liệu phong phú về các hệ thống của Trái Đất, qua đó hỗ trợ ra quyết định dựa trên dữ liệu về hiện trạng và tương lai của hành tinh.
+
+Để tìm hiểu thêm, xem khóa đào tạo Fundamentals of Remote Sensing của chương trình Applied Remote Sensing Training (ARSET).
+
+\subsubsection{Kiến thức cơ bản về dữ liệu viễn thám}
+
+\begin{itemize}
+\item
+  \textbf{Quỹ đạo (Orbits):} quỹ đạo là đường cong mà vệ tinh đi theo quanh Trái Đất do lực hấp dẫn.
+\item
+  \textbf{Độ phân giải (Resolution):} mọi tập dữ liệu đều cần xét bốn loại độ phân giải: bức xạ (radiometric), không gian (spatial), phổ (spectral) và thời gian (temporal). Độ phân giải quyết định cách dữ liệu từ một thiết bị có thể được sử dụng, và có thể thay đổi tùy theo quỹ đạo của nền tảng và thiết kế thiết bị.
+\item
+  \textbf{Phổ điện từ (The Electromagnetic Spectrum):} để hiểu dữ liệu viễn thám, cần nắm rõ phổ điện từ.
+\item
+  \textbf{Thiết bị chủ động (Active Instruments):} phát ra năng lượng và thu thập dữ liệu dựa trên sự thay đổi của tín hiệu phản hồi.
+\item
+  \textbf{Thiết bị thụ động (Passive Instruments):} phát hiện năng lượng do môi trường tự nhiên phát ra.
+\item
+  \textbf{Biến thiết yếu (Essential Variables):} là những biến được biết là then chốt để quan sát và giám sát một khía cạnh nhất định của hệ thống Trái Đất.
+\item
+  \textbf{Xử lý, diễn giải và phân tích dữ liệu (Data Processing, Interpretation, and Analysis):} dữ liệu viễn thám thu từ thiết bị trên vệ tinh cần được xử lý trước khi hầu hết nhà nghiên cứu và người dùng khoa học ứng dụng có thể sử dụng.
+\item
+  \textbf{Quang phổ học thực địa (Field Spectroscopy):} quang phổ học là phép đo cách các vật liệu tương tác với bức xạ điện từ trên toàn phổ. Các nhà khoa học có công cụ để thực hiện việc này từ mặt đất và từ tàu thủy.
+\end{itemize}
+
+\subsection{Tìm hiểu siêu dữ liệu (Understanding Metadata)}
+
+Công cụ tương tác này giúp người dùng định hướng và hiểu siêu dữ liệu (metadata) thiết yếu trên các trang đích của tập dữ liệu khoa học Trái Đất. Thông qua các ví dụ có hướng dẫn và thực hành trực tiếp, người dùng nắm được bối cảnh quan trọng về dữ liệu để hỗ trợ các khám phá khoa học của riêng mình.
+
+\subsubsection{Các thành phần của trang đích tập dữ liệu Earthdata (tương tác)}
+
+\begin{itemize}
+\item
+  Tên dài/Tiêu đề mục (Long Name/Entry Title): tiêu đề của tập dữ liệu; Long Name đồng nghĩa với Entry Title.
+\item
+  Tên ngắn (Short Name)
+\item
+  Phiên bản (Version)
+\item
+  Mã định danh đối tượng số (Digital Object Identifier, DOI)
+\item
+  Trung tâm/Dự án (Center/Project)
+\item
+  Biểu tượng đám mây (Cloud Icon)
+\item
+  Biểu tượng cảnh báo dữ liệu (Data Alert Icon)
+\item
+  Sao chép URL/Lệnh API (Copy URL/Copy API Command)
+\item
+  Định dạng dữ liệu (Data Format)
+\item
+  Kích thước tập dữ liệu (Dataset Size)
+\item
+  Phạm vi không gian (Spatial Extent)
+\item
+  Độ phân giải không gian (Spatial Resolution)
+\item
+  Phạm vi thời gian (Temporal Extent)
+\item
+  Tài liệu và tài nguyên (Documents and Resources)
+\item
+  Ấn phẩm (Publications)
+\item
+  Biến (Variables)
+\item
+  Nền tảng (Platforms)
+\item
+  Thiết bị (Instruments)
+\item
+  Hệ tọa độ (Coordinate System)
+\item
+  Biểu diễn không gian của granule (Granule Spatial Representation)
+\item
+  Độ phân giải thời gian (Temporal Resolution)
+\item
+  Mã khái niệm (Concept ID)
+\item
+  Trạng thái dữ liệu (Data State)
+\item
+  Số lượng tệp/granule (Number of Files/Granules)
+\item
+  Cấp xử lý (Processing Level)
+\item
+  Từ khóa khoa học (Science Keywords)
+\item
+  Trích dẫn (Citation)
+\item
+  Quy ước đặt tên tệp (File Naming Convention)
+\end{itemize}
+
+\subsubsection{Công nghệ}
+
+Các đổi mới trong trí tuệ nhân tạo, mô hình khí hậu và điện toán đám mây đang cải thiện cách người dùng làm việc với dữ liệu khoa học Trái Đất, đặc biệt là các tập dữ liệu khổng lồ như dữ liệu dự kiến từ NISAR. NASA tận dụng các phương pháp điện toán hiện đại để tối ưu chất lượng dữ liệu thu thập và tốc độ người dùng truy cập đến chi tiết cần thiết, phục vụ nghiên cứu khoa học thực địa.
+
+\subsubsection{Điện toán đám mây}
+
+Gần như toàn bộ dữ liệu khoa học Trái Đất của NASA có thể truy cập qua Earthdata Cloud, giúp việc truy cập, phân tích và trực quan hóa hiệu quả hơn và tiết kiệm chi phí hơn. NASA cung cấp các tài nguyên gồm thư viện Python, hướng dẫn và các "công thức dữ liệu" (data recipes) để người dùng làm việc với dữ liệu trên đám mây hiệu quả hơn.
+
+\subsubsection{Dữ liệu quan sát Trái Đất và trí tuệ nhân tạo}
+
+Việc áp dụng trí tuệ nhân tạo (AI) vào dữ liệu khoa học Trái Đất cho phép tìm kiếm trong lượng dữ liệu lớn để phát hiện các mối quan hệ.
+
+\subsubsection{Radar khẩu độ tổng hợp}
+
+Radar khẩu độ tổng hợp (Synthetic Aperture Radar, SAR) là một dạng viễn thám tạo ra dữ liệu có độ phân giải mịn, dùng công nghệ có thể phát hiện, theo thời gian, cả những thay đổi rất nhỏ trên bề mặt Trái Đất.
+
+\begin{itemize}
+\item
+  \textbf{Synthetic Aperture Radar (SAR):} một trong những công nghệ mạnh của viễn thám, cho phép tạo ảnh độ phân giải cao cả ngày lẫn đêm, bất kể điều kiện thời tiết.
+\item
+  \textbf{SAR Handbook:} được biên soạn năm 2019 làm hướng dẫn giám sát rừng và ước lượng sinh khối bằng SAR.
+\item
+  \textbf{Các loại sản phẩm SAR:} bảng các sản phẩm SAR và mức xử lý có trong chương trình Earth Science Data Systems (ESDS) của NASA.
+\item
+  \textbf{Diễn giải ảnh SAR:} các quy tắc kinh nghiệm chung để diễn giải ảnh SAR và tài nguyên xem ảnh SAR.
+\end{itemize}
+
+\subsubsection{Tham gia cộng đồng người dùng dữ liệu NASA}
+
+Dữ liệu NASA được công khai, không hạn chế, nhưng cần có Earthdata Login để tải dữ liệu và dùng đầy đủ chức năng của một số công cụ.
+
+\subsubsection{Câu hỏi và hỗ trợ}
+
+Có câu hỏi? Diễn đàn Earthdata (Earthdata Forum) hỗ trợ về dữ liệu, bộ dữ liệu, công cụ, dịch vụ và siêu dữ liệu khoa học Trái Đất của NASA. Đội ngũ có kinh nghiệm trong cộng đồng người dùng dữ liệu sẽ xem xét và trả lời các câu hỏi.
+
+\subsubsection{Tìm dữ liệu}
+
+(Phần này của nguồn chỉ gồm menu và chân trang của trang web, không có nội dung cần dịch.)

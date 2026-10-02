@@ -1,0 +1,762 @@
+\chapter{Phân rã ma trận không âm (Non-Negative Matrix Factorization)}
+\label{ch:M5L1LessonNotes}
+
+\section*{Lesson Notes}
+
+MODULE 5 \textbar{} BÀI 1
+
+\begin{center}\rule{0.5\linewidth}{0.5pt}\end{center}
+
+{\small
+\begin{longtable}[]{@{}
+  >{\raggedright\arraybackslash}p{(\columnwidth - 2\tabcolsep) * \real{0.2182}}
+  >{\raggedright\arraybackslash}p{(\columnwidth - 2\tabcolsep) * \real{0.7697}}@{}}
+\toprule\noalign{}
+\endhead
+\bottomrule\noalign{}
+\endlastfoot
+\textbf{Thời gian đọc} & 50 phút \\
+\textbf{Kiến thức nền tảng} & \begin{minipage}[t]{\linewidth}\raggedright
+Hiểu biết cơ bản về đại số tuyến tính và thống kê: ma trận và vectơ; giá trị riêng và vectơ riêng; thống kê cơ bản;\\
+Quen thuộc với lập trình Python: cú pháp Python cơ bản, xử lý dữ liệu và các phép toán số học;\\
+Các khái niệm tài chính cơ bản: lợi suất tài sản và tương quan; đa dạng hóa danh mục đầu tư; phân tích cảm xúc\strut
+\end{minipage} \\
+\textbf{Từ khóa} & \begin{minipage}[t]{\linewidth}\raggedright
+Phân rã ma trận không âm (NMF), giảm chiều dữ liệu, trích xuất đặc trưng, biểu diễn theo thành phần (parts-based representation),\\
+tính thưa (sparsity), khả năng diễn giải, NMF thưa (Sparse NMF), NMF có ràng buộc (Constrained NMF), Semi-NMF, Convex NMF, NMF trực tuyến (Online NMF), phân tích cảm xúc,\\
+Phân tích thành phần chính (PCA), Phân rã giá trị suy biến (SVD), Phân tích thành phần độc lập (ICA),\\
+hệ số tải nhân tố (factor loadings), điểm số nhân tố (factor scores)\strut
+\end{minipage} \\
+\end{longtable}
+}
+
+\begin{center}\rule{0.5\linewidth}{0.5pt}\end{center}
+
+\emph{Trong bài học này, chúng ta tìm hiểu phân rã ma trận không âm (NMF), một kỹ thuật phân rã một ma trận không âm thành hai ma trận không âm nhỏ hơn. Kỹ thuật này thường được dùng để giảm chiều dữ liệu, trích xuất đặc trưng và mô hình hóa chủ đề. Bài học cung cấp cái nhìn tổng quan toàn diện về NMF, các biến thể và ứng dụng của nó, với trọng tâm là kỹ thuật tài chính, đặc biệt là đa dạng hóa danh mục đầu tư.}
+
+In {[}1{]}:
+
+\begin{lstlisting}[escapeinside={(*@}{@*)}]
+# Loading libraries
+import pandas as pd
+import yfinance as yf
+
+from sklearn.decomposition import NMF
+\end{lstlisting}
+
+\section{Phân rã ma trận không âm là gì?}
+
+Phân rã ma trận không âm (non-negative matrix factorization, NMF) là một kỹ thuật giảm chiều dữ liệu, trong đó một ma trận không âm được phân rã thành hai ma trận không âm nhỏ hơn. Kỹ thuật này thường được dùng trong phân tích dữ liệu, học máy và các hệ thống gợi ý. Hãy xem lại các tài liệu đọc bắt buộc rồi quay lại với phần còn lại của bài học này.
+
+Định nghĩa toán học của phân rã ma trận không âm (NMF) như sau:
+
+Cho một ma trận không âm \(V\) có kích thước \(m \times n\), NMF tìm hai ma trận không âm:
+
+\begin{itemize}
+\item
+  \(W\) có kích thước \(m \times k\) (\(m\) hàng, \(k\) cột, trong đó \(k\) là số chiều sau khi giảm);
+\item
+  \(H\) có kích thước \(k \times n\);
+\end{itemize}
+
+sao cho: \[
+V \approx W * H
+\]
+
+Trong đó:
+
+\begin{itemize}
+\item
+  \(*\) ký hiệu phép nhân ma trận
+\item
+  Phép xấp xỉ \(\approx\) thường được đo bằng một hàm chi phí, chẳng hạn chuẩn Frobenius: \(\lVert V - W * H \rVert ^2\)
+\end{itemize}
+
+Ràng buộc: Mọi phần tử của \(W\) và \(H\) phải là số thực không âm, tức là \(W\) \ensuremath{\geq} 0, \(H\) \ensuremath{\geq} 0
+
+Nói đơn giản, ta muốn tìm hai ma trận (\(W\) và \(H\)) sao cho khi nhân với nhau, kết quả xấp xỉ sát ma trận dữ liệu gốc (\(V\)). Các phần tử của \(W\) và \(H\) phải không âm (lớn hơn hoặc bằng không).
+
+Hạng phân rã (factorization rank) trong NMF, thường ký hiệu là \(k\), biểu thị số lượng nhân tố hay thành phần mà ta muốn trích xuất từ dữ liệu. Về bản chất, nó quyết định số chiều của biểu diễn đã giảm chiều.
+
+\textbf{Quy tắc cập nhật lặp:} Có nhiều cách để tìm \(W\) và \(H\). Các thuật toán NMF thường dùng quy tắc cập nhật lặp để tinh chỉnh các ma trận \(W\) và \(H\) cho đến khi hội tụ. Các quy tắc này nhằm cực tiểu hóa sự khác biệt giữa ma trận gốc \(V\) và tích \(W * H\). Một quy tắc cập nhật phổ biến là quy tắc cập nhật nhân (multiplicative update rule), được suy ra từ việc cực tiểu hóa chuẩn Frobenius:
+
+\[
+W_{ia} \leftarrow W_{ia} * \frac{(V * H^T)_{ia}}{(W * H * H^T)_{ia}}
+\]
+
+\[
+H_{aj} \leftarrow H_{aj} * \frac{(W^T * V)_{aj}}{(W^T * W * H)_{aj}}
+\]
+
+Trong đó:
+
+\begin{itemize}
+\item
+  \(W_{ia}\) biểu diễn phần tử ở hàng thứ \(i\) và cột thứ \(a\) của ma trận \(W\).
+\item
+  \(H_{aj}\) biểu diễn phần tử ở hàng thứ \(a\) và cột thứ \(j\) của ma trận \(H\).
+\item
+  \(V\), \(W\) và \(H\) là các ma trận như đã định nghĩa trong bài toán NMF.
+\item
+  \(H^T\) và \(W^T\) lần lượt là ma trận chuyển vị của \(H\) và \(W\).
+\item
+  \(*\) và phép chia lần lượt biểu thị phép nhân và phép chia theo từng phần tử.
+\end{itemize}
+
+Quá trình lặp tiếp tục cho đến khi thỏa mãn một tiêu chí hội tụ. Tiêu chí này có thể dựa trên:
+
+\begin{itemize}
+\item
+  Sự chênh lệch của hàm chi phí: Thuật toán dừng khi mức thay đổi của hàm chi phí (ví dụ chuẩn Frobenius) giữa hai lần lặp liên tiếp nhỏ hơn một ngưỡng định trước.
+\item
+  Số lần lặp tối đa: Thuật toán kết thúc sau một số lần lặp cố định, ngay cả khi hàm chi phí chưa hội tụ hoàn toàn.
+\end{itemize}
+
+Về mặt toán học, sự hội tụ có thể được biểu diễn như sau:
+
+\[
+\lVert V - W^{(t+1)} * H^{(t+1)} \rVert ^2 - \lVert V - W^{(t)} * H^{(t)} \rVert ^2 < \varepsilon
+\]
+
+Trong đó:
+
+\begin{itemize}
+\item
+  \(W^{(t)}\) và \(H^{(t)}\) biểu diễn các ma trận \(W\) và \(H\) tại lần lặp \(t\).
+\item
+  \(\varepsilon\) là một giá trị dương nhỏ biểu thị ngưỡng hội tụ.
+\end{itemize}
+
+Nói đơn giản, thuật toán dừng khi sai khác về sai số xấp xỉ giữa hai lần lặp liên tiếp trở nên đủ nhỏ.
+
+\section{Ứng dụng của phân rã ma trận không âm (NMF) trong kỹ thuật tài chính}
+
+NMF ngày càng phổ biến trong kỹ thuật tài chính nhờ khả năng trích xuất các đặc trưng có ý nghĩa và dễ diễn giải từ dữ liệu tài chính. Dưới đây là một số ứng dụng đáng chú ý:
+
+\textbf{Đa dạng hóa danh mục đầu tư:} NMF có thể được dùng để xác định các nhóm tài sản có hành vi tương tự nhau, từ đó xây dựng các danh mục đầu tư đa dạng hóa với rủi ro thấp hơn. Bằng cách phân rã ma trận tương quan của lợi suất tài sản, NMF có thể làm lộ ra các nhân tố tiềm ẩn chi phối sự đồng biến động của các tài sản và giúp nhà đầu tư phân bổ vốn giữa các nhóm tài sản khác nhau.
+
+\textbf{Quản trị rủi ro:} NMF có thể được dùng để nhận diện và định lượng các nhân tố rủi ro trên thị trường tài chính. Bằng cách phân rã dữ liệu thị trường lịch sử, NMF có thể phát hiện các nhân tố rủi ro ẩn mà các phương pháp truyền thống có thể không nhận ra. Thông tin này có thể được dùng để xây dựng các chiến lược quản trị rủi ro và cải thiện việc phòng ngừa rủi ro cho danh mục đầu tư.
+
+\textbf{Định giá tài sản:} NMF có thể được áp dụng vào các mô hình định giá tài sản để xác định các nhân tố giải thích lợi suất tài sản. Bằng cách phân rã mặt cắt ngang của lợi suất tài sản, NMF có thể làm lộ ra các nhân tố tiềm ẩn chi phối giá tài sản và giúp nhà đầu tư hiểu các yếu tố quyết định hiệu quả của tài sản.
+
+\textbf{Phân tích cảm xúc:} NMF có thể được dùng để phân tích dữ liệu văn bản, chẳng hạn các bài báo hoặc bài đăng trên mạng xã hội, nhằm trích xuất cảm xúc và đánh giá cảm xúc thị trường đối với các tài sản cụ thể hoặc toàn bộ thị trường. Thông tin này có thể được dùng để hỗ trợ các quyết định đầu tư và dự đoán biến động thị trường.
+
+\textbf{Phát hiện gian lận:} NMF có thể được dùng để phát hiện các bất thường và mẫu hình trong các giao dịch tài chính có thể là dấu hiệu của hoạt động gian lận. Bằng cách phân rã dữ liệu giao dịch, NMF có thể nhận diện các mẫu hình bất thường và làm nổi bật những khu vực đáng lưu ý cần điều tra thêm.
+
+\textbf{Giao dịch tần suất cao:} NMF có thể được dùng để phân tích dữ liệu tài chính tần suất cao và xác định các mẫu hình có thể khai thác cho các chiến lược giao dịch. Bằng cách phân rã dữ liệu giá và khối lượng, NMF có thể làm lộ ra các mối quan hệ ẩn và dự đoán biến động giá ngắn hạn.
+
+\textbf{Giao dịch thuật toán:} NMF có thể được tích hợp vào các hệ thống giao dịch thuật toán để tự động hóa các quyết định giao dịch dựa trên các đặc trưng và mẫu hình được trích xuất từ dữ liệu tài chính. Điều này có thể giúp nâng cao hiệu quả và khả năng sinh lời của hoạt động giao dịch.
+
+Đây chỉ là một vài ví dụ về cách NMF đang được áp dụng trong kỹ thuật tài chính. Khả năng trích xuất các đặc trưng có ý nghĩa và dễ diễn giải từ dữ liệu tài chính phức tạp khiến NMF trở thành công cụ có giá trị cho nhiều tác vụ, bao gồm quản lý danh mục đầu tư, quản trị rủi ro, định giá tài sản và giao dịch. Khi thị trường tài chính ngày càng phức tạp và dựa nhiều vào dữ liệu, các ứng dụng của NMF trong kỹ thuật tài chính nhiều khả năng sẽ tiếp tục mở rộng.
+
+\section{Ví dụ minh họa đơn giản}
+
+Hãy minh họa cách thủ tục NMF vận hành bằng một ví dụ đơn giản nhỏ này. Xét ma trận dữ liệu \(V\) kích thước 4x5 như sau:
+
+\[V = \begin{pmatrix} 1 & 2 & 3 & 4 & 5 \\ 6 & 7 & 8 & 9 & 10 \\ 11 & 12 & 13 & 14 & 15 \\ 16 & 17 & 18 & 19 & 20 \\ \end{pmatrix}\]
+
+Chúng ta muốn phân rã ma trận này thành hai ma trận nhỏ hơn, \(W\) (4x2) và \(H\) (2x5), sao cho \(V \ensuremath{\approx} W * H\). Chúng ta khởi tạo \(W^{(0)}\) (ma trận đặc trưng tại \(t=0\)) và \(H^{(0)}\) (ma trận hệ số tại \(t=0\)) bằng các giá trị không âm ngẫu nhiên:
+
+\[W^{(0)} = \begin{pmatrix} 0.2 & 0.5 \\ 0.8 & 0.3 \\ 0.6 & 0.9 \\ 0.4 & 0.7 \\ \end{pmatrix}, \quad H^{(0)} = \begin{pmatrix} 0.7 & 0.1 & 0.4 & 0.6 & 0.2 \\ 0.3 & 0.6 & 0.2 & 0.4 & 0.8 \\ \end{pmatrix}\]
+
+Bây giờ, chúng ta cập nhật lặp \(W^{(t)}\) và \(H^{(t)}\) bằng các quy tắc cập nhật nhân để cực tiểu hóa sự chênh lệch giữa \(V\) và \(W^{(t)} * H^{(t)}\). Sau một vài vòng lặp, chúng ta có thể thu được các ma trận đã cập nhật như sau:
+
+\[W = \begin{pmatrix} 0.9618 & 0. \\ 1.9262 & 1.0167 \\ 2.8902 & 2.0347 \\ 3.8542 & 3.0527 \\ \end{pmatrix}, \quad H = \begin{pmatrix} 1.0413 & 2.0823 & 3.1232 & 4.1642 & 5.19 \\ 3.9269 & 2.9399 & 1.9529 & 0.966 & 0. \\ \end{pmatrix}\]
+
+Giá trị cuối cùng của ma trận đặc trưng \(W\) và ma trận hệ số \(H\) biểu diễn các nhân tử phân rã của ma trận gốc \(V\). Lưu ý rằng các giá trị cụ thể trong các ma trận có thể khác đôi chút tùy thuộc vào phép tính thực tế. Bằng cách nhân \(W\) và \(H\), chúng ta thu được một xấp xỉ của \(V\):
+
+\[W * H = \begin{pmatrix} 1.0015 & 2.0028 & 3.004 & 4.0052 & 4.9919 \\ 5.9983 & 6.9999 & 8.0017 & 9.0034 & 9.9972 \\ 10.9996 & 12. & 13.0004 & 14.0008 & 15.0002 \\ 16.0009 & 17. & 17.9992 & 18.9983 & 20.0032 \\ \end{pmatrix}\]
+
+Ma trận kết quả này là một xấp xỉ của ma trận gốc \(V\). Sự chênh lệch giữa \(V\) và \(W * H\) biểu diễn sai số tái tạo.
+
+\[V - W * H = \begin{pmatrix} -0.0015 & -0.0028 & -0.004 & -0.0052 & 0.0081 \\ 0.0017 & 0.0001 & -0.0017 & -0.0034 & 0.0028 \\ 0.0004 & 0. & -0.0004 & -0.0008 & -0.0002 \\ -0.0009 & -0. & 0.0008 & 0.0017 & -0.0032 \\ \end{pmatrix}\]
+
+Mục tiêu của NMF là tìm \(W\) và \(H\) sao cho cực tiểu hóa sai số tái tạo này, đồng thời giữ cho mọi phần tử của \(W\) và \(H\) đều không âm.
+
+Ví dụ số rất đơn giản này cho thấy NMF có thể phân rã một ma trận dữ liệu lớn hơn thành các ma trận nhỏ hơn, nắm bắt cấu trúc tiềm ẩn và các mối quan hệ của nó.
+
+\section{Cơ bản về phân rã ma trận không âm (NMF)}
+
+Nói ngắn gọn, NMF là việc tìm một cách biểu diễn đơn giản hơn của dữ liệu bằng cách tách nó thành hai phần nắm bắt các đặc trưng thiết yếu và mức độ quan trọng của chúng. NMF có ứng dụng trong nhiều lĩnh vực, bao gồm xử lý ảnh, phân tích văn bản và tin sinh học. Việc triển khai bao gồm các bước sau:
+
+\begin{itemize}
+\item
+  \textbf{Khởi tạo:} Bắt đầu với một ma trận không âm, thường được ký hiệu là \(V\), biểu diễn dữ liệu. Đây là ma trận chứa thông tin về người dùng, sản phẩm hoặc bất kỳ loại dữ liệu nào khác.
+\item
+  \textbf{Phân rã:} Cốt lõi của NMF là tìm hai ma trận không âm, thường được gọi là \(W\) và \(H\), sao cho tích của \(W\) và \(H\) xấp xỉ sát ma trận gốc \(V\), tức là \(V \approx WH\). Nói đơn giản hơn, chúng ta đang cố gắng tách dữ liệu gốc thành hai phần mà khi kết hợp lại sẽ giống với dữ liệu ban đầu.
+\item
+  \textbf{Lặp:} Các thuật toán NMF sử dụng các quy trình lặp để tinh chỉnh \(W\) và \(H\), nhằm cực tiểu hóa sự chênh lệch giữa tích \(W H\) và ma trận gốc \(V\). Các vòng lặp này cập nhật \(W\) và \(H\) nhiều lần cho đến khi đạt được mức độ chính xác thỏa đáng. Quy trình này thường dựa trên hạ gradient (gradient descent) hoặc các phép cập nhật nhân tính.
+\item
+  \textbf{Hội tụ:} Quá trình lặp tiếp tục cho đến khi thỏa mãn một tiêu chí hội tụ. Điều này thường có nghĩa là sự chênh lệch giữa \(W H\) và \(V\) đã đủ nhỏ, hoặc thuật toán đã chạy đủ một số bước định trước.
+\item
+  \textbf{Diễn giải:} Sau khi hội tụ, các ma trận \(W\) và \(H\) thu được cung cấp một biểu diễn có chiều thấp hơn của dữ liệu gốc. Có thể xem \(W\) chứa các vectơ cơ sở hay các đặc trưng, còn \(H\) biểu diễn các hệ số hay trọng số của những đặc trưng này đối với từng điểm dữ liệu. Mỗi cột của \(W\) biểu diễn một đặc trưng, và hàng tương ứng của \(H\) cho biết đặc trưng này được thể hiện mạnh đến mức nào trong từng điểm dữ liệu.
+\end{itemize}
+
+\section{Các tính chất của phân rã ma trận không âm (NMF)}
+
+Một số tính chất quan trọng của phân rã ma trận không âm (non-negative matrix factorization, NMF) là:
+
+\textbf{Tính không âm:} Tính chất cơ bản nhất của NMF là nó tạo ra các ma trận không âm \(W\) và \(H\). Điều này có nghĩa là mọi phần tử của các ma trận này đều lớn hơn hoặc bằng không. Tính chất này rất quan trọng đối với khả năng diễn giải, vì nó cho phép ta hiểu các nhân tố thu được như những tổ hợp cộng tính của các đặc trưng ban đầu.
+
+\textbf{Giảm chiều dữ liệu:} NMF giảm số chiều của dữ liệu bằng cách phân rã nó thành hai ma trận có hạng thấp hơn. Điều này hữu ích để đơn giản hóa dữ liệu, loại bỏ nhiễu và xác định các đặc trưng tiềm ẩn.
+
+\textbf{Biểu diễn theo bộ phận:} NMF thường dẫn đến một biểu diễn dữ liệu theo bộ phận (parts-based representation). Điều này có nghĩa là các nhân tố thu được (các cột của \(W\)) có thể được diễn giải là đại diện cho từng bộ phận hoặc thành phần riêng lẻ của dữ liệu gốc. Chẳng hạn, trong phân tích ảnh, NMF có thể xác định các nhân tố tương ứng với cạnh, kết cấu hoặc đối tượng.
+
+\textbf{Tính thưa:} NMF thường tạo ra các ma trận thưa, nghĩa là nhiều phần tử của \(W\) và \(H\) bằng không. Điều này có lợi cho khả năng diễn giải, vì nó làm nổi bật các đặc trưng quan trọng nhất và giảm độ phức tạp của mô hình.
+
+\textbf{Khả năng diễn giải:} Nhờ tính không âm và biểu diễn theo bộ phận, NMF thường được coi là dễ diễn giải hơn các kỹ thuật giảm chiều dữ liệu khác như Phân tích thành phần chính (Principal Component Analysis, PCA). Các nhân tố thu được có thể được liên hệ dễ dàng hơn với các đặc trưng ban đầu, giúp việc hiểu cấu trúc tiềm ẩn của dữ liệu trở nên dễ dàng hơn.
+
+\textbf{Tính linh hoạt:} NMF có thể được áp dụng cho nhiều loại dữ liệu khác nhau, bao gồm văn bản, hình ảnh, âm thanh và dữ liệu sinh học. Nó cũng có thể được điều chỉnh cho các ứng dụng khác nhau bằng cách sử dụng các hàm chi phí và ràng buộc khác nhau.
+
+\textbf{Hiệu quả tính toán:} Các thuật toán NMF nhìn chung có hiệu quả về mặt tính toán, đặc biệt đối với dữ liệu thưa. Điều này khiến chúng phù hợp với các tập dữ liệu quy mô lớn.
+
+\textbf{Tính không duy nhất:} Phép phân rã NMF không duy nhất, nghĩa là có thể tồn tại nhiều nghiệm cho \(W\) và \(H\) cùng xấp xỉ tốt \(V\). Vấn đề này có thể được giải quyết bằng cách sử dụng các kỹ thuật chính quy hóa hoặc áp đặt thêm các ràng buộc.
+
+Trên đây là một số tính chất quan trọng của NMF. Chúng góp phần làm nên sự phổ biến và hiệu quả của NMF trong nhiều tác vụ phân tích dữ liệu và học máy.
+
+\section{Thách thức và hạn chế của phân rã ma trận không âm (NMF)}
+
+Phân rã ma trận không âm (NMF) có một số thách thức và hạn chế:
+
+\textbf{Tính không duy nhất của nghiệm:} Phép phân rã NMF vốn không duy nhất, nghĩa là có thể tồn tại nhiều cặp ma trận nhân tử (\(W\) và \(H\)) mà khi nhân với nhau đều xấp xỉ ma trận dữ liệu gốc (\(V\)) tốt như nhau. Điều này xuất phát từ việc thường có nhiều cách biểu diễn cùng một dữ liệu bằng các tổ hợp nhân tử không âm khác nhau.
+
+\begin{quote}
+\begin{itemize}
+\item
+  Hệ quả: Tính không duy nhất này gây khó khăn cho việc diễn giải kết quả của NMF, vì các nghiệm khác nhau có thể dẫn đến những cách diễn giải khác nhau về các nhân tử tiềm ẩn. Nó cũng khiến việc so sánh kết quả giữa các lần chạy khác nhau của thuật toán, hoặc khi dùng các chiến lược khởi tạo khác nhau, trở nên khó khăn.
+\item
+  Giải pháp: Các kỹ thuật như chính quy hóa (regularization), vốn bổ sung ràng buộc hoặc hình phạt vào hàm mục tiêu, có thể giúp giảm bớt vấn đề không duy nhất bằng cách khuyến khích các nghiệm có những tính chất cụ thể, chẳng hạn như tính thưa hoặc tính trực giao.
+\end{itemize}
+\end{quote}
+
+\textbf{Độ nhạy với khởi tạo:} Hiệu năng của các thuật toán NMF có thể nhạy với giá trị khởi tạo của các ma trận nhân tử (\(W\) và \(H\)). Các chiến lược khởi tạo khác nhau có thể khiến thuật toán hội tụ về các cực tiểu cục bộ khác nhau, dẫn đến các nghiệm khác nhau.
+
+\begin{quote}
+\begin{itemize}
+\item
+  Hệ quả: Độ nhạy với khởi tạo này làm cho kết quả của NMF kém khả năng tái lập hơn và có thể dẫn đến các nghiệm dưới tối ưu.
+\item
+  Giải pháp: Thử nhiều phương pháp khởi tạo khác nhau, chẳng hạn khởi tạo ngẫu nhiên, NNDSVD (phân rã giá trị suy biến kép không âm - Non-negative Double Singular Value Decomposition), hoặc tận dụng kiến thức có sẵn về dữ liệu, có thể giúp giảm nhẹ vấn đề này và có khả năng cải thiện chất lượng nghiệm.
+\end{itemize}
+\end{quote}
+
+\textbf{Xác định số lượng nhân tử tối ưu:} Chọn đúng số lượng nhân tử (hay thành phần) là một bước then chốt trong NMF. Quá ít nhân tử có thể không nắm bắt được hết thông tin quan trọng trong dữ liệu, dẫn đến mất thông tin và giảm độ chính xác. Quá nhiều nhân tử có thể dẫn đến quá khớp (overfitting), khi đó mô hình nắm bắt nhiễu hoặc các mẫu không liên quan trong dữ liệu, làm giảm khả năng khái quát hóa sang dữ liệu mới.
+
+\begin{quote}
+\begin{itemize}
+\item
+  Hệ quả: Việc chọn số lượng nhân tử không phù hợp có thể ảnh hưởng đáng kể đến hiệu năng và khả năng diễn giải của mô hình NMF.
+\item
+  Giải pháp: Các kỹ thuật lựa chọn mô hình, chẳng hạn kiểm định chéo (cross-validation), phân tích silhouette, hoặc dùng chuyên môn lĩnh vực để đánh giá khả năng diễn giải của các nhân tử, có thể giúp định hướng việc chọn số lượng nhân tử tối ưu.
+\end{itemize}
+\end{quote}
+
+\textbf{Yêu cầu dữ liệu không âm:} NMF về cơ bản được thiết kế để làm việc với dữ liệu không âm. Thuật toán giả định rằng ma trận dữ liệu đầu vào (\(V\)) và các ma trận nhân tử kết quả (\(W\) và \(H\)) chỉ có các phần tử không âm. Lý do là ràng buộc không âm đóng vai trò thiết yếu để bảo đảm các nhân tử có thể diễn giải được như những tổ hợp cộng tính của các đặc trưng ban đầu.
+
+\begin{quote}
+\begin{itemize}
+\item
+  Hệ quả: Hạn chế này giới hạn khả năng áp dụng NMF vào các tập dữ liệu mà giá trị âm không có ý nghĩa, hoặc có thể được chuyển thành biểu diễn không âm.
+\item
+  Giải pháp: Với dữ liệu có giá trị âm, có thể cân nhắc các kỹ thuật như dịch chuyển (cộng một hằng số vào mọi phần tử), co giãn (nhân với một hằng số dương), hoặc dùng các phương pháp phân rã ma trận khác có thể xử lý dữ liệu có dấu hỗn hợp.
+\end{itemize}
+\end{quote}
+
+\textbf{Thách thức về khả năng diễn giải:} Mặc dù NMF thường được xem là dễ diễn giải hơn các kỹ thuật giảm chiều dữ liệu khác như PCA, việc diễn giải các nhân tử kết quả vẫn có thể mang tính chủ quan và đòi hỏi chuyên môn lĩnh vực. Các nhân tử biểu diễn những đặc trưng hoặc mẫu tiềm ẩn trong dữ liệu, và ý nghĩa của chúng không phải lúc nào cũng rõ ràng ngay lập tức.
+
+\begin{quote}
+\begin{itemize}
+\item
+  Hệ quả: Việc diễn giải các nhân tử NMF đòi hỏi phân tích cẩn thận và xem xét bối cảnh của dữ liệu cũng như ứng dụng cụ thể.
+\item
+  Giải pháp: Các kỹ thuật như trực quan hóa các hệ số tải của nhân tử (factor loadings), xem xét các đặc trưng đóng góp nhiều nhất cho từng nhân tử, và dùng kiến thức lĩnh vực để liên hệ các nhân tử với các khái niệm trong thế giới thực có thể hỗ trợ việc diễn giải.
+\end{itemize}
+\end{quote}
+
+\textbf{Chi phí tính toán:} Các thuật toán NMF có thể tốn kém về mặt tính toán, đặc biệt với các tập dữ liệu lớn hoặc số lượng nhân tử cao. Bản chất lặp của thuật toán và nhu cầu cập nhật các ma trận nhân tử nhiều lần có thể dẫn đến thời gian tính toán đáng kể.
+
+\begin{quote}
+\begin{itemize}
+\item
+  Hệ quả: Chi phí tính toán của NMF có thể là một yếu tố hạn chế đối với các ứng dụng quy mô lớn hoặc khi cần phân tích theo thời gian thực.
+\item
+  Giải pháp: Sử dụng các thuật toán hiệu quả, chẳng hạn những thuật toán dựa trên các phép toán ma trận thưa, có thể giúp giảm gánh nặng tính toán. Ngoài ra, các kỹ thuật như NMF trực tuyến (online NMF), vốn cập nhật phép phân rã theo từng bước khi có dữ liệu mới đến, có thể dễ xử lý hơn về mặt tính toán đối với dữ liệu dòng (streaming).
+\end{itemize}
+\end{quote}
+
+\section{So sánh NMF với các kỹ thuật phân rã ma trận khác}
+
+\textbf{Phân tích thành phần chính (Principal component analysis -- PCA)} là một kỹ thuật giảm chiều dữ liệu, biến đổi dữ liệu nhiều chiều sang không gian có số chiều thấp hơn bằng cách xác định các hướng (thành phần chính) mà dữ liệu biến thiên nhiều nhất. Các thành phần chính này trực giao với nhau và nắm bắt phương sai tối đa của dữ liệu, cho phép đơn giản hóa dữ liệu, giảm nhiễu và trích xuất đặc trưng. PCA thường được dùng để trực quan hóa dữ liệu, giảm nhiễu và làm bước tiền xử lý cho học máy. Đây là kỹ thuật linh hoạt, áp dụng được cho nhiều loại dữ liệu, nhưng các thành phần thu được có thể khó diễn giải hơn. Tóm lại, PCA tìm ra các mẫu quan trọng nhất trong dữ liệu và biểu diễn chúng bằng một số ít biến (các thành phần chính) trực giao. Điều này giúp đơn giản hóa dữ liệu mà vẫn giữ được thông tin cốt lõi.
+
+\textbf{Phân rã giá trị suy biến (Singular value decomposition -- SVD)} là một kỹ thuật phân rã ma trận đa dụng hơn, phân rã dữ liệu thành ba ma trận, nắm bắt các nhân tố ẩn và mối quan hệ giữa chúng. SVD là kỹ thuật phân rã ma trận thành ba ma trận thành phần: \(U\), \(\Sigma\) và \(V^T\). Các ma trận này nắm bắt các nhân tố ẩn và các mối quan hệ trong dữ liệu, cho phép giảm chiều dữ liệu, giảm nhiễu và nén dữ liệu. SVD được sử dụng rộng rãi trong nhiều ứng dụng, bao gồm hệ thống gợi ý, nén ảnh và giảm nhiễu. Tuy nhiên, giống như PCA, các thành phần của SVD có thể khó diễn giải hơn. Tóm lại, SVD tách một ma trận thành các thành phần đơn giản hơn, qua đó bộc lộ cấu trúc và các mối quan hệ tiềm ẩn của nó.
+
+\textbf{Phân tích thành phần độc lập (Independent component analysis -- ICA)} là một kỹ thuật tính toán nhằm tách một tín hiệu đa biến thành các thành phần con cộng tính, độc lập về mặt thống kê và không tuân theo phân phối Gauss. Tóm lại, ICA nhằm khám phá các nguồn hoặc nhân tố ẩn đóng góp vào một tín hiệu hỗn hợp. Điều này giống như việc "tách" một ly cocktail để nhận ra từng nguyên liệu riêng lẻ.
+
+\textbf{Phân rã ma trận không âm (Non-negative matrix factorization -- NMF)} chuyên phân rã dữ liệu không âm thành hai ma trận không âm, cho ra một biểu diễn theo bộ phận (parts-based). NMF phân rã dữ liệu không âm thành hai ma trận không âm, \(W\) và \(H\). Phép phân rã này cho ra biểu diễn theo bộ phận, trong đó các thành phần (các cột của \(W\)) đại diện cho từng bộ phận hay đặc trưng riêng của dữ liệu gốc, còn trọng số của chúng (các hàng của \(H\)) cho biết mức độ quan trọng của chúng trong từng điểm dữ liệu. Nhờ vậy, NMF đặc biệt hữu ích cho những tác vụ cần khả năng diễn giải và phân rã theo bộ phận, chẳng hạn xử lý ảnh, phân tích văn bản và mô hình hóa chủ đề. NMF thường cho kết quả thưa, làm tăng thêm khả năng diễn giải. Về bản chất, NMF tách dữ liệu thành các thành phần cộng tính, không âm, đại diện cho các bộ phận hay đặc trưng thiết yếu của dữ liệu.
+
+PCA, SVD, ICA và NMF đều là các kỹ thuật dùng để giảm chiều dữ liệu và trích xuất đặc trưng, nhưng khác nhau về cách tiếp cận và tính chất. Những khác biệt chính là:
+
+\begin{itemize}
+\item
+  \textbf{Ràng buộc:} PCA và SVD áp đặt tính trực giao lên các thành phần, ICA áp đặt tính độc lập, còn NMF áp đặt tính không âm.
+\item
+  \textbf{Diễn giải:} Các thành phần của PCA và SVD có thể khó diễn giải, trong khi các thành phần của ICA đại diện cho các nguồn ẩn và các thành phần của NMF thường dễ liên hệ với các đặc trưng gốc hơn.
+\item
+  \textbf{Tính thưa:} PCA và SVD thường cho kết quả dày đặc, trong khi ICA có thể thưa hoặc dày đặc và NMF thường dẫn đến các biểu diễn thưa.
+\item
+  \textbf{Kiểu dữ liệu:} PCA, SVD và ICA có thể áp dụng cho mọi kiểu dữ liệu, trong khi NMF chỉ giới hạn ở dữ liệu không âm.
+\end{itemize}
+
+Việc lựa chọn giữa PCA, SVD, ICA và NMF phụ thuộc vào ứng dụng cụ thể và các tính chất mong muốn. Nếu mục tiêu chính là nắm bắt phương sai tối đa, PCA có thể phù hợp hơn. Nếu cần một phép phân rã đa dụng hơn, SVD có thể thích hợp hơn. Nếu cần tách nguồn mù (blind source separation), ICA sẽ là kỹ thuật được ưu tiên. Nếu khả năng diễn giải và biểu diễn theo bộ phận là then chốt, NMF là lựa chọn tốt.
+
+Trong một số trường hợp, việc kết hợp các kỹ thuật này có thể mang lại lợi ích. Ví dụ, có thể dùng PCA hoặc SVD để giảm chiều dữ liệu ban đầu, sau đó áp dụng ICA hoặc NMF để trích xuất các đặc trưng dễ diễn giải từ dữ liệu đã được giảm chiều.
+
+\section{Các phần mở rộng của phân rã ma trận không âm (NMF)}
+
+Mặc dù thuật toán NMF chuẩn được sử dụng rộng rãi, nhiều phần mở rộng và biến thể đã được phát triển để đáp ứng các nhu cầu cụ thể và cải thiện hiệu suất. Dưới đây là một vài biến thể đáng chú ý:
+
+\subsection{NMF thưa (Sparse NMF)}
+
+Phân rã ma trận không âm (NMF) thưa là một biến thể của thuật toán NMF chuẩn, trong đó áp đặt tính thưa lên các ma trận nhân tử \(W\) và \(H\). Điều này có nghĩa là thuật toán khuyến khích nhiều phần tử của các ma trận này bằng không.
+
+\textbf{Lý do:} Tính thưa thường được mong muốn trong NMF vì một số lý do sau:
+
+\begin{itemize}
+\item
+  Khả năng diễn giải: Các ma trận nhân tử thưa dễ diễn giải hơn vì chúng làm nổi bật các đặc trưng quan trọng nhất và giảm độ phức tạp của mô hình.
+\item
+  Lựa chọn đặc trưng: Tính thưa có thể đóng vai trò như một hình thức lựa chọn đặc trưng, xác định các đặc trưng phù hợp nhất để biểu diễn dữ liệu.
+\item
+  Giảm nhiễu: Bằng cách tập trung vào một tập đặc trưng nhỏ hơn, NMF thưa có thể giúp giảm ảnh hưởng của nhiễu trong dữ liệu.
+\end{itemize}
+
+\textbf{Phương pháp:} Tính thưa trong NMF thường đạt được bằng cách thêm các số hạng điều chuẩn (regularization) kích thích tính thưa vào hàm mục tiêu của NMF. Các số hạng này phạt các phần tử khác không trong các ma trận nhân tử, khuyến khích chúng tiến về không. Các kỹ thuật điều chuẩn phổ biến gồm:
+
+\begin{itemize}
+\item
+  Điều chuẩn L1: Thêm một khoản phạt tỷ lệ với tổng giá trị tuyệt đối của các phần tử trong các ma trận nhân tử.
+\item
+  Điều chuẩn L2: Thêm một khoản phạt tỷ lệ với tổng bình phương giá trị của các phần tử trong các ma trận nhân tử.
+\item
+  Các ràng buộc thưa khác: Có thể dùng nhiều ràng buộc khác để thực thi tính thưa, chẳng hạn giới hạn số phần tử khác không trong mỗi hàng hoặc cột của các ma trận nhân tử.
+\end{itemize}
+
+\textbf{Lợi ích:} NMF thưa mang lại nhiều lợi ích so với NMF chuẩn:
+
+\begin{itemize}
+\item
+  Cải thiện khả năng diễn giải: Các ma trận nhân tử thưa dễ hiểu hơn và dễ liên hệ với các đặc trưng gốc.
+\item
+  Lựa chọn đặc trưng tốt hơn: Tính thưa giúp xác định các đặc trưng phù hợp nhất để biểu diễn dữ liệu.
+\item
+  Giảm nhiễu: Bằng cách tập trung vào một tập đặc trưng nhỏ hơn, NMF thưa có thể giúp giảm ảnh hưởng của nhiễu.
+\item
+  Tăng khả năng khái quát hóa: Các mô hình thưa thường khái quát hóa tốt hơn trên dữ liệu mới vì ít bị quá khớp hơn.
+\end{itemize}
+
+\subsection{NMF có ràng buộc (Constrained NMF)}
+
+Phân rã ma trận không âm (NMF) có ràng buộc là một biến thể của NMF chuẩn, trong đó các ràng buộc bổ sung được áp đặt lên các ma trận nhân tử (\(W\) và \(H\)) trong quá trình phân rã. Các ràng buộc này thường dựa trên kiến thức có sẵn về dữ liệu hoặc những tính chất cụ thể mong muốn ở các nhân tử thu được.
+
+\textbf{Lý do:} Việc đưa các ràng buộc vào cho phép điều chỉnh NMF phù hợp với từng ứng dụng và đặc điểm dữ liệu. Điều này có thể cải thiện chất lượng của phép phân rã, tăng khả năng diễn giải và bảo đảm kết quả có ý nghĩa hơn trong bối cảnh của bài toán.
+
+\textbf{Ví dụ về các ràng buộc:}
+
+\begin{itemize}
+\item
+  Ràng buộc tổng bằng một: Ràng buộc này buộc các phần tử trong mỗi hàng của \(H\) (hoặc mỗi cột của \(W\)) có tổng bằng một. Ràng buộc này thường được dùng trong mô hình hóa chủ đề, khi mỗi hàng của \(H\) biểu diễn một tài liệu và các phần tử cho biết tỷ trọng của từng chủ đề trong tài liệu đó.
+\item
+  Ràng buộc trực giao: Ràng buộc này yêu cầu các cột của \(W\) (hoặc các hàng của \(H\)) trực giao với nhau. Nó khuyến khích các nhân tử độc lập và biểu diễn những khía cạnh khác nhau của dữ liệu.
+\item
+  Ràng buộc thưa: Tương tự NMF thưa, ràng buộc này thúc đẩy tính thưa trong các ma trận nhân tử, dẫn đến kết quả dễ diễn giải hơn và chống nhiễu tốt hơn.
+\item
+  Ràng buộc đặc thù theo lĩnh vực: Các ràng buộc dựa trên kiến thức chuyên môn có thể được đưa vào để định hướng phép phân rã. Ví dụ, trong xử lý ảnh, có thể dùng ràng buộc để bảo đảm các nhân tử biểu diễn những đặc trưng ảnh cụ thể như cạnh hoặc kết cấu bề mặt.
+\end{itemize}
+
+\textbf{Lợi ích:} NMF có ràng buộc mang lại một số ưu điểm:
+
+\begin{itemize}
+\item
+  Phân rã được cải thiện: Các ràng buộc có thể định hướng quá trình phân rã tới những lời giải có ý nghĩa và phù hợp hơn.
+\item
+  Khả năng diễn giải được nâng cao: Các ràng buộc giúp các nhân tử thu được dễ diễn giải hơn và dễ liên hệ với dữ liệu gốc.
+\item
+  Lời giải được điều chỉnh theo nhu cầu: Các ràng buộc cho phép thích nghi NMF với từng ứng dụng và đặc điểm dữ liệu cụ thể.
+\item
+  Kiểm soát tính chất của nhân tử: Các ràng buộc có thể được dùng để áp đặt những tính chất mong muốn lên các nhân tử, chẳng hạn tính thưa, tính trực giao hoặc các mẫu cụ thể.
+\end{itemize}
+
+Về bản chất, NMF có ràng buộc cho phép bạn tùy biến thuật toán NMF theo nhu cầu cụ thể bằng cách đưa kiến thức có sẵn hoặc các tính chất mong muốn vào quá trình phân rã. Điều này có thể dẫn đến những kết quả sâu sắc và phù hợp hơn so với NMF chuẩn.
+
+\subsection{Semi-NMF}
+
+Semi-NMF, hay phân rã ma trận bán không âm (semi non-negative matrix factorization), là một biến thể của NMF trong đó ràng buộc không âm được nới lỏng đối với một trong hai ma trận nhân tử (\(W\) hoặc \(H\)). Điều này có nghĩa là một ma trận có thể chứa cả giá trị dương lẫn giá trị âm, trong khi ma trận còn lại vẫn không âm.
+
+\textbf{Lý do:} Thuật toán NMF chuẩn yêu cầu mọi phần tử của các ma trận nhân tử đều không âm. Tuy nhiên, trong một số ứng dụng, các giá trị âm có thể mang ý nghĩa và cung cấp những hiểu biết giá trị. Chẳng hạn, trong phân tích dữ liệu tài chính, lợi suất âm là điều có thể xảy ra và cần được tính đến trong quá trình phân rã. Semi-NMF cho phép phân rã loại dữ liệu có dấu hỗn hợp như vậy, đồng thời vẫn giữ được các lợi ích của NMF về khả năng diễn giải và biểu diễn dựa trên các thành phần.
+
+\textbf{Cách hoạt động:} Semi-NMF điều chỉnh hàm mục tiêu và các quy tắc cập nhật của NMF chuẩn để thích ứng với việc nới lỏng ràng buộc không âm. Thuật toán vẫn nhằm tìm hai ma trận (\(W\) và \(H\)) có tích xấp xỉ ma trận dữ liệu gốc (\(V\)), nhưng một trong hai ma trận giờ đây có thể có các phần tử âm.
+
+\textbf{Lợi ích:}
+
+\begin{itemize}
+\item
+  Xử lý dữ liệu có dấu hỗn hợp: Semi-NMF cho phép phân rã dữ liệu có cả giá trị dương và âm, điều này rất quan trọng đối với các ứng dụng mà giá trị âm có ý nghĩa.
+\item
+  Bảo toàn khả năng diễn giải: Dù cho phép giá trị âm, semi-NMF vẫn giữ được lợi ích của NMF về khả năng diễn giải và biểu diễn dựa trên các thành phần.
+\item
+  Tính linh hoạt: Phương pháp này linh hoạt hơn NMF chuẩn nhờ có thể đáp ứng nhiều loại dữ liệu hơn.
+\end{itemize}
+
+\textbf{Những điểm cần lưu ý:}
+
+\begin{itemize}
+\item
+  Khi sử dụng semi-NMF, điều quan trọng là phải chọn ma trận nhân tử nào (\(W\) hay \(H\)) được phép có giá trị âm, dựa trên ứng dụng cụ thể và cách diễn giải các nhân tử.
+\item
+  Cách diễn giải các nhân tử có thể khác đôi chút so với NMF chuẩn do sự xuất hiện của các giá trị âm. Cần cân nhắc cẩn thận ý nghĩa của các giá trị âm trong bối cảnh của bài toán.
+\end{itemize}
+
+Tóm lại, semi-NMF là một mở rộng có giá trị của NMF, cho phép phân rã dữ liệu có dấu hỗn hợp mà vẫn giữ lại nhiều lợi ích của NMF chuẩn. Phương pháp này linh hoạt hơn và có thể mang lại hiểu biết sâu sắc về những dữ liệu mà giá trị âm có ý nghĩa.
+
+\subsection{NMF lồi (Convex NMF)}
+
+Phân rã ma trận không âm lồi (convex NMF) là một biến thể của NMF, trong đó các ràng buộc lồi được áp đặt lên phép phân rã. Điều này có nghĩa là các ma trận nhân tử (\(W\) và \(H\)) bị giới hạn nằm trong một tập lồi.
+
+\textbf{Lập luận:} Việc đưa các ràng buộc lồi vào NMF có thể mang lại nhiều lợi ích:
+
+\begin{itemize}
+\item
+  Tính duy nhất: NMF lồi có thể giúp giải quyết vấn đề không duy nhất vốn có của NMF chuẩn. Bằng cách giới hạn không gian nghiệm trong một tập lồi, phương pháp này có thể làm giảm số nghiệm khả dĩ và có khả năng dẫn đến một nghiệm duy nhất hoặc ổn định hơn.
+\item
+  Cải thiện hội tụ: Các ràng buộc lồi có thể cải thiện tính chất hội tụ của thuật toán NMF, giúp thuật toán nhiều khả năng tìm được nghiệm tốt một cách hiệu quả.
+\item
+  Khả năng diễn giải tốt hơn: Trong một số trường hợp, các ràng buộc lồi có thể dẫn đến các nhân tử dễ diễn giải hơn nhờ khuyến khích chúng biểu diễn những đặc trưng hoặc mẫu hình cụ thể trong dữ liệu.
+\end{itemize}
+
+\textbf{Phương pháp:} Các ràng buộc lồi trong NMF thường được áp đặt bằng cách giới hạn các ma trận nhân tử nằm trong một tập lồi. Điều này có thể thực hiện thông qua nhiều phương pháp khác nhau, chẳng hạn:
+
+\begin{itemize}
+\item
+  Bao lồi (Convex Hull): Các ma trận nhân tử bị ràng buộc nằm trong bao lồi của một tập các điểm dữ liệu hoặc đặc trưng.
+\item
+  Ràng buộc đa diện (Polytope Constraints): Các ma trận nhân tử bị giới hạn nằm trong một đa diện cụ thể được xác định bởi một tập các bất đẳng thức tuyến tính.
+\item
+  Các ràng buộc lồi khác: Có thể sử dụng nhiều ràng buộc lồi khác, chẳng hạn giới hạn các ma trận nhân tử là nửa xác định dương hoặc có các cấu trúc thưa cụ thể.
+\end{itemize}
+
+\textbf{Lợi ích:} NMF lồi mang lại nhiều ưu điểm so với NMF chuẩn:
+
+\begin{itemize}
+\item
+  Khả năng đạt tính duy nhất: Phương pháp này có thể giúp giải quyết vấn đề không duy nhất của NMF chuẩn, dẫn đến các nghiệm ổn định và đáng tin cậy hơn.
+\item
+  Cải thiện hội tụ: Các ràng buộc lồi có thể cải thiện tính chất hội tụ của thuật toán NMF.
+\item
+  Tăng khả năng diễn giải: Trong một số trường hợp, các ràng buộc lồi có thể dẫn đến các nhân tử dễ diễn giải hơn.
+\end{itemize}
+
+\textbf{Các lưu ý:}
+
+\begin{itemize}
+\item
+  Việc lựa chọn các ràng buộc lồi phù hợp có vai trò then chốt đối với thành công của NMF lồi. Các ràng buộc cần phù hợp với ứng dụng cụ thể và đặc điểm của dữ liệu.
+\item
+  Việc áp đặt các ràng buộc lồi có thể làm tăng độ phức tạp tính toán của thuật toán NMF. Tuy nhiên, các thuật toán hiệu quả đã được phát triển để giải quyết thách thức này.
+\end{itemize}
+
+Tóm lại, NMF lồi là một biến thể có giá trị của NMF, kết hợp các ràng buộc lồi nhằm cải thiện tính duy nhất, khả năng hội tụ và khả năng diễn giải của phép phân rã. Đây là một công cụ mạnh mẽ cho nhiều tác vụ phân tích dữ liệu và học máy.
+
+\subsection{Online-NMF:}
+
+Phân rã ma trận không âm trực tuyến (Online NMF) là một biến thể của NMF được thiết kế để xử lý dữ liệu luồng, trong đó các điểm dữ liệu mới liên tục xuất hiện theo thời gian.
+
+\textbf{Lý do:} NMF chuẩn giả định rằng toàn bộ ma trận dữ liệu có sẵn cùng một lúc. Tuy nhiên, trong nhiều tình huống thực tế, dữ liệu đến theo dạng luồng, và việc lưu trữ cũng như xử lý toàn bộ tập dữ liệu cùng lúc là không khả thi. Online NMF giải quyết thách thức này bằng cách cập nhật phép phân rã một cách tăng dần khi có thêm các điểm dữ liệu mới.
+
+\textbf{Cách hoạt động:} Các thuật toán Online NMF thường sử dụng các quy tắc cập nhật tăng dần để đưa các điểm dữ liệu mới vào mà không cần tính toán lại toàn bộ phép phân rã. Các quy tắc cập nhật này điều chỉnh các ma trận nhân tử (\(W\) và \(H\)) dựa trên dữ liệu mới, từng bước tinh chỉnh phép phân rã theo thời gian.
+
+\textbf{Lợi ích:}
+
+\begin{itemize}
+\item
+  Xử lý dữ liệu luồng: Online NMF rất phù hợp để phân tích dữ liệu luồng, trong đó các điểm dữ liệu mới liên tục xuất hiện.
+\item
+  Khả năng thích ứng: Phương pháp này có thể thích ứng với sự thay đổi của phân phối dữ liệu theo thời gian, nên phù hợp với các môi trường động.
+\item
+  Hiệu quả: Phương pháp này không cần lưu trữ và xử lý toàn bộ tập dữ liệu, do đó tiết kiệm bộ nhớ hơn và khả thi hơn về mặt tính toán đối với các tập dữ liệu lớn.
+\item
+  Phân tích thời gian thực: Online NMF cho phép phân tích dữ liệu luồng theo thời gian thực, cung cấp những hiểu biết kịp thời khi có dữ liệu mới.
+\end{itemize}
+
+\textbf{Những lưu ý chính:}
+
+\begin{itemize}
+\item
+  Việc lựa chọn quy tắc cập nhật phù hợp có vai trò then chốt đối với hiệu năng của Online NMF. Các quy tắc cập nhật khác nhau có những tính chất khác nhau và có thể phù hợp hơn với từng loại dữ liệu hoặc ứng dụng cụ thể.
+\item
+  Tốc độ học (learning rate), tham số điều khiển kích thước bước của các lần cập nhật, cần được điều chỉnh cẩn thận để cân bằng giữa tính ổn định và khả năng thích ứng.
+\item
+  Online NMF có thể cần nhiều vòng lặp hoặc nhiều điểm dữ liệu hơn để hội tụ so với NMF chuẩn, do phép phân rã được cập nhật một cách tăng dần.
+\end{itemize}
+
+Tóm lại, Online NMF là một biến thể có giá trị của NMF, được thiết kế để xử lý dữ liệu luồng. Phương pháp này mang lại khả năng thích ứng, hiệu quả và năng lực phân tích thời gian thực, nên phù hợp với nhiều môi trường dữ liệu động.
+
+\section{Ứng dụng NMF để đa dạng hóa danh mục đầu tư}
+
+Trong phần này, chúng ta sẽ khám phá một ví dụ đơn giản về đa dạng hóa danh mục đầu tư (portfolio diversification) bằng kỹ thuật NMF. Chúng ta tiếp cận bài toán này bằng cách tận dụng khả năng của NMF trong việc trích xuất các đặc trưng có ý nghĩa từ dữ liệu tài chính, đồng thời đưa ra một cách thức có hệ thống để đa dạng hóa danh mục đầu tư dựa trên các nhân tố tiềm ẩn. Việc này có thể thực hiện theo các bước sau:
+
+\begin{itemize}
+\item
+  \textbf{Ma trận tương quan:} Chúng ta bắt đầu với ma trận tương quan của lợi suất tài sản, ma trận này nắm bắt mối quan hệ giữa các tài sản khác nhau.
+\item
+  \textbf{Phân rã NMF:} NMF phân rã ma trận tương quan thành các hệ số tải nhân tố (\(W\)) và điểm số nhân tố (\(H\)). Các hệ số tải nhân tố biểu diễn mức đóng góp của từng tài sản vào từng nhân tố, còn điểm số nhân tố biểu diễn mức độ quan trọng của từng nhân tố theo thời gian.
+\item
+  \textbf{Diễn giải nhân tố:} Bằng cách phân tích các hệ số tải nhân tố, chúng ta có thể xác định các nhóm tài sản có hành vi tương tự nhau và hiểu được các nhân tố tiềm ẩn chi phối sự đồng biến động của các tài sản.
+\item
+  \textbf{Đa dạng hóa:} Chúng ta có thể đa dạng hóa danh mục đầu tư bằng cách chọn các tài sản có hệ số tải cao trên các nhân tố khác nhau. Điều này làm giảm rủi ro chung của danh mục đầu tư nhờ phân tán khoản đầu tư vào các nguồn rủi ro khác nhau.
+\item
+  \textbf{Xây dựng danh mục đầu tư:} Dựa trên phân tích nhân tố, chúng ta có thể xác định tỷ trọng của từng tài sản trong danh mục đầu tư, bảo đảm các tỷ trọng không âm và có tổng bằng 1.
+\end{itemize}
+
+Trong đoạn mã sau, chúng ta xây dựng một danh mục dữ liệu đơn giản gồm năm cổ phiếu: AAPL, MSFT, GOOG, AMZN và TSLA. Sau đó, chúng ta tạo một DataFrame \texttt{returns\_df} chứa lợi suất hằng ngày của các tài sản đã chọn.
+
+In {[}2{]}:
+
+\begin{lstlisting}[escapeinside={(*@}{@*)}]
+# (*@Tải@*) (*@dữ@*) (*@liệu@*) (*@lịch@*) (*@sử@*) cho (*@các@*) (*@mã@*) (*@cổ@*) (*@phiếu@*)
+tickers = ['AAPL', 'MSFT', 'GOOG', 'AMZN', 'TSLA', 'NVDA', 'META', 'JPM']
+data = yf.download(tickers, start='2022-01-01', end='2023-01-01')['Close']
+
+# 1. (*@Nạp@*) (*@dữ@*) (*@liệu@*) (*@lợi@*) (*@suất@*) (*@tài@*) (*@sản@*)
+returns_df = data.pct_change().dropna()
+returns_df
+\end{lstlisting}
+
+Out{[}2{]}:
+
+{\small
+\begin{longtable}[]{@{}lllllllll@{}}
+\toprule\noalign{}
+Ticker & AAPL & AMZN & GOOG & JPM & META & MSFT & NVDA & TSLA \\
+\midrule\noalign{}
+\endhead
+\bottomrule\noalign{}
+\endlastfoot
+Date & & & & & & & & \\
+2022-01-04 & -0.012691 & -0.016916 & -0.004535 & 0.037910 & -0.005937 & -0.017147 & -0.027589 & -0.041833 \\
+2022-01-05 & -0.026600 & -0.018893 & -0.046830 & -0.018282 & -0.036728 & -0.038388 & -0.057562 & -0.053471 \\
+2022-01-06 & -0.016693 & -0.006711 & -0.000744 & 0.010624 & 0.025573 & -0.007902 & 0.020794 & -0.021523 \\
+2022-01-07 & 0.000988 & -0.004288 & -0.003973 & 0.009908 & -0.002015 & 0.000510 & -0.033040 & -0.035447 \\
+2022-01-10 & 0.000116 & -0.006570 & 0.011456 & 0.000957 & -0.011212 & 0.000732 & 0.005615 & 0.030342 \\
+... & ... & ... & ... & ... & ... & ... & ... & ... \\
+2022-12-23 & -0.002799 & 0.017425 & 0.017562 & 0.004745 & 0.007855 & 0.002267 & -0.008671 & -0.017551 \\
+2022-12-27 & -0.013878 & -0.025924 & -0.020933 & 0.003504 & -0.009827 & -0.007414 & -0.071354 & -0.114089 \\
+2022-12-28 & -0.030685 & -0.014692 & -0.016718 & 0.005465 & -0.010780 & -0.010255 & -0.006019 & 0.033089 \\
+2022-12-29 & 0.028324 & 0.028844 & 0.028800 & 0.005738 & 0.040132 & 0.027630 & 0.040396 & 0.080827 \\
+2022-12-30 & 0.002469 & -0.002138 & -0.002473 & 0.006606 & 0.000665 & -0.004938 & 0.000753 & 0.011164 \\
+\end{longtable}
+}
+
+250 rows × 8 columns
+
+Bây giờ, khi đã có DataFrame \texttt{returns\_df} chứa lợi suất hằng ngày của các tài sản đã chọn, chúng ta có thể sử dụng nó trong đoạn mã đa dạng hóa danh mục đầu tư bằng NMF:
+
+In {[}3{]}:
+
+\begin{lstlisting}[escapeinside={(*@}{@*)}]
+# 2. (*@Tính@*) ma (*@trận@*) (*@tương@*) quan
+correlation_matrix = returns_df.corr()
+correlation_matrix
+\end{lstlisting}
+
+Out{[}3{]}:
+
+{\small
+\begin{longtable}[]{@{}lllllllll@{}}
+\toprule\noalign{}
+Ticker & AAPL & AMZN & GOOG & JPM & META & MSFT & NVDA & TSLA \\
+\midrule\noalign{}
+\endhead
+\bottomrule\noalign{}
+\endlastfoot
+Ticker & & & & & & & & \\
+AAPL & 1.000000 & 0.695905 & 0.790573 & 0.547907 & 0.592901 & 0.824902 & 0.763022 & 0.637218 \\
+AMZN & 0.695905 & 1.000000 & 0.724022 & 0.501689 & 0.605782 & 0.741197 & 0.709077 & 0.591533 \\
+GOOG & 0.790573 & 0.724022 & 1.000000 & 0.511192 & 0.681990 & 0.845283 & 0.767571 & 0.556652 \\
+JPM & 0.547907 & 0.501689 & 0.511192 & 1.000000 & 0.393247 & 0.532507 & 0.528095 & 0.364935 \\
+META & 0.592901 & 0.605782 & 0.681990 & 0.393247 & 1.000000 & 0.625860 & 0.607685 & 0.398646 \\
+MSFT & 0.824902 & 0.741197 & 0.845283 & 0.532507 & 0.625860 & 1.000000 & 0.787883 & 0.563946 \\
+NVDA & 0.763022 & 0.709077 & 0.767571 & 0.528095 & 0.607685 & 0.787883 & 1.000000 & 0.680243 \\
+TSLA & 0.637218 & 0.591533 & 0.556652 & 0.364935 & 0.398646 & 0.563946 & 0.680243 & 1.000000 \\
+\end{longtable}
+}
+
+Phân rã ma trận không âm (NMF) về bản chất được thiết kế để làm việc với các ma trận không âm. Điều này có nghĩa là ma trận đầu vào (\(V\)) và các ma trận nhân tố thu được (\(W\) và \(H\)) được kỳ vọng chỉ chứa các phần tử không âm. Tuy nhiên, trong bối cảnh cụ thể của việc đa dạng hóa danh mục đầu tư bằng NMF, ma trận đầu vào thường là ma trận tương quan của lợi suất tài sản, và ma trận này có thể chứa các giá trị âm biểu diễn mối quan hệ nghịch đảo giữa các tài sản.
+
+Trong ví dụ của chúng ta, ma trận tương quan chỉ có các giá trị dương. Tuy nhiên, nếu cần, trong một số trường hợp chúng ta có thể xem xét các điều chỉnh sau:
+
+\begin{itemize}
+\item
+  \textbf{Dịch chuyển (Shifting):} chúng ta có thể dịch chuyển ma trận tương quan bằng cách cộng 1 vào mọi phần tử, bảo đảm mọi giá trị nằm trong khoảng từ 0 đến 2. Cách này có thể làm thay đổi đôi chút việc diễn giải các hệ số tải nhân tố (factor loadings), nhưng sẽ không ảnh hưởng đáng kể đến chiến lược đa dạng hóa tổng thể.
+\item
+  \textbf{Giá trị tuyệt đối (Absolute Values):} Một lựa chọn khác là dùng giá trị tuyệt đối của các hệ số tương quan, tập trung vào độ mạnh của các mối quan hệ thay vì chiều hướng của chúng. Cách này có thể hữu ích khi chúng ta muốn xác định các nhóm tài sản có mức đồng biến động mạnh, bất kể mối quan hệ đó là dương hay âm.
+\end{itemize}
+
+Tiếp theo, chúng ta áp dụng NMF để phân rã ma trận tương quan thành hai ma trận nhỏ hơn:
+
+In {[}4{]}:
+
+\begin{lstlisting}[escapeinside={(*@}{@*)}]
+# 3. Apply NMF
+n_components = 5  # Number of factors to extract
+model = NMF(n_components=n_components, init='random', random_state=0)
+W = model.fit_transform(correlation_matrix)  # Factor loadings
+H = model.components_  # Factor scores
+\end{lstlisting}
+
+Ở đây, chúng ta sử dụng hàm \texttt{NMF()} từ module \texttt{sklearn.decomposition} trong thư viện scikit-learn.
+
+\begin{itemize}
+\item
+  \texttt{n\_components} chỉ định số lượng nhân tố (hoặc thành phần) cần trích xuất từ dữ liệu. Trong bối cảnh đa dạng hóa danh mục đầu tư, các nhân tố này đại diện cho những động lực tiềm ẩn đằng sau sự đồng biến động của các tài sản. Trong trường hợp cụ thể này, việc đặt n\_components = 5 giả định rằng có khoảng 5 nhân tố tiềm ẩn chính chi phối sự đồng biến động của các tài sản trong danh mục. Đây là một điểm khởi đầu hợp lý, nhưng chúng ta nên thử nghiệm với các giá trị khác nhau để tìm ra số lượng tối ưu cho dữ liệu và mục tiêu đầu tư cụ thể của mình. Việc chọn đúng số lượng thành phần thường là một quá trình lặp, đòi hỏi chuyên môn về lĩnh vực, thử nghiệm và đánh giá mô hình.
+\item
+  \texttt{init=\textquotesingle{}random\textquotesingle{}} chỉ định phương pháp khởi tạo cho các ma trận nhân tố (\(W\) và \(H\)). \texttt{\textquotesingle{}random\textquotesingle{}} khởi tạo chúng bằng các giá trị không âm ngẫu nhiên.
+\item
+  \texttt{random\_state=0} đặt hạt giống ngẫu nhiên (random seed) để bảo đảm khả năng tái lập kết quả.
+\end{itemize}
+
+Bước tiếp theo là phân tích các hệ số tải nhân tố (\(W\)) thu được từ phép phân rã NMF để hiểu các nhân tố tiềm ẩn chi phối sự đồng biến động của tài sản, và dùng thông tin này để đa dạng hóa danh mục đầu tư. Chúng ta có thể truy cập các hệ số tải nhân tố (\(W\)) thông qua biến \texttt{W} thu được ở bước này:
+
+In {[}5{]}:
+
+\begin{lstlisting}[escapeinside={(*@}{@*)}]
+# Convert W to a pandas DataFrame for easier analysis
+W_df = pd.DataFrame(W, index=returns_df.columns)
+W_df
+\end{lstlisting}
+
+Out{[}5{]}:
+
+{\small
+\begin{longtable}[]{@{}llllll@{}}
+\toprule\noalign{}
+& 0 & 1 & 2 & 3 & 4 \\
+\midrule\noalign{}
+\endhead
+\bottomrule\noalign{}
+\endlastfoot
+Ticker & & & & & \\
+AAPL & 0.464388 & 0.268745 & 2.308214e-01 & 0.780431 & 0.083933 \\
+AMZN & 0.667705 & 0.000000 & 1.201896e-01 & 0.276369 & 0.499711 \\
+GOOG & 0.458127 & 0.178795 & 1.562598e-01 & 0.803559 & 0.246556 \\
+JPM & 0.251893 & 0.864869 & 1.182338e-07 & 0.396028 & 0.208776 \\
+META & 0.003509 & 0.265379 & 2.902255e-01 & 0.680854 & 0.639626 \\
+MSFT & 0.550908 & 0.165173 & 1.144742e-01 & 0.780761 & 0.174299 \\
+NVDA & 0.406847 & 0.266952 & 3.439407e-01 & 0.672617 & 0.173926 \\
+TSLA & 0.310220 & 0.169135 & 6.282613e-01 & 0.296556 & 0.046811 \\
+\end{longtable}
+}
+
+Ma trận hệ số tải nhân tố (\(W\)) cho biết mỗi tài sản đóng góp bao nhiêu vào từng nhân tố.
+
+\begin{itemize}
+\item
+  Hàng: Đại diện cho các tài sản trong danh mục đầu tư của bạn.
+\item
+  Cột: Đại diện cho các nhân tố đã được trích xuất.
+\item
+  Giá trị: Cho biết độ mạnh của mối quan hệ giữa một tài sản và một nhân tố. Giá trị càng cao cho thấy tài sản đóng góp càng mạnh vào nhân tố đó.
+\end{itemize}
+
+Để diễn giải các nhân tố, chúng ta cần xem xét những tài sản có hệ số tải cao trên từng nhân tố. Với mỗi nhân tố, chúng ta cần xác định các tài sản có hệ số tải cao nhất. Những tài sản này gắn kết chặt chẽ nhất với nhân tố đó.
+
+In {[}6{]}:
+
+\begin{lstlisting}[escapeinside={(*@}{@*)}]
+# Identify top contributing assets for each factor
+n_top_assets = 3
+for factor_num in range(W_df.shape[1]):
+    print(f"\nFactor {factor_num + 1}:")
+    top_assets = W_df.iloc[:, factor_num].nlargest(n_top_assets)
+    print(top_assets)
+\end{lstlisting}
+
+\begin{lstlisting}[escapeinside={(*@}{@*)}]
+Factor 1:
+Ticker
+AMZN    0.667705
+MSFT    0.550908
+AAPL    0.464388
+Name: 0, dtype: float64
+
+Factor 2:
+Ticker
+JPM     0.864869
+AAPL    0.268745
+NVDA    0.266952
+Name: 1, dtype: float64
+
+Factor 3:
+Ticker
+TSLA    0.628261
+NVDA    0.343941
+META    0.290226
+Name: 2, dtype: float64
+
+Factor 4:
+Ticker
+GOOG    0.803559
+MSFT    0.780761
+AAPL    0.780431
+Name: 3, dtype: float64
+
+Factor 5:
+Ticker
+META    0.639626
+AMZN    0.499711
+GOOG    0.246556
+Name: 4, dtype: float64
+\end{lstlisting}
+
+Kết quả này cho thấy 3 tài sản đóng góp nhiều nhất cho mỗi nhân tố cùng các hệ số tải của chúng. Hãy nhớ rằng chúng ta có thể điều chỉnh \texttt{n\_top\_assets} và cách diễn giải các nhân tố dựa trên dữ liệu và mục tiêu đầu tư cụ thể của mình. Hiện tại, chúng ta giữ 3 tài sản đóng góp nhiều nhất. Giờ đây, chúng ta có thể dùng thông tin này để diễn giải các nhân tố và xây dựng chiến lược đa dạng hóa. Dựa trên các tài sản đóng góp nhiều nhất cho mỗi nhân tố, chúng ta có thể thử diễn giải ý nghĩa kinh tế hoặc tài chính của chúng:
+
+\begin{itemize}
+\item
+  \textbf{Nhân tố 1:} Bị chi phối bởi AMZN, MSFT và AAPL. Nhân tố này có thể được diễn giải là đại diện cho \textbf{cổ phiếu công nghệ vốn hóa lớn hoặc cổ phiếu tăng trưởng}. Các công ty này thường gắn liền với đổi mới sáng tạo, tiến bộ công nghệ và tiềm năng tăng trưởng cao.
+\item
+  \textbf{Nhân tố 2:} Chủ yếu do JPM thúc đẩy, với đóng góp vừa phải từ AAPL và NVDA. Nhân tố này có thể đại diện cho \textbf{cổ phiếu tài chính hoặc cổ phiếu giá trị}. JPM là một định chế tài chính lớn, và nhân tố này có thể phản ánh hiệu suất của khu vực tài chính hoặc các công ty có đặc điểm giá trị lâu đời hơn.
+\item
+  \textbf{Nhân tố 3:} Dẫn dắt bởi TSLA và NVDA, với một số ảnh hưởng từ META. Nhân tố này có thể được diễn giải là \textbf{xe điện hoặc công nghệ đột phá}. TSLA là nhà sản xuất xe điện hàng đầu, còn NVDA là một công ty bán dẫn lớn, cả hai đều gắn liền với các công nghệ đột phá.
+\item
+  \textbf{Nhân tố 4:} Chịu ảnh hưởng mạnh từ GOOG, MSFT và AAPL. Nhân tố này dường như đại diện cho \textbf{các tập đoàn công nghệ lớn (Big Tech) hoặc những doanh nghiệp dẫn đầu thị trường}. Các công ty này là những chủ thể thống lĩnh trong lĩnh vực công nghệ và có tác động đáng kể đến toàn thị trường. Nhân tố này có thể phần nào trùng lặp với Nhân tố 1, nhưng tập trung rộng hơn vào vị thế dẫn đầu thị trường.
+\item
+  \textbf{Nhân tố 5:} Chủ yếu do META, AMZN và GOOG thúc đẩy. Nhân tố này có thể được diễn giải là \textbf{mạng xã hội và thương mại điện tử}. META là một công ty mạng xã hội lớn, AMZN là chủ thể thống lĩnh thương mại điện tử, còn GOOG có sự hiện diện mạnh ở cả hai lĩnh vực.
+\end{itemize}
+
+Chiến lược đa dạng hóa
+
+Dựa trên cách diễn giải các nhân tố này, có thể xây dựng một danh mục đầu tư đa dạng hóa bằng cách chọn những tài sản có hệ số tải cao trên các nhân tố khác nhau. Ví dụ, chúng ta có thể cân nhắc:
+
+\begin{itemize}
+\item
+  \textbf{Công nghệ vốn hóa lớn/Tăng trưởng:} AMZN hoặc MSFT (Nhân tố 1)
+\item
+  \textbf{Tài chính/Giá trị:} JPM (Nhân tố 2)
+\item
+  \textbf{Xe điện/Công nghệ đột phá:} TSLA hoặc NVDA (Nhân tố 3)
+\item
+  \textbf{Big Tech/Doanh nghiệp dẫn đầu thị trường:} GOOG hoặc AAPL (Nhân tố 4)
+\item
+  \textbf{Mạng xã hội/Thương mại điện tử:} META (Nhân tố 5)
+\end{itemize}
+
+Bằng cách đa dạng hóa trên các nhân tố này, chúng ta sẽ phân tán khoản đầu tư qua nhiều lĩnh vực và hồ sơ rủi ro khác nhau, từ đó có thể giảm rủi ro tổng thể của danh mục đầu tư và nâng cao lợi suất.
+
+Đây chỉ là một cách diễn giải đơn giản hóa phục vụ cho phần minh họa này. Có thể cần phân tích sâu hơn để tinh chỉnh các định nghĩa nhân tố. Chúng ta cũng cần nhớ rằng chiến lược đa dạng hóa tối ưu phụ thuộc vào mục tiêu đầu tư, mức độ chấp nhận rủi ro và thời hạn đầu tư của từng cá nhân.
+
+\section{Kết luận}
+
+Trong bài học này, chúng ta đã tìm hiểu về phân rã ma trận không âm (Non-negative Matrix Factorization, NMF), một kỹ thuật giảm chiều dữ liệu có nhiều ứng dụng trong kỹ thuật tài chính. Chúng ta đã thảo luận về định nghĩa, các tính chất và các biến thể của NMF, đồng thời so sánh nó với các phương pháp khác như PCA, SVD và ICA. Sau đó, bài học tập trung vào các ứng dụng của NMF trong tài chính, bao gồm đa dạng hóa danh mục đầu tư, quản trị rủi ro và phân tích cảm xúc. Bài học cũng trình bày một ví dụ đơn giản hóa nhưng mang tính thực tiễn về việc sử dụng NMF để đa dạng hóa danh mục đầu tư với dữ liệu thị trường chứng khoán, qua đó cho thấy cách trích xuất và diễn giải các nhân tố để xây dựng một danh mục đầu tư đa dạng hóa. Nhìn chung, bài học đã làm nổi bật NMF như một công cụ mạnh mẽ và dễ diễn giải để phân tích dữ liệu tài chính và đưa ra các quyết định đầu tư sáng suốt.
+
+\begin{center}\rule{0.5\linewidth}{0.5pt}\end{center}
+
+Copyright 2024 WorldQuant University. This content is licensed solely for personal use. Redistribution or publication of this material is strictly prohibited.

@@ -1,8 +1,0 @@
-# Translation Configuration
-input_file=M6L4_DT2.md
-input_lang=auto
-output_lang=vi
-conversion_method=markdown
-
-# Book Metadata
-original_title=Hott 2022 - Leverage and Risk Taking under Moral Hazard (chi phan hinh/bang/bieu do)

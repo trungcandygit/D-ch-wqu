@@ -1,0 +1,204 @@
+\chapter{Đọc thêm 1: Dữ liệu GDELT và niềm tin đối với chính sách năng lượng (Bodas-Sagi \& Labeaga)}
+\label{ch:M5L3DocThem1}
+
+\section{Thông tin nguồn}
+
+\begin{itemize}
+  \item \textbf{Nguồn:} Bodas-Sagi, D. J. \& Labeaga, J. M. ``Using GDELT Data to Evaluate the Confidence on the Spanish Government Energy Policy.'' \emph{IJIMAI}, 3(6), 2016.
+  \item \textbf{Phần cần đọc:} tr. 38--43
+  \item \textbf{Ghi chú:} bản chuyển ngữ tiếng Việt súc tích, bám cấu trúc nguồn (giữ nguyên tiêu đề, công thức, số liệu, bảng, chú thích và danh mục tài liệu tham khảo).
+\end{itemize}
+
+International Journal of Interactive Multimedia and Artificial Intelligence, Vol. 3, Nº6
+
+Diego J. Bodas-Sagi, José M. Labeaga Universidad Francisco de Vitoria, Universidad Nacional de Educación a Distancia (UNED), Tây Ban Nha
+
+\textbf{Tóm tắt} --- Nhu cầu ngày càng tăng đối với điện năng giá phải chăng, đáng tin cậy, có nguồn cung trong nước và ít phát thải carbon là một mối quan tâm lớn, chịu tác động của nhiều nguyên nhân, trong đó có các ưu tiên chính sách công. Các mục tiêu chính sách và công nghệ mới đang thay đổi thiết kế thị trường điện bán buôn. Việc phân tích các khía cạnh khác nhau của thị trường năng lượng ngày càng được giới học thuật, nhà quản lý doanh nghiệp và nhà hoạch định chính sách chú ý. Một số mối quan tâm mang tính toàn cầu, gắn với diễn biến của biến đổi khí hậu; những mối quan tâm khác mang tính khu vực hoặc quốc gia và thể hiện rõ ở các nước như Tây Ban Nha, nơi phụ thuộc nhiều vào nguồn năng lượng nhập khẩu nhưng có tiềm năng lớn về năng lượng tái tạo trong nước. Một trường hợp điển hình là chính sách năng lượng mặt trời của Tây Ban Nha: chuỗi cải cách quy định từ năm 2010 đã cắt giảm doanh thu của các nhà máy phát điện tái tạo hiện hữu và chấm dứt hệ thống hỗ trợ trước đây dành cho các nguồn tái tạo mới. Thay đổi chính sách này đã làm biến đổi cơ cấu thị trường năng lượng và ảnh hưởng đến các quyết định đầu tư. Trong bài báo này, nhóm tác giả phân tích dư luận về chính sách năng lượng của Chính phủ Tây Ban Nha bằng Global Database of Events, Language, and Tone (GDELT). Dự án GDELT gồm hơn một phần tư tỷ bản ghi sự kiện thuộc hơn 300 danh mục, bao phủ toàn thế giới từ năm 1979 đến nay, cùng một mạng lưới khổng lồ kết nối mọi cá nhân, tổ chức, địa điểm và chủ đề với cơ sở dữ liệu sự kiện này. Mục tiêu là xây dựng các chỉ báo cảm xúc từ nguồn thông tin này và cuối cùng đánh giá xem các chỉ số tích cực và tiêu cực có ảnh hưởng đến diễn biến của các biến số thị trường chủ chốt như giá và nhu cầu hay không.
+
+thiết kế thị trường. Một trường hợp điển hình là chính sách năng lượng mặt trời của Tây Ban Nha. Chuỗi cải cách quy định từ năm 2010 đã cắt giảm doanh thu của các nhà máy phát điện tái tạo hiện hữu và chấm dứt hệ thống hỗ trợ trước đây cho các nguồn tái tạo mới. Thay đổi này đã gây ra nhiều khiếu nại từ các tổ chức khác nhau và làm biến đổi cơ cấu thị trường năng lượng. Cuối cùng, Sắc lệnh Hoàng gia tháng 10/2015 đã tác động mạnh đến thị trường năng lượng mặt trời.
+
+\textbf{Từ khóa} --- Big Query, GDELT, dư luận, năng lượng, điện.
+
+Phần còn lại của bài báo được cấu trúc như sau: trước hết là tóm lược về Dự án GDELT và mối liên hệ với mô hình dữ liệu lớn (Big Data). Mục 3 trình bày các công cụ, phương pháp và kỹ thuật được sử dụng. Kết quả được thảo luận ở mục 4. Bài báo kết thúc bằng một số hàm ý chính sách và hướng nghiên cứu tiếp theo.
+
+\subsection{I. Giới thiệu}
+
+Chính sách công đóng vai trò then chốt trong việc điều tiết mối quan hệ giữa doanh nghiệp, nhà đầu tư và xã hội. Tầm quan trọng của chính sách công đối với nhà đầu tư dài hạn đã tăng trong những năm gần đây do {[}1{]}:
+
+\begin{itemize}
+\item
+  Cải cách pháp luật khu vực tài chính sau khủng hoảng tài chính toàn cầu.
+\item
+  Nhu cầu của chính phủ đối với nhà đầu tư như một nguồn tăng trưởng dài hạn.
+\item
+  Tác động ngày càng lớn của các yếu tố môi trường, xã hội và quản trị đến khả năng mang lại lợi nhuận dài hạn của nhà đầu tư.
+\end{itemize}
+
+Thị trường năng lượng là một trường hợp then chốt để nghiên cứu tác động của chính sách công. Nhu cầu về điện năng giá phải chăng, đáng tin cậy, có nguồn cung trong nước và ít phát thải carbon đang tăng lên. Nhu cầu này "một phần do các ưu tiên chính sách công đang thay đổi, đặc biệt là giảm tác động của dịch vụ điện đến sức khỏe và môi trường\ldots{} Các thị trường được thiết kế tốt khuyến khích những giải pháp hiệu quả về kinh tế, thúc đẩy đổi mới và giảm thiểu hệ quả ngoài ý muốn" {[}2{]}. Các mục tiêu chính sách và công nghệ mới đang thay đổi thiết kế thị trường bán buôn.
+
+Phân tích dư luận về các biện pháp cụ thể của chính phủ có thể là một thành phần hữu ích cho các quyết định dài hạn của các tác nhân. Dư luận có thể ảnh hưởng đến nhà hoạch định chính sách ở nhiều giai đoạn của quá trình ra quyết định, và nhận thức của công chúng có thể tác động đến thiết kế các chương trình hay biện pháp chính sách. Các tác nhân trong mọi thị trường cũng có thể chịu ảnh hưởng bởi nhận thức tích cực và tiêu cực về doanh nghiệp. Trong mọi trường hợp, đại diện công quyền có thể quan tâm đến tình hình dư luận khi áp dụng các biện pháp có thể làm méo mó thị trường.
+
+Trong bài báo này, nhóm tác giả phân tích dư luận về chính sách năng lượng của Chính phủ Tây Ban Nha bằng Global Database of Events, Language, and Tone (GDELT). Dự án GDELT {[}3{]} gồm hơn một phần tư tỷ bản ghi sự kiện thuộc hơn 300 danh mục, bao phủ toàn thế giới từ năm 1979 đến nay. Mục tiêu là xây dựng các chỉ báo cảm xúc từ nguồn thông tin này và cuối cùng đánh giá xem các chỉ số tích cực và tiêu cực có ảnh hưởng đến diễn biến của các biến số thị trường chủ chốt như giá và nhu cầu hay không. Nhóm tác giả không cố đánh giá quan hệ nhân quả từ các chỉ báo cảm xúc đến các biến số thị trường, mà chỉ nhằm phát hiện sự tồn tại của tương quan giữa các biến số đó.
+
+\subsection{II. Dự án GDELT}
+
+Dự án GDELT, được Google Ideas hỗ trợ, chia sẻ thông tin và siêu dữ liệu theo thời gian thực với toàn thế giới. Siêu dữ liệu đã mã hóa này (không kèm văn bản bài báo) được phát hành dưới dạng luồng dữ liệu mở, cập nhật mỗi 15 phút, cung cấp một chỉ mục có chú giải đa ngôn ngữ về thông tin, bao gồm các nguồn tin phát thanh truyền hình, báo in và báo mạng. Dự án chia sẻ một cơ sở dữ liệu với hàng nghìn tỷ điểm dữ liệu. Dù dữ liệu có sẵn dưới dạng tệp CSV tải về, rất ít người dùng đủ dung lượng lưu trữ và sức mạnh xử lý để tải hàng terabyte dữ liệu rồi truy vấn, phân tích hiệu quả. Nền tảng BigQuery của Google cung cấp cách tương tác với nguồn thông tin khổng lồ này. GDELT là ví dụ điển hình của Dữ liệu lớn (Big Data), còn BigQuery của Google là ví dụ về công nghệ Hạ tầng như một dịch vụ (Infrastructure As a Service, IaaS).
+
+Theo {[}4{]}, Dữ liệu lớn là dữ liệu vượt quá năng lực xử lý của các hệ thống cơ sở dữ liệu thông thường: quá lớn, thay đổi quá nhanh, hoặc không phù hợp với cấu trúc kiến trúc cơ sở dữ liệu hiện có. Để khai thác giá trị từ dữ liệu này, cần chọn một cách xử lý thay thế. Các công nghệ Dữ liệu lớn có nguồn rất đa dạng và khối lượng thông tin rất lớn, nhưng thời gian xử lý giảm đáng kể nhờ xử lý song song và hạ tầng phân cụm.
+
+GDELT duy trì Cơ sở dữ liệu Sự kiện GDELT (GDELT Event Database) và Đồ thị Tri thức Toàn cầu GDELT (Global Knowledge Graph, GKG). GKG bắt đầu từ ngày 1/4/2013 và "\ldots{} nỗ lực kết nối mọi con người, tổ chức, địa điểm, số liệu đếm, chủ đề, nguồn tin và sự kiện trên khắp hành tinh thành một mạng lưới khổng lồ duy nhất, nắm bắt điều đang diễn ra trên thế giới, bối cảnh của nó, ai có liên quan, và thế giới cảm nhận về nó ra sao, mỗi ngày" {[}3{]}. Các tệp dữ liệu dùng bộ mã CAMEO (Conflict and Mediation Event Observations) {[}5{]} để ghi nhận sự kiện. GKG cũng cung cấp mã định danh sự kiện (EventIDs) của từng sự kiện xuất hiện trong cùng một bài báo với thông tin được trích xuất, cho phép đặt sự kiện vào bối cảnh phong phú.
+
+\subsection{III. Phương pháp}
+
+Trong nghiên cứu này, chúng tôi dùng bảng GKG trên nền tảng BigQuery của Google. Bảng GKG có thuộc tính "Themes", liệt kê mọi chủ đề tìm thấy trong tài liệu. Chúng tôi muốn lọc các tài liệu liên quan đến ít nhất một trong hai chủ đề: "ENV\_SOLAR" (năng lượng mặt trời nói chung) và "FUELPRICES" (chi phí nhiên liệu, năng lượng và sưởi ấm). Thuộc tính chủ đề không có trong bảng Event. Đồng thời, chúng tôi tìm các sự kiện có nhắc đến Tây Ban Nha ở một mức nào đó qua thuộc tính "Locations" (chứa danh sách mọi địa điểm tìm thấy trong văn bản). Tóm lại, chúng tôi dùng bảng GKG để lọc thông tin về năng lượng mặt trời hoặc chi phí nhiên liệu, năng lượng và sưởi ấm, có liên quan (theo cách nào đó) đến Tây Ban Nha. Thuộc tính "V2Tone" cho phép phân tích "sắc thái" (tone) trung bình của toàn bộ tài liệu. Điểm số nằm trong khoảng từ -100 (cực kỳ tiêu cực) đến +100 (cực kỳ tích cực); giá trị thường gặp từ -10 đến +10, với 0 là trung tính. Điểm này được tính bằng Điểm tích cực trừ Điểm tiêu cực. Điểm tích cực là tỷ lệ phần trăm số từ trong bài báo mang hàm ý cảm xúc tích cực; Điểm tiêu cực là tỷ lệ phần trăm số từ mang hàm ý cảm xúc tiêu cực. BigQuery cho phép tương tác với toàn bộ bộ dữ liệu GDELT bằng Ngôn ngữ truy vấn có cấu trúc (SQL). Cần có tài khoản Google Cloud Services và kích hoạt Google Cloud Storage để xuất và tải dữ liệu.
+
+Ngôn ngữ R {[}6{]} được dùng để phân tích và xử lý dữ liệu. Dữ liệu tải từ Google Cloud Storage được nhập vào R, sau đó chúng tôi thực hiện phân tích khám phá cơ bản trên dữ liệu đã tải. Kết quả cho thấy một số tham chiếu, tài liệu hoặc URL không liên quan đến chính sách năng lượng; chẳng hạn, một số mục đề cập đến tin khoa học của Viện Vật lý Thiên văn Canarias (chủ đề "ENV\_SOLAR"). Vì vậy, và để đo lường hiệu quả hơn, chúng tôi thấy cần phân tích văn bản tin tức và tìm các nhắc đến Chính phủ Tây Ban Nha, hội đồng, bộ hoặc bộ trưởng. Đây là tác vụ tốn nhiều tính toán vì phải xử lý các thẻ HTML và trích xuất văn bản của tài liệu. Ở phần sau, chúng tôi trình bày chi tiết quy trình này và các phương án cải thiện thời gian thực thi.
+
+Tiếp theo, với mỗi chủ đề, chúng tôi nhóm mọi lượt nhắc đến theo ngày và tính sắc thái trung bình cùng độ lệch chuẩn của sắc thái mỗi ngày. Ở giai đoạn này, chúng tôi chỉ đánh giá các tài liệu viết bằng tiếng Tây Ban Nha hoặc tiếng Anh vì cần tìm các nhắc đến Chính phủ Tây Ban Nha (hai ngôn ngữ này được chọn để xử lý, các ngôn ngữ khác sẽ được đưa vào các phiên bản sau). Kết quả được đặt trong bối cảnh các chính sách mà chính phủ Tây Ban Nha đã thực thi.
+
+Cuối cùng, chúng tôi áp dụng thuật toán Mô hình chủ đề tương quan (Correlated Topics Models, CTM) {[}7{]}, dựa trên thuật toán Phân bổ Dirichlet ẩn (Latent Dirichlet Allocation, LDA) {[}8{]}, lên các từ trong các đề cập, tin tức hoặc tài liệu viết bằng tiếng Tây Ban Nha. Phần còn lại của tập dữ liệu không được đưa vào phần nghiên cứu này. Chúng tôi không trộn lẫn các ngôn ngữ, vì những từ có nghĩa tương tự nhưng thuộc các ngôn ngữ khác nhau có thể rơi vào các chủ đề khác nhau do cách viết khác nhau. Việc đánh giá các ngôn ngữ khác được để lại cho nghiên cứu tương lai. Gói R "topicmodels" {[}9{]} cho phép chạy các thuật toán LDA và CTM.
+
+LDA cho phép khám phá các chủ đề trong các tập dữ liệu lớn được mô tả thông qua chủ đề. LDA không cần dữ liệu có nhãn (học không giám sát) và dùng một thủ tục ngẫu nhiên để sinh vectơ trọng số chủ đề. LDA biểu diễn tài liệu như hỗn hợp của các chủ đề, mỗi chủ đề sinh ra các từ với những xác suất nhất định; đây là mô hình túi từ (bag-of-words). Vì vậy, LDA có thể dùng cho mô hình hóa và phân loại tài liệu. Tuy nhiên, LDA không mô hình hóa trực tiếp được tương quan giữa sự xuất hiện của các chủ đề, trong khi đôi khi sự hiện diện của một chủ đề có tương quan với chủ đề khác (ví dụ: "kinh tế" và "kinh doanh"). CTM rất giống LDA, ngoại trừ việc tỷ trọng chủ đề được rút từ phân phối chuẩn logistic thay vì phân phối Dirichlet. Áp dụng gói R "topicmodels" lên tập dữ liệu, chúng tôi thu được danh sách từ cho mỗi chủ đề và đồng thời kiểm tra tương quan giữa các chủ đề thu được.
+
+A. Lấy văn bản của các tài liệu
+
+Như đã nêu, lấy văn bản của tài liệu là giai đoạn tốn nhiều tính toán vì phải xử lý các thẻ HTML và trích xuất văn bản. Công việc gồm các bước sau:
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\item
+  Trước hết, truy cập tài liệu qua URL của nó.
+\item
+  Phát hiện ngôn ngữ văn bản bằng gói R "textcat" {[}10{]}. Nếu tài liệu viết bằng tiếng Tây Ban Nha hoặc tiếng Anh thì tải văn bản về và xác nhận văn bản chứa một trong các từ sau: "gobierno", "government", "council", "ministers", "ministry", "ministro", "ministerio". Nếu không, coi như văn bản không đề cập đến Chính phủ Tây Ban Nha. Lưu ý rằng vị trí Tây Ban Nha được tham chiếu trong văn bản theo siêu dữ liệu GKG.
+\item
+  Với mọi văn bản đã tải, làm sạch bằng cách loại bỏ thẻ HTML và từ dừng (stop-words, tiếng Tây Ban Nha và tiếng Anh) để cải thiện độ chính xác và hiệu năng; bước này làm giảm kích thước văn bản. Từ dừng là những từ phổ biến nhất trong một ngôn ngữ, nhưng với mục tiêu của nghiên cứu thì chúng không bổ sung giá trị cho phân tích chủ đề.
+\end{enumerate}
+
+Nghiên cứu đã thử cả chế độ thực thi tuần tự và song song. Thuật toán song song, trái với thuật toán tuần tự truyền thống, là thuật toán có thể thực thi từng phần trên nhiều thiết bị xử lý hay bộ xử lý khác nhau, rồi ghép lại ở cuối để có kết quả đúng.
+
+Lợi ích của kiểu song song hóa này là một khi đã biết cấu trúc chương trình, chỉ cần thay đổi đôi chút để chương trình chạy trên nhiều bộ xử lý, khác với thuật toán phân tán vốn phải thiết lập trước cấu trúc truyền thông tối ưu, thường kéo theo những thay đổi lớn đối với chương trình.
+
+Hai sơ đồ song song hóa được đánh giá. Sơ đồ thứ nhất tận dụng nhiều lõi trong một máy tính. Sơ đồ thứ hai dùng kiến trúc chủ-tớ (master-slave) {[}11{]}: một bộ xử lý duy nhất chạy thuật toán chính (master) và giao nhiệm vụ lấy văn bản cho một nhóm bộ xử lý (slave). Các slave chịu trách nhiệm xử lý URL, lấy văn bản và gửi kết quả về tiến trình trung tâm.
+
+Trong mọi trường hợp, nếu có \(p\) bộ xử lý thì tập dữ liệu gốc được chia thành \(p\) phần, mỗi bộ xử lý chỉ xử lý một phần. Trong mọi thí nghiệm, chúng tôi dùng máy tính Pentium V bốn lõi, RAM 8 GB, hệ điều hành Centos 6.4. Tốc độ băng thông Internet khoảng 20 Mbps (tốc độ tải xuống). Hiệu năng thường được đo bằng hệ số tăng tốc (Speedup, Sp) và hiệu suất (Efficiency, Ep):
+
+\begin{equation*}S_p = T_1 / T_p \tag{1}\end{equation*}
+
+\begin{equation*}E_p = S_p / p \tag{2}\end{equation*}
+
+trong đó \(p\) là số bộ xử lý, \(T_1\) là thời gian thực thi của thuật toán tuần tự và \(T_p\) là thời gian thực thi của bản cài đặt song song trên \(p\) bộ xử lý.
+
+Gói Simple Network of Workstations (snow) {[}12{]} cho phép thực thi mã song song trong R. Gói yêu cầu tải mã, tải thư viện snow, tạo cụm snow (hoặc chạy ở chế độ cục bộ bằng CPU đa lõi) và chạy mã, theo đúng thứ tự này. Thư viện snow có thể dùng để khởi chạy các tiến trình R mới (worker) trên máy. Gói snow theo mô hình phân tán/thu thập (scatter/gather), hoạt động như sau:
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\item
+  Manager chia dữ liệu thành các phần và phân phát cho các worker (giai đoạn scatter).
+\end{enumerate}
+
+{[}Kết quả{]} ... cho thấy cảm xúc của các tin tức liên quan đến chính sách năng lượng mặt trời là tiêu cực trong giai đoạn này. Cần nhớ rằng vào tháng 10/2015 chính phủ ban hành cái gọi là "thuế mặt trời" ("impuesto al sol"), điều chỉnh việc tiêu thụ của những người tiêu dùng tự sản xuất điện bằng hệ thống quang điện. Các thảo luận trên truyền thông không bắt đầu vào thời điểm công bố Sắc lệnh Hoàng gia ngày 9/10/2015 mà đã diễn ra trước đó vài tháng, ngay khi các tác nhân biết ý định của chính phủ. Vì vậy không lạ khi cảm xúc của các tác nhân sản xuất tin tức là tiêu cực.
+
+Mặt khác, khi đưa từ "government" vào làm biến kiểm soát để xây dựng chỉ số cảm xúc, giá trị trung bình như trình bày ở các hình 2 và 4 còn tiêu cực hơn. Như vậy, các tác nhân (nhà sản xuất, người tiêu dùng, v.v.) thể hiện rõ phản ứng tiêu cực đối với giá nhiên liệu và năng lượng, và chúng tôi gắn điều này với các quy định trên thị trường năng lượng liên quan đến các biến đó. Ý kiến của các nước châu Âu xung quanh và của các cơ quan có thẩm quyền của EU cũng tiêu cực đối với quy định này.
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\setcounter{enumi}{1}
+\item
+  Các worker xử lý phần dữ liệu của mình.
+\item
+  Các worker xử lý phần dữ liệu của mình.
+\item
+  Manager thu thập kết quả từ các worker (giai đoạn gather) và kết hợp chúng theo yêu cầu của ứng dụng.
+\end{enumerate}
+
+Snow có thể dùng với kết nối socket, Message Passing Interface (MPI), Parallel Virtual Machine (PVM) hoặc NetWorkSpaces {[}12, 13{]}. Truyền tải qua socket không cần gói bổ sung nào và có tính di động cao; nhóm tác giả dùng kết nối socket. Snow là ví dụ về hệ thống không chia sẻ bộ nhớ: với mạng các máy trạm, mỗi máy có bộ nhớ riêng, độc lập. Ngược lại, với trường hợp đa lõi trên một máy, bộ nhớ được chia sẻ giữa mọi tiến trình đang chạy. Ở cả hai trường hợp đều phải lưu ý chi phí truyền thông, vốn phụ thuộc vào nhiều yếu tố như ngữ nghĩa của mô hình lập trình, cấu trúc liên kết mạng, cách xử lý và định tuyến dữ liệu, cùng các giao thức phần mềm liên quan. Việc thêm bộ xử lý để giảm thời gian tính toán chỉ cải thiện được thời gian thực thi tổng thể ở mức hạn chế vì chi phí truyền thông không đổi.
+
+Hình 1. Toàn bộ các lượt đề cập đến chủ đề "FUELPRICES" tại Tây Ban Nha.
+
+\subsection{IV. Kết quả}
+
+\subsubsection{A. Kết quả từ dữ liệu GDELT GKG}
+
+Nhóm tác giả phân tích sắc thái (tone) của các lượt đề cập trong cơ sở dữ liệu GKG. Mọi lượt đề cập đều có chung các đặc điểm: tại một thời điểm có nhắc đến Tây Ban Nha như địa điểm; chủ đề "ENV\_SOLAR" hoặc "FUELPRICES" được phát hiện trong văn bản; và dòng văn bản chứa một trong các từ: "gobierno", "government", "council", "ministers", "ministry", "ministro", "ministerio" (được hiểu là văn bản đề cập đến Chính phủ Tây Ban Nha). GDELT 2.0 và phiên bản GKG mới còn tương đối mới, nên dữ liệu thỏa các điều kiện này chỉ có từ ngày 18/02/2015 đến 28/10/2015. Do đây là dự án được cập nhật liên tục, để khép lại nghiên cứu, bài viết dùng dữ liệu thu được ở lần truy vấn Google BigQuery cuối cùng vào ngày 28/10/2015.
+
+Các hình dưới đây thể hiện trung bình và độ lệch chuẩn của sắc thái các lượt đề cập. Hai nhóm được hiển thị và so sánh: toàn bộ lượt đề cập (không lọc từ khóa hay ngôn ngữ) và chỉ các lượt đề cập về chính phủ. Cột xanh biểu diễn giá trị trung bình của sắc thái, cột đen biểu diễn thanh sai số. Theo Hình 1 và biểu đồ tần suất ở Hình 3, chỉ số trung bình của các lượt đề cập về giá nhiên liệu và năng lượng gần với 0 khi chưa lọc theo chính phủ. Tuy nhiên, khi lọc theo các từ liên quan đến chính phủ, sắc thái tiêu cực xuất hiện rõ hơn nhiều.
+
+Hình 2. Các lượt đề cập đến chủ đề "FUELPRICES" tại Tây Ban Nha, lọc theo từ khóa (đề cập về chính phủ).
+
+Hình 3. Biểu đồ tần suất - Toàn bộ lượt đề cập đến chủ đề "FUELPRICES" tại Tây Ban Nha.
+
+Hình 4. Biểu đồ tần suất - Các lượt đề cập đến chủ đề "FUELPRICES" tại Tây Ban Nha, lọc theo từ khóa (đề cập về chính phủ).
+
+Để dùng dữ liệu này cho các kiểm định, trước hết cần kiểm tra các chỉ số có phân phối chuẩn hay không. Hình 5 và 6 trình bày biểu đồ Q-Q, tức biểu đồ xác suất, là phương pháp đồ thị so sánh hai phân phối xác suất bằng cách vẽ các phân vị của chúng theo nhau. Ở đây, biểu đồ Q-Q được dùng để so sánh dữ liệu với phân phối chuẩn có trung bình và độ lệch chuẩn theo mẫu. Về mặt hình thức, kiểm định Shapiro-Wilk {[}14{]} cho phép bác bỏ tính chuẩn. Ở mọi mẫu dữ liệu, giá trị trung bình gần 0 còn độ lệch chuẩn nằm trong khoảng 0,7 đến 1,7. Phân phối chuẩn đối xứng quanh trung bình, nhưng ở đây không như vậy: theo các hình, có một số giá trị dương cực đoan cân bằng với các giá trị âm xuất hiện thường xuyên hơn, nên sắc thái trung bình gần bằng 0.
+
+Hình 5. Biểu đồ Q-Q - Toàn bộ lượt đề cập đến chủ đề "FUELPRICES" tại Tây Ban Nha.
+
+Hình 6. Biểu đồ Q-Q - Các lượt đề cập đến chủ đề "FUELPRICES" tại Tây Ban Nha, lọc theo từ khóa.
+
+Tiếp theo, nhóm thực hiện bài tập tương tự nhưng lọc trong GDELT một chủ đề khác là môi trường và năng lượng mặt trời (chủ đề "ENV\_SOLAR") và phân tích sắc thái theo cách tương tự. Chỉ số cảm xúc cho thấy một số thông điệp có sắc thái tiêu cực khi không lọc theo các từ liên quan đến chính phủ; tuy nhiên, khi lọc theo các từ này, sắc thái tiêu cực xuất hiện rõ hơn.
+
+Hình 7. Toàn bộ lượt đề cập đến chủ đề "ENV\_SOLAR" tại Tây Ban Nha.
+
+Hình 8. Các lượt đề cập đến chủ đề "ENV\_SOLAR" tại Tây Ban Nha, lọc theo từ khóa (đề cập về chính phủ).
+
+Hình 9. Biểu đồ tần suất - Toàn bộ lượt đề cập đến chủ đề "ENV\_SOLAR" tại Tây Ban Nha.
+
+Hình 10. Biểu đồ tần suất - Các lượt đề cập đến chủ đề "ENV\_SOLAR" tại Tây Ban Nha, lọc theo từ khóa (đề cập về chính phủ).
+
+Hình 11. Biểu đồ Q-Q - Toàn bộ lượt đề cập đến chủ đề "ENV\_SOLAR" tại Tây Ban Nha.
+
+Hình 12. Biểu đồ Q-Q - Các lượt đề cập đến chủ đề "ENV\_SOLAR" tại Tây Ban Nha, lọc theo từ khóa.
+
+Dù biểu đồ cho thấy khác biệt, kiểm định chuẩn Shapiro-Wilk không đưa ra nghi ngờ nào về tính chuẩn. Tuy nhiên, sắc thái trung bình tuy gần 0 nhưng mang dấu âm.
+
+\subsubsection{B. Phân tích tương quan: giá và nhu cầu}
+
+Sắc thái do MeanALLFuel thu thập không khác 0 một cách có ý nghĩa ở các mức chuẩn. Dư luận có thể ảnh hưởng yếu, ở một mức độ nào đó, đến giá nhiên liệu và gián tiếp đến nhu cầu nhiên liệu trong ngắn hạn.
+
+\subsubsection{C. Kết quả của thuật toán CTM}
+
+Phần này trình bày kết quả khi dùng thuật toán CTM để khám phá và tương quan hóa các chủ đề. Cần lưu ý thuật toán chỉ được áp dụng cho văn bản tiếng Tây Ban Nha. Gói R "topicmodels" cho phép hiển thị các đồ thị trong Hình 14. Với chủ đề "FUELPRICES" và văn bản tiếng Tây Ban Nha, cụm Group 1 tương ứng với các thẻ HTML hoặc những từ chưa được loại bỏ đúng cách, hoặc từ tiếng Anh xuất hiện trong các văn bản mà gói R "textcat" đã phân loại là tiếng Tây Ban Nha. Mặt khác, các cụm Group 3 và 6 liên quan đến các từ như (dịch từ tiếng Tây Ban Nha) "sàn chứng khoán", "thị trường", "chính phủ", "thu nhập", "châu Âu", "nhà nước", "quốc hội"..., còn "khí đốt", "giá", "tăng trưởng" và các địa danh Tây Ban Nha như "Madrid" hay "Barcelona" là những từ nằm trong các nhóm còn lại.
+
+Hình 14. Dùng gói R "topicmodels". Chủ đề "FUELPRICES", văn bản tiếng Tây Ban Nha.
+
+Với chủ đề "ENV\_SOLAR" và văn bản tiếng Tây Ban Nha, Nhóm 1 tương tự trường hợp trước. Các Nhóm 5, 12 và 15 gồm những từ như "solar" (mặt trời), "system" (hệ thống), "electricity" (điện), "law" (luật), "change" (thay đổi), "tax" (thuế) và các tháng (viết bằng tiếng Tây Ban Nha).
+
+Fig. 15. Dùng gói R "topicmodels". Chủ đề "ENV\_SOLAR", văn bản tiếng Tây Ban Nha.
+
+Dữ liệu lịch sử về giá điện và nhu cầu điện được lấy từ OMIE {[}15{]}. OMIE vận hành thị trường điện của Tây Ban Nha và Bồ Đào Nha (thị trường MIBEL). Dữ liệu dùng trong giai đoạn từ 18/02/2015 đến 28/10/2015 (tương ứng với dữ liệu GDELT). Mục tiêu là đánh giá xem có tồn tại tương quan nào giữa giá hoặc nhu cầu trên thị trường MIBEL với sắc thái trung bình của dư luận, được đánh giá từ dữ liệu GKG. Với giá và nhu cầu, nhóm tác giả lấy logarit tự nhiên. Các biến trong Fig. 13 được hiểu như sau: MeanALLSolar (chủ đề ENV\_SOLAR của Tây Ban Nha) không bao gồm các đề cập đến Chính phủ Tây Ban Nha, còn MeanGovSolar thì có. MeanALLFuel và MeanGovFuel được hiểu tương tự (với chủ đề FUELPRICES). LogPrices và LogDemand là logarit của giá trị trung bình theo ngày của giá và nhu cầu (tương ứng) từ dữ liệu lịch sử MIBEL trong cùng giai đoạn.
+
+Fig. 13. Kết quả tương quan.
+
+Mô hình CTM cho phép phân loại tài liệu hoặc tin tức trên truyền thông. Nhóm tác giả cũng cho rằng trong tương lai có thể dùng nó để phân tích tương quan sâu hơn. Mục tiêu cuối cùng là dùng kỹ thuật này trong nghiên cứu sau để phân tích nhân quả giữa thông tin thu thập được (các chỉ số xây dựng từ đó) và biến động của các biến then chốt trên thị trường năng lượng.
+
+Có bằng chứng yếu về tương quan giữa LogPrices và sắc thái trung bình của MeanALLFuel. Kiểm định giả thuyết không rằng hệ số (-0,0708) bằng 0 cho giá trị chuẩn là -1,65, khác 0 có ý nghĩa ở mức 9,9\%. Hệ số tương quan âm giữa LogPrices và sắc thái trung bình của MeanGovSolar có p-value là 0,32 khi kiểm định cùng giả thuyết đó.
+
+D. Phân tích tăng tốc (Speedup) và hiệu suất (Efficiency) (khâu lấy văn bản)
+
+Như đã giải thích ở phần phương pháp, việc lấy văn bản từ các URL là giai đoạn tốn nhiều tính toán. Hai hình trình bày so sánh chế độ thực thi tuần tự và song song, tóm tắt hiệu năng theo Speedup và Efficiency dựa trên phương trình (1) và (2). Fig. 16 cho thấy speedup được cải thiện khi dùng mạng các máy trạm. Dù hiệu suất (xét theo mức giảm thời gian thực thi) tăng khi chạy đa nhân, mạng các máy trạm vẫn được ưu tiên hơn.
+
+Fig. 16. So sánh Speedup.
+
+Mã nguồn không đòi hỏi truyền dữ liệu thường xuyên giữa các tiến trình. Vì vậy, khi dùng mạng các máy trạm, chi phí truyền thông không quá lớn và hiệu suất có thể duy trì ở mức ổn định. Ngược lại, với đa nhân, bộ nhớ máy tính phải dùng chung nên ảnh hưởng đến giá trị hiệu suất.
+
+Fig. 17. Phân tích hiệu suất.
+
+Chạy đa nhân có thể giảm thời gian thực thi, tuy nhiên mạng các máy trạm vẫn được ưu tiên.
+
+V. Kết luận và hướng phát triển
+
+Bài báo đã dùng nguồn dữ liệu lớn từ nhiều nơi để phân tích hai vấn đề của thị trường năng lượng. Thứ nhất, phân tích dư luận về chính sách năng lượng của chính phủ Tây Ban Nha bằng GDELT. Thứ hai, phân tích tương quan giữa các biến cảm xúc về chính sách công với giá và nhu cầu thực tế của thị trường năng lượng MIBEL trong cùng giai đoạn. Có hai kết quả đáng nhấn mạnh. Một mặt, phát hiện cảm xúc tiêu cực đối với chính sách năng lượng mặt trời do chính phủ Tây Ban Nha ban hành năm 2015. Mặt khác, tìm thấy tương quan yếu giữa các chỉ số (sắc thái) trong các đề cập từ cơ sở dữ liệu GKG và logarit giá năng lượng trung bình theo ngày. Không tìm thấy tương quan nào với nhu cầu năng lượng trung bình theo ngày.
+
+Còn nhiều hướng mở rộng dùng các cơ sở dữ liệu lớn như trong bài hoặc tương tự. Ở đây chỉ nêu hai khả năng gần với nghiên cứu này. Thứ nhất, mới chỉ xét tiếng Tây Ban Nha và tiếng Anh, trong khi các ngôn ngữ khác có thể quan trọng để xây dựng chỉ số cảm xúc. Thứ hai, mới chỉ trình bày phân tích tương quan giữa các chỉ số với giá và nhu cầu trung bình, nhưng cần một mô hình nhu cầu chính thức có đưa các chỉ số này vào làm biến giải thích để đo chính xác tiềm năng của chúng trong việc giải thích diễn biến của các biến then chốt của thị trường năng lượng.
+
+Lời cảm ơn
+
+Chúng tôi cảm ơn những góp ý rất hữu ích từ một biên tập viên của tạp chí.
+
+References
+
+R. Sullivan, W. Martindale, N. Robins, and Winch H. (2014, November). Principles for Responsible Investment. Policy Frameworks for Long-Term Responsible Investment: The Case for Investor Engagement in Public Policy. Available: http://www.unpri.org/wp-content/uploads/PRI\_Casefor-Investor-Engagement.pdf J. Cochran, et al. (2013, October). Market evolution: Wholesale electricity market design for 21st century power systems. Technical Report. Contract. Available: http://www.nrel.gov/docs/fy14osti/57477.pdf The GDELT Project: Watching Our World Unfold. http://gdeltproject.org/ E. Dumbill, Planning for big data. O'Reilly Media, Inc. 2012. D. J. Gerner, R. Abu-Jabr, P. A. Schrodt, and Ö. Yilmaz. ``Conflict and Mediation Event Observations (CAMEO): A new event data framework for the analysis of foreign policy interactions.'' International Studies Association, New Orleans (2002). R Core Team (2015). R: A language and environment for statistical computing. R Foundation for Statistical Computing, Vienna, Austria. Available: https://www.R-project.org/. D. Blei, and J. Lafferty. ``Correlated topic models.'' Advances in neural information processing systems, vol. 18, pp. 147. 2006. D. Blei, Y. Andrew, and M. I. Jordan. ``Latent dirichlet allocation.'' The Journal of machine Learning research, vol 3, pp. 993-1022. 2003. K. Hornik, and B. Grün. ``topicmodels: An R package for fitting topic models.'' Journal of Statistical Software, vol 40.13, pp: 1-30. 2011. K. Hornik, P. Mair, J. Rauch, W. Geiger, C. Buchta, and I. Feinerer. ``The textcat package for n-gram based text categorization in R.'' Journal of Statistical Software vol 52.6, pp. 1-17. 2013. E. Cantú-Paz, Erick. Designing Efficient and accurate Parallel Genetic Algorithms. Ph.D. Dissertation. University of Illinois at UrbanaChampaign, Champaign, IL, USA. Advisor(s) David E. Goldberg. 1998. L. Tierney, A. J. Rossini, N. Li, H. Sevcikova. (2008). Snow: simple network of workstations. R package version 0.3-3, Available: https:// cran.r-project.org/web/packages/snow/index.html N. Matloff, Parallel Computing for Data Science: With Examples in R, C++ and CUDA. Chapman and Hall/CRC. 2015. S. S. Shapiro, and M. B. Wilk. ``An analysis of variance test for normality (complete samples).'' Biometrika, vol. 52, pp. 591-611. 1965. OMI-Polo Español S.A. (OMIE): Market Results. Available: http://www. omie.es/files/flash/ResultadosMercado.swf
+
+Diego J. Bodas-Sagi là Phó giáo sư tại Đại học Francisco de Vitoria (Trường Bách khoa). Ông có bằng tiến sĩ khoa học máy tính của Đại học Complutense Madrid. Lĩnh vực nghiên cứu gồm Dữ liệu lớn (Big Data), Khoa học dữ liệu, Kinh tế học tính toán, mô hình hóa và y tế điện tử (e-Health). Địa chỉ liên hệ: Universidad Francisco de Vitoria. Carretera Pozuelo a Majadahonda, Km 1.800, 28223 Pozuelo de Alarcón, Madrid (Tây Ban Nha).
+
+José M. Labeaga là Giáo sư Kinh tế tại Đại học Mở ở Madrid, đồng thời là nghiên cứu viên liên kết tại UNU-MERIT (Đại học Maastricht) và Economics for Energy. Ông có bằng thạc sĩ và tiến sĩ kinh tế của Universitat Autónoma de Barcelona, từng giữ chức Tổng giám đốc Viện Nghiên cứu Tài khóa thuộc Chính phủ Tây Ban Nha giai đoạn 2008-2012. Ông nghiên cứu chủ yếu về các mô hình vi kinh tế lượng ứng dụng, mô phỏng vi mô, đánh giá trước (ex-ante) các chương trình cũng như đánh giá sau (ex-post) hay đánh giá tác động của chính sách công trong nhiều lĩnh vực như y tế, năng lượng, thuế. Địa chỉ liên hệ: Universidad Nacional de Educación a Distancia. Departamento de Análisis Económico II. C/ Senda del Rey, 11 28040, Madrid (Tây Ban Nha).

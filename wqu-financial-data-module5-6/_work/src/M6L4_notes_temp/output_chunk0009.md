@@ -1,5 +1,0 @@
-# **7. Các mô hình giả định tuyến tính có thể thất bại do phi tuyến tính, đặc biệt khi có đòn bẩy.**
-
-Ta thường giả định mô hình có tính tuyến tính: tăng đầu vào thì đầu ra tăng theo một mức đã biết. Giả sử tỷ lệ là 1,5. Khi đó, nếu đầu vào tăng gấp đôi thì đầu ra tăng gấp ba. Trong nhiều trường hợp khác, ta lại thấy có nhiều phi tuyến tính. Như đã thấy, tính lồi (convexity) khiến thay đổi nhỏ chỉ tạo kết quả nhỏ, nhưng thay đổi lớn tạo kết quả lớn hơn một cách không tương xứng.
-
-Tương tự, tính phi tuyến từng khúc trong payoff của quyền chọn có thể đưa quyền chọn vào trạng thái có lời (in the money) hoặc không có lời (out of the money). Việc mức tăng đưa bạn sang phía nào của giá thực hiện (strike) là rất quan trọng! Tác động thị trường (market impact) là ví dụ về độ nhạy có thể ban đầu tuyến tính (với lượng giao dịch tương đối nhỏ) rồi trở nên rất phi tuyến với lượng giao dịch lớn hơn. Sai lầm thường là đánh giá thấp nghiêm trọng một chi phí, tổn thất hoặc rủi ro, có thể gây ra khủng hoảng.

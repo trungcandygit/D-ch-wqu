@@ -1,4 +1,0 @@
-### **3.5 Summary of the Basics of Satellite Imagery**
-Let's summarize what we've learned so far. We know that a satellite records reflected energy of different wavelengths based on its band structure from Earth's surface. For each band, the collected data will be stored in a pixel of a matrix of the observation area at a certain time and be created as a digital image of the observation area. Digital images of different bands can be combined for the purposes of research and analysis. Therefore, it is important to know which band or combination of bands provides appropriate images for your research. If your research focuses on identifying objects on Earth's surface, you will also need high-resolution images for this task.
-<br>
-Now we have a basic understanding of satellite imagery. In the next section, we will briefly talk about current trends in using satellite imagery to conduct financial analysis.
