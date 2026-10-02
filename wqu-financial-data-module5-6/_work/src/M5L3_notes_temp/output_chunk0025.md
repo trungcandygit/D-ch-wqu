@@ -1,0 +1,27 @@
+## **4.1. Xem xét hai phương pháp**
+
+Bây giờ, hãy xem xét các phương pháp để quan sát động thái thay đổi của sắc thái (tone) đối với Netflix. Có thể có nhiều cách tiếp cận, nhưng chúng ta sẽ đi sâu vào hai phương pháp đơn giản và rất cơ bản để quan sát động thái thay đổi của sắc thái:
+
+**Phương pháp 1: Lấy trung bình Tone cho từng tệp 15 phút và so sánh các điểm số trung bình**
+
+Phương pháp này ưu tiên quan sát xu hướng cảm xúc tổng thể đối với Netflix theo thời gian bằng cách phân tích điểm Tone trung bình trong các khoảng 15 phút liên tiếp. Sau đây là phân tích chi tiết quy trình:
+
+-   Thu thập và lọc dữ liệu: Quy trình bắt đầu bằng việc thu thập các tệp dữ liệu GDELT GKG liên quan cho giai đoạn mong muốn, thường bao gồm một chuỗi các khoảng 15 phút. Mỗi tệp chứa thông tin về nhiều bài báo và sự kiện được ghi nhận trong khung 15 phút cụ thể đó. Bước tiếp theo là lọc các tệp này để tách riêng các bài báo liên quan cụ thể đến Netflix, bằng cách dùng từ khóa, các lần nhắc đến thực thể hoặc các tiêu chí liên quan khác.
+
+-   Trích xuất và tổng hợp Tone: Sau khi xác định được các bài báo liên quan đến Netflix trong từng tệp, cột "V2Tone" được trích xuất. Cột này chứa một chuỗi giá trị phân tách bằng dấu phẩy, biểu diễn các thành phần cảm xúc khác nhau, bao gồm điểm Tone tổng thể. Chuỗi "V2Tone" sau đó được phân tách để tách riêng giá trị Tone, thường là một điểm số bằng số cho biết cảm xúc được thể hiện trong bài báo. Điểm Tone thường được chuẩn hóa về một khoảng nhất định, chẳng hạn từ -100 đến +100, trong đó giá trị càng cao biểu thị cảm xúc càng tích cực. Với mỗi tệp 15 phút, điểm Tone của tất cả các bài báo liên quan đến Netflix được tổng hợp bằng cách tính trung bình. Điểm Tone trung bình này đại diện cho cảm xúc tổng thể đối với Netflix trong khoảng 15 phút cụ thể đó.
+
+-   Xây dựng và phân tích chuỗi thời gian: Các điểm Tone trung bình, cùng với dấu thời gian tương ứng (thường là thời điểm bắt đầu của mỗi khoảng 15 phút), sau đó được dùng để xây dựng một chuỗi thời gian. Chuỗi thời gian này cho thấy cái nhìn theo trình tự thời gian về việc cảm xúc đối với Netflix đã diễn biến như thế nào trong khoảng thời gian dài. Có thể kiểm tra trực quan chuỗi thời gian để tìm các mẫu hình, xu hướng và những thay đổi đáng kể của cảm xúc. Ngoài ra, có thể áp dụng nhiều kỹ thuật phân tích khác nhau, bao gồm: trung bình trượt, để làm mượt các dao động ngắn hạn và nhận diện các xu hướng dài hạn; phân tích biến động, để định lượng mức độ biến thiên của cảm xúc theo thời gian; và tương quan với các dữ liệu khác, chẳng hạn giá cổ phiếu hoặc các sự kiện tin tức, để khám phá các mối quan hệ tiềm năng.
+
+-   Ưu điểm: Ưu điểm chính của phương pháp này nằm ở sự tập trung rõ ràng vào việc quan sát thay đổi tổng thể của cảm xúc, cũng như tính tương đối đơn giản khi triển khai và diễn giải. Phương pháp này cũng hiệu quả về mặt tính toán, phù hợp với các ứng dụng thời gian thực hoặc các tập dữ liệu lớn. Tuy nhiên, cần lưu ý rằng phương pháp này đánh đổi một phần mức độ chi tiết do lấy trung bình cảm xúc của từng bài báo, và có thể nhạy cảm với các giá trị ngoại lai. Ngoài ra, phương pháp này cung cấp ít hiểu biết về các câu chuyện hay sự kiện tin tức cụ thể làm thay đổi cảm xúc.
+
+**Phương pháp 2: Gộp tất cả các mẫu và phân tích các thành phần Tone của từng bài báo**
+
+Phương pháp này tập trung phân tích cảm xúc được thể hiện trong từng bài báo riêng lẻ và mối quan hệ tiềm năng của nó với các sự kiện hoặc câu chuyện tin tức cụ thể. Phương pháp này cung cấp góc nhìn chi tiết hơn và lấy sự kiện làm trung tâm so với Phương pháp 1. Sau đây là mô tả chi tiết:
+
+-   Hợp nhất dữ liệu và trích xuất Tone: Tất cả các tệp dữ liệu GDELT GKG của giai đoạn mong muốn được gộp thành một tập dữ liệu duy nhất. Tập dữ liệu hợp nhất này bao gồm tất cả các bài báo liên quan đến Netflix và thông tin đi kèm, gồm dấu thời gian, điểm Tone và các đặc trưng liên quan khác. Cột "V2Tone" được trích xuất cho từng bài báo, và điểm Tone được phân tách và tách riêng, tương tự Phương pháp 1.
+
+-   Phân tích cảm xúc ở cấp độ bài báo: Điểm Tone của từng bài báo sau đó được phân tích, có xét đến dấu thời gian và các đặc trưng liên quan khác như chủ đề, các thực thể được nhắc đến hoặc các trích dẫn. Phân tích này nhằm hiểu cảm xúc chi tiết được thể hiện trong từng câu chuyện tin tức cụ thể và cảm xúc đó có thể liên hệ ra sao với bối cảnh hoặc nội dung của bài báo.
+
+-   Phát hiện sự kiện và tương quan: Phương pháp này cho phép xác định các sự kiện hoặc câu chuyện tin tức cụ thể trùng với những thay đổi đáng kể về cảm xúc của từng bài báo. Bằng cách xem xét dấu thời gian của các bài báo có điểm Tone đáng chú ý, các nhà nghiên cứu có thể xác định những nguyên nhân tiềm năng gây ra sự dịch chuyển cảm xúc. Hơn nữa, điểm Tone có thể được đối chiếu tương quan với các nguồn dữ liệu khác, chẳng hạn giá cổ phiếu hoặc cơ sở dữ liệu sự kiện tin tức, để khám phá các mối quan hệ và hiểu tác động của các sự kiện cụ thể lên cảm xúc đối với Netflix.
+
+-   Ưu điểm: Ưu điểm của phương pháp này nằm ở thông tin cảm xúc chi tiết và tiềm năng phân tích sâu hơn, bao gồm khám phá mối quan hệ giữa Tone và các đặc trưng khác của bài báo. Phương pháp này cũng cho phép hiểu tác động của các sự kiện cụ thể lên cảm xúc. Tuy nhiên, cách tiếp cận này có thể đòi hỏi nhiều tính toán hơn và phức tạp hơn, có khả năng làm mất thông tin thời gian rõ ràng vì tập trung vào từng bài báo riêng lẻ thay vì các xu hướng tổng hợp. Việc diễn giải kết quả cũng có thể đòi hỏi nhiều công sức hơn do khối lượng lớn cảm xúc của từng bài báo.
