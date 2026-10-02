@@ -12,3 +12,15 @@ Dịch file markdown sang TIẾNG VIỆT (tuyệt đối không ra tiếng Trung
 11. Phần "neighbor context" chỉ để tham khảo, không dịch, không chép vào output.
 Văn phong: học thuật, tiếng Việt chuẩn, giống sách module 3-4 (ví dụ: "phân tích cảm xúc", "kho ngữ liệu", "nhúng từ", "độ chính xác", "độ bao phủ").
 Ngoài file dịch, ghi thêm output_chunkNNNN.meta.json: {"schema_version":1,"new_entities":[],"alias_hypotheses":[],"attribute_hypotheses":[],"used_term_sources":[],"conflicts":[]} (để mảng rỗng nếu không chắc, KHÔNG có trường chunk_id).
+
+QUY TRÌNH CHO SUBAGENT (mỗi agent đúng một chunk):
+a) Chạy: python3 /root/.claude/skills/translate-book/scripts/glossary.py print-terms-for-chunk <DIR> <chunk>.md  -> bảng thuật ngữ bắt buộc.
+b) Chạy: python3 /root/.claude/skills/translate-book/scripts/chunk_context.py <DIR> <chunk>.md -> ngữ cảnh liền kề (chỉ tham khảo).
+c) Đọc <DIR>/<chunk>.md, DỊCH ĐẦY ĐỦ, SÁT NGUYÊN BẢN sang tiếng Việt (không tóm tắt, không bỏ câu), ghi <DIR>/output_<chunk>.md và <DIR>/output_<chunk>.meta.json.
+d) Với bài đọc trích từ PDF: bỏ đầu trang/chân trang/số trang/ngày in; phần Tài liệu tham khảo (References) giữ nguyên bản gốc không dịch; công thức/bảng vỡ do trích PDF thì dựng lại bằng LaTeX $...$ hoặc bảng markdown. Bỏ video YouTube.
+e) Với lesson note (thư mục *_notes_temp): dịch đầy đủ phần chữ, giữ nguyên code Python, chỉ giữ output có ích; xóa log lỗi/traceback/warning/lỗi đăng nhập hay API.
+f) Chỉ trả lời MỘT dòng khi xong.
+
+LƯU Ý KIỂU DỊCH (ưu tiên hơn mục c): 
+- Thư mục *_notes_temp (lesson note của trường, tài liệu được cấp): dịch đầy đủ.
+- Thư mục *_DT*_temp (bài đọc của bên thứ ba): viết bản tiếng Việt súc tích theo sát cấu trúc nguồn: giữ mọi tiêu đề/mục, định nghĩa, công thức, số liệu, bảng, chú thích hình, kết luận; diễn đạt lại ngắn gọn thay vì dịch từng câu; chỉ trích nguyên văn ngắn khi cần.

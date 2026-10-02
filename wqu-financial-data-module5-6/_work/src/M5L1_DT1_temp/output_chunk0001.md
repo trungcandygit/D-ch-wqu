@@ -1,8 +1,8 @@
 # M5L1_DT1
 
-Ấu trùng được thu thập ngẫu nhiên ngoài thực địa (41°40,339′ N, 2°48,129′ E) bằng phương pháp lặn SCUBA. Có từ 5 đến 10 cá thể non bám thành công trong mỗi một trong 15 hộp polystyrene dung tích 1 l ($n = 15$); đáy hộp được lót một tấm acetate làm giá thể cho bọt biển bám vào. Các hộp sau đó được phân ngẫu nhiên thành 3 nhóm, và bọt biển ở mỗi nhóm được nuôi trong 14 tuần ở 3 nồng độ Si(OH)$_4$ khác nhau: $0{,}741 \pm 0{,}133$, $30{,}235 \pm 0{,}287$ và $100{,}041 \pm 0{,}760$ µM (trung bình $\pm$ sai số chuẩn). Mọi môi trường nuôi đều được chuẩn bị bằng nước biển lọc qua màng polycarbonate 0,22 µm, lấy từ chính môi trường sống của bọt biển, xử lý theo phương pháp chuẩn để tránh nhiễm Si^29 và, khi thí nghiệm yêu cầu, được làm giàu silica hòa tan bằng Na$_2$SiF$_6$. Trong suốt thí nghiệm, bọt biển được cho ăn hằng tuần bằng 2 ml dịch nuôi cấy vi khuẩn (40–60 $\times 10^6$ vi khuẩn ml$^{-1}$) cho mỗi hộp^30. Nước biển được thay hằng tuần, đồng thời khôi phục lượng thức ăn và Si(OH)$_4$ ban đầu. Nồng độ Si(OH)$_4$ trong môi trường nuôi được xác định trên 3 mẫu lặp, mỗi mẫu 1 ml nước biển, lấy từ mỗi hộp, bằng máy phân tích dinh dưỡng tự động Bran-Luebbe TRAACS 2000. Sau tuần thứ 5, một số hộp nuôi bị tảo cát nhiễm ngẫu nhiên, khiến các ước tính lượng Si bọt biển hấp thu về sau không đáng tin cậy, nên các dữ liệu này bị loại khỏi nghiên cứu.
+ấu trùng được thu thập ngẫu nhiên ngoài thực địa (28 48.129 N, 418 40.339 E) bằng thiết bị lặn SCUBA. Từ 5 đến 10 cá thể non được nuôi cấy thành công trong mỗi bình trong số 15 bình polystyrene dung tích 1 l (n ¼ 15), đáy bình được phủ một tấm acetate làm giá bám cho bọt biển. Các bình sau đó được phân ngẫu nhiên thành 3 nhóm, và bọt biển ở mỗi nhóm được nuôi trong 14 tuần ở 3 nồng độ Si(OH)4 khác nhau: 0:741 6 0:133, 30:235 6 0:287 và 100:041 6 0:760 mM (trung bình 6 s:e:). Mọi môi trường nuôi đều được chuẩn bị bằng nước biển lọc qua màng polycarbonate 0,22 mm, lấy từ môi trường sống của bọt biển, xử lý theo phương pháp tiêu chuẩn để tránh nhiễm Si29 và khi thí nghiệm yêu cầu thì được làm giàu silica hòa tan bằng Na2SiF6. Trong suốt thí nghiệm, mọi cá thể bọt biển được cho ăn hằng tuần bằng cách thêm 2 ml dịch nuôi vi khuẩn (40–60 3 106 vi khuẩn ml 2 1) vào mỗi bình30. Nước biển được thay hằng tuần, đồng thời khôi phục mức thức ăn và Si(OH)4 ban đầu. Nồng độ Si(OH)4 trong môi trường nuôi được xác định trên 3 mẫu lặp, mỗi mẫu 1 ml nước biển cho mỗi bình, bằng máy phân tích dinh dưỡng tự động BranLuebbe TRAACS 2000. Sau tuần thứ 5, việc một số bình nuôi bị tảo cát nhiễm tạp ngẫu nhiên khiến các ước tính hấp thụ Si của bọt biển về sau không đáng tin cậy, nên chúng tôi loại các số liệu này khỏi nghiên cứu.
 
-Để nghiên cứu bộ xương, bọt biển được xử lý theo phương pháp chuẩn^30 và quan sát bằng kính hiển vi điện tử quét (SEM) Hitachi S-2300.
+Để nghiên cứu bộ xương, các mẫu bọt biển được xử lý theo phương pháp tiêu chuẩn30 và quan sát dưới kính hiển vi điện tử quét (SEM) Hitachi S-2300.
 
 Nhận bài ngày 21 tháng 4; chấp nhận đăng ngày 16 tháng 8 năm 1999.
 
@@ -61,6 +61,6 @@ Pol. 57, 1–216 (1997).
 
 Lời cảm ơn
 
-Các tác giả cảm ơn S. Pla đã hỗ trợ phân tích dinh dưỡng, các kỹ thuật viên của Servicio de Microscopia đã hỗ trợ SEM, cùng E. Ballesteros, C. M. Young, A. Pisera và R. Rycroft đã góp ý cho bản thảo.
+Chúng tôi cảm ơn S. Pla đã hỗ trợ phân tích dinh dưỡng, các kỹ thuật viên của Servicio de Microscopia đã hỗ trợ SEM, và E. Ballesteros, C. M. Young, A. Pisera và R. Rycroft đã góp ý cho bản thảo.
 
 Thư từ và yêu cầu cung cấp tài liệu xin gửi đến M.M. (e-mail: maldonado@ceab.csic.es).
