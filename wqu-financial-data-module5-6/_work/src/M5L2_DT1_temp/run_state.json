@@ -71,10 +71,10 @@
       ],
       "glossary_version_used": "31cad97c1d81a57449bf98f52bff23d4bab8edcba26835941dd9443d637ad389",
       "output_file": "output_chunk0001.md",
-      "output_hash": "c5093621179fec287622a7fb4ba6f431327ef37bef728027d4e449a10632ed32",
+      "output_hash": "262441534e779ea0470cb792a4cc153d90be5f584af6531fab2b558ba45619fb",
       "source_file": "chunk0001.md",
       "source_hash": "efd6964c249209ac2c062ba6861f5d16f145b934ddeaca1b8e2b3bffcbdb4e22",
-      "updated_at": "2026-10-02T03:29:46+00:00"
+      "updated_at": "2026-10-02T08:15:28+00:00"
     },
     "chunk0002": {
       "entity_hashes_used": {
@@ -147,10 +147,10 @@
       ],
       "glossary_version_used": "31cad97c1d81a57449bf98f52bff23d4bab8edcba26835941dd9443d637ad389",
       "output_file": "output_chunk0002.md",
-      "output_hash": "2fb2b7a990bf61401d7925372fd0bc7a57de56620036c8e31943c908a1b34570",
+      "output_hash": "a6962444f9f13ce28678a6cc5f0ba8a833c5c0bf4dad5fd126b8e144b099c650",
       "source_file": "chunk0002.md",
       "source_hash": "a7ccf31abe75c0eeafca169edfaf52356336dda3fc2e918ba1377ad454b61a29",
-      "updated_at": "2026-10-02T03:29:46+00:00"
+      "updated_at": "2026-10-02T08:15:28+00:00"
     },
     "chunk0003": {
       "entity_hashes_used": {
@@ -223,10 +223,10 @@
       ],
       "glossary_version_used": "31cad97c1d81a57449bf98f52bff23d4bab8edcba26835941dd9443d637ad389",
       "output_file": "output_chunk0003.md",
-      "output_hash": "471e71ab3e6ead7cce95779a3c84e5d74972d6bbc6d2c19c2c59c442342ba2ea",
+      "output_hash": "7cc024b6b695a79e2a33385d7d10b715a595daa0d8e559f78d831580f479220e",
       "source_file": "chunk0003.md",
       "source_hash": "869f6573bc58185e6bd1c685f43611d856eb88780fd32ada5a47b0934df6829c",
-      "updated_at": "2026-10-02T03:29:46+00:00"
+      "updated_at": "2026-10-02T08:15:28+00:00"
     },
     "chunk0004": {
       "entity_hashes_used": {
@@ -295,10 +295,10 @@
       ],
       "glossary_version_used": "31cad97c1d81a57449bf98f52bff23d4bab8edcba26835941dd9443d637ad389",
       "output_file": "output_chunk0004.md",
-      "output_hash": "af28eb97d3d3e31a20708e4678a4dcd5de891af144f4b5bf348fc969a8602229",
+      "output_hash": "47c8b77875f865f68b602580a0110e78bbdb99d47bb882eb8256a9aa5e251d02",
       "source_file": "chunk0004.md",
       "source_hash": "9cfcb83bc48742e04f3dbf20fa602f7db64e65e1dea493e32b7c0a89b09b3261",
-      "updated_at": "2026-10-02T03:29:46+00:00"
+      "updated_at": "2026-10-02T08:15:28+00:00"
     },
     "chunk0005": {
       "entity_hashes_used": {
@@ -371,10 +371,10 @@
       ],
       "glossary_version_used": "31cad97c1d81a57449bf98f52bff23d4bab8edcba26835941dd9443d637ad389",
       "output_file": "output_chunk0005.md",
-      "output_hash": "50e88f9de2103c2ac3dda05d04462dbe212c45ad7e91cf881e9b11e7c483346b",
+      "output_hash": "49ddce0f3508df72eb8bcd6aa36e556df6656da9ef29214ea62b50b52b0c57c3",
       "source_file": "chunk0005.md",
       "source_hash": "9b7fe0709b61c44be26b9f1923b7e5c4a2fa71af379a02139b8e6fdabb15881d",
-      "updated_at": "2026-10-02T03:29:46+00:00"
+      "updated_at": "2026-10-02T08:15:28+00:00"
     },
     "chunk0006": {
       "entity_hashes_used": {
@@ -445,10 +445,10 @@
       ],
       "glossary_version_used": "31cad97c1d81a57449bf98f52bff23d4bab8edcba26835941dd9443d637ad389",
       "output_file": "output_chunk0006.md",
-      "output_hash": "7e630c5c81c795f322b2f9e4b4da5c743071630026c15ac8f59eee6cb51039d7",
+      "output_hash": "b1f3c62576b5738f043928be60391b95a60531917b56f26dfcbad85be6762c8a",
       "source_file": "chunk0006.md",
       "source_hash": "8039f7a28da171c4b5ca87692143cfa0973c192aaff6a5b5085e74fe544238cf",
-      "updated_at": "2026-10-02T03:29:46+00:00"
+      "updated_at": "2026-10-02T08:15:28+00:00"
     },
     "chunk0007": {
       "entity_hashes_used": {
@@ -515,10 +515,10 @@
       ],
       "glossary_version_used": "31cad97c1d81a57449bf98f52bff23d4bab8edcba26835941dd9443d637ad389",
       "output_file": "output_chunk0007.md",
-      "output_hash": "70919cd225b22b00549bbf8319232dabfae7c901b04fbdfcc7d44831802df5d4",
+      "output_hash": "ed98979543e507623b123c5eb07bcfb5bbc3d08b0ba29ce998330a88e2f6ef66",
       "source_file": "chunk0007.md",
       "source_hash": "6fed5cf38e839d2833d4c477007a1c3473f443e110b2448f7686d24b13c07b47",
-      "updated_at": "2026-10-02T03:29:46+00:00"
+      "updated_at": "2026-10-02T08:15:28+00:00"
     },
     "chunk0008": {
       "entity_hashes_used": {
@@ -587,12 +587,12 @@
         "GWR",
         "GeoJSON"
       ],
-      "glossary_version_used": "f5731ce4a6bfda52aa15b95018cc70f4285aa5c512dcfce70d7493920b1c45f1",
+      "glossary_version_used": "31cad97c1d81a57449bf98f52bff23d4bab8edcba26835941dd9443d637ad389",
       "output_file": "output_chunk0008.md",
-      "output_hash": "674a84a5dcf6f637d8f2702ab952a2f05a73356cf7585f94c715f89522e4afee",
+      "output_hash": "fe063734fb9fce7501361999056c9d73b8f36c93e620dd948c6b71863987050b",
       "source_file": "chunk0008.md",
       "source_hash": "96197231871cb025039deeb59e24a1726e24d10bf183e88f29c0a40597deac38",
-      "updated_at": "2026-10-02T03:23:42+00:00"
+      "updated_at": "2026-10-02T08:15:28+00:00"
     },
     "chunk0009": {
       "entity_hashes_used": {
@@ -719,12 +719,12 @@
         "validation set",
         "loss function"
       ],
-      "glossary_version_used": "f5731ce4a6bfda52aa15b95018cc70f4285aa5c512dcfce70d7493920b1c45f1",
+      "glossary_version_used": "31cad97c1d81a57449bf98f52bff23d4bab8edcba26835941dd9443d637ad389",
       "output_file": "output_chunk0010.md",
-      "output_hash": "03208c7633514faffff30c5ff46e6d07808df833b01afd3cfce6e8d36f524bc1",
+      "output_hash": "462965d25b43373ece90cbf95a31c42aa09bdb2ef624d31e675e85e58cabddfa",
       "source_file": "chunk0010.md",
       "source_hash": "d0ff54e639d6351c2131c294b13d078289f0f8b1db3d97bb440aebdffd7a437f",
-      "updated_at": "2026-10-02T03:23:42+00:00"
+      "updated_at": "2026-10-02T08:15:28+00:00"
     }
   },
   "version": 1
