@@ -1,0 +1,1 @@
+wave14 DT outputs may be faithful; delete *_DT*_temp outputs after wave and redo condensed

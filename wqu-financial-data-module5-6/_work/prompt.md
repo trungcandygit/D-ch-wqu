@@ -23,4 +23,4 @@ f) Chỉ trả lời MỘT dòng khi xong.
 
 KIỂU DỊCH:
 - Thư mục *_notes_temp (lesson note của trường, tài liệu được cấp): dịch đầy đủ phần chữ.
-- Thư mục *_DT*_temp (bài đọc của bên thứ ba): viết bản tiếng Việt súc tích bám sát cấu trúc nguồn: giữ mọi tiêu đề/mục, định nghĩa, công thức, số liệu, bảng, chú thích hình, kết luận; diễn đạt lại ngắn gọn thay vì dịch từng câu; chỉ trích nguyên văn ngắn khi cần.
+- Thư mục *_DT*_temp (bài đọc của bên thứ ba): viết bản tiếng Việt súc tích bám sát cấu trúc nguồn: giữ mọi tiêu đề/mục, định nghĩa, công thức, số liệu, bảng, chú thích hình, kết luận; diễn đạt lại ngắn gọn thay vì dịch từng câu; chỉ trích nguyên văn ngắn khi cần. Phần Tài liệu tham khảo giữ nguyên.

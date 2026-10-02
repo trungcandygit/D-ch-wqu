@@ -69,12 +69,12 @@
         "GeoJSON",
         "Landsat"
       ],
-      "glossary_version_used": "f5731ce4a6bfda52aa15b95018cc70f4285aa5c512dcfce70d7493920b1c45f1",
+      "glossary_version_used": "31cad97c1d81a57449bf98f52bff23d4bab8edcba26835941dd9443d637ad389",
       "output_file": "output_chunk0001.md",
-      "output_hash": "3bd86dda4f86ae39acb077a32808b281ced75bd4020e5c3022238434e18954c7",
+      "output_hash": "c5093621179fec287622a7fb4ba6f431327ef37bef728027d4e449a10632ed32",
       "source_file": "chunk0001.md",
       "source_hash": "efd6964c249209ac2c062ba6861f5d16f145b934ddeaca1b8e2b3bffcbdb4e22",
-      "updated_at": "2026-10-02T03:23:41+00:00"
+      "updated_at": "2026-10-02T03:29:46+00:00"
     },
     "chunk0002": {
       "entity_hashes_used": {
@@ -145,12 +145,12 @@
         "GeoJSON",
         "Landsat"
       ],
-      "glossary_version_used": "f5731ce4a6bfda52aa15b95018cc70f4285aa5c512dcfce70d7493920b1c45f1",
+      "glossary_version_used": "31cad97c1d81a57449bf98f52bff23d4bab8edcba26835941dd9443d637ad389",
       "output_file": "output_chunk0002.md",
-      "output_hash": "01f7ec58c194f83b3a7c84e5b7175901628ad5dce51d79c2bf894442191fba01",
+      "output_hash": "2fb2b7a990bf61401d7925372fd0bc7a57de56620036c8e31943c908a1b34570",
       "source_file": "chunk0002.md",
       "source_hash": "a7ccf31abe75c0eeafca169edfaf52356336dda3fc2e918ba1377ad454b61a29",
-      "updated_at": "2026-10-02T03:23:41+00:00"
+      "updated_at": "2026-10-02T03:29:46+00:00"
     },
     "chunk0003": {
       "entity_hashes_used": {
@@ -221,12 +221,12 @@
         "GeoJSON",
         "Landsat"
       ],
-      "glossary_version_used": "f5731ce4a6bfda52aa15b95018cc70f4285aa5c512dcfce70d7493920b1c45f1",
+      "glossary_version_used": "31cad97c1d81a57449bf98f52bff23d4bab8edcba26835941dd9443d637ad389",
       "output_file": "output_chunk0003.md",
-      "output_hash": "d46fed9aa5346be24fa9986ae9b496195d8aa3c730d6378bc50676ba196f5042",
+      "output_hash": "471e71ab3e6ead7cce95779a3c84e5d74972d6bbc6d2c19c2c59c442342ba2ea",
       "source_file": "chunk0003.md",
       "source_hash": "869f6573bc58185e6bd1c685f43611d856eb88780fd32ada5a47b0934df6829c",
-      "updated_at": "2026-10-02T03:23:41+00:00"
+      "updated_at": "2026-10-02T03:29:46+00:00"
     },
     "chunk0004": {
       "entity_hashes_used": {
@@ -293,12 +293,12 @@
         "GIS",
         "GWR"
       ],
-      "glossary_version_used": "f5731ce4a6bfda52aa15b95018cc70f4285aa5c512dcfce70d7493920b1c45f1",
+      "glossary_version_used": "31cad97c1d81a57449bf98f52bff23d4bab8edcba26835941dd9443d637ad389",
       "output_file": "output_chunk0004.md",
-      "output_hash": "a08cd2374b0b08b8930da9ac9410719073e795cc5ba37b34a291a8be19a9d204",
+      "output_hash": "af28eb97d3d3e31a20708e4678a4dcd5de891af144f4b5bf348fc969a8602229",
       "source_file": "chunk0004.md",
       "source_hash": "9cfcb83bc48742e04f3dbf20fa602f7db64e65e1dea493e32b7c0a89b09b3261",
-      "updated_at": "2026-10-02T03:23:41+00:00"
+      "updated_at": "2026-10-02T03:29:46+00:00"
     },
     "chunk0005": {
       "entity_hashes_used": {
@@ -369,12 +369,12 @@
         "GeoJSON",
         "Landsat"
       ],
-      "glossary_version_used": "f5731ce4a6bfda52aa15b95018cc70f4285aa5c512dcfce70d7493920b1c45f1",
+      "glossary_version_used": "31cad97c1d81a57449bf98f52bff23d4bab8edcba26835941dd9443d637ad389",
       "output_file": "output_chunk0005.md",
-      "output_hash": "2358f394e5d184109212dd3fe2c74c9a26b1d877ad4a9645295b0078cb765666",
+      "output_hash": "50e88f9de2103c2ac3dda05d04462dbe212c45ad7e91cf881e9b11e7c483346b",
       "source_file": "chunk0005.md",
       "source_hash": "9b7fe0709b61c44be26b9f1923b7e5c4a2fa71af379a02139b8e6fdabb15881d",
-      "updated_at": "2026-10-02T03:23:41+00:00"
+      "updated_at": "2026-10-02T03:29:46+00:00"
     },
     "chunk0006": {
       "entity_hashes_used": {
@@ -443,12 +443,12 @@
         "GWR",
         "GeoJSON"
       ],
-      "glossary_version_used": "f5731ce4a6bfda52aa15b95018cc70f4285aa5c512dcfce70d7493920b1c45f1",
+      "glossary_version_used": "31cad97c1d81a57449bf98f52bff23d4bab8edcba26835941dd9443d637ad389",
       "output_file": "output_chunk0006.md",
-      "output_hash": "a617d6cbd2dfa9616789890df57f010fe0dc816f8d8b87d27121cbefde2ece7f",
+      "output_hash": "7e630c5c81c795f322b2f9e4b4da5c743071630026c15ac8f59eee6cb51039d7",
       "source_file": "chunk0006.md",
       "source_hash": "8039f7a28da171c4b5ca87692143cfa0973c192aaff6a5b5085e74fe544238cf",
-      "updated_at": "2026-10-02T03:23:42+00:00"
+      "updated_at": "2026-10-02T03:29:46+00:00"
     },
     "chunk0007": {
       "entity_hashes_used": {
@@ -513,12 +513,12 @@
         "GDELT",
         "GIS"
       ],
-      "glossary_version_used": "f5731ce4a6bfda52aa15b95018cc70f4285aa5c512dcfce70d7493920b1c45f1",
+      "glossary_version_used": "31cad97c1d81a57449bf98f52bff23d4bab8edcba26835941dd9443d637ad389",
       "output_file": "output_chunk0007.md",
-      "output_hash": "96551300827d95c007498d21968c39cf10fb7ca3a6d879dd857b8a17ee9f8626",
+      "output_hash": "70919cd225b22b00549bbf8319232dabfae7c901b04fbdfcc7d44831802df5d4",
       "source_file": "chunk0007.md",
       "source_hash": "6fed5cf38e839d2833d4c477007a1c3473f443e110b2448f7686d24b13c07b47",
-      "updated_at": "2026-10-02T03:23:42+00:00"
+      "updated_at": "2026-10-02T03:29:46+00:00"
     },
     "chunk0008": {
       "entity_hashes_used": {
