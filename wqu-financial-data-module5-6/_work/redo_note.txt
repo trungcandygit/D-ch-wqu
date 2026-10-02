@@ -1,1 +1,1 @@
-wave11 DT outputs are faithful -> delete after wave, redo condensed
+after wave 11 finishes: delete *_DT*_temp outputs and redo condensed; then continue
