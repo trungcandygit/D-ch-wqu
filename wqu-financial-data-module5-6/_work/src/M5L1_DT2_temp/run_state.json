@@ -54,7 +54,7 @@
       "output_hash": "b010fcc0695fef83daba4f115ffb99d399fbb2daba33dc2e5ed90548e26e9edc",
       "source_file": "chunk0001.md",
       "source_hash": "076f52fe1998ba326959279b60e6b1e818383b19735c96b2c55593b0394bc198",
-      "updated_at": "2026-10-02T03:21:30+00:00"
+      "updated_at": "2026-10-02T03:22:06+00:00"
     },
     "chunk0002": {
       "entity_hashes_used": {
@@ -114,7 +114,65 @@
       "output_hash": "cbce5787bb43dd590662d1c57c2a1f868b52ad1157dc5f0b03ecf26f596a1c32",
       "source_file": "chunk0002.md",
       "source_hash": "e46013cc1ad717f3319a69ad6c06a7a316c47a14610149021270af2e7e9e864e",
-      "updated_at": "2026-10-02T03:21:30+00:00"
+      "updated_at": "2026-10-02T03:22:06+00:00"
+    },
+    "chunk0003": {
+      "entity_hashes_used": {
+        "BERT": "8d3b9a3c37e1174506f0876ac25d29a011b8a11e3c4908d0827116c8b651f183",
+        "FinBERT": "808faa138a66082c9f677138c6e99e48a5b4cebec19ac8540d1a98a4efea67b5",
+        "GDELT": "a01e166a1724b08a4661d4436f819146ff4b30d264e7f5a7a8d001019a3d4836",
+        "GIS": "e7c221c32bb4ab0b0f134196fbebf89b24f576f64a616e9be335b72cc505cba4",
+        "GWR": "52d581b2e9feaaac8f6ccd407f16b418177fa5328c385b8f10e6b0cf7599f64c",
+        "GeoJSON": "8c9ee6218f0d5a5855ec4709110cd59fff9fe147e17b584f9a2e999fefab6429",
+        "Landsat": "e11ff004fdaf9a3424065ed905c21212b917b70d31a7363cadb6053df098bfc5",
+        "NMF": "05e2e1b06c574f43d77a56002e1f5af7fabbe1842f1a649a0159de9cd3a3447c",
+        "O-ring": "3e04e7ee0e0c32e9207998ebac25e23aa83aa6360693ecec3940047510c3d548",
+        "alternative data": "c3b99d64e1255e33353b91723ef8df58d613a4b97bdd4f7512eb85f04a332c23",
+        "backtesting": "f354857414406f5c999164e662e4b925d062fe28fd7a114e4f0d6428d60b3bf7",
+        "bandwidth": "a4ee02a933978d5d17dbb0774d7dd17f2eaa3c3bdc05ce17473e6dc78ede4025",
+        "benchmark": "be7db379fef3a7d8abcbd11543493cc6f56e20e589991b5a41faa75c6c56765f",
+        "bias": "1003145154806b84864fa92d53c934976c0b71d91f5e6cff4c3d68cf0b4853c6",
+        "bond spread": "d284a8825603af074288e3225e93f2e807306f9f7fc3c1b1b848d889075526c4",
+        "classifier": "ba7f969099e990be353305db9d4b88cef14562b4fbed683c484e1611e09171d9",
+        "coefficient": "fdad36609a92d3ae6233345801d399bb6bdd62dda837cf939a87296ee7a3fe77",
+        "coordinate reference system": "199d2bde97a14cede108e50fae7bf6abe6fd88f45d15c4810f6778abfd67237a",
+        "corpus": "1b2196b8c8420ab671d3b422dd0aa5d5c3bc0616f06c7dacd9bc74239cb619a5",
+        "cost function": "ca238b67cb35b65d8b7668e8a494883d4a228cf083c108340456216ec1b1bc5c",
+        "matrix": "bf95a9d7f8a0f16ab280b1603bcb55bda4f4ef434f52ebe40bb67c8f75c88b32",
+        "non-negative matrix factorization": "e36f407ccdf688a97e4b173179fef6dcb3c452d94f0e5210b1bc0940dee37f67",
+        "topic": "34c5f877fcf26e110c4b8fa5bcb67786b347eb40b4ce85d8eb7f399edefcfa16"
+      },
+      "entity_ids_used": [
+        "matrix",
+        "NMF",
+        "non-negative matrix factorization",
+        "topic",
+        "BERT",
+        "FinBERT",
+        "GDELT",
+        "GIS",
+        "GWR",
+        "GeoJSON",
+        "Landsat",
+        "O-ring",
+        "alternative data",
+        "backtesting",
+        "bandwidth",
+        "benchmark",
+        "bias",
+        "bond spread",
+        "classifier",
+        "coefficient",
+        "coordinate reference system",
+        "corpus",
+        "cost function"
+      ],
+      "glossary_version_used": "d91d7c8e1e4066c1ed12509020d64f90e3b48586e6cc8e5b56dca0dd7b21e0ea",
+      "output_file": "output_chunk0003.md",
+      "output_hash": "bda75b2c6f0021b5754121793cca078132b51730b7362c099730328bea2d805d",
+      "source_file": "chunk0003.md",
+      "source_hash": "500c8d344f14ea4b82d08c21d7a53ce79c692d1b6d4e9dab5ecfd2b29b055416",
+      "updated_at": "2026-10-02T03:22:06+00:00"
     }
   },
   "version": 1
