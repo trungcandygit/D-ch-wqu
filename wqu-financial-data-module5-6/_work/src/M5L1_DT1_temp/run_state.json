@@ -45,12 +45,12 @@
         "backtesting",
         "bandwidth"
       ],
-      "glossary_version_used": "bbbcb0a955f9b902346638b55cf970c479e8d697a7ea3845189369be5ee20988",
+      "glossary_version_used": "5a6ed70219d32db30a927ff36a75d37a5bbe12bbc09633b030d8e26dc7d4c91a",
       "output_file": "output_chunk0001.md",
-      "output_hash": "6a8cca7bbe989412d93ab62ea47c81aca406cd6944444c04a9360c7efd8257a8",
+      "output_hash": "ee922b8fdfa8dc89d521419c57fbc99d0c2aab821cbd55c8c322b340e4007731",
       "source_file": "chunk0001.md",
       "source_hash": "5b6f97234e507bd60dde9ef2a64524472d244b56d8f423c2ad94fb6108a718d6",
-      "updated_at": "2026-10-02T03:17:32+00:00"
+      "updated_at": "2026-10-02T03:19:57+00:00"
     },
     "chunk0002": {
       "entity_hashes_used": {
@@ -105,12 +105,12 @@
         "bond spread",
         "classifier"
       ],
-      "glossary_version_used": "bbbcb0a955f9b902346638b55cf970c479e8d697a7ea3845189369be5ee20988",
+      "glossary_version_used": "5a6ed70219d32db30a927ff36a75d37a5bbe12bbc09633b030d8e26dc7d4c91a",
       "output_file": "output_chunk0002.md",
-      "output_hash": "f9154f6e60b4a6919de312711593390b3e55a57bca672fa4f9daeb44f8e1fe19",
+      "output_hash": "8f70f9c6133b7e5d3a7a5381c9c68379932a8b53a6e460513a7c747855d4c68d",
       "source_file": "chunk0002.md",
       "source_hash": "08ddc656c219c79dd30f1a0cc4de3566009af0c79a04f1cf6edfa09c82f9e53b",
-      "updated_at": "2026-10-02T03:17:32+00:00"
+      "updated_at": "2026-10-02T03:19:57+00:00"
     },
     "chunk0003": {
       "entity_hashes_used": {
@@ -169,12 +169,12 @@
         "coefficient",
         "coordinate reference system"
       ],
-      "glossary_version_used": "bbbcb0a955f9b902346638b55cf970c479e8d697a7ea3845189369be5ee20988",
+      "glossary_version_used": "5a6ed70219d32db30a927ff36a75d37a5bbe12bbc09633b030d8e26dc7d4c91a",
       "output_file": "output_chunk0003.md",
-      "output_hash": "880ae5829735bf5c9b5f96e93ad3d0bf6bc5710b2b1519c8948b12fba892c552",
+      "output_hash": "bd5cf54399049458112579547fc1a10321db06cadf3eb0219feef63165e79842",
       "source_file": "chunk0003.md",
       "source_hash": "749683125d57670ace90186112bb6f7914d08112124a0f5905d1c3c39e342b6a",
-      "updated_at": "2026-10-02T03:17:32+00:00"
+      "updated_at": "2026-10-02T03:19:57+00:00"
     },
     "chunk0004": {
       "entity_hashes_used": {
@@ -233,12 +233,12 @@
         "coefficient",
         "coordinate reference system"
       ],
-      "glossary_version_used": "bbbcb0a955f9b902346638b55cf970c479e8d697a7ea3845189369be5ee20988",
+      "glossary_version_used": "5a6ed70219d32db30a927ff36a75d37a5bbe12bbc09633b030d8e26dc7d4c91a",
       "output_file": "output_chunk0004.md",
-      "output_hash": "a45248970f8e286dd2ad3cf699190859167dd183923b3255d8912aa41ec69d8c",
+      "output_hash": "06e37e120f7f00e00f992d721818ca6260b7fdcafc4b7ae1fcbca0b755191ab1",
       "source_file": "chunk0004.md",
       "source_hash": "7783b65ffdf571b34b05a837f2237cb02abf943423c4cd5a4ca00734f92aa672",
-      "updated_at": "2026-10-02T03:17:32+00:00"
+      "updated_at": "2026-10-02T03:19:57+00:00"
     },
     "chunk0005": {
       "entity_hashes_used": {
@@ -293,12 +293,12 @@
         "bond spread",
         "classifier"
       ],
-      "glossary_version_used": "bbbcb0a955f9b902346638b55cf970c479e8d697a7ea3845189369be5ee20988",
+      "glossary_version_used": "5a6ed70219d32db30a927ff36a75d37a5bbe12bbc09633b030d8e26dc7d4c91a",
       "output_file": "output_chunk0005.md",
-      "output_hash": "622fc75df98c64054b5165a8c01754c42324550591217aa7f16694d1dffaa39b",
+      "output_hash": "20afbb0b4615ab73eb38c9a0c214a8c7d760c4279d42b0a40e250b58cf11b03b",
       "source_file": "chunk0005.md",
       "source_hash": "583be0e67ab27d4ee291ed5bb1a02dce3ebb40a97128e8319c6397b863c35303",
-      "updated_at": "2026-10-02T03:17:32+00:00"
+      "updated_at": "2026-10-02T03:19:57+00:00"
     },
     "chunk0006": {
       "entity_hashes_used": {
@@ -349,12 +349,12 @@
         "benchmark",
         "bias"
       ],
-      "glossary_version_used": "bbbcb0a955f9b902346638b55cf970c479e8d697a7ea3845189369be5ee20988",
+      "glossary_version_used": "5a6ed70219d32db30a927ff36a75d37a5bbe12bbc09633b030d8e26dc7d4c91a",
       "output_file": "output_chunk0006.md",
-      "output_hash": "055c30be770b80013ae663f54259114be760a5bc047b9922767b8eabccc5ed27",
+      "output_hash": "dc42be553cd9debd953be46933e220835b95eafe53ae8b585763b66da62f6cf2",
       "source_file": "chunk0006.md",
       "source_hash": "5a31f6293891a2d7e56f5a4bac59a8b4aa82c9c136c5f792e3c386185b557aaa",
-      "updated_at": "2026-10-02T03:17:32+00:00"
+      "updated_at": "2026-10-02T03:19:57+00:00"
     }
   },
   "version": 1

@@ -1,0 +1,9 @@
+## **4. Cơ bản về phân rã ma trận không âm (NMF)**
+
+Nói ngắn gọn, NMF là việc tìm một cách biểu diễn đơn giản hơn của dữ liệu bằng cách tách nó thành hai phần nắm bắt các đặc trưng thiết yếu và mức độ quan trọng của chúng. NMF có ứng dụng trong nhiều lĩnh vực, bao gồm xử lý ảnh, phân tích văn bản và tin sinh học. Việc triển khai bao gồm các bước sau:
+
+-   **Khởi tạo:** Bắt đầu với một ma trận không âm, thường được ký hiệu là \$V\$, biểu diễn dữ liệu. Đây là ma trận chứa thông tin về người dùng, sản phẩm hoặc bất kỳ loại dữ liệu nào khác.
+-   **Phân rã:** Cốt lõi của NMF là tìm hai ma trận không âm, thường được gọi là \$W\$ và \$H\$, sao cho tích của \$W\$ và \$H\$ xấp xỉ sát ma trận gốc \$V\$, tức là \$V \\approx WH\$. Nói đơn giản hơn, chúng ta đang cố gắng tách dữ liệu gốc thành hai phần mà khi kết hợp lại sẽ giống với dữ liệu ban đầu.
+-   **Lặp:** Các thuật toán NMF sử dụng các quy trình lặp để tinh chỉnh \$W\$ và \$H\$, nhằm cực tiểu hóa sự chênh lệch giữa tích \$W H\$ và ma trận gốc \$V\$. Các vòng lặp này cập nhật \$W\$ và \$H\$ nhiều lần cho đến khi đạt được mức độ chính xác thỏa đáng. Quy trình này thường dựa trên hạ gradient (gradient descent) hoặc các phép cập nhật nhân tính.
+-   **Hội tụ:** Quá trình lặp tiếp tục cho đến khi thỏa mãn một tiêu chí hội tụ. Điều này thường có nghĩa là sự chênh lệch giữa \$W H\$ và \$V\$ đã đủ nhỏ, hoặc thuật toán đã chạy đủ một số bước định trước.
+-   **Diễn giải:** Sau khi hội tụ, các ma trận \$W\$ và \$H\$ thu được cung cấp một biểu diễn có chiều thấp hơn của dữ liệu gốc. Có thể xem \$W\$ chứa các vectơ cơ sở hay các đặc trưng, còn \$H\$ biểu diễn các hệ số hay trọng số của những đặc trưng này đối với từng điểm dữ liệu. Mỗi cột của \$W\$ biểu diễn một đặc trưng, và hàng tương ứng của \$H\$ cho biết đặc trưng này được thể hiện mạnh đến mức nào trong từng điểm dữ liệu.
