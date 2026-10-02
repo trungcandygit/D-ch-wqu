@@ -1,0 +1,4 @@
+## **4. Ứng dụng ảnh vệ tinh: Google Earth Engine**
+Trong phần này, chúng ta sẽ sử dụng nền tảng Google Earth Engine (GEE) để truy xuất ảnh vệ tinh và thực hiện một số phân tích. Google Earth Engine là một nền tảng cho phép chúng ta phân tích ảnh vệ tinh và các dữ liệu không gian địa lý khác. Nhóm GEE đã thu thập và xử lý các ảnh vệ tinh lịch sử công khai từ các vệ tinh phổ biến, đồng thời lưu trữ chúng trong danh mục dữ liệu Earth Engine (Earth Engine data catalog). Do đó, chúng ta không cần tốn thời gian và công sức để thu thập và xử lý các ảnh vệ tinh lịch sử thô. GEE có giao diện trình soạn thảo mã (code editor) cho phép người dùng truy xuất và phân tích ảnh vệ tinh. GEE cũng có một API Python. Trong bài học này, chúng ta sẽ sử dụng API Python để truy xuất ảnh và thực hiện phân tích. Chúng ta sẽ dùng video của Văn phòng Điện toán Nghiên cứu UCLA (UCLA Office of Research Computing) (UCLA 2022) để minh họa ứng dụng này.
+<br>
+<br>

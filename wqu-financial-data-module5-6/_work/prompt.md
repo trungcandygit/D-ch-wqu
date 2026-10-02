@@ -21,6 +21,6 @@ d) Với bài đọc trích từ PDF: bỏ đầu trang/chân trang/số trang/n
 e) Với lesson note (thư mục *_notes_temp): dịch đầy đủ phần chữ, giữ nguyên code Python, chỉ giữ output có ích; xóa log lỗi/traceback/warning/lỗi đăng nhập hay API.
 f) Chỉ trả lời MỘT dòng khi xong.
 
-KIỂU DỊCH:
-- Thư mục *_notes_temp (lesson note của trường, tài liệu được cấp): dịch đầy đủ phần chữ.
-- Thư mục *_DT*_temp (bài đọc của bên thứ ba): viết bản tiếng Việt súc tích bám sát cấu trúc nguồn: giữ mọi tiêu đề/mục, định nghĩa, công thức, số liệu, bảng, chú thích hình, kết luận; diễn đạt lại ngắn gọn thay vì dịch từng câu; chỉ trích nguyên văn ngắn khi cần. Phần Tài liệu tham khảo giữ nguyên.
+KIỂU DỊCH (áp dụng cho MỌI thư mục, kể cả *_notes_temp):
+- Viết bản tiếng Việt súc tích bám sát cấu trúc nguồn: giữ mọi tiêu đề/mục, định nghĩa, công thức, số liệu, bảng, chú thích hình, kết luận; với lesson note giữ nguyên toàn bộ code và output có ích.
+- Phần chữ diễn đạt lại ngắn gọn bằng tiếng Việt thay vì dịch từng câu; chỉ trích nguyên văn ngắn khi cần. Phần Tài liệu tham khảo giữ nguyên.
