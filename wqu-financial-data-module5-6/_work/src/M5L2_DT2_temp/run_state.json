@@ -65,12 +65,12 @@
         "coefficient",
         "coordinate reference system"
       ],
-      "glossary_version_used": "5ef43aa5fc962eb26726b0084201f69ae4552073d17fee6791edd29cafca2d61",
+      "glossary_version_used": "cfdb81047c78c2dc6346e827647efc620780182602e84f0c46564153789a94eb",
       "output_file": "output_chunk0001.md",
-      "output_hash": "60eb8d1b685f9c3181ced1f795744ddb06b5aff75510fca6c62b76013eb4863e",
+      "output_hash": "bb041019c92cc1bdffd02c170dcd2ca7d8ae10d9e97c7c0fed79f7ff6408e152",
       "source_file": "chunk0001.md",
       "source_hash": "44c683d935cb82fca6dcb2ff083b3aef82df15d3e5d9f7c0006281bd5f1f06d2",
-      "updated_at": "2026-10-02T03:24:40+00:00"
+      "updated_at": "2026-10-02T08:16:54+00:00"
     },
     "chunk0002": {
       "entity_hashes_used": {
@@ -119,12 +119,12 @@
         "Landsat",
         "NMF"
       ],
-      "glossary_version_used": "5ef43aa5fc962eb26726b0084201f69ae4552073d17fee6791edd29cafca2d61",
+      "glossary_version_used": "cfdb81047c78c2dc6346e827647efc620780182602e84f0c46564153789a94eb",
       "output_file": "output_chunk0002.md",
-      "output_hash": "5adbaefc6ed1200b71e5dcd60a7fde2835b9111e8b3a8367f07aa5944106b337",
+      "output_hash": "c2b35dd4f44934cdde20f4161cfd409c6b92c37b0479ffcd68fa36295a18d068",
       "source_file": "chunk0002.md",
       "source_hash": "fa6c385bc9b023c3b1c6efbe84a1f8f9690217fe17044561b1923f71be684bf2",
-      "updated_at": "2026-10-02T03:24:40+00:00"
+      "updated_at": "2026-10-02T08:16:54+00:00"
     },
     "chunk0003": {
       "entity_hashes_used": {
@@ -189,12 +189,12 @@
         "classifier",
         "coefficient"
       ],
-      "glossary_version_used": "5ef43aa5fc962eb26726b0084201f69ae4552073d17fee6791edd29cafca2d61",
+      "glossary_version_used": "cfdb81047c78c2dc6346e827647efc620780182602e84f0c46564153789a94eb",
       "output_file": "output_chunk0003.md",
-      "output_hash": "a7b906a4bc4dc3aae37a0b401ff9406b3748d5ad50db0fb85f62ed8e8213074b",
+      "output_hash": "9ceeae63d3e159f21a354b3329b6e75cfefec5f86bed5010ee04282457a0b838",
       "source_file": "chunk0003.md",
       "source_hash": "ae2d79dac17f9a61982f58fe0fd0e564167b7218321d2a5993fea78a24257e39",
-      "updated_at": "2026-10-02T03:24:40+00:00"
+      "updated_at": "2026-10-02T08:16:54+00:00"
     },
     "chunk0004": {
       "entity_hashes_used": {
@@ -251,12 +251,12 @@
         "backtesting",
         "bandwidth"
       ],
-      "glossary_version_used": "5ef43aa5fc962eb26726b0084201f69ae4552073d17fee6791edd29cafca2d61",
+      "glossary_version_used": "cfdb81047c78c2dc6346e827647efc620780182602e84f0c46564153789a94eb",
       "output_file": "output_chunk0004.md",
-      "output_hash": "adb0e5cae702ab5b44e2c66f8689a30804a023524c960adc849421d9732a59bc",
+      "output_hash": "832cda071783f2344b52d26e0dee36161b8c1fa4809d5480b02b89782afef21c",
       "source_file": "chunk0004.md",
       "source_hash": "8ade494f17931470333052e3fed533d5d5ebec54fc372b1dd48fcd03e9aaa1f0",
-      "updated_at": "2026-10-02T03:24:40+00:00"
+      "updated_at": "2026-10-02T08:16:54+00:00"
     },
     "chunk0005": {
       "entity_hashes_used": {
@@ -309,12 +309,12 @@
         "O-ring",
         "alternative data"
       ],
-      "glossary_version_used": "5ef43aa5fc962eb26726b0084201f69ae4552073d17fee6791edd29cafca2d61",
+      "glossary_version_used": "cfdb81047c78c2dc6346e827647efc620780182602e84f0c46564153789a94eb",
       "output_file": "output_chunk0005.md",
       "output_hash": "30e7196e254e94bab11ea629e609d197c57bdbf1bef0ea7f3a0cac9e35d98d61",
       "source_file": "chunk0005.md",
       "source_hash": "30e7196e254e94bab11ea629e609d197c57bdbf1bef0ea7f3a0cac9e35d98d61",
-      "updated_at": "2026-10-02T03:24:40+00:00"
+      "updated_at": "2026-10-02T08:16:54+00:00"
     }
   },
   "version": 1
