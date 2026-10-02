@@ -1,0 +1,7 @@
+# **1. Tài chính không phải là vật lý**
+
+Các định luật vật lý không phải là định luật của tài chính. Cần phân biệt rõ điều đúng trong các mô hình lý thuyết, duy lý với điều đúng trong thực tế. Tài chính không phải là vật lý: mô hình tài chính phản ánh hành vi con người, vốn là sự pha trộn giữa duy lý và phi lý. Vì vậy, mô hình tài chính có thể thất bại nếu giả định mọi người đều hành xử duy lý. Đôi khi thị trường dao động giữa trạng thái hiệu quả cao và trạng thái bị chi phối bởi các thiên lệch nhận thức (bias) cực đoan. (Xem Giả thuyết Thị trường Thích ứng (Adaptive Market Hypothesis) của Andrew Lo <https://web.mit.edu/Alo/www/Papers/JPM2004_Pub.pdf> để có thảo luận thú vị về sự dao động này).
+
+Yếu tố phi lý mới xuất hiện trong kinh tế học gần đây hơn nhiều so với các giả định duy lý. Chỉ trong 20 năm qua, giải Nobel mới được trao cho các nhà nghiên cứu kinh tế học hành vi (ví dụ Kahneman, Thaler). Tài chính hành vi nhắc rằng nhiều giả định nền tảng của tài chính thực tế là sai sót. Do đó, tài chính không có những định luật bất biến như các ngành khoa học tự nhiên. Một số ý tưởng này được nêu trong một tuyên ngôn viết sau Đại khủng hoảng tài chính (Wilmott), nhắc rằng thiên lệch của con người trong ra quyết định khiến mọi "định luật tài chính" không thể tái lập.
+
+Hãy xét đợt tăng giá gần đây của cổ phiếu Game Stop. Trong nhiều bài học rút ra, có việc con người có thể thao túng thị trường chứng khoán vì những lý do vượt ngoài đặc điểm rủi ro và lợi suất. Xem và đọc bài của Zhao (<https://www.atlantis-press.com/proceedings/icemci-21/125966071>).
