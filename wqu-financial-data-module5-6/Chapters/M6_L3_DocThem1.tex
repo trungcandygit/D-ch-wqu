@@ -1,0 +1,334 @@
+\chapter{Đọc thêm 1: Hồi quy trọng số địa lý (Brunsdon, Fotheringham \& Charlton)}
+\label{ch:M6L3DocThem1}
+
+\section{Thông tin nguồn}
+
+\begin{itemize}
+  \item \textbf{Nguồn:} Brunsdon, C., Fotheringham, A. S. \& Charlton, M. E. ``Geographically Weighted Regression: A Method for Exploring Spatial Nonstationarity.'' \emph{Geographical Analysis}, 28(4), 1996.
+  \item \textbf{Phần cần đọc:} Toàn bộ bài báo (18 trang)
+  \item \textbf{Ghi chú:} bản chuyển ngữ tiếng Việt súc tích, bám cấu trúc nguồn (giữ nguyên tiêu đề, công thức, số liệu, bảng, chú thích và danh mục tài liệu tham khảo).
+\end{itemize}
+
+Chris Brunsdon, A. Stewart Fotheringham và Martin E. Charlton
+
+Hồi quy trọng số địa lý (Geographically Weighted Regression): Một phương pháp khám phá tính không dừng theo không gian
+
+\textbf{Tóm tắt.} Tính không dừng theo không gian (spatial nonstationarity) là tình trạng một mô hình "toàn cục" đơn giản không thể giải thích quan hệ giữa một số tập biến; bản chất của mô hình phải thay đổi theo không gian để phản ánh cấu trúc trong dữ liệu. Bài báo phát triển một kỹ thuật gọi là hồi quy trọng số địa lý (GWR), hiệu chỉnh một mô hình hồi quy bội cho phép các quan hệ khác nhau tồn tại tại các điểm khác nhau trong không gian. Kỹ thuật này dựa lỏng lẻo trên hồi quy hàm nhân (kernel). Bài báo giới thiệu phương pháp và thảo luận các vấn đề liên quan như việc chọn hàm trọng số không gian. Tiếp theo là một loạt kiểm định thống kê nhằm kiểm tra tính không dừng theo không gian. Bằng phương pháp Monte Carlo, các tác giả đề xuất kỹ thuật kiểm định giả thuyết không rằng dữ liệu có thể được mô tả bằng một mô hình toàn cục thay vì mô hình không dừng, cũng như kiểm định xem từng hệ số hồi quy có ổn định trên không gian địa lý hay không. Các kỹ thuật được minh họa trên bộ dữ liệu điều tra dân số Anh năm 1991, liên hệ tỷ lệ sở hữu ô tô với tầng lớp xã hội và tỷ lệ thất nghiệp ở nam giới. Bài báo kết thúc bằng việc bàn về các hướng mở rộng kỹ thuật.
+
+Một trong những mục tiêu chính của phân tích không gian là xác định bản chất các quan hệ giữa các biến, thường bằng cách tính thống kê hoặc ước lượng tham số từ quan sát tại các đơn vị không gian khác nhau trong vùng nghiên cứu. Các thống kê hay ước lượng tham số thu được thường được giả định là không đổi trên không gian, dù giả định này rất đáng ngờ trong nhiều trường hợp. Có thể quan hệ vốn khác nhau theo không gian, hoặc mô hình đo lường quan hệ bị đặc tả sai và điều đó biểu hiện thành các ước lượng tham số biến thiên theo không gian. Dù thế nào, một công cụ khám phá để mô tả và lập bản đồ các biến thiên không gian như vậy sẽ giúp hiểu rõ hơn các quan hệ đang nghiên cứu.
+
+\emph{Chú thích tác giả: Chris Brunsdon là giảng viên về phương pháp dựa trên máy tính tại Khoa Quy hoạch Đô thị và Nông thôn; A. Stewart Fotheringham là Giáo sư Địa lý định lượng; Martin Charlton là giảng viên về GIS tại Khoa Địa lý; tất cả thuộc Đại học Newcastle.}
+
+\emph{Geographical Analysis, Vol. 28, No. 4 (October 1996), Ohio State University Press. Nộp 6/7/95; bản sửa đổi được chấp nhận 2/16/96.}
+
+Đã có một số kỹ thuật phục vụ mục đích này, nhưng các tác giả cho rằng phương pháp trong bài có nhiều ưu điểm quan trọng. Khung được biết đến nhiều nhất để đo "độ trôi" tham số là phương pháp mở rộng của Casetti (Casetti 1972; Casetti và Jones 1992), trong đó các tham số của mô hình toàn cục được làm thành hàm của không gian địa lý để đo xu hướng biến thiên tham số (xem Fotheringham và Pitts 1995; Eldridge và Jones 1991). Tuy quan trọng, đây chỉ là bài toán khớp xu hướng, ít hữu ích khi tham số biến thiên phức tạp trong không gian nghiên cứu. GWR cho phép ước lượng và lập bản đồ chính các tham số thực tại từng vị trí, thay vì khớp một mặt xu hướng lên chúng.
+
+Phương pháp lọc thích nghi không gian (SAF) cũng từng được đề xuất để xử lý các quan hệ biến thiên theo không gian (Foster và Gorr 1986; Gorr và Olligschlaeger 1994). Tuy nhiên, cách này đưa quan hệ không gian vào theo kiểu ad hoc và cho ra các ước lượng tham số không thể kiểm định thống kê, nên phạm vi áp dụng hạn chế.
+
+Hai phương pháp khác mô hình hóa biến thiên không gian của ước lượng tham số là mô hình hệ số ngẫu nhiên (Aitken 1996) và mô hình đa cấp (Goldstein 1987). Cả hai đều giả định các ước lượng tham số trong mô hình hồi quy là biến ngẫu nhiên: ở mô hình đa cấp, phân phối của chúng được giả định là Gauss, còn ở mô hình hệ số ngẫu nhiên, các tham số được mô hình hóa như phân phối hỗn hợp hữu hạn. Trong cả hai trường hợp, nhờ định lý Bayes có thể thu được ước lượng cho từng tham số, nhưng không có phụ thuộc không gian nào được giả định giữa các ước lượng, điều này không thực tế với mô hình các hiện tượng không gian. Dù các biến thể địa lý của mô hình đa cấp đã được áp dụng (Jones 1991), chúng phụ thuộc nhiều vào giả định về phân cấp các đơn vị không gian. Điều này có thể hợp lý nếu bản chất phân cấp được phản ánh tốt trong quá trình được mô hình hóa; còn trong các trường hợp khác, một mô hình liên kết không gian kiểu "suy giảm theo khoảng cách" như GWR có thể phù hợp hơn.
+
+\section{2. TÍNH KHÔNG DỪNG THEO KHÔNG GIAN TRONG BỐI CẢNH HỒI QUY}
+
+Mô hình thường dùng trong phân tích địa lý là hồi quy tuyến tính đơn giản (xem Dobson 1990, tr. 68-78). Trong kỹ thuật này, một biến (biến phụ thuộc) được mô hình hóa như hàm tuyến tính của một tập biến độc lập hay biến dự báo:
+
+\begin{equation*}y_i = a_0 + \sum_{k=1}^{m} a_k x_{ik} + \varepsilon_i \tag{1}\end{equation*}
+
+trong đó \(y_i\) là quan sát thứ \(i\) của biến phụ thuộc, \(x_{ik}\) là quan sát thứ \(i\) của biến độc lập thứ \(k\), các \(\varepsilon_i\) là các sai số độc lập phân phối chuẩn với trung bình bằng 0, và mỗi \(a_k\) phải được xác định từ mẫu gồm \(n\) quan sát. Thông thường dùng phương pháp bình phương tối thiểu để ước lượng các \(a_k\). Dùng ký hiệu ma trận, có thể viết:
+
+\begin{equation*}\hat{\mathbf{a}} = (\mathbf{X}^T \mathbf{X})^{-1} \mathbf{X}^T \mathbf{y} \tag{2}\end{equation*}
+
+trong đó các quan sát độc lập là các cột của x và các quan sát phụ thuộc là vectơ cột đơn y.* Vectơ cột chứa các ước lượng hệ số. Mỗi ước lượng có thể được hiểu là một "tốc độ thay đổi" giữa một biến độc lập và biến phụ thuộc. Chẳng hạn, nếu y là giá nhà đã thỏa thuận, còn x gồm nhiều biến liên quan đến thuộc tính của ngôi nhà và môi trường xung quanh, thì các hệ số có thể dùng để ước lượng mức thay đổi giá nhà khi có thêm một mét vuông sân vườn, thêm một phòng ngủ, hoặc khi nhà nằm gần trường học nhất hơn một kilômét.
+
+Cần lưu ý rằng các tốc độ thay đổi này được giả định là phổ quát. Dù ngôi nhà nằm ở đâu, mức tăng giá biên khi có thêm một phòng ngủ vẫn cố định. Tuy nhiên, điều này có thể không đúng. Có thể hợp lý hơn khi giả định rằng tốc độ thay đổi do văn hóa và hiểu biết địa phương quyết định, thay vì một độ thỏa dụng toàn cục áp dụng cho mỗi hàng hóa. Quay lại ví dụ, giá trị gia tăng của một phòng ngủ thêm có thể lớn hơn ở khu dân cư đông gia đình có con, nơi không gian rộng thêm được xem là rất có lợi, so với khu dân cư của người độc thân hoặc các cặp vợ chồng cao tuổi, đối với họ không gian rộng thêm có thể bị coi là một đặc trưng tiêu cực.
+
+Sự biến thiên của các mối quan hệ theo không gian như trên được gọi là tính không dừng theo không gian (spatial nonstationarity). Trong một bài báo gần đây, Fotheringham, Charlton và Brunsdon (1996) minh họa mức độ các ước lượng tham số hồi quy có thể biến thiên theo không gian. Trong ví dụ của họ, một cửa sổ 7 x 7 được đặt lên mọi ô của ma trận 50 x 38, theo cách sao cho cửa sổ nằm hoàn toàn trong vùng nghiên cứu. Tại mỗi vị trí đặt, dữ liệu trong cửa sổ được dùng để hiệu chỉnh một mô hình hồi quy, nhờ đó mỗi ô có một tập ước lượng tham số đi kèm. Các ước lượng tham số sau đó có thể được vẽ bản đồ để cho thấy mức độ biến thiên không gian của các mối quan hệ ước lượng. Kết quả cho thấy (a) các mối quan hệ có thể biến thiên đáng kể theo không gian và ước lượng "toàn cục" có thể che khuất những mối quan hệ địa lý đáng quan tâm, và (b) sự biến thiên theo không gian có thể phức tạp đến mức làm vô hiệu các bài tập khớp xu hướng đơn giản. Một ví dụ về loại bề mặt tham số mà Fotheringham, Charlton và Brunsdon (1996) mô tả được trình bày ở Hình 1, cho mối quan hệ giữa mật độ dân số và độ cao ở một phần đông bắc Scotland. Bề mặt này thể hiện các ước lượng tham số cục bộ thu được từ kỹ thuật hồi quy cửa sổ nêu trên, trong đó một mô hình hồi quy tuyến tính bội được hiệu chỉnh bằng cửa sổ 7 x 7. Bề mặt là một tập giá trị tham số phức tạp, dao động từ -1,26 đến 0,75. Ở một số khu vực nghiên cứu, mối quan hệ giữa mật độ dân số và độ cao âm có ý nghĩa, còn ở những khu vực khác thì dương có ý nghĩa. Mặc dù bề mặt tham số này có những "thung lũng" và "đồi" thú vị, nó rõ ràng quá phức tạp để biểu diễn bằng một xu hướng tuyến tính hay bậc hai đơn giản. Tuy vậy, nó cho những hiểu biết thú vị về cách mối quan hệ cụ thể này biến thiên theo không gian, có thể dùng để khám phá những khía cạnh của quan hệ giữa hai biến mà nếu không có thể sẽ không được nghiên cứu.
+
+Dù phương pháp của Fotheringham, Charlton và Brunsdon (1996) dùng để tạo Hình 1 phục vụ mục đích khám phá hữu ích, nó mang tính ad hoc. Vì vậy, mục đích của bài báo này là mô tả một kỹ thuật thống kê chính thức, mà chúng tôi gọi là hồi quy trọng số địa lý (GWR), cho phép các biến thiên không gian phức tạp trong ước lượng tham số được xác định, vẽ bản đồ và mô hình hóa.
+
+* Đối với số hạng hằng số, x phải chứa một cột gồm các số 1.
+
+\textbf{HÌNH 1.} Bề mặt tham số độ cao (các khoảng giá trị tham số: từ -1,26 đến -0,92; -0,92 đến -0,59; -0,59 đến -0,25; -0,25 đến 0,08; 0,08 đến 0,41; 0,41 đến 0,75)
+
+\section{3. HỒI QUY TRỌNG SỐ ĐỊA LÝ}
+
+GWR là một kỹ thuật tương đối đơn giản mở rộng khung hồi quy truyền thống của phương trình (1) bằng cách cho phép các tốc độ thay đổi biến thiên cục bộ, sao cho các hệ số trong mô hình, thay vì là ước lượng toàn cục, đặc thù cho một vị trí i. Khi đó phương trình hồi quy là k=l,m
+
+trong đó \(a_{ik}\) là giá trị của tham số thứ \(k\) tại vị trí \(i\). Lưu ý (1) là trường hợp đặc biệt của (3), khi mọi hàm đều là hằng số trên toàn không gian. Như sẽ trình bày dưới đây, điểm \(i\) tại đó các tham số được ước lượng hoàn toàn có thể khái quát hóa và không nhất thiết chỉ là những điểm có dữ liệu thu thập. Với GWR, ta dễ dàng tính ước lượng tham số cho các vị trí nằm giữa các điểm dữ liệu, nhờ đó có thể lập bản đồ chi tiết về sự biến thiên không gian của các mối quan hệ.
+
+Mặc dù mô hình (3) có vẻ chỉ là phần mở rộng đơn giản của mô hình (1), việc hiệu chỉnh (3) gặp khó khăn vì các đại lượng chưa biết thực chất là những hàm ánh xạ không gian địa lý lên trục số thực, chứ không phải các số vô hướng như trong (1). Trong một tập dữ liệu điển hình, các mẫu của biến phụ thuộc và biến độc lập được lấy tại một tập điểm mẫu, và các tham số phải được ước lượng từ chúng. Trong mô hình truyền thống, các ước lượng này là hằng số với mọi \(i\), nhưng ở phương trình (3) thì rõ ràng không phải vậy.
+
+Với mô hình (3), một cách trực giác hợp lý là dựa các ước lượng \(a_{ik}\) vào các quan sát tại những điểm mẫu gần \(i\). Nếu giả định các \(a_{ik}\) có mức độ trơn nhất định, ta có thể xấp xỉ hợp lý bằng cách xét quan hệ giữa các biến quan sát trong vùng gần \(i\) về mặt địa lý.
+
+Với phương pháp bình phương tối thiểu có trọng số (weighted least squares) để hiệu chỉnh mô hình hồi quy, các quan sát khác nhau có thể được nhấn mạnh khác nhau khi sinh ra tham số ước lượng. Trong bình phương tối thiểu thông thường, các ước lượng hệ số cực tiểu hóa tổng bình phương chênh lệch giữa \(y_i\) dự đoán và thực tế. Trong bình phương tối thiểu có trọng số, một nhân tố trọng số \(w_i\) được áp dụng cho mỗi bình phương chênh lệch trước khi cực tiểu hóa, sao cho sai số của một số dự đoán bị phạt nặng hơn các dự đoán khác. Nếu \(\mathbf{W}\) là ma trận đường chéo của các \(w_i\), thì các hệ số ước lượng thỏa mãn
+
+\[\hat{a} = (X^T W X)^{-1} X^T W y \quad (4)\]
+
+Trong GWR, việc đặt trọng số cho quan sát theo mức độ gần \(i\) cho phép ước lượng \(a_{ik}\) thỏa tiêu chí "các điểm hiệu chỉnh ở gần" nêu trên.
+
+Lưu ý rằng trong các mô hình hồi quy có trọng số thông thường, giá trị \(w_i\) là hằng số, nên chỉ cần một lần hiệu chỉnh để có tập ước lượng hệ số; nhưng ở đây \(w\) thay đổi theo \(i\), nên mỗi điểm trong vùng nghiên cứu có một lần hiệu chỉnh riêng. Khi đó, công thức ước lượng tham số có thể viết tổng quát hơn là
+
+\[\hat{a}(i) = (X^T W(i) X)^{-1} X^T W(i) y \quad (5)\]
+
+Phương pháp này có nét tương đồng với hồi quy kernel và ước lượng mật độ kernel (Parzen 1962; Cleveland 1979; Cleveland và Devlin 1988; Silverman 1986; Brunsdon 1991, 1995; Wand và Jones 1995, tr. 114-115). Trong hồi quy kernel, \(y\) được mô hình hóa như một hàm phi tuyến của \(x\) bằng hồi quy có trọng số, với trọng số của quan sát thứ \(i\) phụ thuộc vào mức gần nhau giữa \(x\) và \(x_i\), với mỗi \(i\), và bộ ước lượng là
+
+\[\hat{f}(x) = (X^T W(x) X)^{-1} X^T W(x) y. \quad (6)\]
+
+Khác biệt cốt yếu giữa hai phương pháp là: ở (6), hồi quy kernel, hệ thống trọng số phụ thuộc vào vị trí trong "không gian thuộc tính" (Openshaw 1993) của các biến độc lập, còn ở (5), GWR, nó phụ thuộc vào vị trí trong không gian địa lý. Đầu ra của (5) thường là tập ước lượng tham số cục bộ trong không gian \(x\), nên có thể mô hình hóa các quan hệ phi tuyến và không đơn điệu mạnh giữa \(y\) và \(x\). Tuy nhiên, đầu ra điển hình của (6) là tập ước lượng tham số có thể vẽ lên bản đồ địa lý để biểu diễn tính không dừng hay sự "trôi" tham số.
+
+\subsection{3.1 Lựa chọn hàm trọng số không gian}
+
+Đến đây, ta mới chỉ nêu rằng \(w(i)\) là một sơ đồ trọng số dựa trên mức gần của \(i\) với các vị trí lấy mẫu xung quanh \(i\), mà chưa nêu quan hệ tường minh. Phần này xét việc lựa chọn quan hệ đó. Trước hết, xét sơ đồ trọng số ngầm định của (2). Ở đây
+
+\[w_{ij} = 1 \quad \forall i, j \quad (7)\]
+
+trong đó \(j\) là một điểm cụ thể trong không gian có dữ liệu quan sát và \(i\) là điểm bất kỳ trong không gian cần ước lượng tham số. Nghĩa là trong mô hình toàn cục, mỗi quan sát có trọng số bằng một. Bước đầu hướng tới việc đặt trọng số theo vùng lân cận là loại khỏi quá trình hiệu chỉnh mô hình những quan sát cách vùng đó xa hơn một khoảng \(d\) nào đó. Điều này tương đương đặt trọng số của chúng bằng không, cho hàm trọng số
+
+\[w_{ij} = 1 \text{ nếu } d_{ij} < d; \quad w_{ij} = 0 \text{ trong trường hợp còn lại.} \quad (8)\]
+
+Hàm (8) cho phép tính toán hiệu quả, vì với mỗi điểm cần tính hệ số, chỉ một tập con (thường khá nhỏ) các điểm mẫu cần đưa vào mô hình hồi quy. Tuy nhiên, hàm trọng số không gian (8) gặp vấn đề gián đoạn. Khi \(i\) thay đổi trong vùng nghiên cứu, các hệ số hồi quy có thể biến đổi đột ngột mỗi khi một điểm mẫu đi vào hoặc ra khỏi vùng đệm tròn quanh \(i\), tức vùng xác định dữ liệu được đưa vào hiệu chỉnh cho vị trí \(i\). Dù các thay đổi đột ngột của tham số theo không gian có thể thực sự tồn tại, ở đây sự thay đổi của các ước lượng chỉ là hệ quả (artifact) của cách bố trí các điểm mẫu, chứ không phản ánh quá trình nền tảng của hiện tượng đang nghiên cứu. Một cách khắc phục là xác định \(w_{ij}\) như một hàm liên tục của \(d_{ij}\), khoảng cách giữa \(i\) và \(j\). Khi đó, từ (5) có thể thấy các ước lượng hệ số sẽ biến thiên liên tục theo \(i\). Một lựa chọn hiển nhiên là
+
+\[w_{ij} = \exp(-\beta d_{ij}^2) \qquad (9)\]
+
+sao cho nếu \(i\) là điểm có dữ liệu quan sát thì trọng số của dữ liệu đó bằng 1, còn trọng số của các dữ liệu khác giảm theo đường cong Gauss khi khoảng cách giữa \(i\) và \(j\) tăng. Trong trường hợp này, việc đưa dữ liệu vào quá trình hiệu chỉnh trở nên "phân đoạn". Chẳng hạn, khi hiệu chỉnh mô hình cho điểm \(i\), nếu \(w_{ij} = 0.5\) thì dữ liệu tại \(j\) chỉ đóng góp một nửa trọng số so với dữ liệu tại chính \(i\). Với dữ liệu ở rất xa \(i\), trọng số gần như bằng không, tức là loại bỏ thực chất các quan sát này khỏi việc ước lượng tham số tại vị trí \(i\).
+
+Có thể dung hòa giữa (8) và (9), vừa có tính chất thuận lợi về tính toán là loại mọi điểm cách \(i\) quá một khoảng nhất định, vừa có tính chất thuận lợi về phân tích là tính liên tục. Một ví dụ là hàm bisquare:
+
+\[w_{ij} = \left[1 - d_{ij}^2/d^2\right]^2 \ \text{ nếu } d_{ij} < d; \qquad w_{ij} = 0 \ \text{ nếu ngược lại.} \qquad (10)\]
+
+Hàm này loại các điểm ngoài bán kính \(d\) nhưng làm thoải dần trọng số của các điểm bên trong bán kính, sao cho \(w_{ij}\) là hàm liên tục và khả vi một lần với mọi điểm cách \(i\) ít hơn \(d\) đơn vị.
+
+Dù dùng hàm trọng số cụ thể nào, ý tưởng cốt lõi của GWR là với mỗi điểm \(i\) có một "đỉnh ảnh hưởng" quanh \(i\) tương ứng với hàm trọng số, sao cho các quan sát mẫu gần \(i\) có ảnh hưởng lớn hơn các quan sát ở xa trong việc ước lượng tham số của \(i\). Phương pháp cửa sổ trượt dùng để tạo Hình 1 và được mô tả đầy đủ hơn ở nơi khác (Fotheringham, Charlton, and Brunsdon 1996) sử dụng hàm trọng số bằng 1 nếu các điểm \(i\) và \(j\) nằm trong hình vuông có các đỉnh \((-d/2,-d/2)\), \((-d/2,d/2)\), \((d/2,d/2)\) và \((d/2,-d/2)\), và bằng 0 trong các trường hợp còn lại. Về bản chất đây là hàm nhân (kernel) "cắt đột ngột" như (8), nhưng có dạng vuông thay vì tròn. Nhìn lại, đây là lựa chọn kernel khá kỳ quặc, mặc dù về tính toán thì nó phù hợp với khung raster.
+
+\subsection{3.2 Hiệu chỉnh hàm trọng số}
+
+Một khó khăn của GWR là các tham số ước lượng phần nào phụ thuộc vào hàm trọng số hay hàm nhân (kernel) được chọn. Chẳng hạn trong (8), khi \(d\) càng lớn thì nghiệm của mô hình càng gần với OLS, và khi \(d\) bằng khoảng cách lớn nhất giữa các điểm trong hệ thống thì hai mô hình trùng nhau. Tương tự, trong (9), khi \(\beta\) tiến về 0, trọng số tiến về 1 với mọi cặp điểm, nên các tham số ước lượng trở nên đồng nhất và GWR tương đương OLS. Ngược lại, khi độ suy giảm theo khoảng cách (distance-decay) càng lớn, các ước lượng tham số càng phụ thuộc vào các quan sát ở gần \(i\) và do đó có phương sai tăng. Vấn đề là làm thế nào chọn hàm suy giảm phù hợp trong GWR.
+
+Xét việc chọn \(\beta\) trong (9). Một khả năng là chọn \(\beta\) theo tiêu chí bình phương tối thiểu. Nếu các sai số trong (3) được giả định là Gauss thì điều này cũng thỏa tiêu chí hợp lý cực đại. Rõ ràng cách làm là cực tiểu hóa đại lượng
+
+\[\sum_{i=1}^{n} \left[y_i - \hat{y}_i(\beta)\right]^2 \qquad (11)\]
+
+trong đó \(\hat{y}_i(\beta)\) là giá trị khớp của \(y_i\) khi dùng độ suy giảm theo khoảng cách \(\beta\). Để tìm giá trị khớp của \(y_i\), cần ước lượng các \(a_{ik}\) tại mỗi điểm mẫu rồi kết hợp chúng với các giá trị \(z\) tại các điểm đó. Tuy nhiên, khi cực tiểu hóa tổng bình phương sai số như trên thì gặp một vấn đề. Giả sử \(\beta\) rất lớn sao cho trọng số của mọi điểm trừ chính \(i\) là không đáng kể. Khi đó các giá trị khớp tại các điểm mẫu sẽ tiến về giá trị thực, nên (11) bằng không. Điều này gợi ý rằng với tiêu chí tối ưu như vậy, \(\beta\) tiến tới vô cùng, nhưng rõ ràng trường hợp suy biến này vô ích. Thứ nhất, các tham số của mô hình như vậy không xác định trong trường hợp giới hạn này; thứ hai, các ước lượng sẽ dao động dữ dội trong không gian để cho giá trị khớp tốt cục bộ tại mỗi \(i\).
+
+Giải pháp cho vấn đề này là phương pháp kiểm định chéo (cross-validation, CV) do Cleveland (1979) đề xuất cho hồi quy cục bộ và Bowman (1984) cho ước lượng mật độ kernel. Ở đây, ta dùng điểm số có dạng
+
+\[CV = \sum_{i=1}^{n} \left[y_i - \hat{y}_{\neq i}(\beta)\right]^2 \qquad (12)\]
+
+trong đó \(\hat{y}_{\neq i}(\beta)\) là giá trị khớp của \(y_i\) khi các quan sát tại điểm \(i\) bị bỏ ra khỏi quá trình hiệu chỉnh. Cách tiếp cận này có tính chất thuận lợi là chống được hiệu ứng quấn vòng (wrap-around), vì khi \(\beta\) rất lớn, mô hình chỉ được hiệu chỉnh trên các mẫu gần \(i\) chứ không phải tại chính \(i\).
+
+Do đó, việc vẽ đồ thị điểm CV theo tham số cần thiết của hàm trọng số được chọn sẽ giúp định hướng chọn giá trị phù hợp cho tham số đó. Nếu muốn tự động hóa quy trình này, có thể cực đại hóa điểm CV bằng một kỹ thuật tối ưu hóa như tìm kiếm theo tỉ lệ vàng (Golden Section search; Greig 1980).
+
+\subsection{3.3 Kiểm định tính không dừng theo không gian}
+
+Cho đến đây, các kỹ thuật của GWR chủ yếu mang tính mô tả. Tuy nhiên, có hai câu hỏi hữu ích có thể được xem xét:
+
+\begin{itemize}
+\item
+  Mô hình GWR có mô tả dữ liệu tốt hơn một cách có ý nghĩa thống kê so với mô hình hồi quy toàn cục hay không?
+\item
+  Tập các tham số \(a_{ik}\) có biến thiên không gian đáng kể hay không?
+\end{itemize}
+
+Ở câu hỏi thứ nhất, toàn bộ mô hình hồi quy thay đổi theo địa lý được đem ra kiểm định. Ở câu hỏi thứ hai, ta có thể kiểm định xem tốc độ thay đổi của một biến cụ thể có biến động đáng kể trên toàn vùng nghiên cứu hay không. Để trả lời cả hai câu hỏi, cần định nghĩa các thống kê mô tả cho mẫu. Trước hết, thống kê này mô tả mức độ "toàn cục" của mô hình. Một lựa chọn khả dĩ là tham số trọng số \(\beta\) thu được từ thủ tục CV, dùng để đánh giá mức khác biệt giữa mô hình GWR và mô hình toàn cục. Như đã nêu, giá trị \(\beta\) trong hàm mũ tiến về 0 đối với mô hình toàn cục, và độ lệch của ước lượng \(\hat{\beta}\) khỏi 0 cho biết mức độ khác biệt giữa mô hình cục bộ và mô hình toàn cục.
+
+Đối với giả thuyết thứ hai, chính độ biến thiên của \(a_k\) có thể dùng để mô tả mức độ hợp lý của một hệ số không đổi. Nói chung, đây có thể xem như một thước đo phương sai. Với một \(k\) cho trước, giả sử \(\hat{a}_{ik}\) là ước lượng GWR của \(a_{ik}\). Khi đó, một ước lượng khả dĩ của độ biến thiên là "độ gồ ghề" (roughness) của \(a_k\), được định nghĩa là
+
+(công thức gốc bị vỡ khi trích PDF; các thành phần: \(\int_G (\cdot)^2\,dx\,dy\) với \(G\) là vùng nghiên cứu)
+
+trong đó \(G\) là vùng nghiên cứu. Đại lượng này có thể được ước lượng nếu xây dựng được một xấp xỉ dạng lưới cho \(a_{ik}\). Tuy nhiên, thống kê này khá cồng kềnh khi tính toán, nên ở đây đề xuất một phương án thay thế. Giả sử với mỗi điểm trong \(n\) điểm mẫu \(i\), ta tính được ước lượng tham số \(\hat{a}_{ik}\). Khi đó ta có \(n\) ước lượng của hệ số đang nghiên cứu. Một cách tiếp cận là tính độ lệch chuẩn của các giá trị này, cho ra ước lượng mẫu của (13). Thống kê này được gọi là \(s_k\).
+
+Như vậy đã có hai loại thống kê, mỗi loại tương ứng với một câu hỏi nêu trên. Bước tiếp theo là xác định phân phối mẫu của chúng dưới giả thuyết không rằng mô hình (1) đúng. Dù trong tương lai sẽ xem xét các tính chất lý thuyết của các phân phối này, hiện tại sẽ áp dụng phương pháp Monte Carlo. Dưới giả thuyết không, mọi hoán vị của các cặp \((x_i, y_i)\) giữa các điểm lấy mẫu địa lý \(i\) đều có khả năng xảy ra như nhau. Do đó, các giá trị quan sát được của \(\beta\) hoặc \(s_k\) có thể được so sánh với các phân phối ngẫu nhiên hóa này để thực hiện kiểm định ý nghĩa thống kê. Với phương pháp Monte Carlo, việc chọn \(N\) hoán vị ngẫu nhiên của các cặp \((x_i, y_i)\) giữa các điểm \(i\) và tính \(\hat{\beta}\) hoặc \(s_k\) cũng cho một kiểm định ý nghĩa khi so với các thống kê quan sát được.
+
+\textbf{Bảng 1.} Các biến dùng trong ví dụ GWR
+
+{\small
+\begin{longtable}[]{@{}
+  >{\raggedright\arraybackslash}p{(\columnwidth - 6\tabcolsep) * \real{0.2222}}
+  >{\raggedright\arraybackslash}p{(\columnwidth - 6\tabcolsep) * \real{0.2593}}
+  >{\raggedright\arraybackslash}p{(\columnwidth - 6\tabcolsep) * \real{0.2963}}
+  >{\raggedright\arraybackslash}p{(\columnwidth - 6\tabcolsep) * \real{0.2222}}@{}}
+\toprule\noalign{}
+\begin{minipage}[b]{\linewidth}\raggedright
+Biến
+\end{minipage} & \begin{minipage}[b]{\linewidth}\raggedright
+Tử số
+\end{minipage} & \begin{minipage}[b]{\linewidth}\raggedright
+Mẫu số
+\end{minipage} & \begin{minipage}[b]{\linewidth}\raggedright
+Phụ thuộc (D) hoặc độc lập (I)
+\end{minipage} \\
+\midrule\noalign{}
+\endhead
+\bottomrule\noalign{}
+\endlastfoot
+Thất nghiệp nam & Dân số nam đang tìm việc & Dân số hoạt động kinh tế & I \\
+Tầng lớp xã hội I & Số hộ có chủ hộ thuộc tầng lớp xã hội I & Tổng số hộ & I \\
+Số xe trên mỗi hộ & Số xe & Số hộ (đơn vị trăm) & D \\
+\end{longtable}
+}
+
+Khi thực hiện kiểm định cho \(\hat{\beta}\), lưu ý rằng chi phí tính toán có thể rất lớn: với mỗi hoán vị, phải tìm \(\beta\) tối ưu theo CV bằng tìm kiếm theo tỉ lệ vàng. Dù phương pháp này tốn thời gian, việc tính từng thống kê \(s_k\) cho mỗi hoán vị lại khá đơn giản sau khi \(\beta\) đã được hiệu chỉnh. Một cách tiết kiệm thời gian, nếu không cần kiểm định ý nghĩa của \(\beta\), là tối ưu \(\hat{\beta}\) từ dữ liệu quan sát rồi dùng giá trị này để thực hiện các ước lượng \(s_k\) còn lại dựa trên hoán vị.
+
+\section{4. NGHIÊN CỨU TÌNH HUỐNG: SỞ HỮU Ô TÔ TẠI TYNE AND WEAR}
+
+Trong phần này, kỹ thuật GWR được áp dụng cho dữ liệu điều tra dân số năm 1991 cấp phường (ward) của hạt Tyne and Wear, Vương quốc Anh. Hạt này có trung tâm là thành phố Newcastle và sông Tyne ở đông bắc nước Anh. Các mối quan hệ được khảo sát là giữa tỷ lệ sở hữu ô tô (biến phụ thuộc) và hai biến độc lập kinh tế - xã hội: tỷ lệ thất nghiệp nam giới và tỷ lệ hộ gia đình thuộc tầng lớp xã hội I (một biến điều tra dân số của Anh đo tỷ lệ hộ có chủ hộ làm nghề chuyên môn hoặc quản lý, thường được dùng làm biến đại diện cho các hộ thu nhập cao). Chi tiết về các biến này có trong Bảng 1 và phân bố không gian của chúng được vẽ ở Hình 2-4. Phân bố không gian của số ô tô trên mỗi hộ cho thấy các phường dọc sông Tyne, về phía trung tâm vùng, nhìn chung có số ô tô trên mỗi hộ thấp hơn các khu ngoại ô ở ngoại vi. Tỷ lệ thất nghiệp nam giới cao tập trung ở các phường trung tâm của Newcastle (ở gần giữa vùng) và Sunderland (ở phía đông nam). Phân bố của biến tầng lớp xã hội ít rõ nét hơn nhưng phản ánh các khu giàu có ở phía bắc Newcastle và một số khu ven biển ở phía đông của vùng.
+
+Giả thuyết đặt ra là khi tỷ lệ thất nghiệp nam giới trong một phường tăng lên thì tỷ lệ sở hữu ô tô giảm, ceteris paribus (các yếu tố khác không đổi), và khi tỷ lệ hộ thuộc tầng lớp xã hội I tăng lên thì tỷ lệ sở hữu ô tô tăng, ceteris paribus. Các giả thuyết này được ủng hộ mạnh bởi kết quả hồi quy OLS toàn cục ở Bảng 2, trong đó cả hai ước lượng tham số đều khác 0 có ý nghĩa ở mức 99 phần trăm và đều có dấu như kỳ vọng. Giá trị R bình phương của mô hình là 0,83, cho thấy độ khớp cao với dữ liệu. Tuy nhiên, kết quả này không cho biết tính ổn định của các mối quan hệ trên toàn vùng nghiên cứu, và để làm điều đó cần áp dụng GWR.
+
+FIG.2. Bản đồ số ô tô trên một trăm hộ theo phường (các mức: dưới 40; 40-55; 55-65; 65-75; trên 75)
+
+FIG.3. Bản đồ tỷ lệ thất nghiệp nam giới theo phường (các mức: dưới 10\%; 10\%-15\%; 15\%-20\%; 20\%-25\%; trên 25\%)
+
+\subsection{4.1 Ứng dụng GWR}
+
+Vì GWR là kỹ thuật dựa trên các điểm mẫu, các biến gắn với mỗi phường được giả định là mẫu lấy tại tâm (centroid) của phường đó, sao cho điểm i được xác định là tâm của phường i. Theo cách này, hiệu ứng suy giảm theo khoảng cách vẫn được áp dụng, với ảnh hưởng của mỗi phường lên ước lượng a\_ik giảm dần khi khoảng cách từ tâm phường đến i tăng. Điều này cũng cung cấp một cách hữu ích để lập bản đồ kết quả phân tích: nếu a\_ik được ước lượng cho từng tâm phường và giá trị đó được gán cho phường tương ứng thì có thể vẽ bản đồ choropleth về sự biến thiên của các hệ số. Các giá trị hệ số này cũng có thể làm cơ sở cho các kiểm định ý nghĩa đã mô tả ở trên.
+
+FIG.4. Bản đồ tỷ lệ chủ hộ thuộc tầng lớp xã hội I theo phường (các mức: dưới 1\%; 1\%-2\%; 2\%-3\%; 3\%-4\%; trên 4\%)
+
+\textbf{BẢNG 2} Kết quả hồi quy OLS toàn cục
+
+{\small
+\begin{longtable}[]{@{}llll@{}}
+\toprule\noalign{}
+Tham số & Giá trị ước lượng & Sai số chuẩn & Giá trị t \\
+\midrule\noalign{}
+\endhead
+\bottomrule\noalign{}
+\endlastfoot
+Hệ số chặn (Intercept) & 88,5 & 2,89 & 30,6 \\
+Tầng lớp xã hội & 1,88 & 0,33 & 5,7 \\
+Thất nghiệp & -1,83 & 0,11 & 16,6 \\
+\end{longtable}
+}
+
+R² = 0,83
+
+Các mô hình GWR với hàm trọng số không gian mô tả ở (9) và nhiều giá trị \ensuremath{\beta} khác nhau được áp dụng cho dữ liệu mô tả ở Bảng 1 và Hình 2-4. Giá trị tổng bình phương sai số kiểm định chéo (CVSS) được vẽ theo hàm của \ensuremath{\beta} ở Hình 5. Từ đó thấy có một giá trị \ensuremath{\beta} tối ưu toàn cục quanh 0,303, được xác nhận bằng thuật toán tối ưu Golden Section. Tại giá trị này, điểm CV xấp xỉ một nửa so với trường hợp hồi quy toàn cục (\ensuremath{\beta} = 0). Sơ đồ trọng số quanh một phường ở trung tâm thành phố ứng với \ensuremath{\beta} tối ưu được minh họa ở Hình 6. Mẫu này cho thấy dữ liệu được gán trọng số theo không gian như thế nào để ước lượng tham số cho phường đó. Sơ đồ trọng số được đặt tâm tại từng phường để ước lượng các tham số biến thiên theo không gian.
+
+FIG.5. Hiệu chỉnh hàm trọng số không gian
+
+FIG.6. Bản đồ hàm trọng số theo phường (các mức: dưới 0,01; 0,01-0,03; 0,03-0,06; 0,06-0,30; 0,30-1,00)
+
+Kết quả chính của GWR, tức sự biến thiên không gian của các ước lượng tham số, được thể hiện ở Hình 7-9 lần lượt cho hệ số chặn, tầng lớp xã hội và thất nghiệp. Sự biến thiên không gian của các mối quan hệ được bộc lộ bởi
+
+Các phân bố này đáng chú ý. Chẳng hạn, các số hạng chặn (intercept) cho thấy một mô hình không gian rõ rệt, với giá trị cao hơn ở phía tây bắc và đông nam của vùng. Đây là những khu vực ít đô thị hóa hơn, và gợi ý rằng, với các điều kiện khác không đổi (ceteris paribus), tỷ lệ sở hữu ô tô cao hơn gắn với các khu vực nông thôn hơn. Điều này có thể liên quan đến mức độ giao thông công cộng thấp hơn và khả năng tiếp cận dịch vụ kém hơn ở các khu vực đó. Mối quan hệ giữa tỷ lệ sở hữu ô tô và tầng lớp xã hội ở Hình 8 cho thấy, với các điều kiện khác không đổi và cùng một tỷ lệ hộ gia đình thuộc tầng lớp xã hội I, tỷ lệ sở hữu ô tô cao hơn ở các phường hướng ra bờ biển và trong một dải gần rìa phía nam của vùng. Một cách giải thích khả dĩ là tỷ lệ sở hữu ô tô cao hơn ở các phường giàu hơn nhưng không được phục vụ tốt bởi hệ thống giao thông công cộng đường sắt nhẹ của vùng, vốn tập trung vào thành phố Newcastle, xấp xỉ ở trung tâm khu vực nghiên cứu. Phân bố của tham số thất nghiệp cho thấy mối quan hệ này ít âm hơn trong lõi đô thị hóa cao của khu vực nghiên cứu và trong một dải chạy từ tây nam sang đông bắc qua phần phía nam của vùng. Nguyên nhân chưa rõ ràng ngay lập tức. Một ứng dụng quan trọng của GWR là làm công cụ khám phá để điều tra thêm các câu hỏi và phát hiện mà nếu không có thể bị bỏ sót.
+
+\textbf{HÌNH 7.} Bản đồ hệ số chặn (intercept) theo phường (các mức: dưới 75; 75-80; 80-85; 85-90; trên 90).
+
+\textbf{HÌNH 8.} Bản đồ hệ số Tầng lớp xã hội I theo phường (các mức: dưới 0; 0,0-1,5; 1,5-3,0; 3,0-4,5; trên 4,5).
+
+\textbf{HÌNH 9.} Bản đồ hệ số Thất nghiệp nam theo phường (các mức: dưới -1,7; -1,7 đến -1,6; -1,6 đến -1,5; -1,5 đến -1,4; trên -1,4).
+
+\textbf{BẢNG 3} Kiểm định ý nghĩa thống kê cho tính không dừng
+
+{\small
+\begin{longtable}[]{@{}lll@{}}
+\toprule\noalign{}
+Biến & \(s_i\) & giá trị p \\
+\midrule\noalign{}
+\endhead
+\bottomrule\noalign{}
+\endlastfoot
+Intercept (hệ số chặn) & 6.34 & 0.40 \\
+Tầng lớp xã hội I & 1.66 & 0.04 \\
+Thất nghiệp nam & 0.17 & 0.96 \\
+\end{longtable}
+}
+
+Trước khi bàn chi tiết hơn về các kết quả này, cần đánh giá ý nghĩa thống kê của các biến thiên không gian trong các ước lượng tham số, được xác định bằng cách tính các thống kê \(s_i\) theo phương pháp Monte Carlo đã mô tả ở trên. Kết quả các kiểm định được trình bày ở Bảng 3.
+
+Từ đó có thể thấy hệ số duy nhất biến thiên có ý nghĩa theo không gian là hệ số gắn với tỷ lệ tầng lớp xã hội I trong một phường. Điều này cũng được củng cố bởi việc độ lệch chuẩn của các ước lượng tham số biến thiên theo không gian của biến này (1,66) lớn hơn năm lần sai số chuẩn của ước lượng tham số toàn cục (0,33, như trong Bảng 2). Một cách diễn giải khả dĩ là: dù người thất nghiệp có thể coi trọng khả năng tiếp cận giao thông ở nông thôn hơn ở thành thị, thực tế cho thấy việc duy trì một chiếc ô tô có thể quá tốn kém, nên mức thất nghiệp không ảnh hưởng đến tỷ lệ sở hữu ô tô theo cách khác nhau giữa nông thôn và thành thị. Tuy nhiên, với những người khá giả hơn, sở hữu một hoặc nhiều ô tô thường là lựa chọn khả thi, và lựa chọn này được dùng nhiều hơn ở nông thôn, nơi giao thông công cộng thường kém hơn và có lẽ nhu cầu đi lại bằng ô tô lớn hơn. Rõ ràng có thể có những cách diễn giải khác cho phân tích này, nhưng GWR dường như là một phương tiện hữu ích để khám phá dữ liệu và nhận diện các mô hình địa lý tiềm ẩn, có thể được đưa vào một quy trình mô hình hóa chính thức sau đó.
+
+\textbf{HÌNH 10.} Bản đồ sai số chuẩn của hệ số Tầng lớp xã hội I theo phường.
+
+\section{5. CÁC VẤN ĐỀ BỔ SUNG VỀ GWR}
+
+Bài báo này mô tả một kỹ thuật mới cho phân tích không gian, có tiềm năng làm lộ ra nhiều câu hỏi thú vị về tính bất ổn định theo không gian của các mối quan hệ. Ở đây chúng tôi thảo luận một số vấn đề có thể làm cơ sở cho các nghiên cứu tiếp theo về chủ đề này.
+
+5.1 Độ biến thiên của các ước lượng hệ số
+
+Mọi phương pháp phân tích không gian cho ra kết quả cục bộ có thể lập bản đồ đều chịu hiệu ứng biên, và GWR cũng không ngoại lệ. Chẳng hạn, với hàm nhân (kernel) "cắt đột ngột" như (8), các điểm gần biên vùng nghiên cứu thường có ít điểm mẫu trong bán kính d quanh điểm i, vì một phần vòng tròn lấy mẫu nằm ngoài vùng nghiên cứu. Do đó, việc hiệu chỉnh mô hình hồi quy tại những điểm này chịu sai số lấy mẫu lớn hơn. Các hàm nhân khác cũng gặp hiện tượng tương tự dù tinh tế hơn: tổng các trọng số đóng vai trò tương tự n và thay đổi theo vị trí từng điểm, nên những vùng chỉ gần vài điểm mẫu sẽ có sai số lấy mẫu lớn hơn. Có thể tính sai số chuẩn của các ước lượng hệ số trong mô hình GWR và lập bản đồ chúng để đánh giá độ tin cậy của từng ước lượng. Ở Hình 10, sai số chuẩn của hệ số Social Class I trong ví dụ trên được vẽ thành bản đồ; bản đồ cho thấy rõ sai số chuẩn không đồng đều và lớn hơn ở các phường (ward) thuộc phía nam vùng nghiên cứu.
+
+Thách thức cho nghiên cứu tương lai là tìm cách trực quan hóa đồng thời các ước lượng hệ số và độ tin cậy của chúng, đo bằng sai số chuẩn này.
+
+5.2 Kiểm định giả thuyết lưu động (Roving Hypothesis Tests)
+
+Từ phần trên, với mỗi điểm có thể tính một ước lượng hệ số và một sai số chuẩn. Lấy ước lượng chia cho sai số chuẩn sẽ được một thống kê t giả (pseudo t). Trong hồi quy bình phương tối thiểu thông thường, thống kê này là cơ sở để kiểm định hệ số có khác 0 một cách có ý nghĩa hay không, tức kiểm định sự phụ thuộc giữa một biến độc lập và biến phụ thuộc. Với GWR, sẽ có một thống kê như vậy tại mọi điểm trong vùng nghiên cứu. Việc khái quát hóa kiểm định phụ thuộc này là hướng hấp dẫn, vì nó cho phép xác định khu vực nào biến này ảnh hưởng đến biến kia và khu vực nào không.
+
+Rõ ràng cần cân nhắc kỹ vấn đề này, đặc biệt là những cạm bẫy của kiểm định ý nghĩa thống kê nhiều lần; tuy vậy, sẽ hữu ích nếu phát triển được một phương tiện, chính thức hoặc không chính thức, để khảo sát bản chất không gian của các mối phụ thuộc.
+
+5.3 Biến thiên không gian của các hàm trọng số
+
+Trong các phương pháp GWR đã đề xuất đến nay, hàm trọng số sau khi hiệu chỉnh được giả định là không đổi trên toàn vùng nghiên cứu. Tuy nhiên, đôi khi giả định này không hợp lý. Chẳng hạn trong các ứng dụng kinh tế, cơ cấu giá có thể phụ thuộc vào thị trường địa phương, nhưng phạm vi của khái niệm "địa phương" có thể khác nhau theo vùng: phạm vi địa lý của thị trường London có thể rộng hơn của Newcastle. Khi đó, cách tiếp cận GWR hợp lý hơn là dùng hàm trọng số biến thiên theo không gian, sao cho \(p_i\) được ước lượng thay vì \(\beta\). Dù phức tạp về tính toán, kết quả sẽ mang nhiều thông tin, không chỉ về bản chất mối quan hệ giữa các thuộc tính mà còn về cách các địa điểm tương tác với nhau.
+
+5.4 Các mở rộng của GWR
+
+Ý tưởng dùng dữ liệu có trọng số địa lý để tạo thống kê cục bộ không chỉ áp dụng cho kỹ thuật hồi quy. Nhiều kỹ thuật thống kê khác cho phép gán trọng số cho từng biến, và bất kỳ kỹ thuật nào trong số đó cũng có thể được điều chỉnh để thích ứng địa lý như hồi quy đã làm với GWR. Một ví dụ đơn giản: có thể tính độ lệch chuẩn của một tập quan sát với trọng số gán cho từng quan sát. Độ lệch chuẩn trọng số địa lý (GWSD) tại điểm i được định nghĩa bằng cách áp dụng sơ đồ trọng số kernel quanh i vào việc tính độ lệch chuẩn mẫu, tạo ra một bề mặt phủ vùng nghiên cứu thể hiện độ biến thiên cục bộ của biến được lập bản đồ. Cũng có thể tạo các thống kê tự tương quan không gian cục bộ theo cách này từ phiên bản GWR của mô hình Ord (Ord 1975). Về cơ bản, bất kỳ mô hình nào có thể gán trọng số đều có thể được gán trọng số địa lý.
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\setcounter{enumi}{5}
+\item
+  KẾT LUẬN
+\end{enumerate}
+
+Một cách diễn giải GWR là xem nó như một phép biến đổi rời rạc, chẳng hạn biến đổi Fourier. Biến đổi Fourier thường dùng với dữ liệu chuỗi thời gian để xem nội dung tần số; chuỗi được quan sát càng dài thì càng thấy được nhiều thành phần tần số thấp, nên số phần tử dữ liệu trong chuỗi Fourier tăng theo kích thước chuỗi thời gian. Do đó, thay vì dùng
+
+"Giảm dữ liệu" (data reduction) là một mô hình mô tả dữ liệu, nhưng ở đây đúng hơn là "sắp xếp lại dữ liệu", tức biến đổi dữ liệu. GWR cũng có thể được xem theo cách này.
+
+Một tập dữ liệu ban đầu có \(m\) biến độc lập, một biến phụ thuộc và \(n\) quan sát chứa \((m+1)n\) phần tử dữ liệu. Sau khi tính các giá trị \(a_i\) cục bộ cho từng hệ số và cho cả số hạng chặn tại mỗi trong \(n\) điểm mẫu, tập dữ liệu đã biến đổi vẫn có \((m+1)n\) phần tử. Tuy nhiên, nhờ biến đổi như vậy, ta có thể khảo sát các xu hướng cục bộ của tính không dừng trong mô hình hồi quy, điều không thể thấy rõ từ dữ liệu thô. Do đó, giống như biến đổi Fourier, đây là một phép biến đổi dữ liệu cho phép nhìn tập dữ liệu từ một góc độ khác.
+
+Kỹ thuật này cũng có thể xem là phản hồi trước lời kêu gọi của Fotheringham (1992, 1994), Fotheringham và Rogerson (1993) và Openshaw (1993) về việc chuyển từ thống kê trên toàn bản đồ sang thống kê cục bộ, vốn giàu thông tin hơn và có thể được lập bản đồ. Trong bài này, chúng tôi phản đối việc dùng một thống kê đơn lẻ, như hệ số tương quan hay một tham số hồi quy, để mô tả mối quan hệ trên toàn bộ khu vực nghiên cứu địa lý. Giá trị như vậy là trung bình trên mọi điểm trong khu vực và có thể che khuất thông tin không gian quan trọng về các mối quan hệ giữa các biến vốn thay đổi theo địa phương. Có ý kiến cho rằng phân tích không gian chỉ có thể tiến bộ đáng kể nếu giải quyết được sự thiếu nhất quán này. Chúng tôi hy vọng GWR là một bước theo hướng đó và sẽ thúc đẩy sự quan tâm đến các cách tiếp cận mang tính địa lý thực sự hơn trong phân tích dữ liệu không gian.
+
+\subsection{LITERATURE CITED}
+
+Aitken, M. (1996). "A General Maximum Likelihood Analysis of Overdispersion in Generalized Linear Models." Statistics and Computing (in press).
+
+Bowman, A. W. (1984). "An Alternative Method of Cross-Validation for the Smoothing of Density Estimates." Biometrika 71, 353-60.
+
+Brunsdon, C. F. (1991). "Estimating Probability Surfaces in GIS: An Adaptive Technique." In Proceedings of the Second European Conference on Geographical Information Systems, edited by J. Harts, H. F. Ottens, and H. J. Scholten, pp. 155-63. Utrecht: EGIS Foundation.
+
+(1995). "Estimating Probability Surfaces for Geographical Point Data: An Adaptive Kernel Algorithm." Computers and Geosciences 21, 877-94.
+
+Casetti, E. (1972). "Generating Models by the Expansion Method: Applications to Geographic Research." Geographical Analysis 4, 81-91.
+
+Casetti, E., and J. P. Jones III (1992). Applications of the Expansion Method. London: Routledge.
+
+Cleveland, W. S. (1979). "Robust Locally Weighted Regression and Smoothing Scatterplots." Journal of the American Statistical Association 74, 829-36.
+
+Cleveland, W. S., and S. J. Devlin (1988). "Locally Weighted Regression: An Approach to Regression Analysis by Local Fitting." Journal of the American Statistical Association 83, 596-610.
+
+Dobson, A. J. (1990). An Introduction to Generalised Linear Models. London: Chapman and Hall.
+
+Eldridge, J. D., and J. P. Jones III (1991). "Warped Space: A Geography of Distance Decay." Professional Geographer 43, 500-11.
+
+Foster, S. A., and W. L. Gorr (1986). "An Adaptive Filter for Estimating Spatially Varying Parameters: Application to Modeling Police Hours Spent in Response to Calls for Service." Management Science 32, 878-89.
+
+Fotheringham, A. S. (1992). "Exploratory Spatial Data Analysis and GIS." Environment and Planning A 25, 156-58.
+
+(1994). "On the Future of Spatial Analysis: The Role of GIS." Environment and Planning A, Anniversary Issue, 30-34.
+
+Fotheringham, A. S., and T. C. Pitts (1995). "Directional Variation in Distance-Decay." Environment and Planning A 27, 715-29.
+
+Fotheringham, A. S., and P. A. Rogerson (1993). "GIS and Spatial Analytical Problems." International Journal of Geographical Information Systems 7, 3-19.
+
+Fotheringham, A. S., M. Charlton, and C. F. Brunsdon (1996). "The Geography of Parameter Space: An Investigation into Spatial Non-Stationarity." International Journal of Geographical Information Systems (in press).
+
+Goldstein, H. (1987). Multilevel Models in Educational and Social Research. London: Oxford University Press.
+
+Gorr, W. L., and A. M. Olligschlaeger (1994). "Weighted Spatial Adaptive Filtering: Monte Carlo Studies and Application to Illicit Drug Market Modeling." Geographical Analysis 26, 67-87.
+
+Greig, D. M. (1980). Optimisation. London: Longman.
+
+Jones, K. (1991). "Specifying and Estimating Multilevel Models for Geographical Research." Transactions of the Institute of British Geographers 16, 148-59.
+
+Openshaw, S. (1993). "Exploratory Space-Time-Attribute Pattern Analysers." In Spatial Analysis and GIS, edited by A. S. Fotheringham, and P. A. Rogerson, pp. 147-63. London: Taylor and Francis.
+
+Ord, J. K. (1975). "Estimation Methods for Models of Spatial Interaction." Journal of the American Statistical Association 70, 120-26.
+
+Parzen, E. (1962). "On the Estimation of a Probability Density Function and the Mode." Annals of Mathematical Statistics 33, 1065-76.
+
+Silverman, B. W. (1986). Density Estimation for Statistics and Data Analysis. London: Chapman and Hall.
+
+Wand, M. P., and M. C. Jones (1995). Kernel Smoothing. London: Chapman and Hall.
+
+(Trang cuối chỉ có đầu/chân trang nhà xuất bản và số trang; không có nội dung cần dịch.)

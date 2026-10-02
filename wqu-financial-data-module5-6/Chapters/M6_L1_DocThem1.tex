@@ -1,0 +1,31 @@
+\chapter{Đọc thêm 1: GeoJSON}
+\label{ch:M6L1DocThem1}
+
+\section{Thông tin nguồn}
+
+\begin{itemize}
+  \item \textbf{Nguồn:} GeoJSON. \url{https://geojson.org}
+  \item \textbf{Phần cần đọc:} Toàn bộ trang
+  \item \textbf{Ghi chú:} bản chuyển ngữ tiếng Việt súc tích, bám cấu trúc nguồn (giữ nguyên tiêu đề, công thức, số liệu, bảng, chú thích và danh mục tài liệu tham khảo).
+\end{itemize}
+
+GeoJSON là một định dạng dùng để mã hóa nhiều loại cấu trúc dữ liệu địa lý.
+
+\begin{lstlisting}[escapeinside={(*@}{@*)}]
+{
+    "type": "Feature",
+    "geometry": {
+      "type": "Point",
+      "coordinates": [125.6, 10.1]
+    },
+    "properties": {
+      "name": "Dinagat Islands"
+    }
+}
+\end{lstlisting}
+
+GeoJSON hỗ trợ các kiểu hình học sau: Point, LineString, Polygon, MultiPoint, MultiLineString và MultiPolygon. Đối tượng hình học kèm thuộc tính bổ sung là đối tượng Feature. Tập hợp các feature được chứa trong đối tượng FeatureCollection.
+
+\subsection{Đặc tả GeoJSON (RFC 7946)}
+
+Năm 2015, Internet Engineering Task Force (IETF) phối hợp với các tác giả đặc tả gốc đã thành lập một nhóm làm việc (WG) về GeoJSON nhằm chuẩn hóa định dạng này. RFC 7946 được công bố vào tháng 8 năm 2016 và là đặc tả chuẩn mới của định dạng GeoJSON, thay thế đặc tả GeoJSON năm 2008.

@@ -1,0 +1,94 @@
+%****************************************************************************************************
+% main — WQU Financial Data — Module 5 & Module 6
+% Bản dịch tiếng Việt (tài liệu học tập cá nhân)
+%****************************************************************************************************
+\RequirePackage{fix-cm}
+\documentclass[
+  oneside, titlepage, numbers=noenddot, headinclude,
+  footinclude=true, cleardoublepage=empty, abstractoff,
+  BCOR=5mm, paper=a4, fontsize=11pt
+]{scrreprt}
+
+\input{classicthesis-config}
+\usepackage{framed}
+\usepackage{tikz}
+\usetikzlibrary{arrows.meta, positioning, calc}
+\usepackage{pdfpages}
+\usepackage{xcolor}
+\usepackage{longtable}
+\usepackage{pdflscape}
+
+% ---- Style riêng cho khối code/output (lstlisting), chỉ áp dụng ở main.tex,
+% ---- không chỉnh sửa classicthesis-config.tex. Mục tiêu: chống tràn lề
+% ---- (breaklines) và trình bày chuẩn học thuật cho các đoạn code Python.
+\lstset{
+  basicstyle=\ttfamily\footnotesize,
+  breaklines=true,
+  breakatwhitespace=false,
+  columns=fullflexible,
+  keepspaces=true,
+  showstringspaces=false,
+  tabsize=4,
+  frame=single,
+  framerule=0.4pt,
+  rulecolor=\color{black!30},
+  backgroundcolor=\color{black!4},
+  captionpos=b,
+  aboveskip=1em,
+  belowskip=1em,
+  keywordstyle=\color{blue!55!black}\bfseries,
+  commentstyle=\color{green!40!black}\itshape,
+  stringstyle=\color{orange!65!black},
+  numberstyle=\tiny\color{black!50}
+}
+
+\begin{document}
+\frenchspacing
+\raggedbottom
+\selectlanguage{vietnamese}
+\pagenumbering{roman}
+\pagestyle{plain}
+
+\IfFileExists{gfx/cover.pdf}{\includepdf[pages=-]{gfx/cover.pdf}}{}
+\input{disclaimer}
+
+\pagestyle{scrheadings}
+\tableofcontents
+\cleardoublepage
+\pagenumbering{arabic}
+
+% ============ MODULE 5 ============
+% ---- Lesson 1 ----
+\include{Chapters/M5_L1_LessonNotes}
+\include{Chapters/M5_L1_DocThem1}
+\include{Chapters/M5_L1_DocThem2}
+% ---- Lesson 2 ----
+\include{Chapters/M5_L2_LessonNotes}
+\include{Chapters/M5_L2_DocThem1}
+\include{Chapters/M5_L2_DocThem2}
+% ---- Lesson 3 ----
+\include{Chapters/M5_L3_LessonNotes}
+\include{Chapters/M5_L3_DocThem1}
+\include{Chapters/M5_L3_DocThem2}
+\include{Chapters/M5_L3_DocThem3}
+% ---- Lesson 4 ----
+\include{Chapters/M5_L4_LessonNotes}
+\include{Chapters/M5_L4_DocThem1}
+\include{Chapters/M5_L4_DocThem2}
+% ============ MODULE 6 ============
+% ---- Lesson 1 ----
+\include{Chapters/M6_L1_LessonNotes}
+\include{Chapters/M6_L1_DocThem1}
+\include{Chapters/M6_L1_DocThem2}
+% ---- Lesson 2 ----
+\include{Chapters/M6_L2_LessonNotes}
+\include{Chapters/M6_L2_DocThem1}
+% ---- Lesson 3 ----
+\include{Chapters/M6_L3_LessonNotes}
+\include{Chapters/M6_L3_DocThem1}
+% ---- Lesson 4 ----
+\include{Chapters/M6_L4_LessonNotes}
+\include{Chapters/M6_L4_DocThem1}
+\include{Chapters/M6_L4_DocThem2}
+\include{Chapters/M6_L4_DocThem3}
+\end{document}

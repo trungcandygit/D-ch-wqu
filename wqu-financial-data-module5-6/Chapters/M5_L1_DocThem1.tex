@@ -1,0 +1,176 @@
+\chapter{Đọc thêm 1: Học các bộ phận của đối tượng bằng phân rã ma trận không âm (Lee \& Seung)}
+\label{ch:M5L1DocThem1}
+
+\section{Thông tin nguồn}
+
+\begin{itemize}
+  \item \textbf{Nguồn:} Lee, D. D. \& Seung, H. S. ``Learning the parts of objects by non-negative matrix factorization.'' \emph{Nature}, 401, 1999.
+  \item \textbf{Phần cần đọc:} Toàn bộ bài báo
+  \item \textbf{Ghi chú:} bản chuyển ngữ tiếng Việt súc tích, bám cấu trúc nguồn (giữ nguyên tiêu đề, công thức, số liệu, bảng, chú thích và danh mục tài liệu tham khảo).
+\end{itemize}
+
+(Trang đầu của tệp PDF thuộc một bài báo khác trên tạp chí Nature, không phải phần cần đọc; bỏ qua. Nội dung bài của Lee \& Seung (1999) bắt đầu ở phần tiếp theo.)
+
+Daniel D. Lee và H. Sebastian Seung (Bell Laboratories, Lucent Technologies; Massachusetts Institute of Technology)
+
+Việc nhận thức tổng thể có dựa trên nhận thức các bộ phận của nó hay không? Đã có bằng chứng tâm lý học và sinh lý học về các biểu diễn theo bộ phận trong não, và một số lý thuyết tính toán về nhận dạng đối tượng cũng dựa trên các biểu diễn này. Tuy nhiên, người ta còn biết rất ít về cách não bộ hay máy tính học được các bộ phận của đối tượng. Bài báo trình bày một thuật toán phân rã ma trận không âm (NMF) có khả năng học các bộ phận của khuôn mặt và các đặc trưng ngữ nghĩa của văn bản. Điều này trái với các phương pháp khác như phân tích thành phần chính (PCA) và lượng tử hóa vectơ (VQ), vốn học các biểu diễn toàn thể chứ không theo bộ phận. NMF khác biệt ở chỗ sử dụng các ràng buộc không âm; các ràng buộc này chỉ cho phép tổ hợp cộng, không cho phép tổ hợp trừ, nên dẫn đến biểu diễn theo bộ phận. Khi NMF được cài đặt dưới dạng mạng nơ-ron, biểu diễn theo bộ phận xuất hiện nhờ hai tính chất: tốc độ phát xung của nơ-ron không bao giờ âm và cường độ synap không đổi dấu.
+
+\subsection{Áp dụng NMF, PCA và VQ cho ảnh khuôn mặt}
+
+Các tác giả áp dụng NMF, PCA và VQ cho một cơ sở dữ liệu ảnh khuôn mặt. Như Hình 1 cho thấy, cả ba phương pháp đều biểu diễn một khuôn mặt dưới dạng tổ hợp tuyến tính của các ảnh cơ sở, nhưng kết quả khác nhau về chất:
+
+\begin{itemize}
+\item
+  VQ tìm ra một cơ sở gồm các nguyên mẫu, mỗi nguyên mẫu là một khuôn mặt hoàn chỉnh.
+\item
+  Các ảnh cơ sở của PCA là các "eigenface" (khuôn mặt riêng), một số trông như phiên bản méo của khuôn mặt nguyên vẹn.
+\item
+  Cơ sở NMF hoàn toàn khác: các ảnh là những đặc trưng cục bộ, phù hợp hơn với quan niệm trực giác về các bộ phận của khuôn mặt.
+\end{itemize}
+
+\subsection{Khung phân rã ma trận}
+
+Để hiểu vì sao NMF học được biểu diễn khác với PCA và VQ, ta mô tả cả ba phương pháp trong khung phân rã ma trận. Cơ sở dữ liệu ảnh được coi là ma trận \(n \times m\) \(V\), mỗi cột chứa \(n\) giá trị điểm ảnh không âm của một trong \(m\) ảnh khuôn mặt. Cả ba phương pháp đều xây dựng phân rã xấp xỉ dạng \(V \approx WH\), tức là
+
+\begin{equation*}V_{i\mu} \approx (WH)_{i\mu} = \sum_{a=1}^{r} W_{ia} H_{a\mu} \tag{1}\end{equation*}
+
+\(r\) cột của \(W\) được gọi là các ảnh cơ sở. Mỗi cột của \(H\) được gọi là một mã hóa (encoding), tương ứng một-một với một khuôn mặt trong \(V\); mã hóa gồm các hệ số dùng để biểu diễn khuôn mặt đó như tổ hợp tuyến tính của các ảnh cơ sở. Kích thước của các thừa số \(W\) và \(H\) lần lượt là \(n \times r\) và \(r \times m\). Hạng \(r\) thường được chọn sao cho \((n+m)r < nm\), nhờ đó tích \(WH\) có thể xem là dạng nén của dữ liệu trong \(V\).
+
+\subsection{Khác biệt giữa VQ, PCA và NMF}
+
+Sự khác biệt giữa ba phương pháp bắt nguồn từ các ràng buộc khác nhau áp đặt lên \(W\) và \(H\):
+
+\begin{itemize}
+\item
+  \textbf{VQ:} mỗi cột của \(H\) bị ràng buộc là vectơ đơn vị một phần tử (một phần tử bằng 1, các phần tử còn lại bằng 0). Nói cách khác, mỗi khuôn mặt (cột của \(V\)) được xấp xỉ bằng đúng một ảnh cơ sở (cột của \(W\)). Mã hóa đơn phân này (minh họa cạnh cơ sở VQ ở Hình 1) buộc VQ học các ảnh cơ sở là khuôn mặt nguyên mẫu.
+\item
+  \textbf{PCA:} các cột của \(W\) bị ràng buộc trực chuẩn và các hàng của \(H\) trực giao với nhau. Điều này nới lỏng ràng buộc đơn phân của VQ, cho phép biểu diễn phân tán, trong đó mỗi khuôn mặt được xấp xỉ bằng tổ hợp tuyến tính của mọi ảnh cơ sở (eigenface). Dù eigenface có ý nghĩa thống kê là các hướng có phương sai lớn nhất, nhiều eigenface không có cách diễn giải trực quan rõ ràng, vì PCA cho phép các phần tử của \(W\) và \(H\) mang dấu bất kỳ. Do các eigenface được dùng trong những tổ hợp thường có sự triệt tiêu phức tạp giữa số dương và số âm, nhiều eigenface riêng lẻ không có ý nghĩa trực quan.
+\item
+  \textbf{NMF:} không cho phép phần tử âm trong \(W\) và \(H\). Khác với ràng buộc đơn phân của VQ, ràng buộc không âm cho phép kết hợp nhiều ảnh cơ sở để biểu diễn một khuôn mặt, nhưng chỉ cho phép tổ hợp cộng vì các phần tử khác không của \(W\) và \(H\) đều dương. Khác với PCA, không có phép trừ nào xảy ra. Vì vậy, ràng buộc không âm phù hợp với quan niệm trực giác về việc ghép các bộ phận thành một tổng thể, và đó chính là cách NMF học biểu diễn theo bộ phận.
+\end{itemize}
+
+\subsection{Tính thưa của biểu diễn NMF}
+
+Hình 1 cho thấy cơ sở và các mã hóa của NMF chứa tỷ lệ lớn các hệ số triệt tiêu, nên cả ảnh cơ sở lẫn mã hóa ảnh đều thưa. Các ảnh cơ sở thưa vì chúng không mang tính toàn cục và chứa nhiều phiên bản của miệng, mũi và các bộ phận khác của mặt, ở các vị trí hoặc hình dạng khác nhau; sự biến thiên của cả khuôn mặt được tạo ra bằng cách kết hợp các bộ phận khác nhau này. Mọi bộ phận đều được ít nhất một khuôn mặt sử dụng, nhưng một khuôn mặt bất kỳ không dùng hết các bộ phận sẵn có. Kết quả là mã hóa ảnh phân tán thưa, trái với mã hóa đơn phân của VQ và mã hóa phân tán hoàn toàn của PCA.
+
+\subsection{Quy tắc cập nhật}
+
+Các tác giả cài đặt NMF với các quy tắc cập nhật cho \(W\) và \(H\) nêu ở Hình 2. Việc lặp các quy tắc này hội tụ đến một cực đại cục bộ của hàm mục tiêu \(F\) (công thức được nêu tiếp ở phần sau).
+
+\begin{equation*}F=\sum_{i=1}^{n}\sum_{\mu=1}^{m}\left[V_{i\mu}\log (WH)_{i\mu}-(WH)_{i\mu}\right] \tag{2}\end{equation*}
+
+với các ràng buộc không âm đã nêu ở trên. Hàm mục tiêu này có thể suy ra bằng cách diễn giải NMF như một phương pháp xây dựng mô hình xác suất sinh ảnh: mỗi điểm ảnh \(V_{i\mu}\) được tạo ra bằng cách cộng nhiễu Poisson vào tích \((WH)_{i\mu}\). Khi đó, hàm trong phương trình (2) liên quan đến khả năng (likelihood) sinh ra các ảnh trong \(V\) từ cơ sở \(W\) và các mã hóa \(H\).
+
+Dạng chính xác của hàm mục tiêu không quan trọng bằng các ràng buộc không âm đối với việc NMF học được các thành phần (parts). Hàm mục tiêu sai số bình phương cũng có thể được tối ưu bằng các quy tắc cập nhật \(W\) và \(H\) khác với quy tắc trong Hình 2 (tài liệu tham khảo 10, 11). Các quy tắc này cho kết quả tương tự Hình 1, nhưng có nhược điểm kỹ thuật là phải điều chỉnh một tham số kiểm soát tốc độ học, thường bằng thử và sai, rất tốn thời gian khi ma trận \(V\) lớn. Vì vậy, quy tắc cập nhật ở Hình 2 có lợi thế đối với các ứng dụng trên cơ sở dữ liệu lớn.
+
+\textbf{Hình 1.} NMF học biểu diễn theo thành phần của khuôn mặt, trong khi lượng tử hóa vectơ (VQ) và phân tích thành phần chính (PCA) học các biểu diễn toàn thể. Ba phương pháp được áp dụng cho cơ sở dữ liệu \(m = 2.429\) ảnh khuôn mặt, mỗi ảnh gồm \(n = 19 \times 19\) điểm ảnh, tạo thành ma trận \(V\) cỡ \(n \times m\). Cả ba đều tìm phân rã xấp xỉ \(V \approx WH\) nhưng với ba loại ràng buộc khác nhau lên \(W\) và \(H\). Mỗi phương pháp học \(r = 49\) ảnh cơ sở, hiển thị dạng lưới \(7 \times 7\); giá trị dương là điểm ảnh đen, giá trị âm là điểm ảnh đỏ. Một khuôn mặt cụ thể (phía trên bên phải) được biểu diễn xấp xỉ bằng chồng chập tuyến tính của các ảnh cơ sở; các hệ số chồng chập hiển thị cạnh mỗi lưới, và kết quả chồng chập nằm ở phía bên kia dấu bằng. Khác với VQ và PCA, NMF học cách biểu diễn khuôn mặt bằng các ảnh cơ sở giống các bộ phận của khuôn mặt.
+
+Có thể trực quan hóa mối phụ thuộc giữa điểm ảnh và biến mã hóa dưới dạng mạng ở Hình 3. Lớp trên là mã hóa \(h_1,\dots,h_r\) (một cột của \(H\)), lớp dưới là ảnh \(v_1,\dots,v_n\) (một cột của \(V\)). Phần tử ma trận \(W_{ia}\) cho biết mức ảnh hưởng của biến mã hóa \(h_a\) lên điểm ảnh \(v_i\). Một biến mã hóa ảnh hưởng nhiều điểm ảnh nhờ các kết nối tỏa ra từ nó; do \(W_{ia}\) không âm, ảnh hưởng này chỉ là đồng kích hoạt các điểm ảnh. Theo trực giác, biểu diễn theo thành phần có thể học được từ quan sát đồng kích hoạt trong \(V\), vì các điểm ảnh thuộc cùng một bộ phận khuôn mặt cùng được kích hoạt khi bộ phận đó xuất hiện. NMF học bằng cách điều chỉnh \(W_{ia}\) để tạo ra các đồng kích hoạt phù hợp.
+
+Mô tả trên dành cho ảnh, nhưng thuật toán áp dụng được cho nhiều lĩnh vực. Tổng quát hơn, NMF là phương pháp mô hình hóa việc sinh các biến quan sát được \(V\) từ các biến ẩn \(H\) (tài liệu tham khảo 12, 13). Mỗi biến ẩn đồng kích hoạt một tập con biến quan sát, tức một "thành phần"; kích hoạt một tổ hợp biến ẩn sẽ cộng các thành phần để tạo thành tổng thể. Do đó NMF có phạm vi ứng dụng rất rộng. Tác giả minh họa bằng một bài toán hoàn toàn khác: phân tích ngữ nghĩa văn bản.
+
+Ở đây, một kho ngữ liệu tài liệu được tóm tắt bằng ma trận \(V\), trong đó \(V_{i\mu}\) là số lần từ thứ \(i\) của từ vựng xuất hiện trong tài liệu thứ \(\mu\) (tài liệu 14). Các số đếm từ này được xem là biến quan sát, được mô hình hóa như sinh ra từ một tập biến ẩn. Áp dụng VQ, PCA hoặc NMF là tìm phân rã xấp xỉ \(V \approx WH\) thành tập đặc trưng \(W\) và biến ẩn \(H\), tương tự như với khuôn mặt.
+
+Trong phân rã VQ, mỗi tài liệu chỉ có một biến ẩn hoạt động. Nếu cùng một biến ẩn hoạt động với một nhóm tài liệu thì các tài liệu đó liên quan về ngữ nghĩa vì có tần suất từ tương tự. Vì vậy các biến ẩn được gọi là biến ngữ nghĩa, và VQ được dùng để lập chỉ mục ngữ nghĩa tự động theo chủ đề (tài liệu 14). Mỗi cột của \(W\), hay đặc trưng ngữ nghĩa, gồm tần suất từ của biến ngữ nghĩa tương ứng.
+
+VQ chỉ cho phép một biến ngữ nghĩa hoạt động nên không thể gán nhiều chủ đề cho một tài liệu. PCA có vẻ là giải pháp vì cho phép kích hoạt nhiều biến ngữ nghĩa. Tuy PCA đã thành công trong
+
+Trong một số tác vụ ngôn ngữ nhất định\textsuperscript{15}, PCA nhìn chung cho ra các biến ngữ nghĩa khó diễn giải, với lý do tương tự như việc biểu diễn khuôn mặt bằng PCA không có ý nghĩa trực quan rõ ràng. Nguyên nhân là hai khía cạnh phi thực tế của mô hình: mọi biến ngữ nghĩa đều được dùng để biểu diễn mỗi tài liệu; và các biến ngữ nghĩa được phép nhận giá trị âm. Theo trực giác, hợp lý hơn là mỗi tài liệu gắn với một tập con nhỏ trong một mảng lớn các chủ đề, thay vì chỉ một chủ đề hoặc toàn bộ chủ đề. Vì biểu diễn phân bố thưa của NMF dường như rất phù hợp cho mục đích này, các tác giả đã áp dụng NMF vào phân tích ngữ nghĩa trên một kho ngữ liệu gồm các bài viết bách khoa toàn thư.
+
+Một số đặc trưng ngữ nghĩa (r = 200, các cột của W) do NMF tìm ra được trình bày ở Hình 4. Trong mỗi đặc trưng ngữ nghĩa, thuật toán gom các từ có liên quan về ngữ nghĩa lại với nhau. Mỗi bài viết trong bách khoa toàn thư được biểu diễn bằng cách cộng gộp nhiều đặc trưng như vậy. Chẳng hạn, để biểu diễn bài viết về "Constitution of the United States" (Hiến pháp Hoa Kỳ), đặc trưng ngữ nghĩa chứa "supreme" và "court" cùng đặc trưng chứa "president" và "congress" được đồng kích hoạt.
+
+Ngoài việc gom các từ liên quan về ngữ nghĩa vào cùng một đặc trưng ngữ nghĩa, thuật toán còn dùng ngữ cảnh để phân biệt các nghĩa khác nhau của cùng một từ. Ví dụ, từ "lead" xuất hiện với tần suất cao trong hai đặc trưng ngữ nghĩa ở Hình 4: ở đặc trưng thứ nhất nó đi cùng "metal", "copper" và "steel", còn ở đặc trưng kia nó đi cùng "person", "rules" và "law". Điều này cho thấy NMF xử lý được hiện tượng đa nghĩa của từ "lead" bằng cách phân biệt hai nghĩa của nó trong kho tài liệu.
+
+Dù NMF thành công trong việc học các bộ phận khuôn mặt và các chủ đề ngữ nghĩa, thành công này không có nghĩa là phương pháp có thể học các bộ phận từ mọi cơ sở dữ liệu, chẳng hạn ảnh các vật thể nhìn từ những góc nhìn cực kỳ khác nhau, hay các vật thể có khớp nối phức tạp. Việc học các bộ phận trong những trường hợp phức tạp này nhiều khả năng đòi hỏi các mô hình phân cấp đầy đủ với nhiều tầng biến ẩn, thay vì chỉ một tầng như trong NMF. Dù các ràng buộc không âm có thể giúp các mô hình đó học được biểu diễn theo bộ phận\textsuperscript{13}, các tác giả không khẳng định rằng chúng tự thân là đủ. Ngoài ra, NMF không học được gì về các quan hệ "cú pháp" giữa các bộ phận. NMF giả định các biến ẩn không âm, nhưng không đặt thêm giả định nào về sự phụ thuộc thống kê giữa chúng.
+
+Điều này trái với phân tích thành phần độc lập (ICA), một biến thể của PCA giả định các biến ẩn độc lập thống kê và không có phân phối Gauss\textsuperscript{16,12}. Áp dụng ICA lên ảnh khuôn mặt để làm cho các mã hóa độc lập sẽ cho ra các ảnh cơ sở mang tính tổng thể (holistic). Giả định độc lập của ICA không phù hợp để học biểu diễn theo bộ phận vì các bộ phận khác nhau có khả năng xuất hiện cùng nhau.
+
+\textbf{Hình 2.} Thuật toán lặp cho phân rã ma trận không âm. Bắt đầu từ các điều kiện ban đầu không âm cho W và H, việc lặp các quy tắc cập nhật này với V không âm sẽ tìm ra một phân rã xấp xỉ V \ensuremath{\approx} WH bằng cách hội tụ đến một cực đại địa phương của hàm mục tiêu trong phương trình (2). Độ khớp của phép xấp xỉ đi vào các bước cập nhật thông qua thương số V\_i\ensuremath{\mu}/(WH)\_i\ensuremath{\mu}. Có thể chứng minh sự hội tụ đơn điệu bằng các kỹ thuật tương tự như khi chứng minh sự hội tụ của thuật toán EM\textsuperscript{22,23}. Các quy tắc cập nhật bảo toàn tính không âm của W và H, đồng thời ràng buộc tổng các cột của W bằng 1. Ràng buộc tổng này là cách thuận tiện để loại bỏ tính suy biến liên quan đến sự bất biến của WH dưới phép biến đổi W \ensuremath{\rightarrow} W\ensuremath{\Lambda}, H \ensuremath{\rightarrow} \ensuremath{\Lambda}\textsuperscript{-1}H, trong đó \ensuremath{\Lambda} là ma trận đường chéo.
+
+\textbf{Hình 3.} Mô hình biến ẩn xác suất làm nền tảng cho phân rã ma trận không âm. Mô hình được vẽ dưới dạng mạng cho thấy các biến quan sát v1,\ldots,vn ở lớp nút dưới được sinh ra từ các biến ẩn h1,\ldots,hr ở lớp nút trên như thế nào. Theo mô hình, các biến quan sát v\_i được sinh từ một phân phối xác suất có trung bình \ensuremath{\Sigma}\_a W\_ia h\_a. Trong sơ đồ mạng, ảnh hưởng của h\_a lên v\_i được biểu diễn bằng một liên kết có cường độ W\_ia. Trong ứng dụng cho ảnh khuôn mặt, các biến quan sát là các điểm ảnh, còn các biến ẩn chứa mã hóa theo bộ phận. Với a cố định, các cường độ liên kết W\_1a,\ldots,W\_na tạo thành một ảnh cơ sở cụ thể (giữa bên phải), được kết hợp với các ảnh cơ sở khác để biểu diễn một ảnh khuôn mặt hoàn chỉnh (dưới bên phải).
+
+các bộ phận thường xuất hiện cùng nhau. Điều này tạo ra các phụ thuộc phức tạp giữa các biến ẩn mà những thuật toán giả định tính độc lập trong phần mã hóa không thể nắm bắt được. Một ứng dụng khác của ICA là biến đổi các ảnh cơ sở của PCA để làm cho bản thân các ảnh, chứ không phải phần mã hóa, độc lập thống kê ở mức cao nhất có thể\^{}18. Cách này cho một cơ sở không toàn cục; tuy nhiên, trong biểu diễn đó mọi ảnh cơ sở đều được dùng theo các tổ hợp triệt tiêu lẫn nhau để biểu diễn một khuôn mặt, nên phần mã hóa không thưa. Ngược lại, biểu diễn NMF có cả cơ sở lẫn phần mã hóa đều thưa một cách tự nhiên, tức là nhiều thành phần bằng đúng 0. Tính thưa ở cả cơ sở lẫn phần mã hóa là điều then chốt cho biểu diễn theo bộ phận.
+
+Thuật toán ở Hình 2 thực hiện đồng thời cả học và suy luận: vừa học một tập ảnh cơ sở, vừa suy ra giá trị của các biến ẩn từ các biến quan sát. Mặc dù mô hình sinh ở Hình 3 là tuyến tính, phép tính suy luận lại phi tuyến do các ràng buộc không âm. Phép tính này tương tự việc tái dựng hợp lý cực đại trong chụp cắt lớp phát xạ\^{}19 và khử nhòe (deconvolution) ảnh thiên văn bị mờ\^{}20,21.
+
+Theo mô hình sinh ở Hình 3, các biến quan sát được sinh ra từ các biến ẩn bởi một mạng nơ-ron chứa các kết nối kích thích. Một mạng nơ-ron suy ra biến ẩn từ biến quan sát cần bổ sung các kết nối phản hồi ức chế. Khi đó, việc học NMF được hiện thực qua tính dẻo của các kết nối synapse. Thảo luận đầy đủ về một mạng như vậy nằm ngoài phạm vi của bức thư này; ở đây chỉ nêu một hệ quả của các ràng buộc không âm: synapse hoặc là kích thích hoặc là ức chế, nhưng không đổi dấu. Hơn nữa, tính không âm của các biến ẩn và biến quan sát tương ứng với thực tế sinh lý rằng tốc độ phát xung của nơ-ron không thể âm. Chúng tôi đề xuất rằng các ràng buộc một phía lên hoạt động nơ-ron và độ mạnh synapse trong não có thể quan trọng cho việc hình thành các biểu diễn thưa, phân tán, theo bộ phận phục vụ tri giác.
+
+court government council culture supreme constitutional rights justice
+
+president served governor secretary senate congress presidential elected
+
+flowers leaves plant perennial flower plants growing annual
+
+disease behaviour glands contact symptoms skin pain infection
+
+Mục bách khoa toàn thư: \textquotesingle Constitution of the United States\textquotesingle{}
+
+president (148), congress (124), power (120), united (104), constitution (81), amendment (71), government (57), law (49)
+
+metal process method paper ... glass copper lead steel person example time people ... rules lead leads law
+
+\textbf{Hình 4} Phân rã ma trận không âm (NMF) khám phá các đặc trưng ngữ nghĩa của m = 30.991 bài viết từ bách khoa toàn thư Grolier. Với mỗi từ trong bộ từ vựng cỡ n = 15.276, số lần xuất hiện được đếm trong từng bài và dùng để lập ma trận V cỡ 15.276 × 30.991. Mỗi cột của V chứa số lần xuất hiện của các từ trong một bài viết, còn mỗi hàng chứa số lần xuất hiện của một từ trong các bài khác nhau. Ma trận được phân rã xấp xỉ thành dạng WH bằng thuật toán mô tả ở Hình 2. Trên trái: bốn trong số r = 200 đặc trưng ngữ nghĩa (các cột của W). Vì là các vectơ số chiều rất cao, mỗi đặc trưng ngữ nghĩa được biểu diễn bằng danh sách tám từ có tần suất cao nhất trong đặc trưng đó; độ đậm của chữ thể hiện tần suất tương đối của từng từ trong đặc trưng. Phải: tám từ thường gặp nhất và số lần xuất hiện của chúng trong mục \textquotesingle Constitution of the United States\textquotesingle. Vectơ đếm từ này được xấp xỉ bằng một chồng chập cho trọng số cao với hai đặc trưng ngữ nghĩa phía trên và không có trọng số với hai đặc trưng phía dưới, như bốn ô tô bóng ở giữa biểu thị hoạt động của H. Phần dưới của hình cho thấy hai đặc trưng ngữ nghĩa chứa từ \textquotesingle lead\textquotesingle{} với tần suất cao. Xét theo các từ khác trong đặc trưng, NMF phân biệt được hai nghĩa khác nhau của \textquotesingle lead\textquotesingle.
+
+\subsection{Phương pháp}
+
+Các ảnh khuôn mặt dùng ở Hình 1 gồm các ảnh nhìn thẳng, được căn chỉnh thủ công trong lưới 19 × 19. Với mỗi ảnh, cường độ xám trước hết được co giãn tuyến tính sao cho trung bình và độ lệch chuẩn của điểm ảnh đều bằng 0,25, rồi cắt về khoảng {[}0,1{]}. NMF được thực hiện bằng thuật toán lặp mô tả ở Hình 2, bắt đầu từ các điều kiện ban đầu ngẫu nhiên cho W và H. Thuật toán hội tụ phần lớn sau chưa đến 50 vòng lặp; kết quả trình bày là sau 500 vòng lặp, mất vài giờ tính toán trên máy Pentium II. PCA được thực hiện bằng cách chéo hóa ma trận VV\^{}T; hiển thị 49 vectơ riêng ứng với các trị riêng lớn nhất. VQ được thực hiện bằng thuật toán k-means, bắt đầu từ các điều kiện ban đầu ngẫu nhiên cho W và H.
+
+Trong ứng dụng phân tích ngữ nghĩa ở Hình 4, bộ từ vựng gồm 15.276 từ thường gặp nhất trong cơ sở dữ liệu các bài viết Grolier, sau khi loại 430 từ phổ biến nhất như \textquotesingle the\textquotesingle{} và \textquotesingle and\textquotesingle. Vì phần lớn các từ chỉ xuất hiện trong tương đối ít bài, ma trận đếm từ V cực kỳ thưa, giúp thuật toán chạy nhanh hơn. Kết quả trình bày là sau khi các quy tắc cập nhật ở Hình 2 được lặp 50 lần, bắt đầu từ các điều kiện ban đầu ngẫu nhiên cho W và H.
+
+Nhận ngày 24 tháng 5; chấp nhận ngày 6 tháng 8 năm 1999.
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\item
+  Palmer, S. E. Hierarchical structure in perceptual representation. Cogn. Psychol. 9, 441--474 (1977).
+\item
+  Wachsmuth, E., Oram, M. W. \& Perrett, D. I. Recognition of objects and their component parts: responses of single units in the temporal cortex of the macaque. Cereb. Cortex 4, 509--522 (1994).
+\item
+  Logothetis, N. K. \& Sheinberg, D. L. Visual object recognition. Annu. Rev. Neurosci. 19, 577--621 (1996).
+\item
+  Biederman, I. Recognition-by-components: a theory of human image understanding. Psychol. Rev. 94, 115--147 (1987).
+\item
+  Ullman, S. High-Level Vision: Object Recognition and Visual Cognition (MIT Press, Cambridge, MA, 1996).
+\item
+  Turk, M. \& Pentland, A. Eigenfaces for recognition. J. Cogn. Neurosci. 3, 71--86 (1991).
+\item
+  Field, D. J. What is the goal of sensory coding? Neural Comput. 6, 559--601 (1994).
+\item
+  Foldiak, P. \& Young, M. Sparse coding in the primate cortex. The Handbook of Brain Theory and Neural Networks 895--898 (MIT Press, Cambridge, MA, 1995).
+\item
+  Olshausen, B. A. \& Field, D. J. Emergence of simple-cell receptive field properties by learning a sparse code for natural images. Nature 381, 607--609 (1996).
+\item
+  Lee, D. D. \& Seung, H. S. Unsupervised learning by convex and conic coding. Adv. Neural Info. Proc. Syst. 9, 515--521 (1997).
+\item
+  Paatero, P. Least squares formulation of robust non-negative factor analysis. Chemometr. Intell. Lab. 37, 23--35 (1997).
+\item
+  Nakayama, K. \& Shimojo, S. Experiencing and perceiving visual surfaces. Science 257, 1357--1363 (1992).
+\item
+  Hinton, G. E., Dayan, P., Frey, B. J. \& Neal, R. M. The `\,`wake-sleep'\,' algorithm for unsupervised neural networks. Science 268, 1158--1161 (1995).
+\item
+  Salton, G. \& McGill, M. J. Introduction to Modern Information Retrieval (McGraw-Hill, New York, 1983).
+\item
+  Landauer, T. K. \& Dumais, S. T. The latent semantic analysis theory of knowledge. Psychol. Rev. 104, 211--240 (1997).
+\item
+  Jutten, C. \& Herault, J. Blind separation of sources, part I: An adaptive algorithm based on neuromimetic architecture. Signal Proc. 24, 1--10 (1991).
+\item
+  Bell, A. J. \& Sejnowski, T. J. An information maximization approach to blind separation and blind deconvolution. Neural Comput. 7, 1129--1159 (1995).
+\item
+  Bartlett, M. S., Lades, H. M. \& Sejnowski, T. J. Independent component representations for face recognition. Proc. SPIE 3299, 528--539 (1998).
+\item
+  Shepp, L. A. \& Vardi, Y. Maximum likelihood reconstruction for emission tomography. IEEE Trans. Med. Imaging. 2, 113--122 (1982).
+\item
+  Richardson, W. H. Bayesian-based iterative method of image restoration. J. Opt. Soc. Am. 62, 55--59 (1972).
+\item
+  Lucy, L. B. An iterative technique for the rectification of observed distributions. Astron. J. 74, 745--754 (1974).
+\item
+  Dempster, A. P., Laired, N. M. \& Rubin, D. B. Maximum likelihood from incomplete data via the EM algorithm. J. Royal Stat. Soc. 39, 1--38 (1977).
+\item
+  Saul, L. \& Pereira, F. Proceedings of the Second Conference on Empirical Methods n Natural Language Processing (eds Cardie, C. \& Weischedel, R.) 81--89 (Morgan Kaufmann, San Francisco, 1997).
+\end{enumerate}
+
+\subsection{Lời cảm ơn}
+
+Chúng tôi ghi nhận sự hỗ trợ của Bell Laboratories và MIT. C. Papageorgiou và T. Poggio đã cung cấp cơ sở dữ liệu khuôn mặt, và R. Sproat cung cấp kho ngữ liệu bách khoa toàn thư Grolier. Chúng tôi cảm ơn L. Saul đã thuyết phục chúng tôi về ưu điểm của các thuật toán dạng EM. Chúng tôi đã được hưởng lợi từ các trao đổi với B. Anderson, K. Clarkson, R. Freund, L. Kaufman, E. Rietman, S. Roweis, N. Rubin, J. Tenenbaum, N. Tishby, M. Tsodyks, T. Tyson và M. Wright.
+
+Thư từ và yêu cầu cung cấp tài liệu xin gửi tới H.S.S.

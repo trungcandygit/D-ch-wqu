@@ -1,0 +1,249 @@
+\chapter{Đọc thêm 3: Bộ dữ liệu GDELT và thị trường trái phiếu chính phủ Ý (Consoli và cộng sự)}
+\label{ch:M5L3DocThem3}
+
+\section{Thông tin nguồn}
+
+\begin{itemize}
+  \item \textbf{Nguồn:} Consoli, S., Tiozzo Pezzoli, L. \& Tosetti, E. ``Using the GDELT Dataset to Analyse the Italian Sovereign Bond Market.'' Springer, 2020.
+  \item \textbf{Phần cần đọc:} tr. 190--202
+  \item \textbf{Ghi chú:} bản chuyển ngữ tiếng Việt súc tích, bám cấu trúc nguồn (giữ nguyên tiêu đề, công thức, số liệu, bảng, chú thích và danh mục tài liệu tham khảo).
+\end{itemize}
+
+Sergio Consoli, Luca Tiozzo Pezzoli và Elisa Tosetti European Commission, Joint Research Centre, Directorate A-Strategy, Work Programme and Resources, Scientific Development Unit, Via E. Fermi 2749, 21027 Ispra, VA, Italy sergio.consoli@ec.europa.eu
+
+\textbf{Tóm tắt.} GDELT (Global Data on Events, Location, and Tone) là cơ sở dữ liệu quy mô lớn, thời gian thực về xã hội loài người toàn cầu, phục vụ nghiên cứu mở; nó theo dõi tin tức phát thanh, báo in và báo mạng trên thế giới, tạo thành một nền tảng mở miễn phí để tính toán trên toàn bộ truyền thông thế giới. Trước hết, nhóm tác giả mô tả một trình thu thập dữ liệu (crawler) lấy siêu dữ liệu của GDELT theo thời gian thực và lưu vào hệ thống quản lý dữ liệu lớn dựa trên Elasticsearch, một công cụ tìm kiếm phổ biến và hiệu quả dựa trên thư viện Lucene. Sau đó, bằng cách khai thác và xử lý thông tin chi tiết của từng bản tin được mã hóa trong GDELT, nhóm xây dựng các chỉ báo phản ánh cảm xúc của nhà đầu tư, hữu ích cho việc phân tích thị trường trái phiếu chính phủ Ý. Dùng phân tích hồi quy và mô hình Gradient Boosting của học máy, nhóm nhận thấy các đặc trưng trích xuất từ GDELT cải thiện dự báo chênh lệch lợi suất trái phiếu chính phủ so với hồi quy cơ sở chỉ gồm các biến hồi quy truyền thống. Mức cải thiện về độ khớp đặc biệt rõ trong giai đoạn khủng hoảng chính phủ từ tháng 5 đến tháng 12/2018.
+
+\textbf{Từ khóa:} chênh lệch lợi suất trái phiếu chính phủ · học máy · quản lý dữ liệu lớn · hồi quy phân vị · xây dựng đặc trưng (feature engineering) · GDELT
+
+\section{1. Giới thiệu}
+
+Sự bùng nổ của công nghệ tính toán và thông tin trong thập kỷ qua đã tạo ra lượng dữ liệu khổng lồ ở nhiều lĩnh vực, gọi là dữ liệu lớn (Big Data). Trong kinh tế và tài chính, việc khai thác các dữ liệu này đưa nghiên cứu và thực tiễn kinh doanh lại gần nhau, vì dữ liệu sinh ra từ hoạt động kinh tế thường ngày có thể dùng cho các hệ thống kinh tế học nhanh, liên tục cải thiện và cá nhân hóa mô hình. Việc ứng dụng công nghệ khoa học dữ liệu vào kinh tế và tài chính mang lại lợi ích cho cả nhà khoa học lẫn người làm nghề, cải thiện dự báo và dự báo tức thời (nowcasting) trong nhiều loại ứng dụng.
+
+Cụ thể, đợt tăng mạnh gần đây của chênh lệch lợi suất trái phiếu chính phủ ở các nước khu vực đồng Euro đã làm dấy lên tranh luận sôi nổi về các yếu tố quyết định và nguồn rủi ro của chênh lệch lợi suất trái phiếu chính phủ. Theo truyền thống, các yếu tố như mức độ tín nhiệm, rủi ro thanh khoản của trái phiếu chính phủ và mức ngại rủi ro toàn cầu được xem là nhân tố chính tác động đến chênh lệch lợi suất {[}2,20{]}. Tuy nhiên, văn liệu gần đây chỉ ra vai trò quan trọng của cảm xúc nhà đầu tư tài chính trong việc dự đoán diễn biến lãi suất {[}17,25{]}.
+
+Bài báo khai thác một cơ sở dữ liệu tin tức mã nguồn mở mới là Global Database of Events, Language and Tone (GDELT)¹ {[}15{]} để xây dựng các chỉ báo tài chính dựa trên tin tức, liên quan đến các sự kiện kinh tế và chính trị của một nhóm nước khu vực đồng Euro. Như mô tả ở Mục 3.1, do quy mô của GDELT khiến việc dùng cơ sở dữ liệu quan hệ để phân tích trong thời gian hợp lý là không khả thi, Mục 4.1 trình bày hạ tầng quản lý dữ liệu lớn dùng để lưu trữ và tương tác với dữ liệu. Sau khi dữ liệu GDELT được thu thập từ Web bằng các REST API² tùy biến, nhóm biến đổi và lưu chúng một cách hiệu quả vào hệ thống quản lý dữ liệu lớn dựa trên Elasticsearch, một công cụ tìm kiếm NoSQL phổ biến và hiệu quả (Mục 4.1).
+
+Tiếp theo, quy trình xây dựng đặc trưng được áp dụng lên thông tin chi tiết mã hóa trong GDELT (Mục 4.2) nhằm chọn các biến hữu ích nhất, phản ánh, trong số khác, cảm xúc của nhà đầu tư và mức độ phổ biến của các chủ đề tin tức, phục vụ phân tích thị trường trái phiếu chính phủ Ý. Mục 4.3 mô tả mô hình Gradient Boosting được dùng để phân tích thị trường này. Phân tích thực nghiệm ở Mục 4.4 cho thấy mô hình học máy sử dụng các chỉ báo GDELT đã xây dựng có ích trong dự báo chênh lệch lợi suất trái phiếu chính phủ và bất ổn tài chính, phù hợp với các nghiên cứu trước.
+
+\section{2. Các nghiên cứu liên quan}
+
+Các bài báo tin tức là nguồn thông tin mới được bổ sung vào dữ liệu chuẩn dùng để mô hình hóa các biến kinh tế và tài chính. Một nghiên cứu sớm là {[}25{]}, dùng cảm xúc từ một chuyên mục của Wall Street Journal để chỉ ra rằng mức bi quan cao là yếu tố dự báo đáng kể cho sự hội tụ của giá cổ phiếu về giá trị cơ bản. Tiếp sau đó, nhiều bài báo khác tìm hiểu vai trò của tin tức trong dự báo, chẳng hạn các thông báo của doanh nghiệp, lợi suất cổ phiếu và biến động. Ví dụ, trong tài chính có các công trình gần đây áp dụng phân tích cảm xúc ngữ nghĩa từ mạng xã hội, vi blog tài chính và tin tức để cải thiện dự đoán thị trường chứng khoán (ví dụ {[}1,7{]}). Tuy nhiên, các cách tiếp cận này thường bị hạn chế do phạm vi nguồn tài chính lịch sử sẵn có hẹp. Gần đây tin tức cũng được dùng trong kinh tế vĩ mô. Chẳng hạn, {[}13{]} xem xét nội dung thông tin trong các tuyên bố của Cục Dự trữ Liên bang Mỹ và định hướng mà chúng cung cấp về diễn biến chính sách tiền tệ trong tương lai. Các bài báo khác ({[}26,27{]} và {[}23{]}, trong số
+
+¹ Trang web GDELT: https://blog.gdeltproject.org/. ² Xem https://blog.gdeltproject.org/gdelt-2-0-our-global-world-in-realtime/.
+
+(tiếp theo) ... và {[}23{]}, trong số những nghiên cứu khác, sử dụng phân bổ Dirichlet tiềm ẩn (Latent Dirichlet allocation, LDA) để phân loại bài báo theo chủ đề và tính các thước đo cảm xúc đơn giản dựa trên phân loại chủ đề đó. Mục tiêu là trích xuất tín hiệu có thể có giá trị dự báo đối với các thước đo hoạt động kinh tế như GDP, thất nghiệp và lạm phát {[}11{]}. Kết quả cho thấy cảm xúc kinh tế là bổ sung hữu ích cho các biến dự báo thường dùng để theo dõi và dự báo chu kỳ kinh doanh {[}7{]}.
+
+Các phương pháp học máy trong tài liệu hiện có nhằm kiểm soát các chỉ số tài chính đo lường rủi ro tín dụng, rủi ro thanh khoản và mức ngại rủi ro gồm các công trình {[}2,4,8,9,18{]}, cùng nhiều công trình khác. Nỗ lực đưa các mô hình học máy vào lĩnh vực mô hình hóa kinh tế đã tăng nhanh theo cấp số nhân trong những năm gần đây {[}19,24{]}. Trong các phương pháp học máy phổ biến, Gradient Boosting machines đã tỏ ra thành công trong nhiều bài toán dự báo thuộc kinh tế và tài chính (xem {[}5,6,16,28{]}, cùng nhiều công trình khác).
+
+\section{3. Dữ liệu}
+
+\subsection{3.1. Về GDELT}
+
+GDELT là cơ sở dữ liệu toàn cầu về sự kiện, địa điểm và sắc thái do Google duy trì {[}15{]}. Đây là nền tảng Dữ liệu lớn (Big Data) mở về tin tức thu thập trên toàn thế giới, chứa dữ liệu có cấu trúc khai thác từ nguồn tin truyền hình, báo in và web bằng hơn 65 ngôn ngữ. GDELT liên kết con người, tổ chức, trích dẫn, địa điểm, chủ đề và cảm xúc gắn với các sự kiện trên thế giới; mô tả hành vi xã hội qua lăng kính truyền thông, nên là nguồn dữ liệu lý tưởng để đo các yếu tố xã hội và kiểm định giả thuyết. Về quy mô, GDELT phân tích hơn 88 triệu bài báo mỗi năm từ hơn 150.000 cơ quan báo chí; dung lượng khoảng 8 TB, tăng thêm 2 TB mỗi năm. GDELT gồm hai bộ dữ liệu chính: "Global Knowledge Graph (GKG)" và "Events Table"; nghiên cứu này dùng bộ thứ nhất. GKG ghi nhận điều đang diễn ra trên thế giới, bối cảnh, những ai liên quan và thế giới cảm nhận ra sao, mỗi ngày; đồng thời cung cấp bản dịch tiếng Anh của thông tin đã mã hóa từ các ngôn ngữ được hỗ trợ. Ngoài ra, các chủ đề được ánh xạ sang các hệ phân loại chủ đề thông dụng trong thực tiễn, như "World Bank (WB) Topical Ontology" (3), hoặc hệ phân loại chủ đề tích hợp của GDELT. GDELT cũng đo hàng nghìn chiều cảm xúc dựa trên các từ điển phổ biến như "Harvard IV-4 Psychosocial Dictionary" (4), "WordNet-Affect dictionary" (5) và "Loughran and McDonald Sentiment Word Lists dictionary" (6), cùng các từ điển khác. Trong ứng dụng này, chúng tôi dùng các trường GKG của GDELT gồm World Bank Topical Ontology (tức các chủ đề WB), toàn bộ chiều cảm xúc (GCAM) và tên cơ quan báo chí.
+
+Chú thích:
+
+\begin{itemize}
+\item
+  \begin{enumerate}
+  \def\labelenumi{(\arabic{enumi})}
+  \setcounter{enumi}{2}
+    \item
+    https://vocabulary.worldbank.org/taxonomy.html
+  \end{enumerate}
+\item
+  \begin{enumerate}
+  \def\labelenumi{(\arabic{enumi})}
+  \setcounter{enumi}{3}
+    \item
+    http://www.wjh.harvard.edu/\textasciitilde inquirer/homecat.htm
+  \end{enumerate}
+\item
+  \begin{enumerate}
+  \def\labelenumi{(\arabic{enumi})}
+  \setcounter{enumi}{4}
+    \item
+    http://wndomains.fbk.eu/wnaffect.html
+  \end{enumerate}
+\item
+  \begin{enumerate}
+  \def\labelenumi{(\arabic{enumi})}
+  \setcounter{enumi}{5}
+    \item
+    https://sraf.nd.edu/textualanalysis/resources/
+  \end{enumerate}
+\end{itemize}
+
+\subsection{3.2. Chênh lệch lợi suất}
+
+Chúng tôi trích dữ liệu từ Bloomberg về cấu trúc kỳ hạn của lợi suất trái phiếu chính phủ Ý trong giai đoạn 2/3/2015 đến 31/8/2019. Chênh lệch lợi suất trái phiếu chính phủ (sovereign spread) của Ý so với Đức được tính bằng lợi suất trái phiếu kỳ hạn 10 năm của Ý trừ lợi suất tương ứng của Đức. Chúng tôi cũng trích các nhân tố chuẩn về mức (level), độ dốc (slope) và độ cong (curvature) của cấu trúc kỳ hạn bằng phương pháp Nelson và Siegel {[}21{]}.
+
+Chúng tôi ước lượng mô hình dự báo chênh lệch tín dụng dùng các nhân tố đường cong lợi suất thông thường cùng các đặc trưng GDELT được chọn, và so sánh với mô hình dự báo cổ điển chỉ dùng mức, độ dốc và độ cong làm biến hồi quy.
+
+\section{4. Phương pháp}
+
+\subsection{4.1. Quản lý Dữ liệu lớn}
+
+Các bộ dữ liệu phi cấu trúc khổng lồ như GDELT cần được lưu trong hệ thống tệp phân tán (DFS) chuyên dụng, kết nối nhiều nút tính toán qua mạng, vốn thiết yếu để xây dựng các đường ống dữ liệu phân lớp và tổng hợp lượng thông tin lớn này. Trong các nền tảng DFS phổ biến, do lượng tài liệu phi cấu trúc khổng lồ từ GDELT, chúng tôi dùng Elasticsearch {[}12,22{]} để lưu trữ và tương tác với dữ liệu. Elasticsearch là kho tài liệu phổ biến và hiệu quả; thay vì lưu thông tin thành các hàng dữ liệu dạng cột như cơ sở dữ liệu quan hệ cổ điển, nó lưu các cấu trúc dữ liệu phức tạp được tuần tự hóa thành tài liệu JSON. Được xây dựng trên thư viện tìm kiếm Apache Lucene (7), nó cung cấp tìm kiếm và phân tích thời gian thực cho nhiều loại dữ liệu có cấu trúc hoặc phi cấu trúc.
+
+Elasticsearch có kiến trúc phân tán, cho phép nối nhiều nút Elasticsearch thành một cụm duy nhất. Ngay khi tài liệu được lưu, nó được lập chỉ mục và có thể tìm kiếm đầy đủ gần như theo thời gian thực. Một chỉ mục (index) Elasticsearch có thể xem là tập hợp tài liệu được tối ưu hóa, mỗi tài liệu là tập hợp các trường (field), tức các cặp khóa-giá trị chứa dữ liệu. Chỉ mục thực chất chỉ là nhóm logic gồm một hoặc nhiều phân mảnh (shard) vật lý, mỗi phân mảnh là một chỉ mục tự chứa.
+
+Elasticsearch cũng không cần lược đồ (schema-less): tài liệu có thể được lập chỉ mục mà không cần chỉ định rõ cách xử lý từng trường có thể xuất hiện. Elasticsearch cung cấp REST API đơn giản để quản lý cụm và tương tác với tài liệu đã lưu; có thể gửi yêu cầu API trực tiếp từ dòng lệnh hoặc qua Developer Console trong giao diện web người dùng, gọi là Kibana (8). Các REST API của Elasticsearch hỗ trợ truy vấn có cấu trúc, truy vấn toàn văn và truy vấn phức hợp kết hợp cả hai, dùng ngôn ngữ truy vấn kiểu JSON của Elasticsearch, gọi là Query DSL (9).
+
+Chú thích:
+
+\begin{itemize}
+\item
+  \begin{enumerate}
+  \def\labelenumi{(\arabic{enumi})}
+  \setcounter{enumi}{6}
+    \item
+    https://lucene.apache.org/
+  \end{enumerate}
+\item
+  \begin{enumerate}
+  \def\labelenumi{(\arabic{enumi})}
+  \setcounter{enumi}{7}
+    \item
+    Kibana, phiên bản 7.4: https://www.elastic.co/guide/en/kibana/7.4/
+  \end{enumerate}
+\end{itemize}
+
+Kỹ thuật đặc trưng (Feature Engineering)
+
+GDELT bổ sung bài báo mới mỗi mười lăm phút, mỗi bài được biểu diễn gọn thành một hàng của bảng GDELT ở định dạng .csv. Bảng GKG chứa khoảng 10 TB dữ liệu, cần được tích hợp và nạp dưới dạng các tài liệu JSON tuần tự hóa vào khung Elasticsearch. Việc này gồm ba bước ETL thông thường (Extract, Transform, Load), phải nhận diện và khắc phục sự không đồng nhất về cấu trúc, cú pháp và ngữ nghĩa của dữ liệu. Vì vậy nhóm tác giả dùng World Bank Topical Ontology để xác định trọng tâm (chủ đề) của từng bài báo và chọn những tin có chủ đề chính liên quan đến các sự kiện mà nhà đầu tư thị trường trái phiếu quan tâm. Bảng phân loại này là lược đồ mô tả các lĩnh vực chuyên môn và tri thức của Ngân hàng Thế giới, phản ánh ngôn ngữ của các chuyên gia trong từng lĩnh vực. GDELT ghi toàn bộ các chủ đề được thảo luận trong một bài báo vào một hàng duy nhất; nhóm tách các chủ đề này thành những mục riêng.
+
+Nhóm trích xuất tin tức từ GKG của khoảng 20 tờ báo Ý, xuất bản từ tháng 3/2015 đến cuối tháng 8/2019. Nhóm dựa vào tệp Geographic Source Lookup trên blog GDELT\^{}10 để chọn cả các báo quốc gia tổng hợp có lượng phát hành lớn nhất lẫn các báo chuyên về tài chính và kinh tế. Sau khi thu thập, tin được ánh xạ vào ngày giao dịch tương ứng: các bài đăng trong giờ mở cửa thị trường trái phiếu (9h00-17h30) được gán cho ngày giao dịch đó; bài đăng sau giờ đóng cửa hoặc qua đêm được gán cho ngày giao dịch kế tiếp.\^{}11 Theo {[}10{]}, tin đăng vào cuối tuần được gán cho thứ Hai; bài đăng trong ngày lễ hoặc cuối tuần liền trước ngày lễ bị loại.
+
+Tiếp theo, chỉ giữ các bài có chủ đề do GDELT trích xuất thuộc một trong các chủ đề WB quan tâm: Macroeconomic Vulnerability and Debt (Tính dễ tổn thương kinh tế vĩ mô và nợ) và Macroeconomic and Structural Policies (Chính sách kinh tế vĩ mô và cơ cấu). Có bài chỉ nhắc thoáng một chủ đề được chọn rồi chuyển sang chủ đề hoàn toàn khác. Để bảo đảm trọng tâm của bài là một chủ đề WB đã chọn, nhóm chỉ giữ tin có ít nhất ba từ khóa thuộc các chủ đề này trong nội dung, nhằm chọn tin tập trung vào các vấn đề liên quan đến thị trường trái phiếu và loại tin chỉ lướt qua các vấn đề kinh tế vĩ mô, nợ và chính sách cơ cấu. Cuối cùng, để tập tin không quá chênh lệch về độ dài, chỉ giữ các bài dài tối thiểu 100 từ. Sau quy trình chọn lọc này còn tổng cộng 18.986 bài báo.
+
+Từ lượng thông tin này, nhóm xây dựng các đặc trưng bằng cách đếm tổng số từ thuộc mọi chủ đề WB và GCAM được phát hiện mỗi ngày. Nhóm cũng tạo biến "Number of mentions" (số lần được nhắc đến), là số từ của mỗi địa điểm xuất hiện trong các tin được chọn. Kết quả thu được 2.978 GCAM, 1.996 chủ đề và 155 địa điểm. Lưu ý mọi đặc trưng đều tính theo số từ mỗi ngày, trừ từ điển ANEW (v19) và thước đo hạnh phúc Hedonometer (v21) vốn đã là điểm số.
+
+Sau khi trích xuất dữ liệu từ GKG, nhóm áp dụng quy trình năm bước để lọc các đặc trưng từ tin tức:
+
+\begin{itemize}
+\item
+  Bước 1: dùng tiêu chí tri thức chuyên môn, giữ lại tập con gồm 413 từ điển GCAM có khả năng liên quan, cụ thể là 31 chiều của từ điển tâm lý xã hội General Inquirer Harvard IV, 61 chiều của Roget\textquotesingle s Thesaurus, 7 chiều của Martindale Regressive Imagery và 3 chiều của từ điển Affective Norms for English Words (ANEW).
+\item
+  Bước 2: xét mức biến thiên của đặc trưng; giữ các biến có độ lệch chuẩn trên toàn mẫu lớn hơn 5 từ và cho phép tối đa 10\% giá trị thiếu trên tổng số ngày. Ngoài ra loại các đặc trưng thiếu dữ liệu ở đầu mẫu (hơn 33\% mẫu).
+\item
+  Bước cuối: phân tích tương quan giữa các biến đã chọn. Trước hết chuẩn hóa mọi đặc trưng theo số bài báo mỗi ngày. Nếu tương quan giữa hai đặc trưng bất kỳ vượt 80\%, ưu tiên biến ít giá trị thiếu hơn; nếu số giá trị thiếu bằng nhau và hai biến cùng loại (cùng là chủ đề hoặc cùng là GCAM) thì chọn ngẫu nhiên một biến; nếu số giá trị thiếu bằng nhau nhưng khác loại thì theo thứ tự ưu tiên: GCAM, chủ đề WB, chủ đề GDELT, địa điểm.
+\end{itemize}
+
+Sau quy trình kỹ thuật đặc trưng này còn lại 45 biến: 9 chủ đề, 34 GCAM và 2 địa điểm. Xem xét các chủ đề được chọn cho thấy các chủ đề WB như Inflation (lạm phát), Government (chính phủ), Central Banks (ngân hàng trung ương), Taxation (thuế) và Policy (chính sách) đã được chọn; đây là những chủ đề quan trọng trong tin tức khi xét các vấn đề lãi suất. Ngoài ra, các đặc trưng xây dựng từ chiều GCAM như lạc quan, bi quan hoặc mức độ kích động (arousal) cũng được đưa vào, cho phép khảo sát trạng thái cảm xúc của thị trường.
+
+Chú thích:
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\setcounter{enumi}{9}
+\item
+  https://blog.gdeltproject.org/mapping-the-media-a-geographic-lookup-pf-gdelts-sources/
+\item
+  Vì GKG dùng giờ UTC (https://blog.gdeltproject.org/new-gkg-20-article-metadata-fields/), nhóm đã hiệu chỉnh lệch một giờ theo múi giờ Ý.
+\end{enumerate}
+
+4.3 Phân tích dữ liệu lớn (Big Data Analytics)
+
+Các mô hình kinh tế cổ điển không thể mở rộng linh hoạt để xử lý và duy trì các cấu trúc dữ liệu lớn (Big Data) như GDELT mà nghiên cứu này sử dụng. Cần có một bộ mô hình và công cụ phân tích dữ liệu lớn mới, vững chắc trong không gian nhiều chiều, như các phương pháp của học máy {[}19,24{]}. Cụ thể, trong nghiên cứu tính toán này, nhóm tác giả chọn Gradient Boosting (GB) {[}14{]}, một phương pháp học máy nổi tiếng đã chứng tỏ hiệu quả trong nhiều bài toán mô hình hóa thuộc kinh tế và tài chính {[}5,6,16,28{]}. Gradient boosting là kỹ thuật học máy cho các bài toán hồi quy và phân loại, tạo ra mô hình dự báo dưới dạng một tập hợp (ensemble) các mô hình dự báo yếu, thường là cây quyết định. Mô hình được xây dựng theo từng giai đoạn như các phương pháp boosting khác, và tổng quát hóa chúng bằng cách cho phép tối ưu hóa một hàm mất mát khả vi tùy ý. Nói cách khác, đây là thuật toán tối ưu một hàm chi phí trên không gian hàm bằng cách lặp lại việc chọn một hàm (giả thuyết yếu) theo hướng gradient âm.
+
+Về triển khai, nghiên cứu dùng thư viện H2O {[}12{]} cho ngôn ngữ lập trình R. H2O là nền tảng học máy mã nguồn mở, có khả năng mở rộng, cung cấp các triển khai song song của nhiều thuật toán học máy có giám sát và không giám sát, trong đó có Gradient Boosting Machines.
+
+Để xác định giá trị tối ưu cho các tham số của mô hình GB, nghiên cứu dùng kiểm định chéo 10 lần (10-fold cross-validation) kết hợp thủ tục tìm kiếm lưới (grid search, hay quét tham số) {[}3{]}. Tìm kiếm lưới là việc duyệt vét cạn một tập con do người dùng chỉ định của không gian siêu tham số của thuật toán học, được dẫn dắt bởi một thước đo hiệu năng (ở đây là cực tiểu hóa sai số bình phương trung bình). Hai tham số chính cần tối ưu trong mô hình GB là:
+
+\begin{itemize}
+\item
+  độ sâu tối đa của cây, cho biết độ sâu lớn nhất có thể của một cây trong mô hình và dùng để kiểm soát quá khớp (over-fitting), vì độ sâu lớn hơn cho phép mô hình học những quan hệ rất đặc thù của một mẫu cụ thể;
+\item
+  tốc độ học (learning rate), xác định mức ảnh hưởng của mỗi cây lên kết quả cuối cùng của mô hình GB. GB bắt đầu từ một ước lượng ban đầu, được cập nhật bằng đầu ra của từng cây; tốc độ học điều khiển độ lớn của thay đổi này. Vì vậy, giá trị thấp thường được ưu tiên do giúp mô hình vững trước các đặc điểm riêng của từng cây và nhờ đó khái quát hóa tốt. Tuy nhiên, giá trị thấp đòi hỏi nhiều cây hơn để mô hình hóa mọi quan hệ và tốn kém về tính toán.
+\end{itemize}
+
+Để khám phá không gian siêu tham số nhằm tìm giá trị tối ưu, thủ tục tìm kiếm lưới kiểm thử mô hình GB với độ sâu tối đa của cây từ 1 đến 10 (bước 1) và tốc độ học từ 0,01 đến 0,99 (bước 0,10); các giá trị tham số tốt nhất theo sai số bình phương trung bình được xuất ra. Nếu một giá trị tham số đạt đến cận trên hoặc cận dưới của khoảng tìm kiếm (tức nghiệm biên, corner solution), một cách tiếp cận tham lam (greedy) được lặp lại: biên tìm kiếm của tham số đó được dịch chuyển, và tìm kiếm lưới được khởi động lại từ các tham số dưới tối ưu của lần ước lượng trước. Thủ tục dừng khi cả hai giá trị tham số nằm trong biên tìm kiếm tương ứng, và các giá trị này là kết quả đầu ra. Tuy tìm kiếm lưới không đảm bảo tuyệt đối sẽ tìm được giá trị tham số tối ưu toàn cục, thực tế nhóm tác giả thấy nó hoạt động khá tốt, dù tốn kém về tính toán. Nhìn chung, tìm kiếm lưới là thủ tục được áp dụng và chấp nhận rộng rãi cho loại tác vụ tinh chỉnh này {[}3{]}.
+
+{[}12{]} Giao diện R cho nền tảng học máy mở rộng "H2O": https://cran.rproject.org/web/packages/h2o/index.html.
+
+\subsection{4.4 Phân tích thực nghiệm}
+
+Mục tiêu chính của thực nghiệm là đánh giá sức dự báo của các đặc trưng GDELT được chọn, bên cạnh các yếu tố quyết định cổ điển của chênh lệch lợi suất (credit spread) trái phiếu chính phủ trong các giai đoạn căng thẳng. Nhóm tác giả xét khả năng dự báo ở phân vị thứ 90 của phân phối credit spread, vì mức này thường được xem là tình trạng khủng hoảng tài chính (xem {[}4{]}). Nhiều nghiên cứu cho thấy trong các giai đoạn này, các quan hệ phi tuyến phức tạp giữa các biến giải thích tác động đến biến mục tiêu mà các mô hình tuyến tính đơn giản không nắm bắt được. Do đó nhóm dùng mô hình GB (Gradient Boosting) với phân phối phân vị và kỹ thuật ước lượng cửa sổ trượt, với mẫu ước lượng đầu tiên bắt đầu từ đầu tháng 3 đến tháng 5/2017. Hiệu quả dự báo của mô hình GB gồm cả các yếu tố cổ điển lẫn các đặc trưng GDELT được chọn được so sánh với mô hình GB chỉ gồm các yếu tố cổ điển. Hiệu quả dự báo được đo bằng sai số tuyệt đối của từng dự báo. Sức giải thích của các đặc trưng GDELT theo thời gian được đánh giá qua độ quan trọng của biến ở mỗi lần ước lượng, và xét năm biến quan trọng nhất ở mỗi cửa sổ trượt, phù hợp với văn liệu cấu trúc kỳ hạn chuẩn: ba đến năm nhân tố là đủ để giải thích động thái của chênh lệch lợi suất. Mô hình được ước lượng trên nửa mẫu và dùng cửa sổ trượt để tạo dự báo trước một bước. Mỗi cửa sổ ước lượng dùng kiểm định chéo 10 lớp (10-fold cross-validation) và thủ tục tìm kiếm lưới (grid search) mô tả ở Mục 4.3 để chọn siêu tham số tối ưu cho mô hình GB.
+
+Hình 1 trình bày chuỗi thời gian của chênh lệch lợi suất Ý và tỷ số giữa sai số dự báo tuyệt đối của mô hình bổ sung đặc trưng GDELT với mô hình chỉ có các biến hồi quy cổ điển. Khi tỷ số này nhỏ hơn 1, mô hình bổ sung tốt hơn chuẩn so sánh (benchmark). Hiệu quả của mô hình bổ sung cải thiện đáng kể từ cuối tháng 5/2018, khi khủng hoảng chính trị bắt đầu ở Ý. Ngày 29/5, chênh lệch lợi suất của Ý tăng mạnh lên 250 điểm cơ bản; nhà đầu tư lo ngại về khả năng có chính phủ chống đồng euro và thiếu tin tưởng vào việc lập một chính phủ ổn định. Trong các sự kiện căng thẳng này, mô hình bổ sung đặc trưng GDELT vượt trội rõ rệt so với benchmark, với tỷ số tuyệt đối thấp hơn nhiều so với 1, thấp nhất là 0,93 vào ngày 24/5 (giá trị nhỏ nhất trong toàn mẫu). Kết quả này nhấn mạnh giá trị gia tăng của tin tức báo chí trong dự báo động thái chênh lệch lợi suất ở giai đoạn khủng hoảng tài chính. Từ tháng 6 đến tháng 11/2018, các tranh luận về cam kết chi tiêu thâm hụt và khả năng xung đột với quy tắc tài khóa châu Âu tiếp tục khiến thị trường lo ngại. Chênh lệch lợi suất tăng mạnh vào tháng 10 và tháng 11, quanh mức 300 điểm cơ bản.
+
+\textbf{Hình 1.} Tỷ số sai số tuyệt đối và chênh lệch lợi suất
+
+Trong giai đoạn này, mô hình bổ sung lại hoạt động đặc biệt tốt, tỷ số quanh 0,95, thấp nhất 0,94 vào ngày 9/11. Từ năm 2019, tình hình chính trị Ý cải thiện và chênh lệch lợi suất giảm êm, nhất là sau thỏa thuận với Brussels về thâm hụt ngân sách vào tháng 12/2018. Tuy nhiên, sau đó một số sự kiện tác động đến kinh tế Ý, như triển vọng tiêu cực của EU và bầu cử Nghị viện châu Âu, làm lãi suất tăng tạm thời. Dù năm 2019 mô hình bổ sung không tốt bằng năm 2018 xét theo tỷ số sai số tuyệt đối, nó vẫn luôn vượt benchmark. Từ phân tích trên có thể thấy ba giai đoạn con: giai đoạn trước khủng hoảng từ 7/2017 đến 5/2018; giai đoạn khủng hoảng từ tháng 6 đến tháng 12/2018; và giai đoạn từ tháng 1/2019 đến hết mẫu. Tiếp theo, đóng góp của từng đặc trưng GDELT được chọn trong dự báo chênh lệch lãi suất ở giai đoạn căng thẳng chính trị được phân tích theo ba giai đoạn con này.
+
+Hình 2 cho thấy tần suất mỗi biến xuất hiện trong năm vị trí đầu theo độ quan trọng biến của Gradient Boosting Machine trong (a) giai đoạn trước khủng hoảng, (b) giai đoạn khủng hoảng và (c) giai đoạn sau khủng hoảng. Trong giai đoạn trước khủng hoảng, các yếu tố cổ điển như độ dốc và độ cong của đường cong chênh lệch lợi suất là các biến quan trọng nhất. Tuy nhiên, trong các biến hồi quy cổ điển, nhân tố mức (level), vốn được văn liệu xem là biến quan trọng nhất giải thích động thái lãi suất, lại kém quan trọng hơn hai thước đo cảm xúc GCAM, cụ thể là arousal từ từ điển ANEW và Hate từ Thesaurus. Hình 2(b) cho thấy trong giai đoạn khủng hoảng, đóng góp dự báo của các yếu tố chênh lệch lợi suất cổ điển giảm đáng kể. Biến quan trọng nhất là Arousal.
+
+Hình 2. Mức độ quan trọng của biến: phần trăm số lần các biến nằm trong top 5 (các bảng: (a) giai đoạn trước khủng hoảng chính phủ; (b) giai đoạn khủng hoảng chính phủ; (c) giai đoạn sau khủng hoảng chính phủ).
+
+Chỉ số của từ điển ANEW đứng đầu. Đáng chú ý, các đề cập đến địa danh Đức và "Government" (chính phủ) chiếm vị trí thứ hai và thứ ba. Nhân tố độ dốc (slope) kinh điển chỉ xếp thứ năm. Cuối cùng, Hình 2(c) cho thấy năm 2019, tầm quan trọng của nhân tố mức (level) tăng mạnh, cùng với các đề cập đến các vấn đề chính sách tiền tệ. ANEW Arousal và các đề cập đến chính phủ vẫn nằm trong danh sách top 5, nghĩa là các thảo luận mang nhiều cảm xúc về các vấn đề của chính phủ vẫn quan trọng trong giai đoạn hậu căng thẳng. Cần nhấn mạnh rằng, giống như giai đoạn hậu khủng hoảng, chỉ có một trong ba biến dự báo kinh điển nằm ngoài danh sách top 5.
+
+\section{5 Kết luận}
+
+Phân tích của chúng tôi là một trong những nghiên cứu đầu tiên về hành vi của chênh lệch lợi suất trái phiếu chính phủ và các quyết định danh mục đầu tư tài chính khi có mặt cả các nhân tố đường cong lợi suất kinh điển lẫn các thước đo cảm xúc tài chính trích xuất từ tin tức. Chúng tôi tin rằng các thước đo mới này có thể nắm bắt và dự báo những thay đổi trong động lực lãi suất, đặc biệt trong thời kỳ biến động mạnh. Thực nghiệm cho thấy đóng góp của các chiều cảm xúc là đáng kể trong những giai đoạn như vậy, thậm chí lớn hơn các nhân tố lãi suất kinh điển. Đáng chú ý, tầm quan trọng của các thước đo này còn kéo dài sang giai đoạn hậu khủng hoảng, nghĩa là các đặc trưng của chúng tôi nắm bắt được những câu chuyện giàu cảm xúc về các vấn đề chính phủ và chính sách tiền tệ vốn vẫn là tâm điểm của tin tức sau khủng hoảng. Nhìn chung, bài báo cho thấy cách dùng một cơ sở dữ liệu quy mô lớn như GDELT để rút ra các chỉ báo tài chính nhằm nắm bắt ý định tương lai của các tác nhân trên thị trường trái phiếu. Trong nghiên cứu tiếp theo, chúng tôi sẽ áp dụng thêm các kỹ thuật học máy để khai thác tốt hơn các hiệu ứng phi tuyến lên các biến phụ thuộc.
+
+\section{Tài liệu tham khảo}
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\item
+  Agrawal, S., Azar, P., Lo, A.W., Singh, T.: Momentum, mean-reversion and social media: evidence from StockTwits and Twitter. J. Portfolio Manag. 44, 85--95 (2018)
+\item
+  Beber, A., Brandt, M.W., Kavajecz, K.A.: Flight-to-quality or flight-to-liquidity? Evidence from the Euro-area bond market. Rev. Finan. Stud. 22(3), 925--957 (2009)
+\item
+  Bergstra, J., Bengio, Y.: Random search for hyper-parameter optimization. J. Mach. Learn. Res. 13(1), 281--305 (2012)
+\item
+  Bernal, O., Gnabo, J.-Y., Guilmin, G.: Economic policy uncertainty and risk spillover in the Eurozone. J. Int. Money Finan. 65(C), 24--451 (2016)
+\item
+  Chang, Y.-C., Chang, K.-H., Wu, G.-J.: Application of eXtreme gradient boosting trees in the construction of credit risk assessment models for financial institutions. Appl. Soft Comput. J. 73, 914--920 (2018)
+\item
+  Deng, S., Wang, C., Wang, M., Sun, Z.: A gradient boosting decision tree approach for insider trading identification: an empirical model evaluation of china stock market. Appl. Soft Comput. J. 83, 105652 (2019)
+\item
+  Dridi, A., Atzeni, M., Reforgiato Recupero, D.: FineNews: fine-grained semantic sentiment analysis on financial microblogs and news. Int. J. Mach. Learn. Cybernet. 10(8), 2199--2207 (2018). https://doi.org/10.1007/s13042-018-0805-x
+\item
+  Favero, C., Pagano, M., von Thadden, E.-L.: How does liquidity affect government bond yields? J. Finan. Quant. Anal. 45(1), 107--134 (2010)
+\item
+  Garcia, A.J., Gimeno, R.: Flight-to-liquidity flows in the Euro area sovereign debt crisis. Technical report, Banco de Espana Working Papers (2014)
+\item
+  Garcia, D.: Sentiment during recessions. J. Finan. 68(3), 1267--1300 (2013)
+\item
+  Gentzkow, M., Kelly, B., Taddy, M.: Text as data. Journal of Economic Literature (2019, to appear)
+\item
+  Gormley, C., Tong, Z.: Elasticsearch: The definitive guide. O\textquotesingle{} Reilly Media, US (2015)
+\item
+  Hansen, S., McMahon, M.: Shocking language: understanding the macroeconomic effects of central bank communication. J. Int. Econ. 99, S114--S133 (2016)
+\item
+  Hastie, T., Tibshirani, R., Friedman, J.: Additive models, trees, and related methods. The Elements of Statistical Learning. SSS, pp. 295--336. Springer, New York (2009). https://doi.org/10.1007/978-0-387-84858-7\_9
+\item
+  Leetaru, K., Schrodt, P.A.: Gdelt: global data on events, location and tone, 1979--2012. Technical report, KOF Working Papers (2013)
+\item
+  Liu, J., Wu, C., Li, Y.: Improving financial distress prediction using financial network-based information and GA-based gradient boosting method. Comput. Econ. 53(2), 851--872 (2019)
+\item
+  Loughran, T., McDonald, B.: When is a liability not a liability? Textual analysis, dictionaries and 10-ks. J. Finan. 66(1), 35--65 (2011)
+\item
+  Manganelli, S., Wolswijk, G.: What drives spreads in the Euro area government bond markets? Econ. Policy 24(58), 191--240 (2009)
+\item
+  Marwala, T.: Economic Modeling using Artificial Intelligence Methods. SpringerVerlag, London (2013). https://doi.org/10.1007/978-1-4471-5010-7
+\item
+  Monfort, A., Renne, J.-P.: Decomposing Euro-area sovereign spreads: credit and liquidity risks. Rev. Finan. 18(6), 2103--2151 (2013)
+\item
+  Nelson, C., Siegel, A.F.: Parsimonious modeling of yield curves. J. Bus. 60(4), 473--489 (1987)
+\item
+  Shah, N., Willick, D., Mago, V.: A framework for social media data analytics using elastic search and kibana. Wireless Networks (2018, in press)
+\item
+  Shapiro, A.H., Sudhof, M., Wilson, D.: Measuring news sentiment. Federal Reserve Bank of San Francisco Working Paper (2018)
+\item
+  Taddy, M.: Business Data Science: Combining Machine Learning and Economics to optimize, automate, and accelerate business decisions. McGraw-Hill, US (2019)
+\item
+  Tetlock, P.C.: Giving content to investor sentiment: the role of media in the stock market. J. Finan. 62(3), 1139--1168 (2007)
+\item
+  Thorsrud, L.A.: Nowcasting using news topics. big data versus big bank. Norges Bank Working Paper (2016)
+\item
+  Thorsrud, L.A.: Words are the new numbers: a newsy coincident index of the business cycle. J. Bus. Econ. Stat. 38(2), 1--17 (2018)
+\item
+  Yang, X., He, J., Lin, H., Zhang, Y.: Boosting exponential gradient strategy for online portfolio selection: an aggregating experts' advice method. Comput. Econ. 55(1), 231--251 (2020)
+\end{enumerate}
+
+Chương này được cấp phép theo Giấy phép Creative Commons Ghi công 4.0 Quốc tế (http://creativecommons.org/licenses/by/4.0/), cho phép sử dụng, chia sẻ, chuyển thể, phân phối và sao chép trên mọi phương tiện hoặc định dạng, miễn là ghi công phù hợp tác giả gốc và nguồn, cung cấp liên kết tới giấy phép Creative Commons và nêu rõ nếu có thay đổi.
+
+Hình ảnh hoặc tài liệu của bên thứ ba trong chương này thuộc giấy phép Creative Commons của chương, trừ khi có ghi chú nguồn khác. Nếu tài liệu không thuộc giấy phép của chương và mục đích sử dụng của bạn không được quy định pháp luật cho phép hoặc vượt quá phạm vi cho phép, bạn cần xin phép trực tiếp từ chủ sở hữu bản quyền.
