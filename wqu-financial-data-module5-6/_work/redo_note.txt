@@ -1,1 +1,1 @@
-FAITHFUL FINAL. all existing *_DT*_temp outputs are condensed -> delete when current wave ends
+FINAL POLICY: DT condensed, notes full. After current wave: rm DT outputs and redo.

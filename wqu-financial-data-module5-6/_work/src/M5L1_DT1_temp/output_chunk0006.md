@@ -39,6 +39,6 @@ Processing (eds Cardie, C. & Weischedel, R.) 81–89 (Morgan Kaufmann, San Franc
 
 Lời cảm ơn
 
-Các tác giả cảm ơn sự hỗ trợ của Bell Laboratories và MIT. C. Papageorgiou và T. Poggio cung cấp cơ sở dữ liệu khuôn mặt, R. Sproat cung cấp kho ngữ liệu bách khoa toàn thư Grolier. Các tác giả cảm ơn L. Saul đã thuyết phục về ưu điểm của các thuật toán dạng EM, và cảm ơn những trao đổi với B. Anderson, K. Clarkson, R. Freund, L. Kaufman, E. Rietman, S. Roweis, N. Rubin, J. Tenenbaum, N. Tishby, M. Tsodyks, T. Tyson và M. Wright.
+Chúng tôi xin cảm ơn sự hỗ trợ của Bell Laboratories và MIT. C. Papageorgiou và T. Poggio đã cung cấp cho chúng tôi cơ sở dữ liệu khuôn mặt, và R. Sproat đã cung cấp kho ngữ liệu bách khoa toàn thư Grolier. Chúng tôi cảm ơn L. Saul đã thuyết phục chúng tôi về những ưu điểm của các thuật toán kiểu EM. Chúng tôi đã được hưởng lợi từ các cuộc thảo luận với B. Anderson, K. Clarkson, R. Freund, L. Kaufman, E. Rietman, S. Roweis, N. Rubin, J. Tenenbaum, N. Tishby, M. Tsodyks, T. Tyson và M. Wright.
 
-Thư từ và yêu cầu tài liệu xin gửi tới H.S.S.
+Thư từ và yêu cầu cung cấp tài liệu xin gửi tới H.S.S.
