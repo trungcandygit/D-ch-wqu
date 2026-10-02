@@ -1,27 +1,43 @@
 # Học các bộ phận của đối tượng bằng phân rã ma trận không âm
 
-Daniel D. Lee* & H. Sebastian Seung*†
+Daniel D. Lee & H. Sebastian Seung (Bell Laboratories, Lucent Technologies; Massachusetts Institute of Technology)
 
-\* Bell Laboratories, Lucent Technologies, Murray Hill, New Jersey 07974, USA
+Việc nhận thức cái toàn thể có dựa trên nhận thức các bộ phận của nó hay không? Đã có bằng chứng tâm lý học và sinh lý học về biểu diễn dựa trên bộ phận trong não, và một số lý thuyết tính toán về nhận dạng đối tượng cũng dựa vào các biểu diễn này. Tuy nhiên, người ta biết rất ít về cách não hay máy tính học được các bộ phận của đối tượng. Bài báo trình bày một thuật toán phân rã ma trận không âm (NMF) có khả năng học các bộ phận của khuôn mặt và các đặc trưng ngữ nghĩa của văn bản. Điều này trái với các phương pháp khác như phân tích thành phần chính (PCA) và lượng tử hóa vector (VQ), vốn học các biểu diễn toàn thể chứ không phải dựa trên bộ phận. NMF khác biệt ở chỗ dùng các ràng buộc không âm. Các ràng buộc này dẫn đến biểu diễn dựa trên bộ phận vì chỉ cho phép tổ hợp cộng, không cho phép tổ hợp trừ. Khi NMF được cài đặt như một mạng nơ-ron, biểu diễn dựa trên bộ phận xuất hiện nhờ hai tính chất: tần số phát xung của nơ-ron không bao giờ âm và cường độ synapse không đổi dấu.
 
-† Department of Brain and Cognitive Sciences, Massachusetts Institute of Technology, Cambridge, Massachusetts 02139, USA
+## So sánh NMF, PCA và VQ trên ảnh khuôn mặt
 
-Liệu nhận thức về toàn thể có dựa trên nhận thức về các bộ phận của nó hay không? Có bằng chứng tâm lý học¹ và sinh lý học²,³ cho các biểu diễn dựa trên bộ phận (parts-based) trong não, và một số lý thuyết tính toán về nhận dạng đối tượng cũng dựa vào các biểu diễn như vậy⁴,⁵. Tuy nhiên, người ta biết rất ít về việc bộ não hay máy tính có thể học các bộ phận của đối tượng như thế nào. Ở đây chúng tôi trình bày một thuật toán phân rã ma trận không âm có khả năng học các bộ phận của khuôn mặt và các đặc trưng ngữ nghĩa của văn bản. Điều này trái ngược với các phương pháp khác, chẳng hạn như phân tích thành phần chính và lượng tử hóa vector, vốn học các biểu diễn mang tính tổng thể (holistic) chứ không dựa trên bộ phận. Phân rã ma trận không âm khác biệt với các phương pháp còn lại ở chỗ sử dụng các ràng buộc không âm. Các ràng buộc này dẫn đến một biểu diễn dựa trên bộ phận vì chúng chỉ cho phép các tổ hợp cộng, không cho phép các tổ hợp trừ. Khi phân rã ma trận không âm được triển khai dưới dạng một mạng nơ-ron, các biểu diễn dựa trên bộ phận xuất hiện nhờ hai tính chất: tần suất phát xung của các nơ-ron không bao giờ âm và cường độ khớp thần kinh không đổi dấu.
+Các tác giả áp dụng NMF, PCA và VQ cho một cơ sở dữ liệu ảnh khuôn mặt. Như Hình 1 cho thấy, cả ba phương pháp đều biểu diễn một khuôn mặt như tổ hợp tuyến tính của các ảnh cơ sở, nhưng kết quả khác nhau về chất:
+- VQ tìm ra cơ sở gồm các nguyên mẫu, mỗi nguyên mẫu là một khuôn mặt hoàn chỉnh.
+- Cơ sở của PCA là các "eigenface" (mặt riêng), một số trông như phiên bản méo của khuôn mặt toàn thể.
+- Cơ sở của NMF hoàn toàn khác: các ảnh là những đặc trưng cục bộ, phù hợp hơn với quan niệm trực giác về các bộ phận của khuôn mặt.
 
-Chúng tôi đã áp dụng phân rã ma trận không âm (NMF), cùng với phân tích thành phần chính (PCA) và lượng tử hóa vector (VQ), lên một cơ sở dữ liệu ảnh khuôn mặt. Như thể hiện trong Hình 1, cả ba phương pháp đều học cách biểu diễn một khuôn mặt dưới dạng một tổ hợp tuyến tính của các ảnh cơ sở, nhưng cho kết quả khác nhau về mặt định tính. VQ tìm ra một cơ sở gồm các nguyên mẫu, mỗi nguyên mẫu là một khuôn mặt hoàn chỉnh. Các ảnh cơ sở của PCA là các "eigenface" (khuôn mặt riêng), một số trong đó giống các phiên bản méo mó của khuôn mặt hoàn chỉnh⁶. Cơ sở NMF thì khác biệt hoàn toàn: các ảnh của nó là những đặc trưng cục bộ tương ứng tốt hơn với quan niệm trực giác về các bộ phận của khuôn mặt.
+## Khung phân rã ma trận
 
-NMF học một biểu diễn như vậy bằng cách nào, khi nó khác xa các biểu diễn tổng thể của PCA và VQ? Để trả lời câu hỏi này, sẽ hữu ích nếu mô tả cả ba phương pháp trong khuôn khổ phân rã ma trận. Cơ sở dữ liệu ảnh được xem là một ma trận V kích thước $n \times m$, mỗi cột của nó chứa $n$ giá trị điểm ảnh không âm của một trong $m$ ảnh khuôn mặt. Khi đó cả ba phương pháp đều xây dựng các phân rã xấp xỉ có dạng $V \approx WH$, hay
+Cơ sở dữ liệu ảnh được coi là ma trận V kích thước n × m, mỗi cột chứa n giá trị điểm ảnh không âm của một trong m ảnh khuôn mặt. Cả ba phương pháp đều xây dựng phân rã xấp xỉ V ≈ WH, tức:
 
-$$V_{i\mu} \approx (WH)_{i\mu} = \sum_{a=1}^{r} W_{ia} H_{a\mu} \qquad (1)$$
+$$V_{i\mu} \approx (WH)_{i\mu} = \sum_{a=1}^{r} W_{ia} H_{a\mu} \quad (1)$$
 
-$r$ cột của $W$ được gọi là các ảnh cơ sở. Mỗi cột của $H$ được gọi là một mã hóa (encoding) và tương ứng một–một với một khuôn mặt trong $V$. Một mã hóa gồm các hệ số mà nhờ đó một khuôn mặt được biểu diễn bằng tổ hợp tuyến tính của các ảnh cơ sở. Kích thước của các nhân tử ma trận $W$ và $H$ lần lượt là $n \times r$ và $r \times m$. Hạng $r$ của phân rã thường được chọn sao cho $(n + m)r < nm$, và tích $WH$ có thể được xem là dạng nén của dữ liệu trong $V$.
+(Công thức gốc bị vỡ do trích PDF; chỉ số cột thứ hai là chỉ số ảnh, ký hiệu m trong bản gốc.)
 
-Sự khác biệt giữa PCA, VQ và NMF xuất phát từ các ràng buộc khác nhau áp đặt lên các nhân tử ma trận $W$ và $H$. Trong VQ, mỗi cột của $H$ bị ràng buộc là một vector đơn phân (unary), với một phần tử bằng một và các phần tử còn lại bằng không. Nói cách khác, mọi khuôn mặt (cột của $V$) được xấp xỉ bằng một ảnh cơ sở duy nhất (cột của $W$) trong phân rã $V \approx WH$. Một mã hóa đơn phân như vậy cho một khuôn mặt cụ thể được thể hiện bên cạnh cơ sở VQ trong Hình 1. Biểu diễn đơn phân này buộc VQ phải học các ảnh cơ sở là những khuôn mặt nguyên mẫu.
+- r cột của W gọi là các ảnh cơ sở (basis images).
+- Mỗi cột của H gọi là một mã hóa (encoding), tương ứng một-một với một khuôn mặt trong V; đó là các hệ số để biểu diễn khuôn mặt bằng tổ hợp tuyến tính của các ảnh cơ sở.
+- Kích thước của W và H lần lượt là n × r và r × m. Hạng r thường được chọn sao cho $(n+m)r < nm$, nên tích WH có thể xem là dạng nén của dữ liệu trong V.
 
-PCA ràng buộc các cột của $W$ là trực chuẩn và các hàng của $H$ trực giao với nhau. Điều này nới lỏng ràng buộc đơn phân của VQ, cho phép một biểu diễn phân tán, trong đó mỗi khuôn mặt được xấp xỉ bằng một tổ hợp tuyến tính của tất cả các ảnh cơ sở, hay các eigenface⁶. Một mã hóa phân tán của một khuôn mặt cụ thể được thể hiện bên cạnh các eigenface trong Hình 1. Mặc dù các eigenface có cách diễn giải thống kê là các hướng có phương sai lớn nhất, nhiều eigenface không có cách diễn giải trực quan rõ ràng. Điều này là do PCA cho phép các phần tử của $W$ và $H$ có dấu tùy ý. Vì các eigenface được dùng trong các tổ hợp tuyến tính thường kéo theo sự triệt tiêu phức tạp giữa các số dương và số âm, nhiều eigenface riêng lẻ thiếu ý nghĩa trực quan.
+Sự khác biệt giữa PCA, VQ và NMF đến từ các ràng buộc khác nhau áp lên W và H:
+- **VQ**: mỗi cột của H bị ràng buộc là vector đơn vị (unary), một phần tử bằng 1, các phần tử còn lại bằng 0. Nghĩa là mỗi khuôn mặt (cột của V) được xấp xỉ bằng đúng một ảnh cơ sở (cột của W). Mã hóa đơn này buộc VQ học các ảnh cơ sở là các khuôn mặt nguyên mẫu.
+- **PCA**: ràng buộc các cột của W trực chuẩn và các hàng của H trực giao với nhau. Điều này nới lỏng ràng buộc của VQ, cho phép biểu diễn phân tán, trong đó mỗi khuôn mặt được xấp xỉ bằng tổ hợp tuyến tính của mọi ảnh cơ sở (eigenface). Dù eigenface có ý nghĩa thống kê là các hướng có phương sai lớn nhất, nhiều eigenface không có cách diễn giải trực quan rõ ràng, vì PCA cho phép các phần tử của W và H mang dấu tùy ý; các tổ hợp tuyến tính liên quan đến sự triệt tiêu phức tạp giữa số dương và số âm, nên từng eigenface thường thiếu ý nghĩa trực giác.
+- **NMF**: không cho phép phần tử âm trong W và H. Khác với ràng buộc unary của VQ, ràng buộc không âm cho phép kết hợp nhiều ảnh cơ sở để biểu diễn một khuôn mặt, nhưng chỉ cho tổ hợp cộng vì mọi phần tử khác không đều dương; khác PCA, không có phép trừ. Vì vậy ràng buộc không âm phù hợp với quan niệm trực giác về việc ghép các bộ phận thành một tổng thể, và đó là cách NMF học biểu diễn dựa trên bộ phận.
 
-NMF không cho phép các phần tử âm trong các nhân tử ma trận $W$ và $H$. Không giống ràng buộc đơn phân của VQ, các ràng buộc không âm này cho phép kết hợp nhiều ảnh cơ sở để biểu diễn một khuôn mặt. Nhưng chỉ các tổ hợp cộng được phép, vì các phần tử khác không của $W$ và $H$ đều dương. Trái với PCA, không thể có phép trừ nào xảy ra. Vì những lý do này, các ràng buộc không âm phù hợp với quan niệm trực giác về việc kết hợp các bộ phận để tạo thành một toàn thể, và đó chính là cách NMF học một biểu diễn dựa trên bộ phận.
+## Tính thưa của NMF
 
-Như có thể thấy từ Hình 1, cơ sở và các mã hóa của NMF chứa một tỷ lệ lớn các hệ số triệt tiêu, do đó cả các ảnh cơ sở lẫn các mã hóa ảnh đều thưa. Các ảnh cơ sở thưa vì chúng không mang tính toàn cục và chứa nhiều phiên bản của miệng, mũi và các bộ phận khác của khuôn mặt, trong đó các phiên bản khác nhau nằm ở những vị trí hoặc có hình dạng khác nhau. Sự biến thiên của một khuôn mặt hoàn chỉnh được tạo ra bằng cách kết hợp các bộ phận khác nhau này. Mặc dù mọi bộ phận đều được dùng bởi ít nhất một khuôn mặt, bất kỳ khuôn mặt nào cũng không dùng hết tất cả các bộ phận sẵn có. Điều này dẫn đến một mã hóa ảnh phân tán thưa, trái với mã hóa đơn phân của VQ và mã hóa phân tán hoàn toàn của PCA⁷⁻⁹.
+Như Hình 1 cho thấy, cơ sở và mã hóa của NMF chứa tỷ lệ lớn các hệ số bằng 0, nên cả ảnh cơ sở lẫn mã hóa ảnh đều thưa. Ảnh cơ sở thưa vì chúng không toàn cục và chứa nhiều phiên bản của miệng, mũi và các bộ phận khác ở những vị trí hoặc hình dạng khác nhau; sự đa dạng của một khuôn mặt được tạo ra bằng cách kết hợp các bộ phận này. Mỗi bộ phận được ít nhất một khuôn mặt sử dụng, nhưng không khuôn mặt nào dùng toàn bộ các bộ phận, tạo ra mã hóa ảnh phân tán thưa, trái với mã hóa unary của VQ và mã hóa phân tán đầy đủ của PCA.
 
-Chúng tôi triển khai NMF với các quy tắc cập nhật cho $W$ và $H$ được nêu trong Hình 2. Việc lặp các quy tắc cập nhật này hội tụ đến một cực đại cục bộ của hàm mục tiêu
+(Hình 1: so sánh Original, NMF, PCA, VQ; mỗi khuôn mặt = ảnh cơ sở × mã hóa.)
+
+## Quy tắc cập nhật và hàm mục tiêu
+
+Các tác giả cài đặt NMF với quy tắc cập nhật cho W và H nêu trong Hình 2. Lặp các quy tắc này hội tụ đến một cực đại cục bộ của hàm mục tiêu
+
+$$F = \sum_{i=1}^{n}\sum_{\mu=1}^{m}\left[V_{i\mu}\log (WH)_{i\mu} - (WH)_{i\mu}\right]$$
+
+(Phần đầu công thức bị vỡ do trích PDF; phần còn lại tiếp tục ở chunk sau.)
