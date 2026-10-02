@@ -45,12 +45,12 @@
         "GIS",
         "GWR"
       ],
-      "glossary_version_used": "74634fef31f3a31a34386a8d8a8f44a8f646f95a71c838a7bdc6b394b8aed166",
+      "glossary_version_used": "d58e3b3db9fa0e4077c2c875aa058982aa59c8f880e207131d4e61e0d20006bc",
       "output_file": "output_chunk0001.md",
       "output_hash": "f394347aad4a9a0d969e449bc0b0f547fa70144da8174f19e7e215e15b5b9835",
       "source_file": "chunk0001.md",
       "source_hash": "3753283662ad83ae0b29b10aaefc710bde82df8eed420ab2039452f2c12304cb",
-      "updated_at": "2026-10-02T03:22:06+00:00"
+      "updated_at": "2026-10-02T03:22:53+00:00"
     },
     "chunk0002": {
       "entity_hashes_used": {
@@ -113,12 +113,12 @@
         "benchmark",
         "bias"
       ],
-      "glossary_version_used": "74634fef31f3a31a34386a8d8a8f44a8f646f95a71c838a7bdc6b394b8aed166",
+      "glossary_version_used": "d58e3b3db9fa0e4077c2c875aa058982aa59c8f880e207131d4e61e0d20006bc",
       "output_file": "output_chunk0002.md",
       "output_hash": "5d633855cb1b87fb3f802602a330c330814c70658c0cb6ac37e05d79922461a4",
       "source_file": "chunk0002.md",
       "source_hash": "68acf60c859ef1164cd8de46cd537c47a032d3324a87c3079e78c6d4aa597f09",
-      "updated_at": "2026-10-02T03:22:06+00:00"
+      "updated_at": "2026-10-02T03:22:53+00:00"
     },
     "chunk0003": {
       "entity_hashes_used": {
@@ -177,12 +177,12 @@
         "backtesting",
         "bandwidth"
       ],
-      "glossary_version_used": "74634fef31f3a31a34386a8d8a8f44a8f646f95a71c838a7bdc6b394b8aed166",
+      "glossary_version_used": "d58e3b3db9fa0e4077c2c875aa058982aa59c8f880e207131d4e61e0d20006bc",
       "output_file": "output_chunk0003.md",
       "output_hash": "78f340ef5f4d6850baf674eeaddb293562df1782a5b2f61578ec3106bf292ab3",
       "source_file": "chunk0003.md",
       "source_hash": "cc9ccd34816b61528871f329a79e5df5ae9aa3b7a9fee5cf27ef147ee41e59c6",
-      "updated_at": "2026-10-02T03:22:06+00:00"
+      "updated_at": "2026-10-02T03:22:53+00:00"
     },
     "chunk0004": {
       "entity_hashes_used": {
@@ -237,12 +237,12 @@
         "O-ring",
         "alternative data"
       ],
-      "glossary_version_used": "74634fef31f3a31a34386a8d8a8f44a8f646f95a71c838a7bdc6b394b8aed166",
+      "glossary_version_used": "d58e3b3db9fa0e4077c2c875aa058982aa59c8f880e207131d4e61e0d20006bc",
       "output_file": "output_chunk0004.md",
       "output_hash": "42089983b952a9ec930fbb487daca0037930efeebc5c638141fca42734049eba",
       "source_file": "chunk0004.md",
       "source_hash": "d96a4768eb2c988e0420186a77ad22885dee7ab6d5be88caa0ec34e5bab2a513",
-      "updated_at": "2026-10-02T03:22:06+00:00"
+      "updated_at": "2026-10-02T03:22:53+00:00"
     },
     "chunk0005": {
       "entity_hashes_used": {
@@ -297,12 +297,12 @@
         "O-ring",
         "alternative data"
       ],
-      "glossary_version_used": "74634fef31f3a31a34386a8d8a8f44a8f646f95a71c838a7bdc6b394b8aed166",
+      "glossary_version_used": "d58e3b3db9fa0e4077c2c875aa058982aa59c8f880e207131d4e61e0d20006bc",
       "output_file": "output_chunk0005.md",
       "output_hash": "49081188d7eac29118207b80812b8c196779bceba51576cb801ef21b59987476",
       "source_file": "chunk0005.md",
       "source_hash": "6e51d8ccfa2d0b8abe671aef8b894a9d0f475c639abef7693c0c806d18990e78",
-      "updated_at": "2026-10-02T03:22:06+00:00"
+      "updated_at": "2026-10-02T03:22:53+00:00"
     },
     "chunk0006": {
       "entity_hashes_used": {
@@ -355,12 +355,12 @@
         "Landsat",
         "O-ring"
       ],
-      "glossary_version_used": "74634fef31f3a31a34386a8d8a8f44a8f646f95a71c838a7bdc6b394b8aed166",
+      "glossary_version_used": "d58e3b3db9fa0e4077c2c875aa058982aa59c8f880e207131d4e61e0d20006bc",
       "output_file": "output_chunk0006.md",
       "output_hash": "363745f9a761c2a6a1773941b302942f838d0216a0130882f0cf1e61a1c84fbd",
       "source_file": "chunk0006.md",
       "source_hash": "99eb5f0f4d45c06dd1ab118ef859413ada48a2248bd3fec05f6108b5b2e2383f",
-      "updated_at": "2026-10-02T03:22:06+00:00"
+      "updated_at": "2026-10-02T03:22:53+00:00"
     },
     "chunk0007": {
       "entity_hashes_used": {
@@ -417,12 +417,12 @@
         "alternative data",
         "backtesting"
       ],
-      "glossary_version_used": "74634fef31f3a31a34386a8d8a8f44a8f646f95a71c838a7bdc6b394b8aed166",
+      "glossary_version_used": "d58e3b3db9fa0e4077c2c875aa058982aa59c8f880e207131d4e61e0d20006bc",
       "output_file": "output_chunk0007.md",
       "output_hash": "b6f6777af1872d26c5a9f0f2007c58230bafab5a8b620113b1ca78e58e3f18b3",
       "source_file": "chunk0007.md",
       "source_hash": "c1f00d7dd76631bc589998bfafb8839ea4aa146641cb20856cd58e2d7bcd1867",
-      "updated_at": "2026-10-02T03:22:06+00:00"
+      "updated_at": "2026-10-02T03:22:53+00:00"
     },
     "chunk0008": {
       "entity_hashes_used": {
@@ -477,12 +477,12 @@
         "O-ring",
         "alternative data"
       ],
-      "glossary_version_used": "74634fef31f3a31a34386a8d8a8f44a8f646f95a71c838a7bdc6b394b8aed166",
+      "glossary_version_used": "d58e3b3db9fa0e4077c2c875aa058982aa59c8f880e207131d4e61e0d20006bc",
       "output_file": "output_chunk0008.md",
       "output_hash": "03dab4a638c42018f869d1f1bb2021e5b4239d1eba2d51c865208327f357e8ea",
       "source_file": "chunk0008.md",
       "source_hash": "0e2e4878da9c55d27e5a270e29e557b650993dcc456e1cf2ffc60c80a7f5b782",
-      "updated_at": "2026-10-02T03:22:06+00:00"
+      "updated_at": "2026-10-02T03:22:53+00:00"
     },
     "chunk0009": {
       "entity_hashes_used": {
@@ -543,12 +543,12 @@
         "bandwidth",
         "benchmark"
       ],
-      "glossary_version_used": "74634fef31f3a31a34386a8d8a8f44a8f646f95a71c838a7bdc6b394b8aed166",
+      "glossary_version_used": "d58e3b3db9fa0e4077c2c875aa058982aa59c8f880e207131d4e61e0d20006bc",
       "output_file": "output_chunk0009.md",
       "output_hash": "5bf7e96e4bc5eb7c2ab57c810f95911d734b02a09e935ae93490943928a79979",
       "source_file": "chunk0009.md",
       "source_hash": "e2833d8462ab2d022d717e59f48d3393c332c770adecacfbe1a095b104ed2ca5",
-      "updated_at": "2026-10-02T03:22:06+00:00"
+      "updated_at": "2026-10-02T03:22:53+00:00"
     },
     "chunk0010": {
       "entity_hashes_used": {
@@ -597,12 +597,12 @@
         "GWR",
         "GeoJSON"
       ],
-      "glossary_version_used": "74634fef31f3a31a34386a8d8a8f44a8f646f95a71c838a7bdc6b394b8aed166",
+      "glossary_version_used": "d58e3b3db9fa0e4077c2c875aa058982aa59c8f880e207131d4e61e0d20006bc",
       "output_file": "output_chunk0010.md",
       "output_hash": "72ed7434111db83e1bace5ea0af1c5bbc982be3a11751f6cebfe67a74066f42d",
       "source_file": "chunk0010.md",
       "source_hash": "3149088e9ba549f1cbf167d434ec4b14a15c643d1d00a27972c007312c700d41",
-      "updated_at": "2026-10-02T03:22:06+00:00"
+      "updated_at": "2026-10-02T03:22:53+00:00"
     },
     "chunk0011": {
       "entity_hashes_used": {
@@ -659,12 +659,12 @@
         "alternative data",
         "backtesting"
       ],
-      "glossary_version_used": "74634fef31f3a31a34386a8d8a8f44a8f646f95a71c838a7bdc6b394b8aed166",
+      "glossary_version_used": "d58e3b3db9fa0e4077c2c875aa058982aa59c8f880e207131d4e61e0d20006bc",
       "output_file": "output_chunk0011.md",
       "output_hash": "b5dce32111c03e6d401527a5528ed45898ebe39ad269c3fed6af4e6ce7298c21",
       "source_file": "chunk0011.md",
       "source_hash": "39ff733b42883c8d0aa2a9654fe0594dc2e1519ad5316f79e608a2ac690507a0",
-      "updated_at": "2026-10-02T03:22:06+00:00"
+      "updated_at": "2026-10-02T03:22:53+00:00"
     },
     "chunk0012": {
       "entity_hashes_used": {
@@ -721,12 +721,12 @@
         "alternative data",
         "backtesting"
       ],
-      "glossary_version_used": "74634fef31f3a31a34386a8d8a8f44a8f646f95a71c838a7bdc6b394b8aed166",
+      "glossary_version_used": "d58e3b3db9fa0e4077c2c875aa058982aa59c8f880e207131d4e61e0d20006bc",
       "output_file": "output_chunk0012.md",
       "output_hash": "537ef624a332359d7a16de134d2886e485046044f207c1f2a1ab2590079d78c1",
       "source_file": "chunk0012.md",
       "source_hash": "399880510d78d0691b494d270cf48b820f0c37d474bfcce5e5dcaf1147986ab7",
-      "updated_at": "2026-10-02T03:22:06+00:00"
+      "updated_at": "2026-10-02T03:22:53+00:00"
     },
     "chunk0013": {
       "entity_hashes_used": {
@@ -779,12 +779,12 @@
         "Landsat",
         "O-ring"
       ],
-      "glossary_version_used": "74634fef31f3a31a34386a8d8a8f44a8f646f95a71c838a7bdc6b394b8aed166",
+      "glossary_version_used": "d58e3b3db9fa0e4077c2c875aa058982aa59c8f880e207131d4e61e0d20006bc",
       "output_file": "output_chunk0013.md",
       "output_hash": "00adb23a0269a3c130295f1e50de4cc8e971c6b6d1154aac0a97f0cd78636526",
       "source_file": "chunk0013.md",
       "source_hash": "71883f5c4207a77f472e4a05a5fd1bd9d86eb9b459ac2294a28f7256245c0385",
-      "updated_at": "2026-10-02T03:22:06+00:00"
+      "updated_at": "2026-10-02T03:22:53+00:00"
     },
     "chunk0014": {
       "entity_hashes_used": {
@@ -839,12 +839,304 @@
         "O-ring",
         "alternative data"
       ],
-      "glossary_version_used": "74634fef31f3a31a34386a8d8a8f44a8f646f95a71c838a7bdc6b394b8aed166",
+      "glossary_version_used": "d58e3b3db9fa0e4077c2c875aa058982aa59c8f880e207131d4e61e0d20006bc",
       "output_file": "output_chunk0014.md",
       "output_hash": "7fbc385f50a0c84101b882be85b74a64d4acb2378f2080d3eabebc22c2c1710b",
       "source_file": "chunk0014.md",
       "source_hash": "b5ef7d8da829b72dbbec8bc1589cf3f65f7b03d15829285233808c3b3084589d",
-      "updated_at": "2026-10-02T03:22:06+00:00"
+      "updated_at": "2026-10-02T03:22:53+00:00"
+    },
+    "chunk0015": {
+      "entity_hashes_used": {
+        "BERT": "8d3b9a3c37e1174506f0876ac25d29a011b8a11e3c4908d0827116c8b651f183",
+        "FinBERT": "808faa138a66082c9f677138c6e99e48a5b4cebec19ac8540d1a98a4efea67b5",
+        "GDELT": "a01e166a1724b08a4661d4436f819146ff4b30d264e7f5a7a8d001019a3d4836",
+        "GIS": "e7c221c32bb4ab0b0f134196fbebf89b24f576f64a616e9be335b72cc505cba4",
+        "GWR": "52d581b2e9feaaac8f6ccd407f16b418177fa5328c385b8f10e6b0cf7599f64c",
+        "GeoJSON": "8c9ee6218f0d5a5855ec4709110cd59fff9fe147e17b584f9a2e999fefab6429",
+        "Landsat": "e11ff004fdaf9a3424065ed905c21212b917b70d31a7363cadb6053df098bfc5",
+        "NMF": "05e2e1b06c574f43d77a56002e1f5af7fabbe1842f1a649a0159de9cd3a3447c",
+        "O-ring": "3e04e7ee0e0c32e9207998ebac25e23aa83aa6360693ecec3940047510c3d548",
+        "coefficient": "fdad36609a92d3ae6233345801d399bb6bdd62dda837cf939a87296ee7a3fe77",
+        "cost function": "ca238b67cb35b65d8b7668e8a494883d4a228cf083c108340456216ec1b1bc5c",
+        "dimensionality reduction": "1a87d2e1a0db612e2f34c6c7977574752b7ac48fd34165ade7cc43dd3e41786c",
+        "feature": "99b7e6b2a29e498e89266aac1cc9ae8991913b58b3aab8172716f0ea6bff4aee",
+        "machine learning": "5593c708754c386ddd516d6d211680d993bbb89415f52cbbaf950e214e4b3f4e",
+        "matrix": "bf95a9d7f8a0f16ab280b1603bcb55bda4f4ef434f52ebe40bb67c8f75c88b32",
+        "non-negative matrix factorization": "e36f407ccdf688a97e4b173179fef6dcb3c452d94f0e5210b1bc0940dee37f67",
+        "overfitting": "62c0e871537f219ed9b97e19259dc95762067183c79ccc5be3c7aee2831764a4",
+        "portfolio": "872f2cb3b53d7b0d84d5409fb2240dcf0d5ab0ced1a78d54b7004079bc8b2176",
+        "sentiment": "7b9ac59e18d75bfe47e986ee7b7a593f99da2c670d0fb4833ba12e4ed9a81191",
+        "sentiment analysis": "ce8ba5db8a85457762b130961f79e5968ce455ea659d164f1344b156d2b3d21d",
+        "stock market": "61181c552971dbfb244130ec511b772503eaf5b054881be452a867ad1b6fa99f",
+        "topic": "34c5f877fcf26e110c4b8fa5bcb67786b347eb40b4ce85d8eb7f399edefcfa16",
+        "topic modeling": "5d3050fd5723ef9acffcfdb699eef486f470e7cde77e2cfadf2f8de88a5061fa"
+      },
+      "entity_ids_used": [
+        "NMF",
+        "matrix",
+        "non-negative matrix factorization",
+        "portfolio",
+        "dimensionality reduction",
+        "feature",
+        "cost function",
+        "machine learning",
+        "topic",
+        "sentiment",
+        "topic modeling",
+        "overfitting",
+        "coefficient",
+        "sentiment analysis",
+        "stock market",
+        "BERT",
+        "FinBERT",
+        "GDELT",
+        "GIS",
+        "GWR",
+        "GeoJSON",
+        "Landsat",
+        "O-ring"
+      ],
+      "glossary_version_used": "d58e3b3db9fa0e4077c2c875aa058982aa59c8f880e207131d4e61e0d20006bc",
+      "output_file": "output_chunk0015.md",
+      "output_hash": "9e2eb5ae208e419b356dd9a2f22e056c21c09a847f89a1bb74e7f3a1246bddf1",
+      "source_file": "chunk0015.md",
+      "source_hash": "c1f05bde2393323f882a481335c6ecfc3b1980cc2a2b178812727d9ab1fb1d62",
+      "updated_at": "2026-10-02T03:22:53+00:00"
+    },
+    "chunk0016": {
+      "entity_hashes_used": {
+        "BERT": "8d3b9a3c37e1174506f0876ac25d29a011b8a11e3c4908d0827116c8b651f183",
+        "FinBERT": "808faa138a66082c9f677138c6e99e48a5b4cebec19ac8540d1a98a4efea67b5",
+        "GDELT": "a01e166a1724b08a4661d4436f819146ff4b30d264e7f5a7a8d001019a3d4836",
+        "GIS": "e7c221c32bb4ab0b0f134196fbebf89b24f576f64a616e9be335b72cc505cba4",
+        "GWR": "52d581b2e9feaaac8f6ccd407f16b418177fa5328c385b8f10e6b0cf7599f64c",
+        "GeoJSON": "8c9ee6218f0d5a5855ec4709110cd59fff9fe147e17b584f9a2e999fefab6429",
+        "Landsat": "e11ff004fdaf9a3424065ed905c21212b917b70d31a7363cadb6053df098bfc5",
+        "NMF": "05e2e1b06c574f43d77a56002e1f5af7fabbe1842f1a649a0159de9cd3a3447c",
+        "O-ring": "3e04e7ee0e0c32e9207998ebac25e23aa83aa6360693ecec3940047510c3d548",
+        "coefficient": "fdad36609a92d3ae6233345801d399bb6bdd62dda837cf939a87296ee7a3fe77",
+        "cost function": "ca238b67cb35b65d8b7668e8a494883d4a228cf083c108340456216ec1b1bc5c",
+        "dimensionality reduction": "1a87d2e1a0db612e2f34c6c7977574752b7ac48fd34165ade7cc43dd3e41786c",
+        "feature": "99b7e6b2a29e498e89266aac1cc9ae8991913b58b3aab8172716f0ea6bff4aee",
+        "machine learning": "5593c708754c386ddd516d6d211680d993bbb89415f52cbbaf950e214e4b3f4e",
+        "matrix": "bf95a9d7f8a0f16ab280b1603bcb55bda4f4ef434f52ebe40bb67c8f75c88b32",
+        "non-negative matrix factorization": "e36f407ccdf688a97e4b173179fef6dcb3c452d94f0e5210b1bc0940dee37f67",
+        "overfitting": "62c0e871537f219ed9b97e19259dc95762067183c79ccc5be3c7aee2831764a4",
+        "portfolio": "872f2cb3b53d7b0d84d5409fb2240dcf0d5ab0ced1a78d54b7004079bc8b2176",
+        "sentiment": "7b9ac59e18d75bfe47e986ee7b7a593f99da2c670d0fb4833ba12e4ed9a81191",
+        "sentiment analysis": "ce8ba5db8a85457762b130961f79e5968ce455ea659d164f1344b156d2b3d21d",
+        "stock market": "61181c552971dbfb244130ec511b772503eaf5b054881be452a867ad1b6fa99f",
+        "topic": "34c5f877fcf26e110c4b8fa5bcb67786b347eb40b4ce85d8eb7f399edefcfa16",
+        "topic modeling": "5d3050fd5723ef9acffcfdb699eef486f470e7cde77e2cfadf2f8de88a5061fa"
+      },
+      "entity_ids_used": [
+        "NMF",
+        "matrix",
+        "portfolio",
+        "dimensionality reduction",
+        "feature",
+        "non-negative matrix factorization",
+        "cost function",
+        "machine learning",
+        "topic",
+        "sentiment",
+        "topic modeling",
+        "overfitting",
+        "coefficient",
+        "sentiment analysis",
+        "stock market",
+        "BERT",
+        "FinBERT",
+        "GDELT",
+        "GIS",
+        "GWR",
+        "GeoJSON",
+        "Landsat",
+        "O-ring"
+      ],
+      "glossary_version_used": "d58e3b3db9fa0e4077c2c875aa058982aa59c8f880e207131d4e61e0d20006bc",
+      "output_file": "output_chunk0016.md",
+      "output_hash": "9d6ce9abb1bf01a0b590e4d3b1a7205c85fa52eaa11e3e0dd791e2daae8168bc",
+      "source_file": "chunk0016.md",
+      "source_hash": "d133b4d808adae82c3291ca73a037bac286e2fd22ffa2624026df37bf0eb5e14",
+      "updated_at": "2026-10-02T03:22:53+00:00"
+    },
+    "chunk0017": {
+      "entity_hashes_used": {
+        "BERT": "8d3b9a3c37e1174506f0876ac25d29a011b8a11e3c4908d0827116c8b651f183",
+        "FinBERT": "808faa138a66082c9f677138c6e99e48a5b4cebec19ac8540d1a98a4efea67b5",
+        "GDELT": "a01e166a1724b08a4661d4436f819146ff4b30d264e7f5a7a8d001019a3d4836",
+        "GIS": "e7c221c32bb4ab0b0f134196fbebf89b24f576f64a616e9be335b72cc505cba4",
+        "GWR": "52d581b2e9feaaac8f6ccd407f16b418177fa5328c385b8f10e6b0cf7599f64c",
+        "GeoJSON": "8c9ee6218f0d5a5855ec4709110cd59fff9fe147e17b584f9a2e999fefab6429",
+        "Landsat": "e11ff004fdaf9a3424065ed905c21212b917b70d31a7363cadb6053df098bfc5",
+        "NMF": "05e2e1b06c574f43d77a56002e1f5af7fabbe1842f1a649a0159de9cd3a3447c",
+        "O-ring": "3e04e7ee0e0c32e9207998ebac25e23aa83aa6360693ecec3940047510c3d548",
+        "coefficient": "fdad36609a92d3ae6233345801d399bb6bdd62dda837cf939a87296ee7a3fe77",
+        "cost function": "ca238b67cb35b65d8b7668e8a494883d4a228cf083c108340456216ec1b1bc5c",
+        "dimensionality reduction": "1a87d2e1a0db612e2f34c6c7977574752b7ac48fd34165ade7cc43dd3e41786c",
+        "feature": "99b7e6b2a29e498e89266aac1cc9ae8991913b58b3aab8172716f0ea6bff4aee",
+        "machine learning": "5593c708754c386ddd516d6d211680d993bbb89415f52cbbaf950e214e4b3f4e",
+        "matrix": "bf95a9d7f8a0f16ab280b1603bcb55bda4f4ef434f52ebe40bb67c8f75c88b32",
+        "non-negative matrix factorization": "e36f407ccdf688a97e4b173179fef6dcb3c452d94f0e5210b1bc0940dee37f67",
+        "overfitting": "62c0e871537f219ed9b97e19259dc95762067183c79ccc5be3c7aee2831764a4",
+        "portfolio": "872f2cb3b53d7b0d84d5409fb2240dcf0d5ab0ced1a78d54b7004079bc8b2176",
+        "sentiment": "7b9ac59e18d75bfe47e986ee7b7a593f99da2c670d0fb4833ba12e4ed9a81191",
+        "sentiment analysis": "ce8ba5db8a85457762b130961f79e5968ce455ea659d164f1344b156d2b3d21d",
+        "stock market": "61181c552971dbfb244130ec511b772503eaf5b054881be452a867ad1b6fa99f",
+        "topic": "34c5f877fcf26e110c4b8fa5bcb67786b347eb40b4ce85d8eb7f399edefcfa16",
+        "topic modeling": "5d3050fd5723ef9acffcfdb699eef486f470e7cde77e2cfadf2f8de88a5061fa"
+      },
+      "entity_ids_used": [
+        "NMF",
+        "matrix",
+        "portfolio",
+        "dimensionality reduction",
+        "feature",
+        "non-negative matrix factorization",
+        "cost function",
+        "machine learning",
+        "topic",
+        "sentiment",
+        "topic modeling",
+        "overfitting",
+        "coefficient",
+        "sentiment analysis",
+        "stock market",
+        "BERT",
+        "FinBERT",
+        "GDELT",
+        "GIS",
+        "GWR",
+        "GeoJSON",
+        "Landsat",
+        "O-ring"
+      ],
+      "glossary_version_used": "d58e3b3db9fa0e4077c2c875aa058982aa59c8f880e207131d4e61e0d20006bc",
+      "output_file": "output_chunk0017.md",
+      "output_hash": "eecf6e6f06d2408af3524b6ebb010655657333a0fbbe5ff4177ee3d1e5d80469",
+      "source_file": "chunk0017.md",
+      "source_hash": "208527ce765338530d217a3bb655f0a0067c70ea0913c89dfacab6f6165ee32c",
+      "updated_at": "2026-10-02T03:22:53+00:00"
+    },
+    "chunk0018": {
+      "entity_hashes_used": {
+        "BERT": "8d3b9a3c37e1174506f0876ac25d29a011b8a11e3c4908d0827116c8b651f183",
+        "FinBERT": "808faa138a66082c9f677138c6e99e48a5b4cebec19ac8540d1a98a4efea67b5",
+        "GDELT": "a01e166a1724b08a4661d4436f819146ff4b30d264e7f5a7a8d001019a3d4836",
+        "GIS": "e7c221c32bb4ab0b0f134196fbebf89b24f576f64a616e9be335b72cc505cba4",
+        "GWR": "52d581b2e9feaaac8f6ccd407f16b418177fa5328c385b8f10e6b0cf7599f64c",
+        "GeoJSON": "8c9ee6218f0d5a5855ec4709110cd59fff9fe147e17b584f9a2e999fefab6429",
+        "NMF": "05e2e1b06c574f43d77a56002e1f5af7fabbe1842f1a649a0159de9cd3a3447c",
+        "coefficient": "fdad36609a92d3ae6233345801d399bb6bdd62dda837cf939a87296ee7a3fe77",
+        "cost function": "ca238b67cb35b65d8b7668e8a494883d4a228cf083c108340456216ec1b1bc5c",
+        "dimensionality reduction": "1a87d2e1a0db612e2f34c6c7977574752b7ac48fd34165ade7cc43dd3e41786c",
+        "feature": "99b7e6b2a29e498e89266aac1cc9ae8991913b58b3aab8172716f0ea6bff4aee",
+        "machine learning": "5593c708754c386ddd516d6d211680d993bbb89415f52cbbaf950e214e4b3f4e",
+        "matrix": "bf95a9d7f8a0f16ab280b1603bcb55bda4f4ef434f52ebe40bb67c8f75c88b32",
+        "non-negative matrix factorization": "e36f407ccdf688a97e4b173179fef6dcb3c452d94f0e5210b1bc0940dee37f67",
+        "overfitting": "62c0e871537f219ed9b97e19259dc95762067183c79ccc5be3c7aee2831764a4",
+        "portfolio": "872f2cb3b53d7b0d84d5409fb2240dcf0d5ab0ced1a78d54b7004079bc8b2176",
+        "sentiment": "7b9ac59e18d75bfe47e986ee7b7a593f99da2c670d0fb4833ba12e4ed9a81191",
+        "sentiment analysis": "ce8ba5db8a85457762b130961f79e5968ce455ea659d164f1344b156d2b3d21d",
+        "stock market": "61181c552971dbfb244130ec511b772503eaf5b054881be452a867ad1b6fa99f",
+        "topic": "34c5f877fcf26e110c4b8fa5bcb67786b347eb40b4ce85d8eb7f399edefcfa16",
+        "topic modeling": "5d3050fd5723ef9acffcfdb699eef486f470e7cde77e2cfadf2f8de88a5061fa"
+      },
+      "entity_ids_used": [
+        "portfolio",
+        "NMF",
+        "matrix",
+        "dimensionality reduction",
+        "feature",
+        "non-negative matrix factorization",
+        "cost function",
+        "machine learning",
+        "topic",
+        "sentiment",
+        "topic modeling",
+        "overfitting",
+        "coefficient",
+        "sentiment analysis",
+        "stock market",
+        "BERT",
+        "FinBERT",
+        "GDELT",
+        "GIS",
+        "GWR",
+        "GeoJSON"
+      ],
+      "glossary_version_used": "d58e3b3db9fa0e4077c2c875aa058982aa59c8f880e207131d4e61e0d20006bc",
+      "output_file": "output_chunk0018.md",
+      "output_hash": "906ab04b8b5fff6315721212c7e35edf02334812e3c542c6e51315366767886a",
+      "source_file": "chunk0018.md",
+      "source_hash": "92b20253e8081b47f8c8f83adc58baaef94f3eaeb23a05c22b9dd5e703b2b93e",
+      "updated_at": "2026-10-02T03:22:53+00:00"
+    },
+    "chunk0019": {
+      "entity_hashes_used": {
+        "BERT": "8d3b9a3c37e1174506f0876ac25d29a011b8a11e3c4908d0827116c8b651f183",
+        "FinBERT": "808faa138a66082c9f677138c6e99e48a5b4cebec19ac8540d1a98a4efea67b5",
+        "GDELT": "a01e166a1724b08a4661d4436f819146ff4b30d264e7f5a7a8d001019a3d4836",
+        "GIS": "e7c221c32bb4ab0b0f134196fbebf89b24f576f64a616e9be335b72cc505cba4",
+        "GWR": "52d581b2e9feaaac8f6ccd407f16b418177fa5328c385b8f10e6b0cf7599f64c",
+        "GeoJSON": "8c9ee6218f0d5a5855ec4709110cd59fff9fe147e17b584f9a2e999fefab6429",
+        "Landsat": "e11ff004fdaf9a3424065ed905c21212b917b70d31a7363cadb6053df098bfc5",
+        "NMF": "05e2e1b06c574f43d77a56002e1f5af7fabbe1842f1a649a0159de9cd3a3447c",
+        "O-ring": "3e04e7ee0e0c32e9207998ebac25e23aa83aa6360693ecec3940047510c3d548",
+        "alternative data": "c3b99d64e1255e33353b91723ef8df58d613a4b97bdd4f7512eb85f04a332c23",
+        "backtesting": "f354857414406f5c999164e662e4b925d062fe28fd7a114e4f0d6428d60b3bf7",
+        "bandwidth": "a4ee02a933978d5d17dbb0774d7dd17f2eaa3c3bdc05ce17473e6dc78ede4025",
+        "coefficient": "fdad36609a92d3ae6233345801d399bb6bdd62dda837cf939a87296ee7a3fe77",
+        "cost function": "ca238b67cb35b65d8b7668e8a494883d4a228cf083c108340456216ec1b1bc5c",
+        "dimensionality reduction": "1a87d2e1a0db612e2f34c6c7977574752b7ac48fd34165ade7cc43dd3e41786c",
+        "feature": "99b7e6b2a29e498e89266aac1cc9ae8991913b58b3aab8172716f0ea6bff4aee",
+        "machine learning": "5593c708754c386ddd516d6d211680d993bbb89415f52cbbaf950e214e4b3f4e",
+        "matrix": "bf95a9d7f8a0f16ab280b1603bcb55bda4f4ef434f52ebe40bb67c8f75c88b32",
+        "non-negative matrix factorization": "e36f407ccdf688a97e4b173179fef6dcb3c452d94f0e5210b1bc0940dee37f67",
+        "overfitting": "62c0e871537f219ed9b97e19259dc95762067183c79ccc5be3c7aee2831764a4",
+        "portfolio": "872f2cb3b53d7b0d84d5409fb2240dcf0d5ab0ced1a78d54b7004079bc8b2176",
+        "sentiment": "7b9ac59e18d75bfe47e986ee7b7a593f99da2c670d0fb4833ba12e4ed9a81191",
+        "sentiment analysis": "ce8ba5db8a85457762b130961f79e5968ce455ea659d164f1344b156d2b3d21d",
+        "stock market": "61181c552971dbfb244130ec511b772503eaf5b054881be452a867ad1b6fa99f",
+        "topic": "34c5f877fcf26e110c4b8fa5bcb67786b347eb40b4ce85d8eb7f399edefcfa16",
+        "topic modeling": "5d3050fd5723ef9acffcfdb699eef486f470e7cde77e2cfadf2f8de88a5061fa"
+      },
+      "entity_ids_used": [
+        "NMF",
+        "portfolio",
+        "dimensionality reduction",
+        "sentiment",
+        "sentiment analysis",
+        "stock market",
+        "matrix",
+        "feature",
+        "non-negative matrix factorization",
+        "cost function",
+        "machine learning",
+        "topic",
+        "topic modeling",
+        "overfitting",
+        "coefficient",
+        "BERT",
+        "FinBERT",
+        "GDELT",
+        "GIS",
+        "GWR",
+        "GeoJSON",
+        "Landsat",
+        "O-ring",
+        "alternative data",
+        "backtesting",
+        "bandwidth"
+      ],
+      "glossary_version_used": "d58e3b3db9fa0e4077c2c875aa058982aa59c8f880e207131d4e61e0d20006bc",
+      "output_file": "output_chunk0019.md",
+      "output_hash": "68ef12e8b663a4343216bde1b5d80385784588ba865d5c96dbf3ca30ea1aee6b",
+      "source_file": "chunk0019.md",
+      "source_hash": "cf783f2a7f3e23cd642f64fc733ee17386a9769939b9a3a8f74c91c5ab30d55f",
+      "updated_at": "2026-10-02T03:22:53+00:00"
     }
   },
   "version": 1
