@@ -1,0 +1,4 @@
+## **4. Satellite Imagery Application: Google Earth Engine**
+In this section, we are going to use the Google Earth Engine (GEE) platform to retrieve satellite images and do some analysis. Google Earth Engine is a platform that we can use to conduct analysis for satellite images and other geospatial data. The GEE team has collected and processed publicly available historical satellite images from popular satellites and stores them in its Earth Engine data catalog. Hence, we don't need to spend time and effort to collect and process raw historical satellite images. GEE has a code editor user interface that allows users to retrieve and analyze satellite images. It also has a Python API. In this lesson, we will use the Python API to retrieve images and conduct analysis. We will use the video from UCLA Office of Research Computing (UCLA 2022) to demonstrate this application.
+<br>
+<br>

@@ -1,0 +1,2 @@
+## **8. Conclusion**
+In this lesson, we first explained what geospatial data is. We introduced the concept of using a coordinate reference system (CRS) for providing geoposition information on Earth's surface. We also explained vector data and its common data formats. Then, we demonstrated a simple geospatial data application using Python. Through this application, we learned how to process different types of geospatial data. We also learned how to overlay processed data onto a map for data visualization.

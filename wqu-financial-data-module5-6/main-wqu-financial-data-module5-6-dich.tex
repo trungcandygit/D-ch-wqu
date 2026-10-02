@@ -1,0 +1,108 @@
+%****************************************************************************************************
+% main — WQU Financial Data — Module 3 & Module 4
+% Bản dịch tiếng Việt (tài liệu học tập cá nhân)
+%****************************************************************************************************
+\RequirePackage{fix-cm}
+\documentclass[
+  oneside, titlepage, numbers=noenddot, headinclude,
+  footinclude=true, cleardoublepage=empty, abstractoff,
+  BCOR=5mm, paper=a4, fontsize=11pt
+]{scrreprt}
+
+\input{classicthesis-config}
+\usepackage{framed}
+\usepackage{tikz}
+\usetikzlibrary{arrows.meta, positioning, calc}
+\usepackage{pdfpages}
+\usepackage{xcolor}
+\usepackage{longtable}
+\usepackage{pdflscape}
+
+% ---- Style riêng cho khối code/output (lstlisting), chỉ áp dụng ở main.tex,
+% ---- không chỉnh sửa classicthesis-config.tex. Mục tiêu: chống tràn lề
+% ---- (breaklines) và trình bày chuẩn học thuật cho các đoạn code Python.
+\lstset{
+  basicstyle=\ttfamily\footnotesize,
+  breaklines=true,
+  breakatwhitespace=false,
+  columns=fullflexible,
+  keepspaces=true,
+  showstringspaces=false,
+  tabsize=4,
+  frame=single,
+  framerule=0.4pt,
+  rulecolor=\color{black!30},
+  backgroundcolor=\color{black!4},
+  captionpos=b,
+  aboveskip=1em,
+  belowskip=1em,
+  keywordstyle=\color{blue!55!black}\bfseries,
+  commentstyle=\color{green!40!black}\itshape,
+  stringstyle=\color{orange!65!black},
+  numberstyle=\tiny\color{black!50}
+}
+
+\begin{document}
+\frenchspacing
+\raggedbottom
+\selectlanguage{vietnamese}
+\pagenumbering{roman}
+\pagestyle{plain}
+
+\IfFileExists{gfx/cover.pdf}{\includepdf[pages=-]{gfx/cover.pdf}}{}
+\input{disclaimer}
+
+\pagestyle{scrheadings}
+\tableofcontents
+\cleardoublepage
+\pagenumbering{arabic}
+
+% ============ MODULE 3: WORKING WITH PORTFOLIOS AND TICK DATA ============
+
+% ---- Lesson 1: Portfolio Returns and Variance ----
+% Thứ tự đọc: Lesson Notes -> Đọc thêm
+\include{Chapters/M3_L1_LessonNotes}
+\include{Chapters/M3_L1_DocThem1}
+
+% ---- Lesson 2: Efficient Frontier, Sharpe Ratio and Downside Risk Metrics ----
+% Thứ tự đọc: Lesson Notes -> Đọc thêm
+\include{Chapters/M3_L2_LessonNotes}
+\include{Chapters/M3_L2_DocThem1}
+\include{Chapters/M3_L2_DocThem2}
+
+% ---- Lesson 3: Tick Data ----
+% Thứ tự đọc: Lesson Notes -> Đọc thêm
+\include{Chapters/M3_L3_LessonNotes}
+\include{Chapters/M3_L3_DocThem1}
+\include{Chapters/M3_L3_DocThem2}
+
+% ---- Lesson 4: Singular Value Decomposition of Matrices ----
+% Thứ tự đọc: Lesson Notes -> Đọc thêm
+\include{Chapters/M3_L4_LessonNotes}
+\include{Chapters/M3_L4_DocThem1}
+
+% ============ MODULE 4: ALTERNATIVE DATA ============
+
+% ---- Lesson 1 ----
+% Thứ tự đọc: Lesson Notes -> Đọc thêm
+\include{Chapters/M4_L1_LessonNotes}
+\include{Chapters/M4_L1_DocThem1}
+\include{Chapters/M4_L1_DocThem2}
+
+% ---- Lesson 2 ----
+% Thứ tự đọc: Lesson Notes -> Đọc thêm
+\include{Chapters/M4_L2_LessonNotes}
+\include{Chapters/M4_L2_DocThem1}
+\include{Chapters/M4_L2_DocThem2}
+\include{Chapters/M4_L2_DocThem3}
+
+% ---- Lesson 3 ----
+% Thứ tự đọc: Lesson Notes -> Đọc thêm
+\include{Chapters/M4_L3_LessonNotes}
+\include{Chapters/M4_L3_DocThem1}
+\include{Chapters/M4_L3_DocThem2}
+
+% ---- Lesson 4: KHÔNG có Required Reading (WQU không yêu cầu đọc thêm) ----
+\include{Chapters/M4_L4_LessonNotes}
+
+\end{document}

@@ -1,0 +1,9 @@
+## **4. Basics of Non-Negative Matrix Factorization**[¶]{.anchor-link}
+
+In a nutshell, NMF is about finding a simpler representation of data by breaking it down into two parts that capture the essential features and their importance. It has applications in various fields, including image processing, text analysis, and bioinformatics. Implementation involves the following steps:
+
+-   **Initialization:** Starting with a non-negative matrix, often denoted as \$V\$, that represents data. This is our matrix that contains information about users, products, or any other kind of data.
+-   **Decomposition:** The core of NMF is to find two non-negative matrices, typically called \$W\$ and \$H\$, such that the product of \$W\$ and \$H\$ closely approximates the original matrix \$V\$ i.e. \$V \\approx WH\$. In simpler terms, we\'re trying to break down the original data into two parts that, when combined, resemble the original.
+-   **Iteration:** NMF algorithms employ iterative processes to refine \$W\$ and \$H\$, minimizing the difference between the product \$W H\$ and the original matrix \$V\$. These iterations involve updating \$W\$ and \$H\$ repeatedly until a satisfactory level of accuracy is reached. This process is often based on gradient descent or multiplicative updates.
+-   **Convergence:** The iteration process continues until a convergence criterion is met. This usually means that the difference between \$W H\$ and \$V\$ is small enough or that the algorithm has run for a predetermined number of steps.
+-   **Interpretation:** After convergence, the resulting matrices \$W\$ and \$H\$ provide a lower-dimensional representation of the original data. \$W\$ can be seen as containing the basis vectors or features, while \$H\$ represents the coefficients or weights of these features for each data point. Each column of \$W\$ represents a feature, and the corresponding row of \$H\$ shows how strongly this feature is expressed in each data point.

@@ -1,0 +1,5 @@
+# **7. Models assuming linearity may fail due to non-linearities, especially when there is leverage.**[¶](#7.-Models-assuming-linearity-may-fail-due-to-non-linearities,-especially-when-there-is-leverage.){.anchor-link}
+
+Often, we assume a model has linearities: we increase an input, we get a known increase in the output. Suppose the ratio is 1.5. Then, when we double the output, we get triple the output. Other times, we see there are lots of non-linearities. As we've seen, convexity causes small changes to produce small results, but bigger changes produce disproportionately bigger results.
+
+Likewise, the piecewise nonlinearity of an option's payoff can drive an option to be in the money or out of the money. It becomes very important whether the increase brings you on one side of strike or the other! Market impact is an example of a sensitivity that may start out linear (for relatively small amounts traded) and become very non-linear for larger amounts traded. The mistake is usually a gross underestimation of a cost, loss, or risk that can cause a crisis.

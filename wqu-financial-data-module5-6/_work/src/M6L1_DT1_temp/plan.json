@@ -1,0 +1,31 @@
+{
+  "chunks": [
+    {
+      "action": "translate",
+      "chunk_id": "chunk0001",
+      "output_file": "output_chunk0001.md",
+      "reasons": [
+        "missing_output"
+      ],
+      "source_file": "chunk0001.md"
+    }
+  ],
+  "decision_rules": [
+    "missing_output_or_empty_output",
+    "blank_or_unreadable_output",
+    "manifest_source_hash_changed",
+    "untracked_existing_output",
+    "source_hash_changed_since_record",
+    "glossary_term_selection_or_term_hash_changed"
+  ],
+  "glossary_hash": "f78202fa96f0a2aaec87e34ddf203c15ad6d6de116dc7c420b914e208a87c453",
+  "record_only_chunk_ids": [],
+  "record_update_rules": [
+    "output_hash_changed_since_record"
+  ],
+  "temp_dir": "src/M6L1_DT1_temp",
+  "translation_chunk_ids": [
+    "chunk0001"
+  ],
+  "unchanged_chunk_ids": []
+}

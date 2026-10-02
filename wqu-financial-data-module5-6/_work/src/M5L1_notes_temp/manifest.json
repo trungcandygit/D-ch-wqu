@@ -1,0 +1,139 @@
+{
+  "chunk_count": 19,
+  "source_hash": "d43bfecb0da6a30356446470401f22934899c74fe2920f400fe0013c5c5ad2bb",
+  "chunks": [
+    {
+      "id": "chunk0001",
+      "order": 1,
+      "source_file": "chunk0001.md",
+      "source_hash": "3753283662ad83ae0b29b10aaefc710bde82df8eed420ab2039452f2c12304cb",
+      "output_file": "output_chunk0001.md"
+    },
+    {
+      "id": "chunk0002",
+      "order": 2,
+      "source_file": "chunk0002.md",
+      "source_hash": "68acf60c859ef1164cd8de46cd537c47a032d3324a87c3079e78c6d4aa597f09",
+      "output_file": "output_chunk0002.md"
+    },
+    {
+      "id": "chunk0003",
+      "order": 3,
+      "source_file": "chunk0003.md",
+      "source_hash": "cc9ccd34816b61528871f329a79e5df5ae9aa3b7a9fee5cf27ef147ee41e59c6",
+      "output_file": "output_chunk0003.md"
+    },
+    {
+      "id": "chunk0004",
+      "order": 4,
+      "source_file": "chunk0004.md",
+      "source_hash": "d96a4768eb2c988e0420186a77ad22885dee7ab6d5be88caa0ec34e5bab2a513",
+      "output_file": "output_chunk0004.md"
+    },
+    {
+      "id": "chunk0005",
+      "order": 5,
+      "source_file": "chunk0005.md",
+      "source_hash": "6e51d8ccfa2d0b8abe671aef8b894a9d0f475c639abef7693c0c806d18990e78",
+      "output_file": "output_chunk0005.md"
+    },
+    {
+      "id": "chunk0006",
+      "order": 6,
+      "source_file": "chunk0006.md",
+      "source_hash": "99eb5f0f4d45c06dd1ab118ef859413ada48a2248bd3fec05f6108b5b2e2383f",
+      "output_file": "output_chunk0006.md"
+    },
+    {
+      "id": "chunk0007",
+      "order": 7,
+      "source_file": "chunk0007.md",
+      "source_hash": "c1f00d7dd76631bc589998bfafb8839ea4aa146641cb20856cd58e2d7bcd1867",
+      "output_file": "output_chunk0007.md"
+    },
+    {
+      "id": "chunk0008",
+      "order": 8,
+      "source_file": "chunk0008.md",
+      "source_hash": "0e2e4878da9c55d27e5a270e29e557b650993dcc456e1cf2ffc60c80a7f5b782",
+      "output_file": "output_chunk0008.md"
+    },
+    {
+      "id": "chunk0009",
+      "order": 9,
+      "source_file": "chunk0009.md",
+      "source_hash": "e2833d8462ab2d022d717e59f48d3393c332c770adecacfbe1a095b104ed2ca5",
+      "output_file": "output_chunk0009.md"
+    },
+    {
+      "id": "chunk0010",
+      "order": 10,
+      "source_file": "chunk0010.md",
+      "source_hash": "3149088e9ba549f1cbf167d434ec4b14a15c643d1d00a27972c007312c700d41",
+      "output_file": "output_chunk0010.md"
+    },
+    {
+      "id": "chunk0011",
+      "order": 11,
+      "source_file": "chunk0011.md",
+      "source_hash": "39ff733b42883c8d0aa2a9654fe0594dc2e1519ad5316f79e608a2ac690507a0",
+      "output_file": "output_chunk0011.md"
+    },
+    {
+      "id": "chunk0012",
+      "order": 12,
+      "source_file": "chunk0012.md",
+      "source_hash": "399880510d78d0691b494d270cf48b820f0c37d474bfcce5e5dcaf1147986ab7",
+      "output_file": "output_chunk0012.md"
+    },
+    {
+      "id": "chunk0013",
+      "order": 13,
+      "source_file": "chunk0013.md",
+      "source_hash": "71883f5c4207a77f472e4a05a5fd1bd9d86eb9b459ac2294a28f7256245c0385",
+      "output_file": "output_chunk0013.md"
+    },
+    {
+      "id": "chunk0014",
+      "order": 14,
+      "source_file": "chunk0014.md",
+      "source_hash": "b5ef7d8da829b72dbbec8bc1589cf3f65f7b03d15829285233808c3b3084589d",
+      "output_file": "output_chunk0014.md"
+    },
+    {
+      "id": "chunk0015",
+      "order": 15,
+      "source_file": "chunk0015.md",
+      "source_hash": "c1f05bde2393323f882a481335c6ecfc3b1980cc2a2b178812727d9ab1fb1d62",
+      "output_file": "output_chunk0015.md"
+    },
+    {
+      "id": "chunk0016",
+      "order": 16,
+      "source_file": "chunk0016.md",
+      "source_hash": "d133b4d808adae82c3291ca73a037bac286e2fd22ffa2624026df37bf0eb5e14",
+      "output_file": "output_chunk0016.md"
+    },
+    {
+      "id": "chunk0017",
+      "order": 17,
+      "source_file": "chunk0017.md",
+      "source_hash": "208527ce765338530d217a3bb655f0a0067c70ea0913c89dfacab6f6165ee32c",
+      "output_file": "output_chunk0017.md"
+    },
+    {
+      "id": "chunk0018",
+      "order": 18,
+      "source_file": "chunk0018.md",
+      "source_hash": "92b20253e8081b47f8c8f83adc58baaef94f3eaeb23a05c22b9dd5e703b2b93e",
+      "output_file": "output_chunk0018.md"
+    },
+    {
+      "id": "chunk0019",
+      "order": 19,
+      "source_file": "chunk0019.md",
+      "source_hash": "cf783f2a7f3e23cd642f64fc733ee17386a9769939b9a3a8f74c91c5ab30d55f",
+      "output_file": "output_chunk0019.md"
+    }
+  ]
+}

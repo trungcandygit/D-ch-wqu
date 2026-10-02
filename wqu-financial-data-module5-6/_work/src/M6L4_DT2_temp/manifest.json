@@ -1,0 +1,34 @@
+{
+  "chunk_count": 4,
+  "source_hash": "8f1a6e102fd35a152a9a781f23bb530ac7cfaea71db4e9185e04b53651537c13",
+  "chunks": [
+    {
+      "id": "chunk0001",
+      "order": 1,
+      "source_file": "chunk0001.md",
+      "source_hash": "c73b7e2b35dde5f4bce7089a1f5a6eae8bf6f644b5264278a6fa64e151211410",
+      "output_file": "output_chunk0001.md"
+    },
+    {
+      "id": "chunk0002",
+      "order": 2,
+      "source_file": "chunk0002.md",
+      "source_hash": "78435ae19589de8e10920053100549aea9ed664fbfc3c7a508adef5195376b51",
+      "output_file": "output_chunk0002.md"
+    },
+    {
+      "id": "chunk0003",
+      "order": 3,
+      "source_file": "chunk0003.md",
+      "source_hash": "af15af53d2ac3432e091cc7552db1ec093fb0dae1cf2d68f8b1505cb0c3e6035",
+      "output_file": "output_chunk0003.md"
+    },
+    {
+      "id": "chunk0004",
+      "order": 4,
+      "source_file": "chunk0004.md",
+      "source_hash": "8c3977d6550e6c5b711c226f3813db40c6a3ecd9e8476f34b0c805906d7ba762",
+      "output_file": "output_chunk0004.md"
+    }
+  ]
+}

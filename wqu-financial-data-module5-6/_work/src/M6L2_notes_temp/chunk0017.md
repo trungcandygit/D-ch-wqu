@@ -1,0 +1,4 @@
+### **4.1 Scenario: 2018 Northern California Camp Fire**
+On Thursday, November 8, 2018, a faulty electric transmission line caught fire in Butte County, California, in the United States. Due to strong downslope wind, the fire spread quickly and burned around 153,000 acres of land. It did not stop until November 25, 2018. The Camp Fire was the most expensive natural disaster in 2018. In this section, we are going to look at the satellite images before the fire, during the fire, and after the fire. We will also do one analysis to investigate the vegetation conditions before and after the fire.
+<br>
+<br>

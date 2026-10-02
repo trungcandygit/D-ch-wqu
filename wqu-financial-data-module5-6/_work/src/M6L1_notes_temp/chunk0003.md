@@ -1,0 +1,3 @@
+## **1. Introduction**
+In this lesson, we are going to introduce geospatial data. This type of data is tagged with location information in the form of a coordinate system. We will go through the basic concepts of geospatial data. Then, we will demonstrate how to use Python to process geospatial data for further analysis. The knowledge we learn from this lesson will also help us study for this module's upcoming lessons on satellite imagery and climate data.
+<br>

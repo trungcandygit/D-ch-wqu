@@ -1,0 +1,13 @@
+{
+  "chunk_count": 1,
+  "source_hash": "3b1a3614ce5c47e485660aba1a9201fc54ef627574b4ae32f35cae694f478cc3",
+  "chunks": [
+    {
+      "id": "chunk0001",
+      "order": 1,
+      "source_file": "chunk0001.md",
+      "source_hash": "3b1a3614ce5c47e485660aba1a9201fc54ef627574b4ae32f35cae694f478cc3",
+      "output_file": "output_chunk0001.md"
+    }
+  ]
+}

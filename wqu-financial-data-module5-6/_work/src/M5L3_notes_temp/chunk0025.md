@@ -1,0 +1,27 @@
+## **4.1. Considering Two Methods**[¶]{.anchor-link}
+
+Let\'s now consider methods for observing the dynamics of change in tone toward Netflix. There could be many approaches to this, but let\'s delve deeper into the two very basic simple methods for observing the dynamics of change in tone:
+
+**Method 1: Averaging Tone for Each 15-Minute File and Comparing Average Scores**
+
+This method prioritizes observing the overall sentiment trend towards Netflix over time by analyzing the average Tone score within consecutive 15-minute intervals. Here\'s a detailed breakdown of the process:
+
+-   Data Acquisition and Filtering: The process begins by acquiring the relevant GDELT GKG data files for the desired time period, typically encompassing a series of 15-minute intervals. Each file contains information about various news articles and events captured during that specific 15-minute window. The next step is to filter these files to isolate news articles specifically related to Netflix, using keywords, entity mentions, or other relevant criteria.
+
+-   Tone Extraction and Aggregation: Once the Netflix-related articles are identified within each file, the \"V2Tone\" column is extracted. This column contains a comma-separated string of values representing different sentiment components, including the overall Tone score. The \"V2Tone\" string is then parsed to isolate the Tone value, which is typically a numerical score indicating the sentiment expressed in the article. Tone scores are often normalized to a specific range, such as -100 to +100, with higher values indicating more positive sentiment. For each 15-minute file, the Tone scores of all the Netflix-related articles are aggregated by calculating their average. This average Tone score represents the overall sentiment toward Netflix during that specific 15-minute interval.
+
+-   Time Series Construction and Analysis: The average Tone scores, along with their corresponding timestamps (usually the start time of each 15-minute interval), are then used to construct a time series. This time series provides a chronological view of how sentiment toward Netflix has evolved over the extended period. The time series can be visually inspected for patterns, trends, and significant shifts in sentiment. Additionally, various analytical techniques can be applied, including: moving averages, to smooth out short-term fluctuations and identify longer-term trends; volatility analysis, to quantify the variability of sentiment over time; and correlation with other data, such as stock prices or news events, to explore potential relationships.
+
+-   Advantages: This method\'s primary advantage lies in its clear focus on observing the overall change in sentiment and its relative simplicity for implementation and interpretation. It\'s also computationally efficient, making it suitable for real-time applications or large datasets. However, it\'s worth noting that this method sacrifices some granularity by averaging individual article sentiments, and it might be sensitive to outliers. Additionally, it provides limited insight into the specific news stories or events that drive sentiment changes.
+
+**Method 2: Combining All Samples and Analyzing Tone Elements for Individual Articles**
+
+This method focuses on analyzing the sentiment expressed in individual news articles and its potential relationship to specific events or news stories. It provides a more granular and event-centric perspective compared to Method 1. Here\'s a detailed description:
+
+-   Data Consolidation and Tone Extraction: All the GDELT GKG data files for the desired time period are merged into a single dataset. This consolidated dataset includes all Netflix-related articles and their associated information, including timestamps, Tone scores, and other relevant features. The \"V2Tone\" column is extracted for each article, and the Tone score is parsed and isolated, similar to Method 1.
+
+-   Article-Level Sentiment Analysis: The Tone scores of individual articles are then analyzed, considering their timestamps and other relevant features such as themes, entities mentioned, or quotations. This analysis aims to understand the detailed sentiment expressed within specific news stories and how it might relate to the context or content of the article.
+
+-   Event Detection and Correlation: This method allows for identifying specific events or news stories that coincide with significant changes in sentiment for individual articles. By examining the timestamps of articles with notable Tone scores, researchers can pinpoint potential triggers for sentiment shifts. Furthermore, the Tone scores can be correlated with other data sources, such as stock prices or news event databases, to explore relationships and understand the impact of specific events on sentiment toward Netflix.
+
+-   Advantage: The advantage of this method lies in its detailed sentiment information and the potential for deeper analysis, including exploring the relationship between Tone and other article features. It also allows for understanding the impact of specific events on sentiment. However, this approach can be more computationally demanding and complex, potentially losing clear temporal information as it focuses on individual articles rather than aggregated trends. The interpretation of results might also require more effort due to the large volume of individual article sentiments.

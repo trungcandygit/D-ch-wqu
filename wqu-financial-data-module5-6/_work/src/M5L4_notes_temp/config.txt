@@ -1,0 +1,8 @@
+# Translation Configuration
+input_file=M5L4_notes.md
+input_lang=auto
+output_lang=vi
+conversion_method=markdown
+
+# Book Metadata
+original_title=M5L4_notes

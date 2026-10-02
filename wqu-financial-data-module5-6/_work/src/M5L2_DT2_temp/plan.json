@@ -1,0 +1,71 @@
+{
+  "chunks": [
+    {
+      "action": "translate",
+      "chunk_id": "chunk0001",
+      "output_file": "output_chunk0001.md",
+      "reasons": [
+        "missing_output"
+      ],
+      "source_file": "chunk0001.md"
+    },
+    {
+      "action": "translate",
+      "chunk_id": "chunk0002",
+      "output_file": "output_chunk0002.md",
+      "reasons": [
+        "missing_output"
+      ],
+      "source_file": "chunk0002.md"
+    },
+    {
+      "action": "translate",
+      "chunk_id": "chunk0003",
+      "output_file": "output_chunk0003.md",
+      "reasons": [
+        "missing_output"
+      ],
+      "source_file": "chunk0003.md"
+    },
+    {
+      "action": "translate",
+      "chunk_id": "chunk0004",
+      "output_file": "output_chunk0004.md",
+      "reasons": [
+        "missing_output"
+      ],
+      "source_file": "chunk0004.md"
+    },
+    {
+      "action": "translate",
+      "chunk_id": "chunk0005",
+      "output_file": "output_chunk0005.md",
+      "reasons": [
+        "missing_output"
+      ],
+      "source_file": "chunk0005.md"
+    }
+  ],
+  "decision_rules": [
+    "missing_output_or_empty_output",
+    "blank_or_unreadable_output",
+    "manifest_source_hash_changed",
+    "untracked_existing_output",
+    "source_hash_changed_since_record",
+    "glossary_term_selection_or_term_hash_changed"
+  ],
+  "glossary_hash": "e1e32b58a72a373ff15e7252fad24ea6df07048de131acf7f048b169603effcc",
+  "record_only_chunk_ids": [],
+  "record_update_rules": [
+    "output_hash_changed_since_record"
+  ],
+  "temp_dir": "src/M5L2_DT2_temp",
+  "translation_chunk_ids": [
+    "chunk0001",
+    "chunk0002",
+    "chunk0003",
+    "chunk0004",
+    "chunk0005"
+  ],
+  "unchanged_chunk_ids": []
+}

@@ -1,0 +1,341 @@
+{
+  "chunks": [
+    {
+      "action": "translate",
+      "chunk_id": "chunk0001",
+      "output_file": "output_chunk0001.md",
+      "reasons": [
+        "missing_output"
+      ],
+      "source_file": "chunk0001.md"
+    },
+    {
+      "action": "translate",
+      "chunk_id": "chunk0002",
+      "output_file": "output_chunk0002.md",
+      "reasons": [
+        "missing_output"
+      ],
+      "source_file": "chunk0002.md"
+    },
+    {
+      "action": "translate",
+      "chunk_id": "chunk0003",
+      "output_file": "output_chunk0003.md",
+      "reasons": [
+        "missing_output"
+      ],
+      "source_file": "chunk0003.md"
+    },
+    {
+      "action": "translate",
+      "chunk_id": "chunk0004",
+      "output_file": "output_chunk0004.md",
+      "reasons": [
+        "missing_output"
+      ],
+      "source_file": "chunk0004.md"
+    },
+    {
+      "action": "translate",
+      "chunk_id": "chunk0005",
+      "output_file": "output_chunk0005.md",
+      "reasons": [
+        "missing_output"
+      ],
+      "source_file": "chunk0005.md"
+    },
+    {
+      "action": "translate",
+      "chunk_id": "chunk0006",
+      "output_file": "output_chunk0006.md",
+      "reasons": [
+        "missing_output"
+      ],
+      "source_file": "chunk0006.md"
+    },
+    {
+      "action": "translate",
+      "chunk_id": "chunk0007",
+      "output_file": "output_chunk0007.md",
+      "reasons": [
+        "missing_output"
+      ],
+      "source_file": "chunk0007.md"
+    },
+    {
+      "action": "translate",
+      "chunk_id": "chunk0008",
+      "output_file": "output_chunk0008.md",
+      "reasons": [
+        "missing_output"
+      ],
+      "source_file": "chunk0008.md"
+    },
+    {
+      "action": "translate",
+      "chunk_id": "chunk0009",
+      "output_file": "output_chunk0009.md",
+      "reasons": [
+        "missing_output"
+      ],
+      "source_file": "chunk0009.md"
+    },
+    {
+      "action": "translate",
+      "chunk_id": "chunk0010",
+      "output_file": "output_chunk0010.md",
+      "reasons": [
+        "missing_output"
+      ],
+      "source_file": "chunk0010.md"
+    },
+    {
+      "action": "translate",
+      "chunk_id": "chunk0011",
+      "output_file": "output_chunk0011.md",
+      "reasons": [
+        "missing_output"
+      ],
+      "source_file": "chunk0011.md"
+    },
+    {
+      "action": "translate",
+      "chunk_id": "chunk0012",
+      "output_file": "output_chunk0012.md",
+      "reasons": [
+        "missing_output"
+      ],
+      "source_file": "chunk0012.md"
+    },
+    {
+      "action": "translate",
+      "chunk_id": "chunk0013",
+      "output_file": "output_chunk0013.md",
+      "reasons": [
+        "missing_output"
+      ],
+      "source_file": "chunk0013.md"
+    },
+    {
+      "action": "translate",
+      "chunk_id": "chunk0014",
+      "output_file": "output_chunk0014.md",
+      "reasons": [
+        "missing_output"
+      ],
+      "source_file": "chunk0014.md"
+    },
+    {
+      "action": "translate",
+      "chunk_id": "chunk0015",
+      "output_file": "output_chunk0015.md",
+      "reasons": [
+        "missing_output"
+      ],
+      "source_file": "chunk0015.md"
+    },
+    {
+      "action": "translate",
+      "chunk_id": "chunk0016",
+      "output_file": "output_chunk0016.md",
+      "reasons": [
+        "missing_output"
+      ],
+      "source_file": "chunk0016.md"
+    },
+    {
+      "action": "translate",
+      "chunk_id": "chunk0017",
+      "output_file": "output_chunk0017.md",
+      "reasons": [
+        "missing_output"
+      ],
+      "source_file": "chunk0017.md"
+    },
+    {
+      "action": "translate",
+      "chunk_id": "chunk0018",
+      "output_file": "output_chunk0018.md",
+      "reasons": [
+        "missing_output"
+      ],
+      "source_file": "chunk0018.md"
+    },
+    {
+      "action": "translate",
+      "chunk_id": "chunk0019",
+      "output_file": "output_chunk0019.md",
+      "reasons": [
+        "missing_output"
+      ],
+      "source_file": "chunk0019.md"
+    },
+    {
+      "action": "translate",
+      "chunk_id": "chunk0020",
+      "output_file": "output_chunk0020.md",
+      "reasons": [
+        "missing_output"
+      ],
+      "source_file": "chunk0020.md"
+    },
+    {
+      "action": "translate",
+      "chunk_id": "chunk0021",
+      "output_file": "output_chunk0021.md",
+      "reasons": [
+        "missing_output"
+      ],
+      "source_file": "chunk0021.md"
+    },
+    {
+      "action": "translate",
+      "chunk_id": "chunk0022",
+      "output_file": "output_chunk0022.md",
+      "reasons": [
+        "missing_output"
+      ],
+      "source_file": "chunk0022.md"
+    },
+    {
+      "action": "translate",
+      "chunk_id": "chunk0023",
+      "output_file": "output_chunk0023.md",
+      "reasons": [
+        "missing_output"
+      ],
+      "source_file": "chunk0023.md"
+    },
+    {
+      "action": "translate",
+      "chunk_id": "chunk0024",
+      "output_file": "output_chunk0024.md",
+      "reasons": [
+        "missing_output"
+      ],
+      "source_file": "chunk0024.md"
+    },
+    {
+      "action": "translate",
+      "chunk_id": "chunk0025",
+      "output_file": "output_chunk0025.md",
+      "reasons": [
+        "missing_output"
+      ],
+      "source_file": "chunk0025.md"
+    },
+    {
+      "action": "translate",
+      "chunk_id": "chunk0026",
+      "output_file": "output_chunk0026.md",
+      "reasons": [
+        "missing_output"
+      ],
+      "source_file": "chunk0026.md"
+    },
+    {
+      "action": "translate",
+      "chunk_id": "chunk0027",
+      "output_file": "output_chunk0027.md",
+      "reasons": [
+        "missing_output"
+      ],
+      "source_file": "chunk0027.md"
+    },
+    {
+      "action": "translate",
+      "chunk_id": "chunk0028",
+      "output_file": "output_chunk0028.md",
+      "reasons": [
+        "missing_output"
+      ],
+      "source_file": "chunk0028.md"
+    },
+    {
+      "action": "translate",
+      "chunk_id": "chunk0029",
+      "output_file": "output_chunk0029.md",
+      "reasons": [
+        "missing_output"
+      ],
+      "source_file": "chunk0029.md"
+    },
+    {
+      "action": "translate",
+      "chunk_id": "chunk0030",
+      "output_file": "output_chunk0030.md",
+      "reasons": [
+        "missing_output"
+      ],
+      "source_file": "chunk0030.md"
+    },
+    {
+      "action": "translate",
+      "chunk_id": "chunk0031",
+      "output_file": "output_chunk0031.md",
+      "reasons": [
+        "missing_output"
+      ],
+      "source_file": "chunk0031.md"
+    },
+    {
+      "action": "translate",
+      "chunk_id": "chunk0032",
+      "output_file": "output_chunk0032.md",
+      "reasons": [
+        "missing_output"
+      ],
+      "source_file": "chunk0032.md"
+    }
+  ],
+  "decision_rules": [
+    "missing_output_or_empty_output",
+    "blank_or_unreadable_output",
+    "manifest_source_hash_changed",
+    "untracked_existing_output",
+    "source_hash_changed_since_record",
+    "glossary_term_selection_or_term_hash_changed"
+  ],
+  "glossary_hash": "cc89e3c537e04fe3b35859a0fa0a06fcc885e797127d1feab6014963fcab49c1",
+  "record_only_chunk_ids": [],
+  "record_update_rules": [
+    "output_hash_changed_since_record"
+  ],
+  "temp_dir": "src/M5L3_notes_temp",
+  "translation_chunk_ids": [
+    "chunk0001",
+    "chunk0002",
+    "chunk0003",
+    "chunk0004",
+    "chunk0005",
+    "chunk0006",
+    "chunk0007",
+    "chunk0008",
+    "chunk0009",
+    "chunk0010",
+    "chunk0011",
+    "chunk0012",
+    "chunk0013",
+    "chunk0014",
+    "chunk0015",
+    "chunk0016",
+    "chunk0017",
+    "chunk0018",
+    "chunk0019",
+    "chunk0020",
+    "chunk0021",
+    "chunk0022",
+    "chunk0023",
+    "chunk0024",
+    "chunk0025",
+    "chunk0026",
+    "chunk0027",
+    "chunk0028",
+    "chunk0029",
+    "chunk0030",
+    "chunk0031",
+    "chunk0032"
+  ],
+  "unchanged_chunk_ids": []
+}
