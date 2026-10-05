@@ -51,12 +51,12 @@
         "plagiarism",
         "Gemini"
       ],
-      "glossary_version_used": "203fef7c154dd16d4cb6115c48084e0a71074156f4a0ff6d6c68413a0ad9efc4",
+      "glossary_version_used": "078042890a60ace4528dc9b5f93015a918bfd9ef08ffbe701e6ee2b5c1f87572",
       "output_file": "output_chunk0001.md",
       "output_hash": "96721eb76c2a2290357919ac26360b1d472fcefd4673cbd9f4b2dd8752248147",
       "source_file": "chunk0001.md",
       "source_hash": "e721358efd8e6f302f6d5fcdf19925aeded9f15550b9aea7909022a37d3c8c1b",
-      "updated_at": "2026-10-05T04:02:26+00:00"
+      "updated_at": "2026-10-05T04:03:02+00:00"
     },
     "chunk0002": {
       "entity_hashes_used": {
@@ -103,12 +103,12 @@
         "Abstract",
         "Keywords"
       ],
-      "glossary_version_used": "203fef7c154dd16d4cb6115c48084e0a71074156f4a0ff6d6c68413a0ad9efc4",
+      "glossary_version_used": "078042890a60ace4528dc9b5f93015a918bfd9ef08ffbe701e6ee2b5c1f87572",
       "output_file": "output_chunk0002.md",
       "output_hash": "32c4858e22cc2c967b42150fa550562a2c839c2cebcaab91cabdf6f4da020022",
       "source_file": "chunk0002.md",
       "source_hash": "09b9d4f7c31d5ffa9c8c2231fe6bc1b13f0dc8d3864f295d153cf4039397b8a4",
-      "updated_at": "2026-10-05T04:02:26+00:00"
+      "updated_at": "2026-10-05T04:03:02+00:00"
     },
     "chunk0003": {
       "entity_hashes_used": {
@@ -155,12 +155,12 @@
         "Abstract",
         "Keywords"
       ],
-      "glossary_version_used": "203fef7c154dd16d4cb6115c48084e0a71074156f4a0ff6d6c68413a0ad9efc4",
+      "glossary_version_used": "078042890a60ace4528dc9b5f93015a918bfd9ef08ffbe701e6ee2b5c1f87572",
       "output_file": "output_chunk0003.md",
       "output_hash": "ee7b6e2b77afff3595946e2b0346b964a3edc895d7ccf02e319b992d1d7482d8",
       "source_file": "chunk0003.md",
       "source_hash": "d1cd308ada2b7505cd9cdcdcd1b70aca530e7ab7bc9b9ff8809d101ccbdd0a4f",
-      "updated_at": "2026-10-05T04:02:26+00:00"
+      "updated_at": "2026-10-05T04:03:02+00:00"
     },
     "chunk0004": {
       "entity_hashes_used": {
@@ -215,12 +215,12 @@
         "plagiarism",
         "Wikidata"
       ],
-      "glossary_version_used": "203fef7c154dd16d4cb6115c48084e0a71074156f4a0ff6d6c68413a0ad9efc4",
+      "glossary_version_used": "078042890a60ace4528dc9b5f93015a918bfd9ef08ffbe701e6ee2b5c1f87572",
       "output_file": "output_chunk0004.md",
       "output_hash": "4c8cc5449f3f7de505811957b52fd735b78a57342a5f0734624943983736b6cb",
       "source_file": "chunk0004.md",
       "source_hash": "b91dd858e3ad218e46bfd166587072747792743250b0b8f4f9b74b14a4d44c97",
-      "updated_at": "2026-10-05T04:02:26+00:00"
+      "updated_at": "2026-10-05T04:03:02+00:00"
     },
     "chunk0005": {
       "entity_hashes_used": {
@@ -275,12 +275,12 @@
         "plagiarism",
         "Wikidata"
       ],
-      "glossary_version_used": "203fef7c154dd16d4cb6115c48084e0a71074156f4a0ff6d6c68413a0ad9efc4",
+      "glossary_version_used": "078042890a60ace4528dc9b5f93015a918bfd9ef08ffbe701e6ee2b5c1f87572",
       "output_file": "output_chunk0005.md",
       "output_hash": "632c960c98837144e158df04feddf27ac93f51204be8da391eb94d1710edd065",
       "source_file": "chunk0005.md",
       "source_hash": "c55022e8ec94c6acc6b5b184fcc3914530e67283d9bbf8943cbc1d75ce0c5b3a",
-      "updated_at": "2026-10-05T04:02:26+00:00"
+      "updated_at": "2026-10-05T04:03:02+00:00"
     },
     "chunk0006": {
       "entity_hashes_used": {
@@ -339,12 +339,12 @@
         "DALL-E",
         "GDPR"
       ],
-      "glossary_version_used": "203fef7c154dd16d4cb6115c48084e0a71074156f4a0ff6d6c68413a0ad9efc4",
+      "glossary_version_used": "078042890a60ace4528dc9b5f93015a918bfd9ef08ffbe701e6ee2b5c1f87572",
       "output_file": "output_chunk0006.md",
       "output_hash": "057895e2cb731b16de2d92e85617cd8dca64934091827ed56eaee0c31938c69b",
       "source_file": "chunk0006.md",
       "source_hash": "03bfbb117d9164a05b5fe362bb1a2cc64f9bcd22f825c56982ec479db7f99c23",
-      "updated_at": "2026-10-05T04:02:26+00:00"
+      "updated_at": "2026-10-05T04:03:02+00:00"
     },
     "chunk0007": {
       "entity_hashes_used": {
@@ -399,12 +399,12 @@
         "Gemini",
         "Wikidata"
       ],
-      "glossary_version_used": "203fef7c154dd16d4cb6115c48084e0a71074156f4a0ff6d6c68413a0ad9efc4",
+      "glossary_version_used": "078042890a60ace4528dc9b5f93015a918bfd9ef08ffbe701e6ee2b5c1f87572",
       "output_file": "output_chunk0007.md",
       "output_hash": "8af527ddf7f8dcf503efe044b04461f01e0570291f69413331846b8613289baf",
       "source_file": "chunk0007.md",
       "source_hash": "6a0da9121558cd79891bc0e57bb8074475a53258565e2326cb4f311ed1c2aa6f",
-      "updated_at": "2026-10-05T04:02:26+00:00"
+      "updated_at": "2026-10-05T04:03:02+00:00"
     },
     "chunk0008": {
       "entity_hashes_used": {
@@ -453,12 +453,12 @@
         "Keywords",
         "no-code"
       ],
-      "glossary_version_used": "203fef7c154dd16d4cb6115c48084e0a71074156f4a0ff6d6c68413a0ad9efc4",
+      "glossary_version_used": "078042890a60ace4528dc9b5f93015a918bfd9ef08ffbe701e6ee2b5c1f87572",
       "output_file": "output_chunk0008.md",
       "output_hash": "d9fa9108b1cf0891722e62d6d9a09ca4caeb720236ce21ced504d5a50146a6fd",
       "source_file": "chunk0008.md",
       "source_hash": "b4a900b5a23d19bc7d1a5dd3cf1c75c396465f98b3d70a7cc672aced8f7e4914",
-      "updated_at": "2026-10-05T04:02:26+00:00"
+      "updated_at": "2026-10-05T04:03:02+00:00"
     },
     "chunk0009": {
       "entity_hashes_used": {
@@ -511,12 +511,12 @@
         "no-code",
         "plagiarism"
       ],
-      "glossary_version_used": "203fef7c154dd16d4cb6115c48084e0a71074156f4a0ff6d6c68413a0ad9efc4",
+      "glossary_version_used": "078042890a60ace4528dc9b5f93015a918bfd9ef08ffbe701e6ee2b5c1f87572",
       "output_file": "output_chunk0009.md",
       "output_hash": "8a9b77f89995b2032f923738127b279864a13cdcd5504b5bf0d076480f2c884a",
       "source_file": "chunk0009.md",
       "source_hash": "85ba3808b60977e2d1be8f215cbaef38f6addfa48a0a4630f4a95fedf1874b17",
-      "updated_at": "2026-10-05T04:02:26+00:00"
+      "updated_at": "2026-10-05T04:03:02+00:00"
     },
     "chunk0010": {
       "entity_hashes_used": {
@@ -569,12 +569,12 @@
         "no-code",
         "plagiarism"
       ],
-      "glossary_version_used": "203fef7c154dd16d4cb6115c48084e0a71074156f4a0ff6d6c68413a0ad9efc4",
+      "glossary_version_used": "078042890a60ace4528dc9b5f93015a918bfd9ef08ffbe701e6ee2b5c1f87572",
       "output_file": "output_chunk0010.md",
       "output_hash": "88af5d618c5aac68d459d9768a07d48c57b3e8292dcae9c330ebd890e4c1cb44",
       "source_file": "chunk0010.md",
       "source_hash": "f68e7e793b73564959a67326ab497a6bf4e73b5cbd06ac2abf30b1fe6a3e62b0",
-      "updated_at": "2026-10-05T04:02:26+00:00"
+      "updated_at": "2026-10-05T04:03:02+00:00"
     },
     "chunk0011": {
       "entity_hashes_used": {
@@ -623,12 +623,12 @@
         "Keywords",
         "no-code"
       ],
-      "glossary_version_used": "203fef7c154dd16d4cb6115c48084e0a71074156f4a0ff6d6c68413a0ad9efc4",
+      "glossary_version_used": "078042890a60ace4528dc9b5f93015a918bfd9ef08ffbe701e6ee2b5c1f87572",
       "output_file": "output_chunk0011.md",
       "output_hash": "71df734916eedb6e474ce157c6a3f31cfa75702ea0d46c795ecc6078f474ff04",
       "source_file": "chunk0011.md",
       "source_hash": "704f63a1da45bedba081c3612980cbdf2cce6e99f07fd1148545f5b1cca9ee0e",
-      "updated_at": "2026-10-05T04:02:26+00:00"
+      "updated_at": "2026-10-05T04:03:02+00:00"
     },
     "chunk0012": {
       "entity_hashes_used": {
@@ -697,12 +697,12 @@
         "citation management",
         "feature engineering"
       ],
-      "glossary_version_used": "203fef7c154dd16d4cb6115c48084e0a71074156f4a0ff6d6c68413a0ad9efc4",
+      "glossary_version_used": "078042890a60ace4528dc9b5f93015a918bfd9ef08ffbe701e6ee2b5c1f87572",
       "output_file": "output_chunk0012.md",
       "output_hash": "9afccccc362ebce88b20b74c3d6618992e2a318c301315bc5b08c3023086b553",
       "source_file": "chunk0012.md",
       "source_hash": "cd63118e9526ce4b1075831e7c16b1bc841988c360e040694532d54474708112",
-      "updated_at": "2026-10-05T04:02:26+00:00"
+      "updated_at": "2026-10-05T04:03:02+00:00"
     },
     "chunk0013": {
       "entity_hashes_used": {
@@ -749,12 +749,12 @@
         "Abstract",
         "Keywords"
       ],
-      "glossary_version_used": "203fef7c154dd16d4cb6115c48084e0a71074156f4a0ff6d6c68413a0ad9efc4",
+      "glossary_version_used": "078042890a60ace4528dc9b5f93015a918bfd9ef08ffbe701e6ee2b5c1f87572",
       "output_file": "output_chunk0013.md",
       "output_hash": "03f9da8b913849b0ff5f10b6a43cfce77bad4b84f96114cfde30c21cab34498b",
       "source_file": "chunk0013.md",
       "source_hash": "c7b2965017aca18083378484fefdd3bf0991ea3e29ce3e7d6c60d933c86bec87",
-      "updated_at": "2026-10-05T04:02:26+00:00"
+      "updated_at": "2026-10-05T04:03:02+00:00"
     },
     "chunk0014": {
       "entity_hashes_used": {
@@ -803,12 +803,12 @@
         "Keywords",
         "no-code"
       ],
-      "glossary_version_used": "203fef7c154dd16d4cb6115c48084e0a71074156f4a0ff6d6c68413a0ad9efc4",
+      "glossary_version_used": "078042890a60ace4528dc9b5f93015a918bfd9ef08ffbe701e6ee2b5c1f87572",
       "output_file": "output_chunk0014.md",
       "output_hash": "673ad3da4918ed4d20f471f7c36989dd5f398ed6c8a6c5edb22412dac58e6a7c",
       "source_file": "chunk0014.md",
       "source_hash": "0dae5023a659f99164c70c8a8cfe5c848994abe85d41162238f1d4e6b8317b85",
-      "updated_at": "2026-10-05T04:02:26+00:00"
+      "updated_at": "2026-10-05T04:03:02+00:00"
     },
     "chunk0015": {
       "entity_hashes_used": {
@@ -855,12 +855,12 @@
         "Abstract",
         "Keywords"
       ],
-      "glossary_version_used": "203fef7c154dd16d4cb6115c48084e0a71074156f4a0ff6d6c68413a0ad9efc4",
+      "glossary_version_used": "078042890a60ace4528dc9b5f93015a918bfd9ef08ffbe701e6ee2b5c1f87572",
       "output_file": "output_chunk0015.md",
       "output_hash": "f18ec3acdbd804f3998243a5e89ccd60ce707518bd1f092d05ff36e29209075b",
       "source_file": "chunk0015.md",
       "source_hash": "2f5c83f7e02b4c39262b41e4792d30a595a9fdabdeace02026cdc11023be3e06",
-      "updated_at": "2026-10-05T04:02:26+00:00"
+      "updated_at": "2026-10-05T04:03:02+00:00"
     },
     "chunk0016": {
       "entity_hashes_used": {
@@ -917,12 +917,12 @@
         "Wikidata",
         "DALL-E"
       ],
-      "glossary_version_used": "203fef7c154dd16d4cb6115c48084e0a71074156f4a0ff6d6c68413a0ad9efc4",
+      "glossary_version_used": "078042890a60ace4528dc9b5f93015a918bfd9ef08ffbe701e6ee2b5c1f87572",
       "output_file": "output_chunk0016.md",
       "output_hash": "8120be8d95f6873283acd13ec724319c3dd6cc68cb4f45a65efabd60f939a202",
       "source_file": "chunk0016.md",
       "source_hash": "0edc98b84c8c8fbaa9b36c1ec6246bf8dd409504e8e81940de02d4dcde151781",
-      "updated_at": "2026-10-05T04:02:26+00:00"
+      "updated_at": "2026-10-05T04:03:02+00:00"
     },
     "chunk0017": {
       "entity_hashes_used": {
@@ -977,12 +977,12 @@
         "Gemini",
         "Wikidata"
       ],
-      "glossary_version_used": "203fef7c154dd16d4cb6115c48084e0a71074156f4a0ff6d6c68413a0ad9efc4",
+      "glossary_version_used": "078042890a60ace4528dc9b5f93015a918bfd9ef08ffbe701e6ee2b5c1f87572",
       "output_file": "output_chunk0017.md",
       "output_hash": "233935a0acbb1cf5c86db60f045ca86b76d3f0a53a6c7484d42b15e2c2b8717d",
       "source_file": "chunk0017.md",
       "source_hash": "77432d054fe595341e1a172cc6650b36b7c4460a36f947649e86882444c4b0b8",
-      "updated_at": "2026-10-05T04:02:26+00:00"
+      "updated_at": "2026-10-05T04:03:02+00:00"
     },
     "chunk0018": {
       "entity_hashes_used": {
@@ -1029,12 +1029,12 @@
         "Abstract",
         "Keywords"
       ],
-      "glossary_version_used": "203fef7c154dd16d4cb6115c48084e0a71074156f4a0ff6d6c68413a0ad9efc4",
+      "glossary_version_used": "078042890a60ace4528dc9b5f93015a918bfd9ef08ffbe701e6ee2b5c1f87572",
       "output_file": "output_chunk0018.md",
       "output_hash": "777b97420708b84aa298eaa1b639725ace39b43fdbbc96c2ef4ff3cf90a1839e",
       "source_file": "chunk0018.md",
       "source_hash": "46dc4561626d9624846f66d7af58467c2a6c63a91a1b4d99036f629773b11cbc",
-      "updated_at": "2026-10-05T04:02:26+00:00"
+      "updated_at": "2026-10-05T04:03:02+00:00"
     },
     "chunk0019": {
       "entity_hashes_used": {
@@ -1095,12 +1095,12 @@
         "Wikidata",
         "DALL-E"
       ],
-      "glossary_version_used": "203fef7c154dd16d4cb6115c48084e0a71074156f4a0ff6d6c68413a0ad9efc4",
+      "glossary_version_used": "078042890a60ace4528dc9b5f93015a918bfd9ef08ffbe701e6ee2b5c1f87572",
       "output_file": "output_chunk0019.md",
       "output_hash": "b68466179b9fd99fc4901be3c894b169f7b42efc0feea7e35073e372b7b8d461",
       "source_file": "chunk0019.md",
       "source_hash": "dc4dd5423223e7cfcca727587a4b506c815b533fa5a535a3f6ec965ecded8899",
-      "updated_at": "2026-10-05T04:02:26+00:00"
+      "updated_at": "2026-10-05T04:03:02+00:00"
     },
     "chunk0020": {
       "entity_hashes_used": {
@@ -1149,12 +1149,12 @@
         "Keywords",
         "no-code"
       ],
-      "glossary_version_used": "203fef7c154dd16d4cb6115c48084e0a71074156f4a0ff6d6c68413a0ad9efc4",
+      "glossary_version_used": "078042890a60ace4528dc9b5f93015a918bfd9ef08ffbe701e6ee2b5c1f87572",
       "output_file": "output_chunk0020.md",
       "output_hash": "9ec5123c1a9d41b0d6e1d27f4ee5b1c6a16695516825e643893a96429e5b6c5f",
       "source_file": "chunk0020.md",
       "source_hash": "38d175437312f680f13d4589d631d5b474d1b3af3b4327e7970e88bce21b0a27",
-      "updated_at": "2026-10-05T04:02:26+00:00"
+      "updated_at": "2026-10-05T04:03:02+00:00"
     },
     "chunk0021": {
       "entity_hashes_used": {
@@ -1203,12 +1203,12 @@
         "Keywords",
         "no-code"
       ],
-      "glossary_version_used": "203fef7c154dd16d4cb6115c48084e0a71074156f4a0ff6d6c68413a0ad9efc4",
+      "glossary_version_used": "078042890a60ace4528dc9b5f93015a918bfd9ef08ffbe701e6ee2b5c1f87572",
       "output_file": "output_chunk0021.md",
       "output_hash": "3f5c08175cacf8e4c12745f3045018085af6b5df51ac3600d1099c8b524cc614",
       "source_file": "chunk0021.md",
       "source_hash": "d9c4370de406b7b4eb33d95a6749371fd054107e3d74cbfd47b048cf5ce99b95",
-      "updated_at": "2026-10-05T04:02:26+00:00"
+      "updated_at": "2026-10-05T04:03:02+00:00"
     },
     "chunk0022": {
       "entity_hashes_used": {
@@ -1255,12 +1255,12 @@
         "Abstract",
         "Keywords"
       ],
-      "glossary_version_used": "203fef7c154dd16d4cb6115c48084e0a71074156f4a0ff6d6c68413a0ad9efc4",
+      "glossary_version_used": "078042890a60ace4528dc9b5f93015a918bfd9ef08ffbe701e6ee2b5c1f87572",
       "output_file": "output_chunk0022.md",
       "output_hash": "60192003c0c1fa959939a180c4398a47d2a0186058a8b1fa224b10ae30626f0c",
       "source_file": "chunk0022.md",
       "source_hash": "531e517f22e6c4b7339539cf07695c403abf7ca28bff018e60524cafc55907e2",
-      "updated_at": "2026-10-05T04:02:26+00:00"
+      "updated_at": "2026-10-05T04:03:02+00:00"
     },
     "chunk0023": {
       "entity_hashes_used": {
@@ -1309,12 +1309,12 @@
         "Keywords",
         "no-code"
       ],
-      "glossary_version_used": "203fef7c154dd16d4cb6115c48084e0a71074156f4a0ff6d6c68413a0ad9efc4",
+      "glossary_version_used": "078042890a60ace4528dc9b5f93015a918bfd9ef08ffbe701e6ee2b5c1f87572",
       "output_file": "output_chunk0023.md",
       "output_hash": "3589a298d8fadeacd060f895a4fc4e8a08d5294c016af53a211016f60a27a227",
       "source_file": "chunk0023.md",
       "source_hash": "3b8fad9f87422cd22956cf9ec2ef136508b9105801158a284890fbb2584375bc",
-      "updated_at": "2026-10-05T04:02:26+00:00"
+      "updated_at": "2026-10-05T04:03:02+00:00"
     },
     "chunk0024": {
       "entity_hashes_used": {
@@ -1371,12 +1371,12 @@
         "Gemini",
         "Wikidata"
       ],
-      "glossary_version_used": "203fef7c154dd16d4cb6115c48084e0a71074156f4a0ff6d6c68413a0ad9efc4",
+      "glossary_version_used": "078042890a60ace4528dc9b5f93015a918bfd9ef08ffbe701e6ee2b5c1f87572",
       "output_file": "output_chunk0024.md",
       "output_hash": "6c1d75288dfd1d40683e2501cd00667cb8877c0e2248ed62735c3360aa928066",
       "source_file": "chunk0024.md",
       "source_hash": "e4d412a4e7a4abc32c9074c3594637bcb986b58748f1c777b57184f323fdbf54",
-      "updated_at": "2026-10-05T04:02:26+00:00"
+      "updated_at": "2026-10-05T04:03:02+00:00"
     },
     "chunk0025": {
       "entity_hashes_used": {
@@ -1431,12 +1431,12 @@
         "plagiarism",
         "Gemini"
       ],
-      "glossary_version_used": "203fef7c154dd16d4cb6115c48084e0a71074156f4a0ff6d6c68413a0ad9efc4",
+      "glossary_version_used": "078042890a60ace4528dc9b5f93015a918bfd9ef08ffbe701e6ee2b5c1f87572",
       "output_file": "output_chunk0025.md",
       "output_hash": "9b0924996be5957512ee3169cd97d85a342eab385d55e02cafe9e755dfc7100e",
       "source_file": "chunk0025.md",
       "source_hash": "0f17d635e1d1ab33885e477605080c19e984d4c40fea7021944cc2844d8457b2",
-      "updated_at": "2026-10-05T04:02:26+00:00"
+      "updated_at": "2026-10-05T04:03:02+00:00"
     },
     "chunk0026": {
       "entity_hashes_used": {
@@ -1487,12 +1487,12 @@
         "no-code",
         "plagiarism"
       ],
-      "glossary_version_used": "203fef7c154dd16d4cb6115c48084e0a71074156f4a0ff6d6c68413a0ad9efc4",
+      "glossary_version_used": "078042890a60ace4528dc9b5f93015a918bfd9ef08ffbe701e6ee2b5c1f87572",
       "output_file": "output_chunk0026.md",
       "output_hash": "0212103fe4cdf5e118577107e1acec504d837cb5e27ad41949b1f77ec0e18775",
       "source_file": "chunk0026.md",
       "source_hash": "d781adeaab511eec8757bf0c5866597791c2ba7109d4d334a2abc032c06c930b",
-      "updated_at": "2026-10-05T04:02:26+00:00"
+      "updated_at": "2026-10-05T04:03:02+00:00"
     },
     "chunk0027": {
       "entity_hashes_used": {
@@ -1547,12 +1547,12 @@
         "Gemini",
         "Wikidata"
       ],
-      "glossary_version_used": "203fef7c154dd16d4cb6115c48084e0a71074156f4a0ff6d6c68413a0ad9efc4",
+      "glossary_version_used": "078042890a60ace4528dc9b5f93015a918bfd9ef08ffbe701e6ee2b5c1f87572",
       "output_file": "output_chunk0027.md",
       "output_hash": "3b16f896be37feaebe22b9ab20738907e809afade5e45bf195ce3e184fca22c4",
       "source_file": "chunk0027.md",
       "source_hash": "80e4476886b9b3a744cd5f0f315ece257a2782731a6e70fa62b88adc46696e21",
-      "updated_at": "2026-10-05T04:02:26+00:00"
+      "updated_at": "2026-10-05T04:03:02+00:00"
     },
     "chunk0028": {
       "entity_hashes_used": {
@@ -1599,12 +1599,12 @@
         "Abstract",
         "Keywords"
       ],
-      "glossary_version_used": "203fef7c154dd16d4cb6115c48084e0a71074156f4a0ff6d6c68413a0ad9efc4",
+      "glossary_version_used": "078042890a60ace4528dc9b5f93015a918bfd9ef08ffbe701e6ee2b5c1f87572",
       "output_file": "output_chunk0028.md",
       "output_hash": "d714a73a6453dceb20760c974d94b72c855ade9665d0fe0224e7b80f1affbc78",
       "source_file": "chunk0028.md",
       "source_hash": "64b3fee619aaba108eb1f56d4cfb42f9b6d32bfc7f6d5ab85592f34ed3a278ca",
-      "updated_at": "2026-10-05T04:02:26+00:00"
+      "updated_at": "2026-10-05T04:03:02+00:00"
     },
     "chunk0029": {
       "entity_hashes_used": {
@@ -1659,12 +1659,12 @@
         "plagiarism",
         "Wikidata"
       ],
-      "glossary_version_used": "203fef7c154dd16d4cb6115c48084e0a71074156f4a0ff6d6c68413a0ad9efc4",
+      "glossary_version_used": "078042890a60ace4528dc9b5f93015a918bfd9ef08ffbe701e6ee2b5c1f87572",
       "output_file": "output_chunk0029.md",
       "output_hash": "5aec673f664b017efa90d58316bf36acf872d25d1f290ea62b7fbaa51348f46a",
       "source_file": "chunk0029.md",
       "source_hash": "1bb7044647e77905c6b3491d46b33055bf45ef5e799a6cb7e495935ea6bf79fe",
-      "updated_at": "2026-10-05T04:02:26+00:00"
+      "updated_at": "2026-10-05T04:03:02+00:00"
     },
     "chunk0030": {
       "entity_hashes_used": {
@@ -1721,12 +1721,12 @@
         "Wikidata",
         "DALL-E"
       ],
-      "glossary_version_used": "203fef7c154dd16d4cb6115c48084e0a71074156f4a0ff6d6c68413a0ad9efc4",
+      "glossary_version_used": "078042890a60ace4528dc9b5f93015a918bfd9ef08ffbe701e6ee2b5c1f87572",
       "output_file": "output_chunk0030.md",
       "output_hash": "39d776a71b7b39faab3f1827ac2683ccc0b882e2573cac28e027aa659bba0f72",
       "source_file": "chunk0030.md",
       "source_hash": "3df3b063553a158a0ccfbb4b4c3cbeb8605b1c2c7db58e6248e4d9c8f70d20b0",
-      "updated_at": "2026-10-05T04:02:26+00:00"
+      "updated_at": "2026-10-05T04:03:02+00:00"
     },
     "chunk0031": {
       "entity_hashes_used": {
@@ -1777,12 +1777,12 @@
         "no-code",
         "plagiarism"
       ],
-      "glossary_version_used": "203fef7c154dd16d4cb6115c48084e0a71074156f4a0ff6d6c68413a0ad9efc4",
+      "glossary_version_used": "078042890a60ace4528dc9b5f93015a918bfd9ef08ffbe701e6ee2b5c1f87572",
       "output_file": "output_chunk0031.md",
       "output_hash": "02e2dce159d2078564c4ec9971b18b35673096ba32023798c47266e25a1b4257",
       "source_file": "chunk0031.md",
       "source_hash": "6cdff81ccf3b0d22ce2e2f2b2d17bd7c1267b9385e655ee846141273862d99ce",
-      "updated_at": "2026-10-05T04:02:26+00:00"
+      "updated_at": "2026-10-05T04:03:02+00:00"
     },
     "chunk0032": {
       "entity_hashes_used": {
@@ -1837,12 +1837,12 @@
         "Gemini",
         "Wikidata"
       ],
-      "glossary_version_used": "203fef7c154dd16d4cb6115c48084e0a71074156f4a0ff6d6c68413a0ad9efc4",
+      "glossary_version_used": "078042890a60ace4528dc9b5f93015a918bfd9ef08ffbe701e6ee2b5c1f87572",
       "output_file": "output_chunk0032.md",
       "output_hash": "e3f0a7b34c8e13785359ba3c4a0830a9cde7f53d2aeb939303749cc5a4f9bc94",
       "source_file": "chunk0032.md",
       "source_hash": "8c034ef9a4e3b2a9258d746115710ef3f8e76f6ac0e780254268bac6e5d7bfcc",
-      "updated_at": "2026-10-05T04:02:26+00:00"
+      "updated_at": "2026-10-05T04:03:02+00:00"
     },
     "chunk0033": {
       "entity_hashes_used": {
@@ -1891,12 +1891,12 @@
         "Keywords",
         "no-code"
       ],
-      "glossary_version_used": "203fef7c154dd16d4cb6115c48084e0a71074156f4a0ff6d6c68413a0ad9efc4",
+      "glossary_version_used": "078042890a60ace4528dc9b5f93015a918bfd9ef08ffbe701e6ee2b5c1f87572",
       "output_file": "output_chunk0033.md",
       "output_hash": "a22e8e9c0b9e248f8db844715edf0d0005b9eb668b398cce816f9b07e4b648fe",
       "source_file": "chunk0033.md",
       "source_hash": "6af8795b9bf3e86ea8c9a005f014e1c58d457daaa463b9c7f98ce9996dc20c4b",
-      "updated_at": "2026-10-05T04:02:26+00:00"
+      "updated_at": "2026-10-05T04:03:02+00:00"
     },
     "chunk0034": {
       "entity_hashes_used": {
@@ -1945,12 +1945,12 @@
         "Keywords",
         "no-code"
       ],
-      "glossary_version_used": "203fef7c154dd16d4cb6115c48084e0a71074156f4a0ff6d6c68413a0ad9efc4",
+      "glossary_version_used": "078042890a60ace4528dc9b5f93015a918bfd9ef08ffbe701e6ee2b5c1f87572",
       "output_file": "output_chunk0034.md",
       "output_hash": "2285b7ded819c52c6c368887c497e98071afed9c45566cd344b74412da94f76e",
       "source_file": "chunk0034.md",
       "source_hash": "b2545710947d74ce1b8b9602a955209652d699c7b9ca7a42eb12e1f25332a14e",
-      "updated_at": "2026-10-05T04:02:26+00:00"
+      "updated_at": "2026-10-05T04:03:02+00:00"
     },
     "chunk0035": {
       "entity_hashes_used": {
@@ -2007,12 +2007,12 @@
         "plagiarism",
         "Gemini"
       ],
-      "glossary_version_used": "203fef7c154dd16d4cb6115c48084e0a71074156f4a0ff6d6c68413a0ad9efc4",
+      "glossary_version_used": "078042890a60ace4528dc9b5f93015a918bfd9ef08ffbe701e6ee2b5c1f87572",
       "output_file": "output_chunk0035.md",
       "output_hash": "94e482e82acd1f74d3aac1267c5f5978fc20fee8ac038c57afd3d8297865e635",
       "source_file": "chunk0035.md",
       "source_hash": "04f40aa5820ed23d96847613652647ae8e9a05b7a18dff5135d46cc9a8f1e4a6",
-      "updated_at": "2026-10-05T04:02:26+00:00"
+      "updated_at": "2026-10-05T04:03:02+00:00"
     },
     "chunk0036": {
       "entity_hashes_used": {
@@ -2063,12 +2063,12 @@
         "no-code",
         "plagiarism"
       ],
-      "glossary_version_used": "203fef7c154dd16d4cb6115c48084e0a71074156f4a0ff6d6c68413a0ad9efc4",
+      "glossary_version_used": "078042890a60ace4528dc9b5f93015a918bfd9ef08ffbe701e6ee2b5c1f87572",
       "output_file": "output_chunk0036.md",
       "output_hash": "0f2330678334bad3b5c111ce0e5b72348f33bebe13cb2ea587901ffdc1b0dee1",
       "source_file": "chunk0036.md",
       "source_hash": "e190f22a2cd87c5e885cfb3041b405a8ae301110f87ad372bfa4db4920b67b7b",
-      "updated_at": "2026-10-05T04:02:26+00:00"
+      "updated_at": "2026-10-05T04:03:02+00:00"
     },
     "chunk0037": {
       "entity_hashes_used": {
@@ -2121,12 +2121,12 @@
         "plagiarism",
         "Gemini"
       ],
-      "glossary_version_used": "203fef7c154dd16d4cb6115c48084e0a71074156f4a0ff6d6c68413a0ad9efc4",
+      "glossary_version_used": "078042890a60ace4528dc9b5f93015a918bfd9ef08ffbe701e6ee2b5c1f87572",
       "output_file": "output_chunk0037.md",
       "output_hash": "0dacc7f84c1eb43856d61c68e3db8389e436af3aead133fc1b8c86a461951c3b",
       "source_file": "chunk0037.md",
       "source_hash": "aade28f50af34da3ee1d8ae7978f41a0986884504673c3a3998cd67325a432b9",
-      "updated_at": "2026-10-05T04:02:26+00:00"
+      "updated_at": "2026-10-05T04:03:02+00:00"
     },
     "chunk0038": {
       "entity_hashes_used": {
@@ -2181,12 +2181,12 @@
         "plagiarism",
         "Gemini"
       ],
-      "glossary_version_used": "203fef7c154dd16d4cb6115c48084e0a71074156f4a0ff6d6c68413a0ad9efc4",
+      "glossary_version_used": "078042890a60ace4528dc9b5f93015a918bfd9ef08ffbe701e6ee2b5c1f87572",
       "output_file": "output_chunk0038.md",
       "output_hash": "72f8a80bb9f7180aa6a4c4edabf78c4713cdb5ba46f236f8ea13e6a03ada2cfa",
       "source_file": "chunk0038.md",
       "source_hash": "14d6f8d05da45fd524c04cad0e080a4f6e4a955d7e85ce7c58b9ce0c0a0dabb4",
-      "updated_at": "2026-10-05T04:02:26+00:00"
+      "updated_at": "2026-10-05T04:03:02+00:00"
     },
     "chunk0039": {
       "entity_hashes_used": {
@@ -2241,12 +2241,12 @@
         "Gemini",
         "Wikidata"
       ],
-      "glossary_version_used": "203fef7c154dd16d4cb6115c48084e0a71074156f4a0ff6d6c68413a0ad9efc4",
+      "glossary_version_used": "078042890a60ace4528dc9b5f93015a918bfd9ef08ffbe701e6ee2b5c1f87572",
       "output_file": "output_chunk0039.md",
       "output_hash": "01a9f8c5aa0a7a9442ca878707f41aa243454a703ef138c89eda6b3e6dc767b0",
       "source_file": "chunk0039.md",
       "source_hash": "7dde9a11093c570df198b7a41d8b87869e78b6f67f57e3005b4912f5ff9785c9",
-      "updated_at": "2026-10-05T04:02:26+00:00"
+      "updated_at": "2026-10-05T04:03:02+00:00"
     },
     "chunk0040": {
       "entity_hashes_used": {
@@ -2297,12 +2297,12 @@
         "no-code",
         "plagiarism"
       ],
-      "glossary_version_used": "203fef7c154dd16d4cb6115c48084e0a71074156f4a0ff6d6c68413a0ad9efc4",
+      "glossary_version_used": "078042890a60ace4528dc9b5f93015a918bfd9ef08ffbe701e6ee2b5c1f87572",
       "output_file": "output_chunk0040.md",
       "output_hash": "46452c584c7b5117b2bc82baf0cd2cb009f93e32e1effa0bfc1feba1bb924f14",
       "source_file": "chunk0040.md",
       "source_hash": "2af6a5c87f756b4b8b2370c79f68253e44154a891dd2644f0a2d56b1548065b6",
-      "updated_at": "2026-10-05T04:02:26+00:00"
+      "updated_at": "2026-10-05T04:03:02+00:00"
     },
     "chunk0041": {
       "entity_hashes_used": {
@@ -2353,12 +2353,12 @@
         "no-code",
         "plagiarism"
       ],
-      "glossary_version_used": "203fef7c154dd16d4cb6115c48084e0a71074156f4a0ff6d6c68413a0ad9efc4",
+      "glossary_version_used": "078042890a60ace4528dc9b5f93015a918bfd9ef08ffbe701e6ee2b5c1f87572",
       "output_file": "output_chunk0041.md",
       "output_hash": "7b8ce0d189473b096be16055a5b368145c13a78ab723645d06b2eb01c81fb9f5",
       "source_file": "chunk0041.md",
       "source_hash": "d54e5807d0107daae873376d137b1fd1647133cecd78d14894e82833b4db693b",
-      "updated_at": "2026-10-05T04:02:26+00:00"
+      "updated_at": "2026-10-05T04:03:02+00:00"
     },
     "chunk0042": {
       "entity_hashes_used": {
@@ -2421,12 +2421,12 @@
         "GDPR",
         "Practical Example"
       ],
-      "glossary_version_used": "203fef7c154dd16d4cb6115c48084e0a71074156f4a0ff6d6c68413a0ad9efc4",
+      "glossary_version_used": "078042890a60ace4528dc9b5f93015a918bfd9ef08ffbe701e6ee2b5c1f87572",
       "output_file": "output_chunk0042.md",
       "output_hash": "82f9c876f273aae336760b1e1d5713ea4a0dbb0a32e0fa22e018113e3b86f635",
       "source_file": "chunk0042.md",
       "source_hash": "eb11b94391c0c97918082e443a8406f5eb5507ad066267e84325c963f31702f5",
-      "updated_at": "2026-10-05T04:02:26+00:00"
+      "updated_at": "2026-10-05T04:03:02+00:00"
     },
     "chunk0043": {
       "entity_hashes_used": {
@@ -2479,12 +2479,12 @@
         "no-code",
         "Gemini"
       ],
-      "glossary_version_used": "203fef7c154dd16d4cb6115c48084e0a71074156f4a0ff6d6c68413a0ad9efc4",
+      "glossary_version_used": "078042890a60ace4528dc9b5f93015a918bfd9ef08ffbe701e6ee2b5c1f87572",
       "output_file": "output_chunk0043.md",
       "output_hash": "622ee8cdb306716baafd5295b69a5547eaf7c9b491532c7427cec64c52bb46cc",
       "source_file": "chunk0043.md",
       "source_hash": "358da0fd4d99f88dcb261cb1f2375d74ad966b2a42a1bd2341e5488fc37d4923",
-      "updated_at": "2026-10-05T04:02:26+00:00"
+      "updated_at": "2026-10-05T04:03:02+00:00"
     },
     "chunk0044": {
       "entity_hashes_used": {
@@ -2541,12 +2541,12 @@
         "Gemini",
         "Wikidata"
       ],
-      "glossary_version_used": "203fef7c154dd16d4cb6115c48084e0a71074156f4a0ff6d6c68413a0ad9efc4",
+      "glossary_version_used": "078042890a60ace4528dc9b5f93015a918bfd9ef08ffbe701e6ee2b5c1f87572",
       "output_file": "output_chunk0044.md",
       "output_hash": "9a048cd76a580dced08fccd6f5ad253b3e5dc57055fd3adb96aea015d1954851",
       "source_file": "chunk0044.md",
       "source_hash": "98594da9559cbc6c754c1fd344d60687a100c80c1e97dcc3e4273b74157ee780",
-      "updated_at": "2026-10-05T04:02:26+00:00"
+      "updated_at": "2026-10-05T04:03:02+00:00"
     },
     "chunk0045": {
       "entity_hashes_used": {
@@ -2593,12 +2593,12 @@
         "Abstract",
         "Keywords"
       ],
-      "glossary_version_used": "203fef7c154dd16d4cb6115c48084e0a71074156f4a0ff6d6c68413a0ad9efc4",
+      "glossary_version_used": "078042890a60ace4528dc9b5f93015a918bfd9ef08ffbe701e6ee2b5c1f87572",
       "output_file": "output_chunk0045.md",
       "output_hash": "6574ea609e0bbbdc15c3134a4c3f951d6683517f0e468d3ab9c3166297e36b50",
       "source_file": "chunk0045.md",
       "source_hash": "2e1bef1b3d6f2bc37388f7bf85746b0beb199994fbbcd39cc8117f8e6971775d",
-      "updated_at": "2026-10-05T04:02:26+00:00"
+      "updated_at": "2026-10-05T04:03:02+00:00"
     },
     "chunk0046": {
       "entity_hashes_used": {
@@ -2651,12 +2651,12 @@
         "no-code",
         "plagiarism"
       ],
-      "glossary_version_used": "203fef7c154dd16d4cb6115c48084e0a71074156f4a0ff6d6c68413a0ad9efc4",
+      "glossary_version_used": "078042890a60ace4528dc9b5f93015a918bfd9ef08ffbe701e6ee2b5c1f87572",
       "output_file": "output_chunk0046.md",
       "output_hash": "b61c437d7816c712351f158c3f4b3c858c6d6dca649e0516c44c4027f18e2fb4",
       "source_file": "chunk0046.md",
       "source_hash": "0c83c8502281c9e5aa8975bef284cc1a8019d07e9ead91e1d5aa84843c1fd1b9",
-      "updated_at": "2026-10-05T04:02:26+00:00"
+      "updated_at": "2026-10-05T04:03:02+00:00"
     },
     "chunk0047": {
       "entity_hashes_used": {
@@ -2713,12 +2713,392 @@
         "plagiarism",
         "Gemini"
       ],
-      "glossary_version_used": "203fef7c154dd16d4cb6115c48084e0a71074156f4a0ff6d6c68413a0ad9efc4",
+      "glossary_version_used": "078042890a60ace4528dc9b5f93015a918bfd9ef08ffbe701e6ee2b5c1f87572",
       "output_file": "output_chunk0047.md",
       "output_hash": "796964bce0ac9a0e0c324fc23958e944b272bac5baa7cf5ad503290bc3be15e7",
       "source_file": "chunk0047.md",
       "source_hash": "d72c32ec5240bc0bf1803dbadc740ee9a80ca2a5e1cf15676f2e860a21c022d9",
-      "updated_at": "2026-10-05T04:02:26+00:00"
+      "updated_at": "2026-10-05T04:03:02+00:00"
+    },
+    "chunk0048": {
+      "entity_hashes_used": {
+        "AI Winter": "6f577d02ac6f6f26b51471f934c7cd3fe0f5e07888328137c10a7c31af3116c7",
+        "Abstract": "ebb230d90ffbdb8d09874de62babf1a96ea6c2d05757a4ccf00e58dbd5a765cd",
+        "ChatGPT": "fc45fd5b9247140f7cf0d37e85dac560dd97223d69968eb76898c3e8df342775",
+        "Claude": "989431e57cad30131fe929b665c65b09c82f84e35b2eafe54ca7a39bcd5ecf73",
+        "Conclusion": "fd84e07a798ad7abde53efb228a8de9a7ebc6effda1cd6371635a90570925651",
+        "Gemini": "7a6b89139b22af90e0f8c29079ec94d99c882f2fda579fbd316397e22443ec41",
+        "Keywords": "938cc0e4a3faf02ca4a65f2da3fa0c45d0755501de6546ce74f97e14d9b03bd7",
+        "Wikidata": "3edb95594a3ff8aa54a57fb1dbab14870f2fc82c77d6fb66be4d6229d1fee2de",
+        "academic integrity": "b9887c64f99154d9c929ffe7fc96c4580ba61019be3a374b24a9391361503940",
+        "artificial intelligence": "5cf54841c74976f6c9c15490f88362e31bb41e0bc440b8215ca131a53eed2957",
+        "copyright": "6ff4edda7639772b0664060b9fb7e378d9a020d9ae4b65d3560c52c276e799bf",
+        "data protection": "208909679728f5fc36478ce8b4ebb15a3de06f87e4eaa6e30c3296f0a8e7c7d5",
+        "datafication": "d07eb483aa28cd959e37bda15ed60c69f62d210ef2664034b6529054993e6bf1",
+        "deep learning": "322921ec230f233c412983c0d9fb5bb61fe3db8d80dde77623899604382718b6",
+        "feature engineering": "1e49cfd16723be9b1d46a30993336b4dd7c797a417f0ecb05e64a0841460a327",
+        "generative AI": "ea7d3331dd7b23c25442dba0d30f3d9504a9a19eb076c862ddaf42e4ac1e9b0a",
+        "intellectual property": "a483bba3e982ce08036c916966fa1200f989edbce0db3d47bcdef148b4f90bb6",
+        "literature review": "93c5a1e2727b09ed83b0ce7d436ffa9fca99ebcfe3b5be89a4fa881e141229fa",
+        "machine learning": "5593c708754c386ddd516d6d211680d993bbb89415f52cbbaf950e214e4b3f4e",
+        "natural language processing": "35b92799bb28a963111bb9c6674abedcac082b6378f3c3188e22b4d25f24622d",
+        "no-code": "90377cbeb04f445b0a470231ce0ff5d7572365dda972703a18540e3ef07d62b3",
+        "open science": "551ace6e9e75757f0d3bfe34ab557968e257d34c29f38c91dfcc5418bc33021b",
+        "peer review": "70945a8a2afe0ad206a300ada87a516a51f2435d11a10bdc6adc89738691bfce",
+        "plagiarism": "e5f1fecfcc9f3c722a4ebc7e5d30576211bf65af6321272f20e8ae87489b5892",
+        "privacy": "0fcabff5a5d2fd38c991d608c53949fd9c0d48cd39dab2505eb57738093152b3",
+        "prompt": "34f13a1b7c183541c1142578197adabc797e14958431339a0e24c85477cb9234"
+      },
+      "entity_ids_used": [
+        "machine learning",
+        "artificial intelligence",
+        "natural language processing",
+        "Keywords",
+        "feature engineering",
+        "datafication",
+        "generative AI",
+        "prompt",
+        "academic integrity",
+        "peer review",
+        "privacy",
+        "Conclusion",
+        "copyright",
+        "Claude",
+        "intellectual property",
+        "ChatGPT",
+        "data protection",
+        "deep learning",
+        "literature review",
+        "open science",
+        "AI Winter",
+        "Abstract",
+        "no-code",
+        "plagiarism",
+        "Gemini",
+        "Wikidata"
+      ],
+      "glossary_version_used": "078042890a60ace4528dc9b5f93015a918bfd9ef08ffbe701e6ee2b5c1f87572",
+      "output_file": "output_chunk0048.md",
+      "output_hash": "78d7107b10cc005c379bda52cb4b0492a51ee8b87fbe9bfde706fc0092a5a69c",
+      "source_file": "chunk0048.md",
+      "source_hash": "749907830aa6cd9d70c5d562ae5246ea74fdf51fd2c538be35bc93037f18ab35",
+      "updated_at": "2026-10-05T04:03:02+00:00"
+    },
+    "chunk0050": {
+      "entity_hashes_used": {
+        "AI Winter": "6f577d02ac6f6f26b51471f934c7cd3fe0f5e07888328137c10a7c31af3116c7",
+        "Abstract": "ebb230d90ffbdb8d09874de62babf1a96ea6c2d05757a4ccf00e58dbd5a765cd",
+        "ChatGPT": "fc45fd5b9247140f7cf0d37e85dac560dd97223d69968eb76898c3e8df342775",
+        "Claude": "989431e57cad30131fe929b665c65b09c82f84e35b2eafe54ca7a39bcd5ecf73",
+        "Conclusion": "fd84e07a798ad7abde53efb228a8de9a7ebc6effda1cd6371635a90570925651",
+        "Keywords": "938cc0e4a3faf02ca4a65f2da3fa0c45d0755501de6546ce74f97e14d9b03bd7",
+        "Practical Example": "453978b0b674c448ebd9d2825611ae662df845565dd5e81d1318a2752191220b",
+        "academic integrity": "b9887c64f99154d9c929ffe7fc96c4580ba61019be3a374b24a9391361503940",
+        "artificial intelligence": "5cf54841c74976f6c9c15490f88362e31bb41e0bc440b8215ca131a53eed2957",
+        "copyright": "6ff4edda7639772b0664060b9fb7e378d9a020d9ae4b65d3560c52c276e799bf",
+        "data protection": "208909679728f5fc36478ce8b4ebb15a3de06f87e4eaa6e30c3296f0a8e7c7d5",
+        "deep learning": "322921ec230f233c412983c0d9fb5bb61fe3db8d80dde77623899604382718b6",
+        "generative AI": "ea7d3331dd7b23c25442dba0d30f3d9504a9a19eb076c862ddaf42e4ac1e9b0a",
+        "intellectual property": "a483bba3e982ce08036c916966fa1200f989edbce0db3d47bcdef148b4f90bb6",
+        "literature review": "93c5a1e2727b09ed83b0ce7d436ffa9fca99ebcfe3b5be89a4fa881e141229fa",
+        "machine learning": "5593c708754c386ddd516d6d211680d993bbb89415f52cbbaf950e214e4b3f4e",
+        "natural language processing": "35b92799bb28a963111bb9c6674abedcac082b6378f3c3188e22b4d25f24622d",
+        "open science": "551ace6e9e75757f0d3bfe34ab557968e257d34c29f38c91dfcc5418bc33021b",
+        "peer review": "70945a8a2afe0ad206a300ada87a516a51f2435d11a10bdc6adc89738691bfce",
+        "privacy": "0fcabff5a5d2fd38c991d608c53949fd9c0d48cd39dab2505eb57738093152b3",
+        "prompt": "34f13a1b7c183541c1142578197adabc797e14958431339a0e24c85477cb9234"
+      },
+      "entity_ids_used": [
+        "Practical Example",
+        "generative AI",
+        "prompt",
+        "academic integrity",
+        "peer review",
+        "privacy",
+        "machine learning",
+        "Conclusion",
+        "copyright",
+        "artificial intelligence",
+        "Claude",
+        "intellectual property",
+        "ChatGPT",
+        "data protection",
+        "natural language processing",
+        "deep learning",
+        "literature review",
+        "open science",
+        "AI Winter",
+        "Abstract",
+        "Keywords"
+      ],
+      "glossary_version_used": "078042890a60ace4528dc9b5f93015a918bfd9ef08ffbe701e6ee2b5c1f87572",
+      "output_file": "output_chunk0050.md",
+      "output_hash": "07282a717845aa7ef131e55ec138281645f402e522eae62bc84af5181f43ff1d",
+      "source_file": "chunk0050.md",
+      "source_hash": "bb53a431ae31c725daebf51407b07873f4c2948df38617772fd6ab105699a132",
+      "updated_at": "2026-10-05T04:03:02+00:00"
+    },
+    "chunk0051": {
+      "entity_hashes_used": {
+        "AI Winter": "6f577d02ac6f6f26b51471f934c7cd3fe0f5e07888328137c10a7c31af3116c7",
+        "Abstract": "ebb230d90ffbdb8d09874de62babf1a96ea6c2d05757a4ccf00e58dbd5a765cd",
+        "ChatGPT": "fc45fd5b9247140f7cf0d37e85dac560dd97223d69968eb76898c3e8df342775",
+        "Claude": "989431e57cad30131fe929b665c65b09c82f84e35b2eafe54ca7a39bcd5ecf73",
+        "Conclusion": "fd84e07a798ad7abde53efb228a8de9a7ebc6effda1cd6371635a90570925651",
+        "Keywords": "938cc0e4a3faf02ca4a65f2da3fa0c45d0755501de6546ce74f97e14d9b03bd7",
+        "academic integrity": "b9887c64f99154d9c929ffe7fc96c4580ba61019be3a374b24a9391361503940",
+        "artificial intelligence": "5cf54841c74976f6c9c15490f88362e31bb41e0bc440b8215ca131a53eed2957",
+        "copyright": "6ff4edda7639772b0664060b9fb7e378d9a020d9ae4b65d3560c52c276e799bf",
+        "data protection": "208909679728f5fc36478ce8b4ebb15a3de06f87e4eaa6e30c3296f0a8e7c7d5",
+        "deep learning": "322921ec230f233c412983c0d9fb5bb61fe3db8d80dde77623899604382718b6",
+        "generative AI": "ea7d3331dd7b23c25442dba0d30f3d9504a9a19eb076c862ddaf42e4ac1e9b0a",
+        "intellectual property": "a483bba3e982ce08036c916966fa1200f989edbce0db3d47bcdef148b4f90bb6",
+        "literature review": "93c5a1e2727b09ed83b0ce7d436ffa9fca99ebcfe3b5be89a4fa881e141229fa",
+        "machine learning": "5593c708754c386ddd516d6d211680d993bbb89415f52cbbaf950e214e4b3f4e",
+        "natural language processing": "35b92799bb28a963111bb9c6674abedcac082b6378f3c3188e22b4d25f24622d",
+        "open science": "551ace6e9e75757f0d3bfe34ab557968e257d34c29f38c91dfcc5418bc33021b",
+        "peer review": "70945a8a2afe0ad206a300ada87a516a51f2435d11a10bdc6adc89738691bfce",
+        "privacy": "0fcabff5a5d2fd38c991d608c53949fd9c0d48cd39dab2505eb57738093152b3",
+        "prompt": "34f13a1b7c183541c1142578197adabc797e14958431339a0e24c85477cb9234"
+      },
+      "entity_ids_used": [
+        "generative AI",
+        "prompt",
+        "academic integrity",
+        "peer review",
+        "privacy",
+        "machine learning",
+        "Conclusion",
+        "copyright",
+        "artificial intelligence",
+        "Claude",
+        "intellectual property",
+        "ChatGPT",
+        "data protection",
+        "natural language processing",
+        "deep learning",
+        "literature review",
+        "open science",
+        "AI Winter",
+        "Abstract",
+        "Keywords"
+      ],
+      "glossary_version_used": "078042890a60ace4528dc9b5f93015a918bfd9ef08ffbe701e6ee2b5c1f87572",
+      "output_file": "output_chunk0051.md",
+      "output_hash": "0cdb598b028269eb8938b7c7d944176317d752fbe3ecdce341e3df994aae3a8d",
+      "source_file": "chunk0051.md",
+      "source_hash": "c2fdc800eb1449ae1bf37d66f824051b7d4ef1b65ed353da622184fe461cf1de",
+      "updated_at": "2026-10-05T04:03:02+00:00"
+    },
+    "chunk0052": {
+      "entity_hashes_used": {
+        "AI Winter": "6f577d02ac6f6f26b51471f934c7cd3fe0f5e07888328137c10a7c31af3116c7",
+        "Abstract": "ebb230d90ffbdb8d09874de62babf1a96ea6c2d05757a4ccf00e58dbd5a765cd",
+        "ChatGPT": "fc45fd5b9247140f7cf0d37e85dac560dd97223d69968eb76898c3e8df342775",
+        "Claude": "989431e57cad30131fe929b665c65b09c82f84e35b2eafe54ca7a39bcd5ecf73",
+        "Conclusion": "fd84e07a798ad7abde53efb228a8de9a7ebc6effda1cd6371635a90570925651",
+        "Keywords": "938cc0e4a3faf02ca4a65f2da3fa0c45d0755501de6546ce74f97e14d9b03bd7",
+        "academic integrity": "b9887c64f99154d9c929ffe7fc96c4580ba61019be3a374b24a9391361503940",
+        "artificial intelligence": "5cf54841c74976f6c9c15490f88362e31bb41e0bc440b8215ca131a53eed2957",
+        "copyright": "6ff4edda7639772b0664060b9fb7e378d9a020d9ae4b65d3560c52c276e799bf",
+        "data protection": "208909679728f5fc36478ce8b4ebb15a3de06f87e4eaa6e30c3296f0a8e7c7d5",
+        "deep learning": "322921ec230f233c412983c0d9fb5bb61fe3db8d80dde77623899604382718b6",
+        "generative AI": "ea7d3331dd7b23c25442dba0d30f3d9504a9a19eb076c862ddaf42e4ac1e9b0a",
+        "intellectual property": "a483bba3e982ce08036c916966fa1200f989edbce0db3d47bcdef148b4f90bb6",
+        "literature review": "93c5a1e2727b09ed83b0ce7d436ffa9fca99ebcfe3b5be89a4fa881e141229fa",
+        "machine learning": "5593c708754c386ddd516d6d211680d993bbb89415f52cbbaf950e214e4b3f4e",
+        "natural language processing": "35b92799bb28a963111bb9c6674abedcac082b6378f3c3188e22b4d25f24622d",
+        "open science": "551ace6e9e75757f0d3bfe34ab557968e257d34c29f38c91dfcc5418bc33021b",
+        "peer review": "70945a8a2afe0ad206a300ada87a516a51f2435d11a10bdc6adc89738691bfce",
+        "privacy": "0fcabff5a5d2fd38c991d608c53949fd9c0d48cd39dab2505eb57738093152b3",
+        "prompt": "34f13a1b7c183541c1142578197adabc797e14958431339a0e24c85477cb9234"
+      },
+      "entity_ids_used": [
+        "generative AI",
+        "prompt",
+        "academic integrity",
+        "peer review",
+        "privacy",
+        "machine learning",
+        "Conclusion",
+        "copyright",
+        "artificial intelligence",
+        "Claude",
+        "intellectual property",
+        "ChatGPT",
+        "data protection",
+        "natural language processing",
+        "deep learning",
+        "literature review",
+        "open science",
+        "AI Winter",
+        "Abstract",
+        "Keywords"
+      ],
+      "glossary_version_used": "078042890a60ace4528dc9b5f93015a918bfd9ef08ffbe701e6ee2b5c1f87572",
+      "output_file": "output_chunk0052.md",
+      "output_hash": "b62046653eeb8d7db446cd6615e011291e2992bc6e979b1978cc93059ddd143b",
+      "source_file": "chunk0052.md",
+      "source_hash": "a930b79a94967e820c5a67be16bee0ea069b49c86c12ad8ee9ca7c98cb715230",
+      "updated_at": "2026-10-05T04:03:02+00:00"
+    },
+    "chunk0053": {
+      "entity_hashes_used": {
+        "AI Winter": "6f577d02ac6f6f26b51471f934c7cd3fe0f5e07888328137c10a7c31af3116c7",
+        "Abstract": "ebb230d90ffbdb8d09874de62babf1a96ea6c2d05757a4ccf00e58dbd5a765cd",
+        "ChatGPT": "fc45fd5b9247140f7cf0d37e85dac560dd97223d69968eb76898c3e8df342775",
+        "Claude": "989431e57cad30131fe929b665c65b09c82f84e35b2eafe54ca7a39bcd5ecf73",
+        "Conclusion": "fd84e07a798ad7abde53efb228a8de9a7ebc6effda1cd6371635a90570925651",
+        "Keywords": "938cc0e4a3faf02ca4a65f2da3fa0c45d0755501de6546ce74f97e14d9b03bd7",
+        "academic integrity": "b9887c64f99154d9c929ffe7fc96c4580ba61019be3a374b24a9391361503940",
+        "artificial intelligence": "5cf54841c74976f6c9c15490f88362e31bb41e0bc440b8215ca131a53eed2957",
+        "copyright": "6ff4edda7639772b0664060b9fb7e378d9a020d9ae4b65d3560c52c276e799bf",
+        "data protection": "208909679728f5fc36478ce8b4ebb15a3de06f87e4eaa6e30c3296f0a8e7c7d5",
+        "deep learning": "322921ec230f233c412983c0d9fb5bb61fe3db8d80dde77623899604382718b6",
+        "generative AI": "ea7d3331dd7b23c25442dba0d30f3d9504a9a19eb076c862ddaf42e4ac1e9b0a",
+        "intellectual property": "a483bba3e982ce08036c916966fa1200f989edbce0db3d47bcdef148b4f90bb6",
+        "literature review": "93c5a1e2727b09ed83b0ce7d436ffa9fca99ebcfe3b5be89a4fa881e141229fa",
+        "machine learning": "5593c708754c386ddd516d6d211680d993bbb89415f52cbbaf950e214e4b3f4e",
+        "natural language processing": "35b92799bb28a963111bb9c6674abedcac082b6378f3c3188e22b4d25f24622d",
+        "open science": "551ace6e9e75757f0d3bfe34ab557968e257d34c29f38c91dfcc5418bc33021b",
+        "peer review": "70945a8a2afe0ad206a300ada87a516a51f2435d11a10bdc6adc89738691bfce",
+        "privacy": "0fcabff5a5d2fd38c991d608c53949fd9c0d48cd39dab2505eb57738093152b3",
+        "prompt": "34f13a1b7c183541c1142578197adabc797e14958431339a0e24c85477cb9234"
+      },
+      "entity_ids_used": [
+        "generative AI",
+        "prompt",
+        "academic integrity",
+        "peer review",
+        "privacy",
+        "machine learning",
+        "Conclusion",
+        "copyright",
+        "artificial intelligence",
+        "Claude",
+        "intellectual property",
+        "ChatGPT",
+        "data protection",
+        "natural language processing",
+        "deep learning",
+        "literature review",
+        "open science",
+        "AI Winter",
+        "Abstract",
+        "Keywords"
+      ],
+      "glossary_version_used": "078042890a60ace4528dc9b5f93015a918bfd9ef08ffbe701e6ee2b5c1f87572",
+      "output_file": "output_chunk0053.md",
+      "output_hash": "d10b9d08bc0911ca0b8d20dde2197dde99bf1d2a2d4d4e1803091f3471b31eff",
+      "source_file": "chunk0053.md",
+      "source_hash": "54108239d4a2b9ec4ab33ddb916781e559b3cb0a462b35024570331cbe3cbb56",
+      "updated_at": "2026-10-05T04:03:02+00:00"
+    },
+    "chunk0054": {
+      "entity_hashes_used": {
+        "AI Winter": "6f577d02ac6f6f26b51471f934c7cd3fe0f5e07888328137c10a7c31af3116c7",
+        "Abstract": "ebb230d90ffbdb8d09874de62babf1a96ea6c2d05757a4ccf00e58dbd5a765cd",
+        "ChatGPT": "fc45fd5b9247140f7cf0d37e85dac560dd97223d69968eb76898c3e8df342775",
+        "Claude": "989431e57cad30131fe929b665c65b09c82f84e35b2eafe54ca7a39bcd5ecf73",
+        "Conclusion": "fd84e07a798ad7abde53efb228a8de9a7ebc6effda1cd6371635a90570925651",
+        "Keywords": "938cc0e4a3faf02ca4a65f2da3fa0c45d0755501de6546ce74f97e14d9b03bd7",
+        "academic integrity": "b9887c64f99154d9c929ffe7fc96c4580ba61019be3a374b24a9391361503940",
+        "artificial intelligence": "5cf54841c74976f6c9c15490f88362e31bb41e0bc440b8215ca131a53eed2957",
+        "copyright": "6ff4edda7639772b0664060b9fb7e378d9a020d9ae4b65d3560c52c276e799bf",
+        "data protection": "208909679728f5fc36478ce8b4ebb15a3de06f87e4eaa6e30c3296f0a8e7c7d5",
+        "deep learning": "322921ec230f233c412983c0d9fb5bb61fe3db8d80dde77623899604382718b6",
+        "generative AI": "ea7d3331dd7b23c25442dba0d30f3d9504a9a19eb076c862ddaf42e4ac1e9b0a",
+        "intellectual property": "a483bba3e982ce08036c916966fa1200f989edbce0db3d47bcdef148b4f90bb6",
+        "literature review": "93c5a1e2727b09ed83b0ce7d436ffa9fca99ebcfe3b5be89a4fa881e141229fa",
+        "machine learning": "5593c708754c386ddd516d6d211680d993bbb89415f52cbbaf950e214e4b3f4e",
+        "natural language processing": "35b92799bb28a963111bb9c6674abedcac082b6378f3c3188e22b4d25f24622d",
+        "no-code": "90377cbeb04f445b0a470231ce0ff5d7572365dda972703a18540e3ef07d62b3",
+        "open science": "551ace6e9e75757f0d3bfe34ab557968e257d34c29f38c91dfcc5418bc33021b",
+        "peer review": "70945a8a2afe0ad206a300ada87a516a51f2435d11a10bdc6adc89738691bfce",
+        "privacy": "0fcabff5a5d2fd38c991d608c53949fd9c0d48cd39dab2505eb57738093152b3",
+        "prompt": "34f13a1b7c183541c1142578197adabc797e14958431339a0e24c85477cb9234"
+      },
+      "entity_ids_used": [
+        "peer review",
+        "generative AI",
+        "prompt",
+        "academic integrity",
+        "privacy",
+        "machine learning",
+        "Conclusion",
+        "copyright",
+        "artificial intelligence",
+        "Claude",
+        "intellectual property",
+        "ChatGPT",
+        "data protection",
+        "natural language processing",
+        "deep learning",
+        "literature review",
+        "open science",
+        "AI Winter",
+        "Abstract",
+        "Keywords",
+        "no-code"
+      ],
+      "glossary_version_used": "078042890a60ace4528dc9b5f93015a918bfd9ef08ffbe701e6ee2b5c1f87572",
+      "output_file": "output_chunk0054.md",
+      "output_hash": "ac5e619a6719ab8109d1bf77bcfd919520b60e3b3546129c48b9b90bbf805eeb",
+      "source_file": "chunk0054.md",
+      "source_hash": "610913c0d0675ec16cc31ef498dcc8cb54fad1fc2465f56cfc9dbe8cb2aba65d",
+      "updated_at": "2026-10-05T04:03:02+00:00"
+    },
+    "chunk0055": {
+      "entity_hashes_used": {
+        "AI Winter": "6f577d02ac6f6f26b51471f934c7cd3fe0f5e07888328137c10a7c31af3116c7",
+        "Abstract": "ebb230d90ffbdb8d09874de62babf1a96ea6c2d05757a4ccf00e58dbd5a765cd",
+        "ChatGPT": "fc45fd5b9247140f7cf0d37e85dac560dd97223d69968eb76898c3e8df342775",
+        "Claude": "989431e57cad30131fe929b665c65b09c82f84e35b2eafe54ca7a39bcd5ecf73",
+        "Conclusion": "fd84e07a798ad7abde53efb228a8de9a7ebc6effda1cd6371635a90570925651",
+        "Keywords": "938cc0e4a3faf02ca4a65f2da3fa0c45d0755501de6546ce74f97e14d9b03bd7",
+        "academic integrity": "b9887c64f99154d9c929ffe7fc96c4580ba61019be3a374b24a9391361503940",
+        "artificial intelligence": "5cf54841c74976f6c9c15490f88362e31bb41e0bc440b8215ca131a53eed2957",
+        "copyright": "6ff4edda7639772b0664060b9fb7e378d9a020d9ae4b65d3560c52c276e799bf",
+        "data protection": "208909679728f5fc36478ce8b4ebb15a3de06f87e4eaa6e30c3296f0a8e7c7d5",
+        "deep learning": "322921ec230f233c412983c0d9fb5bb61fe3db8d80dde77623899604382718b6",
+        "generative AI": "ea7d3331dd7b23c25442dba0d30f3d9504a9a19eb076c862ddaf42e4ac1e9b0a",
+        "intellectual property": "a483bba3e982ce08036c916966fa1200f989edbce0db3d47bcdef148b4f90bb6",
+        "literature review": "93c5a1e2727b09ed83b0ce7d436ffa9fca99ebcfe3b5be89a4fa881e141229fa",
+        "machine learning": "5593c708754c386ddd516d6d211680d993bbb89415f52cbbaf950e214e4b3f4e",
+        "natural language processing": "35b92799bb28a963111bb9c6674abedcac082b6378f3c3188e22b4d25f24622d",
+        "open science": "551ace6e9e75757f0d3bfe34ab557968e257d34c29f38c91dfcc5418bc33021b",
+        "peer review": "70945a8a2afe0ad206a300ada87a516a51f2435d11a10bdc6adc89738691bfce",
+        "privacy": "0fcabff5a5d2fd38c991d608c53949fd9c0d48cd39dab2505eb57738093152b3",
+        "prompt": "34f13a1b7c183541c1142578197adabc797e14958431339a0e24c85477cb9234"
+      },
+      "entity_ids_used": [
+        "generative AI",
+        "prompt",
+        "academic integrity",
+        "peer review",
+        "privacy",
+        "machine learning",
+        "Conclusion",
+        "copyright",
+        "artificial intelligence",
+        "Claude",
+        "intellectual property",
+        "ChatGPT",
+        "data protection",
+        "natural language processing",
+        "deep learning",
+        "literature review",
+        "open science",
+        "AI Winter",
+        "Abstract",
+        "Keywords"
+      ],
+      "glossary_version_used": "078042890a60ace4528dc9b5f93015a918bfd9ef08ffbe701e6ee2b5c1f87572",
+      "output_file": "output_chunk0055.md",
+      "output_hash": "373bd832f60eb7106eb1da8b755c950003d4ff92a7645ad839bec7162dd8b35f",
+      "source_file": "chunk0055.md",
+      "source_hash": "373bd832f60eb7106eb1da8b755c950003d4ff92a7645ad839bec7162dd8b35f",
+      "updated_at": "2026-10-05T04:03:02+00:00"
     }
   },
   "version": 1
