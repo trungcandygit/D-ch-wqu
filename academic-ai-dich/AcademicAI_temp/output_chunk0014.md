@@ -1,0 +1,7 @@
+## Con đường phía trước
+
+Khi tiến về phía trước, AI tạo sinh sẽ tiếp tục định hình sâu sắc công việc học thuật. Thách thức đối với các học giả, nhà giáo dục và các tổ chức không phải là có nên sử dụng AI hay không, mà là sử dụng AI như thế nào một cách có trách nhiệm. Cuốn sách này cung cấp một sự khám phá có nền tảng lịch sử và mang tính phản biện về tiềm năng của AI trong môi trường học thuật, bảo đảm rằng việc tích hợp AI phù hợp với các giá trị học thuật, các cân nhắc đạo đức và sự nghiêm cẩn trí tuệ.
+
+Thay vì xem AI như một công cụ trung lập, chúng tôi khuyến khích các nhà nghiên cứu tiếp cận những công nghệ này một cách có tính phản biện. AI không chỉ đơn thuần là một công cụ tăng hiệu suất, mà còn là một lực lượng định hình bản chất của việc sản xuất và phổ biến tri thức. Bằng cách hiểu cơ chế vận hành của AI, tận dụng điểm mạnh và giảm thiểu điểm yếu của nó, các học giả có thể khai thác tiềm năng của AI đồng thời duy trì tính toàn vẹn của hoạt động nghiên cứu học thuật.
+
+Cuốn sách này không đưa ra một công thức chung cho mọi trường hợp về việc sử dụng AI trong học thuật. Thay vào đó, sách cung cấp một nền tảng cho việc ra quyết định có hiểu biết, trang bị cho độc giả kiến thức và chiến lược cần thiết để định hướng trong lĩnh vực đang thay đổi nhanh chóng này. Khi chúng ta bắt đầu hành trình tìm hiểu vai trò của AI trong học thuật, chúng tôi mời độc giả tiếp cận với sự tò mò, sự thận trọng và cam kết đối với nghiên cứu học thuật có đạo đức.
