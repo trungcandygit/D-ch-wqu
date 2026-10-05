@@ -1,0 +1,3 @@
+## Sự hồi sinh của AI: Các yếu tố tạo nên làn sóng bùng nổ hiện nay
+
+Giai đoạn "tan băng" của lĩnh vực AI bắt đầu một cách dần dần vào cuối những năm 1990 và đầu những năm 2000, nhờ một số tiến bộ đồng thời về công nghệ và hạ tầng. Bước đột phá quan trọng nhất là sự hồi sinh của mạng nơ-ron thông qua học sâu, một sự hồi sinh sẽ làm thay đổi căn bản lĩnh vực này. Thời kỳ phục hưng ấy được thúc đẩy bởi ba yếu tố then chốt hội tụ lại, tạo nên "cơn bão hoàn hảo" cho sự phát triển của AI: sức mạnh tính toán chưa từng có, nguồn dữ liệu khổng lồ và những đổi mới mang tính cách mạng về thuật toán (Goodfellow et al., 2016).
