@@ -1,3 +1,0 @@
-| **Audit Trail & Version Control**: All transformations are recorded, fostering reproducibility and facilitating peer review[.]                          |
-|                                                                                                                                                                                      |
-| **Large Dataset Handling**: DataPrep can handle millions of rows without relying on local machine memory, which is essential for enterprise-level or longitudinal studies.           |

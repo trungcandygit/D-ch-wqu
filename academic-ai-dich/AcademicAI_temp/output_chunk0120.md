@@ -1,9 +1,0 @@
-## Tham gia có suy xét và trách nhiệm của cộng đồng
-
-Cuộc cách mạng công nghệ này đòi hỏi sự tham gia có suy xét, thay vì chấp nhận thiếu phê phán hay bác bỏ hoàn toàn. Cộng đồng học thuật phải tham gia một cách chủ động và phê phán vào việc định hình cách các công cụ AI phát triển và hòa nhập vào thực hành học thuật, bảo đảm chúng củng cố thay vì làm suy yếu những giá trị cốt lõi của hoạt động nghiên cứu học thuật: tính chặt chẽ, tính minh bạch, liêm chính và sự thăng tiến của tri thức nhân loại.
-
-Đặc biệt quan trọng là giữ gìn không gian cho những dạng thức sáng tạo, thấu hiểu và phán đoán riêng biệt của con người vốn vẫn nằm ngoài khả năng của AI. Trong khi đón nhận những hiệu quả và khả năng mới mà các công cụ AI mang lại, học giả phải duy trì nhận thức phê phán về những hạn chế và thiên kiến của chúng, và sử dụng chúng như phần bổ trợ cho, chứ không phải thay thế, lao động trí tuệ của con người.
-
-Các phản ứng mang tính thể chế sẽ có vai trò then chốt trong việc vượt qua giai đoạn chuyển đổi này. Các trường đại học, nhà tài trợ nghiên cứu và hội học thuật phải xây dựng những chính sách chu đáo, khuyến khích đổi mới có trách nhiệm đồng thời bảo vệ các giá trị học thuật và giải quyết những mối quan ngại về đạo đức. Điều này bao gồm đầu tư vào năng lực hiểu biết về AI cho giảng viên và sinh viên, xây dựng các cấu trúc quản trị phù hợp, và chủ động tham gia vào các cuộc thảo luận xã hội rộng lớn hơn về quy định và phát triển AI.
-
-Suy cho cùng, việc AI tạo sinh định hình lại giới học thuật như thế nào sẽ không phụ thuộc vào thuyết tất định công nghệ mà phụ thuộc vào những lựa chọn tập thể của cộng đồng học thuật. Bằng cách tiếp cận các công nghệ này với cả sự cởi mở trước tiềm năng chuyển đổi của chúng lẫn nhận thức phê phán về những hạn chế và rủi ro, giới học thuật có thể khai thác AI như một công cụ mạnh mẽ để thúc đẩy tri thức nhân loại, đồng thời giữ gìn những yếu tố nhân văn thiết yếu của hoạt động tìm hiểu trí tuệ.

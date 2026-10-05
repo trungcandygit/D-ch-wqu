@@ -1,7 +1,0 @@
-### Cuộc cách mạng dữ liệu: Từ khan hiếm đến dồi dào
-
-Cuộc cách mạng số mang đến một thành tố then chốt khác: lượng dữ liệu dồi dào chưa từng có. Sự tăng trưởng bùng nổ của internet, sự lan rộng của các nền tảng mạng xã hội và quá trình số hóa trên diện rộng các ngành công nghiệp đã tạo ra những tập dữ liệu khổng lồ, phù hợp để huấn luyện các hệ thống AI. Cuộc cách mạng dữ liệu này được đặc trưng bởi những bước phát triển mang tính biến đổi trên nhiều lĩnh vực. Sự xuất hiện của các nền tảng mạng xã hội đã tạo ra lượng nội dung do người dùng tạo lập khổng lồ, cung cấp dữ liệu ngôn ngữ tự nhiên ở quy mô chưa từng có. Song song với đó, việc áp dụng rộng rãi các thiết bị di động trang bị cảm biến tinh vi đã tạo ra những tập dữ liệu phong phú về hình ảnh, dữ liệu vị trí và các tương tác của người dùng. Internet vạn vật (IoT) còn non trẻ bắt đầu tạo ra các luồng dữ liệu cảm biến liên tục từ hàng triệu thiết bị được kết nối, trong khi các sáng kiến chuyển đổi số trong nhiều ngành đã sinh ra các tập dữ liệu có cấu trúc từ y tế, tài chính và các quy trình công nghiệp.
-
- 
-
-Các nền tảng điện toán đám mây nổi lên như một lực lượng dân chủ hóa, thay đổi căn bản cách các nhà nghiên cứu và tổ chức có thể truy cập và xử lý những tập dữ liệu khổng lồ này. Các dịch vụ như Amazon Web Services (AWS), Google Cloud Platform và Microsoft Azure đã loại bỏ nhu cầu đầu tư hạ tầng ban đầu quy mô lớn. Sự dân chủ hóa này giúp các công ty khởi nghiệp và các nhà nghiên cứu có thể thử nghiệm AI ở những quy mô trước đây chỉ dành cho các công ty công nghệ lớn (Jonas et al., 2019).

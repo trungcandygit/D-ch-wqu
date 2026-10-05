@@ -1,9 +1,0 @@
-## Con đường phía trước: Cân bằng giữa đổi mới và trách nhiệm
-
-Tương lai của việc phát triển AI phải tìm được sự cân bằng giữa đổi mới liên tục và việc quản lý có trách nhiệm các nguồn lực. Nghiên cứu về các phương pháp huấn luyện hiệu quả hơn, chẳng hạn các cơ chế chú ý thưa (sparse attention) và những mô hình nhỏ hơn, chuyên biệt hơn, mở ra triển vọng giảm nhu cầu tính toán. Các đổi mới phần cứng trong điện toán mô phỏng thần kinh (neuromorphic computing) và bộ xử lý lượng tử có thể mang lại những hướng đi mới cho các hệ thống AI tiết kiệm năng lượng.
-
-Dân chủ hóa khả năng tiếp cận AI đòi hỏi phải giải quyết cả các rào cản kỹ thuật lẫn kinh tế. Các sáng kiến mã nguồn mở, các phương pháp học liên kết (federated learning) và các kỹ thuật nén mô hình được cải tiến có thể giúp phân bổ năng lực AI rộng rãi hơn. Các khuôn khổ hợp tác quốc tế nhằm chia sẻ nghiên cứu, dữ liệu và tài nguyên tính toán có thể góp phần ngăn chặn sự tập trung nguy hiểm của năng lực AI.
-
-Lĩnh vực này cũng phải chấp nhận các thực hành đổi mới có trách nhiệm. Điều đó bao gồm việc xây dựng các biện pháp an toàn vững chắc, bảo đảm các hệ thống AI tôn trọng quyền riêng tư và nhân quyền, đồng thời thiết lập các khuôn khổ quản trị thúc đẩy sự phát triển AI có lợi trong khi kiểm soát rủi ro. Những bài học của Mùa đông AI nhắc chúng ta rằng tiến bộ bền vững đòi hỏi phải cân bằng giữa tham vọng và tính thực tế, bảo đảm rằng việc phát triển AI phục vụ lợi ích rộng lớn hơn của nhân loại thay vì chỉ những thành tựu kỹ thuật hẹp hòi.
-
-Khi tiến về phía trước, thách thức then chốt sẽ là duy trì đà phát triển hiện tại trong khi giải quyết những thách thức nền tảng này. Thành công sẽ đòi hỏi sự hợp tác chưa từng có giữa các nhà nghiên cứu, lãnh đạo ngành, nhà hoạch định chính sách và công chúng nói chung, nhằm bảo đảm rằng tiềm năng của AI được hiện thực hóa theo cách mang lại lợi ích cho toàn thể nhân loại.
