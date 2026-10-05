@@ -51,12 +51,12 @@
         "plagiarism",
         "Gemini"
       ],
-      "glossary_version_used": "b52762f54eb96366c439b11b6a9e9e35c2290ae97de77889562ac3a9da32cb26",
+      "glossary_version_used": "51c5d2c00651dde5edbd26471a37aa99fd297afe5501b77ae51472c0f99bd1b0",
       "output_file": "output_chunk0001.md",
       "output_hash": "96721eb76c2a2290357919ac26360b1d472fcefd4673cbd9f4b2dd8752248147",
       "source_file": "chunk0001.md",
       "source_hash": "e721358efd8e6f302f6d5fcdf19925aeded9f15550b9aea7909022a37d3c8c1b",
-      "updated_at": "2026-10-05T03:59:27+00:00"
+      "updated_at": "2026-10-05T04:00:06+00:00"
     },
     "chunk0002": {
       "entity_hashes_used": {
@@ -103,12 +103,12 @@
         "Abstract",
         "Keywords"
       ],
-      "glossary_version_used": "b52762f54eb96366c439b11b6a9e9e35c2290ae97de77889562ac3a9da32cb26",
+      "glossary_version_used": "51c5d2c00651dde5edbd26471a37aa99fd297afe5501b77ae51472c0f99bd1b0",
       "output_file": "output_chunk0002.md",
       "output_hash": "32c4858e22cc2c967b42150fa550562a2c839c2cebcaab91cabdf6f4da020022",
       "source_file": "chunk0002.md",
       "source_hash": "09b9d4f7c31d5ffa9c8c2231fe6bc1b13f0dc8d3864f295d153cf4039397b8a4",
-      "updated_at": "2026-10-05T03:59:27+00:00"
+      "updated_at": "2026-10-05T04:00:06+00:00"
     },
     "chunk0003": {
       "entity_hashes_used": {
@@ -155,12 +155,12 @@
         "Abstract",
         "Keywords"
       ],
-      "glossary_version_used": "b52762f54eb96366c439b11b6a9e9e35c2290ae97de77889562ac3a9da32cb26",
+      "glossary_version_used": "51c5d2c00651dde5edbd26471a37aa99fd297afe5501b77ae51472c0f99bd1b0",
       "output_file": "output_chunk0003.md",
       "output_hash": "ee7b6e2b77afff3595946e2b0346b964a3edc895d7ccf02e319b992d1d7482d8",
       "source_file": "chunk0003.md",
       "source_hash": "d1cd308ada2b7505cd9cdcdcd1b70aca530e7ab7bc9b9ff8809d101ccbdd0a4f",
-      "updated_at": "2026-10-05T03:59:27+00:00"
+      "updated_at": "2026-10-05T04:00:06+00:00"
     },
     "chunk0004": {
       "entity_hashes_used": {
@@ -215,12 +215,12 @@
         "plagiarism",
         "Wikidata"
       ],
-      "glossary_version_used": "b52762f54eb96366c439b11b6a9e9e35c2290ae97de77889562ac3a9da32cb26",
+      "glossary_version_used": "51c5d2c00651dde5edbd26471a37aa99fd297afe5501b77ae51472c0f99bd1b0",
       "output_file": "output_chunk0004.md",
       "output_hash": "4c8cc5449f3f7de505811957b52fd735b78a57342a5f0734624943983736b6cb",
       "source_file": "chunk0004.md",
       "source_hash": "b91dd858e3ad218e46bfd166587072747792743250b0b8f4f9b74b14a4d44c97",
-      "updated_at": "2026-10-05T03:59:27+00:00"
+      "updated_at": "2026-10-05T04:00:06+00:00"
     },
     "chunk0005": {
       "entity_hashes_used": {
@@ -275,12 +275,12 @@
         "plagiarism",
         "Wikidata"
       ],
-      "glossary_version_used": "b52762f54eb96366c439b11b6a9e9e35c2290ae97de77889562ac3a9da32cb26",
+      "glossary_version_used": "51c5d2c00651dde5edbd26471a37aa99fd297afe5501b77ae51472c0f99bd1b0",
       "output_file": "output_chunk0005.md",
       "output_hash": "632c960c98837144e158df04feddf27ac93f51204be8da391eb94d1710edd065",
       "source_file": "chunk0005.md",
       "source_hash": "c55022e8ec94c6acc6b5b184fcc3914530e67283d9bbf8943cbc1d75ce0c5b3a",
-      "updated_at": "2026-10-05T03:59:27+00:00"
+      "updated_at": "2026-10-05T04:00:06+00:00"
     },
     "chunk0006": {
       "entity_hashes_used": {
@@ -339,12 +339,12 @@
         "DALL-E",
         "GDPR"
       ],
-      "glossary_version_used": "b52762f54eb96366c439b11b6a9e9e35c2290ae97de77889562ac3a9da32cb26",
+      "glossary_version_used": "51c5d2c00651dde5edbd26471a37aa99fd297afe5501b77ae51472c0f99bd1b0",
       "output_file": "output_chunk0006.md",
       "output_hash": "057895e2cb731b16de2d92e85617cd8dca64934091827ed56eaee0c31938c69b",
       "source_file": "chunk0006.md",
       "source_hash": "03bfbb117d9164a05b5fe362bb1a2cc64f9bcd22f825c56982ec479db7f99c23",
-      "updated_at": "2026-10-05T03:59:27+00:00"
+      "updated_at": "2026-10-05T04:00:06+00:00"
     },
     "chunk0007": {
       "entity_hashes_used": {
@@ -399,12 +399,12 @@
         "Gemini",
         "Wikidata"
       ],
-      "glossary_version_used": "b52762f54eb96366c439b11b6a9e9e35c2290ae97de77889562ac3a9da32cb26",
+      "glossary_version_used": "51c5d2c00651dde5edbd26471a37aa99fd297afe5501b77ae51472c0f99bd1b0",
       "output_file": "output_chunk0007.md",
       "output_hash": "8af527ddf7f8dcf503efe044b04461f01e0570291f69413331846b8613289baf",
       "source_file": "chunk0007.md",
       "source_hash": "6a0da9121558cd79891bc0e57bb8074475a53258565e2326cb4f311ed1c2aa6f",
-      "updated_at": "2026-10-05T03:59:27+00:00"
+      "updated_at": "2026-10-05T04:00:06+00:00"
     },
     "chunk0008": {
       "entity_hashes_used": {
@@ -453,12 +453,12 @@
         "Keywords",
         "no-code"
       ],
-      "glossary_version_used": "b52762f54eb96366c439b11b6a9e9e35c2290ae97de77889562ac3a9da32cb26",
+      "glossary_version_used": "51c5d2c00651dde5edbd26471a37aa99fd297afe5501b77ae51472c0f99bd1b0",
       "output_file": "output_chunk0008.md",
       "output_hash": "d9fa9108b1cf0891722e62d6d9a09ca4caeb720236ce21ced504d5a50146a6fd",
       "source_file": "chunk0008.md",
       "source_hash": "b4a900b5a23d19bc7d1a5dd3cf1c75c396465f98b3d70a7cc672aced8f7e4914",
-      "updated_at": "2026-10-05T03:59:27+00:00"
+      "updated_at": "2026-10-05T04:00:06+00:00"
     },
     "chunk0009": {
       "entity_hashes_used": {
@@ -511,12 +511,12 @@
         "no-code",
         "plagiarism"
       ],
-      "glossary_version_used": "b52762f54eb96366c439b11b6a9e9e35c2290ae97de77889562ac3a9da32cb26",
+      "glossary_version_used": "51c5d2c00651dde5edbd26471a37aa99fd297afe5501b77ae51472c0f99bd1b0",
       "output_file": "output_chunk0009.md",
       "output_hash": "8a9b77f89995b2032f923738127b279864a13cdcd5504b5bf0d076480f2c884a",
       "source_file": "chunk0009.md",
       "source_hash": "85ba3808b60977e2d1be8f215cbaef38f6addfa48a0a4630f4a95fedf1874b17",
-      "updated_at": "2026-10-05T03:59:27+00:00"
+      "updated_at": "2026-10-05T04:00:06+00:00"
     },
     "chunk0010": {
       "entity_hashes_used": {
@@ -569,12 +569,12 @@
         "no-code",
         "plagiarism"
       ],
-      "glossary_version_used": "b52762f54eb96366c439b11b6a9e9e35c2290ae97de77889562ac3a9da32cb26",
+      "glossary_version_used": "51c5d2c00651dde5edbd26471a37aa99fd297afe5501b77ae51472c0f99bd1b0",
       "output_file": "output_chunk0010.md",
       "output_hash": "88af5d618c5aac68d459d9768a07d48c57b3e8292dcae9c330ebd890e4c1cb44",
       "source_file": "chunk0010.md",
       "source_hash": "f68e7e793b73564959a67326ab497a6bf4e73b5cbd06ac2abf30b1fe6a3e62b0",
-      "updated_at": "2026-10-05T03:59:27+00:00"
+      "updated_at": "2026-10-05T04:00:06+00:00"
     },
     "chunk0011": {
       "entity_hashes_used": {
@@ -623,12 +623,86 @@
         "Keywords",
         "no-code"
       ],
-      "glossary_version_used": "b52762f54eb96366c439b11b6a9e9e35c2290ae97de77889562ac3a9da32cb26",
+      "glossary_version_used": "51c5d2c00651dde5edbd26471a37aa99fd297afe5501b77ae51472c0f99bd1b0",
       "output_file": "output_chunk0011.md",
       "output_hash": "71df734916eedb6e474ce157c6a3f31cfa75702ea0d46c795ecc6078f474ff04",
       "source_file": "chunk0011.md",
       "source_hash": "704f63a1da45bedba081c3612980cbdf2cce6e99f07fd1148545f5b1cca9ee0e",
-      "updated_at": "2026-10-05T03:59:27+00:00"
+      "updated_at": "2026-10-05T04:00:06+00:00"
+    },
+    "chunk0012": {
+      "entity_hashes_used": {
+        "AI Winter": "6f577d02ac6f6f26b51471f934c7cd3fe0f5e07888328137c10a7c31af3116c7",
+        "Abstract": "ebb230d90ffbdb8d09874de62babf1a96ea6c2d05757a4ccf00e58dbd5a765cd",
+        "ChatGPT": "fc45fd5b9247140f7cf0d37e85dac560dd97223d69968eb76898c3e8df342775",
+        "Claude": "989431e57cad30131fe929b665c65b09c82f84e35b2eafe54ca7a39bcd5ecf73",
+        "Conclusion": "fd84e07a798ad7abde53efb228a8de9a7ebc6effda1cd6371635a90570925651",
+        "DALL-E": "5eebadc441585fbe4e3520db69277fec8c3b8efea6e1235cab588efbd3c20fd0",
+        "GDPR": "6167e1bacb0e644c61aaaaf2c4cd9b411ac2dfd5b4519c87102f32bd08a38be3",
+        "Gemini": "7a6b89139b22af90e0f8c29079ec94d99c882f2fda579fbd316397e22443ec41",
+        "Keywords": "938cc0e4a3faf02ca4a65f2da3fa0c45d0755501de6546ce74f97e14d9b03bd7",
+        "McCarthy": "4ea56ee0626c60ffd96a04ce3696e8ad43f473ae8f5945d52cf41c2ad67a676f",
+        "Practical Example": "453978b0b674c448ebd9d2825611ae662df845565dd5e81d1318a2752191220b",
+        "Turing": "39acec5fb45107a333812454ce2cc0f9070e49331dd40c6052667c7a5d96ce54",
+        "Wikidata": "3edb95594a3ff8aa54a57fb1dbab14870f2fc82c77d6fb66be4d6229d1fee2de",
+        "academic integrity": "b9887c64f99154d9c929ffe7fc96c4580ba61019be3a374b24a9391361503940",
+        "artificial intelligence": "5cf54841c74976f6c9c15490f88362e31bb41e0bc440b8215ca131a53eed2957",
+        "citation management": "d6d7a999642b7ca3982ae13e114b126adbced687fa3242b994b7f9cb8d6fc026",
+        "copyright": "6ff4edda7639772b0664060b9fb7e378d9a020d9ae4b65d3560c52c276e799bf",
+        "data protection": "208909679728f5fc36478ce8b4ebb15a3de06f87e4eaa6e30c3296f0a8e7c7d5",
+        "deep learning": "322921ec230f233c412983c0d9fb5bb61fe3db8d80dde77623899604382718b6",
+        "feature engineering": "1e49cfd16723be9b1d46a30993336b4dd7c797a417f0ecb05e64a0841460a327",
+        "generative AI": "ea7d3331dd7b23c25442dba0d30f3d9504a9a19eb076c862ddaf42e4ac1e9b0a",
+        "intellectual property": "a483bba3e982ce08036c916966fa1200f989edbce0db3d47bcdef148b4f90bb6",
+        "literature review": "93c5a1e2727b09ed83b0ce7d436ffa9fca99ebcfe3b5be89a4fa881e141229fa",
+        "machine learning": "5593c708754c386ddd516d6d211680d993bbb89415f52cbbaf950e214e4b3f4e",
+        "natural language processing": "35b92799bb28a963111bb9c6674abedcac082b6378f3c3188e22b4d25f24622d",
+        "no-code": "90377cbeb04f445b0a470231ce0ff5d7572365dda972703a18540e3ef07d62b3",
+        "open science": "551ace6e9e75757f0d3bfe34ab557968e257d34c29f38c91dfcc5418bc33021b",
+        "peer review": "70945a8a2afe0ad206a300ada87a516a51f2435d11a10bdc6adc89738691bfce",
+        "plagiarism": "e5f1fecfcc9f3c722a4ebc7e5d30576211bf65af6321272f20e8ae87489b5892",
+        "privacy": "0fcabff5a5d2fd38c991d608c53949fd9c0d48cd39dab2505eb57738093152b3",
+        "prompt": "34f13a1b7c183541c1142578197adabc797e14958431339a0e24c85477cb9234"
+      },
+      "entity_ids_used": [
+        "generative AI",
+        "machine learning",
+        "artificial intelligence",
+        "Claude",
+        "ChatGPT",
+        "natural language processing",
+        "deep learning",
+        "AI Winter",
+        "Gemini",
+        "McCarthy",
+        "Turing",
+        "prompt",
+        "academic integrity",
+        "peer review",
+        "privacy",
+        "Conclusion",
+        "copyright",
+        "intellectual property",
+        "data protection",
+        "literature review",
+        "open science",
+        "Abstract",
+        "Keywords",
+        "no-code",
+        "plagiarism",
+        "Wikidata",
+        "DALL-E",
+        "GDPR",
+        "Practical Example",
+        "citation management",
+        "feature engineering"
+      ],
+      "glossary_version_used": "51c5d2c00651dde5edbd26471a37aa99fd297afe5501b77ae51472c0f99bd1b0",
+      "output_file": "output_chunk0012.md",
+      "output_hash": "9afccccc362ebce88b20b74c3d6618992e2a318c301315bc5b08c3023086b553",
+      "source_file": "chunk0012.md",
+      "source_hash": "cd63118e9526ce4b1075831e7c16b1bc841988c360e040694532d54474708112",
+      "updated_at": "2026-10-05T04:00:06+00:00"
     },
     "chunk0013": {
       "entity_hashes_used": {
@@ -675,12 +749,12 @@
         "Abstract",
         "Keywords"
       ],
-      "glossary_version_used": "b52762f54eb96366c439b11b6a9e9e35c2290ae97de77889562ac3a9da32cb26",
+      "glossary_version_used": "51c5d2c00651dde5edbd26471a37aa99fd297afe5501b77ae51472c0f99bd1b0",
       "output_file": "output_chunk0013.md",
       "output_hash": "03f9da8b913849b0ff5f10b6a43cfce77bad4b84f96114cfde30c21cab34498b",
       "source_file": "chunk0013.md",
       "source_hash": "c7b2965017aca18083378484fefdd3bf0991ea3e29ce3e7d6c60d933c86bec87",
-      "updated_at": "2026-10-05T03:59:27+00:00"
+      "updated_at": "2026-10-05T04:00:06+00:00"
     },
     "chunk0014": {
       "entity_hashes_used": {
@@ -729,12 +803,12 @@
         "Keywords",
         "no-code"
       ],
-      "glossary_version_used": "b52762f54eb96366c439b11b6a9e9e35c2290ae97de77889562ac3a9da32cb26",
+      "glossary_version_used": "51c5d2c00651dde5edbd26471a37aa99fd297afe5501b77ae51472c0f99bd1b0",
       "output_file": "output_chunk0014.md",
       "output_hash": "673ad3da4918ed4d20f471f7c36989dd5f398ed6c8a6c5edb22412dac58e6a7c",
       "source_file": "chunk0014.md",
       "source_hash": "0dae5023a659f99164c70c8a8cfe5c848994abe85d41162238f1d4e6b8317b85",
-      "updated_at": "2026-10-05T03:59:27+00:00"
+      "updated_at": "2026-10-05T04:00:06+00:00"
     },
     "chunk0015": {
       "entity_hashes_used": {
@@ -781,12 +855,12 @@
         "Abstract",
         "Keywords"
       ],
-      "glossary_version_used": "b52762f54eb96366c439b11b6a9e9e35c2290ae97de77889562ac3a9da32cb26",
+      "glossary_version_used": "51c5d2c00651dde5edbd26471a37aa99fd297afe5501b77ae51472c0f99bd1b0",
       "output_file": "output_chunk0015.md",
       "output_hash": "f18ec3acdbd804f3998243a5e89ccd60ce707518bd1f092d05ff36e29209075b",
       "source_file": "chunk0015.md",
       "source_hash": "2f5c83f7e02b4c39262b41e4792d30a595a9fdabdeace02026cdc11023be3e06",
-      "updated_at": "2026-10-05T03:59:27+00:00"
+      "updated_at": "2026-10-05T04:00:06+00:00"
     },
     "chunk0016": {
       "entity_hashes_used": {
@@ -843,12 +917,404 @@
         "Wikidata",
         "DALL-E"
       ],
-      "glossary_version_used": "b52762f54eb96366c439b11b6a9e9e35c2290ae97de77889562ac3a9da32cb26",
+      "glossary_version_used": "51c5d2c00651dde5edbd26471a37aa99fd297afe5501b77ae51472c0f99bd1b0",
       "output_file": "output_chunk0016.md",
       "output_hash": "8120be8d95f6873283acd13ec724319c3dd6cc68cb4f45a65efabd60f939a202",
       "source_file": "chunk0016.md",
       "source_hash": "0edc98b84c8c8fbaa9b36c1ec6246bf8dd409504e8e81940de02d4dcde151781",
-      "updated_at": "2026-10-05T03:59:27+00:00"
+      "updated_at": "2026-10-05T04:00:06+00:00"
+    },
+    "chunk0017": {
+      "entity_hashes_used": {
+        "AI Winter": "6f577d02ac6f6f26b51471f934c7cd3fe0f5e07888328137c10a7c31af3116c7",
+        "Abstract": "ebb230d90ffbdb8d09874de62babf1a96ea6c2d05757a4ccf00e58dbd5a765cd",
+        "ChatGPT": "fc45fd5b9247140f7cf0d37e85dac560dd97223d69968eb76898c3e8df342775",
+        "Claude": "989431e57cad30131fe929b665c65b09c82f84e35b2eafe54ca7a39bcd5ecf73",
+        "Conclusion": "fd84e07a798ad7abde53efb228a8de9a7ebc6effda1cd6371635a90570925651",
+        "Gemini": "7a6b89139b22af90e0f8c29079ec94d99c882f2fda579fbd316397e22443ec41",
+        "Keywords": "938cc0e4a3faf02ca4a65f2da3fa0c45d0755501de6546ce74f97e14d9b03bd7",
+        "Wikidata": "3edb95594a3ff8aa54a57fb1dbab14870f2fc82c77d6fb66be4d6229d1fee2de",
+        "academic integrity": "b9887c64f99154d9c929ffe7fc96c4580ba61019be3a374b24a9391361503940",
+        "artificial intelligence": "5cf54841c74976f6c9c15490f88362e31bb41e0bc440b8215ca131a53eed2957",
+        "copyright": "6ff4edda7639772b0664060b9fb7e378d9a020d9ae4b65d3560c52c276e799bf",
+        "data protection": "208909679728f5fc36478ce8b4ebb15a3de06f87e4eaa6e30c3296f0a8e7c7d5",
+        "deep learning": "322921ec230f233c412983c0d9fb5bb61fe3db8d80dde77623899604382718b6",
+        "generative AI": "ea7d3331dd7b23c25442dba0d30f3d9504a9a19eb076c862ddaf42e4ac1e9b0a",
+        "intellectual property": "a483bba3e982ce08036c916966fa1200f989edbce0db3d47bcdef148b4f90bb6",
+        "literature review": "93c5a1e2727b09ed83b0ce7d436ffa9fca99ebcfe3b5be89a4fa881e141229fa",
+        "machine learning": "5593c708754c386ddd516d6d211680d993bbb89415f52cbbaf950e214e4b3f4e",
+        "natural language processing": "35b92799bb28a963111bb9c6674abedcac082b6378f3c3188e22b4d25f24622d",
+        "no-code": "90377cbeb04f445b0a470231ce0ff5d7572365dda972703a18540e3ef07d62b3",
+        "open science": "551ace6e9e75757f0d3bfe34ab557968e257d34c29f38c91dfcc5418bc33021b",
+        "peer review": "70945a8a2afe0ad206a300ada87a516a51f2435d11a10bdc6adc89738691bfce",
+        "plagiarism": "e5f1fecfcc9f3c722a4ebc7e5d30576211bf65af6321272f20e8ae87489b5892",
+        "privacy": "0fcabff5a5d2fd38c991d608c53949fd9c0d48cd39dab2505eb57738093152b3",
+        "prompt": "34f13a1b7c183541c1142578197adabc797e14958431339a0e24c85477cb9234"
+      },
+      "entity_ids_used": [
+        "generative AI",
+        "deep learning",
+        "AI Winter",
+        "Keywords",
+        "prompt",
+        "academic integrity",
+        "peer review",
+        "privacy",
+        "machine learning",
+        "Conclusion",
+        "copyright",
+        "artificial intelligence",
+        "Claude",
+        "intellectual property",
+        "ChatGPT",
+        "data protection",
+        "natural language processing",
+        "literature review",
+        "open science",
+        "Abstract",
+        "no-code",
+        "plagiarism",
+        "Gemini",
+        "Wikidata"
+      ],
+      "glossary_version_used": "51c5d2c00651dde5edbd26471a37aa99fd297afe5501b77ae51472c0f99bd1b0",
+      "output_file": "output_chunk0017.md",
+      "output_hash": "233935a0acbb1cf5c86db60f045ca86b76d3f0a53a6c7484d42b15e2c2b8717d",
+      "source_file": "chunk0017.md",
+      "source_hash": "77432d054fe595341e1a172cc6650b36b7c4460a36f947649e86882444c4b0b8",
+      "updated_at": "2026-10-05T04:00:06+00:00"
+    },
+    "chunk0018": {
+      "entity_hashes_used": {
+        "AI Winter": "6f577d02ac6f6f26b51471f934c7cd3fe0f5e07888328137c10a7c31af3116c7",
+        "Abstract": "ebb230d90ffbdb8d09874de62babf1a96ea6c2d05757a4ccf00e58dbd5a765cd",
+        "ChatGPT": "fc45fd5b9247140f7cf0d37e85dac560dd97223d69968eb76898c3e8df342775",
+        "Claude": "989431e57cad30131fe929b665c65b09c82f84e35b2eafe54ca7a39bcd5ecf73",
+        "Conclusion": "fd84e07a798ad7abde53efb228a8de9a7ebc6effda1cd6371635a90570925651",
+        "Keywords": "938cc0e4a3faf02ca4a65f2da3fa0c45d0755501de6546ce74f97e14d9b03bd7",
+        "academic integrity": "b9887c64f99154d9c929ffe7fc96c4580ba61019be3a374b24a9391361503940",
+        "artificial intelligence": "5cf54841c74976f6c9c15490f88362e31bb41e0bc440b8215ca131a53eed2957",
+        "copyright": "6ff4edda7639772b0664060b9fb7e378d9a020d9ae4b65d3560c52c276e799bf",
+        "data protection": "208909679728f5fc36478ce8b4ebb15a3de06f87e4eaa6e30c3296f0a8e7c7d5",
+        "deep learning": "322921ec230f233c412983c0d9fb5bb61fe3db8d80dde77623899604382718b6",
+        "generative AI": "ea7d3331dd7b23c25442dba0d30f3d9504a9a19eb076c862ddaf42e4ac1e9b0a",
+        "intellectual property": "a483bba3e982ce08036c916966fa1200f989edbce0db3d47bcdef148b4f90bb6",
+        "literature review": "93c5a1e2727b09ed83b0ce7d436ffa9fca99ebcfe3b5be89a4fa881e141229fa",
+        "machine learning": "5593c708754c386ddd516d6d211680d993bbb89415f52cbbaf950e214e4b3f4e",
+        "natural language processing": "35b92799bb28a963111bb9c6674abedcac082b6378f3c3188e22b4d25f24622d",
+        "open science": "551ace6e9e75757f0d3bfe34ab557968e257d34c29f38c91dfcc5418bc33021b",
+        "peer review": "70945a8a2afe0ad206a300ada87a516a51f2435d11a10bdc6adc89738691bfce",
+        "privacy": "0fcabff5a5d2fd38c991d608c53949fd9c0d48cd39dab2505eb57738093152b3",
+        "prompt": "34f13a1b7c183541c1142578197adabc797e14958431339a0e24c85477cb9234"
+      },
+      "entity_ids_used": [
+        "generative AI",
+        "prompt",
+        "academic integrity",
+        "peer review",
+        "privacy",
+        "machine learning",
+        "Conclusion",
+        "copyright",
+        "artificial intelligence",
+        "Claude",
+        "intellectual property",
+        "ChatGPT",
+        "data protection",
+        "natural language processing",
+        "deep learning",
+        "literature review",
+        "open science",
+        "AI Winter",
+        "Abstract",
+        "Keywords"
+      ],
+      "glossary_version_used": "51c5d2c00651dde5edbd26471a37aa99fd297afe5501b77ae51472c0f99bd1b0",
+      "output_file": "output_chunk0018.md",
+      "output_hash": "777b97420708b84aa298eaa1b639725ace39b43fdbbc96c2ef4ff3cf90a1839e",
+      "source_file": "chunk0018.md",
+      "source_hash": "46dc4561626d9624846f66d7af58467c2a6c63a91a1b4d99036f629773b11cbc",
+      "updated_at": "2026-10-05T04:00:06+00:00"
+    },
+    "chunk0019": {
+      "entity_hashes_used": {
+        "AI Winter": "6f577d02ac6f6f26b51471f934c7cd3fe0f5e07888328137c10a7c31af3116c7",
+        "Abstract": "ebb230d90ffbdb8d09874de62babf1a96ea6c2d05757a4ccf00e58dbd5a765cd",
+        "ChatGPT": "fc45fd5b9247140f7cf0d37e85dac560dd97223d69968eb76898c3e8df342775",
+        "Claude": "989431e57cad30131fe929b665c65b09c82f84e35b2eafe54ca7a39bcd5ecf73",
+        "Conclusion": "fd84e07a798ad7abde53efb228a8de9a7ebc6effda1cd6371635a90570925651",
+        "DALL-E": "5eebadc441585fbe4e3520db69277fec8c3b8efea6e1235cab588efbd3c20fd0",
+        "Gemini": "7a6b89139b22af90e0f8c29079ec94d99c882f2fda579fbd316397e22443ec41",
+        "Keywords": "938cc0e4a3faf02ca4a65f2da3fa0c45d0755501de6546ce74f97e14d9b03bd7",
+        "McCarthy": "4ea56ee0626c60ffd96a04ce3696e8ad43f473ae8f5945d52cf41c2ad67a676f",
+        "Turing": "39acec5fb45107a333812454ce2cc0f9070e49331dd40c6052667c7a5d96ce54",
+        "Wikidata": "3edb95594a3ff8aa54a57fb1dbab14870f2fc82c77d6fb66be4d6229d1fee2de",
+        "academic integrity": "b9887c64f99154d9c929ffe7fc96c4580ba61019be3a374b24a9391361503940",
+        "artificial intelligence": "5cf54841c74976f6c9c15490f88362e31bb41e0bc440b8215ca131a53eed2957",
+        "copyright": "6ff4edda7639772b0664060b9fb7e378d9a020d9ae4b65d3560c52c276e799bf",
+        "data protection": "208909679728f5fc36478ce8b4ebb15a3de06f87e4eaa6e30c3296f0a8e7c7d5",
+        "deep learning": "322921ec230f233c412983c0d9fb5bb61fe3db8d80dde77623899604382718b6",
+        "generative AI": "ea7d3331dd7b23c25442dba0d30f3d9504a9a19eb076c862ddaf42e4ac1e9b0a",
+        "intellectual property": "a483bba3e982ce08036c916966fa1200f989edbce0db3d47bcdef148b4f90bb6",
+        "literature review": "93c5a1e2727b09ed83b0ce7d436ffa9fca99ebcfe3b5be89a4fa881e141229fa",
+        "machine learning": "5593c708754c386ddd516d6d211680d993bbb89415f52cbbaf950e214e4b3f4e",
+        "natural language processing": "35b92799bb28a963111bb9c6674abedcac082b6378f3c3188e22b4d25f24622d",
+        "no-code": "90377cbeb04f445b0a470231ce0ff5d7572365dda972703a18540e3ef07d62b3",
+        "open science": "551ace6e9e75757f0d3bfe34ab557968e257d34c29f38c91dfcc5418bc33021b",
+        "peer review": "70945a8a2afe0ad206a300ada87a516a51f2435d11a10bdc6adc89738691bfce",
+        "plagiarism": "e5f1fecfcc9f3c722a4ebc7e5d30576211bf65af6321272f20e8ae87489b5892",
+        "privacy": "0fcabff5a5d2fd38c991d608c53949fd9c0d48cd39dab2505eb57738093152b3",
+        "prompt": "34f13a1b7c183541c1142578197adabc797e14958431339a0e24c85477cb9234"
+      },
+      "entity_ids_used": [
+        "artificial intelligence",
+        "Claude",
+        "natural language processing",
+        "deep learning",
+        "AI Winter",
+        "McCarthy",
+        "Turing",
+        "generative AI",
+        "prompt",
+        "academic integrity",
+        "peer review",
+        "privacy",
+        "machine learning",
+        "Conclusion",
+        "copyright",
+        "intellectual property",
+        "ChatGPT",
+        "data protection",
+        "literature review",
+        "open science",
+        "Abstract",
+        "Keywords",
+        "no-code",
+        "plagiarism",
+        "Gemini",
+        "Wikidata",
+        "DALL-E"
+      ],
+      "glossary_version_used": "51c5d2c00651dde5edbd26471a37aa99fd297afe5501b77ae51472c0f99bd1b0",
+      "output_file": "output_chunk0019.md",
+      "output_hash": "b68466179b9fd99fc4901be3c894b169f7b42efc0feea7e35073e372b7b8d461",
+      "source_file": "chunk0019.md",
+      "source_hash": "dc4dd5423223e7cfcca727587a4b506c815b533fa5a535a3f6ec965ecded8899",
+      "updated_at": "2026-10-05T04:00:06+00:00"
+    },
+    "chunk0020": {
+      "entity_hashes_used": {
+        "AI Winter": "6f577d02ac6f6f26b51471f934c7cd3fe0f5e07888328137c10a7c31af3116c7",
+        "Abstract": "ebb230d90ffbdb8d09874de62babf1a96ea6c2d05757a4ccf00e58dbd5a765cd",
+        "ChatGPT": "fc45fd5b9247140f7cf0d37e85dac560dd97223d69968eb76898c3e8df342775",
+        "Claude": "989431e57cad30131fe929b665c65b09c82f84e35b2eafe54ca7a39bcd5ecf73",
+        "Conclusion": "fd84e07a798ad7abde53efb228a8de9a7ebc6effda1cd6371635a90570925651",
+        "Keywords": "938cc0e4a3faf02ca4a65f2da3fa0c45d0755501de6546ce74f97e14d9b03bd7",
+        "academic integrity": "b9887c64f99154d9c929ffe7fc96c4580ba61019be3a374b24a9391361503940",
+        "artificial intelligence": "5cf54841c74976f6c9c15490f88362e31bb41e0bc440b8215ca131a53eed2957",
+        "copyright": "6ff4edda7639772b0664060b9fb7e378d9a020d9ae4b65d3560c52c276e799bf",
+        "data protection": "208909679728f5fc36478ce8b4ebb15a3de06f87e4eaa6e30c3296f0a8e7c7d5",
+        "deep learning": "322921ec230f233c412983c0d9fb5bb61fe3db8d80dde77623899604382718b6",
+        "generative AI": "ea7d3331dd7b23c25442dba0d30f3d9504a9a19eb076c862ddaf42e4ac1e9b0a",
+        "intellectual property": "a483bba3e982ce08036c916966fa1200f989edbce0db3d47bcdef148b4f90bb6",
+        "literature review": "93c5a1e2727b09ed83b0ce7d436ffa9fca99ebcfe3b5be89a4fa881e141229fa",
+        "machine learning": "5593c708754c386ddd516d6d211680d993bbb89415f52cbbaf950e214e4b3f4e",
+        "natural language processing": "35b92799bb28a963111bb9c6674abedcac082b6378f3c3188e22b4d25f24622d",
+        "no-code": "90377cbeb04f445b0a470231ce0ff5d7572365dda972703a18540e3ef07d62b3",
+        "open science": "551ace6e9e75757f0d3bfe34ab557968e257d34c29f38c91dfcc5418bc33021b",
+        "peer review": "70945a8a2afe0ad206a300ada87a516a51f2435d11a10bdc6adc89738691bfce",
+        "privacy": "0fcabff5a5d2fd38c991d608c53949fd9c0d48cd39dab2505eb57738093152b3",
+        "prompt": "34f13a1b7c183541c1142578197adabc797e14958431339a0e24c85477cb9234"
+      },
+      "entity_ids_used": [
+        "deep learning",
+        "generative AI",
+        "prompt",
+        "academic integrity",
+        "peer review",
+        "privacy",
+        "machine learning",
+        "Conclusion",
+        "copyright",
+        "artificial intelligence",
+        "Claude",
+        "intellectual property",
+        "ChatGPT",
+        "data protection",
+        "natural language processing",
+        "literature review",
+        "open science",
+        "AI Winter",
+        "Abstract",
+        "Keywords",
+        "no-code"
+      ],
+      "glossary_version_used": "51c5d2c00651dde5edbd26471a37aa99fd297afe5501b77ae51472c0f99bd1b0",
+      "output_file": "output_chunk0020.md",
+      "output_hash": "9ec5123c1a9d41b0d6e1d27f4ee5b1c6a16695516825e643893a96429e5b6c5f",
+      "source_file": "chunk0020.md",
+      "source_hash": "38d175437312f680f13d4589d631d5b474d1b3af3b4327e7970e88bce21b0a27",
+      "updated_at": "2026-10-05T04:00:06+00:00"
+    },
+    "chunk0021": {
+      "entity_hashes_used": {
+        "AI Winter": "6f577d02ac6f6f26b51471f934c7cd3fe0f5e07888328137c10a7c31af3116c7",
+        "Abstract": "ebb230d90ffbdb8d09874de62babf1a96ea6c2d05757a4ccf00e58dbd5a765cd",
+        "ChatGPT": "fc45fd5b9247140f7cf0d37e85dac560dd97223d69968eb76898c3e8df342775",
+        "Claude": "989431e57cad30131fe929b665c65b09c82f84e35b2eafe54ca7a39bcd5ecf73",
+        "Conclusion": "fd84e07a798ad7abde53efb228a8de9a7ebc6effda1cd6371635a90570925651",
+        "Keywords": "938cc0e4a3faf02ca4a65f2da3fa0c45d0755501de6546ce74f97e14d9b03bd7",
+        "academic integrity": "b9887c64f99154d9c929ffe7fc96c4580ba61019be3a374b24a9391361503940",
+        "artificial intelligence": "5cf54841c74976f6c9c15490f88362e31bb41e0bc440b8215ca131a53eed2957",
+        "copyright": "6ff4edda7639772b0664060b9fb7e378d9a020d9ae4b65d3560c52c276e799bf",
+        "data protection": "208909679728f5fc36478ce8b4ebb15a3de06f87e4eaa6e30c3296f0a8e7c7d5",
+        "deep learning": "322921ec230f233c412983c0d9fb5bb61fe3db8d80dde77623899604382718b6",
+        "generative AI": "ea7d3331dd7b23c25442dba0d30f3d9504a9a19eb076c862ddaf42e4ac1e9b0a",
+        "intellectual property": "a483bba3e982ce08036c916966fa1200f989edbce0db3d47bcdef148b4f90bb6",
+        "literature review": "93c5a1e2727b09ed83b0ce7d436ffa9fca99ebcfe3b5be89a4fa881e141229fa",
+        "machine learning": "5593c708754c386ddd516d6d211680d993bbb89415f52cbbaf950e214e4b3f4e",
+        "natural language processing": "35b92799bb28a963111bb9c6674abedcac082b6378f3c3188e22b4d25f24622d",
+        "no-code": "90377cbeb04f445b0a470231ce0ff5d7572365dda972703a18540e3ef07d62b3",
+        "open science": "551ace6e9e75757f0d3bfe34ab557968e257d34c29f38c91dfcc5418bc33021b",
+        "peer review": "70945a8a2afe0ad206a300ada87a516a51f2435d11a10bdc6adc89738691bfce",
+        "privacy": "0fcabff5a5d2fd38c991d608c53949fd9c0d48cd39dab2505eb57738093152b3",
+        "prompt": "34f13a1b7c183541c1142578197adabc797e14958431339a0e24c85477cb9234"
+      },
+      "entity_ids_used": [
+        "deep learning",
+        "generative AI",
+        "prompt",
+        "academic integrity",
+        "peer review",
+        "privacy",
+        "machine learning",
+        "Conclusion",
+        "copyright",
+        "artificial intelligence",
+        "Claude",
+        "intellectual property",
+        "ChatGPT",
+        "data protection",
+        "natural language processing",
+        "literature review",
+        "open science",
+        "AI Winter",
+        "Abstract",
+        "Keywords",
+        "no-code"
+      ],
+      "glossary_version_used": "51c5d2c00651dde5edbd26471a37aa99fd297afe5501b77ae51472c0f99bd1b0",
+      "output_file": "output_chunk0021.md",
+      "output_hash": "3f5c08175cacf8e4c12745f3045018085af6b5df51ac3600d1099c8b524cc614",
+      "source_file": "chunk0021.md",
+      "source_hash": "d9c4370de406b7b4eb33d95a6749371fd054107e3d74cbfd47b048cf5ce99b95",
+      "updated_at": "2026-10-05T04:00:06+00:00"
+    },
+    "chunk0022": {
+      "entity_hashes_used": {
+        "AI Winter": "6f577d02ac6f6f26b51471f934c7cd3fe0f5e07888328137c10a7c31af3116c7",
+        "Abstract": "ebb230d90ffbdb8d09874de62babf1a96ea6c2d05757a4ccf00e58dbd5a765cd",
+        "ChatGPT": "fc45fd5b9247140f7cf0d37e85dac560dd97223d69968eb76898c3e8df342775",
+        "Claude": "989431e57cad30131fe929b665c65b09c82f84e35b2eafe54ca7a39bcd5ecf73",
+        "Conclusion": "fd84e07a798ad7abde53efb228a8de9a7ebc6effda1cd6371635a90570925651",
+        "Keywords": "938cc0e4a3faf02ca4a65f2da3fa0c45d0755501de6546ce74f97e14d9b03bd7",
+        "academic integrity": "b9887c64f99154d9c929ffe7fc96c4580ba61019be3a374b24a9391361503940",
+        "artificial intelligence": "5cf54841c74976f6c9c15490f88362e31bb41e0bc440b8215ca131a53eed2957",
+        "copyright": "6ff4edda7639772b0664060b9fb7e378d9a020d9ae4b65d3560c52c276e799bf",
+        "data protection": "208909679728f5fc36478ce8b4ebb15a3de06f87e4eaa6e30c3296f0a8e7c7d5",
+        "deep learning": "322921ec230f233c412983c0d9fb5bb61fe3db8d80dde77623899604382718b6",
+        "generative AI": "ea7d3331dd7b23c25442dba0d30f3d9504a9a19eb076c862ddaf42e4ac1e9b0a",
+        "intellectual property": "a483bba3e982ce08036c916966fa1200f989edbce0db3d47bcdef148b4f90bb6",
+        "literature review": "93c5a1e2727b09ed83b0ce7d436ffa9fca99ebcfe3b5be89a4fa881e141229fa",
+        "machine learning": "5593c708754c386ddd516d6d211680d993bbb89415f52cbbaf950e214e4b3f4e",
+        "natural language processing": "35b92799bb28a963111bb9c6674abedcac082b6378f3c3188e22b4d25f24622d",
+        "open science": "551ace6e9e75757f0d3bfe34ab557968e257d34c29f38c91dfcc5418bc33021b",
+        "peer review": "70945a8a2afe0ad206a300ada87a516a51f2435d11a10bdc6adc89738691bfce",
+        "privacy": "0fcabff5a5d2fd38c991d608c53949fd9c0d48cd39dab2505eb57738093152b3",
+        "prompt": "34f13a1b7c183541c1142578197adabc797e14958431339a0e24c85477cb9234"
+      },
+      "entity_ids_used": [
+        "generative AI",
+        "prompt",
+        "academic integrity",
+        "peer review",
+        "privacy",
+        "machine learning",
+        "Conclusion",
+        "copyright",
+        "artificial intelligence",
+        "Claude",
+        "intellectual property",
+        "ChatGPT",
+        "data protection",
+        "natural language processing",
+        "deep learning",
+        "literature review",
+        "open science",
+        "AI Winter",
+        "Abstract",
+        "Keywords"
+      ],
+      "glossary_version_used": "51c5d2c00651dde5edbd26471a37aa99fd297afe5501b77ae51472c0f99bd1b0",
+      "output_file": "output_chunk0022.md",
+      "output_hash": "60192003c0c1fa959939a180c4398a47d2a0186058a8b1fa224b10ae30626f0c",
+      "source_file": "chunk0022.md",
+      "source_hash": "531e517f22e6c4b7339539cf07695c403abf7ca28bff018e60524cafc55907e2",
+      "updated_at": "2026-10-05T04:00:06+00:00"
+    },
+    "chunk0023": {
+      "entity_hashes_used": {
+        "AI Winter": "6f577d02ac6f6f26b51471f934c7cd3fe0f5e07888328137c10a7c31af3116c7",
+        "Abstract": "ebb230d90ffbdb8d09874de62babf1a96ea6c2d05757a4ccf00e58dbd5a765cd",
+        "ChatGPT": "fc45fd5b9247140f7cf0d37e85dac560dd97223d69968eb76898c3e8df342775",
+        "Claude": "989431e57cad30131fe929b665c65b09c82f84e35b2eafe54ca7a39bcd5ecf73",
+        "Conclusion": "fd84e07a798ad7abde53efb228a8de9a7ebc6effda1cd6371635a90570925651",
+        "Keywords": "938cc0e4a3faf02ca4a65f2da3fa0c45d0755501de6546ce74f97e14d9b03bd7",
+        "academic integrity": "b9887c64f99154d9c929ffe7fc96c4580ba61019be3a374b24a9391361503940",
+        "artificial intelligence": "5cf54841c74976f6c9c15490f88362e31bb41e0bc440b8215ca131a53eed2957",
+        "copyright": "6ff4edda7639772b0664060b9fb7e378d9a020d9ae4b65d3560c52c276e799bf",
+        "data protection": "208909679728f5fc36478ce8b4ebb15a3de06f87e4eaa6e30c3296f0a8e7c7d5",
+        "deep learning": "322921ec230f233c412983c0d9fb5bb61fe3db8d80dde77623899604382718b6",
+        "generative AI": "ea7d3331dd7b23c25442dba0d30f3d9504a9a19eb076c862ddaf42e4ac1e9b0a",
+        "intellectual property": "a483bba3e982ce08036c916966fa1200f989edbce0db3d47bcdef148b4f90bb6",
+        "literature review": "93c5a1e2727b09ed83b0ce7d436ffa9fca99ebcfe3b5be89a4fa881e141229fa",
+        "machine learning": "5593c708754c386ddd516d6d211680d993bbb89415f52cbbaf950e214e4b3f4e",
+        "natural language processing": "35b92799bb28a963111bb9c6674abedcac082b6378f3c3188e22b4d25f24622d",
+        "no-code": "90377cbeb04f445b0a470231ce0ff5d7572365dda972703a18540e3ef07d62b3",
+        "open science": "551ace6e9e75757f0d3bfe34ab557968e257d34c29f38c91dfcc5418bc33021b",
+        "peer review": "70945a8a2afe0ad206a300ada87a516a51f2435d11a10bdc6adc89738691bfce",
+        "privacy": "0fcabff5a5d2fd38c991d608c53949fd9c0d48cd39dab2505eb57738093152b3",
+        "prompt": "34f13a1b7c183541c1142578197adabc797e14958431339a0e24c85477cb9234"
+      },
+      "entity_ids_used": [
+        "machine learning",
+        "generative AI",
+        "prompt",
+        "academic integrity",
+        "peer review",
+        "privacy",
+        "Conclusion",
+        "copyright",
+        "artificial intelligence",
+        "Claude",
+        "intellectual property",
+        "ChatGPT",
+        "data protection",
+        "natural language processing",
+        "deep learning",
+        "literature review",
+        "open science",
+        "AI Winter",
+        "Abstract",
+        "Keywords",
+        "no-code"
+      ],
+      "glossary_version_used": "51c5d2c00651dde5edbd26471a37aa99fd297afe5501b77ae51472c0f99bd1b0",
+      "output_file": "output_chunk0023.md",
+      "output_hash": "3589a298d8fadeacd060f895a4fc4e8a08d5294c016af53a211016f60a27a227",
+      "source_file": "chunk0023.md",
+      "source_hash": "3b8fad9f87422cd22956cf9ec2ef136508b9105801158a284890fbb2584375bc",
+      "updated_at": "2026-10-05T04:00:06+00:00"
     }
   },
   "version": 1
