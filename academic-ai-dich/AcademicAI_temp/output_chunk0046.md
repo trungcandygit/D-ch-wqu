@@ -1,0 +1,7 @@
+## Kết luận
+
+AI tạo sinh (generative AI) đang định hình lại việc viết và xuất bản học thuật, nâng cao năng suất và tinh gọn quy trình làm việc. Từ việc động não và cấu trúc lập luận đến tinh chỉnh bản thảo, định dạng trích dẫn và tối ưu hóa hồ sơ nộp bài, AI đóng vai trò là một cộng tác viên có giá trị trong truyền thông học thuật. Tuy nhiên, AI không thay thế tư duy phản biện, tính độc đáo hay sự chặt chẽ về phương pháp luận---các học giả phải cân bằng giữa hiệu quả mà AI mang lại với sự giám sát của con người để duy trì liêm chính học thuật (academic integrity). Mặc dù AI có thể hỗ trợ quản lý trích dẫn (citation management), lập chỉ mục và tối ưu hóa bản thảo, các kết quả đầu ra của nó vẫn cần được xem xét cẩn trọng. Những rủi ro như trích dẫn bịa đặt (hallucinated citations), sự tiếp cận nông cạn với tài liệu và sự đồng nhất hóa diễn ngôn phải được chủ động giảm thiểu. Các tổ chức và nhà xuất bản ngày càng yêu cầu minh bạch trong việc sử dụng AI, khiến việc công bố thông tin một cách có trách nhiệm trở nên thiết yếu.
+
+Nhìn về phía trước, vai trò của AI trong học thuật sẽ tiếp tục phát triển, làm nảy sinh những câu hỏi mới về quyền tác giả, sự ghi nhận nguồn và lao động trí tuệ. Thách thức không nằm ở việc có nên sử dụng AI hay không, mà là làm thế nào để tích hợp nó một cách có trách nhiệm. Bằng cách tận dụng các điểm mạnh của AI đồng thời bảo đảm sự chặt chẽ về trí tuệ, các học giả có thể nâng cao hiệu quả mà không làm tổn hại đến chiều sâu và tính độc đáo trong công trình của mình.
+
+Chương 4: AI trong quản lý và phân tích dữ liệu
