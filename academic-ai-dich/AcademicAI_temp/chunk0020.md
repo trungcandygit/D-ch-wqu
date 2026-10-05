@@ -1,0 +1,3 @@
+## The Resurgence of AI: Factors Enabling the Current Boom
+
+The thaw in AI development began gradually in the late 1990s and early 2000s, driven by several concurrent technological and infrastructural developments. The most significant breakthrough came with the revival of neural networks through deep learning, a resurgence that would fundamentally transform the field. This renaissance was enabled by three crucial factors that converged to create the perfect storm for AI advancement: unprecedented computational power, massive data availability, and revolutionary algorithmic innovations (Goodfellow et al., 2016).

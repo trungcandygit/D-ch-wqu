@@ -1,0 +1,5 @@
+# Translation Configuration
+input_file=AcademicAI.md
+input_lang=auto
+output_lang=vi
+conversion_method=markdown

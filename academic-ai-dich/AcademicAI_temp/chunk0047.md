@@ -1,0 +1,3 @@
+### Abstract {#abstract-3 .block_9}
+
+Chapter 4 explores how AI is revolutionizing academic data management and analysis by automating labor-intensive tasks such as data wrangling, cleaning, integration, and exploratory analysis. From structured survey data to unstructured textual content, generative AI and machine learning tools can detect anomalies, suggest harmonizations, engineer new features, and reveal patterns at scale. The chapter offers practical insights into tools like Google DataPrep, Airtable, and Wikidata, while emphasizing the continued need for human oversight. It cautions against overreliance on automated suggestions and underscores the importance of validation, reproducibility, and ethical data governance in AI-assisted research workflows.
