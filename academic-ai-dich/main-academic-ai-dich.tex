@@ -1,0 +1,82 @@
+%****************************************************************************************************
+% main — AI học thuật (Academic AI) — bản dịch tiếng Việt
+% Bản dịch tiếng Việt (tài liệu học tập cá nhân)
+%****************************************************************************************************
+\RequirePackage{fix-cm}
+\documentclass[
+  oneside, titlepage, numbers=noenddot, headinclude,
+  footinclude=true, cleardoublepage=empty, abstractoff,
+  BCOR=5mm, paper=a4, fontsize=11pt
+]{scrreprt}
+
+\input{classicthesis-config}
+\usepackage{framed}
+\usepackage{tikz}
+\usetikzlibrary{arrows.meta, positioning, calc}
+\usepackage{xcolor}
+\usepackage{pdfpages}
+\usepackage{longtable}
+
+% ---- Style riêng cho khối code/output (lstlisting), chỉ áp dụng ở main.tex,
+% ---- không chỉnh sửa classicthesis-config.tex. Mục tiêu: chống tràn lề
+% ---- (breaklines) và trình bày chuẩn học thuật cho các đoạn code Python.
+\lstset{
+  basicstyle=\ttfamily\footnotesize,
+  breaklines=true,
+  breakatwhitespace=false,
+  columns=fullflexible,
+  keepspaces=true,
+  showstringspaces=false,
+  tabsize=4,
+  frame=single,
+  framerule=0.4pt,
+  rulecolor=\color{black!30},
+  backgroundcolor=\color{black!4},
+  captionpos=b,
+  aboveskip=1em,
+  belowskip=1em,
+  keywordstyle=\color{blue!55!black}\bfseries,
+  commentstyle=\color{green!40!black}\itshape,
+  stringstyle=\color{orange!65!black},
+  numberstyle=\tiny\color{black!50}
+}
+
+
+% ---- Khung "Ví dụ thực tế" (hộp ví dụ) ----
+\newtcolorbox{examplebox}[1]{%
+  breakable, enhanced, colback=black!3, colframe=CTsemi!70!black,
+  boxrule=0.5pt, arc=1.5pt, left=8pt, right=8pt, top=6pt, bottom=6pt,
+  title={#1}, fonttitle=\bfseries\small, coltitle=white, colbacktitle=CTsemi!70!black,
+  before skip=10pt, after skip=10pt,
+  before upper={\setlength{\parskip}{4pt}\setlength{\parindent}{0pt}}}
+\tcbuselibrary{breakable,skins}
+\begin{document}
+\frenchspacing
+\raggedbottom
+\selectlanguage{vietnamese}
+\pagenumbering{roman}
+\pagestyle{plain}
+
+\IfFileExists{gfx/cover.pdf}{\includepdf[pages=-]{gfx/cover.pdf}}{}
+\thispagestyle{empty}
+\section*{Về bản dịch}
+Tài liệu này là bản chuyển ngữ tiếng Việt từ bản thảo \emph{Academic AI: Harnessing the Power of Generative Intelligence in Scholarly Work} (bản thảo Palgrave), phục vụ \textbf{mục đích học tập cá nhân}.
+
+Bản dịch giữ nguyên cấu trúc chương, mục và nội dung của bản gốc. Theo yêu cầu, \textbf{danh mục tài liệu tham khảo ở cuối mỗi chương và phần chỉ mục (Index) đã được lược bỏ}; các trích dẫn tác giả, năm trong thân bài được giữ nguyên. Tên riêng, tên công cụ và mô hình (ChatGPT, Claude, Gemini, DALL-E, \dots) giữ nguyên tiếng Anh.
+
+\pagestyle{scrheadings}
+\tableofcontents
+\cleardoublepage
+\pagenumbering{arabic}
+
+\include{Chapters/Gioi_thieu}
+\include{Chapters/Chuong_1}
+\include{Chapters/Chuong_2}
+\include{Chapters/Chuong_3}
+\include{Chapters/Chuong_4}
+\include{Chapters/Chuong_5}
+\include{Chapters/Chuong_6}
+\include{Chapters/Chuong_7}
+\include{Chapters/Chuong_8}
+\include{Chapters/Ket_luan}
+\end{document}
